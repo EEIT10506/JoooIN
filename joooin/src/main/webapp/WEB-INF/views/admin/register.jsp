@@ -23,7 +23,6 @@
 <jsp:include page="/navbar/navbar.jsp" />
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
-	
 	<form action="registerpage" method="post">
   <div class="form-group">
     <label for="membername">會員姓名</label>
@@ -94,7 +93,6 @@
   </div>
   <button type="submit">Submit</button>
 </form>
-
 	</div>
 <!-- 請把所有內容寫在此div內 -->
 </body>
