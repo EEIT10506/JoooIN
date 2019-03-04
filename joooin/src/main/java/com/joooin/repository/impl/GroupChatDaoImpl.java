@@ -6,13 +6,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.joooin.model.GroupChatBean;
 import com.joooin.repository.GroupChatDao;
 
 @Repository
-@Transactional
 public class GroupChatDaoImpl implements GroupChatDao{
 	@Autowired
 	SessionFactory factory;

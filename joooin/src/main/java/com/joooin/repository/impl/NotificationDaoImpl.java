@@ -6,12 +6,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import com.joooin.model.NotificationBean;
 import com.joooin.repository.NotificationDao;
 
 @Repository
-@Transactional
 public class NotificationDaoImpl implements NotificationDao{
 	@Autowired
 	SessionFactory factory;

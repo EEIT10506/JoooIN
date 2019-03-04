@@ -6,12 +6,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import com.joooin.model.EventMemberBean;
 import com.joooin.repository.EventMemberDao;
 
 @Repository
-@Transactional
 public class EventMemberDaoImpl implements EventMemberDao{
 	@Autowired
 	SessionFactory factory;

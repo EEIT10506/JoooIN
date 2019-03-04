@@ -6,13 +6,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.joooin.model.MemberFriendBean;
 import com.joooin.repository.MemberFriendDao;
 
 @Repository
-@Transactional
 public class MemberFriendDaoImpl implements MemberFriendDao{
 	@Autowired
 	SessionFactory factory;

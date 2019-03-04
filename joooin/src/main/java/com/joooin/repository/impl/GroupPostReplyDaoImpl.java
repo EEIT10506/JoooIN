@@ -6,12 +6,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import com.joooin.model.GroupPostReplyBean;
 import com.joooin.repository.GroupPostReplyDao;
 
 @Repository
-@Transactional
 public class GroupPostReplyDaoImpl implements GroupPostReplyDao{
 	@Autowired
 	SessionFactory factory;

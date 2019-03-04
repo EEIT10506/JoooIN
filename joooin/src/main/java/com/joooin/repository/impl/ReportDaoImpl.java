@@ -6,12 +6,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import com.joooin.model.ReportBean;
 import com.joooin.repository.ReportDao;
 
 @Repository
-@Transactional
 public class ReportDaoImpl implements ReportDao{
 	@Autowired
 	SessionFactory factory;
