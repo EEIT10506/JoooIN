@@ -22,7 +22,7 @@
 <jsp:include page="/navbar/navbar.jsp" />
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
-	</div>
 <!-- 請把所有內容寫在此div內 -->
+	</div>
 </body>
 </html>
