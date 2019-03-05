@@ -17,7 +17,7 @@
 		top: 50px;
 	}
 </style>
-<title>Insert title here</title></head>
+<title>Insert title here123</title></head>
 <body>
 <jsp:include page="/navbar/navbar.jsp" />
 <!-- 請把所有內容寫在此div內 -->
