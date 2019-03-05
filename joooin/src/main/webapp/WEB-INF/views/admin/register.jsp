@@ -31,12 +31,26 @@
   
     <div class="form-group">
     <label for="email">會員信箱</label>
-    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+    <input type="email" class="form-control" id="email" name="email" placeholder="Email"><br>
+    <label flor="emailDisplay">是否顯信箱</label><br>
+    <label>
+      <input type="radio" name="emailDisplay" value="true"> 是
+    </label>
+    <label>
+      <input type="radio" name="emailDisplay" value="false"> 否
+    </label>
   </div>
   
   <div class="form-group">
     <label for="phone">會員電話</label>
-    <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
+    <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone"><br>
+    <label flor="phoneDisplay">是否顯電話</label><br>
+    <label>
+      <input type="radio" name="phoneDisplay" value="true"> 是
+    </label>
+    <label>
+      <input type="radio" name="phoneDisplay" value="false"> 否
+    </label>
   </div>
 
   <div class="form-group">
@@ -51,12 +65,26 @@
     </label>
     <label>
       <input type="radio" name="gender" value="female"> 女
+    </label><br>
+    <label flor="genderDisplay">是否顯示性別</label><br>
+    <label>
+      <input type="radio" name="genderDisplay" value="true"> 是
+    </label>
+    <label>
+      <input type="radio" name="genderDisplay" value="false"> 否
     </label>
   </div>
   
   <div class="form-group">
   	<label for="birthday">會員生日</label>
-  	<input type="date" id="birthday" name="birthday">
+  	<input type="date" id="birthday" name="birthday"><br>
+  	<label flor="genderDisplay">是否顯示生日</label><br>
+    <label>
+      <input type="radio" name="birthdayDisplay" value="true"> 是
+    </label>
+    <label>
+      <input type="radio" name="birthdayDisplay" value="false"> 否
+    </label>
   </div>
   
   <div class="form-group">
@@ -85,12 +113,22 @@
 		<option value="金門縣">金門縣</option>  	
 		<option value="連江縣">連江縣</option>  	
 		<option value="國外">國外</option>  	
-  	</select>
+  	</select><br>
+  	<label flor="cityDisplay">是否顯居住地</label><br>
+    <label>
+      <input type="radio" name="cityDisplay" value="true"> 是
+    </label>
+    <label>
+      <input type="radio" name="cityDisplay" value="false"> 否
+    </label>
   </div>
-  <div class="form-group">
-    <label for="exampleInputFile">照片上傳</label>
-    <input type="file" id="exampleInputFile">
-  </div>
+  
+<!--   照片上傳先不要 -->
+<!--   <div class="form-group"> -->
+<!--     <label for="exampleInputFile">照片上傳</label> -->
+<!--     <input type="file" id="exampleInputFile"> -->
+<!--   </div> -->
+
   <button type="submit">Submit</button>
 </form>
 	</div>

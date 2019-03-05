@@ -22,6 +22,24 @@
 <jsp:include page="/navbar/navbar.jsp" />
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
+	<form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">帳號</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">密碼</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> 記住我
+    </label>
+  </div>
+  <button type="submit" class="btn btn-default">登入</button>
+  <button type="button" class="btn btn-default" onclick="location.href='/joooin/admin/register'">註冊</button>
+</form>
+ 
 	</div>
 <!-- 請把所有內容寫在此div內 -->
 </body>
