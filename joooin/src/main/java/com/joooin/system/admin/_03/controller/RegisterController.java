@@ -1,6 +1,7 @@
 package com.joooin.system.admin._03.controller;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -70,6 +71,21 @@ public class RegisterController {
 					Byte[] B = ArrayUtils.toObject(b);
 					mmb.setMemberImage(B);
 					service.save(mmb);
+					
+					/**
+					 * Test 圖片取出 OK
+					 */
+//					System.out.println(B);
+//					byte[] test = ArrayUtils.toPrimitive(B);
+//					ByteArrayInputStream bais = new ByteArrayInputStream(test);
+//					 File w2 = new File("C:\\img\\00000000004.png");
+//					 try {
+//						BufferedImage bi1 =ImageIO.read(bais);
+//						 ImageIO.write(bi1, "png", w2);
+//						 bais.close();
+//					} catch (IOException e) {
+//						e.printStackTrace();
+//					}
 			}
 			if(mmb.getGender().equals(f)) {
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -92,8 +108,21 @@ public class RegisterController {
 					Byte[] B = ArrayUtils.toObject(b);
 					mmb.setMemberImage(B);
 					service.save(mmb);
+					/**
+					 * Test 圖片取出OK
+					 */
+//					System.out.println(B);
+//					byte[] test = ArrayUtils.toPrimitive(B);
+//					ByteArrayInputStream bais = new ByteArrayInputStream(test);
+//					 File w2 = new File("C:\\img\\00000000003.png");
+//					 try {
+//						BufferedImage bi1 =ImageIO.read(bais);
+//						 ImageIO.write(bi1, "png", w2);
+//						 bais.close();
+//					} catch (IOException e) {
+//						e.printStackTrace();
+//					}
 			}
-			
 		}else {
 			System.out.println("null");
 		}
