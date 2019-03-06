@@ -18,7 +18,10 @@
 		top: 50px;
 	}
 </style>
-<title>Insert title here</title></head>
+<script type="text/javascript">
+// oneSet
+</script>
+<title>會員註冊</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
@@ -123,8 +126,10 @@
 	<form:input type="hidden" value="0" nama="logins" id="logins" path="logins"/>
 	<form:input type="hidden" value="true" nama="certificationStatus" id="certificationStatus" path="certificationStatus"/>
 	<form:input type="hidden" value="test" nama="certificationHash" id="certificationHash" path="certificationHash"/>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">送出</button>
+  <button type="reset" class="btn btn-primary">重填</button>
 </form:form>
+<button type="button" class="btn btn-primary" onclick="">一鍵填寫</button>
 	</div>
 <!-- 請把所有內容寫在此div內 -->
 </body>
