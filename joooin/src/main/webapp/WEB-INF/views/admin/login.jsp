@@ -22,6 +22,10 @@
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
+	<div style="text-align: center;color: red;">
+	<h4 >${name}</h4>
+	<h4>${welcome}</h4>
+	</div>
 	<form>
   <div class="form-group">
     <label for="exampleInputEmail1">帳號</label>
