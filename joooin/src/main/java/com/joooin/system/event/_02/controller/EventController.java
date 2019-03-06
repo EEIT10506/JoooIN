@@ -14,6 +14,7 @@ public class EventController {
 	@RequestMapping("/event/{eventId}")
 	public String event(Model model, @PathVariable("eventId") String eventId, HttpServletRequest request) {
 		
+		
 		return "event";
 	}
 	
