@@ -36,8 +36,8 @@
       <input type="checkbox"> 記住我
     </label>
   </div>
-  <button type="submit" class="btn btn-default">登入</button>
-  <button type="button" class="btn btn-default" onclick="location.href='/joooin/admin/register'">註冊</button>
+  <button type="submit" class="btn btn-primary">登入</button>
+  <button type="button" class="btn btn-primary" onclick="location.href='/joooin/register'">註冊</button>
 </form>
  
 	</div>

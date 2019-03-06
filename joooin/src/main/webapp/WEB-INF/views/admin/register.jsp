@@ -23,34 +23,30 @@
 <jsp:include page="/navbar/navbar.jsp" />
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
-	<form action="registerpage" method="post">
+	<form action="registerProcess" method="post">
   <div class="form-group">
     <label for="membername">會員姓名</label>
     <input type="text" class="form-control" id="membername" name="membername" placeholder="Name">
   </div>
   
     <div class="form-group">
-    <label for="email">會員信箱</label>
-    <input type="email" class="form-control" id="email" name="email" placeholder="Email"><br>
-    <label flor="emailDisplay">是否顯信箱</label><br>
-    <label>
+    <label for="email">會員信箱</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>
       <input type="radio" name="emailDisplay" value="true"> 是
     </label>
     <label>
       <input type="radio" name="emailDisplay" value="false"> 否
-    </label>
+    </label></span>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
   </div>
   
   <div class="form-group">
-    <label for="phone">會員電話</label>
-    <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone"><br>
-    <label flor="phoneDisplay">是否顯電話</label><br>
-    <label>
+    <label for="phone">會員電話</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>
       <input type="radio" name="phoneDisplay" value="true"> 是
     </label>
     <label>
       <input type="radio" name="phoneDisplay" value="false"> 否
-    </label>
+    </label></span>
+    <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
   </div>
 
   <div class="form-group">
@@ -59,36 +55,38 @@
   </div>
   
     <div class="form-group">
-    <label for="gender">會員性別</label><br>
+    <label for="gender">會員性別</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>
+      <input type="radio" name="genderDisplay" value="true"> 是
+    </label>
+    <label>
+      <input type="radio" name="genderDisplay" value="false"> 否
+    </label></span>
+    <br>
     <label>
       <input type="radio" name="gender" value="male"> 男
     </label>
     <label>
       <input type="radio" name="gender" value="female"> 女
-    </label><br>
-    <label flor="genderDisplay">是否顯示性別</label><br>
-    <label>
-      <input type="radio" name="genderDisplay" value="true"> 是
-    </label>
-    <label>
-      <input type="radio" name="genderDisplay" value="false"> 否
     </label>
   </div>
   
   <div class="form-group">
-  	<label for="birthday">會員生日</label>
-  	<input type="date" id="birthday" name="birthday"><br>
-  	<label flor="genderDisplay">是否顯示生日</label><br>
-    <label>
+  	<label for="birthday">會員生日</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>
       <input type="radio" name="birthdayDisplay" value="true"> 是
     </label>
     <label>
       <input type="radio" name="birthdayDisplay" value="false"> 否
-    </label>
+    </label></span><br>
+  	<input type="date" id="birthday" name="birthday">
   </div>
   
   <div class="form-group">
-  <label for="city">城市</label>
+  <label for="city">城市</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>
+      <input type="radio" name="cityDisplay" value="true"> 是
+    </label>
+    <label>
+      <input type="radio" name="cityDisplay" value="false"> 否
+    </label></span><br>
   	<select name="city" id="city">
 		<option value="臺北市">臺北市</option>  	
 		<option value="新北市">新北市</option>  	
@@ -113,14 +111,7 @@
 		<option value="金門縣">金門縣</option>  	
 		<option value="連江縣">連江縣</option>  	
 		<option value="國外">國外</option>  	
-  	</select><br>
-  	<label flor="cityDisplay">是否顯居住地</label><br>
-    <label>
-      <input type="radio" name="cityDisplay" value="true"> 是
-    </label>
-    <label>
-      <input type="radio" name="cityDisplay" value="false"> 否
-    </label>
+  	</select>
   </div>
   
 <!--   照片上傳先不要 -->
@@ -129,7 +120,10 @@
 <!--     <input type="file" id="exampleInputFile"> -->
 <!--   </div> -->
 
-  <button type="submit">Submit</button>
+	<input type="hidden" value="0" nama="logins" id="logins">
+	<input type="hidden" value="true" nama="certificationStatus" id="certificationStatus">
+	<input type="hidden" value="test" nama="certificationHash" id="certificationHash">
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 	</div>
 <!-- 請把所有內容寫在此div內 -->

@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class RegisterController {
 	
-	@RequestMapping("/admin/register")
+	@RequestMapping("/register")
 	public String Registerpage() {
 		return "/admin/register";
 	}
 	
-	@RequestMapping("/admin/registerpage")
+	@RequestMapping("/registerProcess")
 	public String Register(@RequestParam(value="membername")String membername,
 			@RequestParam(value="membername")String email,
 			@RequestParam(value="phone")String phone,
