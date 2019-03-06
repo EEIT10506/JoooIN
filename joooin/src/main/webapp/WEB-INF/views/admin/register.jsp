@@ -23,95 +23,95 @@
 <jsp:include page="/navbar/navbar.jsp" />
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
-	<form action="registerProcess" method="post">
+	<form:form action="registerProcess" method="POST" modelAttribute="memberMainBean">
   <div class="form-group">
-    <label for="membername">會員姓名</label>
-    <input type="text" class="form-control" id="membername" name="membername" placeholder="Name">
+    <label for="memberName">會員姓名</label>
+    <form:input type="text" class="form-control" id="memberName" name="memberName" placeholder="Name" path="memberName"/>
   </div>
   
     <div class="form-group">
     <label for="email">會員信箱</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>
-      <input type="radio" name="emailDisplay" value="true"> 是
+      <form:input type="radio" name="emailDisplay" value="true" path="emailDisplay"/> 是
     </label>
     <label>
-      <input type="radio" name="emailDisplay" value="false"> 否
+      <form:input type="radio" name="emailDisplay" value="false" path="emailDisplay"/> 否
     </label></span>
-    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+    <form:input type="email" class="form-control" id="email" name="email" placeholder="Email" path="email"/>
   </div>
   
   <div class="form-group">
     <label for="phone">會員電話</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>
-      <input type="radio" name="phoneDisplay" value="true"> 是
+      <form:input type="radio" name="phoneDisplay" value="true" path="phoneDisplay"/> 是
     </label>
     <label>
-      <input type="radio" name="phoneDisplay" value="false"> 否
+      <form:input type="radio" name="phoneDisplay" value="false" path="phoneDisplay"/> 否
     </label></span>
-    <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
+    <form:input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" path="phone"/>
   </div>
 
   <div class="form-group">
     <label for="password">會員密碼</label>
-    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+    <form:input type="password" class="form-control" id="password" name="password" placeholder="Password" path="password"/>
   </div>
   
     <div class="form-group">
     <label for="gender">會員性別</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>
-      <input type="radio" name="genderDisplay" value="true"> 是
+      <form:input type="radio" name="genderDisplay" value="true" path="genderDisplay"/> 是
     </label>
     <label>
-      <input type="radio" name="genderDisplay" value="false"> 否
+      <form:input type="radio" name="genderDisplay" value="false" path="genderDisplay"/> 否
     </label></span>
     <br>
     <label>
-      <input type="radio" name="gender" value="male"> 男
+      <form:input type="radio" name="gender" value="male" path="gender"/> 男
     </label>
     <label>
-      <input type="radio" name="gender" value="female"> 女
+      <form:input type="radio" name="gender" value="female" path="gender"/> 女
     </label>
   </div>
   
   <div class="form-group">
   	<label for="birthday">會員生日</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>
-      <input type="radio" name="birthdayDisplay" value="true"> 是
+      <form:input type="radio" name="birthdayDisplay" value="true" path="birthdayDisplay"/> 是
     </label>
     <label>
-      <input type="radio" name="birthdayDisplay" value="false"> 否
+      <form:input type="radio" name="birthdayDisplay" value="false" path="birthdayDisplay"/> 否
     </label></span><br>
-  	<input type="date" id="birthday" name="birthday">
+  	<form:input type="date" id="birthday" name="birthday" path="birthday"/>
   </div>
   
   <div class="form-group">
   <label for="city">城市</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>
-      <input type="radio" name="cityDisplay" value="true"> 是
+      <form:input type="radio" name="cityDisplay" value="true" path="cityDisplay"/> 是
     </label>
     <label>
-      <input type="radio" name="cityDisplay" value="false"> 否
+      <form:input type="radio" name="cityDisplay" value="false" path="cityDisplay"/> 否
     </label></span><br>
-  	<select name="city" id="city">
-		<option value="臺北市">臺北市</option>  	
-		<option value="新北市">新北市</option>  	
-		<option value="桃園市">桃園市</option>  	
-		<option value="臺中市">臺中市</option>  	
-		<option value="臺南市">臺南市</option>  	
-		<option value="高雄市">高雄市</option>  	
-		<option value="基隆市">基隆市</option>  	
-		<option value="新竹市">新竹市</option> 
-		<option value="新竹縣">新竹縣</option>  	
-		<option value="嘉義市">嘉義市</option>  	
-		<option value="苗栗縣">苗栗縣</option>  	
-		<option value="彰化縣">彰化縣</option>  	
-		<option value="南投縣">南投縣</option>  	
-		<option value="雲林縣">雲林縣</option>  	
-		<option value="嘉義縣">嘉義縣</option>  	
-		<option value="屏東縣">屏東縣</option>  	
-		<option value="宜蘭縣">宜蘭縣</option>  	
-		<option value="花蓮縣">花蓮縣</option>  	
-		<option value="臺東縣">臺東縣</option>  	
-		<option value="澎湖縣">澎湖縣</option>  	
-		<option value="金門縣">金門縣</option>  	
-		<option value="連江縣">連江縣</option>  	
-		<option value="國外">國外</option>  	
-  	</select>
+  	<form:select name="city" id="city" path="city">
+		<form:option value="臺北市">臺北市</form:option>  	
+		<form:option value="新北市">新北市</form:option>  	
+		<form:option value="桃園市">桃園市</form:option>  	
+		<form:option value="臺中市">臺中市</form:option>  	
+		<form:option value="臺南市">臺南市</form:option>  	
+		<form:option value="高雄市">高雄市</form:option>  	
+		<form:option value="基隆市">基隆市</form:option>  	
+		<form:option value="新竹市">新竹市</form:option> 
+		<form:option value="新竹縣">新竹縣</form:option>  	
+		<form:option value="嘉義市">嘉義市</form:option>  	
+		<form:option value="苗栗縣">苗栗縣</form:option>  	
+		<form:option value="彰化縣">彰化縣</form:option>  	
+		<form:option value="南投縣">南投縣</form:option>  	
+		<form:option value="雲林縣">雲林縣</form:option>  	
+		<form:option value="嘉義縣">嘉義縣</form:option>  	
+		<form:option value="屏東縣">屏東縣</form:option>  	
+		<form:option value="宜蘭縣">宜蘭縣</form:option>  	
+		<form:option value="花蓮縣">花蓮縣</form:option>  	
+		<form:option value="臺東縣">臺東縣</form:option>  	
+		<form:option value="澎湖縣">澎湖縣</form:option>  	
+		<form:option value="金門縣">金門縣</form:option>  	
+		<form:option value="連江縣">連江縣</form:option>  	
+		<form:option value="國外">國外</form:option>  	
+  	</form:select>
   </div>
   
 <!--   照片上傳先不要 -->
@@ -120,11 +120,11 @@
 <!--     <input type="file" id="exampleInputFile"> -->
 <!--   </div> -->
 
-	<input type="hidden" value="0" nama="logins" id="logins">
-	<input type="hidden" value="true" nama="certificationStatus" id="certificationStatus">
-	<input type="hidden" value="test" nama="certificationHash" id="certificationHash">
+	<form:input type="hidden" value="0" nama="logins" id="logins" path="logins"/>
+	<form:input type="hidden" value="true" nama="certificationStatus" id="certificationStatus" path="certificationStatus"/>
+	<form:input type="hidden" value="test" nama="certificationHash" id="certificationHash" path="certificationHash"/>
   <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+</form:form>
 	</div>
 <!-- 請把所有內容寫在此div內 -->
 </body>

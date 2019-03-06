@@ -1,32 +1,26 @@
 package com.joooin.system.admin._03.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.joooin.model.MemberMainBean;
 
 @Controller
 public class RegisterController {
 	
-	@RequestMapping("/register")
-	public String Registerpage() {
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String Registerpage(Model model) {
+		MemberMainBean mmb = new MemberMainBean();
+		model.addAttribute("memberMainBean", mmb);
 		return "/admin/register";
 	}
 	
-	@RequestMapping("/registerProcess")
-	public String Register(@RequestParam(value="membername")String membername,
-			@RequestParam(value="membername")String email,
-			@RequestParam(value="phone")String phone,
-			@RequestParam(value="password")String password,
-			@RequestParam(value="gender")String gender,
-			@RequestParam(value="birthday")String birthday,
-			@RequestParam(value="city")String city){
-		System.out.println(membername);
-		System.out.println(email);
-		System.out.println(phone);
-		System.out.println(password);
-		System.out.println(gender);
-		System.out.println(birthday);
-		System.out.println(city);
+	@RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
+	public String Register(@ModelAttribute("memberMainBean")MemberMainBean mmb){
+		
 		return "/admin/register";
 	}
 }
