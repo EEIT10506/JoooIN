@@ -16,16 +16,13 @@ public class MemberFriendBean implements Serializable {
 	private Integer receiveMemberId;
 	private Boolean isFriend;
 	private Boolean isInviter;
-	private Boolean isRejected;
 	
-	public MemberFriendBean(Integer inviteMemberId, Integer receiveMemberId, Boolean isFriend, Boolean isInviter,
-			Boolean isRejected) {
+	public MemberFriendBean(Integer inviteMemberId, Integer receiveMemberId, Boolean isFriend, Boolean isInviter) {
 		super();
 		this.inviteMemberId = inviteMemberId;
 		this.receiveMemberId = receiveMemberId;
 		this.isFriend = isFriend;
 		this.isInviter = isInviter;
-		this.isRejected = isRejected;
 	}
 	public MemberFriendBean() {
 		super();
@@ -62,14 +59,4 @@ public class MemberFriendBean implements Serializable {
 	public void setIsInviter(Boolean isInviter) {
 		this.isInviter = isInviter;
 	}
-	public Boolean getIsRejected() {
-		return isRejected;
-	}
-	public void setIsRejected(Boolean isRejected) {
-		this.isRejected = isRejected;
-	}
-	
-	
-	
-
 }
