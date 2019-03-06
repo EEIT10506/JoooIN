@@ -19,7 +19,7 @@
 </style>
 <title>Insert title here</title></head>
 <body>
-<jsp:include page="/navbar/navbar.jsp" />
+<jsp:include page="${request.contextPath}/navbar"/>
 	<div id="main">
 <!-- 請把所有內容寫在此div內 -->
 	</div>
