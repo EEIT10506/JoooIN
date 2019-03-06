@@ -22,6 +22,10 @@
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
+	 <a href="event">活動詳細資訊</a>
+	 
+	 
+	
 	</div>
 <!-- 請把所有內容寫在此div內 -->
 </body>

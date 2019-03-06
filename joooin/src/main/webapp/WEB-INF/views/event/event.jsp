@@ -22,6 +22,15 @@
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
+		<p>hello</p>
+<%-- 		 <c:set var="eventId" value="${eventId}"/> --%>
+		          
+		 <a href="event/${eventId}">活動詳細資訊有ID=2</a>
+		<p>${event.eventName}</p>
+		<p>${event.eventInviterId}</p>
+		<p>${event.eventTypeId}</p>
+		<p>${event.eventContent}</p>
+		
 	</div>
 <!-- 請把所有內容寫在此div內 -->
 </body>
