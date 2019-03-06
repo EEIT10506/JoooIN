@@ -31,20 +31,20 @@
   
     <div class="form-group">
     <label for="email">會員信箱</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>
-      <form:input type="radio" name="emailDisplay" value="true" path="emailDisplay"/> 是
+      <form:radiobutton name="emailDisplay" value="true" path="emailDisplay"/> 是
     </label>
     <label>
-      <form:input type="radio" name="emailDisplay" value="false" path="emailDisplay"/> 否
+      <form:radiobutton name="emailDisplay" value="false" path="emailDisplay"/> 否
     </label></span>
     <form:input type="email" class="form-control" id="email" name="email" placeholder="Email" path="email"/>
   </div>
   
   <div class="form-group">
     <label for="phone">會員電話</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>
-      <form:input type="radio" name="phoneDisplay" value="true" path="phoneDisplay"/> 是
+      <form:radiobutton name="phoneDisplay" value="true" path="phoneDisplay"/> 是
     </label>
     <label>
-      <form:input type="radio" name="phoneDisplay" value="false" path="phoneDisplay"/> 否
+      <form:radiobutton name="phoneDisplay" value="false" path="phoneDisplay"/> 否
     </label></span>
     <form:input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" path="phone"/>
   </div>
@@ -56,36 +56,36 @@
   
     <div class="form-group">
     <label for="gender">會員性別</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>
-      <form:input type="radio" name="genderDisplay" value="true" path="genderDisplay"/> 是
+      <form:radiobutton name="genderDisplay" value="true" path="genderDisplay"/> 是
     </label>
     <label>
-      <form:input type="radio" name="genderDisplay" value="false" path="genderDisplay"/> 否
+      <form:radiobutton name="genderDisplay" value="false" path="genderDisplay"/> 否
     </label></span>
     <br>
     <label>
-      <form:input type="radio" name="gender" value="male" path="gender"/> 男
+      <form:radiobutton name="gender" value="male" path="gender"/> 男
     </label>
     <label>
-      <form:input type="radio" name="gender" value="female" path="gender"/> 女
+      <form:radiobutton name="gender" value="female" path="gender"/> 女
     </label>
   </div>
   
   <div class="form-group">
   	<label for="birthday">會員生日</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>
-      <form:input type="radio" name="birthdayDisplay" value="true" path="birthdayDisplay"/> 是
+      <form:radiobutton name="birthdayDisplay" value="true" path="birthdayDisplay"/> 是
     </label>
     <label>
-      <form:input type="radio" name="birthdayDisplay" value="false" path="birthdayDisplay"/> 否
+      <form:radiobutton name="birthdayDisplay" value="false" path="birthdayDisplay"/> 否
     </label></span><br>
   	<form:input type="date" id="birthday" name="birthday" path="birthday"/>
   </div>
   
   <div class="form-group">
   <label for="city">城市</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>
-      <form:input type="radio" name="cityDisplay" value="true" path="cityDisplay"/> 是
+      <form:radiobutton name="cityDisplay" value="true" path="cityDisplay"/> 是
     </label>
     <label>
-      <form:input type="radio" name="cityDisplay" value="false" path="cityDisplay"/> 否
+      <form:radiobutton name="cityDisplay" value="false" path="cityDisplay"/> 否
     </label></span><br>
   	<form:select name="city" id="city" path="city">
 		<form:option value="臺北市">臺北市</form:option>  	
