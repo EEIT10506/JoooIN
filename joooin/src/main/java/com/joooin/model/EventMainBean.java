@@ -30,7 +30,7 @@ public class EventMainBean implements Serializable {
 	private Integer eventInviterId;
 	private Integer eventLike;
 	private Integer eventMemberLimit;
-	private Integer eventFee;
+	private Integer eventFee; 
 	private Boolean isFull;
 	private Integer eventCurrentMembers;
 	private Byte[] eventImage;

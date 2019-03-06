@@ -43,13 +43,27 @@ $(document).ready(function () {
 	<button id="get">尋找活動</button>
 	<div id="newdiv" style="display: none">
 
-		<h2>新增活動資料</h2>
-		<form:form modelAttribute="EventMainBean" action='events/add'
+		
+		<form:form modelAttribute="NewEvent" 
 			method='POST'>
-			活動名稱:<form:input path='eventName' />	<p>
-			姓名:<form:input path='name' /><p>
-			餘額:<form:input path='balance' /><p>
-			生日:<form:input path='birthday' /><p>
+			<p>
+			
+			活動名稱:<form:input path='eventName' /><p>
+			開始日期:<form:input path='eventDateStart' /><p>
+			結束日期:<form:input path='eventDateEnd' /><p>
+			
+			
+			活動地區:<form:input path='eventLocation' /><p>			
+			活動地址:<form:input path='eventAddress' /><p>
+			活動座標經度:<form:input path='eventLatitude' /><p>
+			活動座標緯度:<form:input path='eventLongitude' /><p>
+			
+			活動內容:<form:input path='eventContent' /><p>
+			
+		
+			人員上限:<form:input path='eventMemberLimit' /><p>
+			參加費:<form:input path='eventFee' /><p>
+
 			<br> 
 			<br> 
 			<input type='submit' value='提交'> 
