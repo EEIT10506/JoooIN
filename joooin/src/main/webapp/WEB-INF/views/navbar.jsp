@@ -31,10 +31,9 @@
 <nav class="navbar navbar-expand bg-dark navbar-dark">
   <!-- Brand/logo -->
   <a class="navbar-brand" href="${pageContext.request.contextPath}">
-    <img src="#" alt="logo" style="width:40px;">
+    <img src="<c:url value='/resources/img/logo_94x94_07.png'/>" alt="logo" style="width:45px;">
   </a>
   
-  <!-- Links -->
   <ul class="navbar-nav">
     <li class="nav-item">
       <a class="nav-link" href="member">會員</a>

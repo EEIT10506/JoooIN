@@ -11,7 +11,9 @@ import org.springframework.orm.hibernate5.support.OpenSessionInViewInterceptor;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.resource.VersionResourceResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
@@ -41,7 +43,12 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	    sessionInterceptor.setSessionFactory(sessionFactory);
 	    registry.addWebRequestInterceptor(sessionInterceptor);
 	}
-	
-	
 
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**")
+        		.addResourceLocations("/WEB-INF/resources/")
+        		.resourceChain(true).addResolver(
+        		new VersionResourceResolver().addContentVersionStrategy("/**"));
+	}
 }

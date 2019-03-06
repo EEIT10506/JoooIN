@@ -36,7 +36,7 @@ $(document).ready(function () {
 
 </head>
 <body>
-<jsp:include page="/navbar/navbar.jsp" />
+<jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
 	<button id="new">開新活動</button>
