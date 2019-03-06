@@ -34,7 +34,7 @@
       <form:radiobutton name="emailDisplay" value="true" path="emailDisplay"/> 是
     </label>
     <label>
-      <form:radiobutton name="emailDisplay" value="false" path="emailDisplay"/> 否
+      <form:radiobutton name="emailDisplay" value="false" path="emailDisplay" checked="true"/> 否
     </label></span>
     <form:input type="email" class="form-control" id="email" name="email" placeholder="Email" path="email"/>
   </div>
@@ -44,7 +44,7 @@
       <form:radiobutton name="phoneDisplay" value="true" path="phoneDisplay"/> 是
     </label>
     <label>
-      <form:radiobutton name="phoneDisplay" value="false" path="phoneDisplay"/> 否
+      <form:radiobutton name="phoneDisplay" value="false" path="phoneDisplay" checked="true"/> 否
     </label></span>
     <form:input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" path="phone"/>
   </div>
@@ -59,11 +59,11 @@
       <form:radiobutton name="genderDisplay" value="true" path="genderDisplay"/> 是
     </label>
     <label>
-      <form:radiobutton name="genderDisplay" value="false" path="genderDisplay"/> 否
+      <form:radiobutton name="genderDisplay" value="false" path="genderDisplay" checked="true"/> 否
     </label></span>
     <br>
     <label>
-      <form:radiobutton name="gender" value="male" path="gender"/> 男
+      <form:radiobutton name="gender" value="male" path="gender" checked="true"/> 男
     </label>
     <label>
       <form:radiobutton name="gender" value="female" path="gender"/> 女
@@ -75,7 +75,7 @@
       <form:radiobutton name="birthdayDisplay" value="true" path="birthdayDisplay"/> 是
     </label>
     <label>
-      <form:radiobutton name="birthdayDisplay" value="false" path="birthdayDisplay"/> 否
+      <form:radiobutton name="birthdayDisplay" value="false" path="birthdayDisplay" checked="true"/> 否
     </label></span><br>
   	<form:input type="date" id="birthday" name="birthday" path="birthday"/>
   </div>
@@ -85,7 +85,7 @@
       <form:radiobutton name="cityDisplay" value="true" path="cityDisplay"/> 是
     </label>
     <label>
-      <form:radiobutton name="cityDisplay" value="false" path="cityDisplay"/> 否
+      <form:radiobutton name="cityDisplay" value="false" path="cityDisplay" checked="true"/> 否
     </label></span><br>
   	<form:select name="city" id="city" path="city">
 		<form:option value="臺北市">臺北市</form:option>  	
