@@ -62,8 +62,9 @@ public class EventController {
 	public String eventMembers(Model model, @PathVariable("eventId") Integer eventId) {
 		EventMainBean event = eventservice.getByEventMainId(eventId);
 //		Integer typeid = event.getEventTypeId();
+		Integer inviterid = event.getEventInviterId();
 		Set<EventMemberBean> eventmember = event.getEventMemberSet();
-		
+		MemberMainBean eventbuildname = eventservice.getByMemberId(inviterid);
 		MemberMainBean eventmembers = null;
 		for(EventMemberBean members: eventmember) {
 			Integer memberid = members.getMemberId();
@@ -86,6 +87,7 @@ public class EventController {
 		model.addAttribute("totalmember", totalmember);
 		model.addAttribute("eventmember", eventmember);
 		model.addAttribute("eventmembers", eventmembers);
+		model.addAttribute("eventbuildname", eventbuildname);
 		return "event/event";
 	}
 	//活動修改
