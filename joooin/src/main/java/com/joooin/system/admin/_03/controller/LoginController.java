@@ -29,12 +29,13 @@ public class LoginController {
 	@RequestMapping(value = "loginProcess", method = RequestMethod.POST)
 	public String loginProcess(@ModelAttribute("memberMainBean") MemberMainBean mmb, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		Boolean check = service.checkId(mmb.getEmail(), mmb.getPassword());
-		if (check == true) {
-			MemberMainBean meminfo = service.getMemberInfo(mmb.getEmail());
-			session.setAttribute("LoginOK", meminfo);
+		MemberMainBean member = null;
+		
+		member = service.checkIDPassword(mmb.getEmail(), mmb.getPassword());
+		if(member != null) {
+			session.setAttribute("memberName", mmb);
 			return "redirect:/";
-		} else {
+		}else {
 			return "admin/login";
 		}
 	}

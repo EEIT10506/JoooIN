@@ -9,5 +9,5 @@ public interface MemberMainDao {
 	public Integer save(MemberMainBean memberMainBean);
 	public void update(MemberMainBean memberMainBean);
 	public void deleteByMemberId(Integer memberId);
-	public MemberMainBean getByEmail(String mail);
+	public MemberMainBean checkIDPassword(String email, String password);
 }
