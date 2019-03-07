@@ -55,35 +55,35 @@ public class EventServiceImpl implements EventService {
 		
 	}
 
-	@Override
-	public EventMemberBean getByEventMemberId(Integer eventMemberId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<EventMemberBean> getAllEventMembers() {
-		List<EventMemberBean> memberbean = eventmemberdao.getAll();
-		return null;
-	}
-
-	@Override
-	public Integer save(EventMemberBean eventMemberBean) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void update(EventMemberBean eventMemberBean) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteByEventMemberId(Integer eventMemberId) {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public EventMemberBean getByEventMemberId(Integer eventMemberId) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public List<EventMemberBean> getAllEventMembers() {
+//		List<EventMemberBean> memberbean = eventmemberdao.getAll();
+//		return null;
+//	}
+//
+//	@Override
+//	public Integer save(EventMemberBean eventMemberBean) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public void update(EventMemberBean eventMemberBean) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public void deleteByEventMemberId(Integer eventMemberId) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	@Override
 	public EventTypeBean getByEventTypeId(Integer eventTypeId) {

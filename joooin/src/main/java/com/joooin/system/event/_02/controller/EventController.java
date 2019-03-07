@@ -1,7 +1,8 @@
 package com.joooin.system.event._02.controller;
 
+
 import java.util.Iterator;
-import java.util.List;
+
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
@@ -35,33 +36,50 @@ public class EventController {
 	@RequestMapping("/event/{eventId}")
 	public String eventDetail(Model model, @PathVariable("eventId") Integer eventId) {
 		EventMainBean event = eventservice.getByEventMainId(eventId);
-		System.out.println(event.getEventName());
 		Integer typeid = event.getEventTypeId();
-		Set<EventMemberBean> eventmember = event.getEventMemberSet();
-		Iterator<EventMemberBean> iterator = eventmember.iterator();
-		MemberMainBean eventmembers = null;
-			while(iterator.hasNext()) {
-				Integer memberid = iterator.next().getMemberId();
-				eventmembers = eventservice.getByMemberId(memberid);
-				 
-			}
-		int totalmember = eventmember.size();
+//		Set<EventMemberBean> eventmember = event.getEventMemberSet();
+//		Iterator<EventMemberBean> iterator = eventmember.iterator();
+//		MemberMainBean eventmembers = null;
+//			while(iterator.hasNext()) {
+//				Integer memberid = iterator.next().getMemberId();
+//				eventmembers = eventservice.getByMemberId(memberid);
+//			}
+//		int totalmember = eventmember.size();
 		EventTypeBean eventtype = eventservice.getByEventTypeId(typeid);
-		//System.out.println(typeid);
+		
 		model.addAttribute("event", event);
 		model.addAttribute("eventtype", eventtype);
-		model.addAttribute("totalmember", totalmember);
-		model.addAttribute("eventmember", eventmember);
-		model.addAttribute("eventmembers", eventmembers);
+//		model.addAttribute("totalmember", totalmember);
+//		model.addAttribute("eventmember", eventmember);
+//		model.addAttribute("eventmembers", eventmembers);
 		return "event/event";
 	}
 	//詳細活動成員
 	@RequestMapping("/event/members/{eventId}")
 	public String eventMembers(Model model, @PathVariable("eventId") Integer eventId) {
 		EventMainBean event = eventservice.getByEventMainId(eventId);
-		System.out.println(event.getEventMemberSet());
+//		Integer typeid = event.getEventTypeId();
 		Set<EventMemberBean> eventmember = event.getEventMemberSet();
+		MemberMainBean eventmembers = null;
+		for(EventMemberBean members: eventmember) {
+			Integer memberid = members.getMemberId();
+			eventmembers = eventservice.getByMemberId(memberid);
+		}
+//		Iterator<EventMemberBean> iterator = eventmember.iterator();
+//		
+//			while(iterator.hasNext()) {
+//				Integer memberid = iterator.next().getMemberId();
+//				eventmembers = eventservice.getByMemberId(memberid);
+//			}
+			
+		int totalmember = eventmember.size();
+//		EventTypeBean eventtype = eventservice.getByEventTypeId(typeid);
+		
+//		model.addAttribute("event", event);
+//		model.addAttribute("eventtype", eventtype);
+		model.addAttribute("totalmember", totalmember);
 		model.addAttribute("eventmember", eventmember);
+		model.addAttribute("eventmembers", eventmembers);
 		return "event/event";
 	}
 	//活動修改

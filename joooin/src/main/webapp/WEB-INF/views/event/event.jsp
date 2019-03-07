@@ -27,17 +27,18 @@
 		          
 		 <a href="event/${eventId}">活動詳細資訊有ID=2</a>
 		 <a href="event/${eventId}">活動詳細資訊有ID=3</a>
-		<p>${event.eventName}</p>
-		<p>${event.eventInviterId}</p>
-		<p>${eventtype.eventType}</p>
-		<p>${event.eventContent}</p>
-		<p>${totalmember}</p>
+		 <a href="event/members/${eventId}">活動詳細成員/event/members/Id</a>
+		<p>活動名稱 : ${event.eventName}</p>
+		<p>活動發起人ID : ${event.eventInviterId}</p>
+		<p>活動種類 : ${eventtype.eventType}</p>
+		<p>活動內容描述 : ${event.eventContent}</p>
+		<p>活動參加會員人數(不含額外人) : ${totalmember}</p>
 		<c:forEach var="eventmember" items="${eventmember}">
-			<p>${eventmember.memberId}</p>
+			<p>活動成員ID : ${eventmember.memberId}</p>
 			
 		</c:forEach>
 <%-- 		<c:forEach var="eventmembers" items="${eventmembers}"> --%>
-			<p>${eventmembers.memberName}</p>
+			<p>活動成員Name : ${eventmembers.memberName}</p>
 			
 <%-- 		</c:forEach> --%>
 	</div>
