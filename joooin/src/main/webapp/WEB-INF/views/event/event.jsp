@@ -26,11 +26,20 @@
 <%-- 		 <c:set var="eventId" value="${eventId}"/> --%>
 		          
 		 <a href="event/${eventId}">活動詳細資訊有ID=2</a>
+		 <a href="event/${eventId}">活動詳細資訊有ID=3</a>
 		<p>${event.eventName}</p>
 		<p>${event.eventInviterId}</p>
-		<p>${event.eventTypeId}</p>
+		<p>${eventtype.eventType}</p>
 		<p>${event.eventContent}</p>
-		
+		<p>${totalmember}</p>
+		<c:forEach var="eventmember" items="${eventmember}">
+			<p>${eventmember.memberId}</p>
+			
+		</c:forEach>
+<%-- 		<c:forEach var="eventmembers" items="${eventmembers}"> --%>
+			<p>${eventmembers.memberName}</p>
+			
+<%-- 		</c:forEach> --%>
 	</div>
 <!-- 請把所有內容寫在此div內 -->
 </body>
