@@ -26,23 +26,23 @@
 	<h4 >${name}</h4>
 	<h4>${welcome}</h4>
 	</div>
-	<form>
+	<form:form action="loginProcess" method="POST" modelAttribute="memberMainBean">
   <div class="form-group">
-    <label for="exampleInputEmail1">帳號</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+    <label for="email">帳號</label>
+    <form:input type="email" class="form-control" id="email" placeholder="Email" path="email"/>
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">密碼</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <label for="password">密碼</label>
+    <form:input type="password" class="form-control" id="password" placeholder="Password" path="password"/>
   </div>
-  <div class="checkbox">
-    <label>
-      <input type="checkbox"> 記住我
-    </label>
-  </div>
+<!--   <div class="checkbox"> -->
+<!--     <label> -->
+<!--       <input type="checkbox"> 記住我 -->
+<!--     </label> -->
+<!--   </div> -->
   <button type="submit" class="btn btn-primary">登入</button>
   <button type="button" class="btn btn-primary" onclick="location.href='/joooin/register'">註冊</button>
-</form>
+</form:form>
  
 	</div>
 <!-- 請把所有內容寫在此div內 -->

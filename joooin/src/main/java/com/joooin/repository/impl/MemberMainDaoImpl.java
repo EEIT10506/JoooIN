@@ -45,5 +45,12 @@ public class MemberMainDaoImpl implements MemberMainDao{
 		Session session = factory.getCurrentSession();
 		session.delete(session.get(MemberMainBean.class, memberId));
 	}
+
+	@Override
+	public MemberMainBean getByEmail(String email) {
+		String hql = "select email from member_main";
+		Session session = factory.getCurrentSession();
+		return session.get(MemberMainBean.class, email);
+	}
 	
 }
