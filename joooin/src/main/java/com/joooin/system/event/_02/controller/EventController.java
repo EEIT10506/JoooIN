@@ -1,8 +1,8 @@
 package com.joooin.system.event._02.controller;
 
 
-import java.util.Iterator;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
@@ -27,7 +27,7 @@ public class EventController {
 	//主頁面進入前
 	@RequestMapping("/event")
 	public String test(Model model, HttpSession session) {
-		session.setAttribute("eventId", 2);
+		session.setAttribute("eventId", 3);
 		
 		return "event/event";
 	}
@@ -37,6 +37,7 @@ public class EventController {
 	public String eventDetail(Model model, @PathVariable("eventId") Integer eventId) {
 		EventMainBean event = eventservice.getByEventMainId(eventId);
 		Integer typeid = event.getEventTypeId();
+		Integer inviterid = event.getEventInviterId();
 //		Set<EventMemberBean> eventmember = event.getEventMemberSet();
 //		Iterator<EventMemberBean> iterator = eventmember.iterator();
 //		MemberMainBean eventmembers = null;
@@ -46,9 +47,11 @@ public class EventController {
 //			}
 //		int totalmember = eventmember.size();
 		EventTypeBean eventtype = eventservice.getByEventTypeId(typeid);
+		MemberMainBean eventbuildname = eventservice.getByMemberId(inviterid);
 		
 		model.addAttribute("event", event);
 		model.addAttribute("eventtype", eventtype);
+		model.addAttribute("eventbuildname", eventbuildname);
 //		model.addAttribute("totalmember", totalmember);
 //		model.addAttribute("eventmember", eventmember);
 //		model.addAttribute("eventmembers", eventmembers);
@@ -60,11 +63,14 @@ public class EventController {
 		EventMainBean event = eventservice.getByEventMainId(eventId);
 //		Integer typeid = event.getEventTypeId();
 		Set<EventMemberBean> eventmember = event.getEventMemberSet();
+		
 		MemberMainBean eventmembers = null;
 		for(EventMemberBean members: eventmember) {
 			Integer memberid = members.getMemberId();
-			eventmembers = eventservice.getByMemberId(memberid);
+			 eventmembers  = eventservice.getByMemberId(memberid);
+			
 		}
+//		List<MemberMainBean> list = new ArrayList<>();
 //		Iterator<EventMemberBean> iterator = eventmember.iterator();
 //		
 //			while(iterator.hasNext()) {

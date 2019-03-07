@@ -29,7 +29,14 @@
 		 <a href="event/${eventId}">活動詳細資訊有ID=3</a>
 		 <a href="event/members/${eventId}">活動詳細成員/event/members/Id</a>
 		<p>活動名稱 : ${event.eventName}</p>
+		<p>活動開始 : ${event.eventDateStart}</p>
+		<p>活動結束 : ${event.eventDateEnd}</p>
+		<p>縣市 : ${event.eventLocation}</p>
+		<p>地址 : ${event.eventAddress}</p>
+		<p>報名人數 : ${event.eventCurrentMembers}/${event.eventMemberLimit}</p>
 		<p>活動發起人ID : ${event.eventInviterId}</p>
+		<p>活動發起人姓名 : ${eventbuildname.memberName}</p>
+		
 		<p>活動種類 : ${eventtype.eventType}</p>
 		<p>活動內容描述 : ${event.eventContent}</p>
 		<p>活動參加會員人數(不含額外人) : ${totalmember}</p>
