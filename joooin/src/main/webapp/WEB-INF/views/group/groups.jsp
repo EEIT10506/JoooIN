@@ -125,7 +125,7 @@
                 <div class="our-team-main">
 
                     <div class="team-front">
-                        <img src="<c:url value='/resources/img/icon_mag_01.png'/>" class="img-fluid" />
+                        <img src="<c:url value='/resources/img/icon_all_01.png'/>" class="img-fluid" />
                         <h3>全部</h3>
                     </div>
 
