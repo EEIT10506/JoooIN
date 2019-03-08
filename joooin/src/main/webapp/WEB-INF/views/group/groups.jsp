@@ -28,7 +28,7 @@
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 	<div id="main">
-<h1 class="text-center">Team Design Section with Pure CSS Effect</h1>
+<h1 class="text-center">Groups</h1>
 
 
     <div class="container">
