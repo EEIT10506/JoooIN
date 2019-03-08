@@ -17,12 +17,28 @@
 		top: 50px;
 	}
 </style>
-<title>Insert title here</title></head>
+<title>社團分類結果</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
-	</div> 
+	<table style="border:3px #cccccc solid;" cellpadding="10" border='1'>
+	<tr><th>種類</th><th>社團名稱</th><th>人數</th></tr>
+	<c:forEach var='group_main' item='${groupsType}' >
+	
+	<tr><td>${group_main.groupType}</td>
+	<td>${group_main.groupName}</td>
+	<td>${group_main.groupCurrentMembers}</td>
+	<td>
+	<button>加入社團</button>
+	</td>
+	
+	</tr>
+	
+	</c:forEach>
+	</table>
+
+	</div>
 <!-- 請把所有內容寫在此div內 -->
 </body>
 </html>
