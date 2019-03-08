@@ -17,11 +17,33 @@
 		top: 50px;
 	}
 </style>
-<title>Insert title here</title></head>
+<title>登入畫面</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
+	<div style="text-align: center;color: red;">
+	<h4 >${name}</h4>
+	<h4>${welcome}</h4>
+	</div>
+	<form:form action="loginProcess" method="POST" modelAttribute="memberMainBean">
+  <div class="form-group">
+    <label for="email">帳號</label>
+    <form:input type="email" class="form-control" id="email" placeholder="Email" path="email"/>
+  </div>
+  <div class="form-group">
+    <label for="password">密碼</label>
+    <form:input type="password" class="form-control" id="password" placeholder="Password" path="password"/>
+  </div>
+<!--   <div class="checkbox"> -->
+<!--     <label> -->
+<!--       <input type="checkbox"> 記住我 -->
+<!--     </label> -->
+<!--   </div> -->
+  <button type="submit" class="btn btn-primary">登入</button>
+  <button type="button" class="btn btn-primary" onclick="location.href='/joooin/register'">註冊</button>
+</form:form>
+ 
 	</div>
 <!-- 請把所有內容寫在此div內 -->
 </body>
