@@ -52,6 +52,7 @@ public class EventController {
 			 eventmembers  = eventservice.getByMemberId(memberid);
 			 eventmemberset.add(eventmembers);
 		}
+		String start = event.getEventDateStart();
 		model.addAttribute("event", event);
 		model.addAttribute("eventtype", eventtype);
 		model.addAttribute("eventbuildname", eventbuildname);
