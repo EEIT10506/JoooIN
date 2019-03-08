@@ -2,6 +2,7 @@ package com.joooin.system.event._02.controller;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -31,46 +32,50 @@ public class EventController {
 		
 		return "event/event";
 	}
-	//詳細活動資訊
+	//詳細活動資訊 & 成員 click button 才帶資料顯示
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/event/{eventId}")
 	public String eventDetail(Model model, @PathVariable("eventId") Integer eventId) {
 		EventMainBean event = eventservice.getByEventMainId(eventId);
 		Integer typeid = event.getEventTypeId();
 		Integer inviterid = event.getEventInviterId();
-//		Set<EventMemberBean> eventmember = event.getEventMemberSet();
-//		Iterator<EventMemberBean> iterator = eventmember.iterator();
-//		MemberMainBean eventmembers = null;
-//			while(iterator.hasNext()) {
-//				Integer memberid = iterator.next().getMemberId();
-//				eventmembers = eventservice.getByMemberId(memberid);
-//			}
-//		int totalmember = eventmember.size();
+
 		EventTypeBean eventtype = eventservice.getByEventTypeId(typeid);
 		MemberMainBean eventbuildname = eventservice.getByMemberId(inviterid);
 		
-		model.addAttribute("event", event);
-		model.addAttribute("eventtype", eventtype);
-		model.addAttribute("eventbuildname", eventbuildname);
-//		model.addAttribute("totalmember", totalmember);
-//		model.addAttribute("eventmember", eventmember);
-//		model.addAttribute("eventmembers", eventmembers);
-		return "event/event";
-	}
-	//詳細活動成員
-	@RequestMapping("/event/members/{eventId}")
-	public String eventMembers(Model model, @PathVariable("eventId") Integer eventId) {
-		EventMainBean event = eventservice.getByEventMainId(eventId);
-//		Integer typeid = event.getEventTypeId();
-		Integer inviterid = event.getEventInviterId();
 		Set<EventMemberBean> eventmember = event.getEventMemberSet();
-		MemberMainBean eventbuildname = eventservice.getByMemberId(inviterid);
+		int totalmember = eventmember.size();
 		MemberMainBean eventmembers = null;
+		Set<MemberMainBean> eventmemberset =new HashSet<MemberMainBean>();
 		for(EventMemberBean members: eventmember) {
 			Integer memberid = members.getMemberId();
 			 eventmembers  = eventservice.getByMemberId(memberid);
-			
+			 eventmemberset.add(eventmembers);
 		}
+		model.addAttribute("event", event);
+		model.addAttribute("eventtype", eventtype);
+		model.addAttribute("eventbuildname", eventbuildname);
+		model.addAttribute("totalmember", totalmember);
+		model.addAttribute("eventmember", eventmember);
+		model.addAttribute("eventmembers", eventmemberset);
+		
+		return "event/event";
+	}
+	//詳細活動成員
+//	@RequestMapping("/event/members/{eventId}")
+//	public String eventMembers(Model model, @PathVariable("eventId") Integer eventId) {
+//		EventMainBean event = eventservice.getByEventMainId(eventId);
+//		Integer typeid = event.getEventTypeId();
+//		Integer inviterid = event.getEventInviterId();
+//		Set<EventMemberBean> eventmember = event.getEventMemberSet();
+		//MemberMainBean eventbuildname = eventservice.getByMemberId(inviterid);
+//		MemberMainBean eventmembers = null;
+//		Set<MemberMainBean> eventmemberset =new HashSet<MemberMainBean>();
+//		for(EventMemberBean members: eventmember) {
+//			Integer memberid = members.getMemberId();
+//			 eventmembers  = eventservice.getByMemberId(memberid);
+//			 eventmemberset.add(eventmembers);
+//		}
 //		List<MemberMainBean> list = new ArrayList<>();
 //		Iterator<EventMemberBean> iterator = eventmember.iterator();
 //		
@@ -79,17 +84,17 @@ public class EventController {
 //				eventmembers = eventservice.getByMemberId(memberid);
 //			}
 			
-		int totalmember = eventmember.size();
+//		int totalmember = eventmember.size();
 //		EventTypeBean eventtype = eventservice.getByEventTypeId(typeid);
 		
 //		model.addAttribute("event", event);
 //		model.addAttribute("eventtype", eventtype);
-		model.addAttribute("totalmember", totalmember);
-		model.addAttribute("eventmember", eventmember);
-		model.addAttribute("eventmembers", eventmembers);
-		model.addAttribute("eventbuildname", eventbuildname);
-		return "event/event";
-	}
+//		model.addAttribute("totalmember", totalmember);
+//		model.addAttribute("eventmember", eventmember);
+//		model.addAttribute("eventmembers", eventmemberset);
+//		model.addAttribute("eventbuildname", eventbuildname);
+//		return "event/event";
+//	}
 	//活動修改
 	@RequestMapping("/event/setting/{eventId}")
 	public String eventSetting(Model model, @PathVariable("eventId") Integer eventId) {
