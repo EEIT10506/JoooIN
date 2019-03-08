@@ -15,6 +15,10 @@
 	}
 	#hasLogin {
 		position: absolute;
+		right: 75px;
+	}
+	#logout{
+		position: absolute;
 		right: 30px;
 	}
 </style>
@@ -48,7 +52,10 @@
       <a class="nav-link" href="login">登入／註冊</a>
     </li>
     <li id="hasLogin" class="nav-item">
-      <a class="nav-link hasLogin" href="#">${memberName}</a>
+      <a class="nav-link hasLogin" href="/joooin/member">${memberName}</a>
+    </li>
+    <li id="logout" class="nav-item">
+      <a class="nav-link logout" href="/joooin/logout">${logout}</a>
     </li>
   </ul>
 </nav>
