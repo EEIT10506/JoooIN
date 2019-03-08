@@ -33,10 +33,19 @@ public class LoginController {
 		
 		member = service.checkIDPassword(mmb.getEmail(), mmb.getPassword());
 		if(member != null) {
-			session.setAttribute("memberName", mmb);
+			session.setAttribute("memberName", member.getMemberName());
+			session.setAttribute("memberId", member.getMemberId());
+			session.setAttribute("logout", "登出");
 			return "redirect:/";
 		}else {
 			return "admin/login";
 		}
+	}
+	
+	@RequestMapping("logout")
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return "redirect:/";
 	}
 }
