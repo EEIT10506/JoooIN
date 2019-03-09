@@ -18,6 +18,11 @@
 		position: relative;
 		top: 50px;
 	}
+	
+	.a{
+   		 text-decoration:none;
+	}
+	
 	.body{
 		font-family:微軟正黑體;
 		background-color:#F5F5F5;
@@ -52,6 +57,7 @@
 	.leavemessage{
 		margin-top:30px;
 /* 		border:1px solid black; */
+		margin-bottom:30px;
 	}
 	.eventbuilder{
 		font-size:25px;
@@ -65,6 +71,7 @@
 	}
 	.eventmodify{
 /* 	positive:relative; */
+		text-decoration:none;
 		padding-top:25px;
 		padding-right:100px;
 		font-size:20px;
@@ -126,6 +133,26 @@
 		top:3px;
 		font-weight:bold !important;
 	}
+	.textArea{
+		width:70%;
+		height:50px;
+		margin-left:136px;
+		border-radius:10px;
+		border:solid 2px #FF8C00;
+		overflow:hidden;
+	}
+	.messageContent{
+		width:70%;
+		margin:auto;
+	}
+	.writeMessage{
+		width:70% !important;
+		margin:auto;
+	}
+	.hr{
+		width:70%;
+		margin:auto;
+	}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -159,7 +186,7 @@
 			<img class="eventtypeimg" src="<c:url value='/resources/img/icon_${eventtype.eventType}_01.png' />" />${eventtype.eventType}</span>
 			<span class="eventtype" id="eventfull">已滿團</span>
 			<span class="eventtype" id="eventnofull">未滿團</span>
-			 <span class="eventmodify"> </span>
+			 <span class="eventmodify"><i class="fas fa-cog"></i><a class="a" href="#">活動管理</a></span>
 			 
 		 </div>
 		
@@ -206,9 +233,24 @@
      			 </div>
    			</div>
   	   <div class="leavemessage">
-  	   	<form action="#" method="Post">
+  	   	<hr/>
+  	   	<div id="allMessage">
+<!--   	   	各留言 -->
+  	   		<p class="messageContent">
   	   	
-      	<input type="submit" value="留言" class="btn btn-primary btn-md btn-block"/>
+  	   		
+  	   		
+  	   		<span id="leaveMessageName">${eventbuildname.memberName} </span><br/>
+  	   				今天天氣真好今天天氣
+<!--   	   				內文 -->
+  	   		<br/><br/>
+  	   		<hr class="hr"/>
+  	   		</p>
+  	   	<!--   	   	各留言 -->
+  	   	</div>
+  	   	<form action="#" method="Post">
+  	   	<textarea class="textArea" ></textarea>
+      	<input type="submit" value="留言" class="btn btn-primary btn-md btn-block writeMessage"/>
       	</form>
        </div>
  </div>
