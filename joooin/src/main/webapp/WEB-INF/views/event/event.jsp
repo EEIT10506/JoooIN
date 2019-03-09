@@ -32,25 +32,26 @@
 	}
 	.row{
 		padding:10px;
-		
+/* 		margin-right: 15px;  */
+/*   		margin-left: 15px; */
 	}
 	.left{
 	
 	}
 	.right{
-		
+		padding-left:10px;
 	}
 	.eventname{
-		position:relative;
+/* 		position:relative; */
 		padding-left:30px;
-		padding-top:40px;
+ 		padding-top:40px; 
 		font-size:40px;
 		font-weight:bold;
 		
 	}
 	.leavemessage{
 		margin-top:30px;
-		border:1px solid black;
+/* 		border:1px solid black; */
 	}
 	.eventbuilder{
 		font-size:25px;
@@ -63,14 +64,20 @@
 	
 	}
 	.eventmodify{
-	positive:relative;
+/* 	positive:relative; */
 		padding-top:25px;
 		padding-right:100px;
 		font-size:20px;
 		float:right;	
 	}
 	.eventtype{
-		font-size:20px;
+		position:relative;
+		padding:5px 5px;
+		border-radius:30px;
+		border:solid 1px #FF0000;
+		font-size:15px;
+		bottom:8px;
+		
 	}
 	.eventliketotal{
 	margin-left:370px;
@@ -78,7 +85,67 @@
 		margin-right:5px;
 /* 		float:right; */
 	}
+	.eventtypeimg{
+		width:20px;
+		
+	}
+	.eventimg{
+		width:430px;
+		height:300px;
+		padding-left:10px;
+	}
+	.eventjoinmember{
+		
+	}
+	#liked{
+		background-color:#EEEEE0;
+	}
+ 	.eventNotLike{ 
+ 		background-color:#CDCDC1 !important;  
+ 		font-weight:bold !important;
+ 		width:80px;
+ 	} 
+ 	.eventLike{ 
+  		background-color:#4876FF !important;  
+		
+ 	} 
+	.eventJoin{
+		position:relative;
+		background-color:#8B4500;
+		color:white;
+		padding:8px 30px !important;
+		font-family:微軟正黑體 !important;
+		font-size:18px !important;
+		font-weight:bold !important;
+ 		left:180px; 
+		
+	}
+	.eventCancels{
+		position:relative;
+ 		left:180px; 
+		top:3px;
+		font-weight:bold !important;
+	}
 </style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#e${event.eventId }").click(function(){
+			var liked = $("#e${event.eventId }");
+			if(liked.val= "<i class='far fa-thumbs-up'></i> 讚"){
+			    $(this).addClass("eventLike");
+			    $(this).html("<i class='far fa-thumbs-up'></i> 收回");
+			    return;
+			}else if(liked.val = "<i class='far fa-thumbs-up'></i> 收回"){
+				$(this).addClass("eventNotLike");
+			    $(this).html("<i class='far fa-thumbs-up'></i> 讚");
+			    return;
+			}
+			
+		});
+		
+	});
+	
+</script>
 <title>Insert title here</title></head>
 <body class="body">
 <jsp:include page="${request.contextPath}/navbar"/>
@@ -87,16 +154,31 @@
 <%-- 		 <c:set var="eventId" value="${eventId}"/> --%>
 <div class="outer">
 		<div class="eventname">
-			${event.eventName}
-			<span class="eventmodify"> 活動設定按鈕</span>
-			<span class="eventtype"> <img src="<c:url value='/resources/img/cover_${eventtype.eventType}.jpg' />" />${eventtype.eventType}</span>
+			<span >${event.eventName}</span>
+			<span class="eventtype"> 
+			<img class="eventtypeimg" src="<c:url value='/resources/img/icon_${eventtype.eventType}_01.png' />" />${eventtype.eventType}</span>
+			<span class="eventtype" id="eventfull">已滿團</span>
+			<span class="eventtype" id="eventnofull">未滿團</span>
+			 <span class="eventmodify"> </span>
+			 
 		 </div>
+		
 			<div class="row">
     			  <div class="col-md-6 left">
-    				<p>${event.eventImage}</p>
+    				<img class="eventimg" src="<c:url value='/resources/img/cover_${eventtype.eventType}.jpg'/>" />${event.eventImage}
     				<p class="eventliketotal"><i class="far fa-thumbs-up"></i> ${event.eventLike}</p>
     				<hr>
-    				讚   分享
+    				<p>
+    				 <span id="likedspan">
+    				 <button type="button" id="e${event.eventId }" class="btn btn-default eventNotLike"><i class="far fa-thumbs-up"></i> &nbsp讚</button></span>
+    				<span id="joinOrNot">
+    				
+    				 <button type="button" class="btn btn-success eventJoin">報名</button>
+    				</span>
+    				<span>
+    				 <button type="button" class="btn btn-danger eventCancels">退出</button>
+    				 </span> 
+    				 </p>
      			 </div>
     		 	 <div class="col-md-6 right">
       				<p class="eventbuilder">
@@ -112,11 +194,22 @@
 <!--       				位置icon圖 -->
 						<span> ${event.eventLocation} ,${event.eventAddress}</span>
       				</p>
-      				<p></p>
+      				<p class="eventjoinmember">目前人數 : 
+      				<span>${event.eventCurrentMembers}</span>  人
+      				</p>
+      				<p>人數限制 : 
+      				<span>${event.eventMemberLimit}</span>
+      				</p>
+      				<p>活動內容 : 
+      				<span> ${event.eventContent}</span>
+      				</p>
      			 </div>
    			</div>
   	   <div class="leavemessage">
-      	12312412414244
+  	   	<form action="#" method="Post">
+  	   	
+      	<input type="submit" value="留言" class="btn btn-primary btn-md btn-block"/>
+      	</form>
        </div>
  </div>
 		 
