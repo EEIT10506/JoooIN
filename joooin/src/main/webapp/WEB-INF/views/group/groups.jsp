@@ -37,7 +37,6 @@
             <!--team-1-->
             <div class="col-lg-4">
                 <div class="our-team-main">
-
                     <div class="team-front">
                         <img src="<c:url value='/resources/img/icon_sport_01.png'/>"  class="img-fluid" />
                         <h3>運動</h3>
@@ -161,7 +160,7 @@
                 </div>
             </div>
             <!--team-6-->
-
+ <a href="${pageContext.request.contextPath}/group/groupstype">test</a>//測試 刪除這行即可by fu
 
 
         </div>
