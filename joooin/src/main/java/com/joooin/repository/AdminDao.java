@@ -9,6 +9,7 @@ public interface AdminDao {
 	public Integer save(AdminBean adminBean);
 	public void update(AdminBean adminBean);
 	public void deleteByAdminId(Integer adminId);
+	public AdminBean check(String email);
 }
 
 
