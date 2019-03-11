@@ -2,8 +2,8 @@ package com.joooin.model;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,8 +25,8 @@ public class GroupPostBean implements Serializable {
 	private Integer groupPostLike;
 	private String groupPostDate;
 	private Boolean isDeleted;
-	private Set<GroupPostLikeBean> groupPostLikeSet = new LinkedHashSet<GroupPostLikeBean>();
-	private Set<GroupPostReplyBean> GroupPostReplySet = new LinkedHashSet<GroupPostReplyBean>();
+	private List<GroupPostLikeBean> groupPostLikeList = new ArrayList<GroupPostLikeBean>();
+	private List<GroupPostReplyBean> GroupPostReplyList = new ArrayList<GroupPostReplyBean>();
 	
 	public GroupPostBean(Integer groupId, Integer memberId, String groupPostTitle, Byte[] groupPostContent,
 			Integer groupPostLike, String groupPostDate, Boolean isDeleted) {
@@ -45,19 +45,19 @@ public class GroupPostBean implements Serializable {
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="groupPostId", referencedColumnName="groupPostId")
-	public Set<GroupPostLikeBean> getGroupPostLikeSet() {
-		return groupPostLikeSet;
+	public List<GroupPostLikeBean> getGroupPostLikeList() {
+		return groupPostLikeList;
 	}
-	public void setGroupPostLikeSet(Set<GroupPostLikeBean> groupPostLikeSet) {
-		this.groupPostLikeSet = groupPostLikeSet;
+	public void setGroupPostLikeList(List<GroupPostLikeBean> groupPostLikeList) {
+		this.groupPostLikeList = groupPostLikeList;
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="groupPostId", referencedColumnName="groupPostId")
-	public Set<GroupPostReplyBean> getGroupPostReplySet() {
-		return GroupPostReplySet;
+	public List<GroupPostReplyBean> getGroupPostReplyList() {
+		return GroupPostReplyList;
 	}
-	public void setGroupPostReplySet(Set<GroupPostReplyBean> groupPostReplySet) {
-		GroupPostReplySet = groupPostReplySet;
+	public void setGroupPostReplyList(List<GroupPostReplyBean> groupPostReplyList) {
+		GroupPostReplyList = groupPostReplyList;
 	}
 	
 	@Id

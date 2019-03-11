@@ -1,8 +1,8 @@
 package com.joooin.model;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -24,7 +24,7 @@ public class ReportBean implements Serializable {
 	private String reportType;
 	private String reportContent;
 	private Boolean isDone;
-	private Set<PunishmentBean> punishmentSet = new LinkedHashSet<PunishmentBean>();
+	private List<PunishmentBean> punishmentList = new ArrayList<PunishmentBean>();
 	
 	public ReportBean(String reportDate, Integer reportMemberId, Integer reportViolatorId, String reportType,
 			String reportContent, Boolean isDone) {
@@ -41,11 +41,11 @@ public class ReportBean implements Serializable {
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="reportId", referencedColumnName="reportId")
-	public Set<PunishmentBean> getPunishmentSet() {
-		return punishmentSet;
+	public List<PunishmentBean> getPunishmentList() {
+		return punishmentList;
 	}
-	public void setPunishmentSet(Set<PunishmentBean> punishmentSet) {
-		this.punishmentSet = punishmentSet;
+	public void setPunishmentList(List<PunishmentBean> punishmentList) {
+		this.punishmentList = punishmentList;
 	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

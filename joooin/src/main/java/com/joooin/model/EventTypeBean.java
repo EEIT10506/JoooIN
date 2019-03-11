@@ -1,8 +1,8 @@
 package com.joooin.model;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -19,7 +19,7 @@ public class EventTypeBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer eventTypeId;
 	private String eventType;
-	private Set<EventMainBean> eventMainSet = new LinkedHashSet<EventMainBean>();
+	private List<EventMainBean> eventMainList = new ArrayList<EventMainBean>();
 	
 	public EventTypeBean(String eventType) {
 		this.eventType = eventType;
@@ -29,11 +29,11 @@ public class EventTypeBean implements Serializable {
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="eventTypeId", referencedColumnName="eventTypeId")
-	public Set<EventMainBean> getEventMainSet() {
-		return eventMainSet;
+	public List<EventMainBean> getEventMainList() {
+		return eventMainList;
 	}
-	public void setEventMainSet(Set<EventMainBean> eventMainSet) {
-		this.eventMainSet = eventMainSet;
+	public void setEventMainList(List<EventMainBean> eventMainList) {
+		this.eventMainList = eventMainList;
 	}
 	
 	@Id

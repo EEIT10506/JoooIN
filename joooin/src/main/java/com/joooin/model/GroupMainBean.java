@@ -1,8 +1,8 @@
 package com.joooin.model;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,10 +23,10 @@ public class GroupMainBean implements Serializable {
 	private Integer groupCurrentMembers;
 	private String groupCreateDate;
 	private String groupIntro;
-	private Set<GroupMemberBean> GroupMemberSet = new LinkedHashSet<GroupMemberBean>();
-	private Set<GroupPostBean> GroupPostSet = new LinkedHashSet<GroupPostBean>();
-	private Set<GroupPostReplyBean> GroupPostReplySet = new LinkedHashSet<GroupPostReplyBean>();
-	private Set<GroupChatBean> groupChatSet = new LinkedHashSet<GroupChatBean>();
+	private List<GroupMemberBean> GroupMemberList = new ArrayList<GroupMemberBean>();
+	private List<GroupPostBean> GroupPostList = new ArrayList<GroupPostBean>();
+	private List<GroupPostReplyBean> GroupPostReplyList = new ArrayList<GroupPostReplyBean>();
+	private List<GroupChatBean> groupChatList = new ArrayList<GroupChatBean>();
 	
 	public GroupMainBean(String groupType, String groupName, Integer groupLeaderId,
 			Integer groupCurrentMembers, String groupCreateDate, String groupIntro) {
@@ -43,35 +43,35 @@ public class GroupMainBean implements Serializable {
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="groupId", referencedColumnName="groupId")
-	public Set<GroupMemberBean> getGroupMemberSet() {
-		return GroupMemberSet;
+	public List<GroupMemberBean> getGroupMemberList() {
+		return GroupMemberList;
 	}
-	public void setGroupMemberSet(Set<GroupMemberBean> groupMemberSet) {
-		GroupMemberSet = groupMemberSet;
-	}
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="groupId", referencedColumnName="groupId")
-	public Set<GroupPostBean> getGroupPostSet() {
-		return GroupPostSet;
-	}
-	public void setGroupPostSet(Set<GroupPostBean> groupPostSet) {
-		GroupPostSet = groupPostSet;
+	public void setGroupMemberList(List<GroupMemberBean> groupMemberList) {
+		GroupMemberList = groupMemberList;
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="groupId", referencedColumnName="groupId")
-	public Set<GroupPostReplyBean> getGroupPostReplySet() {
-		return GroupPostReplySet;
+	public List<GroupPostBean> getGroupPostList() {
+		return GroupPostList;
 	}
-	public void setGroupPostReplySet(Set<GroupPostReplyBean> groupPostReplySet) {
-		GroupPostReplySet = groupPostReplySet;
+	public void setGroupPostList(List<GroupPostBean> groupPostList) {
+		GroupPostList = groupPostList;
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="groupId", referencedColumnName="groupId")
-	public Set<GroupChatBean> getGroupChatSet() {
-		return groupChatSet;
+	public List<GroupPostReplyBean> getGroupPostReplyList() {
+		return GroupPostReplyList;
 	}
-	public void setGroupChatSet(Set<GroupChatBean> groupChatSet) {
-		this.groupChatSet = groupChatSet;
+	public void setGroupPostReplyList(List<GroupPostReplyBean> groupPostReplyList) {
+		GroupPostReplyList = groupPostReplyList;
+	}
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="groupId", referencedColumnName="groupId")
+	public List<GroupChatBean> getGroupChatList() {
+		return groupChatList;
+	}
+	public void setGroupChatList(List<GroupChatBean> groupChatList) {
+		this.groupChatList = groupChatList;
 	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
