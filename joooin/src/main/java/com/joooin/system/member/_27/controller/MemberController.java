@@ -29,16 +29,24 @@ public class MemberController {
 		
 		if (memberId != null) {
 			MemberMainBean mmb = memberService.getMemberMainBean(memberId);
-			model.addAttribute("bean", mmb);
+			model.addAttribute("memberMainBean", mmb);
 			return "member/self/member";
 		} else {
-			return "member/self/not_login";
+			return "not_login";
 		}
 	}
 	
 	@RequestMapping(value = "/member/profile", method = RequestMethod.GET)
-	public String profile() {
-		return "member/self/profile";
+	public String profile(Model model, HttpSession session) {
+		Integer memberId = (Integer)session.getAttribute("memberId");
+		
+		if (memberId != null) {
+			MemberMainBean mmb = memberService.getMemberMainBean(memberId);
+			model.addAttribute("memberMainBean", mmb);
+			return "member/self/profile";
+		} else {
+			return "not_login";
+		}
 	}
 	@RequestMapping(value = "/member/friend", method = RequestMethod.GET)
 	public String friend() {
