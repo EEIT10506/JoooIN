@@ -25,14 +25,9 @@
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
-	<div id="main">
-	<form:form action="registerProcess" method="POST" modelAttribute="memberMainBean">
-  <div class="form-group">
-    <label for="memberName">會員姓名</label>
-    <form:input type="text" class="form-control" id="memberName" name="memberName" placeholder="Name" path="memberName"/>
-  </div>
-  
-    <div class="form-group">
+<div id="main">
+<form:form action="registerProcess" method="POST" modelAttribute="memberMainBean">
+	<div class="form-group">
     <label for="email">會員信箱</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>
       <form:radiobutton name="emailDisplay" value="true" path="emailDisplay"/> 是
     </label>
@@ -40,6 +35,12 @@
       <form:radiobutton name="emailDisplay" value="false" path="emailDisplay" checked="true"/> 否
     </label></span>
     <form:input type="email" class="form-control" id="email" name="email" placeholder="Email" path="email"/>
+  </div>
+
+	
+  <div class="form-group">
+    <label for="memberName">會員姓名</label>
+    <form:input type="text" class="form-control" id="memberName" name="memberName" placeholder="Name" path="memberName"/>
   </div>
   
   <div class="form-group">
