@@ -4,15 +4,12 @@ package com.joooin.system.member._27.controller;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.joooin.model.MemberMainBean;
 import com.joooin.system.member._27.service.MemberService;
-import com.joooin.util.ImageUtils;
 
 @Controller
 public class MemberController {
@@ -37,12 +34,6 @@ public class MemberController {
 		} else {
 			return "member/self/not_login";
 		}
-	}
-	
-	@RequestMapping(value = "/getMemberImage/{memberId}", method = RequestMethod.GET)
-	public ResponseEntity<byte[]> getMemberImage(@PathVariable Integer memberId) {
-	    MemberMainBean bean = memberService.getMemberMainBean(memberId);
-	    return ImageUtils.byteArrayToImage(bean.getMemberImage());
 	}
 	
 	@RequestMapping(value = "/member/profile", method = RequestMethod.GET)
