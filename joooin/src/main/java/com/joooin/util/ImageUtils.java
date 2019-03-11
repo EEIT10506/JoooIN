@@ -1,10 +1,17 @@
 package com.joooin.util;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Blob;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,12 +19,35 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 public class ImageUtils {
+	@Autowired
+	static ServletContext context;
+	
+	public static Byte[] localImageToByteArray(String fileName) {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		String filePath = "/WEB-INF/resources/img/" + fileName;
+		String root = context.getRealPath("/");
+		root = root.substring(0, root.length()-1);
+		String fileLoction = root + filePath;
+		byte[] b = null;
+		File file = new File(fileLoction);
+		BufferedImage bi;
+		try {
+			bi = ImageIO.read(file);
+			ImageIO.write(bi, "png", baos);
+			b = baos.toByteArray();
+			baos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+			Byte[] byteArray = ArrayUtils.toObject(b);
+		return byteArray;
+	}
+	
 	public static ResponseEntity<byte[]> byteArrayToImage(Byte[] byteArray) {
 		byte[] media = null;
 	    HttpHeaders headers = new HttpHeaders();
 	    int len = 0;
 	    
-	    //Convert Byte[] to Blob
 	    Byte[] objByte = byteArray;
 	    byte[] priByte = ArrayUtils.toPrimitive(objByte);
 	    try {

@@ -2,6 +2,7 @@ package com.joooin.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -369,5 +370,16 @@ public class MemberMainBean implements Serializable {
 	public void setPhoneDisplay(Boolean phoneDisplay) {
 		this.phoneDisplay = phoneDisplay;
 	}
+	@Override
+	public String toString() {
+		return "MemberMainBean [memberId=" + memberId + ", memberName=" + memberName + ", email=" + email
+				+ ", password=" + password + ", gender=" + gender + ", birthday=" + birthday + ", city=" + city
+				+ ", phone=" + phone + ", memberImage=" + Arrays.toString(memberImage) + ", logins=" + logins
+				+ ", memberCreateDate=" + memberCreateDate + ", certificationStatus=" + certificationStatus
+				+ ", certificationHash=" + certificationHash + ", genderDisplay=" + genderDisplay + ", birthdayDisplay="
+				+ birthdayDisplay + ", cityDisplay=" + cityDisplay + ", emailDisplay=" + emailDisplay
+				+ ", phoneDisplay=" + phoneDisplay + "]";
+	}
+	
 
 }

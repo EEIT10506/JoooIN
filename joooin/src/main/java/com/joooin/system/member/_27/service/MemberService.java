@@ -4,4 +4,5 @@ import com.joooin.model.MemberMainBean;
 
 public interface MemberService {
 	public MemberMainBean getMemberMainBean(Integer memberId); 
+	public void updateMemberMainBean(MemberMainBean memberMainBean);
 }

@@ -21,6 +21,11 @@ public class MemberServiceImpl implements MemberService{
 		return memberMainDao.getByMemberId(memberId);
 	}
 
+	@Override
+	public void updateMemberMainBean(MemberMainBean memberMainBean) {
+		memberMainDao.update(memberMainBean);
+	}
+
 	
 	
 }
