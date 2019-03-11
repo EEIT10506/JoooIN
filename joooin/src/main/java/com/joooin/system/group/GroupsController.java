@@ -11,4 +11,8 @@ public class GroupsController {
 	public String homepage() {
 		return "group/groups";
 	}
+	@RequestMapping(method = RequestMethod.GET, value = "/group/groupstype")
+	public String getgrouptypeAll() {
+		return "group/groupstype";
+	}
 }
