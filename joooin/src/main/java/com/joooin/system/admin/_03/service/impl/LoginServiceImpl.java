@@ -27,4 +27,9 @@ public class LoginServiceImpl implements LoginService {
 		return dao.checkIDPassword(email, password);
 	}
 
+	@Override
+	public void update(MemberMainBean memberMainBean) {
+		dao.update(memberMainBean);
+	}
+
 }

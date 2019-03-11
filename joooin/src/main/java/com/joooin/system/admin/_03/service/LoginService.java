@@ -5,4 +5,5 @@ import com.joooin.model.MemberMainBean;
 public interface LoginService {
 
 	public MemberMainBean checkIDPassword(String email, String password) ;
+	public void update(MemberMainBean memberMainBean);
 }

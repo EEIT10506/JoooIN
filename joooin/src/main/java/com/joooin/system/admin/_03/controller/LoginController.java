@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.joooin.model.MemberMainBean;
+import com.joooin.repository.MemberMainDao;
 import com.joooin.system.admin._03.service.LoginService;
 
 @Controller
@@ -18,6 +19,9 @@ public class LoginController {
 
 	@Autowired
 	LoginService service;
+	
+	@Autowired
+	MemberMainDao dao;
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String login(Model model) {
@@ -35,6 +39,9 @@ public class LoginController {
 		if(member != null) {
 			session.setAttribute("memberName", member.getMemberName());
 			session.setAttribute("memberId", member.getMemberId());
+			Integer logins = member.getLogins() + 1;
+			member.setLogins(logins);
+			service.update(member);
 			session.setAttribute("logout", "登出");
 			return "redirect:/";
 		}else {
