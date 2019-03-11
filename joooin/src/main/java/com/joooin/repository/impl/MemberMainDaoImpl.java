@@ -67,5 +67,17 @@ public class MemberMainDaoImpl implements MemberMainDao{
 		return mmb;
 	}
 
+	@Override
+	public MemberMainBean checkEmail(String email) {
+		MemberMainBean mmb = null;
+		Session session = factory.getCurrentSession();
+		String hql = "FROM MemberMainBean m WHERE m.email = :email";
+		
+		mmb = (MemberMainBean)session.createQuery(hql)
+				.setParameter("email", email)
+				.uniqueResult();
+		
+		return mmb;
+	}
 	
 }
