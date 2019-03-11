@@ -25,6 +25,7 @@
 	<div style="text-align: center;color: red;">
 	<h4 >${name}</h4>
 	<h4>${welcome}</h4>
+	<h4>${error}</h4>
 	</div>
 	<form:form action="loginProcess" method="POST" modelAttribute="memberMainBean">
   <div class="form-group">
