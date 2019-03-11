@@ -55,7 +55,7 @@
       <a class="nav-link hasLogin" href="/joooin/member">${memberName}</a>
     </li>
     <li id="logout" class="nav-item">
-      <a class="nav-link logout" href="/joooin/logout">${logout}</a>
+      <a class="nav-link logout" href="/joooin/logout" onclick="return(confirm('您確定要登出帳號嗎？'))">${logout}</a>
     </li>
   </ul>
 </nav>
