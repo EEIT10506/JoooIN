@@ -26,6 +26,9 @@
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
 <div id="main">
+<div style="text-align: center;color: red;">
+	<h4 >${error}</h4>
+	</div>
 <form:form action="registerProcess" method="POST" modelAttribute="memberMainBean">
 	<div class="form-group">
     <label for="email">會員信箱</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>

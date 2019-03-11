@@ -115,5 +115,13 @@ public class RegisterServiceImpl implements RegisterService {
 		
 	}
 
-
+	@Override
+	public Boolean checkEmail(String email) {
+		Boolean result = true;
+		
+		if(dao.checkEmail(email)==null) {
+			result = false;
+		}
+		return result;
+	}
 }

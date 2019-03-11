@@ -33,13 +33,17 @@ public class RegisterController {
 	public String Register(@ModelAttribute("memberMainBean")MemberMainBean mmb,
 			Model model,
 			RedirectAttributes redirectAttributes){
-		service.save(mmb);
-		/**
-		 * redirectAttributes.addFlashAttribute
-		 * 將redirect物件有效化回傳到指定程式
-		 */
-		redirectAttributes.addFlashAttribute("name", mmb.getMemberName());
-		redirectAttributes.addFlashAttribute("welcome", "註冊成功");
-		return "redirect:/login";
+		if(service.checkEmail(mmb.getEmail()) != true) {
+			redirectAttributes.addFlashAttribute("name", mmb.getMemberName());
+			redirectAttributes.addFlashAttribute("welcome", "註冊成功");
+			service.save(mmb);
+			return "redirect:/login";
+		}else {
+			redirectAttributes.addFlashAttribute("error", "註冊失敗，信箱已有人使用");
+			return "redirect:/register";
+		}
+		
+		
+		
 	}
 }
