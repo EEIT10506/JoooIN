@@ -70,10 +70,10 @@
     </label></span>
     <br>
     <label>
-      <form:radiobutton name="gender" value="male" path="gender" checked="true"/> 男
+      <form:radiobutton name="gender" value="男" path="gender" checked="true"/> 男
     </label>
     <label>
-      <form:radiobutton name="gender" value="female" path="gender"/> 女
+      <form:radiobutton name="gender" value="女" path="gender"/> 女
     </label>
   </div>
   
