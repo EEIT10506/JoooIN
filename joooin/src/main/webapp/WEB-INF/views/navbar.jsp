@@ -40,22 +40,22 @@
   
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="member">會員</a>
+      <a class="nav-link" href="${pageContext.request.contextPath}/member">會員</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="events">活動</a>
+      <a class="nav-link" href="${pageContext.request.contextPath}/events">活動</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="groups">社團</a>
+      <a class="nav-link" href="${pageContext.request.contextPath}/groups">社團</a>
     </li>
     <li id="loginNregister" class="nav-item">
-      <a class="nav-link" href="login">登入／註冊</a>
+      <a class="nav-link" href="${pageContext.request.contextPath}/login">登入／註冊</a>
     </li>
     <li id="hasLogin" class="nav-item">
-      <a class="nav-link hasLogin" href="/joooin/member">${memberName}</a>
+      <a class="nav-link hasLogin" href="${pageContext.request.contextPath}/member">${memberName}</a>
     </li>
     <li id="logout" class="nav-item">
-      <a class="nav-link logout" href="/joooin/logout">${logout}</a>
+      <a class="nav-link logout" href="${pageContext.request.contextPath}/logout">${logout}</a>
     </li>
   </ul>
 </nav>
