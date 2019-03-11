@@ -1,7 +1,9 @@
 package com.joooin.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -36,7 +38,7 @@ public class EventMainBean implements Serializable {
 	private Byte[] eventImage;
 	private String eventStatus;
 	private Set<EventMemberBean> eventMemberSet = new LinkedHashSet<EventMemberBean>();
-	private Set<EventPostBean> eventPostSet = new LinkedHashSet<EventPostBean>();
+	private List<EventPostBean> eventPostSet = new ArrayList<EventPostBean>();
 	private Set<EventLikeBean> eventLikeSet = new LinkedHashSet<EventLikeBean>();
 	
 	public EventMainBean(String eventName, String eventDateStart, String eventDateEnd, String eventLocation,
@@ -76,10 +78,10 @@ public class EventMainBean implements Serializable {
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="eventId", referencedColumnName="eventId")
-	public Set<EventPostBean> getEventPostSet() {
+	public List<EventPostBean> getEventPostSet() {
 		return eventPostSet;
 	}
-	public void setEventPostSet(Set<EventPostBean> eventPostSet) {
+	public void setEventPostSet(List<EventPostBean> eventPostSet) {
 		this.eventPostSet = eventPostSet;
 	}
 	@OneToMany(cascade=CascadeType.ALL)

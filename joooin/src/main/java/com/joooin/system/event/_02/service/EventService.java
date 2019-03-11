@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.joooin.model.EventMainBean;
 import com.joooin.model.EventMemberBean;
+import com.joooin.model.EventPostBean;
 import com.joooin.model.EventTypeBean;
 import com.joooin.model.MemberMainBean;
 
@@ -25,4 +26,6 @@ public interface EventService {
 	//member_main抓活動成員名單 
 	public List<MemberMainBean> getAllEventMember();
 	public MemberMainBean getByMemberId(Integer memberId);
+	
+	public Integer saveOneEventPost(EventPostBean eventPostBean);
 }
