@@ -54,7 +54,8 @@ public class LoginController {
 		if(mmb.getEmail().equals(adm) && admin!=null){
 			session.setAttribute("admin", admin.getName());
 			session.setAttribute("adminId", admin.getAdminId());
-			return "redirect:/";
+			session.setAttribute("logout", "登出");
+			return "redirect:/admin";
 		}
 		else {
 			redirectAttributes.addFlashAttribute("error", "請檢查信箱密碼是否正確");
