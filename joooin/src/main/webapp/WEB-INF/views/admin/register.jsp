@@ -123,14 +123,15 @@
   
 <!--   照片上傳先不要 -->
 <!--   <div class="form-group"> -->
-<!--     <label for="exampleInputFile">照片上傳</label> -->
-<!--     <input type="file" id="exampleInputFile"> -->
+<!--     <label for="memberImage">照片上傳</label> -->
+<%--     <form:input type='file' path="memberImage" id="memberImage" class='form:input-large'/> --%>
 <!--   </div> -->
 
 	<form:input type="hidden" value="0" nama="logins" id="logins" path="logins"/>
 	<form:input type="hidden" value="true" nama="certificationStatus" id="certificationStatus" path="certificationStatus"/>
 	<form:input type="hidden" value="test" nama="certificationHash" id="certificationHash" path="certificationHash"/>
-  <button type="submit" class="btn btn-primary">送出</button>
+
+  <button type="submit" class="btn btn-primary" value="送出"/>
   <button type="reset" class="btn btn-primary">重填</button>
 </form:form>
 <button type="button" class="btn btn-primary" onclick="">一鍵填寫</button>

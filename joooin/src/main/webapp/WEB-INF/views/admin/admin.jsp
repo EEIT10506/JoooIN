@@ -39,9 +39,10 @@
 <body>
 	<jsp:include page="${request.contextPath}/navbar" />
 	<!-- 請把所有內容寫在此div內 -->
-	<div id="main">
+	<div id="main" class="container">
 		
-		  <span class="dropdown">
+		<div class="row">
+		  <div class="dropdown col-3">
 			<button class="btn btn-secondary dropdown-toggle" type="button"
 				id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false">資料庫查詢</button>
@@ -50,9 +51,9 @@
 				<a class="dropdown-item" href="#">社團資料</a>
 				<a class="dropdown-item" href="#">活動資料</a>
 			</div>
-		</span>
+		</div>
 		
-		<span class="dropdown">
+		<div class="dropdown col-3">
 			<button class="btn btn-secondary dropdown-toggle" type="button"
 				id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false">檢舉處理</button>
@@ -60,7 +61,8 @@
 				<a class="dropdown-item" href="#">待處理</a>
 				<a class="dropdown-item" href="#">已處理</a>
 			</div>
-		</span>
+		</div>
+		</div>
 
 	</div>
 	<!-- 請把所有內容寫在此div內 -->
