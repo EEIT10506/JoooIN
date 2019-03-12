@@ -43,8 +43,8 @@ public class EventController {
 		return "event/event";
 	}
 	@RequestMapping(value = "/event/eventPost", method = RequestMethod.POST)
-	public String submitEventPost(@RequestParam Integer eventId, @RequestParam Integer memberId, @RequestParam String eventPostContent) {
-		
+	public String submitEventPost(Model model, @RequestParam Integer eventId, @RequestParam Integer memberId, @RequestParam String eventPostContent) {
+		 
 		EventPostBean eventPostBean = new EventPostBean(); 
 		eventPostBean.setEventId(eventId);		
 		eventPostBean.setMemberId(memberId);
@@ -59,12 +59,34 @@ public class EventController {
 		
 		Integer eventPostId = eventservice.saveOneEventPost(eventPostBean);
 		
-		
 		return "redirect:/event/"+eventId;
 		
 	}
+	@RequestMapping(value = "/DeleteEventPost", method = RequestMethod.POST)
+	public String deleteEventPost(Model model, @RequestParam Integer eventPostId, 
+												@RequestParam Integer eventId) {
+		eventservice.deleteEventPost(eventPostId);
+		
+		return "redirect:/event/"+eventId;
+	}
 	
-	
+	@RequestMapping(value = "/event/eventCheckQuantity", method = RequestMethod.POST)
+	public String checkQuantity(Model model, @RequestParam Integer memberId, 
+											 @RequestParam Integer eventId,
+											 @RequestParam String quantity) {
+		EventMemberBean eventMemberBean = new EventMemberBean();
+		
+		Integer quantitys = Integer.parseInt(quantity);
+		eventMemberBean.setEventId(eventId);
+		eventMemberBean.setMemberId(memberId);
+		eventMemberBean.setQuantity(quantitys);
+		eventMemberBean.setIsPaid(null);
+		eventMemberBean.setIsAgreed(false);
+		eventMemberBean.setIsAttended(true);
+		Integer i = eventservice.saveEventMember(eventMemberBean);
+		System.out.println(i);
+		return "redirect:/event/"+eventId;
+	}
 	//	@RequestMapping(value="/event/{eventId}", method = RequestMethod.GET)
 //	public String addNewEventPost(Model model) {
 //		EventPostBean eventPostBean = new EventPostBean();
@@ -105,6 +127,9 @@ public class EventController {
 		
 		MemberMainBean eventPostMember = null;
 		List<MemberMainBean> eventPostMemberList = new ArrayList<MemberMainBean>();
+		
+		
+		
 		for(EventPostBean postMember: eventPost) {
 			Integer postMemberId = postMember.getMemberId();
 			 eventPostMember = eventservice.getByMemberId(postMemberId);
@@ -115,7 +140,7 @@ public class EventController {
 		model.addAttribute("event", event);
 		model.addAttribute("eventtype", eventtype);
 		model.addAttribute("eventbuildname", eventbuildname);
-//		model.addAttribute("totalmember", totalmember);
+		model.addAttribute("inviterid", inviterid);
 		model.addAttribute("eventmember", eventmember);
 		model.addAttribute("eventmembers", eventmemberset);
 		model.addAttribute("eventPost", eventPost);
@@ -124,14 +149,14 @@ public class EventController {
 		return "event/event";
 	}
 	//活動修改
-	@RequestMapping("/event/setting/{eventId}")
-	public String eventSetting(Model model, @PathVariable("eventId") Integer eventId,Session session) {
-//		EventMainBean event = eventservice.getByEventMainId(eventId);
-////		memberId
+	@RequestMapping("/event/setting")
+	public String eventSetting(Model model, @RequestParam("eventAdminId") Integer eventId) {
+		EventMainBean event = eventservice.getByEventMainId(eventId);
+
 //		Integer typeid = event.getEventTypeId();
 //		EventTypeBean eventtype = eventservice.getByEventTypeId(typeid);
 //		String eventType = eventtype.getEventType();
-//		model.addAttribute("event", event);
+		model.addAttribute("events", event);
 //		model.addAttribute("eventtype", eventtype);
 		return "event/event_setting";
 	}

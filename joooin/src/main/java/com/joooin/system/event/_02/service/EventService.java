@@ -18,7 +18,7 @@ public interface EventService {
 //	活動成員Bean
 //	public EventMemberBean getByEventMemberId(Integer eventMemberId);
 //	public List<EventMemberBean> getAllEventMembers();
-//	public Integer save(EventMemberBean eventMemberBean);
+	public Integer saveEventMember(EventMemberBean eventMemberBean);
 //	public void update(EventMemberBean eventMemberBean);
 //	public void deleteByEventMemberId(Integer eventMemberId);
 	//活動類型	
@@ -26,6 +26,8 @@ public interface EventService {
 	//member_main抓活動成員名單 
 	public List<MemberMainBean> getAllEventMember();
 	public MemberMainBean getByMemberId(Integer memberId);
-	
+	//新增一筆留言
 	public Integer saveOneEventPost(EventPostBean eventPostBean);
+	//刪除一筆留言
+	public void deleteEventPost(Integer eventPostId);
 }

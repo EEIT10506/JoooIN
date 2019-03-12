@@ -101,6 +101,18 @@ public class EventServiceImpl implements EventService {
 		return eventPostDao.save(eventPostBean);
 	}
 
+	@Override
+	public void deleteEventPost(Integer eventPostId) {
+		
+		eventPostDao.deleteByEventPostId(eventPostId);
+	}
+
+	@Override
+	public Integer saveEventMember(EventMemberBean eventMemberBean) {
+		
+		return eventmemberdao.save(eventMemberBean);
+	}
+
 	
 	
 		
