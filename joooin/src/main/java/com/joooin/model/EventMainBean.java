@@ -3,7 +3,6 @@ package com.joooin.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -200,8 +199,5 @@ public class EventMainBean implements Serializable {
 	public void setEventStatus(String eventStatus) {
 		this.eventStatus = eventStatus;
 	}
-	
-	
-	
-	
+
 }
