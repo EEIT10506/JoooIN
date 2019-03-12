@@ -15,13 +15,17 @@ public class SidebarController {
 	@Autowired
 	MemberService memberService;
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/member/sidebar")
-	public String navbar() {
-		return "/member/sidebar";
+	@RequestMapping(value = "/member/self/sidebar", method = RequestMethod.GET)
+	public String selfSidebar() {
+		return "/member/self/sidebar";
 	}
 	
-	@RequestMapping(value = "/member", method = RequestMethod.GET)
-	public String member(Model model, HttpSession session) {
+	@RequestMapping(value = "/member/other/sidebar", method = RequestMethod.GET)
+	public String otherSidebar(Model model) {
+		return "/member/other/sidebar";
+	}
+	@RequestMapping(value = "/member/my", method = RequestMethod.GET)
+	public String selfMember(Model model, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		
 		if (memberId != null) {
@@ -33,8 +37,21 @@ public class SidebarController {
 		}
 	}
 	
-	@RequestMapping(value = "/member/{link}", method = RequestMethod.GET)
-	public String profile(@PathVariable String link, Model model, HttpSession session) {
+	@RequestMapping(value = "/member/other/{otherMemberId}", method = RequestMethod.GET)
+	public String otherMember(@PathVariable Integer otherMemberId, Model model, HttpSession session) {
+		Integer selfMemberId = (Integer)session.getAttribute("memberId");
+		
+		if (selfMemberId != otherMemberId) {
+			MemberMainBean mmb = memberService.getMemberMainBean(otherMemberId);
+			model.addAttribute("memberMainBean", mmb);
+			return "member/other/member";
+		} else {
+			return "redirect:/member/my";
+		}
+	}
+	
+	@RequestMapping(value = "/member/my/{link}", method = RequestMethod.GET)
+	public String selfLink(@PathVariable String link, Model model, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		
 		if (memberId != null) {
@@ -43,6 +60,20 @@ public class SidebarController {
 			return "member/self/" + link;
 		} else {
 			return "not_login";
+		}
+	}
+	
+	@RequestMapping(value = "/member/other/{link}/{otherMemberId}", method = RequestMethod.GET)
+	public String otherLink(@PathVariable String link, @PathVariable Integer otherMemberId, 
+							Model model, HttpSession session) {
+		Integer selfMemberId = (Integer)session.getAttribute("memberId");
+		
+		if (selfMemberId != otherMemberId) {
+			MemberMainBean mmb = memberService.getMemberMainBean(otherMemberId);
+			model.addAttribute("memberMainBean", mmb);
+			return "member/other/" + link;
+		} else {
+			return "redirect:/member/my/" + link;
 		}
 	}
 	

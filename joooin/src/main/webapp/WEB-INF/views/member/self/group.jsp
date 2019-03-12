@@ -13,7 +13,6 @@
 <style>
 	#main {
 		width: 1200px;
-		height: 2000px;
 		margin: auto;
 		position: relative;
 		top: 50px;
@@ -26,7 +25,7 @@
 	<div id="main" class="container">
 		<div class="row">
 			<div class="col-3">
-				<jsp:include page="${request.contextPath}/member/sidebar"/>
+				<jsp:include page="${request.contextPath}/member/self/sidebar"/>
 			</div>
 			<div id="x" class="col-9">
 			</div>

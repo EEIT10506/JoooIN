@@ -22,7 +22,7 @@ public class ProfileController {
 	@Autowired
 	ServletContext context;
 	
-	@RequestMapping(value = "/member/updateProfile", method = RequestMethod.POST)
+	@RequestMapping(value = "/member/my/updateProfile", method = RequestMethod.POST)
 	public String updateProfile(@ModelAttribute("memberMainBean") MemberMainBean updateBean, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		
@@ -37,18 +37,18 @@ public class ProfileController {
 			if (!updateBean.getMultipartFile().isEmpty()) {
 				memberImage = ImageUtils.multipartFileToByteArray(updateBean.getMultipartFile());
 				mmb.setMemberImage(memberImage);
-			} else {
+			} /*else {
 				mmb.setMemberImage(ImageUtils.localImageToByteArray("member_male.PNG", context));
-			}
+			}*/
 			memberService.updateMemberMainBean(mmb);
+			session.setAttribute("memberName", mmb.getMemberName());
 			
-			return "redirect:/member/profile";
+			return "redirect:/member/my/profile";
 		} else {
 			return "not_login";
-		}
-		
+		}	
 	}						  
-	@RequestMapping(value = "/member/updatePassword", method = RequestMethod.POST)
+	@RequestMapping(value = "/member/my/updatePassword", method = RequestMethod.POST)
 	public String updatePassword(@RequestParam String password1, @RequestParam String password2, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		
@@ -65,6 +65,25 @@ public class ProfileController {
 			return "not_login";
 		}
 	}
+	@RequestMapping(value = "/member/my/updatePrivacy", method = RequestMethod.POST)
+	public String updatePrivacy(@ModelAttribute("memberMainBean") MemberMainBean updateBean, HttpSession session) {
+		Integer memberId = (Integer)session.getAttribute("memberId");
+		
+		if (memberId != null) {
+			MemberMainBean mmb = memberService.getMemberMainBean(memberId);
+			mmb.setGenderDisplay(updateBean.getGenderDisplay());
+			mmb.setBirthdayDisplay(updateBean.getBirthdayDisplay());
+			mmb.setCityDisplay(updateBean.getCityDisplay());
+			mmb.setEmailDisplay(updateBean.getEmailDisplay());
+			mmb.setPhoneDisplay(updateBean.getPhoneDisplay());
+			memberService.updateMemberMainBean(mmb);
+			
+			return "redirect:/member/profile";
+		} else {
+			return "not_login";
+		}	
+	}
+	
 
 
 }

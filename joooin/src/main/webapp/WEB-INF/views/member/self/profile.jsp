@@ -19,7 +19,6 @@
 	}
 	#main-view{
 		position: relative;
-		left: 50px;
 	}
 	.profile-navbar {
 		font-size: 24px;
@@ -128,7 +127,7 @@
 	<div id="main" class="container">
 		<div class="row">
 			<div class="col-3">
-				<jsp:include page="${request.contextPath}/member/sidebar"/>
+				<jsp:include page="${request.contextPath}/member/self/sidebar"/>
 			</div>
 			<div class="col-9">
 				<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -154,16 +153,20 @@
 					<div id="edit-data" class="profile-view">
 						<form:form modelAttribute="memberMainBean" action="updateProfile" method="POST" enctype="multipart/form-data">
 							<div class="param-label"><form:label class="edit-data-text" for="memberName" path="memberName">名稱：</form:label></div>　
-							<form:input id="memberName" path="memberName"></form:input><br />
+							<form:input path="memberName"></form:input><br />
+							
+							<div class="param-label"><form:label class="edit-data-text" for="gender" path="gender">性別：</form:label></div>　
+							<form:radiobutton path="gender" value="male"></form:radiobutton>　男　　　　
+							<form:radiobutton path="gender" value="female"></form:radiobutton>　女<br />
 							
 							<div class="param-label"><form:label class="edit-data-text" for="birthday" path="birthday">生日：</form:label></div>　
 							<form:input type="date" id="birthday" path="birthday"></form:input><br />
 							
 							<div class="param-label"><form:label class="edit-data-text" for="city" path="city">城市：</form:label></div>　
-							<form:select id="city" path="city"><form:option value="臺北市">臺北市</form:option>	<form:option value="新北市">新北市</form:option><form:option value="桃園市">桃園市</form:option><form:option value="臺中市">臺中市</form:option><form:option value="臺南市">臺南市</form:option><form:option value="高雄市">高雄市</form:option><form:option value="基隆市">基隆市</form:option><form:option value="新竹市">新竹市</form:option><form:option value="新竹縣">新竹縣</form:option><form:option value="嘉義市">嘉義市</form:option><form:option value="苗栗縣">苗栗縣</form:option><form:option value="彰化縣">彰化縣</form:option><form:option value="南投縣">南投縣</form:option><form:option value="雲林縣">雲林縣</form:option><form:option value="嘉義縣">嘉義縣</form:option><form:option value="屏東縣">屏東縣</form:option><form:option value="宜蘭縣">宜蘭縣</form:option><form:option value="花蓮縣">花蓮縣</form:option><form:option value="臺東縣">臺東縣</form:option><form:option value="澎湖縣">澎湖縣</form:option><form:option value="金門縣">金門縣</form:option><form:option value="連江縣">連江縣</form:option><form:option value="國外">國外</form:option></form:select><br />
+							<form:select path="city"><form:option value="臺北市">臺北市</form:option>	<form:option value="新北市">新北市</form:option><form:option value="桃園市">桃園市</form:option><form:option value="臺中市">臺中市</form:option><form:option value="臺南市">臺南市</form:option><form:option value="高雄市">高雄市</form:option><form:option value="基隆市">基隆市</form:option><form:option value="新竹市">新竹市</form:option><form:option value="新竹縣">新竹縣</form:option><form:option value="嘉義市">嘉義市</form:option><form:option value="苗栗縣">苗栗縣</form:option><form:option value="彰化縣">彰化縣</form:option><form:option value="南投縣">南投縣</form:option><form:option value="雲林縣">雲林縣</form:option><form:option value="嘉義縣">嘉義縣</form:option><form:option value="屏東縣">屏東縣</form:option><form:option value="宜蘭縣">宜蘭縣</form:option><form:option value="花蓮縣">花蓮縣</form:option><form:option value="臺東縣">臺東縣</form:option><form:option value="澎湖縣">澎湖縣</form:option><form:option value="金門縣">金門縣</form:option><form:option value="連江縣">連江縣</form:option><form:option value="國外">國外</form:option></form:select><br />
 						
 							<div class="param-label"><form:label class="edit-data-text" for="phone" path="phone">電話：</form:label></div>　
-							<form:input id="phone" path="phone"></form:input><br />
+							<form:input path="phone"></form:input><br />
 							
 							<div class="param-label"><label class="edit-data-text" for="multipartFile">大頭照：</label></div>　
 							<form:input type="file" accept="image/*" path="multipartFile" onchange="checkImage(this)"></form:input><br />
@@ -214,7 +217,45 @@
 						</form>
 					</div>
 					<div id="edit-privacy" class="profile-view">
-						修改隱私
+						<form:form modelAttribute="memberMainBean" action="updatePrivacy" method="POST">
+							<div class="param-label"><form:label class="edit-data-text" for="genderDisplay" path="genderDisplay">性別：</form:label></div>　
+							<form:radiobutton path="genderDisplay" value="true"></form:radiobutton>　公開　　　　
+							<form:radiobutton path="genderDisplay" value="false"></form:radiobutton>　不公開<br />
+							
+							<div class="param-label"><form:label class="edit-data-text" for="birthdayDisplay" path="birthdayDisplay">生日：</form:label></div>　
+							<form:radiobutton path="birthdayDisplay" value="true"></form:radiobutton>　公開　　　　
+							<form:radiobutton path="birthdayDisplay" value="false"></form:radiobutton>　不公開<br />
+							
+							<div class="param-label"><form:label class="edit-data-text" for="cityDisplay" path="cityDisplay">城市：</form:label></div>　
+							<form:radiobutton path="cityDisplay" value="true"></form:radiobutton>　公開　　　　
+							<form:radiobutton path="cityDisplay" value="false"></form:radiobutton>　不公開<br />
+							
+							<div class="param-label"><form:label class="edit-data-text" for="emailDisplay" path="emailDisplay">信箱：</form:label></div>　
+							<form:radiobutton path="emailDisplay" value="true"></form:radiobutton>　公開　　　　
+							<form:radiobutton path="emailDisplay" value="false"></form:radiobutton>　不公開<br />
+							
+							<div class="param-label"><form:label class="edit-data-text" for="phoneDisplay" path="phoneDisplay">電話：</form:label></div>　
+							<form:radiobutton path="phoneDisplay" value="true"></form:radiobutton>　公開　　　　
+							<form:radiobutton path="phoneDisplay" value="false"></form:radiobutton>　不公開<br />
+							
+							<div class="profile-button" align="center">
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkDisplay">修改</button>
+								<div class="modal fade" id="checkDisplay" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+								  <div class="modal-dialog modal-dialog-centered" role="document">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <h5 class="modal-title" id="exampleModalLongTitle">確認修改</h5>
+								      </div>
+								      <div class="modal-body">是否確認修改資料？</div>
+								      <div class="modal-footer">
+								      	<button type="submit" class="btn btn-primary">確認修改</button>
+								        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消修改</button>
+								      </div>
+								    </div>
+								  </div>
+								</div>　　　　　　
+							</div>
+						</form:form>
 					</div>
 				</div>
 			</div>

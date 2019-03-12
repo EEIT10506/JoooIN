@@ -19,7 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ImageUtils {
-	//將使用者上傳的圖片轉成Byte[]，傳入mulfiFile
+	//將使用者上傳的圖片轉成Byte[]，傳入MutilpartFile
 	public static Byte[] multipartFileToByteArray(MultipartFile multiFile) {
 		byte[] b = null;
 		try {

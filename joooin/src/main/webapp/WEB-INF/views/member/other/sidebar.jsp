@@ -20,8 +20,6 @@
 			$("#event").attr("class", "list-group-item list-group-item-action active");
 		else if (location.href.search("group") != -1)
 			$("#group").attr("class", "list-group-item list-group-item-action active");
-		else if (location.href.search("message") != -1)
-			$("#message").attr("class", "list-group-item list-group-item-action active");
 		else 
 			$("#home").attr("class", "list-group-item list-group-item-action active");
 	});
@@ -29,7 +27,6 @@
 <style>
 	#main {
 		width: 1200px;
-		height: 2000px;
 		margin: auto;
 		position: relative;
 		top: 50px;
@@ -49,17 +46,16 @@
 </style>
 <body>
 	<div id="memberImage" >
-		<img src="<c:url value='/getMemberImage/${memberId}.jpg' />" width="160px" />
-		<p id="memberName">${memberName}</p>
+		<img src="<c:url value='/getMemberImage/${memberMainBean.memberId}.jpg' />" width="160px" />
+		<p id="memberName">${memberMainBean.memberName}</p>
 	</div>
 	<br />
 	<div class="list-group">
-		<a id="home" href="${pageContext.request.contextPath}/member" class="list-group-item list-group-item-action">會員首頁</a>
-		<a id="profile" href="${pageContext.request.contextPath}/member/profile" class="list-group-item list-group-item-action">會員資訊</a>
-		<a id="friend" href="${pageContext.request.contextPath}/member/friend" class="list-group-item list-group-item-action">好友清單</a>
-		<a id="event" href="${pageContext.request.contextPath}/member/event" class="list-group-item list-group-item-action">活動清單</a>
-		<a id="group" href="${pageContext.request.contextPath}/member/group" class="list-group-item list-group-item-action">社團清單</a>
-		<a id="message" href="${pageContext.request.contextPath}/member/message" class="list-group-item list-group-item-action">訊息匣</a>
+		<a id="home" href="${pageContext.request.contextPath}/member/other/${memberMainBean.memberId}" class="list-group-item list-group-item-action">會員首頁</a>
+		<a id="profile" href="${pageContext.request.contextPath}/member/other/profile/${memberMainBean.memberId}" class="list-group-item list-group-item-action">會員資訊</a>
+		<a id="friend" href="${pageContext.request.contextPath}/member/other/friend/${memberMainBean.memberId}" class="list-group-item list-group-item-action">好友清單</a>
+		<a id="event" href="${pageContext.request.contextPath}/member/other/event/${memberMainBean.memberId}" class="list-group-item list-group-item-action">活動清單</a>
+		<a id="group" href="${pageContext.request.contextPath}/member/other/group/${memberMainBean.memberId}" class="list-group-item list-group-item-action">社團清單</a>
 	</div>
 </body>
 </html>
