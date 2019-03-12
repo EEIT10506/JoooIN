@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,7 +63,9 @@ public class EventsController {
 	
 	@RequestMapping(value = "/events", method = RequestMethod.POST)
 	public String processAddNewEvent(@ModelAttribute("NewEvent") EventMainBean event, 
-			@RequestParam("quantity") String quantity,HttpServletRequest request ) {
+			@RequestParam("quantity") String quantity,HttpServletRequest request
+			) {
+		HttpSession session = request.getSession();
 		
 		Integer realquan;
 		if(quantity==null || quantity.trim()=="") {realquan=0;}
@@ -72,13 +75,13 @@ public class EventsController {
 		
 		event.setEventImage(new Byte[] {2,3});
 		
-		Integer inviterId = 3;
+		Integer inviterId = 3;  //開團者ID
 		
 		//event.getEventDateStart();
 		//event.getEventDateEnd();
 		
 	    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-	    SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
+	    SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
 	    Date dates = null;
 	    Date datee = null;

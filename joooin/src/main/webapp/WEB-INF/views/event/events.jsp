@@ -216,20 +216,31 @@ function check(){
     
     
     <tr>
-    <form:form method='GET' modelAttribute="NewEvent">
-	以類別篩選:<form:select path="eventTypeId" id="etype">
+    <form>
+    <select id="ewill">
+    <option value="all">所有未過期</option>
+    <option value="alcome">即將到期</option>
+    <option value="alfull">即將滿團</option>
+    <option vale="lost">已過期的團</option>
+    </select>
+    
+	類別:<select id="etype">
 	    <option value="">全部</option>
 		<option value="運動">運動</option>
 		<option value="美食">美食</option>
 		<option value="娛樂">娛樂</option>
 		<option value="其他">其他</option>	
-	</form:select>
+	</select>
+	地區:<input type="text" id="loc" style="width:150px"/> 
+	時間:<input id="dcheck" type="datetime-local"/>
+   </form> 
+	
 	<button id="search" onclick="search()">篩選</button>
-</form:form>
-    
+  
         <th>活動種類</th>
         <th>活動名稱</th>
         <th>活動地點</th>
+        <th>活動地址</th>
         <th>開始時間</th>
         <th>結束時間</th>
         <th>上限人數</th>
@@ -257,11 +268,12 @@ function check(){
 </td>
 	<td><a href="${pageContext.request.contextPath}/event/${event.eventId}">${event.eventName}</a> <span style="margin-left:10px"><button id="good" value="${event.eventId}" class="btn btn-primary btn-sm" onclick="good()">讚:${event.eventLike}</button></span> </td>
 	<td>${event.eventLocation}</td>
+	<td>${event.eventAddress}</td>
 	<td>${event.eventDateStart}</td>
 	<td>${event.eventDateEnd}</td> 
 	<td>${event.eventMemberLimit}</td>
 	<td>${event.eventCurrentMembers}</td>
-	<td><iframe width='350' height='200' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://www.google.com/maps?&q=${event.eventAddress}&z=16&output=embed&hl=zh-TW&t=m' 
+	<td><iframe width='350' height='200' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://www.google.com/maps?&q=${event.eventLatitude},${event.eventLongitude}&z=16&output=embed&hl=zh-TW&t=m' 
        allowfullscreen></iframe></td>
        </tr>
 <%-- 	  <c:forEach var='eventmem' items='${event.eventMemberSet}'> --%>
@@ -279,8 +291,55 @@ function check(){
     
 <script type="text/javascript">
 var table;
+var ewill;
+$.fn.dataTable.ext.search.push(
+	    function( settings, data, dataIndex ) {
+	    	var usertime = $('#dcheck').val();
+	    	//alert(usertime);
+	        var time = new Date(usertime);
+	        
+	        
+	        ewill = $('#ewill').val();	        
+	        var peopleminus = null;//最大人數與實際人數差
+	        var todaynow = new Date();//現在時間
+	              	        
+	        var tablemin = new Date( data[4]); //活動開始時間
+	        var tablemax = new Date( data[5]); //活動結束時間
+	        
+	        var dateminus = null;  //現在時間與活動開始時間差
+      
+	        if(ewill=="all"){}
+	        if(ewill=="alcome"){dateminus = tablemin-todaynow; }
+	        if(ewill=="alfull"){peopleminus = data[6]-data[7]; }
+	        
+// 	        if(ewill=="lost"){dateminus = todaynow-tablemin; }
+	        
+	        if (      
+	                 (tablemin <= time   
+	               && time <= tablemax
+	               || (usertime==""))   //使用者輸入的時間是否在開始與結束內
+	               
+	               && peopleminus<=1    //上限人數與實際人數差一(有篩選)
+	               && data[6]-data[7]>0 //上限人數大於實際人數(人數未滿)
+	               
+	               
+ 	               && (tablemin-todaynow>0) //活動開始時間大於現在時間(活動未開始)
+                   && (dateminus>0 || dateminus==null) // (無篩選快過期) 
+	               && (dateminus/(1000*60*24*60))<1   //現在時間與活動開始差不到一天(有篩選)
+	           )  
+	        {
+	            return true;
+	        }
+	        return false;
+	    }
+	);
+
+
+
 $(document).ready(function(){
     table = $('#showevents').DataTable();
+
+
 });
     
 //给搜索按钮绑定点击事件
@@ -289,10 +348,11 @@ function search(){
     //自己定义的搜索框，可以是时间控件，或者checkbox 等等
     //alert(table);
     var args1 = $("#etype").val();
+    var args2 = $("#loc").val();
     
     //用空格隔开，达到多条件搜索的效果，相当于两个关键字
 
-     table.column(0).search(args1).draw();
+     table.column(0).search(args1).column(3).search(args2).draw();
     //table.search(args1+" "+args2).draw(false);//保留分页，排序状态
 
 }
