@@ -45,9 +45,7 @@
 
                     <div class="team-back">
                         <span>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-                            penatibus et magnis dis parturient montes, Lorem ipsum dolor sit amet, consectetuer adipiscing
-                            elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.
+                            <a href="${pageContext.request.contextPath}/group/sport" >超連結</a>
                         </span>
                     </div>
 
@@ -67,9 +65,7 @@
 
                     <div class="team-back">
                         <span>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-                            penatibus et magnis dis parturient montes, Lorem ipsum dolor sit amet, consectetuer adipiscing
-                            elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.
+                            <a href="${pageContext.request.contextPath}/group/food" >超連結</a>
                         </span>
                     </div>
 
@@ -88,9 +84,7 @@
 
                     <div class="team-back">
                         <span>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-                            penatibus et magnis dis parturient montes, Lorem ipsum dolor sit amet, consectetuer adipiscing
-                            elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.
+                             <a href="${pageContext.request.contextPath}/group/entertainment" >超連結</a>
                         </span>
                     </div>
 
@@ -109,9 +103,7 @@
 
                     <div class="team-back">
                         <span>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-                            penatibus et magnis dis parturient montes, Lorem ipsum dolor sit amet, consectetuer adipiscing
-                            elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.
+                             <a href="${pageContext.request.contextPath}/group/other" >超連結</a>
                         </span>
                     </div>
 
@@ -130,9 +122,7 @@
 
                     <div class="team-back">
                         <span>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-                            penatibus et magnis dis parturient montes, Lorem ipsum dolor sit amet, consectetuer adipiscing
-                            elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.
+                             <a href="${pageContext.request.contextPath}/group/groupstype" >超連結</a>
                         </span>
                     </div>
 
@@ -151,16 +141,13 @@
 
                     <div class="team-back">
                         <span>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-                            penatibus et magnis dis parturient montes, Lorem ipsum dolor sit amet, consectetuer adipiscing
-                            elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.
+                             <a href="" >超連結</a>
                         </span>
                     </div>
 
                 </div>
             </div>
             <!--team-6-->
- <a href="${pageContext.request.contextPath}/group/groupstype">test</a>//測試 刪除這行即可by fu
 
 
         </div>

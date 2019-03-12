@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.joooin.model.GroupMainBean;
 import com.joooin.repository.GroupMainDao;
 
@@ -52,5 +53,14 @@ public class GroupMainDaoImpl implements GroupMainDao{
 		session.delete(session.get(GroupMainBean.class, groupId));
 	}
 	
+//新增查詢單一種類方法Byfu
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<GroupMainBean> getgrouptype(String grouponetype){
+		Session session = factory.getCurrentSession();
+		String hql = "FROM GroupMainBean WHERE groupType =:grouponetype";
+		return session.createQuery(hql).setParameter("grouponetype", grouponetype).getResultList();
 
+		}
+	
 }
