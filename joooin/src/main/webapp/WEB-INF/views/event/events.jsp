@@ -221,7 +221,7 @@ function check(){
     <option value="all">所有未過期</option>
     <option value="alcome">即將到期</option>
     <option value="alfull">即將滿團</option>
-    <option vale="lost">已過期的團</option>
+<!--     <option vale="lost">已過期的團</option> -->
     </select>
     
 	類別:<select id="etype">
@@ -245,6 +245,7 @@ function check(){
         <th>結束時間</th>
         <th>上限人數</th>
         <th>目前人數</th>
+        <th>人數已滿</th>
         <th>活動地圖</th>
         
     </tr>
@@ -273,6 +274,14 @@ function check(){
 	<td>${event.eventDateEnd}</td> 
 	<td>${event.eventMemberLimit}</td>
 	<td>${event.eventCurrentMembers}</td>
+	<td>
+	  <c:if test="${event.isFull==true}">
+                滿員
+      </c:if>
+     <c:if test="${event.isFull==false}">
+              未滿
+     </c:if>
+	</td>
 	<td><iframe width='350' height='200' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://www.google.com/maps?&q=${event.eventLatitude},${event.eventLongitude}&z=16&output=embed&hl=zh-TW&t=m' 
        allowfullscreen></iframe></td>
        </tr>
@@ -317,10 +326,11 @@ $.fn.dataTable.ext.search.push(
 	        if (      
 	                 (tablemin <= time   
 	               && time <= tablemax
-	               || (usertime==""))   //使用者輸入的時間是否在開始與結束內
+	               || (usertime==""))   //使用者輸入的時間是否在開始與結束內 或是 使用者並無輸入時間
 	               
-	               && peopleminus<=1    //上限人數與實際人數差一(有篩選)
-	               && data[6]-data[7]>0 //上限人數大於實際人數(人數未滿)
+	                                    //滿團限制
+	               && (peopleminus<=1 && peopleminus>0 || peopleminus==null)   //上限人數與實際人數差一(有篩選)  或者未篩選快滿人
+	               && data[6]-data[7]>=0 //上限人數大於實際人數(人數未滿)
 	               
 	               
  	               && (tablemin-todaynow>0) //活動開始時間大於現在時間(活動未開始)
