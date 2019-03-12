@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="event_main")
@@ -34,14 +37,19 @@ public class EventMainBean implements Serializable {
 	private Integer eventCurrentMembers;
 	private Byte[] eventImage;
 	private String eventStatus;
+	private String eventCreateDate;
+	private MultipartFile multipartFile;
 	private List<EventMemberBean> eventMemberList = new ArrayList<EventMemberBean>();
 	private List<EventPostBean> eventPostList = new ArrayList<EventPostBean>();
 	private List<EventLikeBean> eventLikeList = new ArrayList<EventLikeBean>();
 	
+	
 	public EventMainBean(String eventName, String eventDateStart, String eventDateEnd, String eventLocation,
 			String eventAddress, Double eventLatitude, Double eventLongitude, String eventContent, Integer eventTypeId,
 			Integer eventInviterId, Integer eventLike, Integer eventMemberLimit, Integer eventFee, Boolean isFull,
-			Integer eventCurrentMembers, Byte[] eventImage, String eventStatus) {
+			Integer eventCurrentMembers, Byte[] eventImage, String eventStatus, String eventCreateDate,
+			List<EventMemberBean> eventMemberList, List<EventPostBean> eventPostList,
+			List<EventLikeBean> eventLikeList) {
 		super();
 		this.eventName = eventName;
 		this.eventDateStart = eventDateStart;
@@ -60,7 +68,12 @@ public class EventMainBean implements Serializable {
 		this.eventCurrentMembers = eventCurrentMembers;
 		this.eventImage = eventImage;
 		this.eventStatus = eventStatus;
+		this.eventCreateDate = eventCreateDate;
+		this.eventMemberList = eventMemberList;
+		this.eventPostList = eventPostList;
+		this.eventLikeList = eventLikeList;
 	}
+
 	public EventMainBean() {
 		super();
 	}
@@ -199,5 +212,19 @@ public class EventMainBean implements Serializable {
 	public void setEventStatus(String eventStatus) {
 		this.eventStatus = eventStatus;
 	}
+	public String getEventCreateDate() {
+		return eventCreateDate;
+	}
+	public void setEventCreateDate(String eventCreateDate) {
+		this.eventCreateDate = eventCreateDate;
+	}
+	@Transient
+	public MultipartFile getMultipartFile() {
+		return multipartFile;
+	}
 
+	public void setMultipartFile(MultipartFile multipartFile) {
+		this.multipartFile = multipartFile;
+	}
+	
 }
