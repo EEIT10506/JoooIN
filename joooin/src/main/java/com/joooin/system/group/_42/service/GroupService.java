@@ -6,4 +6,6 @@ import com.joooin.model.GroupMainBean;
 
 public interface GroupService {
 	List<GroupMainBean> getAll();
+	List<GroupMainBean> getgrouptype(String getgrouponetype);
+	
 }
