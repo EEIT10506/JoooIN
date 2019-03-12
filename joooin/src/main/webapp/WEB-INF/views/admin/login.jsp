@@ -17,14 +17,29 @@
 		top: 50px;
 	}
 </style>
-<title>登入畫面</title></head>
+<title>登入頁面</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
+	
+	<div class="container" style="margin-left:50px">
+	
+	<!-- Page Heading/Breadcrumbs -->
+		<h1 class="mt-4 mb-3">登入頁面</h1>
+
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a
+				href="${pageContext.request.contextPath}">首頁</a></li>
+			<li class="breadcrumb-item active">登入頁面</li>
+		</ol>
+
+		<!-- Contact Form -->
+	<!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
 	<div style="text-align: center;color: red;">
 	<h4 >${name}</h4>
 	<h4>${welcome}</h4>
+	<h4>${error}</h4>
 	</div>
 	<form:form action="loginProcess" method="POST" modelAttribute="memberMainBean">
   <div class="form-group">
@@ -42,8 +57,30 @@
 <!--   </div> -->
   <button type="submit" class="btn btn-primary">登入</button>
   <button type="button" class="btn btn-primary" onclick="location.href='/joooin/register'">註冊</button>
+  <button type="button" class="btn btn-primary" onclick="location.href='/joooin/forgotPassword'">忘記密碼</button>
 </form:form>
+<button type="button" id="oneSetuser" class="btn btn-success">一鍵填入(user)</button><br>
+<button type="button" id="oneSetadmin" class="btn btn-success">一鍵填入(admin)</button>
+ <!-- /.row -->
  
+ </div>
+ <!-- /.container -->
+ 	<script>
+$('#oneSetuser').click(function(){ 
+		
+		$('#email').val('eeit105joooin@gmail.com'); 
+		$('#password').val('passw0rd');
+		
+ 	});
+ 	
+$('#oneSetadmin').click(function(){ 
+	
+	$('#email').val('admin@admin'); 
+	$('#password').val('admin');
+	
+	});
+	</script>
+	<!-- Footer -->
 	</div>
 <!-- 請把所有內容寫在此div內 -->
 </body>

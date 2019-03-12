@@ -25,14 +25,29 @@
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
-	<div id="main">
-	<form:form action="registerProcess" method="POST" modelAttribute="memberMainBean">
-  <div class="form-group">
-    <label for="memberName">會員姓名</label>
-    <form:input type="text" class="form-control" id="memberName" name="memberName" placeholder="Name" path="memberName"/>
-  </div>
-  
-    <div class="form-group">
+<div id="main">
+
+
+<div class="container" style="margin-left:50px">
+	
+	<!-- Page Heading/Breadcrumbs -->
+		<h1 class="mt-4 mb-3">會員註冊</h1>
+		
+		
+
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a
+				href="${pageContext.request.contextPath}">首頁</a></li>
+			<li class="breadcrumb-item active">會員註冊</li>
+		</ol>
+
+		<!-- Contact Form -->
+	<!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+<div style="text-align: center;color: red;">
+	<h4 >${error}</h4>
+	</div>
+<form:form method="POST" modelAttribute="memberMainBean">
+	<div class="form-group">
     <label for="email">會員信箱</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>
       <form:radiobutton name="emailDisplay" value="true" path="emailDisplay"/> 是
     </label>
@@ -40,6 +55,12 @@
       <form:radiobutton name="emailDisplay" value="false" path="emailDisplay" checked="true"/> 否
     </label></span>
     <form:input type="email" class="form-control" id="email" name="email" placeholder="Email" path="email"/>
+  </div>
+
+	
+  <div class="form-group">
+    <label for="memberName">會員姓名</label>
+    <form:input type="text" class="form-control" id="memberName" name="memberName" placeholder="Name" path="memberName"/>
   </div>
   
   <div class="form-group">
@@ -54,7 +75,7 @@
 
   <div class="form-group">
     <label for="password">會員密碼</label>
-    <form:input type="password" class="form-control" id="password" name="password" placeholder="Password" path="password"/>
+    <form:input type="password" class="form-control" id="password" placeholder="Password" path="password"/>
   </div>
   
     <div class="form-group">
@@ -119,17 +140,31 @@
   
 <!--   照片上傳先不要 -->
 <!--   <div class="form-group"> -->
-<!--     <label for="exampleInputFile">照片上傳</label> -->
-<!--     <input type="file" id="exampleInputFile"> -->
+<!--     <label for="memberImage">照片上傳</label> -->
+<%--     <form:input type='file' path="memberImage" id="memberImage" class='form:input-large'/> --%>
 <!--   </div> -->
 
 	<form:input type="hidden" value="0" nama="logins" id="logins" path="logins"/>
-	<form:input type="hidden" value="true" nama="certificationStatus" id="certificationStatus" path="certificationStatus"/>
-	<form:input type="hidden" value="test" nama="certificationHash" id="certificationHash" path="certificationHash"/>
+	<form:input type="hidden" value="false" nama="certificationStatus" id="certificationStatus" path="certificationStatus"/>
+<%-- 	<form:input type="hidden" value="" nama="certificationHash" id="certificationHash" path="certificationHash"/> --%>
+
   <button type="submit" class="btn btn-primary">送出</button>
   <button type="reset" class="btn btn-primary">重填</button>
+  
 </form:form>
-<button type="button" class="btn btn-primary" onclick="">一鍵填寫</button>
+	</div>
+	<button type="button" id="oneSet" class="btn btn-success">一鍵填入</button>
+	<script>
+$('#oneSet').click(function(){ 
+		
+		$('#email').val('eeit105joooin@gmail.com'); 
+		$('#memberName').val('jojo');
+		$('#phone').val('0987654321');
+		$('#password').val('passw0rd');
+		$('#birthday').val('1993-01-01');
+		
+ 	}) 
+	</script>
 	</div>
 <!-- 請把所有內容寫在此div內 -->
 </body>

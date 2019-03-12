@@ -10,4 +10,6 @@ public interface MemberMainDao {
 	public void update(MemberMainBean memberMainBean);
 	public void deleteByMemberId(Integer memberId);
 	public MemberMainBean checkIDPassword(String email, String password);
+	public MemberMainBean checkEmail(String email);
+	public Integer activeUser(String certificationHash);
 }

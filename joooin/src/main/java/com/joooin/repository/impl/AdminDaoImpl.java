@@ -45,6 +45,18 @@ public class AdminDaoImpl implements AdminDao{
 		Session session = factory.getCurrentSession();
 		session.delete(session.get(AdminBean.class, adminId));
 	}
+
+	@Override
+	public AdminBean check(String email) {
+		AdminBean ab = null;
+		Session session = factory.getCurrentSession();
+		String hql = "FROM AdminBean m WHERE m.name=:email";
+		
+		ab = (AdminBean)session.createQuery(hql)
+				.setParameter("email", email)
+				.uniqueResult();
+		return ab;
+	}
 	
 	
 }
