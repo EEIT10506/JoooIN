@@ -29,7 +29,7 @@ public class RegisterController {
 		return "/admin/register";
 	}
 	
-	@RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String Register(@ModelAttribute("memberMainBean")MemberMainBean mmb,
 			Model model,
 			RedirectAttributes redirectAttributes){

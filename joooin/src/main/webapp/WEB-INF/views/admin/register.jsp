@@ -29,7 +29,7 @@
 <div style="text-align: center;color: red;">
 	<h4 >${error}</h4>
 	</div>
-<form:form action="registerProcess" method="POST" modelAttribute="memberMainBean">
+<form:form method="POST" modelAttribute="memberMainBean">
 	<div class="form-group">
     <label for="email">會員信箱</label><span style="font-size: 12px; color:#888888"> : 是否顯示於個人頁面</span><span style="font-size:12px"> <label>
       <form:radiobutton name="emailDisplay" value="true" path="emailDisplay"/> 是
@@ -58,7 +58,7 @@
 
   <div class="form-group">
     <label for="password">會員密碼</label>
-    <form:input type="password" class="form-control" id="password" name="password" placeholder="Password" path="password"/>
+    <form:input type="password" class="form-control" id="password" placeholder="Password" path="password"/>
   </div>
   
     <div class="form-group">
@@ -131,8 +131,9 @@
 	<form:input type="hidden" value="true" nama="certificationStatus" id="certificationStatus" path="certificationStatus"/>
 	<form:input type="hidden" value="test" nama="certificationHash" id="certificationHash" path="certificationHash"/>
 
-  <button type="submit" class="btn btn-primary" value="送出"/>
+  <button type="submit" class="btn btn-primary">送出</button>
   <button type="reset" class="btn btn-primary">重填</button>
+  
 </form:form>
 <button type="button" class="btn btn-primary" onclick="">一鍵填寫</button>
 	</div>
