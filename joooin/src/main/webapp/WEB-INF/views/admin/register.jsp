@@ -26,6 +26,23 @@
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
 <div id="main">
+
+
+<div class="container" style="margin-left:50px">
+	
+	<!-- Page Heading/Breadcrumbs -->
+		<h1 class="mt-4 mb-3">會員註冊</h1>
+		
+		
+
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a
+				href="${pageContext.request.contextPath}">首頁</a></li>
+			<li class="breadcrumb-item active">會員註冊</li>
+		</ol>
+
+		<!-- Contact Form -->
+	<!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
 <div style="text-align: center;color: red;">
 	<h4 >${error}</h4>
 	</div>
@@ -135,7 +152,19 @@
   <button type="reset" class="btn btn-primary">重填</button>
   
 </form:form>
-<button type="button" class="btn btn-primary" onclick="">一鍵填寫</button>
+	</div>
+	<button type="button" id="oneSet" class="btn btn-success">一鍵填入</button>
+	<script>
+$('#oneSet').click(function(){ 
+		
+		$('#email').val('eeit105joooin@gmail.com'); 
+		$('#memberName').val('jojo');
+		$('#phone').val('0987654321');
+		$('#password').val('passw0rd');
+		$('#birthday').val('1993-01-01');
+		
+ 	}) 
+	</script>
 	</div>
 <!-- 請把所有內容寫在此div內 -->
 </body>
