@@ -3,6 +3,7 @@ package com.joooin.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="group_main")
@@ -23,13 +27,16 @@ public class GroupMainBean implements Serializable {
 	private Integer groupCurrentMembers;
 	private String groupCreateDate;
 	private String groupIntro;
+	private Byte[] groupImage;
+	private MultipartFile multipartFile;
 	private List<GroupMemberBean> GroupMemberList = new ArrayList<GroupMemberBean>();
 	private List<GroupPostBean> GroupPostList = new ArrayList<GroupPostBean>();
 	private List<GroupPostReplyBean> GroupPostReplyList = new ArrayList<GroupPostReplyBean>();
 	private List<GroupChatBean> groupChatList = new ArrayList<GroupChatBean>();
 	
-	public GroupMainBean(String groupType, String groupName, Integer groupLeaderId,
-			Integer groupCurrentMembers, String groupCreateDate, String groupIntro) {
+	
+	public GroupMainBean(String groupType, String groupName, Integer groupLeaderId, Integer groupCurrentMembers,
+			String groupCreateDate, String groupIntro, Byte[] groupImage) {
 		super();
 		this.groupType = groupType;
 		this.groupName = groupName;
@@ -37,7 +44,9 @@ public class GroupMainBean implements Serializable {
 		this.groupCurrentMembers = groupCurrentMembers;
 		this.groupCreateDate = groupCreateDate;
 		this.groupIntro = groupIntro;
+		this.groupImage = groupImage;
 	}
+
 	public GroupMainBean() {
 	}
 	
@@ -130,6 +139,20 @@ public class GroupMainBean implements Serializable {
 
 	public void setGroupIntro(String groupIntro) {
 		this.groupIntro = groupIntro;
+	}
+	public Byte[] getGroupImage() {
+		return groupImage;
+	}
+	public void setGroupImage(Byte[] groupImage) {
+		this.groupImage = groupImage;
+	}
+	@Transient
+	public MultipartFile getMultipartFile() {
+		return multipartFile;
+	}
+
+	public void setMultipartFile(MultipartFile multipartFile) {
+		this.multipartFile = multipartFile;
 	}
 
 	
