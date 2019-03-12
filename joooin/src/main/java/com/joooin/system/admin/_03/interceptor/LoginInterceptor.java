@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.joooin.model.AdminBean;
 import com.joooin.model.MemberMainBean;
 
 public class LoginInterceptor implements HandlerInterceptor {
@@ -17,10 +18,11 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 		HttpSession session = request.getSession();
 		MemberMainBean mmb = (MemberMainBean) session.getAttribute("memberName");
-		if (mmb != null) {
+		AdminBean ab = (AdminBean) session.getAttribute("admin");
+		if (mmb != null || ab !=null) {
 			return true;
 		} else {
-			response.sendRedirect(request.getContextPath() + "/admin/login");
+			response.sendRedirect(request.getContextPath() + "/login");
 			return false;
 		}
 	}
