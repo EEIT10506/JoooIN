@@ -14,13 +14,11 @@ public class EventLikeBean implements Serializable {
 	private Integer eventLikeId;
 	private Integer eventId;
 	private Integer memberId;
-	private Boolean isLiked;
 	
-	public EventLikeBean(Integer eventId, Integer memberId, Boolean isLiked) {
+	public EventLikeBean(Integer eventId, Integer memberId) {
 		super();
 		this.eventId = eventId;
 		this.memberId = memberId;
-		this.isLiked = isLiked;
 	}
 	public EventLikeBean() {
 		super();
@@ -48,13 +46,5 @@ public class EventLikeBean implements Serializable {
 	public void setMemberId(Integer memberId) {
 		this.memberId = memberId;
 	}
-	public Boolean getIsLiked() {
-		return isLiked;
-	}
-	public void setIsLiked(Boolean isLiked) {
-		this.isLiked = isLiked;
-	}
-	
-	
 	
 }

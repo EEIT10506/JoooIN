@@ -37,9 +37,9 @@ public class ProfileController {
 			if (!updateBean.getMultipartFile().isEmpty()) {
 				memberImage = ImageUtils.multipartFileToByteArray(updateBean.getMultipartFile());
 				mmb.setMemberImage(memberImage);
-			} /*else {
+			} else {
 				mmb.setMemberImage(ImageUtils.localImageToByteArray("member_male.PNG", context));
-			}*/
+			}
 			memberService.updateMemberMainBean(mmb);
 			session.setAttribute("memberName", mmb.getMemberName());
 			
@@ -57,7 +57,7 @@ public class ProfileController {
 				MemberMainBean mmb = memberService.getMemberMainBean(memberId);
 				mmb.setPassword(password1);
 				memberService.updateMemberMainBean(mmb);
-				return "redirect:/member/profile";
+				return "redirect:/member/my/profile";
 			} else {
 				return null;
 			}
@@ -78,7 +78,7 @@ public class ProfileController {
 			mmb.setPhoneDisplay(updateBean.getPhoneDisplay());
 			memberService.updateMemberMainBean(mmb);
 			
-			return "redirect:/member/profile";
+			return "redirect:/member/my/profile";
 		} else {
 			return "not_login";
 		}	
