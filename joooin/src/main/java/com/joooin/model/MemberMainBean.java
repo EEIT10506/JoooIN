@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="member_main")
@@ -36,6 +39,7 @@ public class MemberMainBean implements Serializable {
 	private Boolean cityDisplay;
 	private Boolean emailDisplay;
 	private Boolean phoneDisplay;
+	private MultipartFile multipartFile;
 	private List<GroupMainBean> groupMainList = new ArrayList<GroupMainBean>();
 	private List<GroupMemberBean> groupMemberList = new ArrayList<GroupMemberBean>();
 	private List<GroupPostBean> GroupPostList = new ArrayList<GroupPostBean>();
@@ -81,7 +85,13 @@ public class MemberMainBean implements Serializable {
 	public MemberMainBean() {
 	}
 	
-	
+	@Transient
+	public MultipartFile getMultipartFile() {
+		return multipartFile;
+	}
+	public void setMultipartFile(MultipartFile multipartFile) {
+		this.multipartFile = multipartFile;
+	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="memberId", referencedColumnName="memberId")
 	public List<GroupMemberBean> getGroupMemberList() {

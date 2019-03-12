@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.support.OpenSessionInViewInterceptor;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -50,5 +51,13 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         		.addResourceLocations("/WEB-INF/resources/")
         		.resourceChain(true).addResolver(
         		new VersionResourceResolver().addContentVersionStrategy("/**"));
+	}
+	
+	@Bean
+	public CommonsMultipartResolver multipartResolver() {
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+	    multipartResolver.setMaxUploadSize(1000000);
+	    multipartResolver.setDefaultEncoding("UTF-8");
+	    return multipartResolver;
 	}
 }

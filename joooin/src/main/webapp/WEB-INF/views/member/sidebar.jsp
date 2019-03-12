@@ -49,7 +49,7 @@
 </style>
 <body>
 	<div id="memberImage" >
-		<img src="<c:url value='/getMemberImage/${memberId}.jpg' />" />
+		<img src="<c:url value='/getMemberImage/${memberId}.jpg' />" width="160px" />
 		<p id="memberName">${memberName}</p>
 	</div>
 	<br />

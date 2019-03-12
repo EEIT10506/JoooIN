@@ -95,14 +95,36 @@
 		}
 	});
 	
-	
-	
-	
+	function checkImage(image){
+		var validExts = new Array(".jpg", ".png", ".gif");
+		var fileExt = image.value;
+		
+		fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
+		if (validExts.indexOf(fileExt) == -1) {
+			alert("檔案類型錯誤，僅接受以下檔案類型： jpg、png、gif");
+			image.value = null;
+			return false;
+		}
+		
+		var fileSize = 0;
+		var fileMaxSize = 1024;
+	    var filePath = image.value;
+	    if(filePath){
+	        fileSize = image.files[0].size;
+	        var size = fileSize / 1024;
+	        if (size > fileMaxSize) {
+	            alert("圖片容量不可超過 1 MB");
+	            image.value = null;
+	            return false;
+	        } 
+	    }
+	    return true;
+	}
 </script>
 <title>會員</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
-<!-- 請把所有內容寫在此div內 -->ew
+<!-- 請把所有內容寫在此div內 -->
 	<div id="main" class="container">
 		<div class="row">
 			<div class="col-3">
@@ -130,7 +152,7 @@
 						<div class="param-label">Email：</div>　${memberMainBean.email }<br />
 					</div>
 					<div id="edit-data" class="profile-view">
-						<form:form modelAttribute="memberMainBean" action="updateProfile" method="POST">
+						<form:form modelAttribute="memberMainBean" action="updateProfile" method="POST" enctype="multipart/form-data">
 							<div class="param-label"><form:label class="edit-data-text" for="memberName" path="memberName">名稱：</form:label></div>　
 							<form:input id="memberName" path="memberName"></form:input><br />
 							
@@ -142,6 +164,9 @@
 						
 							<div class="param-label"><form:label class="edit-data-text" for="phone" path="phone">電話：</form:label></div>　
 							<form:input id="phone" path="phone"></form:input><br />
+							
+							<div class="param-label"><label class="edit-data-text" for="multipartFile">大頭照：</label></div>　
+							<form:input type="file" accept="image/*" path="multipartFile" onchange="checkImage(this)"></form:input><br />
 						
 							<div class="profile-button" align="center">
 								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkProfile">修改</button>

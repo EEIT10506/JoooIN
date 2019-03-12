@@ -53,7 +53,7 @@ public class RegisterServiceImpl implements RegisterService {
 			
 			if(memberMainBean.getGender().equals(m)) {
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				System.out.println("male");
+				System.out.println("male");               
 				String filePath = "/WEB-INF/resources/img/member_male.PNG";
 				String root = context.getRealPath("/");
 				root = root.substring(0, root.length()-1);
