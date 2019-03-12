@@ -1,19 +1,10 @@
 package com.joooin.system.event._02.controller;
 
-
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.joooin.model.EventMainBean;
 import com.joooin.model.EventMemberBean;
 import com.joooin.model.EventPostBean;
@@ -113,17 +103,17 @@ public class EventController {
 		EventTypeBean eventtype = eventservice.getByEventTypeId(typeid);
 		MemberMainBean eventbuildname = eventservice.getByMemberId(inviterid);
 		
-		Set<EventMemberBean> eventmember = event.getEventMemberSet();
+		List<EventMemberBean> eventmember = event.getEventMemberList();
 		//int totalmember = eventmember.size();
 		MemberMainBean eventmembers = null;
-		Set<MemberMainBean> eventmemberset =new HashSet<MemberMainBean>();
+		List<MemberMainBean> eventmemberset = new ArrayList<MemberMainBean>();
 		for(EventMemberBean members: eventmember) {
 			Integer memberid = members.getMemberId();
 			eventmembers  = eventservice.getByMemberId(memberid);
 			eventmemberset.add(eventmembers);
 		}
 		
-		List<EventPostBean> eventPost = event.getEventPostSet();
+		List<EventPostBean> eventPost = event.getEventPostList();
 		
 		MemberMainBean eventPostMember = null;
 		List<MemberMainBean> eventPostMemberList = new ArrayList<MemberMainBean>();
