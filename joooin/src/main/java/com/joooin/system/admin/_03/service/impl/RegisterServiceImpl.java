@@ -51,6 +51,11 @@ public class RegisterServiceImpl implements RegisterService {
 			String m = "male";
 			String f = "female";
 			
+			String code = memberMainBean.getCertificationHash();
+			if(code!=null) {
+				
+			}
+			
 			if(memberMainBean.getGender().equals(m)) {
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
 				System.out.println("male");
@@ -123,5 +128,14 @@ public class RegisterServiceImpl implements RegisterService {
 			result = false;
 		}
 		return result;
+	}
+
+	@Override
+	public Boolean activeUser(String certificationHash) {
+		Boolean activeUser = false;
+		if(dao.activeUser(certificationHash)!=0) {
+			activeUser = true;
+		}
+		return activeUser;
 	}
 }

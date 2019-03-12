@@ -12,5 +12,6 @@ public interface RegisterService {
 	public void update(MemberMainBean memberMainBean);
 	public void deleteByMemberId(Integer memberId);
 	public Boolean checkEmail(String email);
+	public Boolean activeUser(String certificationHash);
 	
 }

@@ -145,8 +145,8 @@
 <!--   </div> -->
 
 	<form:input type="hidden" value="0" nama="logins" id="logins" path="logins"/>
-<%-- 	<form:input type="hidden" value="true" nama="certificationStatus" id="certificationStatus" path="certificationStatus"/> --%>
-<%-- 	<form:input type="hidden" value="test" nama="certificationHash" id="certificationHash" path="certificationHash"/> --%>
+	<form:input type="hidden" value="false" nama="certificationStatus" id="certificationStatus" path="certificationStatus"/>
+<%-- 	<form:input type="hidden" value="" nama="certificationHash" id="certificationHash" path="certificationHash"/> --%>
 
   <button type="submit" class="btn btn-primary">送出</button>
   <button type="reset" class="btn btn-primary">重填</button>
