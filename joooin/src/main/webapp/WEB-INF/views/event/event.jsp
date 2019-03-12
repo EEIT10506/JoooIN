@@ -159,6 +159,7 @@
 		overflow:hidden;
 	}
 	.messageContent{
+		word-break:break-all;
 		width:70%;
 		margin:auto;
 	}
@@ -166,6 +167,7 @@
 		
 	}
 	.eventpostDate{
+		
 		color:#8B8989;
 		font-size:12px;
 	}
@@ -311,46 +313,16 @@
 <%--   	   				<input type="text" class="hid" name="eventPostId" value="${eventPost.eventPostId}"/>   --%>
 <%--   	   				<input type="text" class="hid" name="eventId" value="${event.eventId}">   --%>
 <!--     舊的		<button type="submit" id="signUp" class="btn btn-success eventJoin">報名</button> -->
-		   <c:if test="${memberId == inviterid}">			
+		   <c:if test="${memberId != inviterid}">			
 			<button type="button" id="signUp" class="btn btn-success eventJoin" data-toggle="modal" data-target="#exampleModalCenter">報名</button>
 			</c:if>
-		<!-- 以下報名Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">${event.eventName}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-     
-      <div class="modal-body">
-      <form action="${pageContext.request.contextPath}/event/eventCheckQuantity" method="POST"> 
-      	<label for="quantity">請輸入報名人數 : </label>
-      	<input id="quantity" type="number" name="quantity" value="1" min="1" max="100" required/>
-
-      	<input type="text" class="hid" name="eventId" value="${event.eventId}"/>  
-  	   	<input type="text" class="hid" name="memberId" value="${memberId}"/>  
-      	<button type="submit" id="ConfirmJoin" class="btn btn-primary">確認報名</button>  
-      </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-        
-        
-      </div>
-      
-    </div>
-  </div>
-</div>
-
-<!-- 以上報名MODAL -->
- </span> 
-    				<span>
-    				 <button type="button" id="dropOut" class="btn btn-danger eventCancels" data-toggle="modal" data-target="#CancelJoinEvent">退出</button>
-    				
-    				 </span> 
+		
+ </span> 	
+    		<span>
+    		 <c:if test="${memberId != inviterid}">
+    			<button type="button" id="dropOut" class="btn btn-danger eventCancels" data-toggle="modal" data-target="#CancelJoinEvent">退出</button>    				
+    		 </c:if>
+    		</span> 
  </p>
      			 </div>
     		 	 <div class="col-md-6 right">
@@ -456,7 +428,38 @@
   </div>
 </div>
 <!--以上 套新的Bootstrap           ====================== --> 
+<!-- 以下報名Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">${event.eventName}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     
+      <div class="modal-body">
+      <form action="${pageContext.request.contextPath}/event/eventCheckQuantity" method="POST"> 
+      	<label for="quantity">請輸入報名人數 : </label>
+      	<input id="quantity" type="number" name="quantity" value="1" min="1" max="100" required/>
 
+      	<input type="text" class="hid" name="eventId" value="${event.eventId}"/>  
+  	   	<input type="text" class="hid" name="memberId" value="${memberId}"/>  
+      	<button type="submit" id="ConfirmJoin" class="btn btn-primary">確認報名</button>  
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- 以上報名MODAL -->
 <!--退出 modal ------------------ -->
 <div class="modal fade" id="CancelJoinEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -470,12 +473,12 @@
      
       <div class="modal-body">
       			確定要退出本團 !?
-       <form atcion="${pageContext.request.contextPath}/event/eventCheckQuantity" method="POST"> 
-      			<label for="quantity">請輸入報名人數 : </label>
-      				<input type="text" class="hid" name="eventId" value="${event.eventId}"/>  
-  	  			 	<input type="text" class="hid" name="memberId" value="${memberId}"/>  
+<%--        <form atcion="${pageContext.request.contextPath}/event/eventCheckQuantity" method="POST">  --%>
+<!--       			<label for="quantity">請輸入報名人數 : </label> -->
+<%--       				<input type="text" class="hid" name="eventId" value="${event.eventId}"/>   --%>
+<%--   	  			 	<input type="text" class="hid" name="memberId" value="${memberId}"/>   --%>
       				<button type="submit" id="ConfirmJoin" class="btn btn-primary">確認</button>  
-      </form>
+<%--       </form> --%>
      		
      		 <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
       </div>
