@@ -1,8 +1,8 @@
 package com.joooin.model;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -35,9 +35,9 @@ public class EventMainBean implements Serializable {
 	private Integer eventCurrentMembers;
 	private Byte[] eventImage;
 	private String eventStatus;
-	private Set<EventMemberBean> eventMemberSet = new LinkedHashSet<EventMemberBean>();
-	private Set<EventPostBean> eventPostSet = new LinkedHashSet<EventPostBean>();
-	private Set<EventLikeBean> eventLikeSet = new LinkedHashSet<EventLikeBean>();
+	private List<EventMemberBean> eventMemberList = new ArrayList<EventMemberBean>();
+	private List<EventPostBean> eventPostList = new ArrayList<EventPostBean>();
+	private List<EventLikeBean> eventLikeList = new ArrayList<EventLikeBean>();
 	
 	public EventMainBean(String eventName, String eventDateStart, String eventDateEnd, String eventLocation,
 			String eventAddress, Double eventLatitude, Double eventLongitude, String eventContent, Integer eventTypeId,
@@ -68,27 +68,27 @@ public class EventMainBean implements Serializable {
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="eventId", referencedColumnName="eventId")
-	public Set<EventMemberBean> getEventMemberSet() {
-		return eventMemberSet;
+	public List<EventMemberBean> getEventMemberList() {
+		return eventMemberList;
 	}
-	public void setEventMemberSet(Set<EventMemberBean> eventMemberSet) {
-		this.eventMemberSet = eventMemberSet;
-	}
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="eventId", referencedColumnName="eventId")
-	public Set<EventPostBean> getEventPostSet() {
-		return eventPostSet;
-	}
-	public void setEventPostSet(Set<EventPostBean> eventPostSet) {
-		this.eventPostSet = eventPostSet;
+	public void setEventMemberList(List<EventMemberBean> eventMemberList) {
+		this.eventMemberList = eventMemberList;
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="eventId", referencedColumnName="eventId")
-	public Set<EventLikeBean> getEventLikeSet() {
-		return eventLikeSet;
+	public List<EventPostBean> getEventPostList() {
+		return eventPostList;
 	}
-	public void setEventLikeSet(Set<EventLikeBean> eventLikeSet) {
-		this.eventLikeSet = eventLikeSet;
+	public void setEventPostList(List<EventPostBean> eventPostList) {
+		this.eventPostList = eventPostList;
+	}
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="eventId", referencedColumnName="eventId")
+	public List<EventLikeBean> getEventLikeList() {
+		return eventLikeList;
+	}
+	public void setEventLikeList(List<EventLikeBean> eventLikeList) {
+		this.eventLikeList = eventLikeList;
 	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

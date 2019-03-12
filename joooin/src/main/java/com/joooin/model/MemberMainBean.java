@@ -1,8 +1,9 @@
 package com.joooin.model;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -35,24 +36,24 @@ public class MemberMainBean implements Serializable {
 	private Boolean cityDisplay;
 	private Boolean emailDisplay;
 	private Boolean phoneDisplay;
-	private Set<GroupMainBean> groupMainSet = new LinkedHashSet<GroupMainBean>();
-	private Set<GroupMemberBean> groupMemberSet = new LinkedHashSet<GroupMemberBean>();
-	private Set<GroupPostBean> GroupPostSet = new LinkedHashSet<GroupPostBean>();
-	private Set<GroupPostLikeBean> groupPostLikeSet = new LinkedHashSet<GroupPostLikeBean>();
-	private Set<GroupPostReplyBean> groupPostReplySet = new LinkedHashSet<GroupPostReplyBean>();
-	private Set<GroupChatBean> groupChatSet = new LinkedHashSet<GroupChatBean>();
-	private Set<MemberFriendBean> memberFriendISet = new LinkedHashSet<MemberFriendBean>();
-	private Set<MemberFriendBean> memberFriendRSet = new LinkedHashSet<MemberFriendBean>();
-	private Set<MemberChatBean> memberChatSSet = new LinkedHashSet<MemberChatBean>();
-	private Set<MemberChatBean> memberChatRSet = new LinkedHashSet<MemberChatBean>();
-	private Set<EventMainBean> eventMainSet = new LinkedHashSet<EventMainBean>();
-	private Set<EventMemberBean> eventMemberSet = new LinkedHashSet<EventMemberBean>();
-	private Set<EventPostBean> eventPostSet = new LinkedHashSet<EventPostBean>();
-	private Set<EventLikeBean> eventLikeSet = new LinkedHashSet<EventLikeBean>();
-	private Set<ReportBean> reportMemberSet = new LinkedHashSet<ReportBean>();
-	private Set<ReportBean> reportViolatorSet = new LinkedHashSet<ReportBean>();
-	private Set<PunishmentBean> punishmentSet = new LinkedHashSet<PunishmentBean>();
-	private Set<NotificationBean> notificationSet = new LinkedHashSet<NotificationBean>();
+	private List<GroupMainBean> groupMainList = new ArrayList<GroupMainBean>();
+	private List<GroupMemberBean> groupMemberList = new ArrayList<GroupMemberBean>();
+	private List<GroupPostBean> GroupPostList = new ArrayList<GroupPostBean>();
+	private List<GroupPostLikeBean> groupPostLikeList = new ArrayList<GroupPostLikeBean>();
+	private List<GroupPostReplyBean> groupPostReplyList = new ArrayList<GroupPostReplyBean>();
+	private List<GroupChatBean> groupChatList = new ArrayList<GroupChatBean>();
+	private List<MemberFriendBean> memberFriendIList = new ArrayList<MemberFriendBean>();
+	private List<MemberFriendBean> memberFriendRList = new ArrayList<MemberFriendBean>();
+	private List<MemberChatBean> memberChatSList = new ArrayList<MemberChatBean>();
+	private List<MemberChatBean> memberChatRList = new ArrayList<MemberChatBean>();
+	private List<EventMainBean> eventMainList = new ArrayList<EventMainBean>();
+	private List<EventMemberBean> eventMemberList = new ArrayList<EventMemberBean>();
+	private List<EventPostBean> eventPostList = new ArrayList<EventPostBean>();
+	private List<EventLikeBean> eventLikeList = new ArrayList<EventLikeBean>();
+	private List<ReportBean> reportMemberList = new ArrayList<ReportBean>();
+	private List<ReportBean> reportViolatorList = new ArrayList<ReportBean>();
+	private List<PunishmentBean> punishmentList = new ArrayList<PunishmentBean>();
+	private List<NotificationBean> notificationList = new ArrayList<NotificationBean>();
 	
 	
 	public MemberMainBean(String memberName, String email, String password, String gender,
@@ -83,147 +84,147 @@ public class MemberMainBean implements Serializable {
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="memberId", referencedColumnName="memberId")
-	public Set<GroupMemberBean> getGroupMemberSet() {
-		return groupMemberSet;
+	public List<GroupMemberBean> getGroupMemberList() {
+		return groupMemberList;
 	}
-	public void setGroupMemberSet(Set<GroupMemberBean> groupMemberSet) {
-		this.groupMemberSet = groupMemberSet;
+	public void setGroupMemberList(List<GroupMemberBean> groupMemberList) {
+		this.groupMemberList = groupMemberList;
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="groupLeaderId", referencedColumnName="memberId")
-	public Set<GroupMainBean> getGroupMainSet() {
-		return groupMainSet;
+	public List<GroupMainBean> getGroupMainList() {
+		return groupMainList;
 	}
-	public void setGroupMainSet(Set<GroupMainBean> groupMainSet) {
-		this.groupMainSet = groupMainSet;
-	}
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="memberId", referencedColumnName="memberId")
-	public Set<GroupPostBean> getGroupPostSet() {
-		return GroupPostSet;
-	}
-	public void setGroupPostSet(Set<GroupPostBean> groupPostSet) {
-		GroupPostSet = groupPostSet;
+	public void setGroupMainList(List<GroupMainBean> groupMainList) {
+		this.groupMainList = groupMainList;
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="memberId", referencedColumnName="memberId")
-	public Set<GroupPostLikeBean> getGroupPostLikeSet() {
-		return groupPostLikeSet;
+	public List<GroupPostBean> getGroupPostList() {
+		return GroupPostList;
 	}
-	public void setGroupPostLikeSet(Set<GroupPostLikeBean> groupPostLikeSet) {
-		this.groupPostLikeSet = groupPostLikeSet;
-	}
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="memberId", referencedColumnName="memberId")
-	public Set<GroupPostReplyBean> getGroupPostReplySet() {
-		return groupPostReplySet;
-	}
-	public void setGroupPostReplySet(Set<GroupPostReplyBean> groupPostReplySet) {
-		this.groupPostReplySet = groupPostReplySet;
+	public void setGroupPostList(List<GroupPostBean> groupPostList) {
+		GroupPostList = groupPostList;
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="memberId", referencedColumnName="memberId")
-	public Set<GroupChatBean> getGroupChatSet() {
-		return groupChatSet;
+	public List<GroupPostLikeBean> getGroupPostLikeList() {
+		return groupPostLikeList;
 	}
-	public void setGroupChatSet(Set<GroupChatBean> groupChatSet) {
-		this.groupChatSet = groupChatSet;
+	public void setGroupPostLikeList(List<GroupPostLikeBean> groupPostLikeList) {
+		this.groupPostLikeList = groupPostLikeList;
+	}
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="memberId", referencedColumnName="memberId")
+	public List<GroupPostReplyBean> getGroupPostReplyList() {
+		return groupPostReplyList;
+	}
+	public void setGroupPostReplyList(List<GroupPostReplyBean> groupPostReplyList) {
+		this.groupPostReplyList = groupPostReplyList;
+	}
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="memberId", referencedColumnName="memberId")
+	public List<GroupChatBean> getGroupChatList() {
+		return groupChatList;
+	}
+	public void setGroupChatList(List<GroupChatBean> groupChatList) {
+		this.groupChatList = groupChatList;
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="inviteMemberId", referencedColumnName="memberId")
-	public Set<MemberFriendBean> getMemberFriendISet() {
-		return memberFriendISet;
+	public List<MemberFriendBean> getMemberFriendIList() {
+		return memberFriendIList;
 	}
-	public void setMemberFriendISet(Set<MemberFriendBean> memberFriendISet) {
-		this.memberFriendISet = memberFriendISet;
+	public void setMemberFriendIList(List<MemberFriendBean> memberFriendIList) {
+		this.memberFriendIList = memberFriendIList;
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="receiveMemberId", referencedColumnName="memberId")
-	public Set<MemberFriendBean> getMemberFriendRSet() {
-		return memberFriendRSet;
+	public List<MemberFriendBean> getMemberFriendRList() {
+		return memberFriendRList;
 	}
-	public void setMemberFriendRSet(Set<MemberFriendBean> memberFriendRSet) {
-		this.memberFriendRSet = memberFriendRSet;
+	public void setMemberFriendRList(List<MemberFriendBean> memberFriendRList) {
+		this.memberFriendRList = memberFriendRList;
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="sendMemberId", referencedColumnName="memberId")
-	public Set<MemberChatBean> getMemberChatSSet() {
-		return memberChatSSet;
+	public List<MemberChatBean> getMemberChatSList() {
+		return memberChatSList;
 	}
-	public void setMemberChatSSet(Set<MemberChatBean> memberChatSSet) {
-		this.memberChatSSet = memberChatSSet;
+	public void setMemberChatSList(List<MemberChatBean> memberChatSList) {
+		this.memberChatSList = memberChatSList;
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="receiveMemberId", referencedColumnName="memberId")
-	public Set<MemberChatBean> getMemberChatRSet() {
-		return memberChatRSet;
+	public List<MemberChatBean> getMemberChatRList() {
+		return memberChatRList;
 	}
-	public void setMemberChatRSet(Set<MemberChatBean> memberChatRSet) {
-		this.memberChatRSet = memberChatRSet;
+	public void setMemberChatRList(List<MemberChatBean> memberChatRList) {
+		this.memberChatRList = memberChatRList;
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="eventInviterId", referencedColumnName="memberId")
-	public Set<EventMainBean> getEventMainSet() {
-		return eventMainSet;
+	public List<EventMainBean> getEventMainList() {
+		return eventMainList;
 	}
-	public void setEventMainSet(Set<EventMainBean> eventMainSet) {
-		this.eventMainSet = eventMainSet;
-	}
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="memberId", referencedColumnName="memberId")
-	public Set<EventMemberBean> getEventMemberSet() {
-		return eventMemberSet;
-	}
-	public void setEventMemberSet(Set<EventMemberBean> eventMemberSet) {
-		this.eventMemberSet = eventMemberSet;
+	public void setEventMainList(List<EventMainBean> eventMainList) {
+		this.eventMainList = eventMainList;
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="memberId", referencedColumnName="memberId")
-	public Set<EventPostBean> getEventPostSet() {
-		return eventPostSet;
+	public List<EventMemberBean> getEventMemberList() {
+		return eventMemberList;
 	}
-	public void setEventPostSet(Set<EventPostBean> eventPostSet) {
-		this.eventPostSet = eventPostSet;
+	public void setEventMemberList(List<EventMemberBean> eventMemberList) {
+		this.eventMemberList = eventMemberList;
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="memberId", referencedColumnName="memberId")
-	public Set<EventLikeBean> getEventLikeSet() {
-		return eventLikeSet;
+	public List<EventPostBean> getEventPostList() {
+		return eventPostList;
 	}
-	public void setEventLikeSet(Set<EventLikeBean> eventLikeSet) {
-		this.eventLikeSet = eventLikeSet;
+	public void setEventPostList(List<EventPostBean> eventPostList) {
+		this.eventPostList = eventPostList;
+	}
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="memberId", referencedColumnName="memberId")
+	public List<EventLikeBean> getEventLikeList() {
+		return eventLikeList;
+	}
+	public void setEventLikeList(List<EventLikeBean> eventLikeList) {
+		this.eventLikeList = eventLikeList;
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="reportMemberId", referencedColumnName="memberId")
-	public Set<ReportBean> getReportMemberSet() {
-		return reportMemberSet;
+	public List<ReportBean> getReportMemberList() {
+		return reportMemberList;
 	}
-	public void setReportMemberSet(Set<ReportBean> reportMemberSet) {
-		this.reportMemberSet = reportMemberSet;
+	public void setReportMemberList(List<ReportBean> reportMemberList) {
+		this.reportMemberList = reportMemberList;
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="reportViolatorId", referencedColumnName="memberId")
-	public Set<ReportBean> getReportViolatorSet() {
-		return reportViolatorSet;
+	public List<ReportBean> getReportViolatorList() {
+		return reportViolatorList;
 	}
-	public void setReportViolatorSet(Set<ReportBean> reportViolatorSet) {
-		this.reportViolatorSet = reportViolatorSet;
-	}
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="punishMemberId", referencedColumnName="memberId")
-	public Set<PunishmentBean> getPunishmentSet() {
-		return punishmentSet;
-	}
-	public void setPunishmentSet(Set<PunishmentBean> punishmentSet) {
-		this.punishmentSet = punishmentSet;
+	public void setReportViolatorList(List<ReportBean> reportViolatorList) {
+		this.reportViolatorList = reportViolatorList;
 	}
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="punishMemberId", referencedColumnName="memberId")
-	public Set<NotificationBean> getNotificationSet() {
-		return notificationSet;
+	public List<PunishmentBean> getPunishmentList() {
+		return punishmentList;
 	}
-	public void setNotificationSet(Set<NotificationBean> notificationSet) {
-		this.notificationSet = notificationSet;
+	public void setPunishmentList(List<PunishmentBean> punishmentList) {
+		this.punishmentList = punishmentList;
+	}
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="punishMemberId", referencedColumnName="memberId")
+	public List<NotificationBean> getNotificationList() {
+		return notificationList;
+	}
+	public void setNotificationList(List<NotificationBean> notificationList) {
+		this.notificationList = notificationList;
 	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -369,5 +370,16 @@ public class MemberMainBean implements Serializable {
 	public void setPhoneDisplay(Boolean phoneDisplay) {
 		this.phoneDisplay = phoneDisplay;
 	}
+	@Override
+	public String toString() {
+		return "MemberMainBean [memberId=" + memberId + ", memberName=" + memberName + ", email=" + email
+				+ ", password=" + password + ", gender=" + gender + ", birthday=" + birthday + ", city=" + city
+				+ ", phone=" + phone + ", memberImage=" + Arrays.toString(memberImage) + ", logins=" + logins
+				+ ", memberCreateDate=" + memberCreateDate + ", certificationStatus=" + certificationStatus
+				+ ", certificationHash=" + certificationHash + ", genderDisplay=" + genderDisplay + ", birthdayDisplay="
+				+ birthdayDisplay + ", cityDisplay=" + cityDisplay + ", emailDisplay=" + emailDisplay
+				+ ", phoneDisplay=" + phoneDisplay + "]";
+	}
+	
 
 }
