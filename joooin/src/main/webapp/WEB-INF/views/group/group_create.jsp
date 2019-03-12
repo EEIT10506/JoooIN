@@ -20,9 +20,28 @@
 <title>Insert title here</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
-<!-- 請把所有內容寫在此div內 -->
 	<div id="main">
-<!-- 請把所有內容寫在此div內 -->
+		<h1>創建社團初版</h1>
+		<hr>
+		<!-- 		使用表格物件 -->
+		<form:form method="POST" modelAttribute="groupMainBean" enctype="multipart/form-data">
+			<fieldset>
+				<label for="groupName">團名</label>
+				<form:input path="groupName" type='text' id="groupName"/>
+				
+				<label for="">社團型態</label>
+				<form:input path="" type='text' id=""/>
+				
+				<label for="">社團管理人</label>
+				<form:input path="" type='text' id=""/>
+				
+				<label for="groupCreateDate">創立時間</label>
+				<form:input path="groupCreateDate" type='text' id="groupCreateDate"/>
+				
+				<input type="submit" value="送出"> 
+			</fieldset>
+		</form:form>
+
 	</div>
 </body>
 </html>
