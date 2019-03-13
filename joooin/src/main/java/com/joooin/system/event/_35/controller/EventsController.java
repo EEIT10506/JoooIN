@@ -73,9 +73,9 @@ public class EventsController {
 		
 		if(event.getEventFee()==null) {event.setEventFee(0);}
 		
-		event.setEventImage(new Byte[] {2,3});
+		event.setEventImage(null);
 		
-		Integer inviterId = 3;  //開團者ID
+		Integer inviterId = (Integer) session.getAttribute("memberId"); //開團者ID
 		
 		//event.getEventDateStart();
 		//event.getEventDateEnd();
@@ -96,10 +96,14 @@ public class EventsController {
 
 	    String eventstart = sdf2.format(dates); 
 	    String eventend = sdf2.format(datee); 
-	
+	    
+	    Date date = new Date();
+		
+		String eventCreateDate =sdf2.format(date);
+		
 	    //System.out.println( eventstart);
 	    //System.out.println( eventend);
-	    
+	    event.setEventCreateDate(eventCreateDate);
 	    event.setEventDateStart(eventstart);
 	    event.setEventDateEnd(eventend);
 		event.setEventInviterId(inviterId);		

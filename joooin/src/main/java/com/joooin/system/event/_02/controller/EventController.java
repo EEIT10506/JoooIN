@@ -3,6 +3,7 @@ package com.joooin.system.event._02.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -78,6 +79,8 @@ public class EventController {
 	public String checkQuantity(Model model, @RequestParam Integer memberId, 
 											 @RequestParam Integer eventId,
 											 @RequestParam String quantity) {
+		if (memberId != null) {
+		
 		EventMemberBean eventMemberBean = new EventMemberBean();
 		
 		Integer quantitys = Integer.parseInt(quantity);
@@ -88,18 +91,50 @@ public class EventController {
 		eventMemberBean.setIsAgreed(false);
 		eventMemberBean.setIsAttended(true);
 		Integer i = eventservice.saveEventMember(eventMemberBean);
-		System.out.println(i);
+		
 		return "redirect:/event/"+eventId;
+		}else {
+			return "not_login";
+		}
 	}
-	
+	@RequestMapping(value = "/DeleteByEventMemberId", method = RequestMethod.POST)
+	public String deleteByEventMemberId(Model model, @RequestParam Integer memberId, @RequestParam Integer eventId ) {
+		if (memberId != null) {
+			List<EventMemberBean> evmems = eventservice.getByEventMainId(eventId).getEventMemberList();
+
+			for(EventMemberBean evmem:evmems) {
+			if (evmem.getMemberId().equals(memberId)){  
+				eventservice.deleteEventMemberById(evmem.getEventMemberId()); break;
+				}
+			}
+
+			return "redirect:/event/"+eventId;
+		}else {
+			return "not_login";
+		}
+	}
 	//詳細活動資訊 & 成員 click button 才帶資料顯示
 	
+	@SuppressWarnings("unlikely-arg-type")
 	@RequestMapping("/event/{eventId}")
-	public String eventDetail(Model model, @PathVariable("eventId") Integer eventId) {
+	public String eventDetail(Model model,HttpSession session, @PathVariable("eventId") Integer eventId) {
+		Integer memberId = (Integer) session.getAttribute("memberId");
+		
 		EventMainBean event = eventservice.getByEventMainId(eventId);
 		Integer typeid = event.getEventTypeId();
 		Integer inviterid = event.getEventInviterId();
-
+		
+		List<EventMemberBean> emlist = event.getEventMemberList();
+		List<Integer> emidlist = new LinkedList<Integer>();
+		for(EventMemberBean em:emlist) {
+			emidlist.add(em.getMemberId());
+		}
+		boolean memberCheck = emidlist.contains(memberId);
+		
+		
+		
+		
+		
 		EventTypeBean eventtype = eventservice.getByEventTypeId(typeid);
 		MemberMainBean eventbuildname = eventservice.getByMemberId(inviterid);
 		
@@ -107,10 +142,16 @@ public class EventController {
 		//int totalmember = eventmember.size();
 		MemberMainBean eventmembers = null;
 		List<MemberMainBean> eventmemberlist = new ArrayList<MemberMainBean>();
+		List<MemberMainBean> emfindagreed = new ArrayList<MemberMainBean>();
+		
 		for(EventMemberBean members: eventmember) {
 			Integer memberid = members.getMemberId();
 			eventmembers  = eventservice.getByMemberId(memberid);
 			eventmemberlist.add(eventmembers);
+			Boolean isAgreed = members.getIsAgreed();
+			if(isAgreed == true) {
+				emfindagreed.add(eventmembers);
+			}
 		}
 		
 		List<EventPostBean> eventPost = event.getEventPostList();
@@ -135,6 +176,8 @@ public class EventController {
 		model.addAttribute("eventmembers", eventmemberlist);
 		model.addAttribute("eventPost", eventPost);
 		model.addAttribute("eventPostMemberList", eventPostMemberList);
+		model.addAttribute("memberCheck", memberCheck);
+		model.addAttribute("emfindagreed", emfindagreed);
 		
 		return "event/event";
 	}

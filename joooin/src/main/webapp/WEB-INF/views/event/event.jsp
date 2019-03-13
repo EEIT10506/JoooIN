@@ -31,6 +31,7 @@
 	
 	.a{
    		 text-decoration:none !important;
+   		 color:black:
 	}
 	
 	.body{
@@ -72,14 +73,19 @@
 		margin-bottom:30px;
 	}
 	.eventbuilder{
-		font-size:25px;
+		height:50px;
+		font-size:35px;
+		color:black;
+	}
+	.eventbuilderName:hover{
+		font-size:40px;
 	}
 	.eventtime{
 		font-size:15px;
 		color:RED;
 	}
 	.eventaddress{
-	
+		cursor: pointer;
 	}
 	.eventmodify{
  	 
@@ -240,8 +246,55 @@
  		margin-left:40px;
 /*  		margin-left:700px;  */
 	}
+	.addressShow{
+		font-family:微軟正黑體;
+		font-weight:bold;
+	}
+	.joinIsAgreedName{
+		font-size:30px;
+ 		color:black; 
+		text-decoration:none !important;
+	}
+ 	.joinIsAgreedName:hover{ 
+ 		text-decoration:none !important; 
+ 		background-color:#DCDCDC;
+ 	} 
+	#quantity{
+		width:100px;
+	}
+	.waitInviterCheck{
+		color:red;
+		font-size:30px;
+		position:relative;
+		left:40px;
+		top:10px;
+	}
+	.joinWaitCheck{
+		opacity:0.7;
+		background-color:black;
+	}
+	#ConfirmCancel{
+		margin-left:60px;
+		
+	}
+	.cancelTitle{
+		font-size:25px;
+	}
+	.ModalTitle{
+		font-size:50px;
+		font-family:微軟正黑體;
+		font-weight:900px;
+	}
 </style>
 <script>
+function ValidateNumber(e, pnumber)
+{
+    if (!/^\d+$/.test(pnumber))
+    {
+        e.value = /^\d+/.exec(e.value);
+    }
+    return false;
+}
  	$(document).ready(function(){
 // 		按讚收回
 		$("#e${event.eventId}").click(function(){
@@ -257,12 +310,18 @@
 			    $(this).html("<i class='far fa-thumbs-up'></i> 讚");
 			}
 		});
+// 		先隱藏 點地址顯示
+		$("#eventAddressImage").hide();
+		$(".eventaddress").click(function(){
+			$("#eventAddressImage").toggle(500);
+			
+		});
 		$("#backbutton").click(function(){
 			history.go(-1);
 		});
-		$("#ConfirmJoin").click(function(){
-			$("#signUp")
-		});
+// 		$("#ConfirmJoin").click(function(){
+// 			$("#signUp")
+// 		});
 	});
 	
 </script>
@@ -274,8 +333,18 @@
 	<div class="outer">
 		<div class="eventname">
 			<span class="eventTitle">${event.eventName}</span>
-			<span class="eventtype"><img class="eventtypeimg" src="<c:url value='/resources/img/icon_${eventtype.eventType}_01.png' />" />${eventtype.eventType}</span>
-			
+			<c:choose>
+				<c:when test="${eventtype.eventType == '美食'}">
+			<span class="eventtype"><img class="eventtypeimg" src="<c:url value='/resources/img/icon_food_01.png' />" />聚餐</span>
+				</c:when>
+					<c:when test="${eventtype.eventType == '運動'}">
+			<span class="eventtype"><img class="eventtypeimg" src="<c:url value='/resources/img/icon_sport_01.png' />" />運動</span>
+				</c:when>	<c:when test="${eventtype.eventType == '娛樂'}">
+			<span class="eventtype"><img class="eventtypeimg" src="<c:url value='/resources/img/icon_entertainment_01.png' />" />休閒娛樂</span>
+				</c:when>	<c:when test="${eventtype.eventType == '其他'}">
+			<span class="eventtype"><img class="eventtypeimg" src="<c:url value='/resources/img/icon_other_01.png' />" />綜合</span>
+				</c:when>
+			</c:choose>
 			<c:choose >
 			<c:when test="${event.eventStatus == 'yes' }">
 			<span class="eventtype" id="eventfull">已成團</span>
@@ -287,7 +356,9 @@
 			<span class="eventtype" id="eventnofull">報名開放 尚未成團</span>
 			</c:otherwise>
 			 </c:choose>
-			
+			<c:if test="${event.isFull != false }">
+			<span class="eventtype" id="eventfull" style="background-color:red;color:white;">人數已滿</span>
+			</c:if>
 			   <c:if test="${memberId == inviterid}">
 			 <span class="eventmodify">
 			
@@ -306,11 +377,18 @@
 			<div class="row">
     			  <div class="col-md-6 left">
     			  	<c:choose>
-    			  	<c:when test="${event.eventImage == null }">
-    				<img class="eventimg" src="<c:url value='/resources/img/cover_${eventtype.eventType}.jpg'/>" />
+    			  	<c:when test="${event.eventImage == null and eventtype.eventType == '美食'}">
+    					<img class="eventimg" src="<c:url value='/resources/img/cover_food.jpg'/>" />
+    				</c:when>
+    				<c:when test="${event.eventImage == null and eventtype.eventType == '運動'}">
+    					<img class="eventimg" src="<c:url value='/resources/img/cover_sport.jpg'/>" />
+    				</c:when><c:when test="${event.eventImage == null and eventtype.eventType == '娛樂'}">
+    					<img class="eventimg" src="<c:url value='/resources/img/cover_entertainment.jpg'/>" />
+    				</c:when><c:when test="${event.eventImage == null and eventtype.eventType == '其他'}">
+    					<img class="eventimg" src="<c:url value='/resources/img/cover_other.jpg'/>" />
     				</c:when>
     				<c:otherwise>
-    					<img class="eventimg" src="${event.eventImage}"/>
+    					<img class="eventimg" src="<c:url value='/getEventImage/${event.eventId}.jpg' />"/>
     				</c:otherwise>
     				</c:choose>
     				<p class="eventliketotal"><i class="far fa-thumbs-up"></i> ${event.eventLike} 個人覺得讚</p><hr class="hrr">
@@ -323,35 +401,44 @@
 <%--   	   				<input type="text" class="hid" name="eventPostId" value="${eventPost.eventPostId}"/>   --%>
 <%--   	   				<input type="text" class="hid" name="eventId" value="${event.eventId}">   --%>
 <!--     舊的		<button type="submit" id="signUp" class="btn btn-success eventJoin">報名</button> -->
-		<c:if test="${memberId != inviterid and event.eventStatus != 'no'}">
+		<c:if test="${memberId != inviterid and memberCheck == false and event.eventStatus == 'unchecked' and event.isFull == false}">
 <%-- 		   	<c:choose>	 --%>
 <%-- 		   		<c:when test="${memberId != inviterid}"></c:when>		 --%>
 				<button type="button" id="signUp" class="btn btn-success eventJoin" data-toggle="modal" data-target="#exampleModalCenter">報名</button>
 <%-- 			</c:choose> --%>
 		</c:if>
-		
+		<c:if test="${memberId != inviterid and memberCheck != false and event.eventStatus == 'unchecked'}">
+				<button type="button" readonly id="joinWaitCheck" class="btn btn-success eventJoin joinWaitCheck">報名中</button>
+<!--  			<span class="waitInviterCheck">報名中</span> -->
+ 		</c:if>	
  </span> 	
+ 			
     		<span>
-    		 <c:if test="${memberId != inviterid and event.eventStatus != 'no'}">
+    		 <c:if test="${memberId != inviterid and memberCheck != false and event.eventStatus == 'unchecked'}">
     			<button type="button" id="dropOut" class="btn btn-danger eventCancels" data-toggle="modal" data-target="#CancelJoinEvent">退出</button>    				
     		 </c:if>
     		</span> 
  </p>
      			 </div>
     		 	 <div class="col-md-6 right">
-      		<p class="eventbuilder">
-<!--       				<span></span>頭像 -->
-      			<span> ${eventbuildname.memberName}</span>
+      		<p class="eventbuilder">																															
+      				<a class=" a" href="<c:url value='/member/other/${inviterid}' />"><span><img class="eventbuilderName" src="<c:url value='/getMemberImage/${inviterid}.jpg' />" width="50px" height="50px" style="border-radius:25px;"/></span>
+      				<span  class="eventbuilder eventbuilderName"> ${eventbuildname.memberName}</span></a>
       		</p>
       		<p>
       			<i class="fas fa-clock"></i>
-      			<span class="eventtime">${event.eventDateStart}</span>
+      			<span class="eventtime">集合時間 : ${event.eventDateStart}</span>
       		</p>
       		<p class="eventaddress">
-      				<i class="fas fa-map-marker-alt"></i>
-<!--       				位置icon圖 -->
-					<span> ${event.eventLocation} ,${event.eventAddress}</span>
+      				<i class="fas fa-map-marker-alt">
+      					<span class="addressShow">地點 : ${event.eventLocation} ,${event.eventAddress}</span>
+      				</i>
       		</p>
+      		
+      			<iframe id="eventAddressImage" width='350' height='200' frameborder='0' scrolling='no' marginheight='0' marginwidth='0'  
+      			src='https://www.google.com/maps?&q=${event.eventLatitude},${event.eventLongitude}&z=16&output=embed&hl=zh-TW&t=m' allowfullscreen>
+<!--       				位置icon圖 -->
+				</iframe>	
       		<p class="eventjoinmember">目前人數 : 
       			<span>${event.eventCurrentMembers} 人</span>
       			<span class="joinDetail">
@@ -385,7 +472,7 @@
   	   			<c:if test="${eventPost.isDeleted == false }">
   	   			<span id="leaveMessageName">${eventPost.memberId} </span>
   	   			
-  	   			<c:if test="${admin == null}">
+  	   			<c:if test="${admin != null}">
   	   			<span class="deleteMessage">
   	   			<form class="deleteMessage" action="${pageContext.request.contextPath}/DeleteEventPost" method="Post">
   	   				<input type="text" class="hid" name="eventPostId" value="${eventPost.eventPostId}"/>  
@@ -426,20 +513,21 @@
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">參加成員</h5>
+        <h5 class="modal-title ModalTitle" id="exampleModalScrollableTitle">參加成員</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <c:forEach var="eventmembers" items="${eventmembers}">
-<%--            <c:if test="${eventmember.isAgreed != false}">     --%>
-            <p>
-          	   <span></span>
-          	   <span>${eventmembers.memberName}</span>
+        <c:forEach var="emfindagreed" items="${emfindagreed}">
+            <a class="a" href="<c:url value='/member/other/${emfindagreed.memberId}' />">
+            <p class="joinIsAgreedName">
+            	<span><img src="<c:url value='/getMemberImage/${emfindagreed.memberId}.jpg' />" width="50px" height="50px" style="border-radius:25px;"/></span>
+          	   
+          	   <span >${emfindagreed.memberName}</span>
             </p>
+            </a>
           	<hr/>
-<%--            </c:if> 	 --%>
         </c:forEach>
       </div>
       <div class="modal-footer">
@@ -455,7 +543,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">${event.eventName}</h5>
+        <h5 class="modal-title ModalTitle" id="exampleModalCenterTitle">${event.eventName}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -464,7 +552,7 @@
       <div class="modal-body">
       <form action="${pageContext.request.contextPath}/event/eventCheckQuantity" method="POST"> 
       	<label for="quantity">請輸入報名人數 : </label>
-      	<input id="quantity" type="number" name="quantity" value="1" min="1" max="100" required/>
+      	<input id="quantity" type="number" name="quantity" onkeyup="return ValidateNumber(this,value)" value="1" min="1" max="${(event.eventMemberLimit-event.eventCurrentMembers)}" required/>
 
       	<input type="text" class="hid" name="eventId" value="${event.eventId}"/>  
   	   	<input type="text" class="hid" name="memberId" value="${memberId}"/>  
@@ -487,23 +575,23 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">${event.eventName}</h5>
+        <h5 class="modal-title ModalTitle" id="exampleModalCenterTitle">${event.eventName}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-     
+     <form action="${pageContext.request.contextPath}/DeleteByEventMemberId" method="POST"> 
       <div class="modal-body">
-      			確定要退出本團 !?
+      			
 <%--        <form atcion="${pageContext.request.contextPath}/event/eventCheckQuantity" method="POST">  --%>
-<!--       			<label for="quantity">請輸入報名人數 : </label> -->
-<%--       				<input type="text" class="hid" name="eventId" value="${event.eventId}"/>   --%>
-<%--   	  			 	<input type="text" class="hid" name="memberId" value="${memberId}"/>   --%>
-      				<button type="submit" id="ConfirmJoin" class="btn btn-primary">確認</button>  
+      			<label class="cancelTitle">確定要退出本團 !? </label>
+      				<input type="text" class="hid" name="eventId" value="${event.eventId}"/>  
+  	  			 	<input type="text" class="hid" name="memberId" value="${memberId}"/>  
+      				<button type="submit" id="ConfirmCancel" class="btn btn-primary">Confirm</button>
+      				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>  
 <%--       </form> --%>
-     		
-     		 <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
       </div>
+      </form>
       <div class="modal-footer">
        
         

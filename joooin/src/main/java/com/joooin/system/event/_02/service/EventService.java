@@ -32,4 +32,7 @@ public interface EventService {
 	public void deleteEventPost(Integer eventPostId);
 	public EventPostBean getByEventPostId(Integer eventPostId);
 	public void updateEventPostIsDeleted(EventPostBean eventPostBean);
+	//刪除一筆報名
+	public void deleteEventMemberById(Integer eventMemberId);
+	
 }

@@ -226,8 +226,8 @@ function check(){
     
 	類別:<select id="etype">
 	    <option value="">全部</option>
-		<option value="運動">運動</option>
 		<option value="美食">美食</option>
+		<option value="運動">運動</option>
 		<option value="娛樂">娛樂</option>
 		<option value="其他">其他</option>	
 	</select>
@@ -254,10 +254,10 @@ function check(){
 	<tr>
 	<td>
   <c:if test="${event.eventTypeId=='1'}">
-      運動
+      美食
   </c:if>
   <c:if test="${event.eventTypeId=='2'}">
-    美食
+    運動
   </c:if>
   <c:if test="${event.eventTypeId=='3'}">
     娛樂

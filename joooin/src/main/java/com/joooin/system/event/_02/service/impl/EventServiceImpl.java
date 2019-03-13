@@ -99,6 +99,10 @@ public class EventServiceImpl implements EventService {
 		
 		return eventPostDao.getByEventPostId(eventPostId);
 	}
+	@Override
+	public void deleteEventMemberById(Integer eventMemberId) {
+		eventmemberdao.deleteByEventMemberId(eventMemberId);
+	}
 
 	
 	
