@@ -35,16 +35,22 @@
 		    url: "${pageContext.request.contextPath}/member/friendShow",
 		    data: {"otherMemberId":otherMemberId},
 		    success: function (status) {
-// 		    	alert(status);
+ 		    	alert(status);
 		    	if (status == "NOT_FRIEND") {
-		    		$(".friendBtn").css("display", "none");
-		    		$("#request").css("display", "inline");
+		    		$(".friendBtn").hide();
+		    		$("#request").show();
 		    		$("#friendText").text("無好友關係");
 		    	}
 		    	if (status == "REQUEST") {
-		    		$(".friendBtn").css("display", "none");
-		    		$("#cancel").css("display", "inline");
+		    		$(".friendBtn").hide();
+		    		$("#cancel").show();
 		    		$("#friendText").text("好友申請中");
+		    	}
+		    	if (status == "RECEIVE") {
+		    		$(".friendBtn").hide();
+		    		$("#agree").show();
+		    		$("#reject").show();
+		    		$("#friendText").text("等待您的選擇");
 		    	}
 		    }
 		});

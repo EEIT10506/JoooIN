@@ -40,8 +40,10 @@ public class SidebarController {
 	@RequestMapping(value = "/member/other/{otherMemberId}", method = RequestMethod.GET)
 	public String otherMember(@PathVariable Integer otherMemberId, Model model, HttpSession session) {
 		Integer selfMemberId = (Integer)session.getAttribute("memberId");
+		System.out.println(otherMemberId);
+		System.out.println(selfMemberId);
 		
-		if (selfMemberId != otherMemberId) {
+		if (!selfMemberId.equals(otherMemberId)) {
 			MemberMainBean mmb = memberService.getMemberMainBean(otherMemberId);
 			model.addAttribute("memberMainBean", mmb);
 			return "member/other/member";

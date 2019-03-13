@@ -76,7 +76,7 @@ public class MemberServiceImpl implements MemberService{
 				if (bean.getReceiveMemberId().equals(receiveMemberId)) {
 					if (bean.getIsFriend() == true)
 						return "FRIEND";
-					else if (bean.getIsFriend() == false || bean.getIsInviter() == true)
+					else if (bean.getIsFriend() == false && bean.getIsInviter() == true)
 						return "REQUEST";
 					else 
 						return "RECEIVE";
@@ -93,6 +93,15 @@ public class MemberServiceImpl implements MemberService{
 		if (process.equals("request")) {
 			memberFriendDao.save(new MemberFriendBean(inviteMemberId, receiveMemberId, false, true));
 			memberFriendDao.save(new MemberFriendBean(receiveMemberId, inviteMemberId, false, false));
+		}
+		if (process.equals("cancel")) {
+			List<MemberFriendBean> list = memberFriendDao.getAll();
+			
+			for (MemberFriendBean bean : list) {
+//				if (bean.getInviteMemberId().equals(inviteMemberId) && bean.getReceiveMemberId()) {
+//					
+//				}
+			}
 		}
 		
 	}
