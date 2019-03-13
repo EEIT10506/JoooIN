@@ -31,6 +31,7 @@ public class ProfileController {
 			return "not_login";
 		}	
 	}						  
+	
 	@RequestMapping(value = "/member/my/updatePassword", method = RequestMethod.POST)
 	public String updatePassword(@RequestParam String password1, @RequestParam String password2, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");

@@ -18,7 +18,7 @@ public class FriendController {
 		Integer selfMemberId = (Integer)session.getAttribute("memberId");
 		
 		if (selfMemberId != null) {
-			return memberService.checkFriendStatus(selfMemberId, Integer.valueOf(otherMemberId));
+			return memberService.checkFriendStatus(selfMemberId, otherMemberId);
 		} else {
 			return "NOT_FRIEND";
 		}

@@ -25,6 +25,7 @@
 		
 		$(".friendBtn").click(function(){
 			friendProcess(this.id);
+			alert(this.id);
 		});
 	});
 	
@@ -35,22 +36,23 @@
 		    url: "${pageContext.request.contextPath}/member/friendShow",
 		    data: {"otherMemberId":otherMemberId},
 		    success: function (status) {
- 		    	alert(status);
+		    	$(".friendBtn").hide();
 		    	if (status == "NOT_FRIEND") {
-		    		$(".friendBtn").hide();
 		    		$("#request").show();
 		    		$("#friendText").text("無好友關係");
 		    	}
 		    	if (status == "REQUEST") {
-		    		$(".friendBtn").hide();
 		    		$("#cancel").show();
 		    		$("#friendText").text("好友申請中");
 		    	}
 		    	if (status == "RECEIVE") {
-		    		$(".friendBtn").hide();
 		    		$("#agree").show();
 		    		$("#reject").show();
-		    		$("#friendText").text("等待您的選擇");
+		    		$("#friendText").text("對您提出好友申請");
+		    	}
+		    	if (status == "FRIEND") {
+		    		$("#delete").show();
+		    		$("#friendText").text("已成為好友");
 		    	}
 		    }
 		});
@@ -73,7 +75,7 @@
 	}
 	
 </script>
-<title>會員</title></head>
+<title>會員1</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->

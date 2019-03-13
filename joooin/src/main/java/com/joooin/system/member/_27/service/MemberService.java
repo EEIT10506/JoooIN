@@ -12,4 +12,5 @@ public interface MemberService {
 	public void updatePrivacy(Integer memberId, MemberMainBean updateBean);
 	public String checkFriendStatus(Integer inviteMemberId, Integer receiveMemberId);
 	public void friendProcess(Integer inviteMemberId, Integer receiveMemberId, String process);
+
 }

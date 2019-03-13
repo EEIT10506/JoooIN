@@ -41,9 +41,9 @@ public class MemberServiceImpl implements MemberService{
 		if (!updateBean.getMultipartFile().isEmpty()) {
 			memberImage = ImageUtils.multipartFileToByteArray(updateBean.getMultipartFile());
 			oldBean.setMemberImage(memberImage);
-		} else {
-			oldBean.setMemberImage(ImageUtils.localImageToByteArray("member_male.PNG", context));
-		}
+		} 
+		memberMainDao.update(oldBean);
+		
 		return oldBean.getMemberName();
 	}
 
@@ -87,23 +87,37 @@ public class MemberServiceImpl implements MemberService{
 			return "NOT_FRIEND";
 		}
 	}
+	
+	
 
 	@Override
 	public void friendProcess(Integer inviteMemberId, Integer receiveMemberId, String process) {
+		List<MemberFriendBean> list = null;
+		
 		if (process.equals("request")) {
 			memberFriendDao.save(new MemberFriendBean(inviteMemberId, receiveMemberId, false, true));
 			memberFriendDao.save(new MemberFriendBean(receiveMemberId, inviteMemberId, false, false));
 		}
-		if (process.equals("cancel")) {
-			List<MemberFriendBean> list = memberFriendDao.getAll();
+		if (process.equals("cancel") || process.equals("reject") || process.equals("delete")) {
+			list = memberFriendDao.getAll();
 			
 			for (MemberFriendBean bean : list) {
-//				if (bean.getInviteMemberId().equals(inviteMemberId) && bean.getReceiveMemberId()) {
-//					
-//				}
+				if ((bean.getInviteMemberId().equals(inviteMemberId) && bean.getReceiveMemberId().equals(receiveMemberId)) ||
+					(bean.getInviteMemberId().equals(receiveMemberId) && bean.getReceiveMemberId().equals(inviteMemberId))) 
+					memberFriendDao.deleteByMemberFriendId(bean.getMemberFriendId());
 			}
 		}
-		
+		if (process.equals("agree")) {
+			list = memberFriendDao.getAll();
+			
+			for (MemberFriendBean bean : list) {
+				if ((bean.getInviteMemberId().equals(inviteMemberId) && bean.getReceiveMemberId().equals(receiveMemberId)) ||
+					(bean.getInviteMemberId().equals(receiveMemberId) && bean.getReceiveMemberId().equals(inviteMemberId))) {
+					bean.setIsFriend(true);
+					memberFriendDao.update(bean);
+				}
+			}
+		}
 	}
-	
+
 }

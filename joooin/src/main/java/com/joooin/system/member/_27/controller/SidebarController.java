@@ -24,6 +24,7 @@ public class SidebarController {
 	public String otherSidebar(Model model) {
 		return "/member/other/sidebar";
 	}
+	
 	@RequestMapping(value = "/member/my", method = RequestMethod.GET)
 	public String selfMember(Model model, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
@@ -40,8 +41,6 @@ public class SidebarController {
 	@RequestMapping(value = "/member/other/{otherMemberId}", method = RequestMethod.GET)
 	public String otherMember(@PathVariable Integer otherMemberId, Model model, HttpSession session) {
 		Integer selfMemberId = (Integer)session.getAttribute("memberId");
-		System.out.println(otherMemberId);
-		System.out.println(selfMemberId);
 		
 		if (!selfMemberId.equals(otherMemberId)) {
 			MemberMainBean mmb = memberService.getMemberMainBean(otherMemberId);
@@ -66,8 +65,7 @@ public class SidebarController {
 	}
 	
 	@RequestMapping(value = "/member/other/{link}/{otherMemberId}", method = RequestMethod.GET)
-	public String otherLink(@PathVariable String link, @PathVariable Integer otherMemberId, 
-							Model model, HttpSession session) {
+	public String otherLink(@PathVariable String link, @PathVariable Integer otherMemberId, Model model, HttpSession session) {
 		Integer selfMemberId = (Integer)session.getAttribute("memberId");
 		
 		if (selfMemberId != otherMemberId) {

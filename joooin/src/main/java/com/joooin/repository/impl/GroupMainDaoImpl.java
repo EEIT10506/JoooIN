@@ -42,12 +42,6 @@ public class GroupMainDaoImpl implements GroupMainDao{
 	}
 
 	@Override
-	public void delete(GroupMainBean groupMainBean) {
-		Session session = factory.getCurrentSession();
-		session.delete(groupMainBean);
-	}
-
-	@Override
 	public void deleteByGroupId(Integer groupId) {
 		Session session = factory.getCurrentSession();
 		session.delete(session.get(GroupMainBean.class, groupId));
