@@ -43,6 +43,9 @@
 	#root{
 		visibility: hidden;
 	}
+	.friendBtn {
+		display: none;
+	}
 </style>
 <body>
 	<div id="memberImage" >

@@ -29,4 +29,8 @@ public class HomeController {
 		MemberMainBean bean = memberService.getMemberMainBean(memberId);
 	    return ImageUtils.byteArrayToImage(bean.getMemberImage());
 	}
+	@RequestMapping(value = "/notLogin", method = RequestMethod.GET)
+	public String notLogin() {
+		return "not_login";
+	}
 }

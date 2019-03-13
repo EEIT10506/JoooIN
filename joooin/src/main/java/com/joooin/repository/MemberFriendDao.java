@@ -9,4 +9,5 @@ public interface MemberFriendDao {
 	public Integer save(MemberFriendBean memberFriendBean);
 	public void update(MemberFriendBean memberFriendBean);
 	public void deleteByMemberFriendId(Integer memberFriendId);
+	public List<MemberFriendBean> getListByMemberId(Integer inviteMemberId);
 }

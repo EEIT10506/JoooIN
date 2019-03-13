@@ -17,7 +17,56 @@
 		position: relative;
 		top: 50px;
 	}
+	
 </style>
+<script>
+	$(document).ready(function(){
+		friendShow();
+		
+		$(".friendBtn").click(function(){
+			friendProcess(this.id);
+		});
+	});
+	
+	function friendShow(){
+		var otherMemberId = parseInt(location.href.substr(location.href.lastIndexOf("/") + 1));
+		$.ajax({
+		    type: "GET",
+		    url: "${pageContext.request.contextPath}/member/friendShow",
+		    data: {"otherMemberId":otherMemberId},
+		    success: function (status) {
+// 		    	alert(status);
+		    	if (status == "NOT_FRIEND") {
+		    		$(".friendBtn").css("display", "none");
+		    		$("#request").css("display", "inline");
+		    		$("#friendText").text("無好友關係");
+		    	}
+		    	if (status == "REQUEST") {
+		    		$(".friendBtn").css("display", "none");
+		    		$("#cancel").css("display", "inline");
+		    		$("#friendText").text("好友申請中");
+		    	}
+		    }
+		});
+	}
+	
+	function friendProcess(process){
+		var otherMemberId = parseInt(location.href.substr(location.href.lastIndexOf("/") + 1));
+		
+		$.ajax({
+		    type: "POST",                           
+		    url: "${pageContext.request.contextPath}/member/friendProcess",
+		    data: {"otherMemberId": otherMemberId, "process": process},
+		    success: function (notLogin) {
+		    	if (notLogin)
+		    		location.href = "${pageContext.request.contextPath}/notLogin";
+		    	else 
+		    		friendShow();
+		    }
+		});
+	}
+	
+</script>
 <title>會員</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
@@ -28,6 +77,12 @@
 				<jsp:include page="${request.contextPath}/member/other/sidebar"/>
 			</div>
 			<div id="x" class="col-9">
+				<button id="request" type="button" class="friendBtn btn btn-primary">申請好友</button>
+				<button id="cancel" type="button" class="friendBtn btn btn-secondary">取消申請</button>
+				<button id="agree" type="button" class="friendBtn btn btn-success">同意</button>
+				<button id="reject" type="button" class="friendBtn btn btn-danger">拒絕</button>
+				<button id="delete" type="button" class="friendBtn btn btn-danger">解除好友</button>
+				<label>　好友關係：</label><label id="friendText"></label>
 			</div>
 		</div>
 	</div>

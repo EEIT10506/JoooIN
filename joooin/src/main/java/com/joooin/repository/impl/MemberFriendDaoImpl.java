@@ -45,6 +45,16 @@ public class MemberFriendDaoImpl implements MemberFriendDao{
 		Session session = factory.getCurrentSession();
 		session.delete(session.get(MemberFriendBean.class, memberFriendId));
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<MemberFriendBean> getListByMemberId(Integer inviteMemberId) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM MemberFriendBean f WHERE f.inviteMemberId = :inviteMemberId";
+		List<MemberFriendBean> list = session.createQuery(hql)
+									.setParameter("inviteMemberId", inviteMemberId)
+									.getResultList();
+		return list;
+	}
 	
 }

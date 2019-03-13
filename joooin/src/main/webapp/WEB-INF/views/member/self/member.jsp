@@ -18,6 +18,8 @@
 		top: 50px;
 	}
 </style>
+<script>
+</script>
 <title>會員</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
