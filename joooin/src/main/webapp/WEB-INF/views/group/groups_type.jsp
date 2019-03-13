@@ -39,42 +39,46 @@
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
-	<table style="border:3px #cccccc solid;" cellpadding="10" border='1'>
+	
 	<div class="album py-5 bg-light">
-    	<div class="container">
-<%-- 	<c:forEach var='alltype' items='${groupsalltype}' > --%>
+	<div class="container">
+	<div class="row">
+		
+	<c:forEach var='groupsType' items='${groupsType}' >
+	
 	
 	<div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-               <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">圖片</text></svg>
+	
+          <div class="card mb-4 shadow-sm" >
+<!--                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">圖片</text></svg> -->
+			 <img src="<c:url value='/resources/img/cover_food.jpg'   />"  />        
             <div class="card-body">
-              <p class="card-text">${alltype.groupType}</p>
-               <p class="card-text">${alltype.groupName}</p>
-                <p class="card-text">${alltype.groupCurrentMembers}</p>
-                <p class="card-text">${alltype.groupinto}</p>
+              <p class="card-text">類型:${groupsType.groupType}</p>
+               <p class="card-text">團名:${groupsType.groupName}</p>
+                <p class="card-text">會員數量:${groupsType.groupCurrentMembers}</p>
+                <p class="card-text">社團介紹:${groupsType.groupIntro}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary">加入社團</button>
                   <button type="button" class="btn btn-sm btn-outline-secondary">未知的按鈕</button>
                 </div>
-                <small class="text-muted">剩下X天(還沒改)</small>
+                <small class="text-muted"></small>
               </div>
             </div>
           </div>
         </div>
 
-
-     
-        
-        
-      
+	 
+	</c:forEach>
+	</div>
+     </div> 
+     </div>
+	
+	</div>
 	
 	
-<%-- 	</c:forEach> --%>
-		</div>
-	</div>
-	</table>
-	</div>
+	
+	
 <!-- 請把所有內容寫在此div內 -->
 </body>
 </html>

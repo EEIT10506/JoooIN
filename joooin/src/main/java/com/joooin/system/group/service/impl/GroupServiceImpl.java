@@ -20,15 +20,7 @@ public class GroupServiceImpl implements GroupService {
 	@Autowired
 	GroupMainDao dao;
 	
-	@Override
-	public List<GroupMainBean> getAll() {
-		return dao.getAll();
-	}
 
-	@Override
-	public List<GroupMainBean> getGroupType(String groupOneType) {
-		return dao.getGroupType(groupOneType);
-	}
 
 	@Override
 	public Integer createGroup(GroupMainBean groupMainBean) {
