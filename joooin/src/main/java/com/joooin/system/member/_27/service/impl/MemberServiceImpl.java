@@ -1,18 +1,17 @@
 package com.joooin.system.member._27.service.impl;
 
-import java.util.Iterator;
+
 import java.util.List;
-
+import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.joooin.model.MemberFriendBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.repository.MemberFriendDao;
 import com.joooin.repository.MemberMainDao;
 import com.joooin.system.member._27.service.MemberService;
+import com.joooin.util.ImageUtils;
 
 @Service
 @Transactional
@@ -29,12 +28,45 @@ public class MemberServiceImpl implements MemberService{
 	public MemberMainBean getMemberMainBean(Integer memberId) {
 		return memberMainDao.getByMemberId(memberId);
 	}
-
+	
 	@Override
-	public void updateMemberMainBean(MemberMainBean memberMainBean) {
-		memberMainDao.update(memberMainBean);
+	public String updateProfile(Integer memberId, MemberMainBean updateBean, ServletContext context) {
+		MemberMainBean oldBean = memberMainDao.getByMemberId(memberId);
+		oldBean.setMemberName(updateBean.getMemberName());
+		oldBean.setBirthday(updateBean.getBirthday());
+		oldBean.setCity(updateBean.getCity());
+		oldBean.setPhone(updateBean.getPhone());
+		
+		Byte[] memberImage = null;
+		if (!updateBean.getMultipartFile().isEmpty()) {
+			memberImage = ImageUtils.multipartFileToByteArray(updateBean.getMultipartFile());
+			oldBean.setMemberImage(memberImage);
+		} else {
+			oldBean.setMemberImage(ImageUtils.localImageToByteArray("member_male.PNG", context));
+		}
+		return oldBean.getMemberName();
 	}
 
+	@Override
+	public void updatePassword(String password1, String password2, Integer memberId) {
+		if (password1.equals(password2)) {
+			MemberMainBean bean = memberMainDao.getByMemberId(memberId);
+			bean.setPassword(password1);
+			memberMainDao.update(bean);
+		}
+	}
+
+	@Override
+	public void updatePrivacy(Integer memberId, MemberMainBean updateBean) {
+		MemberMainBean oldBean = memberMainDao.getByMemberId(memberId);
+		oldBean.setGenderDisplay(updateBean.getGenderDisplay());
+		oldBean.setBirthdayDisplay(updateBean.getBirthdayDisplay());
+		oldBean.setCityDisplay(updateBean.getCityDisplay());
+		oldBean.setEmailDisplay(updateBean.getEmailDisplay());
+		oldBean.setPhoneDisplay(updateBean.getPhoneDisplay());
+		memberMainDao.update(oldBean);
+	}
+	
 	@Override
 	public String checkFriendStatus(Integer inviteMemberId, Integer receiveMemberId) {
 		List<MemberFriendBean> list = memberFriendDao.getListByMemberId(inviteMemberId);
