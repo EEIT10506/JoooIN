@@ -14,13 +14,11 @@ public class GroupPostLikeBean implements Serializable {
 	private Integer groupPostLikeId;
 	private Integer groupPostId;
 	private Integer memberId;
-	private Boolean isLiked;
 	
-	public GroupPostLikeBean(Integer groupPostId, Integer memberId, Boolean isLiked) {
+	public GroupPostLikeBean(Integer groupPostId, Integer memberId) {
 		super();
 		this.groupPostId = groupPostId;
 		this.memberId = memberId;
-		this.isLiked = isLiked;
 	}
 	public GroupPostLikeBean() {
 		super();
@@ -46,12 +44,4 @@ public class GroupPostLikeBean implements Serializable {
 	public void setMemberId(Integer memberId) {
 		this.memberId = memberId;
 	}
-	public Boolean getIsLiked() {
-		return isLiked;
-	}
-	public void setIsLiked(Boolean isLiked) {
-		this.isLiked = isLiked;
-	}
-	
-	
 }
