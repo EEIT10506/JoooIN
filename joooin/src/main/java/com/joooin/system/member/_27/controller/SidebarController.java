@@ -42,7 +42,7 @@ public class SidebarController {
 	public String otherMember(@PathVariable Integer otherMemberId, Model model, HttpSession session) {
 		Integer selfMemberId = (Integer)session.getAttribute("memberId");
 		
-		if (!selfMemberId.equals(otherMemberId)) {
+		if (selfMemberId == null || selfMemberId.equals(otherMemberId) == false) {
 			MemberMainBean mmb = memberService.getMemberMainBean(otherMemberId);
 			model.addAttribute("memberMainBean", mmb);
 			return "member/other/member";
@@ -68,7 +68,7 @@ public class SidebarController {
 	public String otherLink(@PathVariable String link, @PathVariable Integer otherMemberId, Model model, HttpSession session) {
 		Integer selfMemberId = (Integer)session.getAttribute("memberId");
 		
-		if (selfMemberId != otherMemberId) {
+		if (selfMemberId == null || selfMemberId.equals(otherMemberId) == false) {
 			MemberMainBean mmb = memberService.getMemberMainBean(otherMemberId);
 			model.addAttribute("memberMainBean", mmb);
 			return "member/other/" + link;

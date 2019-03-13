@@ -28,6 +28,15 @@
 				<jsp:include page="${request.contextPath}/member/self/sidebar"/>
 			</div>
 			<div id="x" class="col-9">
+				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				    <div class="navbar-nav profile-navbar">
+				      <a id="my-friend-link" class="profile-link nav-item nav-link active" href="#">我的好友</a>　　　
+				      <a id="request-friend-link" class="profile-link nav-item nav-link" href="#">好友申請中</a>　　　
+				      <a id="receive-friend-link" class="profile-link nav-item nav-link" href="#">好友受邀中</a>
+				    </div>
+				  </div>
+				</nav>
 			</div>
 		</div>
 	</div>

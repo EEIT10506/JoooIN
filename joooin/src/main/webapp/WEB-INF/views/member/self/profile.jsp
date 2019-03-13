@@ -46,9 +46,9 @@
 <script>
 	$(document).ready(function(){
 		//show profile
-		$(".profile-view").each(function(){$(this).css("display", "none");});
+		$(".profile-view").each(function(){$(this).hide();});
 		$("#show-data-link").click();
-		$("#show-data").css("display", "block");
+		$("#show-data").show();
 		
 		//navbar switch
 		$(".profile-link").click(function(){
@@ -57,9 +57,8 @@
 			$(".profile-link").attr("class", "profile-link nav-item nav-link");
 			$(this).attr("class", "profile-link nav-item nav-link active");
 			
-			$(".profile-view").each(function(){$(this).css("display", "none");});
-			$("#" + viewId).css("display", "block");
-			
+			$(".profile-view").each(function(){$(this).hide();});
+			$("#" + viewId).show();
 			
 			removePwdAlert();
 		});		
