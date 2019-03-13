@@ -9,10 +9,16 @@ import java.util.Date;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,8 +31,9 @@ import com.joooin.system.admin._03.service.RegisterService;
 public class RegisterServiceImpl implements RegisterService {
 	
 	@Autowired
+	JavaMailSender mailSender;
+	@Autowired
 	ServletContext context;
-	
 	@Autowired
 	MemberMainDao dao;
 
@@ -138,4 +145,41 @@ public class RegisterServiceImpl implements RegisterService {
 		}
 		return activeUser;
 	}
+
+	@Override
+	public void certification(MemberMainBean mmb, HttpServletRequest request) {
+		
+		MimeMessage message = mailSender.createMimeMessage();
+		try {
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+			helper.setFrom("eeit105joooin@gmail.com");// 發件人
+			helper.setTo(mmb.getEmail());// 收件人
+			helper.setSubject("<重要> JOOOIN 認證信箱");// 主題
+			helper.setText("<html><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><body>"
+					+ "<h4>您的名稱:" + mmb.getMemberName() + "</h4><br><h4>請點："
+					+"<a href='"
+					+request.getScheme() + "://"
+					+request.getServerName() 
+					+":" + request.getServerPort()  + request.getContextPath()+"/registerEmail'>"
+					+ "這裡驗證<br><p>joooin團隊敬上</p>" + "</body></html>", true);// 正文
+		} catch (MessagingException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		mailSender.send(message);
+		System.out.println("發送完成");
+		
+	}
+
+	@Override
+	public MemberMainBean checkCertification(String email) {
+		return dao.checkEmail(email);
+	}
+
+	@Override
+	public void certificationChangeStatus(String certificationHash) {
+		dao.activeUser(certificationHash);
+	}
+
 }

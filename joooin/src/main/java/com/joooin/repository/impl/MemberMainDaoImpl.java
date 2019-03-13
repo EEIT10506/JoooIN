@@ -81,15 +81,16 @@ public class MemberMainDaoImpl implements MemberMainDao{
 	}
 
 	@Override
-	public Integer activeUser(String certificationHash) {
-		Integer mmb = 0;
-		Session session = factory.getCurrentSession();
-		String hql = "UPDATE MemberMainBean m set m.certificationStatus = 'true'"
-		+" WHERE m.certificationHash= :certificationHash";
+	public int activeUser(String certificationHash) {
 		
-		mmb=(Integer)session.createQuery(hql)
+		Session session = factory.getCurrentSession();
+		String hql = "UPDATE MemberMainBean set certificationStatus = 1 WHERE certificationHash= :certificationHash";
+		int mmb = 0;
+		mmb = session.createQuery(hql)
 				.setParameter("certificationHash", certificationHash)
 				.executeUpdate();
+		System.out.println("hash="+certificationHash);
+		System.out.println("mmb="+mmb);
 		
 		return mmb;
 	}

@@ -11,5 +11,5 @@ public interface MemberMainDao {
 	public void deleteByMemberId(Integer memberId);
 	public MemberMainBean checkIDPassword(String email, String password);
 	public MemberMainBean checkEmail(String email);
-	public Integer activeUser(String certificationHash);
+	public int activeUser(String certificationHash);
 }

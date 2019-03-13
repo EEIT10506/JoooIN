@@ -1,9 +1,13 @@
 package com.joooin.system.admin._03.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -42,25 +46,9 @@ public class RegisterController {
 	public String Register(@ModelAttribute("memberMainBean")MemberMainBean mmb,
 			Model model,
 			RedirectAttributes redirectAttributes,
-			HttpServletRequest request) throws MessagingException{
+			HttpServletRequest request,HttpSession session) throws MessagingException{
 		String certificationHash = RandomStringUtil.getRandomString();
 		mmb.setCertificationHash(certificationHash);
-		System.out.println("我是認證"+service.activeUser(certificationHash));
-		if(service.activeUser(certificationHash)==true) {
-			System.out.println("有認證碼");
-			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-
-			helper.setFrom("eeit105joooin@gmail.com");// 發件人
-			helper.setTo(mmb.getEmail());// 收件人
-			helper.setSubject("<重要> JOOOIN 認證信箱");// 主題
-			helper.setText("<html><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><body>"
-					+ "<h4>您的名稱:" + mmb.getMemberName() + "</h4><br><h4>您的認證網址是"
-					+ request.getContextPath()+"/registerEmail"+certificationHash
-					+ "。<br><p>joooin團隊敬上</p>" + "</body></html>", true);// 正文
-			mailSender.send(message);
-			System.out.println("發送完成");
-		}
 		
 		if(service.checkEmail(mmb.getEmail()) != true
 				&& mmb.getPassword()!=null && mmb.getPassword().length()!=0
@@ -69,8 +57,10 @@ public class RegisterController {
 				&& mmb.getPhone()!=null && mmb.getPhone().length()!=0
 				&& mmb.getEmail()!=null && mmb.getEmail().length()!=0) {
 			redirectAttributes.addFlashAttribute("name", mmb.getMemberName());
-			redirectAttributes.addFlashAttribute("welcome", "註冊成功");
+			redirectAttributes.addFlashAttribute("welcome", "註冊成功，請至信箱收信認證");
+			session.setAttribute("AAA", mmb.getEmail());
 			service.save(mmb);
+			service.certification(mmb, request);
 			return "redirect:/login";
 		}else if(mmb.getPassword() == null || mmb.getPassword().length()==0) {
 			redirectAttributes.addFlashAttribute("error", "註冊失敗，請輸入密碼");
@@ -102,8 +92,13 @@ public class RegisterController {
 	@RequestMapping(value = "/registerEmail", method = RequestMethod.GET)
 	public String registerEmail(RedirectAttributes redirectAttributes,
 			MemberMainBean mmb,
-			HttpServletRequest request) {
-		request.getParameter("code");
+			HttpServletRequest request,
+			HttpSession session) {
+			session.getAttribute("AAA");
+			System.out.println(session.getAttribute("AAA"));
+			mmb = service.checkCertification(session.getAttribute("AAA").toString());
+			System.out.println(mmb.getEmail());
+			service.certificationChangeStatus(mmb.getCertificationHash());
 		redirectAttributes.addFlashAttribute("welcome", "驗證成功");
 		return "redirect:/login";
 	}
