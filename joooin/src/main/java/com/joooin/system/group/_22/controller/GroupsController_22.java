@@ -85,11 +85,11 @@ public class GroupsController_22 {
 	}
 	
 	//根據groupid傳回社團主頁資料
-	@RequestMapping(method = RequestMethod.GET, value = "/group/{groupId}")
-	public String groupIdView(@PathVariable Integer groupId, Model model ) {
-		
-		
-		return "";
-	}
+//	@RequestMapping(method = RequestMethod.GET, value = "/group/{groupId}")
+//	public String groupIdView(@PathVariable Integer groupId, Model model ) {
+//		
+//		
+//		return "";
+//	}
 	
 }
