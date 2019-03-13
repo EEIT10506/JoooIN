@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.joooin.model.GroupMainBean;
-import com.joooin.system.group._22.service.GroupService;
+import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.util.ImageUtils;
 
 @Controller
 public class GroupsController_22 {
 	@Autowired
-	GroupService service;
+	GroupService_22 service;
 	
 	@Autowired
 	ServletContext context;
