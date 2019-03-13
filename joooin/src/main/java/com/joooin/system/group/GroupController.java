@@ -30,7 +30,7 @@ public class GroupController {
 	@RequestMapping(method = RequestMethod.GET, value = "/group/groups_type")
 	public String getGrouptypeAll(Model model) {
 		List<GroupMainBean> list =service.getAll();
-		model.addAttribute("groups_type", list);
+		model.addAttribute("groupsType", list);
 		return "group/groups_type"; 
 	}
 
