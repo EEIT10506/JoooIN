@@ -27,22 +27,14 @@ public class GroupController {
 	public String groupPage() {
 		return "group/groups";
 	}
-	@RequestMapping(method = RequestMethod.GET, value = "/group/groups_type")
-	public String getGrouptypeAll(Model model) {
-		List<GroupMainBean> list =service.getAll();
-		model.addAttribute("groupsType", list);
-		return "group/groups_type"; 
-	}
-
-	@RequestMapping(method = RequestMethod.GET, value = "/group/{grouponetype}")
-	public String getGroupTypeOne(@PathVariable("grouponetype") String groupOneType ,Model model) {
-		List<GroupMainBean> typeOne = service.getGroupType(groupOneType);
-		model.addAttribute("groupsType", typeOne);
-		return "group/groups_type";
-	}
-
+	
+	//社團主頁連結
 	@RequestMapping(method = RequestMethod.GET, value = "/group/group")
 	public String groupMainPage() {
 		return "group/group";
+		
+		
+		
+
 	}
 }
