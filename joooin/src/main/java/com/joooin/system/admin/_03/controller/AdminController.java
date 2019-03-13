@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.joooin.model.EventMainBean;
+import com.joooin.model.GroupMainBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.system.admin._03.service.AdminService;
 
@@ -22,9 +24,21 @@ public class AdminController {
 		return"admin/admin";
 	}
 	
-	@RequestMapping(value = "/getAllMember", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/getAllMember", method = RequestMethod.GET)
 	public @ResponseBody List<MemberMainBean> getAllMember(){
 		List<MemberMainBean> list = service.getAllMember();
+		return list;
+	}
+	
+	@RequestMapping(value = "/admin/getAllGroup", method = RequestMethod.GET)
+	public @ResponseBody List<GroupMainBean> getAllGroup(){
+		List<GroupMainBean> list = service.getAllGroup();
+		return list;
+	}
+	
+	@RequestMapping(value = "/admin/getAllEvent", method = RequestMethod.GET)
+	public @ResponseBody List<EventMainBean> getAllEvent(){
+		List<EventMainBean> list = service.getAllEvent();
 		return list;
 	}
 

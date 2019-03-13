@@ -17,7 +17,7 @@ $(document).ready(function () {
         if (title == '會員管理'){
         	$.ajax({
         		type: "GET",
-                url: "/joooin/getAllMember",
+                url: "/joooin/admin/getAllMember",
                 dataType: "json",
                 timeout: 600000,
                 
@@ -26,7 +26,7 @@ $(document).ready(function () {
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
                 		console.log(data);
-                		$.each(data, function (idx,Member){
+                		$.each(data, function (index, Member){
                 			var cell1 = $('<td></td>').text(Member.memberId)
                 			var cell2 = $('<td></td>').text(Member.memberName)
                 			var cell3 = $('<td></td>').text(Member.email)
@@ -45,6 +45,42 @@ $(document).ready(function () {
                 }//function (data)
         	})	//ajax end;
         }		//會員資料end;
+        
+        if(title == '社團管理'){
+        	$.ajax({
+        		type: "GET",
+                url: "/joooin/admin/getAllGroup",
+                dataType: "json",
+                timeout: 600000,
+                
+                success: function (data){
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">社團編號</th><th>社團類型</th><th>社團名稱</th><th>管理員</th><th>創建日期</th></tr></thead><tbody></tbody>');
+                	$('#content>h2').after(tab);
+                		var docFrag = $(document.createDocumentFragment());
+                		console.log(data);
+                	//start
+                	
+                }
+        	})
+        	
+        }
+        
+        if(title == '活動管理'){
+        	$.ajax({
+        		type: "GET",
+                url: "/joooin/admin/getAllEvent",
+                dataType: "json",
+                timeout: 600000,
+                
+                success: function (data){
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">活動編號</th><th>活動名稱</th></tr></thead><tbody></tbody>');
+                	$('#content>h2').after(tab);
+                		var docFrag = $(document.createDocumentFragment());
+                		console.log(data);
+                	//start
+                }
+        	})
+        }
         
     	}		//selectCategory end;
     	
