@@ -29,7 +29,8 @@ public class GroupController {
 	}
 	@RequestMapping(method = RequestMethod.GET, value = "/group/groups_type")
 	public String getGrouptypeAll(Model model) {
-		service.getAll();
+		List<GroupMainBean> list =service.getAll();
+		model.addAttribute("groups_type", list);
 		return "group/groups_type"; 
 	}
 
@@ -40,4 +41,8 @@ public class GroupController {
 		return "group/groups_type";
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "/group/group")
+	public String groupMainPage() {
+		return "group/group";
+	}
 }
