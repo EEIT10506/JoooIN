@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.joooin.model.GroupMainBean;
-import com.joooin.system.group._42.service.GroupService;
+import com.joooin.system.group.service.GroupService;
+
 
 @Controller
 public class GroupsController {
@@ -24,17 +25,17 @@ public class GroupsController {
 	public String groupPage() {
 		return "group/groups";
 	}
-	@RequestMapping(method = RequestMethod.GET, value = "/group/groupstype")
-	public String getgrouptypeAll(Model model) {
+	@RequestMapping(method = RequestMethod.GET, value = "/group/groups_type")
+	public String getGrouptypeAll(Model model) {
 		service.getAll();
-		return "group/groupstype"; 
+		return "group/groups_type"; 
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/group/{grouponetype}")
-	public String getgrouptypeone(@PathVariable("grouponetype") String grouponetype ,Model model) {
-		List<GroupMainBean> typeone = service.getgrouptype(grouponetype);
-		model.addAttribute("groupstype", typeone);
-		return "group/groupstype";
+	public String getGroupTypeOne(@PathVariable("grouponetype") String groupOneType ,Model model) {
+		List<GroupMainBean> typeOne = service.getGroupType(groupOneType);
+		model.addAttribute("groupsType", typeOne);
+		return "group/groups_type";
 	}
 	
 	

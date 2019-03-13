@@ -59,7 +59,7 @@
 
                     <div class="team-front">
                         <img src="<c:url value='/resources/img/icon_food_01.png'/>" class="img-fluid" />
-                        <h3>食物</h3>
+                        <h3>美食</h3>
                         
                     </div>
 
@@ -122,7 +122,7 @@
 
                     <div class="team-back">
                         <span>
-                             <a href="${pageContext.request.contextPath}/group/groupstype" >超連結</a>
+                             <a href="${pageContext.request.contextPath}/group/groups_type" >超連結</a>
                         </span>
                     </div>
 

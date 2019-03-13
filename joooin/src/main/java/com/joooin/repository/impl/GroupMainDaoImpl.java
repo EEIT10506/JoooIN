@@ -56,10 +56,10 @@ public class GroupMainDaoImpl implements GroupMainDao{
 //新增查詢單一種類方法Byfu
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<GroupMainBean> getgrouptype(String grouponetype){
+	public List<GroupMainBean> getGroupType(String groupOneType){
 		Session session = factory.getCurrentSession();
 		String hql = "FROM GroupMainBean WHERE groupType =:grouponetype";
-		return session.createQuery(hql).setParameter("grouponetype", grouponetype).getResultList();
+		return session.createQuery(hql).setParameter("grouponetype", groupOneType).getResultList();
 
 		}
 	

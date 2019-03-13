@@ -1,4 +1,4 @@
-package com.joooin.system.group._22.service.impl;
+package com.joooin.system.group.service.impl;
 
 import java.util.List;
 
@@ -8,10 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.joooin.model.GroupMainBean;
 import com.joooin.repository.GroupMainDao;
-import com.joooin.system.group._22.service.GroupService;
+import com.joooin.system.group.service.GroupService;
+
 
 @Service
-public class GroupServiceImp implements GroupService {
+public class GroupServiceImpl implements GroupService {
 
 	@Autowired
 	SessionFactory factory;
@@ -21,8 +22,12 @@ public class GroupServiceImp implements GroupService {
 	
 	@Override
 	public List<GroupMainBean> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.getAll();
+	}
+
+	@Override
+	public List<GroupMainBean> getGroupType(String groupOneType) {
+		return dao.getGroupType(groupOneType);
 	}
 
 	@Override
