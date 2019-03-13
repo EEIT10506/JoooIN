@@ -42,4 +42,9 @@ public class AdminServiceImpl implements AdminService {
 		return emd.getAll();
 	}
 
+	@Override
+	public MemberMainBean getMemberBean(Integer memberId) {
+		return mmd.getByMemberId(memberId);
+	}
+
 }

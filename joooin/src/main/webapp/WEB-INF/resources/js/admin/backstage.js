@@ -27,7 +27,7 @@ $(document).ready(function () {
                 		var docFrag = $(document.createDocumentFragment());
                 		console.log(data);
                 		$.each(data, function (index, Member){
-                			var cell1 = $('<td></td>').text(Member.memberId)
+                			var cell1 = $('<td></td>').text(Member.memberId).addClass('pointer text-primary text-center memberId');
                 			var cell2 = $('<td></td>').text(Member.memberName)
                 			var cell3 = $('<td></td>').text(Member.email)
                 			var cell4 = $('<td></td>').text(Member.password)
@@ -44,6 +44,38 @@ $(document).ready(function () {
                 		$('#content tbody').html(docFrag);
                 }//function (data)
         	})	//ajax end;
+        	
+        	var mi;
+        	$(document).on("click",'.memberId',function(){
+        		mi = $(this).text();
+        		
+        		$('#content').empty();
+        		
+        		$.ajax({
+        			
+        			type:"GET",
+        			url:"/joooin/admin/getMemberBean/" + mi,
+        			
+        			success:function(data){
+        				var name = data.memberName;
+        				var format = $('<container></container>').html(
+        						'<row>'
+        						+'<div class="col-lg-8">'
+        						+'<h2 class="lead">會員修改</h2>'
+        						+'<h4>' + name + '</h4>'
+        						+'<form:form method="POST" action="/admin/delete" modelAttribute="memberBean">'
+        						+'<button type="submit" class = "btn btn-primary" id = "memberButton">刪除</button>'
+        						+'</form>'
+        						)
+        						$('#content').append(format);
+        			}
+        		})
+        	})
+        	
+        	$(document).on("click",'#memberButton',function(){
+        		
+        	})
+        	
         }		//會員資料end;
         
         if(title == '社團管理'){
