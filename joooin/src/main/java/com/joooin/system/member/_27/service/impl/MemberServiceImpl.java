@@ -92,24 +92,29 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public void friendProcess(Integer inviteMemberId, Integer receiveMemberId, String process) {
-		List<MemberFriendBean> list = null;
+		List<MemberFriendBean> list = memberFriendDao.getAll();
 		
 		if (process.equals("request")) {
-			memberFriendDao.save(new MemberFriendBean(inviteMemberId, receiveMemberId, false, true));
-			memberFriendDao.save(new MemberFriendBean(receiveMemberId, inviteMemberId, false, false));
+			Boolean isRequested = false;
+			for (MemberFriendBean bean : list) {
+				if ((bean.getInviteMemberId().equals(inviteMemberId) && bean.getReceiveMemberId().equals(receiveMemberId)))
+					isRequested = true;
+			}
+			if (!isRequested) {
+				memberFriendDao.save(new MemberFriendBean(inviteMemberId, receiveMemberId, false, true));
+				memberFriendDao.save(new MemberFriendBean(receiveMemberId, inviteMemberId, false, false));
+			}
 		}
+		
 		if (process.equals("cancel") || process.equals("reject") || process.equals("delete")) {
-			list = memberFriendDao.getAll();
-			
 			for (MemberFriendBean bean : list) {
 				if ((bean.getInviteMemberId().equals(inviteMemberId) && bean.getReceiveMemberId().equals(receiveMemberId)) ||
 					(bean.getInviteMemberId().equals(receiveMemberId) && bean.getReceiveMemberId().equals(inviteMemberId))) 
 					memberFriendDao.deleteByMemberFriendId(bean.getMemberFriendId());
 			}
 		}
+		
 		if (process.equals("agree")) {
-			list = memberFriendDao.getAll();
-			
 			for (MemberFriendBean bean : list) {
 				if ((bean.getInviteMemberId().equals(inviteMemberId) && bean.getReceiveMemberId().equals(receiveMemberId)) ||
 					(bean.getInviteMemberId().equals(receiveMemberId) && bean.getReceiveMemberId().equals(inviteMemberId))) {
