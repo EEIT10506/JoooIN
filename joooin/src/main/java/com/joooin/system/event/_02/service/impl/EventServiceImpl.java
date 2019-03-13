@@ -35,47 +35,24 @@ public class EventServiceImpl implements EventService {
 	EventPostDao eventPostDao;
 	
 	public EventMainBean getByEventMainId(Integer eventId) {
-//		EventMainBean event = eventmaindao.getByEventMainId(eventId);
-//		Integer typeid = event.getEventTypeId();
-//		Integer inviterid = event.getEventInviterId();
-//		
-//		EventTypeBean eventtype = eventtypedao.getByEventTypeId(typeid);
-//		MemberMainBean eventbuildname = membermaindao.getByMemberId(inviterid);
-//		
-//		Set<EventMemberBean> eventmember = event.getEventMemberSet();
-//		
-//		MemberMainBean eventmembers = null;
-//		Set<MemberMainBean> eventmemberset =new HashSet<MemberMainBean>();
-//		for(EventMemberBean members: eventmember) {
-//			Integer memberid = members.getMemberId();
-//			 eventmembers  = membermaindao.getByMemberId(memberid);
-//			 eventmemberset.add(eventmembers);
-//		}
+
 		return eventmaindao.getByEventMainId(eventId);
 	}
-
 	@Override
 	public List<EventMainBean> getAll() {
-		
 		return null;
 	}
-
 	@Override
 	public Integer save(EventMainBean eventMainBean) {
-	
 		return null;
 	}
-
 	@Override
 	public void update(EventMainBean eventMainBean) {
 	
-		
 	}
-
 	@Override
 	public void deleteByEventId(Integer eventId) {
 	
-		
 	}
 	@Override
 	public EventTypeBean getByEventTypeId(Integer eventTypeId) {
@@ -100,7 +77,7 @@ public class EventServiceImpl implements EventService {
 		
 		return eventPostDao.save(eventPostBean);
 	}
-
+	
 	@Override
 	public void deleteEventPost(Integer eventPostId) {
 		
@@ -111,6 +88,16 @@ public class EventServiceImpl implements EventService {
 	public Integer saveEventMember(EventMemberBean eventMemberBean) {
 		
 		return eventmemberdao.save(eventMemberBean);
+	}
+	@Override
+	public void updateEventPostIsDeleted(EventPostBean eventPostBean) {
+		eventPostDao.update(eventPostBean);
+		
+	}
+	@Override
+	public EventPostBean getByEventPostId(Integer eventPostId) {
+		
+		return eventPostDao.getByEventPostId(eventPostId);
 	}
 
 	

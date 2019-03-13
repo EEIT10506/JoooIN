@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,17 +26,19 @@ import com.joooin.system.event._02.service.EventService;
 public class EventController {
 	@Autowired
 	EventService eventservice;
-	 
+	@Autowired
+	ServletContext context; 
 	//主頁面進入前
 	@RequestMapping("/event")
 	public String test(Model model, HttpSession session) {
-		session.setAttribute("eventId", 2);
+		
 		
 		return "event/event";
 	}
 	@RequestMapping(value = "/event/eventPost", method = RequestMethod.POST)
-	public String submitEventPost(Model model, @RequestParam Integer eventId, @RequestParam Integer memberId, @RequestParam String eventPostContent) {
-		 
+	public String submitEventPost(HttpSession session, @RequestParam Integer eventId, @RequestParam Integer memberId, @RequestParam String eventPostContent) {
+		
+		if (memberId != null) {
 		EventPostBean eventPostBean = new EventPostBean(); 
 		eventPostBean.setEventId(eventId);		
 		eventPostBean.setMemberId(memberId);
@@ -48,16 +52,26 @@ public class EventController {
 		eventPostBean.setIsDeleted(false);
 		
 		Integer eventPostId = eventservice.saveOneEventPost(eventPostBean);
-		
 		return "redirect:/event/"+eventId;
+		}else {
+			return "not_login";
+		}
 		
 	}
 	@RequestMapping(value = "/DeleteEventPost", method = RequestMethod.POST)
-	public String deleteEventPost(Model model, @RequestParam Integer eventPostId, 
+	public String deleteEventPost(HttpSession session, @RequestParam Integer eventPostId, 
 												@RequestParam Integer eventId) {
-		eventservice.deleteEventPost(eventPostId);
-		
+		Integer adminId = (Integer)session.getAttribute("admin");
+		if (adminId != null) {
+//		eventservice.deleteEventPost(eventPostId);
+		EventPostBean eventPostBean = eventservice.getByEventPostId(eventPostId);
+				eventPostBean.setIsDeleted(true);
+				eventservice.updateEventPostIsDeleted(eventPostBean);
 		return "redirect:/event/"+eventId;
+		}else {
+			return "not_login";
+		}
+		
 	}
 	
 	@RequestMapping(value = "/event/eventCheckQuantity", method = RequestMethod.POST)
@@ -77,21 +91,7 @@ public class EventController {
 		System.out.println(i);
 		return "redirect:/event/"+eventId;
 	}
-	//	@RequestMapping(value="/event/{eventId}", method = RequestMethod.GET)
-//	public String addNewEventPost(Model model) {
-//		EventPostBean eventPostBean = new EventPostBean();
-//		model.addAttribute("PostMessage", eventPostBean);
-//		
-//		return "/event/event";
-//		
-//	}
-//	@RequestMapping(value="/event/{eventId}", method = RequestMethod.POST)
-//	public String addEventPost(@ModelAttribute("PostMessage") EventPostBean eventPostBean,@RequestParam Integer eventId) {
-//		
-//		
-//		return "redirect:/event/event/"+eventId;
-//		
-//	}
+	
 	//詳細活動資訊 & 成員 click button 才帶資料顯示
 	
 	@RequestMapping("/event/{eventId}")
@@ -106,11 +106,11 @@ public class EventController {
 		List<EventMemberBean> eventmember = event.getEventMemberList();
 		//int totalmember = eventmember.size();
 		MemberMainBean eventmembers = null;
-		List<MemberMainBean> eventmemberset = new ArrayList<MemberMainBean>();
+		List<MemberMainBean> eventmemberlist = new ArrayList<MemberMainBean>();
 		for(EventMemberBean members: eventmember) {
 			Integer memberid = members.getMemberId();
 			eventmembers  = eventservice.getByMemberId(memberid);
-			eventmemberset.add(eventmembers);
+			eventmemberlist.add(eventmembers);
 		}
 		
 		List<EventPostBean> eventPost = event.getEventPostList();
@@ -132,7 +132,7 @@ public class EventController {
 		model.addAttribute("eventbuildname", eventbuildname);
 		model.addAttribute("inviterid", inviterid);
 		model.addAttribute("eventmember", eventmember);
-		model.addAttribute("eventmembers", eventmemberset);
+		model.addAttribute("eventmembers", eventmemberlist);
 		model.addAttribute("eventPost", eventPost);
 		model.addAttribute("eventPostMemberList", eventPostMemberList);
 		

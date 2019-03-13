@@ -62,7 +62,11 @@
 		font-weight:bold;
 		
 	}
+	.eventTitle{
+		
+	}
 	.leavemessage{
+		word-break:break-all;
 		margin-top:30px;
 /* 		border:1px solid black; */
 		margin-bottom:30px;
@@ -256,6 +260,9 @@
 		$("#backbutton").click(function(){
 			history.go(-1);
 		});
+		$("#ConfirmJoin").click(function(){
+			$("#signUp")
+		});
 	});
 	
 </script>
@@ -266,12 +273,15 @@
 <div id="main">
 	<div class="outer">
 		<div class="eventname">
-			<span >${event.eventName}</span>
+			<span class="eventTitle">${event.eventName}</span>
 			<span class="eventtype"><img class="eventtypeimg" src="<c:url value='/resources/img/icon_${eventtype.eventType}_01.png' />" />${eventtype.eventType}</span>
 			
 			<c:choose >
 			<c:when test="${event.eventStatus == 'yes' }">
 			<span class="eventtype" id="eventfull">已成團</span>
+			</c:when>
+			<c:when test="${event.eventStatus == 'no' }">
+			<span class="eventtype" id="eventNoSuccess">已流團 勿前往</span>
 			</c:when>
 			<c:otherwise>
 			<span class="eventtype" id="eventnofull">報名開放 尚未成團</span>
@@ -313,13 +323,16 @@
 <%--   	   				<input type="text" class="hid" name="eventPostId" value="${eventPost.eventPostId}"/>   --%>
 <%--   	   				<input type="text" class="hid" name="eventId" value="${event.eventId}">   --%>
 <!--     舊的		<button type="submit" id="signUp" class="btn btn-success eventJoin">報名</button> -->
-		   <c:if test="${memberId != inviterid}">			
-			<button type="button" id="signUp" class="btn btn-success eventJoin" data-toggle="modal" data-target="#exampleModalCenter">報名</button>
-			</c:if>
+		<c:if test="${memberId != inviterid and event.eventStatus != 'no'}">
+<%-- 		   	<c:choose>	 --%>
+<%-- 		   		<c:when test="${memberId != inviterid}"></c:when>		 --%>
+				<button type="button" id="signUp" class="btn btn-success eventJoin" data-toggle="modal" data-target="#exampleModalCenter">報名</button>
+<%-- 			</c:choose> --%>
+		</c:if>
 		
  </span> 	
     		<span>
-    		 <c:if test="${memberId != inviterid}">
+    		 <c:if test="${memberId != inviterid and event.eventStatus != 'no'}">
     			<button type="button" id="dropOut" class="btn btn-danger eventCancels" data-toggle="modal" data-target="#CancelJoinEvent">退出</button>    				
     		 </c:if>
     		</span> 
@@ -362,11 +375,16 @@
   	   <div class="leavemessage"><hr/>
   	   	<div id="allMessage">
 <!--   	   	各留言 -->
+			
+			
 			<c:forEach var="eventPost" items="${eventPost}">
+			
 <!-- 			留言區 -->
 <%--   	   		<c:forEach var="eventPostMemberList" items="${eventPostMemberList}"> --%>
   	   		<p class="messageContent">
+  	   			<c:if test="${eventPost.isDeleted == false }">
   	   			<span id="leaveMessageName">${eventPost.memberId} </span>
+  	   			
   	   			<c:if test="${admin == null}">
   	   			<span class="deleteMessage">
   	   			<form class="deleteMessage" action="${pageContext.request.contextPath}/DeleteEventPost" method="Post">
@@ -380,9 +398,11 @@
 <%--   	   		</c:forEach> --%>
   	   		<p class="messageContent">${eventPost.eventPostContent}</p>
   	   		<p class="messageContent"><span class="eventpostDate">${eventPost.eventPostDate}</span>	</p>
-  	   		  
+  	   		  	</c:if>
   	   		<hr class="hr"/>
-  	   		 	</c:forEach>	
+  	   			
+  	   		 	</c:forEach>
+  	   		 		
   	   	<!--   	   	各留言 -->
   	  </div>
   	   	<form action="${pageContext.request.contextPath}/event/eventPost" method="Post">
@@ -412,13 +432,15 @@
         </button>
       </div>
       <div class="modal-body">
-                 <c:forEach var="eventmembers" items="${eventmembers}">
-          <p>
-          	<span></span>
-          	<span>${eventmembers.memberName}</span>
-          </p>
-          <hr/>
-          </c:forEach>
+        <c:forEach var="eventmembers" items="${eventmembers}">
+<%--            <c:if test="${eventmember.isAgreed != false}">     --%>
+            <p>
+          	   <span></span>
+          	   <span>${eventmembers.memberName}</span>
+            </p>
+          	<hr/>
+<%--            </c:if> 	 --%>
+        </c:forEach>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
