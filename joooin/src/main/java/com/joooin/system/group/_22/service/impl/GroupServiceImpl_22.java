@@ -1,11 +1,16 @@
 package com.joooin.system.group._22.service.impl;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.joooin.model.GroupMainBean;
+import com.joooin.model.GroupMemberBean;
 import com.joooin.repository.GroupMainDao;
+import com.joooin.repository.GroupMemberDao;
+import com.joooin.repository.MemberMainDao;
 import com.joooin.system.group._22.service.GroupService_22;
 
 
@@ -16,16 +21,56 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 	SessionFactory factory;
 	
 	@Autowired
-	GroupMainDao dao;
+	GroupMainDao groupMainDao;
+	
+	@Autowired
+	MemberMainDao memMainDao;
+	
+	@Autowired
+	GroupMemberDao groupMemberDao;
 	
 	@Override
 	public GroupMainBean getByGroupId(Integer groupId) {
-		return dao.getByGroupId(groupId);
+		return groupMainDao.getByGroupId(groupId);
 	}
 
 	@Override
-	public void createGroup(GroupMainBean groupMainBean) {
-		dao.save(groupMainBean);
+	public Integer createGroup(GroupMainBean groupMainBean) {
+		return groupMainDao.save(groupMainBean);
 	}
 
+	@Override
+	public String leaderOfGroup(Integer groupId) {
+		Integer leaderId = groupMainDao.getByGroupId(groupId).getGroupLeaderId();
+		String leaderName = memMainDao.getByMemberId(leaderId).getMemberName();
+		return leaderName;
+	}
+
+	
+	@Override
+	public boolean isInGroup(Integer groupId, Integer memberId) {
+		List<GroupMemberBean> groupList = groupMemberDao.getAll();
+		
+		for(GroupMemberBean singleGroup : groupList) {
+			if(groupId == singleGroup.getGroupId() && memberId == singleGroup.getMemberId()) {
+				//社團與會員重複，該社團中有此人
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public void memberAddToGroup(Integer groupId, Integer memberId) {
+		//剛加入預設為待確認false
+		GroupMemberBean groupMemberBean = new GroupMemberBean(groupId, memberId, false);
+		groupMemberDao.save(groupMemberBean);
+	}
+
+	@Override
+	public void leaderAddToGroup(Integer groupId, Integer memberId) {
+		//leader 加入預設為確認true
+		GroupMemberBean groupMemberBean = new GroupMemberBean(groupId, memberId, true);
+		groupMemberDao.save(groupMemberBean);
+	}
 }
