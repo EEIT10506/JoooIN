@@ -324,8 +324,8 @@ function ValidateNumber(e, pnumber)
 }
  	$(document).ready(function(){
 // 		按讚收回
-
-		$("#allmessage").scroll();
+		
+// 		$("#allmessage").scroll();
 		$("#e${event.eventId}").click(function(){
 			//var liked = $("#e${event.eventId }");
 			if($("#e${event.eventId }").attr("class") == "btn btn-default eventNotLike"){
@@ -348,9 +348,31 @@ function ValidateNumber(e, pnumber)
 		$("#backbutton").click(function(){
 			history.go(-1);
 		});
-// 		$("#ConfirmJoin").click(function(){
-// 			$("#signUp")
-// 		});
+// 		按讚 
+		$("#e${event.eventId}").click(function(){
+	    	//$(this).toggleClass('btn btn-primary btn-sm btn btn-secondary btn-sm');
+	    	var eventId = ${event.eventId};
+	    	//alert(eventId);
+	    	$.ajax({
+	    	    type: "POST",                           
+	    	    url: "${pageContext.request.contextPath}/event/good/"+eventId,
+	    	    data: {"eventId": eventId},
+	    	    success: function (result) {
+	    	    	if (result=="notLogin")
+	    	    		{location.href = "${pageContext.request.contextPath}/notLogin";}
+	    	    	else {
+	    	    		alert(result);
+		    	    }
+	    	    	var likeNum = "5";
+	    	    	var array = document.getElementsByClassName("likeBtn");
+	    	    	
+	    	    	for (var i = 0; i < array.length; i++){
+	    	    		if (array[i].value == eventId)
+	    	    			array[i].innerHTML = likeNum;
+	    	    	}
+	   	    	}
+	    	});
+	    });
 	});
 	
 </script>
@@ -507,7 +529,7 @@ function ValidateNumber(e, pnumber)
   	   		<p class="messageContent">
   	   			<c:if test="${getPostContentlist.isDeleted == false }">
   	   			<a class="a leaveMessageName" href="<c:url value='/member/other/${inviterid}' />"><span><img class="eventbuilderName" src="<c:url value='/getMemberImage/${getPostContentlist.memberId}.jpg' />" width="30px" height=30px" style="border-radius:25px;"/></span>
-  	   			<span class="leaveMessageName">${getPostContentlist.memberName} </span></a>
+  	   			<span class="leaveMessageName"> &nbsp;${getPostContentlist.memberName} </span></a>
   	   			
   	   			<c:if test="${admin != null}">
   	   			<span class="deleteMessage">

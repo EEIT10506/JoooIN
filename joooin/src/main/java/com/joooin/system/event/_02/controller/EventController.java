@@ -16,13 +16,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.joooin.model.EventLikeBean;
 import com.joooin.model.EventMainBean;
 import com.joooin.model.EventMemberBean;
 import com.joooin.model.EventPostBean;
 import com.joooin.model.EventTypeBean;
 import com.joooin.model.MemberMainBean;
+import com.joooin.repository.EventLikeDao;
+import com.joooin.repository.EventMainDao;
 import com.joooin.system.event._02.service.EventService;
 import com.joooin.system.event._02.service.impl.GetPostContentBean;
+import com.joooin.system.event._35.service.EventMainService;
 import com.joooin.util.ImageUtils;
 
 
@@ -32,7 +38,10 @@ public class EventController {
 	EventService eventService;
 	@Autowired
 	ServletContext context; 
-	
+	@Autowired
+	EventLikeDao eventLikeDao;
+	@Autowired
+	EventMainService eventMainService;
 	@RequestMapping(value = "/event/eventPost", method = RequestMethod.POST)
 	public String submitEventPost(@RequestParam Integer eventId, @RequestParam String eventPostContent, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
@@ -163,11 +172,55 @@ public class EventController {
 		model.addAttribute("eventmember", eventmember);
 		model.addAttribute("eventmembers", eventmemberlist);
 		model.addAttribute("eventPost", eventPost);
-		model.addAttribute("getPostContentlist", getPostContentlist);
 		model.addAttribute("memberCheck", memberCheck);
 		model.addAttribute("emfindagreed", emfindagreed);
 		
 		return "event/event";
+	}
+	
+	@RequestMapping(value = "/event/good/{eventId}", method = RequestMethod.POST)
+	public @ResponseBody String giveEventLike(Integer eventId,HttpSession session) {
+		Integer memberId = (Integer) session.getAttribute("memberId");
+		if(memberId != null) { 
+			List<EventLikeBean> list = eventLikeDao.getAll();
+			int count = 0;
+			for (EventLikeBean eventLikeBean:list) {
+				if(eventLikeBean.getEventId().equals(eventId) && eventLikeBean.getMemberId().equals(memberId)) {
+					eventLikeDao.deleteByEventLikeId(eventLikeBean.getEventLikeId());
+					
+					EventMainBean updateEvent = eventMainService.getByEventMainId(eventId);
+					Integer like = updateEvent.getEventLike();
+					int updatelike =(like.intValue()-1);
+					Integer reallike = Integer.valueOf(updatelike);
+				
+					
+					updateEvent.setEventLike(reallike);
+					eventMainService.save(updateEvent);
+					count++;
+					break;
+				}
+			}
+			if(count==0) {
+				EventLikeBean eventLikeBean = new EventLikeBean();
+					eventLikeBean.setEventId(eventId);
+					eventLikeBean.setMemberId(memberId);
+					eventLikeDao.save(eventLikeBean);
+					Integer like = eventMainService.getByEventMainId(eventId).getEventLike();
+			 
+					int updatelike = like.intValue()+1;
+					Integer reallike = Integer.valueOf(updatelike);
+
+				EventMainBean updateEvent = eventMainService.getByEventMainId(eventId);
+					updateEvent.setEventLike(reallike);
+					eventMainService.save(updateEvent);
+					return "liked";
+			}
+			else {
+				return "cancel_Liked";
+			}	
+	    }else {  
+	    	return "notLogin";}
+	
 	}
 //	@RequestMapping(value = "/event/setting", method = RequestMethod.POST)
 //	public String eventManager(@ModelAttribute("memberMainBean") MemberMainBean updateBean, HttpSession session) {
