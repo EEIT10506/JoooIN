@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.joooin.model.EventMainBean;
@@ -46,6 +47,13 @@ public class AdminController {
 	@RequestMapping(value = "/admin/getMemberBean/{memberId}", method = RequestMethod.GET)
 	public @ResponseBody MemberMainBean getMemberBean(@PathVariable("memberId") Integer memberId) {
 		return service.getMemberBean(memberId);
+	}
+	
+	@RequestMapping(value = "/admin/deleteMember", method =RequestMethod.POST )
+	@ResponseBody
+	public void deleteMember(@RequestParam("memberId")Integer memberId) {
+		MemberMainBean mmb = service.getMemberBean(memberId);
+		service.deleteMemberBean(mmb.getMemberId());
 	}
 
 }

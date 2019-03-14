@@ -46,7 +46,7 @@ $(document).ready(function () {
         	})	//ajax end;
         	
         	var mi;
-        	$(document).on("click",'.memberId',function(){
+        	$(document).on("click",'.memberId',function(){  //點選memberid動作
         		mi = $(this).text();
         		
         		$('#content').empty();
@@ -63,18 +63,35 @@ $(document).ready(function () {
         						+'<div class="col-lg-8">'
         						+'<h2 class="lead">會員修改</h2>'
         						+'<h4>' + name + '</h4>'
-        						+'<form:form method="POST" action="/admin/delete" modelAttribute="memberBean">'
+        						+'<form:form method="POST" modelAttribute="memberBean" class="form-horizontal">'
         						+'<button type="submit" class = "btn btn-primary" id = "memberButton">刪除</button>'
         						+'</form>'
+        						+'</div>'
+        						+'</row>'
         						)
         						$('#content').append(format);
+        			},
+        		error: function (xhr, ajaxOptions, thrownError){
+        			
+        		},
+        		})
+        	})//點選id end
+        	
+        	$(document).on("click",'#memberButton',function(){ // 刪除按鈕動作
+        		$.ajax({
+        			type:"POST",
+        			url:"/joooin/admin/deleteMember",
+        			data:{memberId:mi},
+        			success:function(){
+        				alert('刪除完成!');
+        				$('.bg-primary').trigger("click");
+        				location.reload();
+        			},
+        			error:function(e){
+        				
         			}
         		})
-        	})
-        	
-        	$(document).on("click",'#memberButton',function(){
-        		
-        	})
+        	})		// 刪除end
         	
         }		//會員資料end;
         

@@ -47,4 +47,9 @@ public class AdminServiceImpl implements AdminService {
 		return mmd.getByMemberId(memberId);
 	}
 
+	@Override
+	public void deleteMemberBean(Integer memberId) {
+		mmd.deleteByMemberId(memberId);
+	}
+
 }
