@@ -24,19 +24,19 @@ import com.joooin.system.event._02.service.EventService;
 public class EventServiceImpl implements EventService {
 	
 	@Autowired
-	EventMainDao eventmaindao;
+	EventMainDao eventMainDao;
 	@Autowired
-	EventMemberDao eventmemberdao;
+	EventMemberDao eventMemberDao;
 	@Autowired
-	EventTypeDao eventtypedao;
+	EventTypeDao eventTypeDao;
 	@Autowired
-	MemberMainDao membermaindao;
+	MemberMainDao memberMainDao;
 	@Autowired
 	EventPostDao eventPostDao;
 	
 	public EventMainBean getByEventMainId(Integer eventId) {
 
-		return eventmaindao.getByEventMainId(eventId);
+		return eventMainDao.getByEventMainId(eventId);
 	}
 	@Override
 	public List<EventMainBean> getAll() {
@@ -57,19 +57,19 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public EventTypeBean getByEventTypeId(Integer eventTypeId) {
 		
-		return eventtypedao.getByEventTypeId(eventTypeId);
+		return eventTypeDao.getByEventTypeId(eventTypeId);
 	}
 
 	@Override
 	public List<MemberMainBean> getAllEventMember() {
 		
-		return membermaindao.getAll();
+		return memberMainDao.getAll();
 	}
 
 	@Override
 	public MemberMainBean getByMemberId(Integer memberId) {
 		// TODO Auto-generated method stub
-		return membermaindao.getByMemberId(memberId);
+		return memberMainDao.getByMemberId(memberId);
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public Integer saveEventMember(EventMemberBean eventMemberBean) {
 		
-		return eventmemberdao.save(eventMemberBean);
+		return eventMemberDao.save(eventMemberBean);
 	}
 	@Override
 	public void updateEventPostIsDeleted(EventPostBean eventPostBean) {
@@ -100,8 +100,20 @@ public class EventServiceImpl implements EventService {
 		return eventPostDao.getByEventPostId(eventPostId);
 	}
 	@Override
-	public void deleteEventMemberById(Integer eventMemberId) {
-		eventmemberdao.deleteByEventMemberId(eventMemberId);
+	public void deleteEventMemberById(Integer eventId, Integer memberId) {
+		List<EventMemberBean> list = eventMemberDao.getAll();
+		
+		for(EventMemberBean bean : list) {
+		     if (bean.getEventId().equals(eventId) && bean.getMemberId().equals(memberId)) {
+		    	 eventMemberDao.deleteByEventMemberId(bean.getEventMemberId());
+		    	 break;
+		     }
+		}
+	}
+	@Override
+	public EventMemberBean getByEventMemberId(Integer eventMemberId) {
+		
+		return eventMemberDao.getByEventMemberId(eventMemberId);
 	}
 
 	
