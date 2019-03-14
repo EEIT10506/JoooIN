@@ -14,6 +14,7 @@ $(document).ready(function () {
         $('#content> p').remove();
         
         // 以上為切換後台按鈕功能
+//    	----------------------------------------------------------------------------------------------------
         if (title == '會員管理'){
         	$.ajax({
         		type: "GET",
@@ -42,9 +43,9 @@ $(document).ready(function () {
                 			docFrag.append(row);
                 		})
                 		$('#content tbody').html(docFrag);
-                }//function (data)
-        	})	//ajax end;
-        	
+                }
+        	})	//撈出會員end
+//        	----------------------------------------------------------------------------------------------------
         	var mi;
         	$(document).on("click",'.memberId',function(){  //點選memberid動作
         		mi = $(this).text();
@@ -58,26 +59,29 @@ $(document).ready(function () {
         			
         			success:function(data){
         				var name = data.memberName;
+        				var docFrag = $(document.createDocumentFragment());
         				var format = $('<container></container>').html(
         						'<row>'
         						+'<div class="col-lg-8">'
-        						+'<h2 class="lead">會員修改</h2>'
+        						+'<h2>會員修改</h2>'
         						+'<h4>' + name + '</h4>'
         						+'<form:form method="POST" modelAttribute="memberBean" class="form-horizontal">'
-        						+'<button type="submit" class = "btn btn-primary" id = "memberButton">刪除</button>'
+        						+'<button type="submit" class="btn btn-primary" id="memberButton">修改</button>'
+        						+'<button type="submit" class="btn btn-danger" id="memberDelete">刪除</button>'
         						+'</form>'
         						+'</div>'
         						+'</row>'
         						)
-        						$('#content').append(format);
+        						docFrag.append(format);
+        						$('#content').html(docFrag);
         			},
         		error: function (xhr, ajaxOptions, thrownError){
         			
         		},
         		})
         	})//點選id end
-        	
-        	$(document).on("click",'#memberButton',function(){ // 刪除按鈕動作
+//        	----------------------------------------------------------------------------------------------------
+        	$(document).on("click",'#memberDelete',function(){ // 刪除按鈕動作
         		$.ajax({
         			type:"POST",
         			url:"/joooin/admin/deleteMember",
@@ -85,16 +89,17 @@ $(document).ready(function () {
         			success:function(){
         				alert('刪除完成!');
         				$('.bg-primary').trigger("click");
-        				location.reload();
+        				
         			},
         			error:function(e){
         				
         			}
         		})
         	})		// 刪除end
+//        	----------------------------------------------------------------------------------------------------
         	
         }		//會員資料end;
-        
+//    	----------------------------------------------------------------------------------------------------
         if(title == '社團管理'){
         	$.ajax({
         		type: "GET",
@@ -112,7 +117,8 @@ $(document).ready(function () {
                 }
         	})
         	
-        }
+        }//社團管理
+//    	----------------------------------------------------------------------------------------------------
         
         if(title == '活動管理'){
         	$.ajax({
@@ -129,7 +135,8 @@ $(document).ready(function () {
                 	//start
                 }
         	})
-        }
+        }//活動管理
+//    	----------------------------------------------------------------------------------------------------
         
     	}		//selectCategory end;
     	
