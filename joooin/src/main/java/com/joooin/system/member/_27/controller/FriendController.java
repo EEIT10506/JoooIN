@@ -1,8 +1,10 @@
 package com.joooin.system.member._27.controller;
 
+
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +25,7 @@ public class FriendController {
 			return "NOT_FRIEND";
 		}
 	}
-	                                
+	 
 	@RequestMapping(value = "/member/friendProcess", method = RequestMethod.POST)
 	public @ResponseBody String friendProcess(Integer otherMemberId, String process, HttpSession session) {
 		Integer selfMemberId = (Integer)session.getAttribute("memberId");
@@ -34,6 +36,18 @@ public class FriendController {
 		} else {
 			return "not_login";
 		}
+	}
+	
+	@RequestMapping(value = "/member/my/friend", method = RequestMethod.GET)
+	public String myFriend(String process, HttpSession session, Model model) {
+		Integer memberId = (Integer)session.getAttribute("memberId");
+		
+		if (memberId != null) {
+			model.addAttribute("friendList", memberService.getFriends(memberId));
+			return "member/self/my_friend";
+		} else {
+			return "not_Login";
+		}	
 	}
 
 }

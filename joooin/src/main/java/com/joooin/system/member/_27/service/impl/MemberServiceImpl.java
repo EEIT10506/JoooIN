@@ -1,15 +1,21 @@
 package com.joooin.system.member._27.service.impl;
 
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.joooin.model.MemberFriendBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.repository.MemberFriendDao;
 import com.joooin.repository.MemberMainDao;
+import com.joooin.system.member._27.pojo.FriendPojo;
 import com.joooin.system.member._27.service.MemberService;
 import com.joooin.util.ImageUtils;
 
@@ -82,7 +88,7 @@ public class MemberServiceImpl implements MemberService{
 						return "RECEIVE";
 				} 
 			}
-			return null;
+			return "NOT_FRIEND";
 		} else {
 			return "NOT_FRIEND";
 		}
@@ -96,9 +102,12 @@ public class MemberServiceImpl implements MemberService{
 		
 		if (process.equals("request")) {
 			Boolean isRequested = false;
+			
 			for (MemberFriendBean bean : list) {
-				if ((bean.getInviteMemberId().equals(inviteMemberId) && bean.getReceiveMemberId().equals(receiveMemberId)))
+				if ((bean.getInviteMemberId().equals(inviteMemberId) && bean.getReceiveMemberId().equals(receiveMemberId))) {
 					isRequested = true;
+					break;
+				}
 			}
 			if (!isRequested) {
 				memberFriendDao.save(new MemberFriendBean(inviteMemberId, receiveMemberId, false, true));
@@ -107,22 +116,47 @@ public class MemberServiceImpl implements MemberService{
 		}
 		
 		if (process.equals("cancel") || process.equals("reject") || process.equals("delete")) {
+			int breakPoint = 0;
 			for (MemberFriendBean bean : list) {
 				if ((bean.getInviteMemberId().equals(inviteMemberId) && bean.getReceiveMemberId().equals(receiveMemberId)) ||
-					(bean.getInviteMemberId().equals(receiveMemberId) && bean.getReceiveMemberId().equals(inviteMemberId))) 
+					(bean.getInviteMemberId().equals(receiveMemberId) && bean.getReceiveMemberId().equals(inviteMemberId))) {
 					memberFriendDao.deleteByMemberFriendId(bean.getMemberFriendId());
+					breakPoint++;
+					if (breakPoint == 2) break;
+				}
 			}
 		}
 		
 		if (process.equals("agree")) {
+			int breakPoint = 0;
 			for (MemberFriendBean bean : list) {
 				if ((bean.getInviteMemberId().equals(inviteMemberId) && bean.getReceiveMemberId().equals(receiveMemberId)) ||
 					(bean.getInviteMemberId().equals(receiveMemberId) && bean.getReceiveMemberId().equals(inviteMemberId))) {
 					bean.setIsFriend(true);
 					memberFriendDao.update(bean);
+					breakPoint++;
+					if (breakPoint == 2) break;
 				}
 			}
 		}
+	}
+
+	@Override
+	public List<FriendPojo> getFriends(Integer memberId) {
+		List<MemberFriendBean> memberFriendList = memberFriendDao.getAll();
+		List<FriendPojo> friendPojoList = new ArrayList<FriendPojo>();
+		
+		for (MemberFriendBean bean : memberFriendList) {
+			if (bean.getInviteMemberId().equals(memberId)) {
+				FriendPojo pojo = new FriendPojo();
+				pojo.setMemberId(bean.getReceiveMemberId());
+				pojo.setMemberName(memberMainDao.getByMemberId(bean.getReceiveMemberId()).getMemberName());
+				pojo.setIsFriend(bean.getIsFriend());
+				pojo.setIsInviter(bean.getIsInviter());
+				friendPojoList.add(pojo);
+			}
+		}
+		return friendPojoList;
 	}
 
 }

@@ -22,11 +22,7 @@
 <script>
 	$(document).ready(function(){
 		friendShow();
-		
-		$(".friendBtn").click(function(){
-			friendProcess(this.id);
-			alert(this.id);
-		});
+		$(".friendBtn").click(function(){friendProcess(this.id);});
 	});
 	
 	function friendShow(){

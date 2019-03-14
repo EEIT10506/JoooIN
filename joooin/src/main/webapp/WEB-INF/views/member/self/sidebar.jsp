@@ -10,6 +10,9 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 <script>
 	$(document).ready(function(){
 		if (location.href.search("profile") != -1)
@@ -45,10 +48,13 @@
 	#root{
 		visibility: hidden;
 	}
+	#userImage {
+		border-radius: 100px;
+	}
 </style>
 <body>
 	<div id="memberImage" >
-		<img src="<c:url value='/getMemberImage/${memberId}.jpg' />" width="160px" />
+		<img id="userImage" src="<c:url value='/getMemberImage/${memberId}.jpg' />" width="160px" />
 		<p id="memberName">${memberName}</p>
 	</div>
 	<br />

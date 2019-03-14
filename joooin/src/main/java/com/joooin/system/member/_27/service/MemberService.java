@@ -1,9 +1,10 @@
 package com.joooin.system.member._27.service;
 
 
+import java.util.List;
 import javax.servlet.ServletContext;
-
 import com.joooin.model.MemberMainBean;
+import com.joooin.system.member._27.pojo.FriendPojo;
 
 public interface MemberService {
 	public MemberMainBean getMemberMainBean(Integer memberId);
@@ -12,5 +13,5 @@ public interface MemberService {
 	public void updatePrivacy(Integer memberId, MemberMainBean updateBean);
 	public String checkFriendStatus(Integer inviteMemberId, Integer receiveMemberId);
 	public void friendProcess(Integer inviteMemberId, Integer receiveMemberId, String process);
-
+	public List<FriendPojo> getFriends(Integer memberId);
 }
