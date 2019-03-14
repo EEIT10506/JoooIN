@@ -49,12 +49,6 @@ public class EnterGroupController {
 		return "group/group_members";
 	}
 	
-//	@RequestMapping(method = RequestMethod.GET, value = "/group/about/${groupId}")
-//	public String mainPageAbout(Model model, @PathVariable Integer groupId) {
-//		
-//		
-//		return "group/group_about";
-//	}
 	
 	//傳回社團主頁的照片
 	@RequestMapping(value = "/getGroupImage/{groupId}", method = RequestMethod.GET)
