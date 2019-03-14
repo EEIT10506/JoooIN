@@ -21,14 +21,14 @@ public class GroupController_42 {
 	
 	@Autowired
 	ServletContext context;
-	@RequestMapping(method = RequestMethod.GET, value = "/group/groups_type")
+	@RequestMapping(method = RequestMethod.GET, value = "/groups/groups_type")
 	public String getGrouptypeAll(Model model) {
 		List<GroupMainBean> list =service.getAll();
 		model.addAttribute("groupsType", list);
 		return "group/groups_type"; 
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/group/{grouponetype}")
+	@RequestMapping(method = RequestMethod.GET, value = "/groups/{grouponetype}")
 	public String getGroupTypeOne(@PathVariable("grouponetype") String groupOneType ,Model model) {
 		List<GroupMainBean> typeOne = service.getGroupType(groupOneType);
 		model.addAttribute("groupsType", typeOne);

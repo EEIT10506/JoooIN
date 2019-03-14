@@ -22,7 +22,7 @@ import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.util.ImageUtils;
 
 @Controller
-public class GroupsController_22 {
+public class CreateGroupController {
 	@Autowired
 	GroupService_22 service;
 
@@ -30,7 +30,7 @@ public class GroupsController_22 {
 	ServletContext context;
 
 	// 送出空白社團表單
-	@RequestMapping(method = RequestMethod.GET, value = "/group/create")
+	@RequestMapping(method = RequestMethod.GET, value = "/groups/create")
 	public String getNewGroupForm(Model model) {
 		GroupMainBean groupMainBean = new GroupMainBean();
 		// 要更改格式
@@ -40,7 +40,7 @@ public class GroupsController_22 {
 	}
 
 	// 處理新增表單
-	@RequestMapping(method = RequestMethod.POST, value = "/group/create")
+	@RequestMapping(method = RequestMethod.POST, value = "/groups/create")
 	public String processNewGroupForm(@ModelAttribute("groupMainBean") GroupMainBean groupMainBean,
 			BindingResult bResult, HttpSession session) {
 
@@ -82,16 +82,6 @@ public class GroupsController_22 {
 		service.createGroup(groupMainBean);
 
 		return "redirect:/groups";
-	}
-
-	// 依照groupId個別社團主頁連結
-	@RequestMapping(method = RequestMethod.GET, value = "/group/{grouponetype}/{groupId}")
-	public String groupMainPage(Model model, @PathVariable Integer groupId) {
-
-		GroupMainBean groupBean = service.getByGroupId(groupId);
-		model.addAttribute("groupMain", groupBean);
-		return "group/group";
-
 	}
 
 }
