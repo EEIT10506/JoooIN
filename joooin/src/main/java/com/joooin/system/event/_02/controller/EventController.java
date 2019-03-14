@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,7 @@ import com.joooin.model.EventTypeBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.system.event._02.service.EventService;
 import com.joooin.system.event._02.service.impl.GetPostContentBean;
+import com.joooin.util.ImageUtils;
 
 
 @Controller
@@ -30,13 +32,7 @@ public class EventController {
 	EventService eventService;
 	@Autowired
 	ServletContext context; 
-	//主頁面進入前
-	@RequestMapping("/event")
-	public String test(Model model, HttpSession session) {
-		
-		
-		return "event/event";
-	}
+	
 	@RequestMapping(value = "/event/eventPost", method = RequestMethod.POST)
 	public String submitEventPost(@RequestParam Integer eventId, @RequestParam String eventPostContent, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
@@ -63,18 +59,15 @@ public class EventController {
 	@RequestMapping(value = "/DeleteEventPost", method = RequestMethod.POST)
 	public String deleteEventPost(@RequestParam Integer eventPostId, @RequestParam Integer eventId, HttpSession session) {
 		Integer adminId = (Integer)session.getAttribute("admin");
-//		if (adminId != null) {
-//		eventService.deleteEventPost(eventPostId);
-		EventPostBean eventPostBean = eventService.getByEventPostId(eventPostId);
-				eventPostBean.setIsDeleted(true);
-				eventService.updateEventPostIsDeleted(eventPostBean);
-		return "redirect:/event/"+eventId;
-//		}else {
-//			return "not_login";
-//		}
-		
+		if (adminId != null) {
+			EventPostBean eventPostBean = eventService.getByEventPostId(eventPostId);
+					eventPostBean.setIsDeleted(true);
+					eventService.updateEventPostIsDeleted(eventPostBean);
+			return "redirect:/event/"+eventId;
+		}else {
+			return "not_login";
+		}
 	}
-	
 	@RequestMapping(value = "/event/eventCheckQuantity", method = RequestMethod.POST)
 	public String checkQuantity(@RequestParam Integer eventId, @RequestParam String quantity, Model model, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
@@ -105,7 +98,6 @@ public class EventController {
 			return "not_login";
 		}
 	}
-	@SuppressWarnings("null")
 	@RequestMapping("/event/{eventId}")
 	public String eventDetail(@PathVariable("eventId") Integer eventId,Model model,HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
@@ -141,10 +133,6 @@ public class EventController {
 		}
 		
 		List<EventPostBean> eventPost = event.getEventPostList();
-		
-		
-		//List<MemberMainBean> eventPostMemberList = new ArrayList<MemberMainBean>();
-		
 		List<GetPostContentBean> getPostContentlist =new ArrayList<>();
 		
 		for(EventPostBean postMember: eventPost) {
@@ -167,10 +155,7 @@ public class EventController {
 				bean.setEventPostId(postId);
 				bean.setMemberId(postMemberId);
 				getPostContentlist.add(bean);
-			
 		}
-		
-		
 		model.addAttribute("event", event);
 		model.addAttribute("eventtype", eventtype);
 		model.addAttribute("eventbuildname", eventbuildname);
@@ -184,6 +169,32 @@ public class EventController {
 		
 		return "event/event";
 	}
+//	@RequestMapping(value = "/event/setting", method = RequestMethod.POST)
+//	public String eventManager(@ModelAttribute("memberMainBean") MemberMainBean updateBean, HttpSession session) {
+//		Integer memberId = (Integer)session.getAttribute("memberId");
+//		
+//		if (memberId != null) {
+//			MemberMainBean mmb = memberService.getMemberMainBean(memberId);
+//			mmb.setMemberName(updateBean.getMemberName());
+//			mmb.setBirthday(updateBean.getBirthday());
+//			mmb.setCity(updateBean.getCity());
+//			mmb.setPhone(updateBean.getPhone());
+//			
+//			Byte[] memberImage = null;
+//			if (!updateBean.getMultipartFile().isEmpty()) {
+//				memberImage = ImageUtils.multipartFileToByteArray(updateBean.getMultipartFile());
+//				mmb.setMemberImage(memberImage);
+//			} else {
+//				mmb.setMemberImage(ImageUtils.localImageToByteArray("member_male.PNG", context));
+//			}
+//			memberService.updateMemberMainBean(mmb);
+//			session.setAttribute("memberName", mmb.getMemberName());
+//			
+//			return "redirect:/member/my/profile";
+//		} else {
+//			return "not_login";
+//		}	
+//	}					
 	//活動修改
 	@RequestMapping("/event/setting")
 	public String eventSetting(Model model, @RequestParam("eventAdminId") Integer eventId) {

@@ -388,10 +388,14 @@ function ValidateNumber(e, pnumber)
 			<c:if test="${event.isFull != false }">
 			<span class="eventtype" id="eventfull" style="background-color:red;color:white;">人數已滿</span>
 			</c:if>
+			  
+<!-- 			  活動設定 -->
+<!-- 			   ========================= -->
+			
 			   <c:if test="${memberId == inviterid}">
 			 <span class="eventmodify">
 			
-			 <form class="manager" action="${pageContext.request.contextPath}/event/setting" method="POST">
+			 <form class="manager" action="${pageContext.request.contextPath}/event/setting/${event.eventId}" method="POST">
 			
 			 <input type="text" class="hid" name="eventAdminId" value="${event.eventId}">
 			 
@@ -400,7 +404,7 @@ function ValidateNumber(e, pnumber)
 			 </span>
 				</c:if>
 			
-			 
+<!-- 	   ============================================		  -->
 		 </div>
 <!-- 		---------------------------------- -->
 			<div class="row">
@@ -438,13 +442,13 @@ function ValidateNumber(e, pnumber)
 		</c:if>
 		<c:if test="${memberId != inviterid and memberCheck != false and event.eventStatus == 'unchecked'}">
 				<button type="button" readonly id="joinWaitCheck" class="btn btn-success eventJoin joinWaitCheck">報名中</button>
-<!--  			<span class="waitInviterCheck">報名中</span> -->
+
  		</c:if>	
  </span> 	
  			
     		<span>
     		 <c:if test="${memberId != inviterid and memberCheck != false and event.eventStatus == 'unchecked'}">
-    			<button type="button" id="dropOut" class="btn btn-danger eventCancels" data-toggle="modal" data-target="#CancelJoinEvent">退出</button>    				
+    			<button type="button" id="dropOut" class="btn btn-danger eventCancels" data-toggle="modal" data-target="#CancelJoinEvent">取消報名</button>    				
     		 </c:if>
     		</span> 
  </p>
