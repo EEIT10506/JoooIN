@@ -24,9 +24,8 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 	}
 
 	@Override
-	public Integer createGroup(GroupMainBean groupMainBean) {
-		Integer inte = dao.save(groupMainBean);
-		return inte;
+	public void createGroup(GroupMainBean groupMainBean) {
+		dao.save(groupMainBean);
 	}
 
 }
