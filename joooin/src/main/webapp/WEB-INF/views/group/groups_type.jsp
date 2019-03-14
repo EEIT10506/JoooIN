@@ -58,8 +58,10 @@
 
 							<div class="card mb-4 shadow-sm">
 								<!--                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">圖片</text></svg> -->
-								<a href="${request.contextPath}/gorup/${groupsType.groupType}/${groupsType.groupId}"><img
+
+								<a href="${pageContext.request.contextPath}/group/${groupsType.groupId}"><img
 									src="<c:url value='/resources/img/cover_food.jpg'/>" width="100%"  height="225" /></a>
+
 								<div class="card-body">
 									<p class="card-text">類型:${groupsType.groupType}</p>
 									<p class="card-text">團名:${groupsType.groupName}</p>
