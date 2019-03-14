@@ -12,6 +12,7 @@
 	rel="stylesheet"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+	
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"
 	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
 	crossorigin="anonymous"></script>
@@ -24,29 +25,30 @@
 	position: relative;
 	top: 50px;
 }
+#menu {
+  position: fixed;
+  left: 15;
+  top: 25%;
+  width: 8em;
+  margin-top: -2.5em;
+}
+
 </style>
-<title>Insert title here</title>
+
+<title>各社團主頁</title>
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/navbar" />
 	<div id="main">
 		<!-- 請把所有內容寫在此div內 -->
 
-		<div id="test">
-			<p>關於社團資料</p>
-			<p>${groupMain.groupId}</p>
-			<p>${groupMain.groupType}</p>
-			<p>${groupMain.groupLeaderId}</p>
-			<p>${groupMain.groupCurrentMembers}</p>
-			<p>${groupMain.groupCreateDate}</p>
-			<p>${groupMain.groupIntro}</p>
-		</div>
-
 		<div class="container-fluid">
 			<div class="row">
-				<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+<!-- 	左側欄位底色	<nav class="col-md-2 d-none d-md-block bg-light sidebar"> -->
 					<div class="sidebar-sticky">
-						<ul class="nav flex-column">
+<!-- 						<ul class="nav flex-column"> -->
+						<div class=.pull-right>
+						<ul id="menu" class="nav flex-column">
 							<li class="nav-item"><a class="nav-link active"
 								href="${pageContext.request.contextPath}/group/about/${groupMain.groupId}">
 									<span data-feather="home"></span> 關於 ${groupMain.groupName} <span
@@ -68,35 +70,24 @@
 									data-feather="layers"></span> Integrations
 							</a></li>
 						</ul>
-
-						<h6
-							class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-							<span>Saved reports</span> <a
-								class="d-flex align-items-center text-muted" href="#"> <span
-								data-feather="plus-circle"></span>
-							</a>
-						</h6>
-						<ul class="nav flex-column mb-2">
-							<li class="nav-item"><a class="nav-link" href="#"> <span
-									data-feather="file-text"></span> Current month
-							</a></li>
-							<li class="nav-item"><a class="nav-link" href="#"> <span
-									data-feather="file-text"></span> Last quarter
-							</a></li>
-							<li class="nav-item"><a class="nav-link" href="#"> <span
-									data-feather="file-text"></span> Social engagement
-							</a></li>
-							<li class="nav-item"><a class="nav-link" href="#"> <span
-									data-feather="file-text"></span> Year-end sale
-							</a></li>
-						</ul>
 					</div>
-				</nav>
-
+					</div>
+<!-- 				</nav> -->
+				
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+		
 				<div
 					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-					<h1 class="h2">社團名稱</h1>
+					<div class="display-4">社團名稱: ${groupMain.groupName}</div>
+<!-- 							<div id="test"> -->
+<!-- 			<p>關於社團資料</p> -->
+<%-- 			<p>${groupMain.groupId}</p> --%>
+<%-- 			<p>${groupMain.groupType}</p> --%>
+<%-- 			<p>${groupMain.groupLeaderId}</p> --%>
+<%-- 			<p>${groupMain.groupCurrentMembers}</p> --%>
+<%-- 			<p>${groupMain.groupCreateDate}</p> --%>
+<%-- 			<p>${groupMain.groupIntro}</p> --%>
+<!-- 		</div> -->
 					<div class="btn-toolbar mb-2 mb-md-0">
 						<div class="btn-group mr-2">
 							<button type="button" class="btn btn-sm btn-outline-secondary">分享</button>
@@ -108,12 +99,11 @@
 						</button>
 					</div>
 				</div>
-
-				<canvas class="my-4 w-100" id="myChart" width="900" height="380">
-				</canvas>
-				<img src="<c:url value='/getGroupImage/${groupMain.groupId}'/>" />
-
-				<h2>文章列表</h2>
+				
+				
+				<img class="container"  src="<c:url value='/getGroupImage/${groupMain.groupId}'/>" height="350" />
+				<h4 >文章列表</h4>
+				
 				<div class="table-responsive">
 					<table class="table table-striped table-sm">
 						<thead>

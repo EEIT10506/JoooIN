@@ -149,7 +149,7 @@
             </div>
             <!--team-6-->
 
- <a href="${pageContext.request.contextPath}/group/group" >超連結</a>
+
 
         </div>
     </div>
