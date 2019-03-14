@@ -22,74 +22,66 @@ import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.util.ImageUtils;
 
 @Controller
-public class GroupsController_22 {
+public class CreateGroupController {
 	@Autowired
 	GroupService_22 service;
-	
+
 	@Autowired
 	ServletContext context;
-	
-	//送出空白社團表單
-	@RequestMapping(method = RequestMethod.GET, value = "/group/create")
+
+	// 送出空白社團表單
+	@RequestMapping(method = RequestMethod.GET, value = "/groups/create")
 	public String getNewGroupForm(Model model) {
 		GroupMainBean groupMainBean = new GroupMainBean();
-		//要更改格式
-		
+		// 要更改格式
+
 		model.addAttribute("groupMainBean", groupMainBean);
 		return "group/group_create";
 	}
-	
-	//處理新增表單
-	@RequestMapping(method = RequestMethod.POST, value = "/group/create")
+
+	// 處理新增表單
+	@RequestMapping(method = RequestMethod.POST, value = "/groups/create")
 	public String processNewGroupForm(@ModelAttribute("groupMainBean") GroupMainBean groupMainBean,
 			BindingResult bResult, HttpSession session) {
-		
+
 		System.out.println(groupMainBean.getGroupType());
-		
-		//bResult待加入白名單功能
-		
-		//若未提供圖片，使用預設圖片
+
+		// bResult待加入白名單功能
+
+		// 若未提供圖片，使用預設圖片
 		Byte[] groupImage = null;
 		if (!groupMainBean.getMultipartFile().isEmpty()) {
 			groupImage = ImageUtils.multipartFileToByteArray(groupMainBean.getMultipartFile());
 			groupMainBean.setGroupImage(groupImage);
-			
+
 		} else {
-			//根據type配置預設圖片
-			if(groupMainBean.getGroupType().equals("sport")) {
+			// 根據type配置預設圖片
+			if (groupMainBean.getGroupType().equals("sport")) {
 				groupMainBean.setGroupImage(ImageUtils.localImageToByteArray("cover_sport.jpg", context));
 			}
-			if(groupMainBean.getGroupType().equals("other")) {
+			if (groupMainBean.getGroupType().equals("other")) {
 				groupMainBean.setGroupImage(ImageUtils.localImageToByteArray("cover_other.jpg", context));
 			}
-			if(groupMainBean.getGroupType().equals("food")) {
+			if (groupMainBean.getGroupType().equals("food")) {
 				groupMainBean.setGroupImage(ImageUtils.localImageToByteArray("cover_food.jpg", context));
 			}
-			if(groupMainBean.getGroupType().equals("entertainment")) {
+			if (groupMainBean.getGroupType().equals("entertainment")) {
 				groupMainBean.setGroupImage(ImageUtils.localImageToByteArray("cover_entertainment.jpg", context));
 			}
 		}
-		
-		//取得並設定當前使用者memId
-		groupMainBean.setGroupLeaderId((Integer) session.getAttribute("memberId")); 
-		
-		//1 : 開團者
-		groupMainBean.setGroupCurrentMembers(1); 
-		
-		//預設開團時間為當下
+
+		// 取得並設定當前使用者memId
+		groupMainBean.setGroupLeaderId((Integer) session.getAttribute("memberId"));
+
+		// 1 : 開團者
+		groupMainBean.setGroupCurrentMembers(1);
+
+		// 預設開團時間為當下
 		groupMainBean.setGroupCreateDate(LocalDateTime.now().toString());
-		
+
 		service.createGroup(groupMainBean);
-		
+
 		return "redirect:/groups";
 	}
-	
-	//根據groupid傳回社團主頁資料
-//	@RequestMapping(method = RequestMethod.GET, value = "/group/{groupId}")
-//	public String groupIdView(@PathVariable Integer groupId, Model model ) {
-//		
-//		
-//		return "";
-//	}
-	
+
 }

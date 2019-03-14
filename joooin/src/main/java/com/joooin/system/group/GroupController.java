@@ -28,13 +28,5 @@ public class GroupController {
 	public String groupPage() {
 		return "group/groups";
 	}
-	
-
-	//社團主頁連結
-	@RequestMapping(method = RequestMethod.GET, value = "/group/group")
-	public String groupMainPage() {
-		return "group/group";
-		
-	}
 
 }

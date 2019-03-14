@@ -6,5 +6,7 @@ public interface GroupService_22 {
 	public GroupMainBean getByGroupId(Integer groupId);
 	
 	Integer createGroup(GroupMainBean groupMainBean);
-	
+
+	//
+
 }
