@@ -32,15 +32,13 @@ public class LoginController {
 		return "admin/login";
 	}
 
-	@RequestMapping(value = "loginProcess", method = RequestMethod.POST)
+	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String loginProcess(@ModelAttribute("memberMainBean") MemberMainBean mmb, HttpServletRequest request
 			,RedirectAttributes redirectAttributes) {
 		HttpSession session = request.getSession();
-		MemberMainBean member = null;
-		AdminBean admin = null;
-		String adm = "admin@admin";
 		
-		member = service.checkIDPassword(mmb.getEmail(), mmb.getPassword());
+		MemberMainBean member = null;
+		member = service.checkEmailPassword(mmb.getEmail(), mmb.getPassword());
 		if(member != null) {
 			session.setAttribute("memberName", member.getMemberName());
 			session.setAttribute("memberId", member.getMemberId());
@@ -50,8 +48,8 @@ public class LoginController {
 			session.setAttribute("logout", "登出");
 			return "redirect:/";
 		}
-		admin = service.check(mmb.getEmail());
-		if(mmb.getEmail().equals(adm) && admin!=null){
+		if(service.checkAdmin(mmb.getEmail(), mmb.getPassword())){
+			AdminBean admin = service.getAdmin();
 			session.setAttribute("admin", admin.getName());
 			session.setAttribute("adminId", admin.getAdminId());
 			session.setAttribute("logout", "登出");

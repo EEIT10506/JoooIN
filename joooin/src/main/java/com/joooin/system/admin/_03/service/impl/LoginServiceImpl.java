@@ -1,5 +1,7 @@
 package com.joooin.system.admin._03.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,28 +17,44 @@ import com.joooin.system.admin._03.service.LoginService;
 public class LoginServiceImpl implements LoginService {
 	
 	@Autowired
-	MemberMainDao dao;
-	@Autowired
-	AdminDao ab;
+	MemberMainDao memberMainDao;
 	
-	public MemberMainBean processLogin(String email, String password) {
-		MemberMainBean mmb = checkIDPassword(email, password);
+	@Autowired
+	AdminDao adminDao;
+
+	@Override
+	public MemberMainBean checkEmailPassword(String email, String password) {
+		MemberMainBean mmb = new MemberMainBean();
+		mmb = null;
+		List<MemberMainBean> list = memberMainDao.getAll();
+		for(MemberMainBean bean : list) {
+			if(bean.getEmail().equals(email) && bean.getPassword().equals(password)) {
+				mmb = bean;
+			}
+		}
 		return mmb;
 	}
 
 	@Override
-	public MemberMainBean checkIDPassword(String email, String password) {
-		return dao.checkIDPassword(email, password);
-	}
-
-	@Override
 	public void update(MemberMainBean memberMainBean) {
-		dao.update(memberMainBean);
+		memberMainDao.update(memberMainBean);
 	}
 
 	@Override
-	public AdminBean check(String email) {
-		return ab.check(email);
+	public Boolean checkAdmin(String email, String passwrod) {
+		Boolean checkAdmin = false;
+		List<AdminBean> list = adminDao.getAll();
+		
+		for(AdminBean ab : list) {
+			if(ab.getName().equals(email) && ab.getPassword().equals(passwrod)) {
+				checkAdmin = true;
+			}
+		}
+		return checkAdmin;
 	}
 
+	@Override
+	public AdminBean getAdmin() {
+		return adminDao.getByAdminId(1);
+	}
 }
