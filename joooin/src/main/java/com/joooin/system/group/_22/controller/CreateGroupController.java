@@ -32,13 +32,13 @@ public class CreateGroupController {
 	// 送出空白社團表單
 	@RequestMapping(method = RequestMethod.GET, value = "/groups/create")
 	public String getNewGroupForm(Model model, HttpSession session) {
-		
+
 		// 未登入不可創社團
-		Integer memberId = (Integer)session.getAttribute("memberId");
-		if(memberId == null) {
+		Integer memberId = (Integer) session.getAttribute("memberId");
+		if (memberId == null) {
 			return "not_login";
 		}
-		
+
 		// 送出空白社團表單
 		GroupMainBean groupMainBean = new GroupMainBean();
 		model.addAttribute("groupMainBean", groupMainBean);
@@ -85,10 +85,10 @@ public class CreateGroupController {
 
 		// 預設開團時間為當下
 		groupMainBean.setGroupCreateDate(LocalDateTime.now().toString());
-		
+
 		// 創社團
 		Integer groupId = service.createGroup(groupMainBean);
-		
+
 		service.leaderAddToGroup(groupId, memId);
 
 		return "redirect:/groups";
@@ -97,17 +97,20 @@ public class CreateGroupController {
 	// 處理加入或進入{groupId}社團
 	@RequestMapping(method = RequestMethod.POST, value = "/group/addgroup/{groupId}")
 	public String processAddGroup(@PathVariable Integer groupId, HttpSession session, Model model) {
-		Integer memId = (Integer) session.getAttribute("memberId");		
-		
-		if(service.isInGroup(groupId, memId)) {
-			return "redirect:/group/"+ groupId; //已經在社團中了，前端按鈕顯示為進入社團
+		Integer memId = (Integer) session.getAttribute("memberId");
+
+		// 未登入不可加入社團
+		if (memId == null) {
+			return "not_login";
 		}
-		else {
+
+		if (service.isInGroup(groupId, memId)) {
+			return "redirect:/group/" + groupId; // 已經在社團中了，前端按鈕顯示為進入社團
+		} else {
 			service.memberAddToGroup(groupId, memId);
 			model.addAttribute("status", "申請成功，待批准");
 			return "已申請成功";
 		}
 	}
-	
-	
+
 }
