@@ -36,6 +36,10 @@
 		width: 50px;
 		border-radius: 100px;
 	}
+	button {
+		position: relative;
+		top: 7px;
+	}
 </style>
 <script>
 	$(document).ready(function(){		

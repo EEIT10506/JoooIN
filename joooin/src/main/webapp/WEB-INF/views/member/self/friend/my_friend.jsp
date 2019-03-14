@@ -29,12 +29,13 @@
 	thead {
 		text-align: center;
 	}
-	td {
-		vertical-align:middle!important;
-	}
 	#friendImage {
 		width: 50px;
 		border-radius: 100px;
+	}
+	button {
+		position: relative;
+		top: 7px;
 	}
 </style>
 <script>
@@ -83,7 +84,7 @@
 	});
 	
 </script>
-<title>會員</title></head>
+<title>會員1</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
