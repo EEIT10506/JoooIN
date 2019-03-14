@@ -30,8 +30,8 @@ public class SidebarController {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		
 		if (memberId != null) {
-			MemberMainBean mmb = memberService.getMemberMainBean(memberId);
-			model.addAttribute("memberMainBean", mmb);
+			MemberMainBean bean = memberService.getMemberMainBean(memberId);
+			model.addAttribute("memberMainBean", bean);
 			return "member/self/member";
 		} else {
 			return "not_login";
@@ -43,8 +43,8 @@ public class SidebarController {
 		Integer selfMemberId = (Integer)session.getAttribute("memberId");
 		
 		if (selfMemberId == null || selfMemberId.equals(otherMemberId) == false) {
-			MemberMainBean mmb = memberService.getMemberMainBean(otherMemberId);
-			model.addAttribute("memberMainBean", mmb);
+			MemberMainBean bean = memberService.getMemberMainBean(otherMemberId);
+			model.addAttribute("memberMainBean", bean);
 			return "member/other/member";
 		} else {
 			return "redirect:/member/my";
@@ -56,8 +56,8 @@ public class SidebarController {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		
 		if (memberId != null) {
-			MemberMainBean mmb = memberService.getMemberMainBean(memberId);
-			model.addAttribute("memberMainBean", mmb);
+			MemberMainBean bean = memberService.getMemberMainBean(memberId);
+			model.addAttribute("memberMainBean", bean);
 			return "member/self/" + link;
 		} else {
 			return "not_login";
@@ -69,8 +69,8 @@ public class SidebarController {
 		Integer selfMemberId = (Integer)session.getAttribute("memberId");
 		
 		if (selfMemberId == null || selfMemberId.equals(otherMemberId) == false) {
-			MemberMainBean mmb = memberService.getMemberMainBean(otherMemberId);
-			model.addAttribute("memberMainBean", mmb);
+			MemberMainBean bean = memberService.getMemberMainBean(otherMemberId);
+			model.addAttribute("memberMainBean", bean);
 			return "member/other/" + link;
 		} else {
 			return "redirect:/member/my/" + link;

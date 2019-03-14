@@ -3,14 +3,10 @@ package com.joooin.system.member._27.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.joooin.model.MemberFriendBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.repository.MemberFriendDao;
@@ -22,13 +18,10 @@ import com.joooin.util.ImageUtils;
 @Service
 @Transactional
 public class MemberServiceImpl implements MemberService{
-
 	@Autowired
 	MemberMainDao memberMainDao;
 	@Autowired
 	MemberFriendDao memberFriendDao;
-	@Autowired
-	MemberService memberService;
 	
 	@Override
 	public MemberMainBean getMemberMainBean(Integer memberId) {
@@ -93,8 +86,6 @@ public class MemberServiceImpl implements MemberService{
 			return "NOT_FRIEND";
 		}
 	}
-	
-	
 
 	@Override
 	public void friendProcess(Integer inviteMemberId, Integer receiveMemberId, String process) {

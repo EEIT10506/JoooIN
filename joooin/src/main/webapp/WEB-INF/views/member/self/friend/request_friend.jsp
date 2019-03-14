@@ -19,10 +19,6 @@
 		position: relative;
 		top: 50px;
 	}
-	.profile-navbar {
-		font-size: 24px;
-		margin: auto;
-	}
 	.friendBtn {
 		width: 90px;
 		text-align: center;
@@ -42,48 +38,34 @@
 	}
 </style>
 <script>
-	$(document).ready(function(){
-		//show my-friend
-		$(".friend-view").hide();
-		$("#my-friend").show();
-		
-		//navbar switch
-		$(".friend-link").click(function(){
-			var viewId = this.id.replace("-link", "");
-			$(".friend-link").attr("class", "friend-link nav-item nav-link");
-			$(this).attr("class", "friend-link nav-item nav-link active");
-			$(".friend-view").hide();
-			$("#" + viewId).show();
-		});	
-		
+	$(document).ready(function(){		
 		$(document).on("click", ".friendPageBtn", function(){
 			window.open("${pageContext.request.contextPath}/member/other/" + $(this).val());
 		});
-		$(document).on("click", ".friendDeleteBtn", function(){
+		
+		$(document).on("click", ".friendCancelBtn", function(){
 			var otherMemberId = $(this).val();
 			
 			$.ajax({
 			    type: "POST",                           
 			    url: "${pageContext.request.contextPath}/member/friendProcess",
-			    data: {"otherMemberId": otherMemberId, "process": "delete"},
+			    data: {"otherMemberId": otherMemberId, "process": "cancel"},
 			    success: function (notLogin) {
 			    	if (notLogin)
 			    		location.href = "${pageContext.request.contextPath}/notLogin";
 			    	else 
-			    		location.href = "${pageContext.request.contextPath}/member/my/friend";
+			    		location.href = "${pageContext.request.contextPath}/member/self/friend/request_friend";
 			    }
 			});
 		});
 		
-		
-		
 		//DataTable
 		var language = {
-		        "zeroRecords": "沒有會員",
-		        "info": "<span class='seperator'>  </span>" + "總共 _TOTAL_ 位好友",
-		        "infoFiltered": " (從所有 _MAX_ 好友中篩選出)",
+		        "zeroRecords": "沒有結果",
+		        "info": "<span class='seperator'>  </span>" + "總共 _TOTAL_ 位申請好友",
+		        "infoFiltered": " (從所有 _MAX_ 位申請好友中篩選出)",
 		        "infoEmpty": "共 0 位",
-		        "search":"搜尋好友：",
+		        "search":"搜尋申請好友：",
 		        "paginate": {
 		            "previous": "上一頁",
 		            "next": "下一頁",
@@ -94,12 +76,10 @@
 		var column=[
             {"data": "name", name:"會員名稱" , "orderable":true },
             {"data": "page", name:"個人頁面" , "orderable":false },
-            {"data": "delete", name:"解除好友" , "orderable":false },
+            {"data": "delete", name:"取消申請" , "orderable":false },
            ];
 
 		$('#datatable').DataTable({"columns":column, "language":language, "lengthChange": false, "aLengthMenu" : 10, "bScrollCollapse": true});
-		
-		
 	});
 	
 </script>
@@ -113,15 +93,7 @@
 				<jsp:include page="${request.contextPath}/member/self/sidebar"/>
 			</div>
 			<div id="x" class="col-9">
-				<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-				    <div class="navbar-nav profile-navbar">
-				      <a id="my-friend-link" class="friend-link nav-item nav-link active" href="#">我的好友</a>　　　
-				      <a id="request-friend-link" class="friend-link nav-item nav-link" href="#">好友申請中</a>　　　
-				      <a id="receive-friend-link" class="friend-link nav-item nav-link" href="#">好友受邀中</a>
-				    </div>
-				  </div>
-				</nav>
+				<jsp:include page="${request.contextPath}/member/self/friend/navbar"/>
 				<div id="main-view"><br /><br />
 					<div id="my-friend" class="friend-view">
 						<table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -129,31 +101,24 @@
 								<tr>
 									<th>會員名稱</th>
 		                            <th>個人頁面</th>
-		                            <th>解除好友</th>
+		                            <th>取消申請</th>
 								</tr>
 							</thead>		
 							<tbody>
 								<c:forEach var="friend" items="${friendList}">
-									<c:if test="${friend.isFriend == true}">
+									<c:if test="${friend.isFriend == false && friend.isInviter == true}">
 										<tr id="friendRow${friend.memberId}" class="tr">
 											<td><img id="friendImage" src='<c:url value='/getMemberImage/${friend.memberId}.jpg' />' />　${friend.memberName} </td>
 				                            <td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="個人頁面"><button value="${friend.memberId}" class="friendPageBtn btn btn-primary btn-xs" data-title="個人頁面" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
-				    						<td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="解除好友"><button value="${friend.memberId}" class="friendDeleteBtn btn btn-danger btn-xs" data-title="解除好友" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_delete.png' />"/></button></p></td>
+				    						<td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="解除好友"><button value="${friend.memberId}" class="friendCancelBtn btn btn-secondary btn-xs" data-title="取消申請" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_delete.png' />"/></button></p></td>
 										</tr>
 									</c:if>
 								</c:forEach>
 							</tbody>
 						</table>
 					</div>
-					<div id="request-friend" class="friend-view">
-					123
-					</div>
-					<div id="receive-friend" class="friend-view">
-					456
-					</div>
 				</div>
 			</div>
-			
 		</div>
 	</div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 <!-- 請把所有內容寫在此div內 -->

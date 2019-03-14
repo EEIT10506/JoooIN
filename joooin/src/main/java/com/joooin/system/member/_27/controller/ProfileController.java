@@ -19,7 +19,7 @@ public class ProfileController {
 	@Autowired
 	ServletContext context;
 	
-	@RequestMapping(value = "/member/my/updateProfile", method = RequestMethod.POST)
+	@RequestMapping(value = "/member/updateProfile", method = RequestMethod.POST)
 	public String updateProfile(@ModelAttribute("memberMainBean") MemberMainBean updateBean, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		
@@ -32,7 +32,7 @@ public class ProfileController {
 		}	
 	}						  
 	
-	@RequestMapping(value = "/member/my/updatePassword", method = RequestMethod.POST)
+	@RequestMapping(value = "/member/updatePassword", method = RequestMethod.POST)
 	public String updatePassword(@RequestParam String password1, @RequestParam String password2, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		
@@ -48,7 +48,7 @@ public class ProfileController {
 		}
 	}
 	
-	@RequestMapping(value = "/member/my/updatePrivacy", method = RequestMethod.POST)
+	@RequestMapping(value = "/member/updatePrivacy", method = RequestMethod.POST)
 	public String updatePrivacy(@ModelAttribute("memberMainBean") MemberMainBean updateBean, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		

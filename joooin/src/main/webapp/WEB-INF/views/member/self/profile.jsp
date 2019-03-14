@@ -46,7 +46,7 @@
 <script>
 	$(document).ready(function(){
 		//show profile
-		$(".profile-view").each(function(){$(this).hide();});
+		$(".profile-view").hide();
 		$("#show-data-link").click();
 		$("#show-data").show();
 		
@@ -57,7 +57,7 @@
 			$(".profile-link").attr("class", "profile-link nav-item nav-link");
 			$(this).attr("class", "profile-link nav-item nav-link active");
 			
-			$(".profile-view").each(function(){$(this).hide();});
+			$(".profile-view").hide();
 			$("#" + viewId).show();
 			
 			removePwdAlert();
@@ -65,8 +65,8 @@
 		
 		$("#checkPwdBtn").click(function(event){
 			removePwdAlert();
-			var pwd1 = document.getElementById("password1").value;
-			var pwd2 = document.getElementById("password2").value;
+			var pwd1 = $("#password1").val();
+			var pwd2 = $("#password2").val();
 			
 			if (pwd1 == "" && pwd2 == ""){
 				event.stopPropagation();
@@ -86,12 +86,12 @@
 			}
 			
 		});
-		
-		function removePwdAlert(){
-			$("#pwdAlert1").text("");
-			$("#pwdAlert2").text("");
-		}
 	});
+	
+	function removePwdAlert(){
+		$("#pwdAlert1").text("");
+		$("#pwdAlert2").text("");
+	}
 	
 	function checkImage(image){
 		var validExts = new Array(".jpg", ".png", ".gif");
@@ -119,7 +119,7 @@
 	    return true;
 	}
 </script>
-<title>會員</title></head>
+<title>會員1</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
@@ -150,7 +150,7 @@
 						<div class="param-label">Email：</div>　${memberMainBean.email }<br />
 					</div>
 					<div id="edit-data" class="profile-view">
-						<form:form modelAttribute="memberMainBean" action="updateProfile" method="POST" enctype="multipart/form-data">
+						<form:form modelAttribute="memberMainBean" action="${pageContext.request.contextPath}/member/updateProfile" method="POST" enctype="multipart/form-data">
 							<div class="param-label"><form:label class="edit-data-text" for="memberName" path="memberName">名稱：</form:label></div>　
 							<form:input path="memberName"></form:input><br />
 							
@@ -190,7 +190,7 @@
 						</form:form>
 					</div>
 					<div id="edit-password" class="profile-view">
-						<form action="updatePassword" method="POST">
+						<form action="${pageContext.request.contextPath}/member/updatePassword" method="POST">
 							<div class="param-label"><label class="edit-data-text" for="password1">請輸入密碼：</label></div>　
 							<input id="password1" type="password" name="password1"></input>　<label class="pwdAlert" id="pwdAlert1"></label><br />
 							<div class="param-label"><label class="edit-data-text" for="password2">再次輸入密碼：</label></div>　
@@ -216,7 +216,7 @@
 						</form>
 					</div>
 					<div id="edit-privacy" class="profile-view">
-						<form:form modelAttribute="memberMainBean" action="updatePrivacy" method="POST">
+						<form:form modelAttribute="memberMainBean" action="${pageContext.request.contextPath}/member/updatePrivacy" method="POST">
 							<div class="param-label"><form:label class="edit-data-text" for="genderDisplay" path="genderDisplay">性別：</form:label></div>　
 							<form:radiobutton path="genderDisplay" value="true"></form:radiobutton>　公開　　　　
 							<form:radiobutton path="genderDisplay" value="false"></form:radiobutton>　不公開<br />
