@@ -5,8 +5,6 @@ import com.joooin.model.GroupMainBean;
 public interface GroupService_22 {
 	public GroupMainBean getByGroupId(Integer groupId);
 	
-	Integer createGroup(GroupMainBean groupMainBean);
-
+	void createGroup(GroupMainBean groupMainBean);
 	//
-
 }

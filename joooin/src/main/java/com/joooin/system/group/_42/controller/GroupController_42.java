@@ -34,5 +34,4 @@ public class GroupController_42 {
 		model.addAttribute("groupsType", typeOne);
 		return "group/groups_type";
 	}
-
 }
