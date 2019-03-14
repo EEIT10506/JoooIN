@@ -29,14 +29,44 @@
 function good(){
 	$("#good").toggleClass('btn btn-primary btn-sm btn btn-secondary btn-sm');
 	
+	$.ajax({
+	    type: "POST",                           
+	    url: "${pageContext.request.contextPath}/event/good/${event.eventId}",
+	    data: {},
+	    success: function (notLogin) {
+	    	if (notLogin)
+	    		location.href = "${pageContext.request.contextPath}/notLogin";
+	    	else 
+	    		friendShow();
+	    }
+	});
+	
 }
+
+
+function newEventProcess(){
+	
+	$.ajax({
+	    type: "POST",                           
+	    url: "${pageContext.request.contextPath}/event/newEventProcess",
+	    data: {},
+	    success: function (notLogin) {
+	    	if (notLogin=="notLogin")
+	    		location.href = "${pageContext.request.contextPath}/notLogin";
+	    	else 
+	        	$("#newdiv").show();
+	    	    $("#getdiv").hide();  	
+	    }
+	});
+}
+
+
 
 $(document).ready(function () {
 	
 	// 切換顯示 新增活動與尋找活動
     $("#new").click(function () {
-    	$("#newdiv").show();
-    	$("#getdiv").hide();  	
+    	newEventProcess();  	
     });
     
     $("#get").click(function () {
@@ -157,19 +187,19 @@ function check(){
 
 		
 		<form:form modelAttribute="NewEvent" 
-			method='POST' onsubmit="return check();">
+			method='POST' onsubmit="return check();" enctype="multipart/form-data">
 			<p>
 			
-			活動名稱:<form:input path='eventName' required="required"/><p>
+			活動名稱:<form:input path='eventName' required="required" maxlength="10"/><p>
 			開始時間:<form:input id="sd" path='eventDateStart' type="datetime-local" required="required"/><p>
 			結束時間:<form:input id="ed" path='eventDateEnd' type="datetime-local" required="required" /><p>  
-           <p>
+           <p></p>
            
                               請輸入活動地點:<input type="text" size="20" id="address" value="" required="required"/>
-           <p/>
+           
            <input type="button" value="開始搜尋!" />
 
-    </p>
+  
     <div id="map" style="width: 600px; height: 450px; display:none"></div>
     <%--設定顯示 Google Maps 的大小--%>
 
@@ -179,16 +209,18 @@ function check(){
 			活動座標經度:<form:input path='eventLatitude' id="lat" required="required"/><p>
 			活動座標緯度:<form:input path='eventLongitude' id="lng" required="required"/><p>
 			</div>
-			活動內容(可省略):<form:input path='eventContent' /><p>
+			<p></p>
+			活動內容(可省略):<p></p>
+			<form:textarea path='eventContent' style="width:300px;height:100px;"/><p>
 			
 			活動類型:<form:select path='eventTypeId' required="required">
-			<form:option value="1">運動</form:option>
-			<form:option value="2">美食</form:option>
+			<form:option value="1">美食</form:option>
+			<form:option value="2">運動</form:option>
 			<form:option value="3">娛樂</form:option>
 			<form:option value="4">其他</form:option>
 			</form:select>
 			<p>
-		
+		          活動圖片(不上傳依類型提供預設圖片):<form:input path='multipartFile' type="file" accept="image/*"/><p>
 			人員上限:<form:input path='eventMemberLimit' required="required"/><p>
 			攜帶人數(單獨參加免輸入):<input name="quantity"/><p>
 			參加費(不輸入為免費):<form:input path='eventFee' /><p>
@@ -221,13 +253,13 @@ function check(){
     <option value="all">所有未過期</option>
     <option value="alcome">即將到期</option>
     <option value="alfull">即將滿團</option>
-<!--     <option vale="lost">已過期的團</option> -->
+    <option value="lost">已過期的團</option>
     </select>
     
 	類別:<select id="etype">
 	    <option value="">全部</option>
-		<option value="運動">運動</option>
 		<option value="美食">美食</option>
+		<option value="運動">運動</option>
 		<option value="娛樂">娛樂</option>
 		<option value="其他">其他</option>	
 	</select>
@@ -255,10 +287,10 @@ function check(){
 	<tr>
 	<td>
   <c:if test="${event.eventTypeId=='1'}">
-      運動
+      美食
   </c:if>
   <c:if test="${event.eventTypeId=='2'}">
-    美食
+    運動
   </c:if>
   <c:if test="${event.eventTypeId=='3'}">
     娛樂
@@ -267,7 +299,7 @@ function check(){
     其他
   </c:if>
 </td>
-	<td><a href="${pageContext.request.contextPath}/event/${event.eventId}">${event.eventName}</a> <span style="margin-left:10px"><button id="good" value="${event.eventId}" class="btn btn-primary btn-sm" onclick="good()">讚:${event.eventLike}</button></span> </td>
+	<td><a href="${pageContext.request.contextPath}/event/${event.eventId}">${event.eventName}</a> <span style="margin-left:10px"><button id="e${event.eventId}" value="${event.eventId}" class="btn btn-primary btn-sm" onclick="good()">讚:${event.eventLike}</button></span> </td>
 	<td>${event.eventLocation}</td>
 	<td>${event.eventAddress}</td>
 	<td>${event.eventDateStart}</td>
@@ -321,7 +353,13 @@ $.fn.dataTable.ext.search.push(
 	        if(ewill=="alcome"){dateminus = tablemin-todaynow; }
 	        if(ewill=="alfull"){peopleminus = data[6]-data[7]; }
 	        
-// 	        if(ewill=="lost"){dateminus = todaynow-tablemin; }
+ 	        if(ewill=="lost"){ 
+ 	          if(tablemin<todaynow){
+ 	           if(tablemin <= time   	        	  
+	               || (usertime=="")
+	                ) {return true;}}
+ 	           else{return false;}
+ 	        }
 	        
 	        if (      
 	                 (tablemin <= time   
@@ -342,6 +380,8 @@ $.fn.dataTable.ext.search.push(
 	        }
 	        return false;
 	    }
+	
+	
 	);
 
 
