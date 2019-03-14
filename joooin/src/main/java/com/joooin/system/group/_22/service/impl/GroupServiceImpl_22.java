@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 
 import com.joooin.model.GroupMainBean;
 import com.joooin.repository.GroupMainDao;
-import com.joooin.system.group._22.service.GroupService;
+import com.joooin.system.group._22.service.GroupService_22;
 
 
 @Service
-public class GroupServiceImpl_22 implements GroupService {
+public class GroupServiceImpl_22 implements GroupService_22 {
 
 	@Autowired
 	SessionFactory factory;
