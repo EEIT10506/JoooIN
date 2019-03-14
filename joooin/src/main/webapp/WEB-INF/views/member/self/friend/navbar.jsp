@@ -21,7 +21,7 @@
 			$("#receive-friend-link").addClass("active");
 	});
 </script>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav friend-navbar">
       <a href="${pageContext.request.contextPath}/member/self/friend/my_friend" id="my-friend-link" class="friend-link nav-item nav-link" href="#">我的好友</a>　　　

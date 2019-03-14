@@ -129,7 +129,7 @@
 				<jsp:include page="${request.contextPath}/member/self/sidebar"/>
 			</div>
 			<div class="col-9">
-				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<nav class="navbar navbar-expand-sm navbar-light bg-light">
 				  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				    <div class="navbar-nav profile-navbar">
 				      <a id="show-data-link" class="profile-link nav-item nav-link active" href="#">個人資料</a>　　　
