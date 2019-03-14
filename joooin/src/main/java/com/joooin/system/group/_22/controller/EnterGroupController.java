@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.system.group._22.service.GroupService_22;
+import com.joooin.system.member._27.service.MemberService;
 import com.joooin.util.ImageUtils;
 
 @Controller
 public class EnterGroupController {
 
 	@Autowired
-	GroupService_22 service;
+	GroupService_22 groupService;
 
 	@Autowired
 	ServletContext context;
@@ -28,15 +29,19 @@ public class EnterGroupController {
 	@RequestMapping(method = RequestMethod.GET, value = "/group/{groupId}")
 	public String groupMainPage(Model model, @PathVariable Integer groupId) {
 
-		GroupMainBean groupMain = service.getByGroupId(groupId);
+		GroupMainBean groupMain = groupService.getByGroupId(groupId);
 		model.addAttribute("groupMain", groupMain);
 		return "group/group";
 	}
 	
-	// 進入社團介紹
+	// 進入社團關於介紹
 	@RequestMapping(method = RequestMethod.GET, value = "/group/about/{groupId}")
 	public String mainPageAbout(Model model, @PathVariable Integer groupId) {
 		
+		GroupMainBean groupMain = groupService.getByGroupId(groupId);
+		String leader = groupService.leaderOfGroup(groupId);
+		model.addAttribute("groupMain", groupMain);
+		model.addAttribute("leader", leader);
 
 		return "group/group_about";
 	}
@@ -49,17 +54,11 @@ public class EnterGroupController {
 		return "group/group_members";
 	}
 	
-//	@RequestMapping(method = RequestMethod.GET, value = "/group/about/${groupId}")
-//	public String mainPageAbout(Model model, @PathVariable Integer groupId) {
-//		
-//		
-//		return "group/group_about";
-//	}
 	
 	//傳回社團主頁的照片
 	@RequestMapping(value = "/getGroupImage/{groupId}", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> getGroupImage(@PathVariable Integer groupId) {
-		GroupMainBean bean = service.getByGroupId(groupId);
+		GroupMainBean bean = groupService.getByGroupId(groupId);
 	    return ImageUtils.byteArrayToImage(bean.getGroupImage());
 	}
 }
