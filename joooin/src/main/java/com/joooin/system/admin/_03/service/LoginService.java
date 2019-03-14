@@ -6,8 +6,8 @@ import com.joooin.model.MemberMainBean;
 public interface LoginService {
 
 	public MemberMainBean checkEmailPassword(String email, String password);
+
 	public void update(MemberMainBean memberMainBean);
-	public Boolean checkAdmin(String email, String password);
-	public AdminBean getAdmin();
-	
+
+	public AdminBean checkAdmin(String email, String password);
 }

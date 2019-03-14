@@ -15,10 +15,10 @@ import com.joooin.system.admin._03.service.LoginService;
 @Service
 @Transactional
 public class LoginServiceImpl implements LoginService {
-	
+
 	@Autowired
 	MemberMainDao memberMainDao;
-	
+
 	@Autowired
 	AdminDao adminDao;
 
@@ -27,8 +27,8 @@ public class LoginServiceImpl implements LoginService {
 		MemberMainBean mmb = new MemberMainBean();
 		mmb = null;
 		List<MemberMainBean> list = memberMainDao.getAll();
-		for(MemberMainBean bean : list) {
-			if(bean.getEmail().equals(email) && bean.getPassword().equals(password)) {
+		for (MemberMainBean bean : list) {
+			if (bean.getEmail().equals(email) && bean.getPassword().equals(password)) {
 				mmb = bean;
 			}
 		}
@@ -41,20 +41,16 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public Boolean checkAdmin(String email, String passwrod) {
-		Boolean checkAdmin = false;
+	public AdminBean checkAdmin(String email, String passwrod) {
+		AdminBean ab = new AdminBean();
+		ab = null;
 		List<AdminBean> list = adminDao.getAll();
-		
-		for(AdminBean ab : list) {
-			if(ab.getName().equals(email) && ab.getPassword().equals(passwrod)) {
-				checkAdmin = true;
+
+		for (AdminBean bean : list) {
+			if (bean.getName().equals(email) && bean.getPassword().equals(passwrod)) {
+				ab = bean;
 			}
 		}
-		return checkAdmin;
-	}
-
-	@Override
-	public AdminBean getAdmin() {
-		return adminDao.getByAdminId(1);
+		return ab;
 	}
 }
