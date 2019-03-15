@@ -44,7 +44,6 @@ public class SidebarController {
 		
 		if (selfMemberId == null || selfMemberId.equals(otherMemberId) == false) {
 			MemberMainBean bean = memberService.getMemberMainBean(otherMemberId);
-			System.out.println(bean);
 			model.addAttribute("memberMainBean", bean);
 			return "member/other/member";
 		} else {

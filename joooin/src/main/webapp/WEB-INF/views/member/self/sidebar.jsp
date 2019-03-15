@@ -18,7 +18,7 @@
 </script>
 <style>
 	#memberImage{text-align: center;}
-	#memberName{font-size: 20px;}
+	#memberName{font-size: 20px; position: relative;top: 20px;}
 	.list-group{text-align: center;}
 	#userImage {border-radius: 100px;}
 </style>

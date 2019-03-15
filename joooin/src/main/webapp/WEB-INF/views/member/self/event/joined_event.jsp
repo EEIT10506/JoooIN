@@ -117,7 +117,7 @@
 				<jsp:include page="${request.contextPath}/member/self/sidebar"/>
 			</div>
 			<div id="x" class="col-9">
-				<jsp:include page="${request.contextPath}/member/self/friend/navbar"/>
+				<jsp:include page="${request.contextPath}/member/self/event/navbar"/>
 				<div id="main-view"><br /><br />
 					<div id="my-friend" class="friend-view">
 						<table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -142,7 +142,6 @@
 								</c:forEach>
 							</tbody>
 						</table>
-					</div>
 				</div>
 			</div>
 		</div>

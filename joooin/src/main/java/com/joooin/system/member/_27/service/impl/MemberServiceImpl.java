@@ -1,14 +1,22 @@
 package com.joooin.system.member._27.service.impl;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.joooin.model.EventMainBean;
 import com.joooin.model.MemberFriendBean;
 import com.joooin.model.MemberMainBean;
+import com.joooin.repository.EventMainDao;
 import com.joooin.repository.MemberFriendDao;
 import com.joooin.repository.MemberMainDao;
 import com.joooin.system.member._27.pojo.FriendPojo;
@@ -22,6 +30,8 @@ public class MemberServiceImpl implements MemberService{
 	MemberMainDao memberMainDao;
 	@Autowired
 	MemberFriendDao memberFriendDao;
+	@Autowired
+	EventMainDao eventMainDao;
 	
 	@Override
 	public MemberMainBean getMemberMainBean(Integer memberId) {
@@ -149,5 +159,21 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return friendPojoList;
 	}
+
+	@Override
+	public List<EventMainBean> getEvents(Integer memberId, String process)  {
+		List<EventMainBean> eventMainList = eventMainDao.getAll();
+		
+		if (process.equals("my_event")) {
+			List<EventMainBean> list = new ArrayList<EventMainBean>();
+			for (EventMainBean bean : eventMainList) {
+				if (bean.getEventInviterId().equals(memberId)) 
+					list.add(bean);
+			}
+			return list;
+		}
+		return null;
+	}
+	
 
 }

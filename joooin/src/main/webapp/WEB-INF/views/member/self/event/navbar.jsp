@@ -13,13 +13,17 @@
 		var url = location.href;
 		$(".friend-link").removeClass("active");
 		
-		if (url.search("my_friend") != -1)
-			$("#my-friend-link").addClass("active");
-		if (url.search("request_friend") != -1)
-			$("#request-friend-link").addClass("active");
-		if (url.search("receive_friend") != -1)
-			$("#receive-friend-link").addClass("active");
+		if (url.search("my_event") != -1)
+			$("#my-event-link").addClass("active");
+		if (url.search("joined_event") != -1)
+			$("#joined_event-link").addClass("active");
+		if (url.search("request_event") != -1)
+			$("#request-event-link").addClass("active");
+		if (url.search("like_event") != -1)
+			$("#like-event-link").addClass("active");
 	});
+	
+	
 </script>
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">

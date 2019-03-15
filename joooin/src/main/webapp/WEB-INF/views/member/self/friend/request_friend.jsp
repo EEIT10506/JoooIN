@@ -99,28 +99,26 @@
 			<div id="x" class="col-9">
 				<jsp:include page="${request.contextPath}/member/self/friend/navbar"/>
 				<div id="main-view"><br /><br />
-					<div id="my-friend" class="friend-view">
-						<table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-		    				<thead>
-								<tr>
-									<th>會員名稱</th>
-		                            <th>個人頁面</th>
-		                            <th>取消申請</th>
-								</tr>
-							</thead>		
-							<tbody>
-								<c:forEach var="friend" items="${friendList}">
-									<c:if test="${friend.isFriend == false && friend.isInviter == true}">
-										<tr id="friendRow${friend.memberId}" class="tr">
-											<td><img id="friendImage" src='<c:url value='/getMemberImage/${friend.memberId}.jpg' />' />　${friend.memberName} </td>
-				                            <td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="個人頁面"><button value="${friend.memberId}" class="friendPageBtn btn btn-primary btn-xs" data-title="個人頁面" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
-				    						<td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="解除好友"><button value="${friend.memberId}" class="friendCancelBtn btn btn-secondary btn-xs" data-title="取消申請" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_delete.png' />"/></button></p></td>
-										</tr>
-									</c:if>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
+					<table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+	    				<thead>
+							<tr>
+								<th>會員名稱</th>
+	                            <th>個人頁面</th>
+	                            <th>取消申請</th>
+							</tr>
+						</thead>		
+						<tbody>
+							<c:forEach var="friend" items="${friendList}">
+								<c:if test="${friend.isFriend == false && friend.isInviter == true}">
+									<tr>
+										<td><img id="friendImage" src='<c:url value='/getMemberImage/${friend.memberId}.jpg' />' />　${friend.memberName} </td>
+			                            <td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="個人頁面"><button value="${friend.memberId}" class="friendPageBtn btn btn-primary btn-xs" data-title="個人頁面" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
+			    						<td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="解除好友"><button value="${friend.memberId}" class="friendCancelBtn btn btn-secondary btn-xs" data-title="取消申請" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_delete.png' />"/></button></p></td>
+									</tr>
+								</c:if>
+							</c:forEach>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
