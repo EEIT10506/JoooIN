@@ -30,7 +30,7 @@ import com.joooin.repository.EventLikeDao;
 import com.joooin.repository.EventMainDao;
 import com.joooin.system.event._02.service.EventService;
 import com.joooin.system.event._02.service.impl.GetPostContentBean;
-import com.joooin.system.event._35.service.EventMainService;
+import com.joooin.system.event._35.service.EventsService;
 import com.joooin.util.ImageUtils;
 
 
@@ -43,7 +43,7 @@ public class EventController {
 	@Autowired
 	EventLikeDao eventLikeDao;
 	@Autowired
-	EventMainService eventMainService;
+	EventsService eventMainService;
 	@RequestMapping(value = "/event/eventPost", method = RequestMethod.POST)
 	public String submitEventPost(@RequestParam Integer eventId, @RequestParam String eventPostContent, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");

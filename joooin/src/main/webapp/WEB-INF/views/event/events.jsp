@@ -656,7 +656,7 @@ $.fn.dataTable.ext.search.push(
                    && (dateminus>0 || dateminus==null) // (無篩選快過期) 
 	               && (dateminus/(1000*60*24*60))<1   //現在時間與活動開始差不到一天(有篩選)
 	           )  
-	        {
+	        { 
 	            return true;
 	        }
 	        return false;
