@@ -22,5 +22,19 @@ public class ProcessGroupController {
 		return "";
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "/group/addgroup/{groupId}")
+	public String processGroupApply() {
+		
+		if("inputString".equals("accept")) {
+			// update isAgreed
+		}
+		else {
+			// delete bean
+		}
+		
+		return "";
+	}
+	
+	
 	
 }
