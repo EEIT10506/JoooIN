@@ -98,6 +98,7 @@ public class EventsController {
 			{event.setEventImage(ImageUtils.localImageToByteArray("cover_other.jpg", context));}		
 		}
 
+
 		
 		//event.getEventDateStart();
 		//event.getEventDateEnd();
@@ -119,10 +120,13 @@ public class EventsController {
 	    String eventstart = sdf2.format(dates); 
 	    String eventend = sdf2.format(datee); 
 	    String eventcreate = sdf2.format(now);
+
 	    //System.out.println( eventstart);
 	    //System.out.println( eventend);
-	    
+
+	 
 	    event.setEventCreateDate(eventcreate);
+
 	    event.setEventDateStart(eventstart);
 	    event.setEventDateEnd(eventend);
 		event.setEventInviterId(inviterId);		

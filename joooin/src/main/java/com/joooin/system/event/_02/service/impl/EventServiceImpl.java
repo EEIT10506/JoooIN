@@ -24,75 +24,52 @@ import com.joooin.system.event._02.service.EventService;
 public class EventServiceImpl implements EventService {
 	
 	@Autowired
-	EventMainDao eventmaindao;
+	EventMainDao eventMainDao;
 	@Autowired
-	EventMemberDao eventmemberdao;
+	EventMemberDao eventMemberDao;
 	@Autowired
-	EventTypeDao eventtypedao;
+	EventTypeDao eventTypeDao;
 	@Autowired
-	MemberMainDao membermaindao;
+	MemberMainDao memberMainDao;
 	@Autowired
 	EventPostDao eventPostDao;
 	
 	public EventMainBean getByEventMainId(Integer eventId) {
-//		EventMainBean event = eventmaindao.getByEventMainId(eventId);
-//		Integer typeid = event.getEventTypeId();
-//		Integer inviterid = event.getEventInviterId();
-//		
-//		EventTypeBean eventtype = eventtypedao.getByEventTypeId(typeid);
-//		MemberMainBean eventbuildname = membermaindao.getByMemberId(inviterid);
-//		
-//		Set<EventMemberBean> eventmember = event.getEventMemberSet();
-//		
-//		MemberMainBean eventmembers = null;
-//		Set<MemberMainBean> eventmemberset =new HashSet<MemberMainBean>();
-//		for(EventMemberBean members: eventmember) {
-//			Integer memberid = members.getMemberId();
-//			 eventmembers  = membermaindao.getByMemberId(memberid);
-//			 eventmemberset.add(eventmembers);
-//		}
-		return eventmaindao.getByEventMainId(eventId);
-	}
 
+		return eventMainDao.getByEventMainId(eventId);
+	}
 	@Override
 	public List<EventMainBean> getAll() {
-		
 		return null;
 	}
-
 	@Override
 	public Integer save(EventMainBean eventMainBean) {
-	
 		return null;
 	}
-
 	@Override
 	public void update(EventMainBean eventMainBean) {
 	
-		
 	}
-
 	@Override
 	public void deleteByEventId(Integer eventId) {
 	
-		
 	}
 	@Override
 	public EventTypeBean getByEventTypeId(Integer eventTypeId) {
 		
-		return eventtypedao.getByEventTypeId(eventTypeId);
+		return eventTypeDao.getByEventTypeId(eventTypeId);
 	}
 
 	@Override
 	public List<MemberMainBean> getAllEventMember() {
 		
-		return membermaindao.getAll();
+		return memberMainDao.getAll();
 	}
 
 	@Override
 	public MemberMainBean getByMemberId(Integer memberId) {
 		// TODO Auto-generated method stub
-		return membermaindao.getByMemberId(memberId);
+		return memberMainDao.getByMemberId(memberId);
 	}
 
 	@Override
@@ -100,7 +77,7 @@ public class EventServiceImpl implements EventService {
 		
 		return eventPostDao.save(eventPostBean);
 	}
-
+	
 	@Override
 	public void deleteEventPost(Integer eventPostId) {
 		
@@ -110,7 +87,33 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public Integer saveEventMember(EventMemberBean eventMemberBean) {
 		
-		return eventmemberdao.save(eventMemberBean);
+		return eventMemberDao.save(eventMemberBean);
+	}
+	@Override
+	public void updateEventPostIsDeleted(EventPostBean eventPostBean) {
+		eventPostDao.update(eventPostBean);
+		
+	}
+	@Override
+	public EventPostBean getByEventPostId(Integer eventPostId) {
+		
+		return eventPostDao.getByEventPostId(eventPostId);
+	}
+	@Override
+	public void deleteEventMemberById(Integer eventId, Integer memberId) {
+		List<EventMemberBean> list = eventMemberDao.getAll();
+		
+		for(EventMemberBean bean : list) {
+		     if (bean.getEventId().equals(eventId) && bean.getMemberId().equals(memberId)) {
+		    	 eventMemberDao.deleteByEventMemberId(bean.getEventMemberId());
+		    	 break;
+		     }
+		}
+	}
+	@Override
+	public EventMemberBean getByEventMemberId(Integer eventMemberId) {
+		
+		return eventMemberDao.getByEventMemberId(eventMemberId);
 	}
 
 	

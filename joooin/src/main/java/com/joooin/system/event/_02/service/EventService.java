@@ -16,11 +16,9 @@ public interface EventService {
 	public void update(EventMainBean eventMainBean);
 	public void deleteByEventId(Integer eventId);
 //	活動成員Bean
-//	public EventMemberBean getByEventMemberId(Integer eventMemberId);
-//	public List<EventMemberBean> getAllEventMembers();
+	public EventMemberBean getByEventMemberId(Integer eventMemberId);
 	public Integer saveEventMember(EventMemberBean eventMemberBean);
-//	public void update(EventMemberBean eventMemberBean);
-//	public void deleteByEventMemberId(Integer eventMemberId);
+
 	//活動類型	
 	public EventTypeBean getByEventTypeId(Integer eventTypeId);
 	//member_main抓活動成員名單 
@@ -30,4 +28,9 @@ public interface EventService {
 	public Integer saveOneEventPost(EventPostBean eventPostBean);
 	//刪除一筆留言
 	public void deleteEventPost(Integer eventPostId);
+	public EventPostBean getByEventPostId(Integer eventPostId);
+	public void updateEventPostIsDeleted(EventPostBean eventPostBean);
+	//刪除一筆報名
+	public void deleteEventMemberById(Integer eventId,Integer eventMemberId);
+	
 }
