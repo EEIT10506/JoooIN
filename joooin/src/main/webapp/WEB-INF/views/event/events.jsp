@@ -24,27 +24,143 @@
 		top: 50px;
 	}
 </style>
-<title>Insert title here</title>
+<title>755</title>
 <script type="text/javascript">
-function good(){
-	$("#good").toggleClass('btn btn-primary btn-sm btn btn-secondary btn-sm');
+
+
+//判斷 使用者是否登入可新增活動
+function newEventProcess(){
 	
+	$.ajax({
+	    type: "POST",                           
+	    url: "${pageContext.request.contextPath}/event/newEventProcess",
+	    data: {},
+	    success: function (notLogin) {
+	    	if (notLogin=="notLogin")
+	    		location.href = "${pageContext.request.contextPath}/notLogin";
+	    	else 
+	        	$("#newdiv").show();
+	    	    $("#getdiv").hide();  	
+	    }
+	});
+}
+
+var table;
+
+var likeNum = [];
+
+function showLikeNum(){
+	
+	var i = 0;
+	
+	$(".likeBtn").each(function(){
+		$(this).text("讚:" + likeNum[i]);
+		i++;
+	});
 }
 
 $(document).ready(function () {
 	
+	table = $('#showevents').DataTable();
+	
+	
+	//顯示讚
+	 <c:forEach var='event' items='${AllEvents}'>
+	$.ajax({
+	    type: "POST",                           
+	    url: "${pageContext.request.contextPath}/event/good/"+${event.eventId},
+	    data: {"eventId": ${event.eventId}},
+	    success: function (result) {
+	    	if (result==-5)
+	    		{}
+	    	else {
+	    		//alert(result);
+    	    }
+	    	likeNum.push(result);
+	    	var array = document.getElementsByClassName("likeBtn");
+	    	
+	    	for (var i = 0; i < array.length; i++){
+	    		if (array[i].value == ${event.eventId})
+	    			array[i].innerHTML ="讚:"+result;
+	    	}
+	    }
+	});
+	</c:forEach>
+	
+	//table = $('#showevents').DataTable();
+	
 	// 切換顯示 新增活動與尋找活動
     $("#new").click(function () {
-    	$("#newdiv").show();
-    	$("#getdiv").hide();  	
+    	newEventProcess();  	
     });
     
     $("#get").click(function () {
     	$("#newdiv").hide();
     	$("#getdiv").show();
     });
+    
 
-
+    //進入時顯示讚數
+    
+//     $(".likeBtn").ready(function(){
+//     	$(this).toggleClass('btn btn-primary btn-sm btn btn-secondary btn-sm');
+//     	var eventId = $(this).val();
+    	
+//     	//alert(eventId);
+//     	$.ajax({
+//     	    type: "POST",                           
+//     	    url: "${pageContext.request.contextPath}/event/good/"+eventId,
+//     	    data: {"eventId": eventId},
+//     	    success: function (result) {
+//     	    	if (result==-5)
+//     	    		{location.href = "${pageContext.request.contextPath}/notLogin";}
+//     	    	else {
+//     	    		//alert(result);
+// 	    	    }
+//     	    	var likeNum = "5";
+//     	    	var array = document.getElementsByClassName("likeBtn");
+    	    	
+//     	    	for (var i = 0; i < array.length; i++){
+//     	    		if (array[i].value == eventId)
+//     	    			array[i].innerHTML ="讚:"+result;
+//     	    	}
+//    	    	}
+//     	});
+//     });
+    
+    
+    
+    //按讚功能
+   
+    $(".likeBtn").click(function(){
+    	$(this).toggleClass('btn btn-primary btn-sm btn btn-secondary btn-sm');
+    	var eventId = $(this).val();
+    	//alert(eventId);
+    	$.ajax({
+    	    type: "POST",                           
+    	    url: "${pageContext.request.contextPath}/event/good/"+eventId,
+    	    data: {"eventId": eventId},
+    	    success: function (result) {
+    	    	if (result==-5)
+    	    		{location.href = "${pageContext.request.contextPath}/notLogin";}
+    	    	else {
+    	    		//alert(result);
+	    	    }
+    	    	
+    	    	var array = document.getElementsByClassName("likeBtn");
+    	    	
+    	    	for (var i = 0; i < array.length; i++){
+    	    		if (array[i].value == eventId)
+    	    			array[i].innerHTML ="讚:"+result;
+    	    	}
+   	    	}
+    	});
+    });
+    
+    	
+    
+    
+	
 
 	//活動時間驗證處理 
     var now = new Date();
@@ -85,7 +201,7 @@ function check(){
 	}
 	else
 	{
-	alert("false");
+	alert("送出已取消");
 	return false ;
 	}
 }
@@ -96,7 +212,7 @@ function check(){
   //googlemap 分析使用者輸入地點名 產生真實地址 經緯度
     $(document).ready(function () {
 
-      $("input:button").click(function () {
+      $("#address").blur(function () {
         var geocoder = new google.maps.Geocoder();
         var add = $("#address").val();
 
@@ -157,19 +273,19 @@ function check(){
 
 		
 		<form:form modelAttribute="NewEvent" 
-			method='POST' onsubmit="return check();">
+			method='POST' onsubmit="return check();" enctype="multipart/form-data">
 			<p>
 			
-			活動名稱:<form:input path='eventName' required="required"/><p>
+			活動名稱:<form:input path='eventName' required="required" maxlength="10"/><p>
 			開始時間:<form:input id="sd" path='eventDateStart' type="datetime-local" required="required"/><p>
 			結束時間:<form:input id="ed" path='eventDateEnd' type="datetime-local" required="required" /><p>  
-           <p>
+           <p></p>
            
                               請輸入活動地點:<input type="text" size="20" id="address" value="" required="required"/>
-           <p/>
-           <input type="button" value="開始搜尋!" />
+           
+           
 
-    </p>
+  
     <div id="map" style="width: 600px; height: 450px; display:none"></div>
     <%--設定顯示 Google Maps 的大小--%>
 
@@ -179,16 +295,18 @@ function check(){
 			活動座標經度:<form:input path='eventLatitude' id="lat" required="required"/><p>
 			活動座標緯度:<form:input path='eventLongitude' id="lng" required="required"/><p>
 			</div>
-			活動內容(可省略):<form:input path='eventContent' /><p>
+			<p></p>
+			活動內容(可省略):<p></p>
+			<form:textarea path='eventContent' style="width:300px;height:100px;"/><p>
 			
 			活動類型:<form:select path='eventTypeId' required="required">
-			<form:option value="1">運動</form:option>
-			<form:option value="2">美食</form:option>
+			<form:option value="1">美食</form:option>
+			<form:option value="2">運動</form:option>
 			<form:option value="3">娛樂</form:option>
 			<form:option value="4">其他</form:option>
 			</form:select>
 			<p>
-		
+		          活動圖片(不上傳依類型提供預設圖片):<form:input path='multipartFile' type="file" accept="image/*"/><p>
 			人員上限:<form:input path='eventMemberLimit' required="required"/><p>
 			攜帶人數(單獨參加免輸入):<input name="quantity"/><p>
 			參加費(不輸入為免費):<form:input path='eventFee' /><p>
@@ -221,13 +339,13 @@ function check(){
     <option value="all">所有未過期</option>
     <option value="alcome">即將到期</option>
     <option value="alfull">即將滿團</option>
-    <option vale="lost">已過期的團</option>
+    <option value="lost">已過期的團</option>
     </select>
-    
+   
 	類別:<select id="etype">
 	    <option value="">全部</option>
-		<option value="運動">運動</option>
 		<option value="美食">美食</option>
+		<option value="運動">運動</option>
 		<option value="娛樂">娛樂</option>
 		<option value="其他">其他</option>	
 	</select>
@@ -245,6 +363,7 @@ function check(){
         <th>結束時間</th>
         <th>上限人數</th>
         <th>目前人數</th>
+        <th>人數已滿</th>
         <th>活動地圖</th>
         
     </tr>
@@ -254,10 +373,10 @@ function check(){
 	<tr>
 	<td>
   <c:if test="${event.eventTypeId=='1'}">
-      運動
+      美食
   </c:if>
   <c:if test="${event.eventTypeId=='2'}">
-    美食
+    運動
   </c:if>
   <c:if test="${event.eventTypeId=='3'}">
     娛樂
@@ -266,13 +385,21 @@ function check(){
     其他
   </c:if>
 </td>
-	<td><a href="${pageContext.request.contextPath}/event/${event.eventId}">${event.eventName}</a> <span style="margin-left:10px"><button id="good" value="${event.eventId}" class="btn btn-primary btn-sm" onclick="good()">讚:${event.eventLike}</button></span> </td>
+	<td><a href="${pageContext.request.contextPath}/event/${event.eventId}">${event.eventName}</a> <span style="margin-left:10px"><button id="e${event.eventId}" value="${event.eventId}" class="likeBtn btn btn-primary btn-sm">讚:${event.eventLike}</button></span> </td>
 	<td>${event.eventLocation}</td>
 	<td>${event.eventAddress}</td>
 	<td>${event.eventDateStart}</td>
 	<td>${event.eventDateEnd}</td> 
 	<td>${event.eventMemberLimit}</td>
 	<td>${event.eventCurrentMembers}</td>
+	<td>
+	  <c:if test="${event.isFull==true}">
+                滿員
+      </c:if>
+     <c:if test="${event.isFull==false}">
+              未滿
+     </c:if>
+	</td>
 	<td><iframe width='350' height='200' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://www.google.com/maps?&q=${event.eventLatitude},${event.eventLongitude}&z=16&output=embed&hl=zh-TW&t=m' 
        allowfullscreen></iframe></td>
        </tr>
@@ -290,7 +417,7 @@ function check(){
     
     
 <script type="text/javascript">
-var table;
+//var table;
 var ewill;
 $.fn.dataTable.ext.search.push(
 	    function( settings, data, dataIndex ) {
@@ -312,35 +439,40 @@ $.fn.dataTable.ext.search.push(
 	        if(ewill=="alcome"){dateminus = tablemin-todaynow; }
 	        if(ewill=="alfull"){peopleminus = data[6]-data[7]; }
 	        
-// 	        if(ewill=="lost"){dateminus = todaynow-tablemin; }
+ 	        if(ewill=="lost"){ 
+ 	          if(tablemin<todaynow){
+ 	           if(tablemin <= time   	        	  
+	               || (usertime=="")
+	                ) {return true;}}
+ 	           else{return false;}
+ 	        }
 	        
 	        if (      
 	                 (tablemin <= time   
 	               && time <= tablemax
-	               || (usertime==""))   //使用者輸入的時間是否在開始與結束內
+	               || (usertime==""))   //使用者輸入的時間是否在開始與結束內 或是 使用者並無輸入時間
 	               
-	               && peopleminus<=1    //上限人數與實際人數差一(有篩選)
-	               && data[6]-data[7]>0 //上限人數大於實際人數(人數未滿)
+	                                    //滿團限制
+	               && (peopleminus<=1 && peopleminus>0 || peopleminus==null)   //上限人數與實際人數差一(有篩選)  或者未篩選快滿人
+	               && data[6]-data[7]>=0 //上限人數大於實際人數(人數未滿)
 	               
 	               
  	               && (tablemin-todaynow>0) //活動開始時間大於現在時間(活動未開始)
                    && (dateminus>0 || dateminus==null) // (無篩選快過期) 
 	               && (dateminus/(1000*60*24*60))<1   //現在時間與活動開始差不到一天(有篩選)
-	           )  
+	           )   
 	        {
 	            return true;
 	        }
 	        return false;
 	    }
+	
+	
 	);
 
 
 
-$(document).ready(function(){
-    table = $('#showevents').DataTable();
 
-
-});
     
 //给搜索按钮绑定点击事件
 
@@ -353,6 +485,9 @@ function search(){
     //用空格隔开，达到多条件搜索的效果，相当于两个关键字
 
      table.column(0).search(args1).column(3).search(args2).draw();
+    
+     showLikeNum();
+    
     //table.search(args1+" "+args2).draw(false);//保留分页，排序状态
 
 }
