@@ -59,7 +59,8 @@ public class CreateGroupController {
 		if (!groupMainBean.getMultipartFile().isEmpty()) {
 			groupImage = ImageUtils.multipartFileToByteArray(groupMainBean.getMultipartFile());
 			groupMainBean.setGroupImage(groupImage);
-
+		
+		// 有空再精簡化
 		} else {
 			// 根據type配置預設圖片
 			if (groupMainBean.getGroupType().equals("sport")) {

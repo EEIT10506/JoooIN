@@ -7,17 +7,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+	crossorigin="anonymous"></script>
+
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
-	
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"
-	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-	crossorigin="anonymous"></script>
+<!-- DataTable -->
+
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='/resources/css/grouptype.css'/>">
+	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
 <style>
 #main {
 	width: 1200px;
@@ -25,15 +29,21 @@
 	position: relative;
 	top: 50px;
 }
-#menu {
-  position: fixed;
-  left: 15;
-  top: 25%;
-  width: 8em;
-  margin-top: -2.5em;
-}
 
+#menu {
+	position: fixed;
+	left: 15;
+	top: 25%;
+	width: 8em;
+	margin-top: -2.5em;
+}
 </style>
+
+<script>
+	$(document).ready(function() {
+		$('#table_id').DataTable();
+	});
+</script>
 
 <title>各社團主頁</title>
 </head>
@@ -44,18 +54,19 @@
 
 		<div class="container-fluid">
 			<div class="row">
-<!-- 	左側欄位底色	<nav class="col-md-2 d-none d-md-block bg-light sidebar"> -->
-					<div class="sidebar-sticky">
-<!-- 						<ul class="nav flex-column"> -->
-						<div class=.pull-right>
+				<!-- 	左側欄位底色	<nav class="col-md-2 d-none d-md-block bg-light sidebar"> -->
+				<div class="sidebar-sticky">
+					<!-- 						<ul class="nav flex-column"> -->
+					<div class=.pull-right>
 						<ul id="menu" class="nav flex-column">
 							<li class="nav-item"><a class="nav-link active"
 								href="${pageContext.request.contextPath}/group/about/${groupMain.groupId}">
 									<span data-feather="home"></span> 關於 ${groupMain.groupName} <span
 									class="sr-only"></span>
 							</a></li>
-							<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/group/members/${groupMain.groupId}"> <span
-									data-feather="file">社團成員</span> 
+							<li class="nav-item"><a class="nav-link"
+								href="${pageContext.request.contextPath}/group/members/${groupMain.groupId}">
+									<span data-feather="file">社團成員</span>
 							</a></li>
 							<li class="nav-item"><a class="nav-link" href="#"> <span
 									data-feather="shopping-cart"></span> Products
@@ -71,23 +82,14 @@
 							</a></li>
 						</ul>
 					</div>
-					</div>
-<!-- 				</nav> -->
-				
+				</div>
+				<!-- 				</nav> -->
+
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-		
+
 				<div
 					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 					<div class="display-4">社團名稱: ${groupMain.groupName}</div>
-<!-- 							<div id="test"> -->
-<!-- 			<p>關於社團資料</p> -->
-<%-- 			<p>${groupMain.groupId}</p> --%>
-<%-- 			<p>${groupMain.groupType}</p> --%>
-<%-- 			<p>${groupMain.groupLeaderId}</p> --%>
-<%-- 			<p>${groupMain.groupCurrentMembers}</p> --%>
-<%-- 			<p>${groupMain.groupCreateDate}</p> --%>
-<%-- 			<p>${groupMain.groupIntro}</p> --%>
-<!-- 		</div> -->
 					<div class="btn-toolbar mb-2 mb-md-0">
 						<div class="btn-group mr-2">
 							<button type="button" class="btn btn-sm btn-outline-secondary">分享</button>
@@ -99,13 +101,17 @@
 						</button>
 					</div>
 				</div>
-				
-				
-				<img class="container"  src="<c:url value='/getGroupImage/${groupMain.groupId}'/>" height="350" />
-				<h4 >文章列表</h4>
-				
+
+
+				<img class="container"
+					src="<c:url value='/getGroupImage/${groupMain.groupId}'/>"
+					height="350" />
+					<p></p>
+				<h4>文章列表</h4>
+
 				<div class="table-responsive">
-					<table class="table table-striped table-sm">
+					<!-- 					<table class="table table-striped table-sm"> -->
+					<table id="table_id" class="display table table-striped table-sm">
 						<thead>
 							<tr>
 								<th>編號</th>
@@ -235,6 +241,11 @@
 			</div>
 		</div>
 	</div>
+<!-- DataTable -->
 
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+<!-- DataTable -->
 </body>
 </html>
