@@ -31,9 +31,11 @@
   top: 25%;
   width: 8em;
   margin-top: -2.5em;
+
 }
 
 </style>
+
 
 <title>各社團主頁</title>
 </head>

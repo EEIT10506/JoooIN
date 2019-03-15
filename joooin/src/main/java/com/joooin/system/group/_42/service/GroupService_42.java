@@ -8,4 +8,5 @@ public interface GroupService_42 {
 	List<GroupMainBean> getAll();
 	
 	List<GroupMainBean> getGroupType(String groupOneType);
+	
 }
