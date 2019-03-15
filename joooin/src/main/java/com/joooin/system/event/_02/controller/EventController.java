@@ -1,5 +1,7 @@
 package com.joooin.system.event._02.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -68,7 +70,9 @@ public class EventController {
 	@RequestMapping(value = "/DeleteEventPost", method = RequestMethod.POST)
 	public String deleteEventPost(@RequestParam Integer eventPostId, @RequestParam Integer eventId, HttpSession session) {
 		Integer adminId = (Integer)session.getAttribute("admin");
-		if (adminId != null) {
+		Integer memberId = (Integer)session.getAttribute("memberId");
+		
+		if (adminId != null || memberId  != null) {
 			EventPostBean eventPostBean = eventService.getByEventPostId(eventPostId);
 					eventPostBean.setIsDeleted(true);
 					eventService.updateEventPostIsDeleted(eventPostBean);
@@ -108,12 +112,25 @@ public class EventController {
 		}
 	}
 	@RequestMapping("/event/{eventId}")
-	public String eventDetail(@PathVariable("eventId") Integer eventId,Model model,HttpSession session) {
+	public String eventDetail(@PathVariable("eventId") Integer eventId,Model model,HttpSession session){
 		Integer memberId = (Integer) session.getAttribute("memberId");
 		
 		EventMainBean event = eventService.getByEventMainId(eventId);
 		Integer typeid = event.getEventTypeId();
 		Integer inviterid = event.getEventInviterId();
+		String endDate = event.getEventDateEnd();
+		
+		SimpleDateFormat format = new SimpleDateFormat();
+		format.applyPattern("yyyy/MM/dd HH:mm");
+		Date endTime = null;
+		try {
+			endTime = format.parse(endDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	//	Date endTime = DateFormat.getDateTimeInstance().parse(endDate);
+		Date timeNow = new Date();
+		 boolean finish = endTime.after(timeNow);
 		
 		List<EventMemberBean> emlist = event.getEventMemberList();
 		List<Integer> emidlist = new LinkedList<Integer>();
@@ -125,8 +142,8 @@ public class EventController {
 		EventTypeBean eventtype = eventService.getByEventTypeId(typeid);
 		MemberMainBean eventbuildname = eventService.getByMemberId(inviterid);
 		
+//		參加人員isAgree = true
 		List<EventMemberBean> eventmember = event.getEventMemberList();
-		
 		MemberMainBean eventmembers = null;
 		List<MemberMainBean> eventmemberlist = new ArrayList<MemberMainBean>();
 		List<MemberMainBean> emfindagreed = new ArrayList<MemberMainBean>();
@@ -140,7 +157,7 @@ public class EventController {
 				emfindagreed.add(eventmembers);
 			}
 		}
-		
+		//抓留言資訊
 		List<EventPostBean> eventPost = event.getEventPostList();
 		List<GetPostContentBean> getPostContentlist =new ArrayList<>();
 		
@@ -165,6 +182,17 @@ public class EventController {
 				bean.setMemberId(postMemberId);
 				getPostContentlist.add(bean);
 		}
+		//LIKE
+		
+		
+		List<EventLikeBean> likeList = event.getEventLikeList();
+			for(EventLikeBean like: likeList){
+				if(like.getEventId().equals(eventId) && like.getMemberId().equals(memberId)) {
+					model.addAttribute("likedCheck", like);
+				}
+			}
+		
+		model.addAttribute("finish",finish);
 		model.addAttribute("event", event);
 		model.addAttribute("eventtype", eventtype);
 		model.addAttribute("eventbuildname", eventbuildname);
@@ -174,11 +202,11 @@ public class EventController {
 		model.addAttribute("eventPost", eventPost);
 		model.addAttribute("memberCheck", memberCheck);
 		model.addAttribute("emfindagreed", emfindagreed);
-		
+		model.addAttribute("getPostContentlist", getPostContentlist);
 		return "event/event";
 	}
 	
-	@RequestMapping(value = "/event/good/{eventId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/event/goods/{eventId}", method = RequestMethod.POST)
 	public @ResponseBody String giveEventLike(Integer eventId,HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
 		if(memberId != null) { 
@@ -191,11 +219,13 @@ public class EventController {
 					EventMainBean updateEvent = eventMainService.getByEventMainId(eventId);
 					Integer like = updateEvent.getEventLike();
 					int updatelike =(like.intValue()-1);
-					Integer reallike = Integer.valueOf(updatelike);
+					Integer realDeleteLike = Integer.valueOf(updatelike);
 				
 					
-					updateEvent.setEventLike(reallike);
+					updateEvent.setEventLike(realDeleteLike);
 					eventMainService.save(updateEvent);
+					
+					
 					count++;
 					break;
 				}
@@ -207,58 +237,38 @@ public class EventController {
 					eventLikeDao.save(eventLikeBean);
 					Integer like = eventMainService.getByEventMainId(eventId).getEventLike();
 			 
-					int updatelike = like.intValue()+1;
-					Integer reallike = Integer.valueOf(updatelike);
+					int updatelikes = like.intValue()+1;
+					Integer reallike = Integer.valueOf(updatelikes);
 
 				EventMainBean updateEvent = eventMainService.getByEventMainId(eventId);
 					updateEvent.setEventLike(reallike);
 					eventMainService.save(updateEvent);
-					return "liked";
+					return "realLike";
 			}
 			else {
-				return "cancel_Liked";
+				return "realDeleteLike";
 			}	
-	    }else {  
-	    	return "notLogin";}
+	    }
+		else {  
+	    	return "not_login";
+	    	}
 	
 	}
-//	@RequestMapping(value = "/event/setting", method = RequestMethod.POST)
-//	public String eventManager(@ModelAttribute("memberMainBean") MemberMainBean updateBean, HttpSession session) {
-//		Integer memberId = (Integer)session.getAttribute("memberId");
-//		
-//		if (memberId != null) {
-//			MemberMainBean mmb = memberService.getMemberMainBean(memberId);
-//			mmb.setMemberName(updateBean.getMemberName());
-//			mmb.setBirthday(updateBean.getBirthday());
-//			mmb.setCity(updateBean.getCity());
-//			mmb.setPhone(updateBean.getPhone());
-//			
-//			Byte[] memberImage = null;
-//			if (!updateBean.getMultipartFile().isEmpty()) {
-//				memberImage = ImageUtils.multipartFileToByteArray(updateBean.getMultipartFile());
-//				mmb.setMemberImage(memberImage);
-//			} else {
-//				mmb.setMemberImage(ImageUtils.localImageToByteArray("member_male.PNG", context));
-//			}
-//			memberService.updateMemberMainBean(mmb);
-//			session.setAttribute("memberName", mmb.getMemberName());
-//			
-//			return "redirect:/member/my/profile";
-//		} else {
-//			return "not_login";
-//		}	
-//	}					
+				
 	//活動修改
-	@RequestMapping("/event/setting")
+	@RequestMapping("/event/setting/{eventId}")
 	public String eventSetting(Model model, @RequestParam("eventAdminId") Integer eventId) {
 		EventMainBean event = eventService.getByEventMainId(eventId);
 
-//		Integer typeid = event.getEventTypeId();
-//		EventTypeBean eventtype = eventService.getByEventTypeId(typeid);
-//		String eventType = eventtype.getEventType();
 		model.addAttribute("events", event);
-//		model.addAttribute("eventtype", eventtype);
+
 		return "event/event_setting";
 	}
 	
+	@RequestMapping("/not_Login")
+	public String notLogin(HttpSession session) {
+		
+		return "not_login";
+		
+	}
 }
