@@ -22,6 +22,11 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+<!-- DataTable -->
+
 <style>
 #main {
 	width: 1200px;
@@ -49,6 +54,11 @@
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/navbar" />
+	<!-- 	解決include jQuery衝突 -->
+	<script type="text/javascript">
+		var xxx = jQuery.noConflict(true);
+	</script>
+	<!-- 	解決include jQuery衝突 -->
 	<div id="main">
 		<!-- 請把所有內容寫在此div內 -->
 
@@ -106,7 +116,7 @@
 				<img class="container"
 					src="<c:url value='/getGroupImage/${groupMain.groupId}'/>"
 					height="350" />
-					<p></p>
+				<p></p>
 				<h4>文章列表</h4>
 
 				<div class="table-responsive">
@@ -241,11 +251,11 @@
 			</div>
 		</div>
 	</div>
-<!-- DataTable -->
+	<!-- DataTable -->
 
-<script type="text/javascript" charset="utf8"
-	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+	<!-- <script type="text/javascript" charset="utf8" -->
+	<!-- 	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script> -->
 
-<!-- DataTable -->
+	<!-- DataTable -->
 </body>
 </html>
