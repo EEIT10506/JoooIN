@@ -22,10 +22,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.joooin.model.EventLikeBean;
 import com.joooin.model.EventMainBean;
 import com.joooin.model.EventMemberBean;
 import com.joooin.model.EventTypeBean;
-import com.joooin.system.event._35.service.EventMainService;
+import com.joooin.repository.EventLikeDao;
+import com.joooin.repository.impl.EventLikeDaoImpl;
+import com.joooin.system.event._35.service.EventsService;
 import com.joooin.system.event._35.service.EventMemberService;
 import com.joooin.system.event._35.service.EventTypeService;
 import com.joooin.util.ImageUtils;
@@ -39,7 +42,7 @@ public class EventsController {
 	ServletContext context;
 	
 	@Autowired
-	EventMainService eventservice;
+	EventsService eventservice;
 	
 	@Autowired
 	EventMemberService eventmemberservice;
@@ -47,6 +50,8 @@ public class EventsController {
 	@Autowired
 	EventTypeService eventtypeservice;
 	
+	@Autowired
+	EventLikeDao eventLikeDao;
 	
 	@RequestMapping(value = "/events", method = RequestMethod.GET)
 	public String eventspage(Model model) {
@@ -146,12 +151,7 @@ public class EventsController {
 		}	
 		
 	}
-	
-	@RequestMapping(value = "/getEventImage/{eventId}", method = RequestMethod.GET)
-	public ResponseEntity<byte[]> getEventImage(@PathVariable Integer eventId) {
-		EventMainBean bean = eventservice.getByEventMainId(eventId);
-	    return ImageUtils.byteArrayToImage(bean.getEventImage());
-	}
+
 	
 	@RequestMapping(value = "/event/newEventProcess", method = RequestMethod.POST)
 	public @ResponseBody String newEventProcess(HttpSession session) {
@@ -162,12 +162,32 @@ public class EventsController {
 		
 	}
 	
-	@RequestMapping(value = "/notLogin")
-	public String notLogin() {
-		
+	@RequestMapping(value = "/notLogin")  //新增活動 按讚時AJAX確認登入用  可能需要刪除
+	public String notLogin() {		
 		return "not_login";
 	}
 	
+	@RequestMapping(value = "/event/good/{eventId}", method = RequestMethod.POST)
+	public @ResponseBody Integer giveEventLike(Integer eventId,HttpSession session) {
+		
+		if(session.getAttribute("memberId")!=null) {
+			Integer memberId = (Integer) session.getAttribute("memberId");			
+			return eventservice.processeventlike(eventId, memberId);
+
+	    }else {  return -5;}
+	
+	}
+	
+	@RequestMapping(value = "/event/good/dis/{eventId}", method = RequestMethod.POST)
+	public @ResponseBody Integer displayEventLike(Integer eventId,HttpSession session) {
+		
+		if(session.getAttribute("memberId")!=null) {
+			Integer memberId = (Integer) session.getAttribute("memberId");			
+			return eventservice.processeventlike(eventId, memberId);
+
+	    }else {  return -5;}
+	
+	}	
 	
 	@ModelAttribute("EventTypeList") // 當有控制器方法被執行時,在控制器方法之前先執行,才執行該方法
 	public Map<String, String> getCompanyList() {

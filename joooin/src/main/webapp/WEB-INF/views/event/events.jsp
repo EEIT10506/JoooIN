@@ -24,26 +24,11 @@
 		top: 50px;
 	}
 </style>
-<title>Insert title here</title>
+<title>755</title>
 <script type="text/javascript">
-function good(){
-	$("#good").toggleClass('btn btn-primary btn-sm btn btn-secondary btn-sm');
-	
-	$.ajax({
-	    type: "POST",                           
-	    url: "${pageContext.request.contextPath}/event/good/${event.eventId}",
-	    data: {},
-	    success: function (notLogin) {
-	    	if (notLogin)
-	    		location.href = "${pageContext.request.contextPath}/notLogin";
-	    	else 
-	    		friendShow();
-	    }
-	});
-	
-}
 
 
+//判斷 使用者是否登入可新增活動
 function newEventProcess(){
 	
 	$.ajax({
@@ -60,9 +45,49 @@ function newEventProcess(){
 	});
 }
 
+var table;
 
+var likeNum = [];
+
+function showLikeNum(){
+	
+	var i = 0;
+	
+	$(".likeBtn").each(function(){
+		$(this).text("讚:" + likeNum[i]);
+		i++;
+	});
+}
 
 $(document).ready(function () {
+	
+	table = $('#showevents').DataTable();
+	
+	
+	//顯示讚
+	 <c:forEach var='event' items='${AllEvents}'>
+	$.ajax({
+	    type: "POST",                           
+	    url: "${pageContext.request.contextPath}/event/good/"+${event.eventId},
+	    data: {"eventId": ${event.eventId}},
+	    success: function (result) {
+	    	if (result==-5)
+	    		{}
+	    	else {
+	    		//alert(result);
+    	    }
+	    	likeNum.push(result);
+	    	var array = document.getElementsByClassName("likeBtn");
+	    	
+	    	for (var i = 0; i < array.length; i++){
+	    		if (array[i].value == ${event.eventId})
+	    			array[i].innerHTML ="讚:"+result;
+	    	}
+	    }
+	});
+	</c:forEach>
+	
+	//table = $('#showevents').DataTable();
 	
 	// 切換顯示 新增活動與尋找活動
     $("#new").click(function () {
@@ -73,8 +98,69 @@ $(document).ready(function () {
     	$("#newdiv").hide();
     	$("#getdiv").show();
     });
+    
 
-
+    //進入時顯示讚數
+    
+//     $(".likeBtn").ready(function(){
+//     	$(this).toggleClass('btn btn-primary btn-sm btn btn-secondary btn-sm');
+//     	var eventId = $(this).val();
+    	
+//     	//alert(eventId);
+//     	$.ajax({
+//     	    type: "POST",                           
+//     	    url: "${pageContext.request.contextPath}/event/good/"+eventId,
+//     	    data: {"eventId": eventId},
+//     	    success: function (result) {
+//     	    	if (result==-5)
+//     	    		{location.href = "${pageContext.request.contextPath}/notLogin";}
+//     	    	else {
+//     	    		//alert(result);
+// 	    	    }
+//     	    	var likeNum = "5";
+//     	    	var array = document.getElementsByClassName("likeBtn");
+    	    	
+//     	    	for (var i = 0; i < array.length; i++){
+//     	    		if (array[i].value == eventId)
+//     	    			array[i].innerHTML ="讚:"+result;
+//     	    	}
+//    	    	}
+//     	});
+//     });
+    
+    
+    
+    //按讚功能
+   
+    $(".likeBtn").click(function(){
+    	$(this).toggleClass('btn btn-primary btn-sm btn btn-secondary btn-sm');
+    	var eventId = $(this).val();
+    	//alert(eventId);
+    	$.ajax({
+    	    type: "POST",                           
+    	    url: "${pageContext.request.contextPath}/event/good/"+eventId,
+    	    data: {"eventId": eventId},
+    	    success: function (result) {
+    	    	if (result==-5)
+    	    		{location.href = "${pageContext.request.contextPath}/notLogin";}
+    	    	else {
+    	    		//alert(result);
+	    	    }
+    	    	
+    	    	var array = document.getElementsByClassName("likeBtn");
+    	    	
+    	    	for (var i = 0; i < array.length; i++){
+    	    		if (array[i].value == eventId)
+    	    			array[i].innerHTML ="讚:"+result;
+    	    	}
+   	    	}
+    	});
+    });
+    
+    	
+    
+    
+	
 
 	//活動時間驗證處理 
     var now = new Date();
@@ -115,7 +201,7 @@ function check(){
 	}
 	else
 	{
-	alert("false");
+	alert("送出已取消");
 	return false ;
 	}
 }
@@ -126,7 +212,7 @@ function check(){
   //googlemap 分析使用者輸入地點名 產生真實地址 經緯度
     $(document).ready(function () {
 
-      $("input:button").click(function () {
+      $("#address").blur(function () {
         var geocoder = new google.maps.Geocoder();
         var add = $("#address").val();
 
@@ -197,7 +283,7 @@ function check(){
            
                               請輸入活動地點:<input type="text" size="20" id="address" value="" required="required"/>
            
-           <input type="button" value="開始搜尋!" />
+           
 
   
     <div id="map" style="width: 600px; height: 450px; display:none"></div>
@@ -255,7 +341,7 @@ function check(){
     <option value="alfull">即將滿團</option>
     <option value="lost">已過期的團</option>
     </select>
-    
+   
 	類別:<select id="etype">
 	    <option value="">全部</option>
 		<option value="美食">美食</option>
@@ -299,7 +385,7 @@ function check(){
     其他
   </c:if>
 </td>
-	<td><a href="${pageContext.request.contextPath}/event/${event.eventId}">${event.eventName}</a> <span style="margin-left:10px"><button id="e${event.eventId}" value="${event.eventId}" class="btn btn-primary btn-sm" onclick="good()">讚:${event.eventLike}</button></span> </td>
+	<td><a href="${pageContext.request.contextPath}/event/${event.eventId}">${event.eventName}</a> <span style="margin-left:10px"><button id="e${event.eventId}" value="${event.eventId}" class="likeBtn btn btn-primary btn-sm">讚:${event.eventLike}</button></span> </td>
 	<td>${event.eventLocation}</td>
 	<td>${event.eventAddress}</td>
 	<td>${event.eventDateStart}</td>
@@ -331,7 +417,7 @@ function check(){
     
     
 <script type="text/javascript">
-var table;
+//var table;
 var ewill;
 $.fn.dataTable.ext.search.push(
 	    function( settings, data, dataIndex ) {
@@ -374,7 +460,7 @@ $.fn.dataTable.ext.search.push(
  	               && (tablemin-todaynow>0) //活動開始時間大於現在時間(活動未開始)
                    && (dateminus>0 || dateminus==null) // (無篩選快過期) 
 	               && (dateminus/(1000*60*24*60))<1   //現在時間與活動開始差不到一天(有篩選)
-	           )  
+	           )   
 	        {
 	            return true;
 	        }
@@ -386,11 +472,7 @@ $.fn.dataTable.ext.search.push(
 
 
 
-$(document).ready(function(){
-    table = $('#showevents').DataTable();
 
-
-});
     
 //给搜索按钮绑定点击事件
 
@@ -403,6 +485,9 @@ function search(){
     //用空格隔开，达到多条件搜索的效果，相当于两个关键字
 
      table.column(0).search(args1).column(3).search(args2).draw();
+    
+     showLikeNum();
+    
     //table.search(args1+" "+args2).draw(false);//保留分页，排序状态
 
 }
