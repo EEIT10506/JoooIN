@@ -22,6 +22,17 @@
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
+	
+<!-- 	測試資料正確性 -->
+
+	<p>type : ${groupMain.groupType}</p>
+	<p>name : ${groupMain.groupName}</p>
+	<p>memNum : ${groupMain.groupCurrentMembers}</p>
+	<p>createDate : ${groupMain.groupCreateDate}</p>
+	<p>Introduction : ${groupMain.groupIntro}</p>
+	<p>Leader : ${leader}</p>
+	<p>PostNum : 待寫</p>
+	
 	</div>
 <!-- 請把所有內容寫在此div內 -->
 </body>

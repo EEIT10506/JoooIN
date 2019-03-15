@@ -9,6 +9,6 @@ public interface GroupMainDao {
 	public Integer save(GroupMainBean groupMainBean);
 	public void update(GroupMainBean groupMainBean);
 	public void deleteByGroupId(Integer groupId);
-	List<GroupMainBean> getgrouptype(String grouponetype);
+	List<GroupMainBean> getGroupType(String groupOneType);
 	
 }

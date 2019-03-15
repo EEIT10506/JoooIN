@@ -45,7 +45,7 @@
 
                     <div class="team-back">
                         <span>
-                            <a href="${pageContext.request.contextPath}/group/sport" >超連結</a>
+                            <a href="${pageContext.request.contextPath}/groups/sport" >超連結</a>
                         </span>
                     </div>
 
@@ -59,13 +59,13 @@
 
                     <div class="team-front">
                         <img src="<c:url value='/resources/img/icon_food_01.png'/>" class="img-fluid" />
-                        <h3>食物</h3>
+                        <h3>美食</h3>
                         
                     </div>
 
                     <div class="team-back">
                         <span>
-                            <a href="${pageContext.request.contextPath}/group/food" >超連結</a>
+                            <a href="${pageContext.request.contextPath}/groups/food" >超連結</a>
                         </span>
                     </div>
 
@@ -84,7 +84,7 @@
 
                     <div class="team-back">
                         <span>
-                             <a href="${pageContext.request.contextPath}/group/entertainment" >超連結</a>
+                             <a href="${pageContext.request.contextPath}/groups/entertainment" >超連結</a>
                         </span>
                     </div>
 
@@ -103,7 +103,7 @@
 
                     <div class="team-back">
                         <span>
-                             <a href="${pageContext.request.contextPath}/group/other" >超連結</a>
+                             <a href="${pageContext.request.contextPath}/groups/other" >超連結</a>
                         </span>
                     </div>
 
@@ -122,7 +122,7 @@
 
                     <div class="team-back">
                         <span>
-                             <a href="${pageContext.request.contextPath}/group/groupstype" >超連結</a>
+                             <a href="${pageContext.request.contextPath}/groups/groups_type" >超連結</a>
                         </span>
                     </div>
 
@@ -141,13 +141,14 @@
 
                     <div class="team-back">
                         <span>
-                            	<a href="group/create">創立社團</a>
+                            	<a href="${pageContext.request.contextPath}/groups/create">創立社團</a>
                         </span>
                     </div>
 
                 </div>
             </div>
             <!--team-6-->
+
 
 
         </div>

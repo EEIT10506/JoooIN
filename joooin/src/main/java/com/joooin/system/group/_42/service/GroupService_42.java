@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.joooin.model.GroupMainBean;
 
-public interface GroupService {
+public interface GroupService_42 {
 	List<GroupMainBean> getAll();
-	List<GroupMainBean> getgrouptype(String getgrouponetype);
 	
+	List<GroupMainBean> getGroupType(String groupOneType);
 }
