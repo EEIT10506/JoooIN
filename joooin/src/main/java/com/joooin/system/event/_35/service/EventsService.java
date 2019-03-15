@@ -12,5 +12,6 @@ public interface EventsService {
 	public void deleteByEventId(Integer eventId);
 	
 	public Integer processeventlike(Integer eventId,Integer memberId);
-
+    
+	public Integer displayeventlike(Integer eventId,Integer memberId);
 }

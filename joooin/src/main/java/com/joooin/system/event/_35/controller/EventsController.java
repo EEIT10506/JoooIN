@@ -181,11 +181,11 @@ public class EventsController {
 	@RequestMapping(value = "/event/good/dis/{eventId}", method = RequestMethod.POST)
 	public @ResponseBody Integer displayEventLike(Integer eventId,HttpSession session) {
 		
-		if(session.getAttribute("memberId")!=null) {
+		
 			Integer memberId = (Integer) session.getAttribute("memberId");			
-			return eventservice.processeventlike(eventId, memberId);
+			return eventservice.displayeventlike(eventId, memberId);
 
-	    }else {  return -5;}
+	  
 	
 	}	
 	
