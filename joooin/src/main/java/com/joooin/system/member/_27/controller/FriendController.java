@@ -38,16 +38,16 @@ public class FriendController {
 			return "not_login";
 		}
 	}
-	
+	                         
 	@RequestMapping(value = "/member/self/friend/{link}", method = RequestMethod.GET)
 	public String getFriends(@PathVariable String link, HttpSession session, Model model) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		
+		System.out.println("not login");
 		if (memberId != null) {
 			model.addAttribute("friendList", memberService.getFriends(memberId));
 			return "member/self/friend/" + link;
 		} else {
-			return "not_Login";
+			return "not_login";
 		}	
 	}
 
