@@ -9,4 +9,6 @@ public interface GroupService_42 {
 	
 	List<GroupMainBean> getGroupType(String groupOneType);
 	
+	
+	
 }
