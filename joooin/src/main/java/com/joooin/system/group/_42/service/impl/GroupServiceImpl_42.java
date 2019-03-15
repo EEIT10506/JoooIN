@@ -28,4 +28,6 @@ public class GroupServiceImpl_42 implements GroupService_42 {
 		return dao.getGroupType(groupOneType);
 	}
 
+
+
 }

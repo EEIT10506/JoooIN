@@ -56,5 +56,5 @@ public class GroupMainDaoImpl implements GroupMainDao{
 		return session.createQuery(hql).setParameter("grouponetype", groupOneType).getResultList();
 
 		}
-	
+
 }

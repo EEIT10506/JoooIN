@@ -36,6 +36,16 @@
 }
 
 #menu {
+  position: fixed;
+  left: 15;
+  top: 25%;
+  width: 8em;
+  margin-top: -2.5em;
+
+}
+
+
+#menu {
 	position: fixed;
 	left: 15;
 	top: 25%;
@@ -49,6 +59,7 @@
 		$('#table_id').DataTable();
 	});
 </script>
+
 
 <title>各社團主頁</title>
 </head>
