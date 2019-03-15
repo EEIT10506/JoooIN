@@ -31,7 +31,7 @@
 	<a id="home" href="${pageContext.request.contextPath}/member/my" class="list-group-item list-group-item-action">會員首頁</a>
 	<a id="profile" href="${pageContext.request.contextPath}/member/my/profile" class="list-group-item list-group-item-action">會員資訊</a>
 	<a id="friend" href="${pageContext.request.contextPath}/member/self/friend/my_friend" class="list-group-item list-group-item-action">好友清單</a>
-	<a id="event" href="${pageContext.request.contextPath}/member/my/event" class="list-group-item list-group-item-action">活動清單</a>
+	<a id="event" href="${pageContext.request.contextPath}/member/self/event/my_event" class="list-group-item list-group-item-action">活動清單</a>
 	<a id="group" href="${pageContext.request.contextPath}/member/my/group" class="list-group-item list-group-item-action">社團清單</a>
 	<a id="message" href="${pageContext.request.contextPath}/member/my/message" class="list-group-item list-group-item-action">訊息匣</a>
 </div>

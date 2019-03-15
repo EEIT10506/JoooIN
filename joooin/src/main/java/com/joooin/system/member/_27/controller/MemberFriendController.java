@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.joooin.system.member._27.service.MemberService;
 
 @Controller
-public class FriendController {
+public class MemberFriendController {
 	@Autowired
 	MemberService memberService;
 	                       
