@@ -41,7 +41,7 @@
 	<h4>${welcome}</h4>
 	<h4>${error}</h4>
 	</div>
-	<form:form action="loginProcess" method="POST" modelAttribute="memberMainBean">
+	<form:form method="POST" modelAttribute="memberMainBean">
   <div class="form-group">
     <label for="email">帳號</label>
     <form:input type="email" class="form-control" id="email" placeholder="Email" path="email"/>

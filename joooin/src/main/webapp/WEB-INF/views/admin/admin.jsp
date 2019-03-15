@@ -26,6 +26,9 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"
 	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
 	crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <style>
 #main {
 	width: 1200px;
@@ -34,35 +37,46 @@
 	top: 50px;
 }
 </style>
-<title>Insert title here</title>
+<script src="<c:url value='/resources/js/admin/backstage.js'/> "></script>
+<title>後台管理系統</title>
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/navbar" />
 	<!-- 請把所有內容寫在此div內 -->
 	<div id="main" class="container">
-		
-		<div class="row">
-		  <div class="dropdown col-3">
-			<button class="btn btn-secondary dropdown-toggle" type="button"
-				id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false">資料庫查詢</button>
-			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				<a class="dropdown-item" href="#">會員資料</a>
-				<a class="dropdown-item" href="#">社團資料</a>
-				<a class="dropdown-item" href="#">活動資料</a>
-			</div>
-		</div>
-		
-		<div class="dropdown col-3">
-			<button class="btn btn-secondary dropdown-toggle" type="button"
-				id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false">檢舉處理</button>
-			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				<a class="dropdown-item" href="#">待處理</a>
-				<a class="dropdown-item" href="#">已處理</a>
-			</div>
-		</div>
-		</div>
+	<h1 class="mt-4 mb-3 font-weight-bold">後台管理系統
+        <small>Backstage</small>
+      </h1> 
+      <div class="row">
+        <div class="col-md-11">
+        </div>
+
+      </div>
+      <ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}">首頁</a></li>
+        <li class="breadcrumb-item active">後台管理系統</li>
+      </ol>
+      <!-- 分割線 -->
+      
+      <div class="row">
+        <div class="col-lg-2 mb-4">
+          <div class="list-group"> 
+            <a class="list-group-item pointer text-primary memberManage">會員管理</a>
+            <a class="list-group-item pointer text-primary groupsManage">社團管理</a>
+            <a class="list-group-item pointer text-primary eventManage">活動管理</a>
+            <a class="list-group-item pointer text-primary reportManage">檢舉管理</a>
+            <a class="list-group-item pointer text-primary websiteReport">報表</a>
+     
+    
+          </div>
+        </div>
+        <div class="col-lg-10 mb-4" id="content">
+          <h2>後台首頁</h2>
+          <p>請從左側列表中選擇功能</p>
+        </div>
+      </div>
+      
+      <!--  -->
 
 	</div>
 	<!-- 請把所有內容寫在此div內 -->
