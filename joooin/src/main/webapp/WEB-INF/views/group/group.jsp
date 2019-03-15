@@ -103,7 +103,8 @@
 					<div class="btn-toolbar mb-2 mb-md-0">
 						<div class="btn-group mr-2">
 							<button type="button" class="btn btn-sm btn-outline-secondary">分享</button>
-							<button type="button" class="btn btn-sm btn-outline-secondary">社團管理人</button>
+							<button type="button" class="btn btn-sm btn-outline-secondary"
+								>社團管理人</button>
 						</div>
 						<button type="button"
 							class="btn btn-sm btn-outline-secondary dropdown-toggle">

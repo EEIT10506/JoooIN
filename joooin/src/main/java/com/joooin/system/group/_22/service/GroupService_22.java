@@ -1,6 +1,9 @@
 package com.joooin.system.group._22.service;
 
+import java.util.List;
+
 import com.joooin.model.GroupMainBean;
+import com.joooin.model.MemberMainBean;
 
 public interface GroupService_22 {
 	public GroupMainBean getByGroupId(Integer groupId);
@@ -14,5 +17,6 @@ public interface GroupService_22 {
 	void memberAddToGroup(Integer groupId, Integer memberId);
 	
 	void leaderAddToGroup(Integer groupId, Integer memberId);
-//	Integer getGroupMemberAccount(Integer groupId);
+	
+	List<MemberMainBean> processGroupApply(Integer groupId);
 }

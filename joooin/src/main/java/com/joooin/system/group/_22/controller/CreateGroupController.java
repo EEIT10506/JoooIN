@@ -110,7 +110,7 @@ public class CreateGroupController {
 		} else {
 			service.memberAddToGroup(groupId, memId);
 			model.addAttribute("status", "申請成功，待批准");
-			return "已申請成功";
+			return "redirect:/groups/groups_type";
 		}
 	}
 

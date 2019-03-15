@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupMemberBean;
+import com.joooin.model.MemberMainBean;
 import com.joooin.repository.GroupMainDao;
 import com.joooin.repository.GroupMemberDao;
 import com.joooin.repository.MemberMainDao;
@@ -72,5 +73,12 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 		//leader 加入預設為確認true
 		GroupMemberBean groupMemberBean = new GroupMemberBean(groupId, memberId, true);
 		groupMemberDao.save(groupMemberBean);
+	}
+
+	@Override
+	public List<MemberMainBean> processGroupApply(Integer groupId) {
+		
+		
+		return null;
 	}
 }
