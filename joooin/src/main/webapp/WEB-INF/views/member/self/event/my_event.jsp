@@ -20,11 +20,11 @@
 		top: 50px;
 	}
 	.eventBtn {
-		width: 90px;
+		width: 70px;
 		text-align: center;
 	}
 	.textTd {
-		width: 100px;
+		width: 90px;
 		text-align: center;
 	}
 	td p {
@@ -41,7 +41,7 @@
 		vertical-align:middle!important;
 	}
 	#eventImage {
-		width: 50px;
+		width: 60px;
 		border-radius: 100px;
 	}
 	button {
@@ -51,9 +51,13 @@
 </style>
 <script>
 	$(document).ready(function(){		
-// 		$(document).on("click", ".friendPageBtn", function(){
-// 			window.open("${pageContext.request.contextPath}/member/other/" + $(this).val());
-// 		});
+		$(document).on("click", ".eventPageBtn", function(){
+			window.open("${pageContext.request.contextPath}/event/" + $(this).val());
+		});
+		$(document).on("click", ".eventSettingBtn", function(){
+// 			window.open("${pageContext.request.contextPath}/event/" + $(this).val());
+		});
+		
 		$(".eventDateEnd").each(function(){
 			var eventDateEnd = new Date($(this).text());
 			var id = "s" + this.id.substr(1);
@@ -83,7 +87,8 @@
             {"data": "start", name:"開始時間" , "orderable":true },
             {"data": "end", name:"結束時間" , "orderable":true },
             {"data": "status", name:"活動狀態" , "orderable":true },
-            {"data": "link", name:"活動連結" , "orderable":true }
+            {"data": "link", name:"活動連結" , "orderable":false },
+            {"data": "setting", name:"活動設定" , "orderable":false }
            ];
 
 		$('#datatable').DataTable({"columns":column, "language":language, "lengthChange": false, "aLengthMenu" : 10, "bScrollCollapse": true});
@@ -110,6 +115,7 @@
 	                            <th>結束時間</th>
 	                            <th>活動狀態</th>
 	                            <th>活動連結</th>
+	                            <th>活動設定</th>
 							</tr>
 						</thead>		
 						<tbody>
@@ -123,6 +129,7 @@
 									<c:if test="${event.eventStatus == 'yes'}">成團</c:if>
 									<c:if test="${event.eventStatus == 'no'}">流團</c:if>	</p></td>
 		    						<td class="eventBtn"><p data-placement="top" data-toggle="tooltip" title="活動連結"><button value="${event.eventId}" class="eventPageBtn btn btn-primary btn-xs" data-title="活動連結" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
+		    						<td class="eventBtn"><p data-placement="top" data-toggle="tooltip" title="活動設定"><button value="${event.eventId}" class="eventSettingBtn btn btn-success btn-xs" data-title="活動設定" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_setting.png' />"/></button></p></td>
 								</tr>
 							</c:forEach>
 						</tbody>

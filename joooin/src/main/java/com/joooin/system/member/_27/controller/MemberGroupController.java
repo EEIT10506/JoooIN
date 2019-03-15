@@ -12,55 +12,43 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.joooin.system.member._27.service.MemberService;
 
 @Controller
-public class MemberEventController {
+public class MemberGroupController {
 	@Autowired
 	MemberService memberService;
 	                                               
-	@RequestMapping(value = "/member/self/event/{link}", method = RequestMethod.GET)
-	public String getEvents(@PathVariable String link, HttpSession session, Model model) {
+	@RequestMapping(value = "/member/self/group/{link}", method = RequestMethod.GET)
+	public String getGroups(@PathVariable String link, HttpSession session, Model model) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		
 		if (memberId != null) {
-			model.addAttribute("eventList", memberService.getEvents(memberId, link));
-			return "member/self/event/" + link;
+			model.addAttribute("groupList", memberService.getGroups(memberId, link));
+			return "member/self/group/" + link;
 		} else {
 			return "not_login";
 		}	
 	}
-
-	@RequestMapping(value = "/member/deleteEvent", method = RequestMethod.POST)
-	public @ResponseBody String deleteEvent(Integer eventId, HttpSession session) {
+	@RequestMapping(value = "/member/deleteGroup", method = RequestMethod.POST)
+	public @ResponseBody String deleteGroup(Integer groupId, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		
 		if (memberId != null) {
-			memberService.deleteEvent(memberId, eventId);
+			memberService.deleteGroup(memberId, groupId);
+			return null;
+		} else {
+			return "not_login";
+		}	
+	}
+	@RequestMapping(value = "/member/cancelGroup", method = RequestMethod.POST)
+	public @ResponseBody String cancelGroup(Integer groupId, HttpSession session) {
+		Integer memberId = (Integer)session.getAttribute("memberId");
+		
+		if (memberId != null) {
+			memberService.cancelGroup(memberId, groupId);
 			return null;
 		} else {
 			return "not_login";
 		}	
 	}
 	
-	@RequestMapping(value = "/member/cancelEvent", method = RequestMethod.POST)
-	public @ResponseBody String cancelEvent(Integer eventId, HttpSession session) {
-		Integer memberId = (Integer)session.getAttribute("memberId");
-		
-		if (memberId != null) {
-			memberService.cancelEvent(memberId, eventId);
-			return null;
-		} else {
-			return "not_login";
-		}	
-	}
 	
-	@RequestMapping(value = "/member/noLikeEvent", method = RequestMethod.POST)
-	public @ResponseBody String noLikeEvent(Integer eventId, HttpSession session) {
-		Integer memberId = (Integer)session.getAttribute("memberId");
-		
-		if (memberId != null) {
-			memberService.noLikeEvent(memberId, eventId);
-			return null;
-		} else {
-			return "not_login";
-		}	
-	}
 }

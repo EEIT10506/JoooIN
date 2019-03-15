@@ -19,9 +19,17 @@
 		position: relative;
 		top: 50px;
 	}
-	.friendBtn {
+	.eventBtn {
+		width: 70px;
+		text-align: center;
+	}
+	.textTd {
 		width: 90px;
 		text-align: center;
+	}
+	td p {
+		position: relative;
+		top: 5px;
 	}
  	.linkBtn { 
  		-webkit-filter:invert(1); 
@@ -32,8 +40,8 @@
 	td {
 		vertical-align:middle!important;
 	}
-	#friendImage {
-		width: 50px;
+	#eventImage {
+		width: 60px;
 		border-radius: 100px;
 	}
 	button {
@@ -43,52 +51,43 @@
 </style>
 <script>
 	$(document).ready(function(){		
-		$(document).on("click", ".friendPageBtn", function(){
-			window.open("${pageContext.request.contextPath}/member/other/" + $(this).val());
+		$(document).on("click", ".eventPageBtn", function(){
+			window.open("${pageContext.request.contextPath}/event/" + $(this).val());
 		});
-		                          
-		$(document).on("click", ".friendAgreeBtn", function(){
-			var otherMemberId = $(this).val();
+		
+		$(document).on("click", ".eventNoLikeBtn", function(){
+			var eventId = $(this).val();
 			
 			$.ajax({
 			    type: "POST",                           
-			    url: "${pageContext.request.contextPath}/member/friendProcess",
-			    data: {"otherMemberId": otherMemberId, "process": "agree"},
-			    success: function (notLogin) {
-			    	if (notLogin)
+			    url: "${pageContext.request.contextPath}/member/noLikeEvent",
+			    data: {"eventId": eventId},
+			    success: function(not_login){
+			    	if (not_login){
 			    		location.href = "${pageContext.request.contextPath}/notLogin";
-			    	else 
-			    		location.href = "${pageContext.request.contextPath}/member/self/friend/receive_friend";
+			    	} else {
+			    		location.href = "${pageContext.request.contextPath}/member/self/event/like_event";
+			    	}
 			    }
 			});
 		});
 		
-		$(document).on("click", ".friendRejectBtn", function(){
-			var otherMemberId = $(this).val();
+		$(".eventDateEnd").each(function(){
+			var eventDateEnd = new Date($(this).text());
+			var id = "s" + this.id.substr(1);
 			
-			$.ajax({
-			    type: "POST",                           
-			    url: "${pageContext.request.contextPath}/member/friendProcess",
-			    data: {"otherMemberId": otherMemberId, "process": "reject"},
-			    success: function (notLogin) {
-			    	if (notLogin)
-			    		location.href = "${pageContext.request.contextPath}/notLogin";
-			    	else 
-			    		location.href = "${pageContext.request.contextPath}/member/self/friend/receive_friend";
-			    }
-			});
+			if (eventDateEnd < new Date()){
+				document.getElementById(id).innerHTML = document.getElementById(id).innerHTML + "<br />（已結束）";
+			}
 		});
 
-		
-		
-		
 		//DataTable
 		var language = {
 		        "zeroRecords": "沒有結果",
-		        "info": "<span class='seperator'>  </span>" + "總共 _TOTAL_ 位受邀好友",
-		        "infoFiltered": " (從所有 _MAX_ 位受邀好友中篩選出)",
-		        "infoEmpty": "共 0 位",
-		        "search":"搜尋受邀好友：",
+		        "info": "<span class='seperator'>  </span>" + "總共 _TOTAL_ 個活動",
+		        "infoFiltered": " (從所有 _MAX_ 活動中篩選出)",
+		        "infoEmpty": "共 0 個活動",
+		        "search":"搜尋活動：",
 		        "paginate": {
 		            "previous": "上一頁",
 		            "next": "下一頁",
@@ -97,17 +96,19 @@
 		        }
 		    };
 		var column=[
-            {"data": "name", name:"會員名稱" , "orderable":true },
-            {"data": "page", name:"個人頁面" , "orderable":false },
-            {"data": "agree", name:"同意" , "orderable":false },
-            {"data": "delete", name:"拒絕" , "orderable":false }
+            {"data": "name", name:"活動名稱" , "orderable":true },
+            {"data": "start", name:"開始時間" , "orderable":true },
+            {"data": "end", name:"結束時間" , "orderable":true },
+            {"data": "status", name:"活動狀態" , "orderable":true },
+            {"data": "link", name:"活動連結" , "orderable":false },
+            {"data": "delete", name:"取消讚" , "orderable":false }
            ];
 
 		$('#datatable').DataTable({"columns":column, "language":language, "lengthChange": false, "aLengthMenu" : 10, "bScrollCollapse": true});
 	});
 	
 </script>
-<title>會員1</title></head>
+<title>會員</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
@@ -117,32 +118,35 @@
 				<jsp:include page="${request.contextPath}/member/self/sidebar"/>
 			</div>
 			<div id="x" class="col-9">
-				<jsp:include page="${request.contextPath}/member/self/friend/navbar"/>
+				<jsp:include page="${request.contextPath}/member/self/event/navbar"/>
 				<div id="main-view"><br /><br />
-					<div id="my-friend" class="friend-view">
-						<table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-		    				<thead>
+					<table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+	    				<thead>
+							<tr>
+								<th>活動名稱</th>
+	                            <th>開始時間</th>
+	                            <th>結束時間</th>
+	                            <th>活動狀態</th>
+	                            <th>活動連結</th>
+	                            <th>取消讚</th>
+							</tr>
+						</thead>		
+						<tbody>
+							<c:forEach var="event" items="${eventList}">
 								<tr>
-									<th>會員名稱</th>
-		                            <th>個人頁面</th>
-		                            <th>同意</th>
-		                            <th>拒絕</th>
+									<td><img id="eventImage" src="<c:url value='/getEventImage/${event.eventId}.jpg' />" />　${event.eventName}</td>
+		                            <td class="textTd"><p data-placement="top" data-toggle="tooltip" title="開始時間">${event.eventDateStart}</p></td>
+		                            <td class="textTd"><p id="d${event.eventId}" class="eventDateEnd" data-placement="top" data-toggle="tooltip" title="結束時間">${event.eventDateEnd}</p></td>
+		    						<td class="textTd"><p id="s${event.eventId}" class="eventStatus" data-placement="top" data-toggle="tooltip" title="活動狀態">
+									<c:if test="${event.eventStatus == 'unchecked'}">未成團</c:if>
+									<c:if test="${event.eventStatus == 'yes'}">成團</c:if>
+									<c:if test="${event.eventStatus == 'no'}">流團</c:if>	</p></td>
+		    						<td class="eventBtn"><p data-placement="top" data-toggle="tooltip" title="活動連結"><button value="${event.eventId}" class="eventPageBtn btn btn-primary btn-xs" data-title="活動連結" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
+		    						<td class="eventBtn"><p data-placement="top" data-toggle="tooltip" title="取消讚"><button value="${event.eventId}" class="eventNoLikeBtn btn btn-danger btn-xs" data-title="取消讚" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_delete.png' />"/></button></p></td>
 								</tr>
-							</thead>		
-							<tbody>
-								<c:forEach var="friend" items="${friendList}">
-									<c:if test="${friend.isFriend == false && friend.isInviter == false}">
-										<tr id="friendRow${friend.memberId}" class="tr">
-											<td><img id="friendImage" src='<c:url value='/getMemberImage/${friend.memberId}.jpg' />' />　${friend.memberName} </td>
-				                            <td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="個人頁面"><button value="${friend.memberId}" class="friendPageBtn btn btn-primary btn-xs" data-title="個人頁面" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
-				    						<td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="同意"><button value="${friend.memberId}" class="friendAgreeBtn btn btn-success btn-xs" data-title="同意" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_thumbup.png' />"/></button></p></td>
-				    						<td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="拒絕"><button value="${friend.memberId}" class="friendRejectBtn btn btn-danger btn-xs" data-title="拒絕" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_delete.png' />"/></button></p></td>
-										</tr>
-									</c:if>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
+							</c:forEach>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>

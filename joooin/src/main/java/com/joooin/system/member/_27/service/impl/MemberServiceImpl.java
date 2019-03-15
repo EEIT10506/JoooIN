@@ -1,10 +1,7 @@
 package com.joooin.system.member._27.service.impl;
 
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -13,10 +10,18 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.joooin.model.EventLikeBean;
 import com.joooin.model.EventMainBean;
+import com.joooin.model.EventMemberBean;
+import com.joooin.model.GroupMainBean;
+import com.joooin.model.GroupMemberBean;
 import com.joooin.model.MemberFriendBean;
 import com.joooin.model.MemberMainBean;
+import com.joooin.repository.EventLikeDao;
 import com.joooin.repository.EventMainDao;
+import com.joooin.repository.EventMemberDao;
+import com.joooin.repository.GroupMainDao;
+import com.joooin.repository.GroupMemberDao;
 import com.joooin.repository.MemberFriendDao;
 import com.joooin.repository.MemberMainDao;
 import com.joooin.system.member._27.pojo.FriendPojo;
@@ -32,6 +37,14 @@ public class MemberServiceImpl implements MemberService{
 	MemberFriendDao memberFriendDao;
 	@Autowired
 	EventMainDao eventMainDao;
+	@Autowired
+	EventMemberDao eventMemberDao;
+	@Autowired
+	EventLikeDao eventLikeDao;
+	@Autowired
+	GroupMainDao groupMainDao;
+	@Autowired
+	GroupMemberDao groupMemberDao;
 	
 	@Override
 	public MemberMainBean getMemberMainBean(Integer memberId) {
@@ -162,18 +175,157 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public List<EventMainBean> getEvents(Integer memberId, String process)  {
-		List<EventMainBean> eventMainList = eventMainDao.getAll();
-		
 		if (process.equals("my_event")) {
+			List<EventMainBean> eventMainList = eventMainDao.getAll();
 			List<EventMainBean> list = new ArrayList<EventMainBean>();
+			
 			for (EventMainBean bean : eventMainList) {
 				if (bean.getEventInviterId().equals(memberId)) 
 					list.add(bean);
 			}
 			return list;
 		}
+		if (process.equals("joined_event")) {
+			List<EventMemberBean> eventMemberlist = eventMemberDao.getAll();
+			List<EventMainBean> eventMainlist = new ArrayList<EventMainBean>();
+			
+			for (EventMemberBean bean : eventMemberlist) {
+				if (bean.getMemberId().equals(memberId) && bean.getIsAgreed() == true && 
+					!eventMainDao.getByEventMainId(bean.getEventId()).getEventInviterId().equals(memberId)) {
+					eventMainlist.add(eventMainDao.getByEventMainId(bean.getEventId()));
+				}
+			}
+			return eventMainlist;
+		}
+		if (process.equals("request_event")) {
+			List<EventMemberBean> eventMemberlist = eventMemberDao.getAll();
+			List<EventMainBean> eventMainlist = new ArrayList<EventMainBean>();
+			
+			for (EventMemberBean bean : eventMemberlist) {
+				if (bean.getMemberId().equals(memberId) && bean.getIsAgreed() == false) 
+					eventMainlist.add(eventMainDao.getByEventMainId(bean.getEventId()));
+			}
+			return eventMainlist;
+		}
+		if (process.equals("like_event")) {
+			List<EventLikeBean> eventLikeList = eventLikeDao.getAll();
+			List<EventMainBean> eventMainList = new ArrayList<EventMainBean>();
+			
+			for (EventLikeBean bean : eventLikeList) {
+				if (bean.getMemberId().equals(memberId)) 
+					eventMainList.add(eventMainDao.getByEventMainId(bean.getEventId()));
+			}
+			return eventMainList;
+		}
 		return null;
 	}
+
+	@Override
+	public void deleteEvent(Integer memberId, Integer eventId) {
+		List<EventMemberBean> list = eventMemberDao.getAll();
+		Integer quantity = null;
+		
+		for (EventMemberBean eventMemberBean : list) {
+			if (eventMemberBean.getMemberId().equals(memberId) && eventMemberBean.getEventId().equals(eventId) &&
+				eventMemberBean.getIsAgreed() == true) {
+				quantity = eventMemberBean.getQuantity();
+				EventMainBean eventMainBean = eventMainDao.getByEventMainId(eventId);
+				eventMainBean.setEventCurrentMembers(eventMainBean.getEventCurrentMembers() - quantity);
+				eventMainDao.update(eventMainBean);
+				eventMemberDao.deleteByEventMemberId(eventMemberBean.getEventMemberId());
+			}
+		}
+	}
+
+	@Override
+	public void cancelEvent(Integer memberId, Integer eventId) {
+		List<EventMemberBean> list = eventMemberDao.getAll();
+		
+		for (EventMemberBean bean : list) {
+			if (bean.getMemberId().equals(memberId) && bean.getEventId().equals(eventId) && 
+				bean.getIsAgreed() == false) 
+				eventMemberDao.deleteByEventMemberId(bean.getEventMemberId());
+		}
+	}
+
+	@Override
+	public void noLikeEvent(Integer memberId, Integer eventId) {
+		List<EventLikeBean> list = eventLikeDao.getAll();
+		
+		for (EventLikeBean eventLikeBean : list) {
+			if (eventLikeBean.getMemberId().equals(memberId) && eventLikeBean.getEventId().equals(eventId)) {
+				EventMainBean eventMainBean = eventMainDao.getByEventMainId(eventId);
+				eventMainBean.setEventLike(eventMainBean.getEventLike() - 1);
+				eventMainDao.update(eventMainBean);
+				eventLikeDao.deleteByEventLikeId(eventLikeBean.getEventLikeId());
+			}
+		}
+	}
+
+	@Override
+	public List<GroupMainBean> getGroups(Integer memberId, String process) {
+		if (process.equals("my_group")) {
+			List<GroupMainBean> listAll = groupMainDao.getAll();
+			List<GroupMainBean> list = new ArrayList<GroupMainBean>();
+			
+			for (GroupMainBean bean : listAll) {
+				if (bean.getGroupLeaderId().equals(memberId)) 
+					list.add(bean);
+			}
+			return list;
+		}
+		
+		if (process.equals("joined_group")) {
+			List<GroupMemberBean> groupMemberlist = groupMemberDao.getAll();
+			List<GroupMainBean> groupMainList = new ArrayList<GroupMainBean>();
+			
+			for (GroupMemberBean bean : groupMemberlist) {
+				if (bean.getMemberId().equals(memberId) && bean.getIsAgreed() == true &&
+					!groupMainDao.getByGroupId(bean.getGroupId()).getGroupLeaderId().equals(memberId)) 
+					groupMainList.add(groupMainDao.getByGroupId(bean.getGroupId()));
+			}
+			return groupMainList;
+		}
+		
+		if (process.equals("request_group")) {
+			List<GroupMemberBean> groupMemberlist = groupMemberDao.getAll();
+			List<GroupMainBean> groupMainList = new ArrayList<GroupMainBean>();
+			
+			for (GroupMemberBean bean : groupMemberlist) {
+				if (bean.getMemberId().equals(memberId) && bean.getIsAgreed() == false) 
+					groupMainList.add(groupMainDao.getByGroupId(bean.getGroupId()));
+			}
+			return groupMainList;
+		}
+		return null;
+	}
+
+	@Override
+	public void deleteGroup(Integer memberId, Integer groupId) {
+		List<GroupMemberBean> list = groupMemberDao.getAll();
+		
+		for (GroupMemberBean groupMemberBean : list) {
+			if (groupMemberBean.getMemberId().equals(memberId) && groupMemberBean.getGroupId().equals(groupId) && 
+				groupMemberBean.getIsAgreed() == true) {
+				GroupMainBean groupMainBean = groupMainDao.getByGroupId(groupId);
+				Integer quantity = groupMainBean.getGroupCurrentMembers();
+				groupMainBean.setGroupCurrentMembers(quantity - 1);
+				groupMainDao.update(groupMainBean);
+				groupMemberDao.deleteByGroupMemberId(groupMemberBean.getGroupMemberId());
+			}
+		}
+	}
+
+	@Override
+	public void cancelGroup(Integer memberId, Integer groupId) {
+		List<GroupMemberBean> list = groupMemberDao.getAll();
+		
+		for (GroupMemberBean bean : list) {
+			if (bean.getMemberId().equals(memberId) && bean.getGroupId().equals(groupId)) 
+				groupMemberDao.deleteByGroupMemberId(bean.getGroupMemberId());
+		}
+	}
+	
 	
 
 }

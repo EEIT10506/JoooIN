@@ -56,11 +56,11 @@ public class EnterGroupController {
 	
 	
 	//傳回社團主頁的照片
-	@RequestMapping(value = "/getGroupImage/{groupId}", method = RequestMethod.GET)
-	public ResponseEntity<byte[]> getGroupImage(@PathVariable Integer groupId) {
-		GroupMainBean bean = groupService.getByGroupId(groupId);
-	    return ImageUtils.byteArrayToImage(bean.getGroupImage());
-	}
+//	@RequestMapping(value = "/getGroupImage/{groupId}", method = RequestMethod.GET)
+//	public ResponseEntity<byte[]> getGroupImage(@PathVariable Integer groupId) {
+//		GroupMainBean bean = groupService.getByGroupId(groupId);
+//	    return ImageUtils.byteArrayToImage(bean.getGroupImage());
+//	}
 }
 
 
