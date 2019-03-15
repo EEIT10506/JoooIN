@@ -47,23 +47,6 @@ public class GroupController_42 {
 		List<GroupMainBean> typeOne = service.getGroupType(groupOneType);
 		model.addAttribute("groupsType", typeOne);
 		
-		List<GroupMainBean> list = service.getGroupType(groupOneType);
-		for(GroupMainBean gb:list) {
-//有功能尚未做完
-//			for(GroupMemberBean gm:groupList) {
-			if(service2.isInGroup(gb.getGroupId(), memId)) {
-				model.addAttribute("isInGroup","進入社團" );
-				}
-			else{
-				
-				service2.isInGroup(gb.getGroupId(),memId );
-				model.addAttribute("isInGroup","加入社團" );
-					return "redirect:/group/"+ groupId;
-				}	
-			}
-//			}
-		
-
 		return "group/groups_type"; 
 	}
 }

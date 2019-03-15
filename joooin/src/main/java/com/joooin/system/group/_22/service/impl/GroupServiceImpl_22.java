@@ -1,5 +1,6 @@
 package com.joooin.system.group._22.service.impl;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -75,10 +76,41 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 		groupMemberDao.save(groupMemberBean);
 	}
 
+	//找出申請此社團的會員
 	@Override
-	public List<MemberMainBean> processGroupApply(Integer groupId) {
+	public List<MemberMainBean> getGroupApplyList(Integer groupId) {
+		
+		// 放待申請的bean
+		List<MemberMainBean> getGroupApplyList = new LinkedList<MemberMainBean>(); 
+		
+		List<GroupMemberBean> allGroupMember = groupMemberDao.getAll();
 		
 		
-		return null;
+		for(GroupMemberBean gmBean : allGroupMember) {
+			if(gmBean.getGroupId().equals(groupId) && (! gmBean.getIsAgreed())) {
+				
+				// 該社團 且狀態是 未允許 取出 memberBean
+				MemberMainBean member = 
+						memMainDao.getByMemberId(gmBean.getMemberId());
+				getGroupApplyList.add(member);
+			}
+		}
+		return getGroupApplyList;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

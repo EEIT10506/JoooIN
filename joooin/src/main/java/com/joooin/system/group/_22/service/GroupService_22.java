@@ -18,5 +18,5 @@ public interface GroupService_22 {
 	
 	void leaderAddToGroup(Integer groupId, Integer memberId);
 	
-	List<MemberMainBean> processGroupApply(Integer groupId);
+	List<MemberMainBean> getGroupApplyList(Integer groupId);
 }
