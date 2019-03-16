@@ -11,12 +11,12 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"
 	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
 	crossorigin="anonymous"></script>
-
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>	
 <!-- DataTable -->
 
 <link rel="stylesheet" type="text/css"
@@ -50,12 +50,46 @@
 	width: 8em;
 	margin-top: -2.5em;
 }
+
 </style>
 
 <script>
 	$(document).ready(function() {
 		$('#table_id').DataTable();
 	});
+	//顯示視窗前呼叫
+	$("#ooo").on("show.bs.modal",function(e){
+	  console.log('顯示視窗前呼叫');
+	});
+
+	//轉場特效結束，已完全呈現時呼叫
+	$("#ooo").on("shown.bs.modal",function(e){
+	  console.log('轉場特效結束，已完全呈現時呼叫');
+	});
+
+	//關閉視窗前呼叫
+	$("#ooo").on("hide.bs.modal",function(e){
+	  console.log('關閉視窗前呼叫');
+	});
+
+	//轉場特效結束，已完全隱藏時呼叫
+	$("#ooo").on("hidden.bs.modal",function(e){
+	  console.log('轉場特效結束，已完全隱藏時呼叫');
+	});
+
+	//隱藏視窗
+	$("#ooo").modal('hide');
+
+	//開啟視窗
+	$("#ooo").modal('show');
+
+	//切換視窗顯示、不顯示
+	$("#ooo").modal('toggle');
+
+	//判斷視窗是否開啟中
+	if($("#ooo").hasClass('in')){
+	  console.log('視窗目前是開啟的狀態..');
+	}
 </script>
 
 
@@ -71,38 +105,8 @@
 	<div id="main">
 		<!-- 請把所有內容寫在此div內 -->
 
-		<div class="container-fluid">
-			<div class="row">
-				<!-- 	左側欄位底色	<nav class="col-md-2 d-none d-md-block bg-light sidebar"> -->
-				<div class="sidebar-sticky">
-					<!-- 						<ul class="nav flex-column"> -->
-					<div class=.pull-right>
-						<ul id="menu" class="nav flex-column">
-							<li class="nav-item"><a class="nav-link active"
-								href="${pageContext.request.contextPath}/group/about/${groupMain.groupId}">
-									<span data-feather="home"></span> 關於 ${groupMain.groupName} <span
-									class="sr-only"></span>
-							</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="${pageContext.request.contextPath}/group/members/${groupMain.groupId}">
-									<span data-feather="file">社團成員</span>
-							</a></li>
-							<li class="nav-item"><a class="nav-link" href="#"> <span
-									data-feather="shopping-cart"></span> Products
-							</a></li>
-							<li class="nav-item"><a class="nav-link" href="#"> <span
-									data-feather="users"></span> Customers
-							</a></li>
-							<li class="nav-item"><a class="nav-link" href="#"> <span
-									data-feather="bar-chart-2"></span> Reports
-							</a></li>
-							<li class="nav-item"><a class="nav-link" href="#"> <span
-									data-feather="layers"></span> Integrations
-							</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- 				</nav> -->
+
+<jsp:include page="${request.contextPath}/group/group_navbar" />
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
@@ -112,11 +116,13 @@
 					<div class="btn-toolbar mb-2 mb-md-0">
 						<div class="btn-group mr-2">
 							<button type="button" class="btn btn-sm btn-outline-secondary">分享</button>
+
 							<!-- 					按鈕顯示判斷		 -->
 							<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
 								<button type="button" class="btn btn-sm btn-outline-secondary">社團申請管理</button>
 							</c:if>
 							<!-- 					按鈕顯示判斷		 -->
+
 						</div>
 						<button type="button"
 							class="btn btn-sm btn-outline-secondary dropdown-toggle">
@@ -125,6 +131,28 @@
 					</div>
 				</div>
 
+<!-- Modal管理者管理成員 -->
+<div id="ooo" class="modal inmodal fade"  tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="true">
+  <div class="modal-dialog modal-lg" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+        <div class="modal-title ">
+          標題列
+        </div>
+      </div>
+      <div class="modal-body" >
+        內容
+      </div>
+      <div class="modal-footer" >
+        <button class="btn">OK</button>
+        <button class="btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 				<img class="container"
 					src="<c:url value='/getGroupImage/${groupMain.groupId}'/>"
@@ -262,8 +290,8 @@
 				</div>
 				</main>
 			</div>
-		</div>
-	</div>
+		
+	
 	<!-- DataTable -->
 
 	<!-- <script type="text/javascript" charset="utf8" -->
