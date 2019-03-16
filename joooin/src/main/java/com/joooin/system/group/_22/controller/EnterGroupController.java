@@ -1,6 +1,7 @@
 package com.joooin.system.group._22.controller;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,11 +34,11 @@ public class EnterGroupController {
 		model.addAttribute("groupMain", groupMain);
 		return "group/group";
 	}
-	
+
 	// 進入社團關於介紹
 	@RequestMapping(method = RequestMethod.GET, value = "/group/about/{groupId}")
 	public String mainPageAbout(Model model, @PathVariable Integer groupId) {
-		
+
 		GroupMainBean groupMain = groupService.getByGroupId(groupId);
 		String leader = groupService.leaderOfGroup(groupId);
 		model.addAttribute("groupMain", groupMain);
@@ -45,22 +46,39 @@ public class EnterGroupController {
 
 		return "group/group_about";
 	}
-	
+
 	// 進入社團成員
 	@RequestMapping(method = RequestMethod.GET, value = "/group/members/{groupId}")
 	public String mainPageMember(Model model, @PathVariable Integer groupId) {
-		
-		
+
 		return "group/group_members";
 	}
-	
-	
-	//傳回社團主頁的照片
+
+	// 傳回社團主頁的照片
 	@RequestMapping(value = "/getGroupImage/{groupId}", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> getGroupImage(@PathVariable Integer groupId) {
 		GroupMainBean bean = groupService.getByGroupId(groupId);
-	    return ImageUtils.byteArrayToImage(bean.getGroupImage());
+		return ImageUtils.byteArrayToImage(bean.getGroupImage());
 	}
+
+	// 處理加入或進入{groupId}社團
+	@RequestMapping(method = RequestMethod.POST, value = "/group/addgroup/{groupId}")
+	public String processAddGroup(@PathVariable Integer groupId, HttpSession session, Model model) {
+		Integer memId = (Integer) session.getAttribute("memberId");
+		// 未登入不可加入社團
+		if (memId == null) {
+			return "not_login";
+		}
+		if (groupService.statusApplyGroup(groupId, memId).equals("IN")) {
+			return "redirect:/group/" + groupId; // 已經在社團中了，前端按鈕顯示為進入社團
+		} else if (groupService.statusApplyGroup(groupId, memId).equals("NOT_IN")) {
+			groupService.memberAddToGroupApply(groupId, memId);
+			model.addAttribute("status", "申請成功，待批准");
+			return "redirect:/groups/groups_type";
+		} else { //
+			model.addAttribute("status", "申請中");
+			return "redirect:/group/" + groupId; // 已經在申請中，前端按鈕顯示為申請中
+		}
+	}
+
 }
-
-

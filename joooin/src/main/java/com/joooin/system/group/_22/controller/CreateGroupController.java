@@ -59,8 +59,8 @@ public class CreateGroupController {
 		if (!groupMainBean.getMultipartFile().isEmpty()) {
 			groupImage = ImageUtils.multipartFileToByteArray(groupMainBean.getMultipartFile());
 			groupMainBean.setGroupImage(groupImage);
-		
-		// 有空再精簡化
+
+			// 有空再精簡化
 		} else {
 			// 根據type配置預設圖片
 			if (groupMainBean.getGroupType().equals("sport")) {
@@ -93,25 +93,6 @@ public class CreateGroupController {
 		service.leaderAddToGroup(groupId, memId);
 
 		return "redirect:/groups";
-	}
-
-	// 處理加入或進入{groupId}社團
-	@RequestMapping(method = RequestMethod.POST, value = "/group/addgroup/{groupId}")
-	public String processAddGroup(@PathVariable Integer groupId, HttpSession session, Model model) {
-		Integer memId = (Integer) session.getAttribute("memberId");
-
-		// 未登入不可加入社團
-		if (memId == null) {
-			return "not_login";
-		}
-
-		if (service.isInGroup(groupId, memId)) {
-			return "redirect:/group/" + groupId; // 已經在社團中了，前端按鈕顯示為進入社團
-		} else {
-			service.memberAddToGroup(groupId, memId);
-			model.addAttribute("status", "申請成功，待批准");
-			return "redirect:/groups/groups_type";
-		}
 	}
 
 }

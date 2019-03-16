@@ -50,20 +50,25 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 
 	
 	@Override
-	public boolean isInGroup(Integer groupId, Integer memberId) {
-		List<GroupMemberBean> groupList = groupMemberDao.getAll();
+	public String statusApplyGroup(Integer groupId, Integer memberId) {
+		List<GroupMemberBean> groupMemberList = groupMemberDao.getAll();
 		
-		for(GroupMemberBean singleGroup : groupList) {
-			if(groupId == singleGroup.getGroupId() && memberId == singleGroup.getMemberId()) {
-				//社團與會員重複，該社團中有此人
-				return true;
+		for(GroupMemberBean singleGroupMember : groupMemberList) {
+			if(groupId.equals(singleGroupMember.getGroupId()) 
+					&& memberId.equals(singleGroupMember.getMemberId())) {  //社團與會員重複，該社團申請中有此人
+				if(singleGroupMember.getIsAgreed()) {
+					return "IN";
+				}
+				else {
+					return "PROCESS";
+				}
 			}
 		}
-		return false;
+		return "NOT_IN";
 	}
 	
 	@Override
-	public void memberAddToGroup(Integer groupId, Integer memberId) {
+	public void memberAddToGroupApply(Integer groupId, Integer memberId) {
 		//剛加入預設為待確認false
 		GroupMemberBean groupMemberBean = new GroupMemberBean(groupId, memberId, false);
 		groupMemberDao.save(groupMemberBean);
@@ -78,7 +83,7 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 
 	//找出申請此社團的會員
 	@Override
-	public List<MemberMainBean> getGroupApplyList(Integer groupId) {
+	public List<MemberMainBean> getGroupApplyMembers(Integer groupId) {
 		
 		// 放待申請的bean
 		List<MemberMainBean> getGroupApplyList = new LinkedList<MemberMainBean>(); 
@@ -96,6 +101,37 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 			}
 		}
 		return getGroupApplyList;
+	}
+	
+	@Override
+	public List<GroupMemberBean> getGroupApplyList(Integer groupId) {
+		List<GroupMemberBean> groupApplyList = new LinkedList<GroupMemberBean>();
+		List<GroupMemberBean> allGroupMember = groupMemberDao.getAll();
+		
+		for(GroupMemberBean gmBean : allGroupMember) {
+			if(gmBean.getGroupId().equals(groupId)) {
+				groupApplyList.add(gmBean);
+			}
+		}
+		return groupApplyList;
+	}
+
+	@Override
+	public Integer processApplyList(Integer groupId, Integer memberId, String decide) {
+		
+		List<GroupMemberBean> groupApplyList = getGroupApplyList(groupId);
+		
+		for(GroupMemberBean gmBean : groupApplyList) {
+			if(gmBean.getMemberId().equals(memberId) && decide.equals("approve")) {
+				gmBean.setIsAgreed(true);
+				return gmBean.getMemberId();
+			}
+			else if(gmBean.getMemberId().equals(memberId) && decide.equals("reject")) {
+				groupMemberDao.deleteByGroupMemberId(gmBean.getGroupMemberId());
+				return null;
+			}
+		}
+		return null;
 	}
 }
 
