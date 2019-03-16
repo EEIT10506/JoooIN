@@ -118,12 +118,13 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 
 	@Override
 	public Integer processApplyList(Integer groupId, Integer memberId, String decide) {
-		
 		List<GroupMemberBean> groupApplyList = getGroupApplyList(groupId);
+		GroupMainBean groupMain = groupMainDao.getByGroupId(groupId);
 		
 		for(GroupMemberBean gmBean : groupApplyList) {
 			if(gmBean.getMemberId().equals(memberId) && decide.equals("approve")) {
 				gmBean.setIsAgreed(true);
+				groupMain.setGroupCurrentMembers(groupMain.getGroupCurrentMembers() + 1);
 				return gmBean.getMemberId();
 			}
 			else if(gmBean.getMemberId().equals(memberId) && decide.equals("reject")) {

@@ -1,6 +1,8 @@
 package com.joooin.system.group._22.controller;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -28,6 +30,9 @@ public class CreateGroupController {
 
 	@Autowired
 	ServletContext context;
+	
+	// 時間格式
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ahh:mm:ss");
 
 	// 送出空白社團表單
 	@RequestMapping(method = RequestMethod.GET, value = "/groups/create")
@@ -85,7 +90,8 @@ public class CreateGroupController {
 		groupMainBean.setGroupCurrentMembers(1);
 
 		// 預設開團時間為當下
-		groupMainBean.setGroupCreateDate(LocalDateTime.now().toString());
+		
+		groupMainBean.setGroupCreateDate(sdf.format(new Date()).toString());
 
 		// 創社團
 		Integer groupId = service.createGroup(groupMainBean);

@@ -35,6 +35,15 @@
 	top: 50px;
 }
 
+
+#menu {
+	position: fixed;
+	left: 15;
+	top: 25%;
+	width: 8em;
+	margin-top: -2.5em;
+}
+
 </style>
 
 <script>
@@ -100,8 +109,16 @@
 					<div class="btn-toolbar mb-2 mb-md-0">
 						<div class="btn-group mr-2">
 							<button type="button" class="btn btn-sm btn-outline-secondary">分享</button>
+
 							<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#ooo"
 								>社團管理人</button>
+
+							<!-- 					按鈕顯示判斷		 -->
+							<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
+								<button type="button" class="btn btn-sm btn-outline-secondary">社團申請管理</button>
+							</c:if>
+							<!-- 					按鈕顯示判斷		 -->
+
 						</div>
 						<button type="button"
 							class="btn btn-sm btn-outline-secondary dropdown-toggle">
