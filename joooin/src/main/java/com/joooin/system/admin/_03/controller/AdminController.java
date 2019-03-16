@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.joooin.model.EventMainBean;
 import com.joooin.model.GroupMainBean;
+import com.joooin.model.GroupMemberBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.system.admin._03.service.AdminService;
 
@@ -49,11 +50,25 @@ public class AdminController {
 		return service.getMemberBean(memberId);
 	}
 	
-	@RequestMapping(value = "/admin/deleteMember", method =RequestMethod.POST )
+	@RequestMapping(value = "/admin/deleteMember", method = RequestMethod.POST)
 	@ResponseBody
 	public void deleteMember(@RequestParam("memberId")Integer memberId) {
 		MemberMainBean mmb = service.getMemberBean(memberId);
 		service.deleteMemberBean(mmb.getMemberId());
+	}
+	
+	@RequestMapping(value = "/admin/getGroupBean/{groupId}", method = RequestMethod.GET)
+	public @ResponseBody GroupMainBean getGroupBean(@PathVariable("groupId")Integer groupId) {
+		return service.getGroupBean(groupId);
+	}
+	
+	@RequestMapping(value = "/admin/deleteGroup", method = RequestMethod.POST)
+	@ResponseBody
+	public void deleteGroup(@RequestParam("groupId")Integer groupId) {
+		GroupMainBean gmb = service.getGroupBean(groupId);
+		GroupMemberBean gmemberb = service.getGroupMemberBean(groupId);
+		service.deleteGroupMemberId(gmemberb.getGroupMemberId());
+		service.deleteGroupBean(gmb.getGroupId());
 	}
 
 }

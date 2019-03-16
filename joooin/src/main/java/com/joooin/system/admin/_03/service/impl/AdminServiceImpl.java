@@ -8,9 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.joooin.model.EventMainBean;
 import com.joooin.model.GroupMainBean;
+import com.joooin.model.GroupMemberBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.repository.EventMainDao;
 import com.joooin.repository.GroupMainDao;
+import com.joooin.repository.GroupMemberDao;
 import com.joooin.repository.MemberMainDao;
 import com.joooin.system.admin._03.service.AdminService;
 
@@ -26,6 +28,9 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	EventMainDao emd;
+	
+	@Autowired
+	GroupMemberDao gmemberd;
 
 	@Override
 	public List<MemberMainBean> getAllMember() {
@@ -51,5 +56,32 @@ public class AdminServiceImpl implements AdminService {
 	public void deleteMemberBean(Integer memberId) {
 		mmd.deleteByMemberId(memberId);
 	}
+	
+	@Override
+	public GroupMainBean getGroupBean(Integer groupId) {
+		return gmd.getByGroupId(groupId);
+	}
+
+	@Override
+	public void deleteGroupBean(Integer groupId) {
+		gmd.deleteByGroupId(groupId);
+	}
+
+	@Override
+	public GroupMemberBean getGroupMemberBean(Integer groupId) {
+		return gmemberd.getByGroupMemberId(groupId);
+	}
+
+	@Override
+	public void deleteGroupMemberId(Integer groupId) {
+//		gmemberd.deleteByGroupMemberId(groupMemberId);
+		List<GroupMemberBean> list = gmemberd.getAll();
+		for(GroupMemberBean gmemberb : list) {
+			if(gmemberb.getGroupId().equals(groupId));
+			gmemberd.deleteByGroupMemberId(gmemberb.getGroupMemberId());
+		}
+	}
+
+	
 
 }

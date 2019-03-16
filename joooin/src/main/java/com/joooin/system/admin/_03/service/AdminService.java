@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.joooin.model.EventMainBean;
 import com.joooin.model.GroupMainBean;
+import com.joooin.model.GroupMemberBean;
 import com.joooin.model.MemberMainBean;
 
 public interface AdminService {
@@ -16,5 +17,13 @@ public interface AdminService {
 	public MemberMainBean getMemberBean(Integer memberId);
 
 	public void deleteMemberBean(Integer memberId);
+	
+	public GroupMainBean getGroupBean(Integer groupId);
+	
+	public void deleteGroupBean(Integer groupId);
+	
+	public GroupMemberBean getGroupMemberBean(Integer groupId);
+	
+	public void deleteGroupMemberId(Integer groupId);
 
 }

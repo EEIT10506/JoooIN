@@ -125,12 +125,62 @@ $(document).ready(function () {
                 			docFrag.append(row);
                 		})
                 		$('#content tbody').html(docFrag);
-                	//start
-                	
                 }
-        	})
+        	})//撈出社團end
+//        	----------------------------------------------------------------------------------------------------
+        	var gi;
+        	$(document).on("click",'.groupId',function(){  //點選groupId動作
+        		gi = $(this).text();
+        		
+        		$('#content').empty();
+        		
+        		$.ajax({
+        			
+        			type:"GET",
+        			url:"/joooin/admin/getGroupBean/" + gi,
+        			
+        			success:function(data){
+        				var name = data.groupName;
+        				var docFrag = $(document.createDocumentFragment());
+        				var format = $('<container></container>').html(
+        						'<row>'
+        						+'<div class="col-lg-8">'
+        						+'<h2>社團修改</h2>'
+        						+'<h4>' + name + '</h4>'
+        						+'<form:form method="POST" class="form-horizontal">'
+        						+'<button type="submit" class="btn btn-primary" id="groupButton">修改</button>'
+        						+'<button type="submit" class="btn btn-danger" id="groupDelete">刪除</button>'
+        						+'</form>'
+        						+'</div>'
+        						+'</row>'
+        						)
+        						docFrag.append(format);
+        						$('#content').html(docFrag);
+        			},
+        		error: function (xhr, ajaxOptions, thrownError){
+        			
+        		},
+        		})
+        	})//點選id end
+//        	----------------------------------------------------------------------------------------------------
+        	$(document).on("click",'#groupDelete',function(){ // 刪除按鈕動作
+        		$.ajax({
+        			type:"POST",
+        			url:"/joooin/admin/deleteGroup",
+        			data:{groupId:gi},
+        			success:function(){
+        				alert('刪除完成!');
+        				$('.bg-primary').trigger("click");
+        				console.log(data)
+        			},
+        			error:function(e){
+        				
+        			}
+        		})
+        	})		// 刪除end
+//        	----------------------------------------------------------------------------------------------------
         	
-        }//社團管理
+        }//社團管理end
 //    	----------------------------------------------------------------------------------------------------
         
         if(title == '活動管理'){
