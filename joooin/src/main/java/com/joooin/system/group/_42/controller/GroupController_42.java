@@ -47,6 +47,7 @@ public class GroupController_42 {
 		List<GroupMainBean> typeOne = service.getGroupType(groupOneType);
 		model.addAttribute("groupsType", typeOne);
 		
+
 		List<GroupMainBean> list = service.getGroupType(groupOneType);
 //		for(GroupMainBean gb:list) {
 ////有功能尚未做完
@@ -63,6 +64,7 @@ public class GroupController_42 {
 //			}
 ////			}
 		
+
 
 		return "group/groups_type"; 
 	}
