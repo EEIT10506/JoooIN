@@ -43,7 +43,7 @@
 								<h3 class="card-title">
 									<a href="/member/other/${member.memberId}">${member.memberName}</a>
 								</h3>
-								<p class="card-text">會員自我介紹:${member.memberName}${member.memberName}${member.memberName}${member.memberName}${member.memberName}${member.memberName}${member.memberName}${member.memberName}${member.memberName}${member.memberName}${member.memberName}${member.memberName}${member.memberName}${member.memberName}${member.memberName}${member.memberName}</p>
+								<p class="card-text">會員自我介紹:</p>
 							</div>
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">發文數量 : xxx</li>
