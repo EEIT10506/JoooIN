@@ -67,5 +67,15 @@ public class GroupController_42 {
 
 
 		return "group/groups_type"; 
-	}
+			}
+
+//左側個別社團選單
+			@RequestMapping(value = "group/group_navbar", method = RequestMethod.GET)
+			public String Group_navbar() {
+				return "group/group_navbar";
+			}
+			
+			
+
+
 }
