@@ -26,4 +26,6 @@ public interface GroupService_22 {
 	
 	// 根據approve，reject 改變清單中的會員狀態，許可的話回傳新增的會員ID
 	public Integer processApplyList(Integer groupId, Integer memberId, String decide);
+	
+	public List<MemberMainBean> getMembersInGroup(Integer groupId); // 取得該社團內成員
 }

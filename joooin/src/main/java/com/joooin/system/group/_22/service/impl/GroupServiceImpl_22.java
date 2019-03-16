@@ -86,7 +86,7 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 	public List<MemberMainBean> getGroupApplyMembers(Integer groupId) {
 		
 		// 放待申請的bean
-		List<MemberMainBean> getGroupApplyList = new LinkedList<MemberMainBean>(); 
+		List<MemberMainBean> GroupApplyList = new LinkedList<MemberMainBean>(); 
 		
 		List<GroupMemberBean> allGroupMember = groupMemberDao.getAll();
 		
@@ -97,10 +97,10 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 				// 該社團 且狀態是 未允許 取出 memberBean
 				MemberMainBean member = 
 						memMainDao.getByMemberId(gmBean.getMemberId());
-				getGroupApplyList.add(member);
+				GroupApplyList.add(member);
 			}
 		}
-		return getGroupApplyList;
+		return GroupApplyList;
 	}
 	
 	@Override
@@ -132,6 +132,20 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public List<MemberMainBean> getMembersInGroup(Integer groupId) {
+		List<MemberMainBean> memberInGroupList = new LinkedList<MemberMainBean>();
+		
+		List<GroupMemberBean> groupApplyList = getGroupApplyList(groupId);
+		for(GroupMemberBean gmBean : groupApplyList) {
+			if(gmBean.getIsAgreed()){
+			MemberMainBean member = memMainDao.getByMemberId(gmBean.getMemberId());
+			memberInGroupList.add(member);
+			}
+		}
+		return memberInGroupList;
 	}
 }
 

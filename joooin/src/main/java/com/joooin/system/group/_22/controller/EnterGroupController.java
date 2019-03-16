@@ -1,5 +1,7 @@
 package com.joooin.system.group._22.controller;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
@@ -50,7 +52,11 @@ public class EnterGroupController {
 	// 進入社團成員
 	@RequestMapping(method = RequestMethod.GET, value = "/group/members/{groupId}")
 	public String mainPageMember(Model model, @PathVariable Integer groupId) {
-
+		
+		List<MemberMainBean> members = groupService.getMembersInGroup(groupId);
+		
+		model.addAttribute("membersInGroup", members);
+		
 		return "group/group_members";
 	}
 
