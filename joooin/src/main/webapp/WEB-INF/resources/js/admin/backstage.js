@@ -108,10 +108,23 @@ $(document).ready(function () {
                 timeout: 600000,
                 
                 success: function (data){
-                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">社團編號</th><th>社團類型</th><th>社團名稱</th><th>管理員</th><th>創建日期</th></tr></thead><tbody></tbody>');
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">社團編號</th><th>社團類型</th><th>社團名稱</th><th>團長ID</th><th>創建日期</th><th>社團人數</th></tr></thead><tbody></tbody>');
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
                 		console.log(data);
+                		$.each(data, function (index, Group){
+                			var cell1 = $('<td></td>').text(Group.groupId).addClass('pointer text-primary text-center groupId');
+                			var cell2 = $('<td></td>').text(Group.groupType)
+                			var cell3 = $('<td></td>').text(Group.groupName)
+                			var cell4 = $('<td></td>').text(Group.groupLeaderId)
+                			var cell5 = $('<td></td>').text(Group.groupCreateDate)
+                			var cell6 = $('<td></td>').text(Group.groupMemberList.length)
+                			
+                			var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6]);
+                			
+                			docFrag.append(row);
+                		})
+                		$('#content tbody').html(docFrag);
                 	//start
                 	
                 }
@@ -128,10 +141,22 @@ $(document).ready(function () {
                 timeout: 600000,
                 
                 success: function (data){
-                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">活動編號</th><th>活動名稱</th></tr></thead><tbody></tbody>');
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">活動編號</th><th>活動名稱</th><th>活動地點</th><th>活動類型</th><th>參加人數</th></tr></thead><tbody></tbody>');
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
                 		console.log(data);
+                		$.each(data, function (index, Event){
+                			var cell1 = $('<td></td>').text(Event.eventId).addClass('pointer text-primary text-center eventId');
+                			var cell2 = $('<td></td>').text(Event.eventName)
+                			var cell3 = $('<td></td>').text(Event.eventAddress)
+                			var cell4 = $('<td></td>').text(Event.eventTypeId)
+                			var cell5 = $('<td></td>').text(Event.eventCurrentMembers)
+                			
+                			var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4, cell5]);
+                			
+                			docFrag.append(row);
+                		})
+                		$('#content tbody').html(docFrag);
                 	//start
                 }
         	})
