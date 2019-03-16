@@ -73,7 +73,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void deleteGroupMemberId(Integer groupId) {
+	public void deleteGroupMemberBean(Integer groupId) {
 //		gmemberd.deleteByGroupMemberId(groupMemberId);
 		List<GroupMemberBean> list = gmemberd.getAll();
 		for(GroupMemberBean gmemberb : list) {

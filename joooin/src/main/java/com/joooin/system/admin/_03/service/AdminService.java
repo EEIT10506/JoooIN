@@ -24,6 +24,6 @@ public interface AdminService {
 	
 	public GroupMemberBean getGroupMemberBean(Integer groupId);
 	
-	public void deleteGroupMemberId(Integer groupId);
+	public void deleteGroupMemberBean(Integer groupId);
 
 }

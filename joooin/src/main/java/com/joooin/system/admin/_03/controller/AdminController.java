@@ -67,7 +67,7 @@ public class AdminController {
 	public void deleteGroup(@RequestParam("groupId")Integer groupId) {
 		GroupMainBean gmb = service.getGroupBean(groupId);
 		GroupMemberBean gmemberb = service.getGroupMemberBean(groupId);
-		service.deleteGroupMemberId(gmemberb.getGroupMemberId());
+		service.deleteGroupMemberBean(gmemberb.getGroupMemberId());
 		service.deleteGroupBean(gmb.getGroupId());
 	}
 
