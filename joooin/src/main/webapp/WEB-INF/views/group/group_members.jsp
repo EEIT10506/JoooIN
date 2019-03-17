@@ -34,8 +34,9 @@
 	<!-- 請把所有內容寫在此div內 -->
 	<div id="main">
 	
-	
+<jsp:include page="${request.contextPath}/group/group_navbar" />	
 		<!-- 	test -->
+		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 		<div class="content">
 			<div class="container mt-3">
 				<div class="card-columns">
@@ -67,6 +68,7 @@
 		</div>
 		<!-- 	test -->
 	</div>
+	
 	<!-- 請把所有內容寫在此div內 -->
 </body>
 </html>
