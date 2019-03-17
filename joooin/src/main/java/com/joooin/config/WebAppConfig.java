@@ -17,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.resource.VersionResourceResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.ResourceBundleViewResolver;
 
 @Configuration
 @EnableWebMvc
@@ -36,6 +37,15 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		viewResolver.setPrefix("/WEB-INF/views/");
 		viewResolver.setSuffix(".jsp");
 		return viewResolver;
+	}
+	
+	@Bean
+	public ViewResolver pdfViewResolver() {
+		System.out.println("pdfViewResolver");
+		ResourceBundleViewResolver pdfView = new ResourceBundleViewResolver();
+		pdfView.setBasename("views");
+		pdfView.setOrder(1);
+		return pdfView;
 	}
 
 	@Override
