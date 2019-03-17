@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.joooin.model.EventLikeBean;
 import com.joooin.model.EventMainBean;
 import com.joooin.model.EventMemberBean;
 import com.joooin.model.GroupMainBean;
@@ -67,8 +68,8 @@ public class AdminController {
 	@ResponseBody
 	public void deleteGroup(@RequestParam("groupId")Integer groupId) {
 		GroupMainBean gmb = service.getGroupBean(groupId);
-		GroupMemberBean gmemberb = service.getGroupMemberBean(groupId);
-		service.deleteGroupMemberBean(gmemberb.getGroupMemberId());
+		service.deleteGroupMemberBean(groupId);
+		service.deleteGroupChat(groupId);
 		service.deleteGroupBean(gmb.getGroupId());
 	}
 	
@@ -81,8 +82,9 @@ public class AdminController {
 	@ResponseBody
 	public void deleteEvent(@RequestParam("eventId")Integer eventId) {
 		EventMainBean emb = service.getEventBean(eventId);
-		EventMemberBean ememberb = service.getEventMemberBean(eventId);
-		service.deleteEventMemberBean(ememberb.getEventMemberId());
+		service.deleteEventMemberBean(eventId);
+		service.deleteEventLike(eventId);
+		service.deleteEventPost(eventId);
 		service.deleteEventBean(emb.getEventId());
 	}
 
