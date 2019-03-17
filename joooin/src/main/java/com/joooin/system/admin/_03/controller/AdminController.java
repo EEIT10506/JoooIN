@@ -10,11 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.joooin.model.EventLikeBean;
 import com.joooin.model.EventMainBean;
-import com.joooin.model.EventMemberBean;
 import com.joooin.model.GroupMainBean;
-import com.joooin.model.GroupMemberBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.system.admin._03.service.AdminService;
 
