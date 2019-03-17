@@ -54,8 +54,11 @@ public class EnterGroupController {
 	public String mainPageMember(Model model, @PathVariable Integer groupId) {
 		
 		List<MemberMainBean> members = groupService.getMembersInGroup(groupId);
-		
 		model.addAttribute("membersInGroup", members);
+		
+		//for group_navbar
+		GroupMainBean groupMain = groupService.getByGroupId(groupId);
+		model.addAttribute("groupMain", groupMain);
 		
 		return "group/group_members";
 	}
