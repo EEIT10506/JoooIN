@@ -43,7 +43,12 @@
 	width: 8em;
 	margin-top: -2.5em;
 }
-
+div{
+	margin:0;
+	border:0;
+	padding:0;
+}
+.div-a{ float:left; width:50px;  solid #999; height:60px;} 
 </style>
 
 <script>
@@ -126,21 +131,31 @@
 
 <!-- Modal管理者管理成員 -->
 <div id="ooo" class="modal inmodal fade"  tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="true">
-  <div class="modal-dialog modal-lg" >
+  <div class="modal-dialog modal-lg modal-dialog-centered" >
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">
-          <span>&times;</span>
-        </button>
-        <div class="modal-title ">
-          
+       <div class="modal-header">
+          <h4 class="modal-title">成員申請表</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-      </div>
       <div class="modal-body" >
-        
+     <div class="container">
+     
+  <div class="row justify-content-end">
+  
+  
+<!--  EL加入地點  -->
+ 
+  	<div class="col-8 div-a"><span >放member地點</span></div>
+    <div class="col div-a"> <button class="btn btn pull-right btn-primary">允許加入</button></div>
+    <div class="col div-a"><button class="btn btn pull-right btn-danger">拒絕</button></div>
+    
+<!--  EL加入地點  -->
+
+
+  </div>
+</div>
       </div>
-      <div class="modal-footer" >
-        <button class="btn">確定</button>
+      <div class="modal-footer" >   
         <button class="btn" class="close" data-dismiss="modal">Cancel</button>
       </div>
     </div>
