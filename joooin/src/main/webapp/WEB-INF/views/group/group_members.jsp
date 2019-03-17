@@ -27,8 +27,14 @@
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/navbar" />
+	
+	
+	
+	
 	<!-- 請把所有內容寫在此div內 -->
 	<div id="main">
+	
+	
 		<!-- 	test -->
 		<div class="content">
 			<div class="container mt-3">

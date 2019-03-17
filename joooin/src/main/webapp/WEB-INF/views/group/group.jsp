@@ -107,6 +107,11 @@
 
 
 <jsp:include page="${request.contextPath}/group/group_navbar" />
+	<!-- 	解決include jQuery衝突 -->
+	<script type="text/javascript">
+		var xxx = jQuery.noConflict(true);
+	</script>
+	<!-- 	解決include jQuery衝突 -->
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
@@ -119,7 +124,8 @@
 
 							<!-- 					按鈕顯示判斷		 -->
 							<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
-								<button type="button" class="btn btn-sm btn-outline-secondary">社團申請管理</button>
+								<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
+								data-target="#ooo">社團申請管理</button>
 							</c:if>
 							<!-- 					按鈕顯示判斷		 -->
 
