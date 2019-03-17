@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.joooin.model.EventMainBean;
 import com.joooin.model.GroupMainBean;
@@ -83,6 +84,12 @@ public class AdminController {
 		service.deleteEventLike(eventId);
 		service.deleteEventPost(eventId);
 		service.deleteEventBean(emb.getEventId());
+	}
+	
+	@RequestMapping(value = "/admin/memberPDF", method = RequestMethod.GET)
+	public ModelAndView memberPdf() {
+		List<MemberMainBean> list = service.getAllMember();
+		return new ModelAndView("pdfView", "allMember", list);
 	}
 
 }

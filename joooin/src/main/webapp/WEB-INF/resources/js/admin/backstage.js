@@ -43,6 +43,7 @@ $(document).ready(function () {
                 			docFrag.append(row);
                 		})
                 		$('#content tbody').html(docFrag);
+                		$('#content tbody').after('<a href="admin/memberPDF">Download PDF Document</a>')
                 }
         	})	//撈出會員end
 //        	----------------------------------------------------------------------------------------------------
