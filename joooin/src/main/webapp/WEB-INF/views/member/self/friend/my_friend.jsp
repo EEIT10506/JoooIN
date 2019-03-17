@@ -77,14 +77,15 @@
 		var column=[
             {"data": "name", name:"會員名稱" , "orderable":true },
             {"data": "page", name:"個人頁面" , "orderable":false },
-            {"data": "delete", name:"解除好友" , "orderable":false },
+            {"data": "chat", name:"聊天" , "orderable":false },
+            {"data": "delete", name:"解除好友" , "orderable":false }
            ];
 
 		$('#datatable').DataTable({"columns":column, "language":language, "lengthChange": false, "aLengthMenu" : 10, "bScrollCollapse": true});
 	});
 	
 </script>
-<title>會員1</title></head>
+<title>會員</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
@@ -101,6 +102,7 @@
 								<tr>
 									<th>會員名稱</th>
 		                            <th>個人頁面</th>
+		                            <th>聊天</th>
 		                            <th>解除好友</th>
 								</tr>
 							</thead>		
@@ -110,6 +112,7 @@
 										<tr>
 											<td><img id="friendImage" src='<c:url value='/getMemberImage/${friend.memberId}.jpg' />' />　${friend.memberName} </td>
 				                            <td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="個人頁面"><button value="${friend.memberId}" class="friendPageBtn btn btn-primary btn-xs" data-title="個人頁面" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
+				                            <td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="聊天"><button value="${friend.memberId}" class="friendChatBtn btn btn-primary btn-xs" data-title="聊天" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_chat.png' />"/></button></p></td>
 				    						<td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="解除好友"><button value="${friend.memberId}" class="friendDeleteBtn btn btn-danger btn-xs" data-title="解除好友" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_delete.png' />"/></button></p></td>
 										</tr>
 									</c:if>

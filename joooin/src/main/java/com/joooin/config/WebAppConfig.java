@@ -18,6 +18,7 @@ import org.springframework.web.servlet.resource.VersionResourceResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.joooin")

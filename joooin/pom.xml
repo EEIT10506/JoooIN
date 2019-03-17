@@ -26,13 +26,26 @@
 		<!-- </dependency> -->
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
 		<!-- 先不要用這兩個dependency -->
+		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+		<dependency>
+		    <groupId>log4j</groupId>
+		    <artifactId>log4j</artifactId>
+		    <version>1.2.17</version>
+		</dependency>
+
+		
 		<dependency>
 		   <groupId>javax.websocket</groupId>
 		   <artifactId>javax.websocket-api</artifactId>
 		   <version>1.1</version>
 		   <scope>provided</scope>
 		</dependency>
-		
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-messaging</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
@@ -150,6 +163,11 @@
 			<artifactId>jackson-annotations</artifactId>
 			<version>2.5.0</version>
 		</dependency>
+		<dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.5.0</version>
+        </dependency>
 		<dependency>
 			<groupId>com.itextpdf</groupId>
 			<artifactId>itextpdf</artifactId>
