@@ -7,7 +7,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"
 	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
 	crossorigin="anonymous"></script>
@@ -47,9 +46,9 @@
 </style>
 
 <script>
-	$(document).ready(function() {
-		$('#table_id').DataTable();
-	});
+// 	$(document).ready(function() {
+// 		$('#table_id').DataTable();
+// 	});
 	//顯示視窗前呼叫
 	$("#ooo").on("show.bs.modal",function(e){
 	  console.log('顯示視窗前呼叫');
@@ -110,12 +109,9 @@
 						<div class="btn-group mr-2">
 							<button type="button" class="btn btn-sm btn-outline-secondary">分享</button>
 
-							<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#ooo"
-								>社團管理人</button>
-
 							<!-- 					按鈕顯示判斷		 -->
 							<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
-								<button type="button" class="btn btn-sm btn-outline-secondary">社團申請管理</button>
+								<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#ooo">社團申請管理</button>
 							</c:if>
 							<!-- 					按鈕顯示判斷		 -->
 
@@ -136,15 +132,15 @@
           <span>&times;</span>
         </button>
         <div class="modal-title ">
-          標題列
+          
         </div>
       </div>
       <div class="modal-body" >
-        內容
+        
       </div>
       <div class="modal-footer" >
-        <button class="btn">OK</button>
-        <button class="btn">Cancel</button>
+        <button class="btn">確定</button>
+        <button class="btn" class="close" data-dismiss="modal">Cancel</button>
       </div>
     </div>
   </div>
