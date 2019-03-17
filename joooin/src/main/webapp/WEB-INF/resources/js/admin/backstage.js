@@ -207,10 +207,63 @@ $(document).ready(function () {
                 			docFrag.append(row);
                 		})
                 		$('#content tbody').html(docFrag);
-                	//start
                 }
         	})
+//        	----------------------------------------------------------------------------------------------------
+        	var ei;
+        	$(document).on("click",'.eventId',function(){  //點選eventId動作
+        		ei = $(this).text();
+        		
+        		$('#content').empty();
+        		
+        		$.ajax({
+        			
+        			type:"GET",
+        			url:"/joooin/admin/getEventBean/" + ei,
+        			
+        			success:function(data){
+        				var name = data.eventName;
+        				var docFrag = $(document.createDocumentFragment());
+        				var format = $('<container></container>').html(
+        						'<row>'
+        						+'<div class="col-lg-8">'
+        						+'<h2>活動修改</h2>'
+        						+'<h4>' + name + '</h4>'
+        						+'<form:form method="POST" class="form-horizontal">'
+        						+'<button type="submit" class="btn btn-primary" id="eventButton">修改</button>'
+        						+'<button type="submit" class="btn btn-danger" id="eventDelete">刪除</button>'
+        						+'</form>'
+        						+'</div>'
+        						+'</row>'
+        						)
+        						docFrag.append(format);
+        						$('#content').html(docFrag);
+        			},
+        		error: function (xhr, ajaxOptions, thrownError){
+        			
+        		},
+        		})
+        	})//點選id end
+//        	----------------------------------------------------------------------------------------------------
+        		$(document).on("click",'#eventDelete',function(){ // 刪除按鈕動作
+        		$.ajax({
+        			type:"POST",
+        			url:"/joooin/admin/deleteEvent",
+        			data:{eventId:ei},
+        			success:function(){
+        				alert('刪除完成!');
+        				$('.bg-primary').trigger("click");
+        				console.log(data)
+        			},
+        			error:function(e){
+        				
+        			}
+        		})
+        	})		// 刪除end
+//        	----------------------------------------------------------------------------------------------------
+        	
         }//活動管理
+        
 //    	----------------------------------------------------------------------------------------------------
         
     	}		//selectCategory end;

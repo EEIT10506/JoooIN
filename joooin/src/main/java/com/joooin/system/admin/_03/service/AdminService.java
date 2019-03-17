@@ -3,6 +3,7 @@ package com.joooin.system.admin._03.service;
 import java.util.List;
 
 import com.joooin.model.EventMainBean;
+import com.joooin.model.EventMemberBean;
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupMemberBean;
 import com.joooin.model.MemberMainBean;
@@ -25,5 +26,13 @@ public interface AdminService {
 	public GroupMemberBean getGroupMemberBean(Integer groupId);
 	
 	public void deleteGroupMemberBean(Integer groupId);
+	
+	public EventMainBean getEventBean(Integer eventId);
+	
+	public void deleteEventBean(Integer eventId);
+	
+	public EventMemberBean getEventMemberBean(Integer eventId);
+	
+	public void deleteEventMemberBean(Integer eventId);
 
 }
