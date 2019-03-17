@@ -85,8 +85,8 @@
 					<div class=.pull-right>
 						<ul id="menu" class="nav flex-column">
 							<li class="nav-item"><a class="nav-link active"
-								href="${pageContext.request.contextPath}/group/about/${groupMain.groupId}">
-									<span data-feather="home"></span> 返回上一頁 <span
+								href="${pageContext.request.contextPath}/group/${groupMain.groupId}">
+									<span data-feather="home"></span> ${groupMain.groupName} <span
 									class="sr-only"></span>
 							</a></li>
 							<li class="nav-item"><a class="nav-link active"
@@ -105,10 +105,10 @@
 									data-feather="users"></span> 聊天
 							</a></li>
 							<li class="nav-item"><a class="nav-link" href="#"> <span
-									data-feather="bar-chart-2"></span> Reports
+									data-feather="bar-chart-2"></span> 相簿
 							</a></li>
 							<li class="nav-item"><a class="nav-link" href="#"> <span
-									data-feather="layers"></span> Integrations
+									data-feather="layers"></span> 投票
 							</a></li>
 						</ul>
 						</div>

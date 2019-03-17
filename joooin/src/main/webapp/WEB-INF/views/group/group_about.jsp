@@ -58,7 +58,9 @@
 								<span class="label label-defaulabel label-primary">${groupMain.groupType}</span>	
 								</p>
 								<p class="text-right">
+								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
 								<button class="btn btn-default btn-lg btn-danger">修改</button>
+								</c:if>
 								</p>	
 							</div>
 						</div>
@@ -74,7 +76,9 @@
 								<span class="label label-defaulabel label-primary">${groupMain.groupName}</span>	
 								</p>
 								<p class="text-right">
+								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
 								<button class="btn btn-default btn-lg btn-danger">修改</button>
+								</c:if>
 								</p>	
 							</div>
 						</div>
@@ -90,7 +94,9 @@
 								<span class="label label-defaulabel label-primary">${groupMain.groupCurrentMembers}</span>	
 								</p>
 								<p class="text-right">
+								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
 								<button class="btn btn-default btn-lg btn-danger">修改</button>
+								</c:if>
 								</p>	
 							</div>
 						</div>					
@@ -106,7 +112,9 @@
 								<span class="label label-defaulabel label-primary">${groupMain.groupCreateDate}</span>	
 								</p>
 								<p class="text-right">
+								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
 								<button class="btn btn-default btn-lg btn-danger">修改</button>
+								</c:if>
 								</p>	
 							</div>
 						</div>
@@ -122,7 +130,9 @@
 								<span class="label label-defaulabel label-primary">${groupMain.groupIntro}</span>	
 								</p>
 								<p class="text-right">
+								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
 								<button class="btn btn-default btn-lg btn-danger">修改</button>
+								</c:if>
 								</p>	
 							</div>
 						</div>
@@ -138,7 +148,9 @@
 								<span class="label label-defaulabel label-primary">${leader}</span>	
 								</p>
 								<p class="text-right">
+								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
 								<button class="btn btn-default btn-lg btn-danger">修改</button>
+								</c:if>
 								</p>	
 							</div>
 						</div>
