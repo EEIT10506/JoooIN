@@ -48,7 +48,7 @@
 								src="logo.jpg" alt="Responsive image">
 							<div class="card-body">
 								<h3 class="card-title">
-									<a href="/member/other/${member.memberId}">${member.memberName}</a>
+									<a href="${pageContext.request.contextPath}/member/other/${member.memberId}">${member.memberName}</a>
 								</h3>
 								<p class="card-text">會員自我介紹:</p>
 							</div>
