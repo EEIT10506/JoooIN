@@ -24,13 +24,13 @@ public class ProcessGroupController {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/group/applygroup/{groupId}")
 	@ResponseBody
-	public String getGroupApplyList(@PathVariable Integer groupId, Model model) {
+	public List<MemberMainBean> getGroupApplyList(@PathVariable Integer groupId, Model model) {
 		
 		List<MemberMainBean> groupApplyList = service.getGroupApplyMembers(groupId);
 		
-		model.addAttribute("applyList", groupApplyList);
+//		model.addAttribute("applyList", groupApplyList);
 		
-		return "";
+		return groupApplyList;
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value =
@@ -39,7 +39,7 @@ public class ProcessGroupController {
 	public String processGroupApply(@PathVariable Integer groupId, 
 			@PathVariable Integer memberId, @PathVariable String decide ) {
 		
-		service.processApplyList(groupId, memberId, decide);
+		Integer sss = service.processApplyList(groupId, memberId, decide);
 		
 		
 		
