@@ -144,6 +144,10 @@ public class EventController {
 		
 //		參加人員isAgree = true
 		List<EventMemberBean> eventmember = event.getEventMemberList();
+		List<EventMemberBean> eventMemberList = new ArrayList<EventMemberBean>();
+		
+		
+		
 		MemberMainBean eventmembers = null;
 		List<MemberMainBean> eventmemberlist = new ArrayList<MemberMainBean>();
 		List<MemberMainBean> emfindagreed = new ArrayList<MemberMainBean>();
@@ -156,6 +160,7 @@ public class EventController {
 			if(isAgreed == true) {
 				emfindagreed.add(eventmembers);
 			}
+			
 		}
 		//抓留言資訊
 		List<EventPostBean> eventPost = event.getEventPostList();
@@ -184,11 +189,13 @@ public class EventController {
 		}
 		//LIKE
 		
-		
+		String notLike = null;
 		List<EventLikeBean> likeList = event.getEventLikeList();
 			for(EventLikeBean like: likeList){
 				if(like.getEventId().equals(eventId) && like.getMemberId().equals(memberId)) {
 					model.addAttribute("likedCheck", like);
+				}else {
+					model.addAttribute("notLike", notLike);
 				}
 			}
 		
@@ -223,11 +230,11 @@ public class EventController {
 				
 					
 					updateEvent.setEventLike(realDeleteLike);
-					eventMainService.save(updateEvent);
+					eventMainService.update(updateEvent);
 					
 					
 					count++;
-					break;
+					
 				}
 			}
 			if(count==0) {
@@ -242,7 +249,7 @@ public class EventController {
 
 				EventMainBean updateEvent = eventMainService.getByEventMainId(eventId);
 					updateEvent.setEventLike(reallike);
-					eventMainService.save(updateEvent);
+					eventMainService.update(updateEvent);
 					return "realLike";
 			}
 			else {
@@ -254,17 +261,146 @@ public class EventController {
 	    	}
 	
 	}
-				
+			@RequestMapping(value = "/event/checkLike/{eventId}", method = RequestMethod.POST)
+			public @ResponseBody String eventLikeCheck(Integer eventId,HttpSession session) {
+				Integer memberId = (Integer) session.getAttribute("memberId");
+				List<EventLikeBean> list = eventLikeDao.getAll();
+				for(EventLikeBean bean : list) {
+					if(bean.getMemberId().equals(memberId) && bean.getEventId().equals(eventId)) {
+						return "liked";
+					}else {
+						return "notLike";
+					}
+						
+				}
+				return null;
+			}
 	//活動修改
-	@RequestMapping("/event/setting/{eventId}")
-	public String eventSetting(Model model, @RequestParam("eventAdminId") Integer eventId) {
+	@RequestMapping(value = "/event/settingbar", method = RequestMethod.GET)
+	public String eventSettingBar() {
+		return "event/settingbar";
+	}
+	@RequestMapping(value = "/event/setting/{eventId}", method = RequestMethod.GET)
+	public String eventSetting(@ModelAttribute("event") EventMainBean updateBean, @PathVariable("eventId") Integer eventId,Model model, HttpSession session) {
+		Integer memberId = (Integer) session.getAttribute("memberId");
+		if( memberId != null) {
+			EventMainBean event = eventService.getByEventMainId(eventId);
+			Integer typeid = event.getEventTypeId();
+			EventTypeBean eventtype = eventService.getByEventTypeId(typeid);
+			
+			
+			model.addAttribute("event", event);
+			model.addAttribute("eventtype", eventtype);
+			
+			return "event/event_setting";
+		}else {
+			 return "not_login";
+		}
+	}
+	//修改活動資料
+	@RequestMapping(value = "/event/setting/{eventId}", method = RequestMethod.POST)
+	public String eventSettingUpdate(@ModelAttribute("event") EventMainBean updateBean, @PathVariable("eventId") Integer eventId,Model model, HttpSession session) {
+		Integer memberId = (Integer) session.getAttribute("memberId");
 		EventMainBean event = eventService.getByEventMainId(eventId);
-
-		model.addAttribute("events", event);
-
-		return "event/event_setting";
+		Integer inviterId = event.getEventInviterId();
+		
+		
+		if( memberId != null && memberId.equals(inviterId)) {
+			
+			Boolean checkLimit= eventService.updateEvent(eventId, updateBean, context);
+			//session.setAttribute("memberName", memberName);
+			
+			model.addAttribute("event", event);
+			if(checkLimit == true)
+			    return "redirect:/event/setting/"+eventId;
+			else
+				return "redirect:/notEnough/"+eventId;
+		}else {
+			 return "not_login";
+		}
+	}
+//	人數限制少於目前人數
+	@RequestMapping(value = "/notEnough/{eventId}")
+	public String notEnoughCurrentMember(@PathVariable Integer eventId) {
+		
+		return null;
+	}
+//	前端判斷BLUR
+	@RequestMapping(value = "/event/currentMember/{eventId}", method = RequestMethod.POST)
+	public @ResponseBody String currentMemberCheck(Integer eventId,Integer memberLimit, HttpSession session) {
+			EventMainBean event = eventService.getByEventMainId(eventId);
+			Integer currentMember = event.getEventCurrentMembers();
+			int current = currentMember.intValue();
+			int limit = memberLimit.intValue();
+			if(current < limit) {
+				return "yes";
+			}else {
+				return "no";
+			}
+			
+	}
+//	已報名人員名單
+	@RequestMapping(value = "/event/signUp/{eventId}")
+	public String eventSignUp(@PathVariable("eventId") Integer eventId,Model model,HttpSession session) {
+		Integer memberId = (Integer) session.getAttribute("memberId");
+		EventMainBean event = eventService.getByEventMainId(eventId);
+		Integer inviterId = event.getEventInviterId();
+		if( memberId != null && memberId.equals(inviterId)) {
+			 List<EventMemberBean> eventMemberList = event.getEventMemberList();
+			 List<MemberMainBean> memberList = new ArrayList<MemberMainBean>();		 
+			 MemberMainBean eventMembers = null;
+			 	for(EventMemberBean bean : eventMemberList) {
+			 		if(bean.getIsAgreed() == false) {
+			 			Integer memberid = bean.getMemberId();
+			 			eventMembers = eventService.getByMemberId(memberid);
+			 			memberList.add(eventMembers);
+			 		}
+			 	}
+			 	model.addAttribute("memberList", memberList);
+				model.addAttribute("event", event);
+			 return "event/event_signUp";
+		}else {
+			return "not_login";
+		}
 	}
 	
+	@RequestMapping(value = "/event/eventAgree/{eventId}")
+	public String agreedMember(@PathVariable("eventId") Integer eventId, HttpSession session, Model model) {
+		Integer memberId = (Integer) session.getAttribute("memberId");
+		EventMainBean event = eventService.getByEventMainId(eventId);
+		Integer inviterId = event.getEventInviterId();
+		if( memberId != null && memberId.equals(inviterId)) {
+			
+		}else {
+			return "not_login";
+		}
+		return null;
+	}
+//	已參加人員名單
+	@RequestMapping(value = "/event/participated/{eventId}")
+	public String eventParticipated(@PathVariable("eventId") Integer eventId,Model model,HttpSession session) {
+		Integer memberId = (Integer) session.getAttribute("memberId");
+		EventMainBean event = eventService.getByEventMainId(eventId);
+		Integer inviterId = event.getEventInviterId();
+		if( memberId != null && memberId.equals(inviterId)){
+			 List<EventMemberBean> eventMemberList = event.getEventMemberList();
+			 List<MemberMainBean> attendList = new ArrayList<MemberMainBean>();		 
+			 MemberMainBean eventMembers = null;
+			 	for(EventMemberBean bean : eventMemberList) {
+			 		if(bean.getIsAgreed() == true) {
+			 			Integer memberid = bean.getMemberId();
+			 			eventMembers = eventService.getByMemberId(memberid);
+			 			attendList.add(eventMembers);
+			 		}
+			 	}
+			model.addAttribute("attendList", attendList);
+			model.addAttribute("event", event);
+		return "event/event_participated";
+		}else {
+			return "not_login";
+		}
+	}
+//	尚未登入前端判斷
 	@RequestMapping("/not_Login")
 	public String notLogin(HttpSession session) {
 		

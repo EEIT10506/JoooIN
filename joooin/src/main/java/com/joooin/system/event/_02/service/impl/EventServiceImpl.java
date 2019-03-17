@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,7 @@ import com.joooin.repository.EventPostDao;
 import com.joooin.repository.EventTypeDao;
 import com.joooin.repository.MemberMainDao;
 import com.joooin.system.event._02.service.EventService;
+import com.joooin.util.ImageUtils;
 @Service
 @Transactional
 public class EventServiceImpl implements EventService {
@@ -47,8 +50,37 @@ public class EventServiceImpl implements EventService {
 		return null;
 	}
 	@Override
-	public void update(EventMainBean eventMainBean) {
-	
+	public Boolean updateEvent(Integer eventId, EventMainBean updateBean, ServletContext context) {
+		EventMainBean oldBean = eventMainDao.getByEventMainId(eventId);
+		Integer oldCurrent = oldBean.getEventCurrentMembers();
+		Integer updateLimit = updateBean.getEventMemberLimit();
+		int oldInt = oldCurrent.intValue();
+		int updateInt = updateLimit.intValue();
+		
+		if(updateInt > oldInt) {
+		oldBean.setEventName(updateBean.getEventName());
+		oldBean.setEventDateStart(updateBean.getEventDateStart());
+		oldBean.setEventDateEnd(updateBean.getEventDateEnd());
+		oldBean.setEventAddress(updateBean.getEventAddress());
+		oldBean.setEventContent(updateBean.getEventContent());
+		oldBean.setEventFee(updateBean.getEventFee());
+		oldBean.setEventLocation(updateBean.getEventLocation());
+		oldBean.setEventLatitude(updateBean.getEventLatitude());
+		oldBean.setEventLongitude(updateBean.getEventLongitude());
+		oldBean.setEventMemberLimit(updateBean.getEventMemberLimit());
+		oldBean.setEventTypeId(updateBean.getEventTypeId());
+		oldBean.setEventStatus(updateBean.getEventStatus());
+		Byte[] eventImage = null;
+		if (!updateBean.getMultipartFile().isEmpty()) {
+			eventImage = ImageUtils.multipartFileToByteArray(updateBean.getMultipartFile());
+			oldBean.setEventImage(eventImage);
+		} 
+			eventMainDao.update(oldBean);
+			return true;
+		}else {
+			return false;
+		}
+		
 	}
 	@Override
 	public void deleteByEventId(Integer eventId) {

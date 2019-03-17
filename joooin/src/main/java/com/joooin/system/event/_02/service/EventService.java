@@ -2,6 +2,8 @@ package com.joooin.system.event._02.service;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import com.joooin.model.EventMainBean;
 import com.joooin.model.EventMemberBean;
 import com.joooin.model.EventPostBean;
@@ -13,7 +15,7 @@ public interface EventService {
 	public EventMainBean getByEventMainId(Integer eventId);
 	public List<EventMainBean> getAll();
 	public Integer save(EventMainBean eventMainBean);
-	public void update(EventMainBean eventMainBean);
+	public Boolean updateEvent(Integer eventId,EventMainBean eventMainBean, ServletContext context);
 	public void deleteByEventId(Integer eventId);
 //	活動成員Bean
 	public EventMemberBean getByEventMemberId(Integer eventMemberId);
