@@ -90,10 +90,17 @@ div{
 	}
 	$("#ooo").ready(function(){
 		  $("#hide").click(function(){
-		    $("#hide").hide();
+			  var i;
+			  for (i = 0; i < cars.length; i++) { 
+			    text += cars[i];
+
+			     $(".col-8 div-a " + text).hide();
+			    }
+			  )};
+			    
 		  });
 		  
-		});
+		
 </script>
 
 <title>各社團主頁</title>
@@ -152,8 +159,8 @@ div{
 
  <c:forEach var="memberApply" items="${applyMemberMain}" varStatus="loop">
   	<div class="col-8 div-a ${loop.count-1}"><span >${memberApply.memberName}</span></div>
-    <div class="col div-a ${loop.count-1}"> <button class="btn btn pull-right btn-primary">允許加入</button></div>
-    <div class="col div-a ${loop.count-1}"><button class="btn btn pull-right btn-danger">拒絕</button></div>
+    <div class="col div-a ${loop.count-1}"> <button id="hide" class="btn btn pull-right btn-primary">允許加入</button></div>
+    <div class="col div-a ${loop.count-1}"><button id="hide" class="btn btn pull-right btn-danger">拒絕</button></div>
 
 </c:forEach>    
 
