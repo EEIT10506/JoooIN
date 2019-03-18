@@ -108,8 +108,8 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 		List<GroupMemberBean> groupApplyList = new LinkedList<GroupMemberBean>();
 		List<GroupMemberBean> allGroupMember = groupMemberDao.getAll();
 		
-		for(GroupMemberBean gmBean : allGroupMember) {
-			if(gmBean.getGroupId().equals(groupId)) {
+		for(GroupMemberBean gmBean : allGroupMember ) {
+			if(gmBean.getGroupId().equals(groupId) && (! gmBean.getIsAgreed())) {
 				groupApplyList.add(gmBean);
 			}
 		}

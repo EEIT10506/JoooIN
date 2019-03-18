@@ -38,10 +38,10 @@ public class EnterGroupController {
 	// 依照groupId個別社團主頁連結
 	@RequestMapping(method = RequestMethod.GET, value = "/group/{groupId}")
 	public String groupMainPage(Model model, @PathVariable Integer groupId) {
-//		HashMap<LinkedList<MemberMainBean>, > mmm = new HashMap<>();
 		LinkedList<MemberMainBean> applyMember = new LinkedList<>();
 		GroupMainBean groupMain = groupService.getByGroupId(groupId);
-		for(GroupMemberBean member : groupMain.getGroupMemberList()) {
+		
+		for(GroupMemberBean member : groupService.getGroupApplyList(groupId)) {
 			MemberMainBean memberMain = memberService.getMemberMainBean(member.getMemberId());
 			applyMember.add(memberMain);
 		}
