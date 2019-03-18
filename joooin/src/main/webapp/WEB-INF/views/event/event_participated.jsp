@@ -7,14 +7,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script> -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 <style>
 	#main {
 		width: 1050px;
@@ -57,13 +57,6 @@
 			font-size:30px;
 			font-weight:bold;
 		}
-		.iconAgree{
-			color:green;
-			cursor: pointer;
-		}
-		.iconReject{
-			color:red;
-			cursor: pointer;
 		}
 		.tdName{
 			text-decoration:none !important;
@@ -73,9 +66,46 @@
 			text-decoration:none !important;
    		    color:black;
 		}
+		.arrive{
+			cursor: pointer;
+		}
+		.absent{
+			cursor: pointer;
+		}
+		.getOut{
+			color:red;
+			cursor: pointer;
+		}
+		.report{
+			cursor: pointer;
+			color:	#FFA500;	
+		}
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
+	//踢出
+	$(".iconGetOut").click(function(){
+		var eventId = ${event.eventId};
+		var getOutId = this.id;
+		var eventMemberId = getOutId.substr(3);
+			$.ajax({
+			type: "POST",                           
+	   		 url: "${pageContext.request.contextPath}/event/eventGetOut/"+eventId,
+	  	     data: {"eventId": eventId, "eventMemberId": eventMemberId},
+	         success: function (out){
+	    	if(out=="outed"){
+	   
+	    		location.href = "${pageContext.request.contextPath}/event/participated/"+eventId;
+	    	}else{
+	    		location.href = "${pageContext.request.contextPath}/not_Login";
+	    	}
+	      } 
+		});
+	});
+	
+	
+	
+	
 	var language = {
 	        "zeroRecords": "沒有結果",
 	        "info": "<span class='seperator'>  </span>" + "總共 _TOTAL_ 位成員",
@@ -127,19 +157,66 @@ function checkAll(bx) {
 				            </tr>
 				        </thead>
 					        <tbody>
-					        	<c:forEach var="attendList" items="${attendList}">
-					            <tr id="tr${attendList.memberId}">
+					        	<c:forEach var="attendList" items="${attendList}" varStatus="loop">
+					            <tr>
 					                <td class="tdCenter tdAll" style="display:none"><input type="checkbox" name=""></td>
 					                <td class="tdCenter tdAll"><a class="aName" href="<c:url value='/member/other/${attendList.memberId}' />"><span><img src="<c:url value='/getMemberImage/${attendList.memberId}.jpg' />" width="50px" height="50px" style="border-radius:25px;"/></span></a></td>
 					                <td class="tdCenter tdAll tdName"><a class="aName" href="<c:url value='/member/other/${attendList.memberId}' />">${attendList.memberName}</a></td>
-					                <td class="tdCenter tdAll"></td>
-					                <td class="tdCenter tdAll"></td>					              
-					                <td class="tdCenter tdAll"><i class="far fa-times-circle"></i></td>
+					                
+					                
+					                <td class="tdCenter tdAll"><i class="fas fa-check-circle arrive"></i></td>
+					       					            
+					                <td class="tdCenter tdAll"><i class="fas fa-times absent"></i></i></td>					              
+					       			    
+					                <td class="tdCenter tdAll"><i data-toggle="modal" data-target="#Out${eventMemberId[loop.count-1].eventMemberId}" class="far fa-times-circle getOut"></i></td>
 					               
-					                <td class="tdCenter tdAll"><i class="fas fa-exclamation-triangle"></i></td>
+					                <td class="tdCenter tdAll"><i class="fas fa-exclamation-triangle report"></i></td>
 					                
 <!-- 					                ========= -->
+<!-- 		踢出確認MODAL			                ========= -->
 
+<div class="modal fade" id="Out${eventMemberId[loop.count-1].eventMemberId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">確認踢出</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+                     確定踢出此會員?
+      </div>
+      <div class="modal-footer">
+         <button type="button" id="out${eventMemberId[loop.count-1].eventMemberId}" class="btn btn-primary iconGetOut">確認</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button> 
+      </div>
+    </div>
+  </div>
+</div>
+            
+<!-- 			檢舉確認MODAL		                ========= -->
+<div class="modal fade" id="RejModal${eventMemberId[loop.count-1].eventMemberId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">確認檢舉資訊</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+                     確定檢舉此會員?
+      </div>
+      <div class="modal-footer">
+         <button type="button" id="rej${eventMemberId[loop.count-1].eventMemberId}" class="btn btn-primary iconRejected">確認</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button> 
+      </div>
+    </div>
+  </div>
+</div>
             
 <!-- 					                ========= -->
 					            </tr>

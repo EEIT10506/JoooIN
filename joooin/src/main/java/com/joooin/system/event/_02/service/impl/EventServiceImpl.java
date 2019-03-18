@@ -151,6 +151,15 @@ public class EventServiceImpl implements EventService {
 	public void updateIsAgreed(EventMemberBean eventMemberBean) {
 		eventMemberDao.update(eventMemberBean);
 	}
+	@Override
+	public void rejectSignUp(Integer eventMemberId) {
+		eventMemberDao.deleteByEventMemberId(eventMemberId);
+	}
+	@Override
+	public void updateQuantityWhenOut(EventMainBean eventMainBean) {
+		eventMainDao.update(eventMainBean);
+		
+	}
 
 	
 	

@@ -16,6 +16,7 @@ public interface EventService {
 	public List<EventMainBean> getAll();
 	public Integer save(EventMainBean eventMainBean);
 	public Boolean updateEvent(Integer eventId,EventMainBean eventMainBean, ServletContext context);
+	public void updateQuantityWhenOut(EventMainBean eventMainBean);
 	public void deleteByEventId(Integer eventId);
 //	活動成員Bean
 	public EventMemberBean getByEventMemberId(Integer eventMemberId);
@@ -34,6 +35,7 @@ public interface EventService {
 	public EventPostBean getByEventPostId(Integer eventPostId);
 	public void updateEventPostIsDeleted(EventPostBean eventPostBean);
 	//刪除一筆報名
-	public void deleteEventMemberById(Integer eventId,Integer eventMemberId);
+	public void deleteEventMemberById(Integer eventId,Integer memberId);
+	public void rejectSignUp(Integer eventMemberId);
 	
 }

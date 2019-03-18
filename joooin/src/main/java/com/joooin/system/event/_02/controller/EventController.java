@@ -43,7 +43,7 @@ public class EventController {
 	EventLikeDao eventLikeDao;
 	@Autowired
 	EventsService eventMainService;
-
+	//新增留言
 	@RequestMapping(value = "/event/eventPost", method = RequestMethod.POST)
 	public String submitEventPost(@RequestParam Integer eventId, @RequestParam String eventPostContent,
 			HttpSession session) {
@@ -68,7 +68,7 @@ public class EventController {
 		}
 
 	}
-
+//刪除留言 (update isDeleted)
 	@RequestMapping(value = "/DeleteEventPost", method = RequestMethod.POST)
 	public String deleteEventPost(@RequestParam Integer eventPostId, @RequestParam Integer eventId,
 			HttpSession session) {
@@ -84,7 +84,7 @@ public class EventController {
 			return "not_login";
 		}
 	}
-
+//確認報名數量
 	@RequestMapping(value = "/event/eventCheckQuantity", method = RequestMethod.POST)
 	public String checkQuantity(@RequestParam Integer eventId, @RequestParam String quantity, Model model,
 			HttpSession session) {
@@ -106,7 +106,7 @@ public class EventController {
 			return "not_login";
 		}
 	}
-
+//	退出活動
 	@RequestMapping(value = "/DeleteByEventMemberId", method = RequestMethod.POST)
 	public String deleteByEventMemberId(@RequestParam Integer eventId, HttpSession session, Model model) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
@@ -152,18 +152,24 @@ public class EventController {
 //		參加人員isAgree = true
 		List<EventMemberBean> eventmember = event.getEventMemberList();
 		List<EventMemberBean> eventMemberList = new ArrayList<EventMemberBean>();
-
+		List<MemberMainBean> findAgreed = new ArrayList<MemberMainBean>();
 		MemberMainBean eventmembers = null;
 		List<MemberMainBean> eventmemberlist = new ArrayList<MemberMainBean>();
 		List<MemberMainBean> emfindagreed = new ArrayList<MemberMainBean>();
 
 		for (EventMemberBean members : eventmember) {
 			Integer memberid = members.getMemberId();
+			Integer eventIds = members.getEventId();
+			Integer eventMemberId = members.getEventMemberId();
 			eventmembers = eventService.getByMemberId(memberid);
 			eventmemberlist.add(eventmembers);
+				
 			Boolean isAgreed = members.getIsAgreed();
-			if (isAgreed == true) {
+			if (isAgreed == true ) {
 				emfindagreed.add(eventmembers);
+			if(isAgreed == false) {
+				findAgreed.add(eventmembers);
+			}
 			}
 
 		}
@@ -203,7 +209,7 @@ public class EventController {
 				model.addAttribute("notLike", notLike);
 			}
 		}
-
+		model.addAttribute("findAgreed", findAgreed);
 		model.addAttribute("finish", finish);
 		model.addAttribute("event", event);
 		model.addAttribute("eventtype", eventtype);
@@ -324,9 +330,9 @@ public class EventController {
 
 //	人數限制少於目前人數
 	@RequestMapping(value = "/notEnough/{eventId}")
-	public String notEnoughCurrentMember(@PathVariable Integer eventId) {
-
-		return null;
+	public String notEnoughCurrentMember(@PathVariable Integer eventId, Model model) {
+			model.addAttribute("eventId", eventId);
+		return "not_Enough";
 	}
 
 //	前端判斷BLUR
@@ -373,15 +379,22 @@ public class EventController {
 			return "not_login";
 		}
 	}
-
+//報名同意
 	@RequestMapping(value = "/event/eventAgreed/{eventId}")
-	public @ResponseBody String agreedMember(Integer eventId, Integer eventMemberId, HttpSession session, Model model) {
+	public @ResponseBody String agreedMember(Integer eventId, Integer eventMemberId, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
 		EventMainBean event = eventService.getByEventMainId(eventId);
 		Integer inviterId = event.getEventInviterId();
 		if (memberId != null && memberId.equals(inviterId)) {
 			EventMemberBean bean = eventService.getByEventMemberId(eventMemberId);
-			
+			Integer current = event.getEventCurrentMembers();
+			Integer quantity = bean.getQuantity();
+			int currenMember = current.intValue();
+			int updateQuantity = quantity.intValue();
+			int newCurrent = currenMember + updateQuantity;
+			Integer eventNewCurrentMember = Integer.valueOf(newCurrent);
+			event.setEventCurrentMembers(eventNewCurrentMember);
+			eventService.updateQuantityWhenOut(event);
 			bean.setIsAgreed(true);
 			eventService.updateIsAgreed(bean);
 			return "attended";
@@ -389,17 +402,15 @@ public class EventController {
 			return "not_login";
 		}
 	}
+//	報名拒絕
 	@RequestMapping(value = "/event/eventReject/{eventId}")
-	public @ResponseBody String rejectMember(Integer eventId, Integer eventMemberId, HttpSession session, Model model) {
+	public @ResponseBody String rejectMember(Integer eventId, Integer eventMemberId, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
 		EventMainBean event = eventService.getByEventMainId(eventId);
 		Integer inviterId = event.getEventInviterId();
 		if (memberId != null && memberId.equals(inviterId)) {
-			EventMemberBean bean = eventService.getByEventMemberId(eventMemberId);
-			
-			bean.setIsAgreed(true);
-			eventService.updateIsAgreed(bean);
-			return "attended";
+			eventService.rejectSignUp(eventMemberId);
+			return "rejected";
 		} else {
 			return "not_login";
 		}
@@ -413,22 +424,55 @@ public class EventController {
 		if (memberId != null && memberId.equals(inviterId)) {
 			List<EventMemberBean> eventMemberList = event.getEventMemberList();
 			List<MemberMainBean> attendList = new ArrayList<MemberMainBean>();
+			List<MemberMainBean> attendedGoodList = new ArrayList<MemberMainBean>();
+			List<EventMemberBean> eventMemberId = new ArrayList<EventMemberBean>();
 			MemberMainBean eventMembers = null;
 			for (EventMemberBean bean : eventMemberList) {
 				if (bean.getIsAgreed() == true) {
 					Integer memberid = bean.getMemberId();
+					Integer id = bean.getEventMemberId();
+					EventMemberBean eventMemberIds = eventService.getByEventMemberId(id);
 					eventMembers = eventService.getByMemberId(memberid);
 					attendList.add(eventMembers);
+					eventMemberId.add(eventMemberIds);
+					if(bean.getIsAttended() == true) {
+						attendedGoodList.add(eventMembers);
+					}
 				}
 			}
+			Boolean attendAndJoin = attendList.contains(attendedGoodList);
 			model.addAttribute("attendList", attendList);
 			model.addAttribute("event", event);
+			model.addAttribute("attendAndJoin", attendAndJoin);
+			model.addAttribute("attendedGoodList", attendedGoodList);
+			model.addAttribute("eventMemberId", eventMemberId);
 			return "event/event_participated";
 		} else {
 			return "not_login";
 		}
 	}
-
+	@RequestMapping(value = "/event/eventGetOut/{eventId}")
+	public @ResponseBody String getOutMember(Integer eventId, Integer eventMemberId, HttpSession session) {
+		Integer memberId = (Integer) session.getAttribute("memberId");
+		EventMainBean event = eventService.getByEventMainId(eventId);
+		EventMemberBean bean = eventService.getByEventMemberId(eventMemberId);
+		Integer inviterId = event.getEventInviterId();
+		if (memberId != null && memberId.equals(inviterId)) {
+			eventService.rejectSignUp(eventMemberId);
+			Integer quantity = bean.getQuantity();
+			int intQuantity = quantity.intValue();
+			Integer current = event.getEventCurrentMembers();
+			int intCurrent = current.intValue();
+			int currentNow = intCurrent - intQuantity;
+			Integer currentMemberNow = Integer.valueOf(currentNow);
+			event.setEventCurrentMembers(currentMemberNow);
+			eventService.updateQuantityWhenOut(event);
+			return "outed";
+		} else {
+			return "not_login";
+		}
+	}
+	
 //	尚未登入前端判斷
 	@RequestMapping("/not_Login")
 	public String notLogin(HttpSession session) {

@@ -62,9 +62,17 @@
 			color:green;
 			cursor: pointer;
 		}
+		.iconAgree:hover{
+			color:#32CD32;
+			cursor: pointer;
+			
+		}
 		.iconReject{
 			color:red;
 			cursor: pointer;
+		}
+		.iconReject:hover{
+			color:#8B1A1A;
 		}
 		.tdName{
 			text-decoration:none !important;
@@ -110,6 +118,27 @@ $(document).ready(function() {
 		  	     data: {"eventId": eventId, "eventMemberId": eventMemberId},
 		         success: function (agreed){
 		    	if(agreed=="attended"){
+// 		   			var trEventMemberId = "tr" + agreedId;
+// 		   			$("#trEventMemberId").attr("display","none");
+		    		location.href = "${pageContext.request.contextPath}/event/signUp/"+eventId;
+		    	}else{
+		    		
+		    		location.href = "${pageContext.request.contextPath}/not_Login";
+		    	}
+		      } 
+			});
+		});
+		//拒絕
+		$(".iconRejected").click(function(){
+			var eventId = ${event.eventId};
+			var rejectId = this.id;
+			var eventMemberId = rejectId.substr(3);
+				$.ajax({
+				type: "POST",                           
+		   		 url: "${pageContext.request.contextPath}/event/eventReject/"+eventId,
+		  	     data: {"eventId": eventId, "eventMemberId": eventMemberId},
+		         success: function (reject){
+		    	if(reject=="rejected"){
 		   
 		    		location.href = "${pageContext.request.contextPath}/event/signUp/"+eventId;
 		    	}else{
@@ -118,25 +147,6 @@ $(document).ready(function() {
 		      } 
 			});
 		});
-		//拒絕
-// 		$(".iconRejected").click(function(){
-// 			var eventId = ${event.eventId};
-// 			var rejectId = this.id;
-// 			var eventMemberId = rejectId.substr(3);
-// 				$.ajax({
-// 				type: "POST",                           
-// 		   		 url: "${pageContext.request.contextPath}/event/eventAgreed/"+eventId,
-// 		  	     data: {"eventId": eventId, "eventMemberId": eventMemberId},
-// 		         success: function (reject){
-// 		    	if(reject=="rejected"){
-		   
-// 		    		location.href = "${pageContext.request.contextPath}/event/signUp/"+eventId;
-// 		    	}else{
-// 		    		location.href = "${pageContext.request.contextPath}/not_Login";
-// 		    	}
-// 		      } 
-// 			});
-// 		});
 // 		======
  });
 function checkAll(bx) {
