@@ -221,7 +221,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void deleteEvent(Integer memberId, Integer eventId) {
+	public synchronized void deleteEvent(Integer memberId, Integer eventId) {
 		List<EventMemberBean> list = eventMemberDao.getAll();
 		Integer quantity = null;
 		
@@ -249,7 +249,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void noLikeEvent(Integer memberId, Integer eventId) {
+	public synchronized void noLikeEvent(Integer memberId, Integer eventId) {
 		List<EventLikeBean> list = eventLikeDao.getAll();
 		
 		for (EventLikeBean eventLikeBean : list) {
@@ -301,7 +301,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void deleteGroup(Integer memberId, Integer groupId) {
+	public synchronized void deleteGroup(Integer memberId, Integer groupId) {
 		List<GroupMemberBean> list = groupMemberDao.getAll();
 		
 		for (GroupMemberBean groupMemberBean : list) {

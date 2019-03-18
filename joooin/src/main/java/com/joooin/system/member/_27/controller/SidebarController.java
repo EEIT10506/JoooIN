@@ -55,7 +55,7 @@ public class SidebarController {
 	@RequestMapping(value = "/member/my/{link}", method = RequestMethod.GET)
 	public String selfLink(@PathVariable String link, Model model, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		session.setAttribute("SESSION_USERNAME", (String)session.getAttribute("memberName"));
+
 		if (memberId != null) {
 			MemberMainBean bean = memberService.getMemberMainBean(memberId);
 			model.addAttribute("memberMainBean", bean);
