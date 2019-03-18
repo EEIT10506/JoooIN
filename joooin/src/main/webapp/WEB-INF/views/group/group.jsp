@@ -88,6 +88,12 @@ div{
 	if($("#ooo").hasClass('in')){
 	  console.log('視窗目前是開啟的狀態..');
 	}
+	$("#ooo").ready(function(){
+		  $("#hide").click(function(){
+		    $(".col-8 div-a ${mem.id}").hide();
+		  });
+		  
+		});
 </script>
 
 
@@ -145,9 +151,9 @@ div{
   
 <!--  EL加入地點  -->
  
-  	<div class="col-8 div-a"><span >放member地點</span></div>
-    <div class="col div-a"> <button class="btn btn pull-right btn-primary">允許加入</button></div>
-    <div class="col div-a"><button class="btn btn pull-right btn-danger">拒絕</button></div>
+  	<div class="col-8 div-a ${mem.id}"><span >放member地點</span></div>
+    <div class="col div-a" ${mem.id}> <button id="hide" class="btn btn pull-right btn-primary">允許加入</button></div>
+    <div class="col div-a" ${mem.id}><button class="btn btn pull-right btn-danger">拒絕</button></div>
     
 <!--  EL加入地點  -->
 
