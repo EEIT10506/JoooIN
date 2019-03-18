@@ -25,7 +25,7 @@ public class SidebarController {
 		return "/member/other/sidebar";
 	}
 	
-	@RequestMapping(value = "/member/my", method = RequestMethod.GET)
+	@RequestMapping(value = "/member", method = RequestMethod.GET)
 	public String selfMember(Model model, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		session.setAttribute("SESSION_USERNAME", (String)session.getAttribute("memberName"));
@@ -48,17 +48,16 @@ public class SidebarController {
 			model.addAttribute("memberMainBean", bean);
 			return "member/other/member";
 		} else {
-			return "redirect:/member/my";
+			return "redirect:/member";
 		}
 	}
 	
-	@RequestMapping(value = "/member/my/{link}", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/{link}", method = RequestMethod.GET)
 	public String selfLink(@PathVariable String link, Model model, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 
 		if (memberId != null) {
-			MemberMainBean bean = memberService.getMemberMainBean(memberId);
-			model.addAttribute("memberMainBean", bean);
+			model.addAttribute("memberMainBean", memberService.getMemberMainBean(memberId));
 			return "member/self/" + link;
 		} else {
 			return "not_login";
@@ -70,8 +69,7 @@ public class SidebarController {
 		Integer selfMemberId = (Integer)session.getAttribute("memberId");
 		
 		if (selfMemberId == null || selfMemberId.equals(otherMemberId) == false) {
-			MemberMainBean bean = memberService.getMemberMainBean(otherMemberId);
-			model.addAttribute("memberMainBean", bean);
+			model.addAttribute("memberMainBean", memberService.getMemberMainBean(otherMemberId));
 			return "member/other/" + link;
 		} else {
 			return "redirect:/member/my/" + link;

@@ -40,7 +40,7 @@
   
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="${pageContext.request.contextPath}/member/my">會員</a>
+      <a class="nav-link" href="${pageContext.request.contextPath}/member">會員</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="${pageContext.request.contextPath}/events">活動</a>
@@ -52,7 +52,7 @@
       <a class="nav-link" href="${pageContext.request.contextPath}/login">登入／註冊</a>
     </li>
     <li id="hasLogin" class="nav-item">
-      <a class="nav-link hasLogin" href="${pageContext.request.contextPath}/member/my">${memberName}</a>
+      <a class="nav-link hasLogin" href="${pageContext.request.contextPath}/member">${memberName}</a>
     </li>
     <li id="hasLogin" class="nav-item">
       <a class="nav-link hasLogin" href="${pageContext.request.contextPath}/admin">${admin}</a>
