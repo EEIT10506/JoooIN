@@ -329,7 +329,7 @@ function ValidateNumber(e, pnumber)
 			history.go(-1);
 		});
 // 		按讚 
- 	   	function checkLike(){
+ 	   	
  	   	var eventId = ${event.eventId};
 			$.ajax({
 				type: "POST",                           
@@ -339,35 +339,25 @@ function ValidateNumber(e, pnumber)
 	    	    	if(check=="liked"){
 	    	    		$("#e${event.eventId }").attr("class", "btn btn-default eventLike");
 	    	    	}else{
-	    	    		$("#e${event.eventId }").removeClass("eventLike");
 	    	    		$("#e${event.eventId }").attr("class", "btn btn-default eventNotLike");
 	    	    	}
 	    	    } 
 			});
-		}
+		
+		
 	    $("#e${event.eventId}").click(function(){
+	    	$("#e${event.eventId}").toggleClass("eventNotLike eventLike");
 	      var eventId = ${event.eventId};
 	    	 $.ajax({
 	    	    type: "POST",                           
 	    	    url: "${pageContext.request.contextPath}/event/goods/"+eventId,
 	    	    data: {"eventId": eventId},
 	    	    success: function (result) {
-	    	    	if (result=="realLike") {
-	    	    		$("#e${event.eventId }").attr("class", "btn btn-default eventLike");
-// 	    					$("#e${event.eventId }").removeClass("eventNotLike");
-	    					
-	    	    			var a = parseInt($(".eventLikeNum").html());
-	                    	 a++;
+	    	    	if (result != -4) {
+	    					 var a = result;
 	                    	 $(".eventLikeNum").html(a);
-		    	    }else if(result=="not_login"){
-		    	    	location.href = "${pageContext.request.contextPath}/not_Login";
 		    	    }else{ 
-		    	    	var b = parseInt($(".eventLikeNum").html());
-	                     b--;
-	                     $(".eventLikeNum").html(b);
-
-	                    	$("#e${event.eventId }").attr("class", "btn btn-default eventNotLike");
-// 							$("#e${event.eventId }").removeClass("eventLike");
+	                    	location.href = "${pageContext.request.contextPath}/not_Login";
 	    	    	     }
 	   	    	   } 
 	    	});
@@ -446,17 +436,17 @@ function ValidateNumber(e, pnumber)
  
  <p>
  			
- 			<c:if test="${likedCheck.memberId != null}">
-    		<span id="likedspan">
-    		 <button type="button" id="e${event.eventId }" class="btn btn-default eventLike"><i class="far fa-thumbs-up"></i> 讚</button>
-    		</span>
-    		</c:if>
+<%--  			<c:if test="${likedCheck.memberId != null}"> --%>
+<!--     		<span id="likedspan"> -->
+<%--     		 <button type="button" id="e${event.eventId }" class="btn btn-default eventLike"><i class="far fa-thumbs-up"></i> 讚</button> --%>
+<!--     		</span> -->
+<%--     		</c:if> --%>
   			
-   			<c:if test="${likedCheck.memberId == null}"> 
+<%--    			<c:if test="${likedCheck.memberId == null}">  --%>
     		<span id="likedspan">
     		 <button type="button" id="e${event.eventId }" class="btn btn-default eventNotLike"><i class="far fa-thumbs-up"></i> 讚</button>
     		</span>
-  			</c:if>
+<%--   			</c:if> --%>
   			
 
   <span id="joinOrNot">

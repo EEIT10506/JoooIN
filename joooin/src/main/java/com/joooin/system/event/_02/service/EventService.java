@@ -20,7 +20,8 @@ public interface EventService {
 //	活動成員Bean
 	public EventMemberBean getByEventMemberId(Integer eventMemberId);
 	public Integer saveEventMember(EventMemberBean eventMemberBean);
-
+	//isAgreed--->true
+	public void updateIsAgreed(EventMemberBean eventMemberBean);
 	//活動類型	
 	public EventTypeBean getByEventTypeId(Integer eventTypeId);
 	//member_main抓活動成員名單 

@@ -177,7 +177,7 @@
 		});
 		
 			<c:if test="${event.eventStatus == 'no'}">
-				$("#eventName ,#eventTypeId, #eventDateStart, #eventDateEnd, #eventFee, #eventContent, #eventMemberLimit, #multipartFile, #findAddress,#labelFile, #eventStatus").attr("readonly", "readonly");
+				$("#eventName ,#eventTypeId, #eventDateStart, #eventDateEnd, #eventFee, #eventContent, #eventMemberLimit, #multipartFile, #findAddress,#labelFile, #eventStatus").attr("readonly", true);
 			</c:if>
 		$("#eventMemberLimit").blur(function(){
 			var eventId = ${event.eventId};
@@ -292,7 +292,7 @@
 				<span class="pure-u-1-3" id="spanLimit"></span>
 				
 				<div class="pure-u-1 ">
-				<label class="labelClass" for="eventFee">活動費用：</label><form:input class="pure-input-1-4" id="eventFee" onkeyup="value=value.replace(/[^\d]/g,'')" path='eventFee' /></div>
+				<label class="labelClass" for="eventFee">活動費用：</label><form:input class="pure-input-1-4" id="eventFee" readonly="true" onkeyup="value=value.replace(/[^\d]/g,'')" path='eventFee' /></div>
 				
 				<div class="pure-u-1 upload-btn-wrapper">
 				<label class="labelClass">活動圖片 : </label>

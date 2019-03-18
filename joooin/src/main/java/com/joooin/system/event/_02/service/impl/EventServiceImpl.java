@@ -147,6 +147,10 @@ public class EventServiceImpl implements EventService {
 		
 		return eventMemberDao.getByEventMemberId(eventMemberId);
 	}
+	@Override
+	public void updateIsAgreed(EventMemberBean eventMemberBean) {
+		eventMemberDao.update(eventMemberBean);
+	}
 
 	
 	

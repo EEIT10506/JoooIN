@@ -11,7 +11,7 @@
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script> -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
 	#main {
@@ -74,45 +74,80 @@
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#example').DataTable(
-        
-         {     
+//     $('#example').DataTable({    
+//       "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+//         "iDisplayLength": 5
+//        });
+    var language = {
+	        "zeroRecords": "沒有結果",
+	        "info": "<span class='seperator'>  </span>" + "總共 _TOTAL_ 位好友",
+	        "infoFiltered": " (從所有 _MAX_ 位好友中篩選出)",
+	        "infoEmpty": "共 0 位",
+	        "search":"搜尋好友：",
+	        "paginate": {
+	            "previous": "上一頁",
+	            "next": "下一頁",
+	            "first": "第一頁  ",
+	            "last": "  最後一頁"
+	        }
+	    };
+	var column=[
+        {"data": "name", name:"會員名稱" , "orderable":true },
+        {"data": "page", name:"個人頁面" , "orderable":false },
+        {"data": "delete", name:"解除好友" , "orderable":false },
+       ];
 
-      "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
-        "iDisplayLength": 5
-       } 
-        );
-    <c:forEach var="memberList" items="${memberList}">
-	var agreedId = ${memberList.memberId}
-	var rejectId = ${memberList.memberId}
-	$("#ag" + agreedId).click(function(){
-		$("#rej" + rejectId).attr("color", "black");
-	});
-	
-	
-	$("#reject").click(function(){
-			
-	});
-	</c:forEach>
-// 	==========
-	function checkLike(){
- 	   	var eventId = ${event.eventId};
+	$('#example').DataTable({ "language":language, "lengthChange": false, "aLengthMenu" : 10, "bScrollCollapse": true});
+    
+    
+	$(".iconAgree").click(function(){
+		alert("in");
+		var eventId = ${event.eventId};
+		var agreedId = this.id;
+		var eventMemberId = agreedId.substr(2);
+		alert(eventMemberId);
 			$.ajax({
-				type: "POST",                           
-	    	    url: "${pageContext.request.contextPath}/event/checkLike/"+eventId,
-	    	    data: {"eventId": eventId},
-	    	    success: function (check){
-	    	    	if(check=="liked"){
-	    	    		$("#e${event.eventId }").attr("class", "btn btn-default eventLike");
-	    	    	}else{
-	    	    		$("#e${event.eventId }").removeClass("eventLike");
-	    	    		$("#e${event.eventId }").attr("class", "btn btn-default eventNotLike");
-	    	    	}
-	    	    } 
-			});
-		}
+			type: "POST",                           
+	   		 url: "${pageContext.request.contextPath}/event/eventAgreed/"+eventId,
+	  	     data: {"eventId": eventId, "eventMemberId": eventMemberId},
+	         success: function (agreed){
+	    	if(agreed=="attended"){
+	   
+	    		location.href = "${pageContext.request.contextPath}/event/signUp/"+eventId;
+	    	}else{
+	    		location.href = "${pageContext.request.contextPath}/not_Login";
+	    	}
+	    } 
+		});
+	});
+ 		
+    
+ });
+	
+
+// 	$("#reject").click(function(){
+			
+// 	});
+	
+// 	==========
+// 	function checkLike(){
+//  	   	var eventId = ${event.eventId};
+// 			$.ajax({
+// 				type: "POST",                           
+// 	    	    url: "${pageContext.request.contextPath}/event/checkLike/"+eventId,
+// 	    	    data: {"eventId": eventId},
+// 	    	    success: function (check){
+// 	    	    	if(check=="liked"){
+// 	    	    		$("#e${event.eventId }").attr("class", "btn btn-default eventLike");
+// 	    	    	}else{
+// 	    	    		$("#e${event.eventId }").removeClass("eventLike");
+// 	    	    		$("#e${event.eventId }").attr("class", "btn btn-default eventNotLike");
+// 	    	    	}
+// 	    	    } 
+// 			});
+// 		}
 	// 	==========
-} );
+// } );
 
 
 
@@ -145,20 +180,19 @@ function checkAll(bx) {
 				                <th class="tdCenter tdAll">名稱</th>
 				                <th class="tdCenter tdAll">同意</th>
 				                <th class="tdCenter tdAll">拒絕</th>
-				               
 				            </tr>
 				        </thead>
 					        <tbody>
-					        	<c:forEach var="memberList" items="${memberList}">
+					        	<c:forEach var="memberList" items="${memberList}" varStatus="loop">
 					            <tr id="tr${memberList.memberId}">
 					                <td class="tdCenter tdAll" style="display:none"><input type="checkbox" name=""></td>
 					                <td class="tdCenter tdAll"><a class="aName" href="<c:url value='/member/other/${memberList.memberId}' />"><span><img src="<c:url value='/getMemberImage/${memberList.memberId}.jpg' />" width="50px" height="50px" style="border-radius:25px;"/></span></a></td>
 					                <td class="tdCenter tdAll tdName"><a class="aName" href="<c:url value='/member/other/${memberList.memberId}' />">${memberList.memberName}</a></td>
 					                
 					              
-					                <td class="tdCenter tdAll"><i id="ag${memberList.memberId}" class="fas fa-check-double iconAgree"></i></td>
+					                <td class="tdCenter tdAll"><i id="ag${eventMemberId[loop.count-1].eventMemberId}" class="fas fa-check-double iconAgree" ></i></td>
 					               
-					                <td class="tdCenter tdAll"><i id="rej${memberList.memberId}" class="fas fa-times-circle iconReject"></i></td>
+					                <td class="tdCenter tdAll"><i id="rej${eventMemberId[loop.count-1].eventMemberId}" class="fas fa-times-circle iconReject"></i></td>
 					                
 <!-- 					                ========= -->
 
