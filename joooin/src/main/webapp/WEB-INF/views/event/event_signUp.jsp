@@ -7,8 +7,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script> -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
@@ -37,9 +39,11 @@
 		}
 		#example_filter{
 		    float:right;
+		  
 		}
 		#example_paginate{
 		    float:right;
+		    
 		}
 		label {
 		    display: inline-flex;
@@ -74,16 +78,12 @@
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
-//     $('#example').DataTable({    
-//       "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
-//         "iDisplayLength": 5
-//        });
     var language = {
 	        "zeroRecords": "沒有結果",
-	        "info": "<span class='seperator'>  </span>" + "總共 _TOTAL_ 位好友",
-	        "infoFiltered": " (從所有 _MAX_ 位好友中篩選出)",
+	        "info": "<span class='seperator'>  </span>" + "總共 _TOTAL_ 位申請",
+	        "infoFiltered": " (從所有 _MAX_ 位申請中篩選出)",
 	        "infoEmpty": "共 0 位",
-	        "search":"搜尋好友：",
+	        "search":"搜尋名稱：",
 	        "paginate": {
 	            "previous": "上一頁",
 	            "next": "下一頁",
@@ -97,62 +97,48 @@ $(document).ready(function() {
         {"data": "delete", name:"解除好友" , "orderable":false },
        ];
 
-	$('#example').DataTable({ "language":language, "lengthChange": false, "aLengthMenu" : 10, "bScrollCollapse": true});
+	$('#example').DataTable({"language":language, "lengthChange": false, "aLengthMenu" : 10, "bScrollCollapse": true});
     
-    
-	$(".iconAgree").click(function(){
-		alert("in");
-		var eventId = ${event.eventId};
-		var agreedId = this.id;
-		var eventMemberId = agreedId.substr(2);
-		alert(eventMemberId);
-			$.ajax({
-			type: "POST",                           
-	   		 url: "${pageContext.request.contextPath}/event/eventAgreed/"+eventId,
-	  	     data: {"eventId": eventId, "eventMemberId": eventMemberId},
-	         success: function (agreed){
-	    	if(agreed=="attended"){
-	   
-	    		location.href = "${pageContext.request.contextPath}/event/signUp/"+eventId;
-	    	}else{
-	    		location.href = "${pageContext.request.contextPath}/not_Login";
-	    	}
-	    } 
+//     同意
+		$(".iconAgreed").click(function(){
+			var eventId = ${event.eventId};
+			var agreedId = this.id;
+			var eventMemberId = agreedId.substr(2);
+				$.ajax({
+				type: "POST",                           
+		   		 url: "${pageContext.request.contextPath}/event/eventAgreed/"+eventId,
+		  	     data: {"eventId": eventId, "eventMemberId": eventMemberId},
+		         success: function (agreed){
+		    	if(agreed=="attended"){
+		   
+		    		location.href = "${pageContext.request.contextPath}/event/signUp/"+eventId;
+		    	}else{
+		    		location.href = "${pageContext.request.contextPath}/not_Login";
+		    	}
+		      } 
+			});
 		});
-	});
- 		
-    
- });
-	
-
-// 	$("#reject").click(function(){
-			
-// 	});
-	
-// 	==========
-// 	function checkLike(){
-//  	   	var eventId = ${event.eventId};
-// 			$.ajax({
+		//拒絕
+// 		$(".iconRejected").click(function(){
+// 			var eventId = ${event.eventId};
+// 			var rejectId = this.id;
+// 			var eventMemberId = rejectId.substr(3);
+// 				$.ajax({
 // 				type: "POST",                           
-// 	    	    url: "${pageContext.request.contextPath}/event/checkLike/"+eventId,
-// 	    	    data: {"eventId": eventId},
-// 	    	    success: function (check){
-// 	    	    	if(check=="liked"){
-// 	    	    		$("#e${event.eventId }").attr("class", "btn btn-default eventLike");
-// 	    	    	}else{
-// 	    	    		$("#e${event.eventId }").removeClass("eventLike");
-// 	    	    		$("#e${event.eventId }").attr("class", "btn btn-default eventNotLike");
-// 	    	    	}
-// 	    	    } 
+// 		   		 url: "${pageContext.request.contextPath}/event/eventAgreed/"+eventId,
+// 		  	     data: {"eventId": eventId, "eventMemberId": eventMemberId},
+// 		         success: function (reject){
+// 		    	if(reject=="rejected"){
+		   
+// 		    		location.href = "${pageContext.request.contextPath}/event/signUp/"+eventId;
+// 		    	}else{
+// 		    		location.href = "${pageContext.request.contextPath}/not_Login";
+// 		    	}
+// 		      } 
 // 			});
-// 		}
-	// 	==========
-// } );
-
-
-
-
-
+// 		});
+// 		======
+ });
 function checkAll(bx) {
   var cbs = document.getElementsByTagName('input');
   for(var i=0; i < cbs.length; i++) {
@@ -184,33 +170,64 @@ function checkAll(bx) {
 				        </thead>
 					        <tbody>
 					        	<c:forEach var="memberList" items="${memberList}" varStatus="loop">
-					            <tr id="tr${memberList.memberId}">
+					            <tr id="tr${eventMemberId[loop.count-1].eventMemberId}">
 					                <td class="tdCenter tdAll" style="display:none"><input type="checkbox" name=""></td>
 					                <td class="tdCenter tdAll"><a class="aName" href="<c:url value='/member/other/${memberList.memberId}' />"><span><img src="<c:url value='/getMemberImage/${memberList.memberId}.jpg' />" width="50px" height="50px" style="border-radius:25px;"/></span></a></td>
 					                <td class="tdCenter tdAll tdName"><a class="aName" href="<c:url value='/member/other/${memberList.memberId}' />">${memberList.memberName}</a></td>
 					                
 					              
-					                <td class="tdCenter tdAll"><i id="ag${eventMemberId[loop.count-1].eventMemberId}" class="fas fa-check-double iconAgree" ></i></td>
+					                <td class="tdCenter tdAll"><i data-toggle="modal" data-target="#Modal${eventMemberId[loop.count-1].eventMemberId}" class="fas fa-check-double iconAgree" ></i></td>
 					               
-					                <td class="tdCenter tdAll"><i id="rej${eventMemberId[loop.count-1].eventMemberId}" class="fas fa-times-circle iconReject"></i></td>
+					                <td class="tdCenter tdAll"><i data-toggle="modal" data-target="#RejModal${eventMemberId[loop.count-1].eventMemberId}" class="fas fa-times-circle iconReject"></i></td>
 					                
-<!-- 					                ========= -->
+<!-- 		同意確認MODAL			                ========= -->
 
+<div class="modal fade" id="Modal${eventMemberId[loop.count-1].eventMemberId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">確認同意</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+                     確定同意此會員加入?
+      </div>
+      <div class="modal-footer">
+         <button type="button" id="ag${eventMemberId[loop.count-1].eventMemberId}" class="btn btn-primary iconAgreed">確認</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button> 
+      </div>
+    </div>
+  </div>
+</div>
             
-<!-- 					                ========= -->
+<!-- 			拒絕確認MODAL		                ========= -->
+<div class="modal fade" id="RejModal${eventMemberId[loop.count-1].eventMemberId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">確認拒絕</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+                     確定拒絕此會員加入?
+      </div>
+      <div class="modal-footer">
+         <button type="button" id="rej${eventMemberId[loop.count-1].eventMemberId}" class="btn btn-primary iconRejected">確認</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button> 
+      </div>
+    </div>
+  </div>
+</div>
 					            </tr>
 					            </c:forEach>
 					            
 					        </tbody>
-<!-- 					        <tfoot> -->
-<!-- 					            <tr> -->
-<!-- 					                <th></th> -->
-<!-- 					                <th></th> -->
-<!-- 					                <th>Position</th> -->
-<!-- 					                <th>Office</th> -->
-<!-- 					                <th>Age</th> -->
-<!-- 					            </tr> -->
-<!-- 					        </tfoot> -->
 					    </table>
 					</div>
 				</div>

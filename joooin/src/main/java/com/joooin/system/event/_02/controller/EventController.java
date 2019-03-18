@@ -388,9 +388,22 @@ public class EventController {
 		} else {
 			return "not_login";
 		}
-		
 	}
-
+	@RequestMapping(value = "/event/eventReject/{eventId}")
+	public @ResponseBody String rejectMember(Integer eventId, Integer eventMemberId, HttpSession session, Model model) {
+		Integer memberId = (Integer) session.getAttribute("memberId");
+		EventMainBean event = eventService.getByEventMainId(eventId);
+		Integer inviterId = event.getEventInviterId();
+		if (memberId != null && memberId.equals(inviterId)) {
+			EventMemberBean bean = eventService.getByEventMemberId(eventMemberId);
+			
+			bean.setIsAgreed(true);
+			eventService.updateIsAgreed(bean);
+			return "attended";
+		} else {
+			return "not_login";
+		}
+	}
 //	已參加人員名單
 	@RequestMapping(value = "/event/participated/{eventId}")
 	public String eventParticipated(@PathVariable("eventId") Integer eventId, Model model, HttpSession session) {

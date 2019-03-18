@@ -12,7 +12,7 @@
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script> -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <style>
@@ -22,6 +22,23 @@
 		position: relative;
 		top: 50px;
 	}
+			table{
+		    width:100%;
+		}
+		#example_filter{
+		    float:right;
+		  
+		}
+		#example_paginate{
+		    float:right;
+		    
+		}
+		label {
+		    display: inline-flex;
+		    margin-bottom: .5rem;
+		    margin-top: .5rem;
+		   
+		}
 	.outSide{
 		width:1000px;
 		margin: auto;
@@ -59,14 +76,22 @@
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#example').DataTable(
-        
-         {     
+	var language = {
+	        "zeroRecords": "沒有結果",
+	        "info": "<span class='seperator'>  </span>" + "總共 _TOTAL_ 位成員",
+	        "infoFiltered": " (從所有 _MAX_ 位成員中篩選出)",
+	        "infoEmpty": "共 0 位",
+	        "search":"搜尋名稱：",
+	        "paginate": {
+	            "previous": "上一頁",
+	            "next": "下一頁",
+	            "first": "第一頁  ",
+	            "last": "  最後一頁"
+	        }
+	    };
 
-      "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
-        "iDisplayLength": 5
-       } 
-        );
+
+	$('#example').DataTable({"language":language, "lengthChange": false, "aLengthMenu" : 10, "bScrollCollapse": true});
 } );
 
 function checkAll(bx) {
