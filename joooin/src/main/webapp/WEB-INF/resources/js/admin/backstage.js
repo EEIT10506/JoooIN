@@ -268,6 +268,38 @@ $(document).ready(function () {
         }//活動管理
         
 //    	----------------------------------------------------------------------------------------------------
+        if(title == '檢舉管理'){
+        	
+        	$.ajax({
+        		type: "GET",
+                url: "/joooin/admin/getUnprocessedReport",
+                dataType: "json",
+                timeout: 600000,
+                
+                success: function (data){
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">檢舉編號</th><th>檢舉時間</th><th>檢舉人</th><th>被檢舉人</th><th>檢舉類型</th><th>檢舉內容</th><th>處理狀態</th></tr></thead><tbody></tbody>');
+                	$('#content>h2').after(tab);
+                		var docFrag = $(document.createDocumentFragment());
+                		console.log(data);
+                		$.each(data, function (index, Report){
+                			var cell1 = $('<td></td>').text(Report.reportId).addClass('pointer text-primary text-center reportId');
+                			var cell2 = $('<td></td>').text(Report.reportDate)
+                			var cell3 = $('<td></td>').text(Report.reportMemberId)
+                			var cell4 = $('<td></td>').text(Report.reportViolatorId)
+                			var cell5 = $('<td></td>').text(Report.reportType)
+                			var cell6 = $('<td></td>').text(Report.reportContent)
+                			var cell7 = $('<td></td>').text(Report.isDone)
+                			
+                			var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7]);
+                			
+                			docFrag.append(row);
+                		})
+                		$('#content tbody').html(docFrag);
+                		$('#content tbody').after('<a href="admin/reportPDF"><img src="resources/img/icon_pdf.png" alt="pdf" style="width:45px;"/></a>')
+                }
+        	})
+//        	----------------------------------------------------------------------------------------------------
+        }
         
     	}		//selectCategory end;
     	
