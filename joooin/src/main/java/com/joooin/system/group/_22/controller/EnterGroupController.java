@@ -1,6 +1,9 @@
 package com.joooin.system.group._22.controller;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.joooin.model.GroupMainBean;
+import com.joooin.model.GroupMemberBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.system.member._27.service.MemberService;
@@ -23,6 +27,9 @@ import com.joooin.util.ImageUtils;
 public class EnterGroupController {
 
 	@Autowired
+	MemberService memberService;
+	
+	@Autowired
 	GroupService_22 groupService;
 
 	@Autowired
@@ -31,9 +38,17 @@ public class EnterGroupController {
 	// 依照groupId個別社團主頁連結
 	@RequestMapping(method = RequestMethod.GET, value = "/group/{groupId}")
 	public String groupMainPage(Model model, @PathVariable Integer groupId) {
-
+//		HashMap<LinkedList<MemberMainBean>, > mmm = new HashMap<>();
+		LinkedList<MemberMainBean> applyMember = new LinkedList<>();
 		GroupMainBean groupMain = groupService.getByGroupId(groupId);
+		for(GroupMemberBean member : groupMain.getGroupMemberList()) {
+			MemberMainBean memberMain = memberService.getMemberMainBean(member.getMemberId());
+			applyMember.add(memberMain);
+		}
+		
 		model.addAttribute("groupMain", groupMain);
+		model.addAttribute("memberMain", applyMember);
+		
 		return "group/group";
 	}
 

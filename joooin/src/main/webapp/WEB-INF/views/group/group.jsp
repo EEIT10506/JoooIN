@@ -144,11 +144,13 @@ div{
   
   
 <!--  EL加入地點  -->
- 
-  	<div class="col-8 div-a"><span >放member地點</span></div>
+ <c:forEach var="memberApply" items="${groupMain.groupMemberList}" varStatus="loop">
+ 	<c:if test="${memberApply.isAgreed}">
+  	<div class="col-8 div-a"><span >${memberMain[loop.count-1].memberName}</span></div>
     <div class="col div-a"> <button class="btn btn pull-right btn-primary">允許加入</button></div>
     <div class="col div-a"><button class="btn btn pull-right btn-danger">拒絕</button></div>
-    
+    </c:if> 
+</c:forEach>    
 <!--  EL加入地點  -->
 
 
