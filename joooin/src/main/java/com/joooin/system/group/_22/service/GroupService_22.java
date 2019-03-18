@@ -22,10 +22,13 @@ public interface GroupService_22 {
 	
 	public List<MemberMainBean> getGroupApplyMembers(Integer groupId); // 取出該社團申請入團的會員資料
 	
-	public List<GroupMemberBean> getGroupApplyList(Integer groupId); // 取出該社團申請入團的清單
+	public List<GroupMemberBean> getGroupApplyList(Integer groupId); // 取出該社團確認及未確認的清單
+	
+	List<GroupMemberBean> getProcessGroupApplyList(Integer groupId); // 取出該社團申請入團的清單
 	
 	// 根據approve，reject 改變清單中的會員狀態，許可的話回傳新增的會員ID
 	public Integer processApplyList(Integer groupId, Integer memberId, String decide);
 	
 	public List<MemberMainBean> getMembersInGroup(Integer groupId); // 取得該社團內成員
+
 }

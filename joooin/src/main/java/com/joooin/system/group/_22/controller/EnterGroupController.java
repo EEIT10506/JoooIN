@@ -41,7 +41,7 @@ public class EnterGroupController {
 		LinkedList<MemberMainBean> applyMember = new LinkedList<>();
 		GroupMainBean groupMain = groupService.getByGroupId(groupId);
 		
-		for(GroupMemberBean member : groupService.getGroupApplyList(groupId)) {
+		for(GroupMemberBean member : groupService.getProcessGroupApplyList(groupId)) {
 			MemberMainBean memberMain = memberService.getMemberMainBean(member.getMemberId());
 			applyMember.add(memberMain);
 		}
