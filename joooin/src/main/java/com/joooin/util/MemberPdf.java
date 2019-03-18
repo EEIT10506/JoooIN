@@ -24,7 +24,7 @@ import com.joooin.model.MemberMainBean;
  * @author www.codejava.net
  *
  */
-public class PDFBuilder extends AbstractITextPdfView {
+public class MemberPdf extends AbstractITextPdfView {
 	
 	final String fontPath = "c:\\windows\\fonts\\kaiu.ttf";
 	BaseFont bfChinese;
@@ -50,11 +50,11 @@ public class PDFBuilder extends AbstractITextPdfView {
 		// get data model which is passed by the Spring container
 		@SuppressWarnings("unchecked")
 		List<MemberMainBean> list = (List<MemberMainBean>) model.get("allMember");
-        doc.add(new Paragraph("會員資料", underlineFont));
+        doc.add(new Paragraph("會員資料", titleFont));
 
 		PdfPTable table = new PdfPTable(9);
 		table.setWidthPercentage(100.0f);
-		table.setWidths(new float[] { 1.0f, 2.0f, 5.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f });
+		table.setWidths(new float[] { 2.0f, 3.0f, 5.0f, 5.0f, 4.0f, 4.0f, 4.0f, 4.0f, 4.0f });
 		table.setSpacingBefore(10);
 
 		// define font for table header row
@@ -62,41 +62,43 @@ public class PDFBuilder extends AbstractITextPdfView {
 
 		// define table header cell
 		PdfPCell cell = new PdfPCell();
-		cell.setBackgroundColor(BaseColor.BLUE);
+//		cell.setBackgroundColor(BaseColor.BLUE);
 		cell.setPadding(5);
 
 		// write table header
-		cell.setPhrase(new Phrase("會員編號", normalFont));
+		cell.setPhrase(new Phrase("No", normalFont));
 		table.addCell(cell);
 
-		cell.setPhrase(new Phrase("會員姓名", normalFont));
+		cell.setPhrase(new Phrase("Name", normalFont));
 		table.addCell(cell);
 
-		cell.setPhrase(new Phrase("會員信箱", normalFont));
+		cell.setPhrase(new Phrase("Email", normalFont));
 		table.addCell(cell);
 
-		cell.setPhrase(new Phrase("會員密碼", normalFont));
+		cell.setPhrase(new Phrase("Password", normalFont));
 		table.addCell(cell);
 
-		cell.setPhrase(new Phrase("會員性別", normalFont));
+		cell.setPhrase(new Phrase("Gender", normalFont));
 		table.addCell(cell);
 
-		cell.setPhrase(new Phrase("會員電話", normalFont));
+		cell.setPhrase(new Phrase("Phone", normalFont));
 		table.addCell(cell);
 
-		cell.setPhrase(new Phrase("會員登入次數", normalFont));
+		cell.setPhrase(new Phrase("Logins", normalFont));
 		table.addCell(cell);
 
-		cell.setPhrase(new Phrase("會員加入日期", normalFont));
+		cell.setPhrase(new Phrase("Sign Up", normalFont));
 		table.addCell(cell);
 
-		cell.setPhrase(new Phrase("會員認證狀態", normalFont));
+		cell.setPhrase(new Phrase("Status", normalFont));
 		table.addCell(cell);
 
 		// write table row data
 		for (MemberMainBean mmb : list) {
 			table.addCell(String.valueOf(mmb.getMemberId()));
-			table.addCell(String.valueOf(mmb.getMemberName()));
+			cell.setPhrase(new Phrase(String.valueOf(mmb.getMemberName()), normalFont));
+			table.addCell(cell);
+//			table.addCell(String.valueOf(mmb.getMemberName()));
 			table.addCell(String.valueOf(mmb.getEmail()));
 			table.addCell(String.valueOf(mmb.getPassword()));
 			table.addCell(String.valueOf(mmb.getGender()));

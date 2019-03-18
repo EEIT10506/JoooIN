@@ -89,7 +89,19 @@ public class AdminController {
 	@RequestMapping(value = "/admin/memberPDF", method = RequestMethod.GET)
 	public ModelAndView memberPdf() {
 		List<MemberMainBean> list = service.getAllMember();
-		return new ModelAndView("pdfView", "allMember", list);
+		return new ModelAndView("memberPdfView", "allMember", list);
+	}
+	
+	@RequestMapping(value = "/admin/groupPDF", method = RequestMethod.GET)
+	public ModelAndView groupPdf() {
+		List<GroupMainBean> list = service.getAllGroup();
+		return new ModelAndView("groupPdfView", "allGroup", list);
+	}
+	
+	@RequestMapping(value = "/admin/eventPDF", method = RequestMethod.GET)
+	public ModelAndView eventPdf() {
+		List<EventMainBean> list = service.getAllEvent();
+		return new ModelAndView("eventPdfView", "allEvent", list);
 	}
 
 }

@@ -43,7 +43,7 @@ $(document).ready(function () {
                 			docFrag.append(row);
                 		})
                 		$('#content tbody').html(docFrag);
-                		$('#content tbody').after('<a href="admin/memberPDF">Download PDF Document</a>')
+                		$('#content tbody').after('<a href="admin/memberPDF"><img src="resources/img/icon_pdf.png" alt="pdf" style="width:45px;"/></a>')
                 }
         	})	//撈出會員end
 //        	----------------------------------------------------------------------------------------------------
@@ -126,6 +126,7 @@ $(document).ready(function () {
                 			docFrag.append(row);
                 		})
                 		$('#content tbody').html(docFrag);
+                		$('#content tbody').after('<a href="admin/groupPDF"><img src="resources/img/icon_pdf.png" alt="pdf" style="width:45px;"/></a>')
                 }
         	})//撈出社團end
 //        	----------------------------------------------------------------------------------------------------
@@ -208,6 +209,7 @@ $(document).ready(function () {
                 			docFrag.append(row);
                 		})
                 		$('#content tbody').html(docFrag);
+                		$('#content tbody').after('<a href="admin/eventPDF"><img src="resources/img/icon_pdf.png" alt="pdf" style="width:45px;"/></a>')
                 }
         	})
 //        	----------------------------------------------------------------------------------------------------
