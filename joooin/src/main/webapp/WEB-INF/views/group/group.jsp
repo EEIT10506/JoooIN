@@ -90,7 +90,7 @@ div{
 	}
 	$("#ooo").ready(function(){
 		  $("#hide").click(function(){
-		    $(".col-8 div-a ${mem.id}").hide();
+		    $("#hide").hide();
 		  });
 		  
 		});
@@ -152,10 +152,12 @@ div{
 <!--  EL加入地點  -->
 
  <c:forEach var="memberApply" items="${groupMain.groupMemberList}" varStatus="loop">
- 	<c:if test="${memberApply.isAgreed}">
-  	<div class="col-8 div-a"><span >${memberMain[loop.count-1].memberName}</span></div>
-    <div class="col div-a"> <button class="btn btn pull-right btn-primary">允許加入</button></div>
-    <div class="col div-a"><button class="btn btn pull-right btn-danger">拒絕</button></div>
+ 	<c:if test="${!memberApply.isAgreed}">
+ 	<div></div>
+  	<p class="col-8 div-a"><span >${memberMain[loop.count-1].memberName}</span></p>
+    <p class="col div-a"><button id="hide" class="btn btn pull-right btn-primary">允許加入</button></p>
+    <p class="col div-a"><button id="hide" class="btn btn pull-right btn-danger">拒絕</button></p>
+    
     </c:if> 
 </c:forEach>    
 
