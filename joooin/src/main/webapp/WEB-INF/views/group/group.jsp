@@ -96,7 +96,6 @@ div{
 		});
 </script>
 
-
 <title>各社團主頁</title>
 </head>
 <body>
@@ -141,7 +140,7 @@ div{
     <div class="modal-content">
        <div class="modal-header">
           <h4 class="modal-title">成員申請表</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" class="close" data-dismiss="modal" onClick="window.location.reload()">&times;</button>
         </div>
       <div class="modal-body" >
      <div class="container">
@@ -151,14 +150,11 @@ div{
   
 <!--  EL加入地點  -->
 
- <c:forEach var="memberApply" items="${groupMain.groupMemberList}" varStatus="loop">
- 	<c:if test="${!memberApply.isAgreed}">
- 	<div></div>
-  	<p class="col-8 div-a"><span >${memberMain[loop.count-1].memberName}</span></p>
-    <p class="col div-a"><button id="hide" class="btn btn pull-right btn-primary">允許加入</button></p>
-    <p class="col div-a"><button id="hide" class="btn btn pull-right btn-danger">拒絕</button></p>
-    
-    </c:if> 
+ <c:forEach var="memberApply" items="${applyMemberMain}" varStatus="loop">
+  	<div class="col-8 div-a ${loop.count-1}"><span >${memberApply.memberName}</span></div>
+    <div class="col div-a ${loop.count-1}"> <button class="btn btn pull-right btn-primary">允許加入</button></div>
+    <div class="col div-a ${loop.count-1}"><button class="btn btn pull-right btn-danger">拒絕</button></div>
+
 </c:forEach>    
 
 <!--  EL加入地點  -->
@@ -168,7 +164,7 @@ div{
 </div>
       </div>
       <div class="modal-footer" >   
-        <button class="btn" class="close" data-dismiss="modal">Cancel</button>
+        <button class="btn" class="close" data-dismiss="modal" onClick="window.location.reload()">Cancel</button>
       </div>
     </div>
   </div>

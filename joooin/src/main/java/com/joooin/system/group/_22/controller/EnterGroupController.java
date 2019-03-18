@@ -47,7 +47,7 @@ public class EnterGroupController {
 		}
 		
 		model.addAttribute("groupMain", groupMain);
-		model.addAttribute("memberMain", applyMember);
+		model.addAttribute("applyMemberMain", applyMember);
 		
 		return "group/group";
 	}
