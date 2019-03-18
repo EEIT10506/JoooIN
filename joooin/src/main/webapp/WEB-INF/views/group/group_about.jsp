@@ -95,7 +95,6 @@
 								</p>
 								<p class="text-right">
 								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
-								<button class="btn btn-default btn-lg btn-danger">修改</button>
 								</c:if>
 								</p>	
 							</div>
@@ -113,7 +112,6 @@
 								</p>
 								<p class="text-right">
 								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
-								<button class="btn btn-default btn-lg btn-danger">修改</button>
 								</c:if>
 								</p>	
 							</div>
@@ -149,7 +147,7 @@
 								</p>
 								<p class="text-right">
 								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
-								<button class="btn btn-default btn-lg btn-danger">修改</button>
+								
 								</c:if>
 								</p>	
 							</div>
