@@ -135,7 +135,7 @@ div {
 		<!-- 請把所有內容寫在此div內 -->
 
 
-<%-- 		<jsp:include page="${request.contextPath}/group/group_navbar" /> --%>
+		<jsp:include page="${request.contextPath}/group/group_navbar" />
 		
 		
 		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
