@@ -17,7 +17,7 @@
 	href="https://code.jquery.com/jquery-1.12.4.min.css">	
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"
 	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous"></script>	
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <style>
@@ -30,6 +30,90 @@
 </style>
 <script>
 	$('.collapse').collapse()
+
+	//修改按鈕
+	$(document).ready(function(){
+	  	$('#updateType').click(function(){  
+		  	$('#updateType').hide();	
+		  	$('#inputType').show(); 			
+		   	$('#confirmType').show();
+			$('#cancelType').show();
+  		});
+  	});
+  	//取消
+  	$(document).ready(function(){
+  	  	$('#cancelType').click(function(){
+  	   	$('#cancelType').hide();
+  	  	$('#inputType').hide();
+  	    $('#confirmType').hide();
+  	  	$('#updateType').show(); 
+  	  	});
+	});
+  	//確認修改
+  	$(document).ready(function(){
+  	  	$('#confirmType').click(function(){
+  	   	$('#cancelType').hide();
+  	  	$('#inputType').hide();
+  	    $('#confirmType').hide();
+  	  	$('#updateType').show(); 
+  	  	});
+	});
+  	
+	//修改按鈕
+	$(document).ready(function(){
+  	$('#updateName').click(function(){  
+  	$('#updateName').hide();	
+  	$('#inputName').show(); 			
+   	$('#confirmName').show();
+	$('#cancelName').show();
+  	});
+  	});
+  	//取消
+  	$(document).ready(function(){
+  	  	$('#cancelName').click(function(){
+  	   	$('#cancelName').hide();
+  	  	$('#inputName').hide();
+  	    $('#confirmName').hide();
+  	  	$('#updateName').show(); 
+  	  	});
+	});
+  	//確認修改
+  	$(document).ready(function(){
+  	  	$('#confirmName').click(function(){
+  	   	$('#cancelName').hide();
+  	  	$('#inputName').hide();
+  	    $('#confirmName').hide();
+  	  	$('#updateName').show(); 
+  	  	});
+	});
+  //修改按鈕
+	$(document).ready(function(){
+  	$('#updateIntro').click(function(){  
+  	$('#updateIntro').hide();	
+  	$('#inputIntro').show(); 			
+   	$('#confirmIntro').show();
+	$('#cancelIntro').show();
+  	});
+  	});
+  	//取消
+  	$(document).ready(function(){
+  	  	$('#cancelIntro').click(function(){
+  	   	$('#cancelIntro').hide();
+  	  	$('#inputIntro').hide();
+  	    $('#confirmIntro').hide();
+  	  	$('#updateIntro').show(); 
+  	  	});
+	});
+  	//確認修改
+  	$(document).ready(function(){
+  	  	$('#confirmIntro').click(function(){
+  	   	$('#cancelIntro').hide();
+  	  	$('#inputIntro').hide();
+  	    $('#confirmIntro').hide();
+  	  	$('#updateIntro').show(); 
+  	  	});
+	});
+
 </script>
 <title>Insert title here</title>
 </head>
@@ -57,11 +141,30 @@
 							<p class="text-center">
 								<span class="label label-defaulabel label-primary">${groupMain.groupType}</span>	
 								</p>
-								<p class="text-right">
+								
 								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
-								<button class="btn btn-default btn-lg btn-danger">修改</button>
+								
+								<form 
+								action="${pageContext.request.contextPath}/group/abouts/updateGroupType/${groupMain.groupId}" method="POST">
+								<p class="text-center">
+								<label for="groupType">社團型態</label>
+								<select id="inputType" name="type">
+　								<option value="sport">運動</option>
+　								<option value="food">美食</option>
+　								<option value="entertainment">娛樂</option>
+　								<option value="other">其他</option>
+								</select>
+
+								<button id="confirmType" class="btn btn-default btn-lg btn-danger" style="display:none;" type="submit" >確認修改</button>
+								</p>
+						
+								</form>
+								<p class="text-right">
+								<button id="cancelType" class="btn btn-default btn-lg btn-danger" style="display:none;">取消</button>
+								<button id="updateType" class="btn btn-default btn-lg btn-danger">修改</button>
+								</p>
 								</c:if>
-								</p>	
+									
 							</div>
 						</div>
 <!-- 			社團名稱			 -->
@@ -77,7 +180,10 @@
 								</p>
 								<p class="text-right">
 								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
-								<button class="btn btn-default btn-lg btn-danger">修改</button>
+								<input id="inputName" class="btn btn-default btn-lg btn-danger" type="text" style="display:none;" placeholder="修改內容" />
+								<button id="confirmName" class="btn btn-default btn-lg btn-danger" style="display:none;">確認修改</button>${groupMain.groupId}
+								<button id="cancelName" class="btn btn-default btn-lg btn-danger" style="display:none;">取消</button>
+								<button id="updateName" class="btn btn-default btn-lg btn-danger">修改</button>
 								</c:if>
 								</p>	
 							</div>
@@ -127,14 +233,21 @@
 							<p class="text-center">
 								<span class="label label-defaulabel label-primary">${groupMain.groupIntro}</span>	
 								</p>
-								<p class="text-right">
+								
+								
 								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
-								<button class="btn btn-default btn-lg btn-danger">修改</button>
+								<p class="text-right">
+								<input id="inputIntro" class="btn btn-default btn-lg btn-danger" type="text" style="display:none;" placeholder="修改內容" />
+								<button id="confirmIntro" class="btn btn-default btn-lg btn-danger" type="submit" style="display:none;">確認修改</button>
+								<button id="cancelIntro" class="btn btn-default btn-lg btn-danger" style="display:none;">取消</button>    
+								<button id="updateIntro" class="btn btn-default btn-lg btn-danger">修改</button>
+								</p>
 								</c:if>
-								</p>	
+								
+									
 							</div>
 						</div>
-<!-- 			社團介紹			 -->
+<!-- 			社團管理人			 -->
 						<h2 class="panel-title">
 						<button class="btn btn-primary btn-lg btn-block" data-toggle="collapse" 
 							data-parent="#accordion" href="#collapseSix">社團管理者</button>	
