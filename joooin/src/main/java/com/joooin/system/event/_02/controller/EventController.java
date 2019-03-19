@@ -156,7 +156,7 @@ public class EventController {
 		MemberMainBean eventmembers = null;
 		List<MemberMainBean> eventmemberlist = new ArrayList<MemberMainBean>();
 		List<MemberMainBean> emfindagreed = new ArrayList<MemberMainBean>();
-
+		Boolean myAgreed = false;
 		for (EventMemberBean members : eventmember) {
 			Integer memberid = members.getMemberId();
 			Integer eventIds = members.getEventId();
@@ -164,14 +164,14 @@ public class EventController {
 			eventmembers = eventService.getByMemberId(memberid);
 			eventmemberlist.add(eventmembers);
 				
+			
 			Boolean isAgreed = members.getIsAgreed();
+			if(isAgreed == true && memberid==memberId) {
+				myAgreed =true;
+			}
 			if (isAgreed == true ) {
 				emfindagreed.add(eventmembers);
-			if(isAgreed == false) {
-				findAgreed.add(eventmembers);
 			}
-			}
-
 		}
 		// 抓留言資訊
 		List<EventPostBean> eventPost = event.getEventPostList();
@@ -209,6 +209,7 @@ public class EventController {
 				model.addAttribute("notLike", notLike);
 			}
 		}
+		model.addAttribute("myAgreed", myAgreed);
 		model.addAttribute("findAgreed", findAgreed);
 		model.addAttribute("finish", finish);
 		model.addAttribute("event", event);

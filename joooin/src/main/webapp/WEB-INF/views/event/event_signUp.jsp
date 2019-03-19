@@ -39,7 +39,6 @@
 		}
 		#example_filter{
 		    float:right;
-		  
 		}
 		#example_paginate{
 		    float:right;
@@ -81,6 +80,24 @@
 		.aName{
 			text-decoration:none !important;
    		    color:black;
+		}
+		.eventLimitShow{
+			font-size:25px;
+			font-weight:bold;
+			position:absolute;
+			top:30px;
+			left:20px;
+		}
+		.eventCurrentShow{
+			font-size:25px;
+			font-weight:bold;
+			position:absolute;
+			top:30px;
+			left:250px;
+			color:red;
+		}
+		.content{
+ 			clear:both; 
 		}
 /* 	 ======= */
 </style>
@@ -166,14 +183,18 @@ function checkAll(bx) {
 	<div id="main">
 	<jsp:include page="${request.contextPath}/event/settingbar"/>
 		<div class="outSide" >
-			<div class="container">
+
+			<div class="container content">
 				<div class="row">
+					  
 					<table id="example" class="table table-striped table-bordered" style="width:100%">
+				        <span class="eventLimitShow">人數限制 : ${event.eventMemberLimit } 人</span> <span class="eventCurrentShow">尚可加入 : ${event.eventMemberLimit - event.eventCurrentMembers } 人</span>
 				        <thead>
 				            <tr>
 				                <th style="display:none"><input type="checkbox" onclick="checkAll(this)"></th>
 				                <th class="tdCenter tdAll">頭像</th>
 				                <th class="tdCenter tdAll">名稱</th>
+				                <th class="tdCenter tdAll">報名人數</th>				                
 				                <th class="tdCenter tdAll">同意</th>
 				                <th class="tdCenter tdAll">拒絕</th>
 				            </tr>
@@ -184,7 +205,7 @@ function checkAll(bx) {
 					                <td class="tdCenter tdAll" style="display:none"><input type="checkbox" name=""></td>
 					                <td class="tdCenter tdAll"><a class="aName" href="<c:url value='/member/other/${memberList.memberId}' />"><span><img src="<c:url value='/getMemberImage/${memberList.memberId}.jpg' />" width="50px" height="50px" style="border-radius:25px;"/></span></a></td>
 					                <td class="tdCenter tdAll tdName"><a class="aName" href="<c:url value='/member/other/${memberList.memberId}' />">${memberList.memberName}</a></td>
-					                
+					                <td class="tdCenter tdAll">${eventMemberId[loop.count-1].quantity }</td>
 					              
 					                <td class="tdCenter tdAll"><i data-toggle="modal" data-target="#Modal${eventMemberId[loop.count-1].eventMemberId}" class="fas fa-check-double iconAgree" ></i></td>
 					               
