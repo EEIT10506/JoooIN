@@ -33,12 +33,12 @@
 
 	//修改按鈕
 	$(document).ready(function(){
-  	$('#updateType').click(function(){  
-  	$('#updateType').hide();	
-  	$('#inputType').show(); 			
-   	$('#confirmType').show();
-	$('#cancelType').show();
-  	});
+	  	$('#updateType').click(function(){  
+		  	$('#updateType').hide();	
+		  	$('#inputType').show(); 			
+		   	$('#confirmType').show();
+			$('#cancelType').show();
+  		});
   	});
   	//取消
   	$(document).ready(function(){
@@ -141,16 +141,30 @@
 							<p class="text-center">
 								<span class="label label-defaulabel label-primary">${groupMain.groupType}</span>	
 								</p>
-								<p class="text-right">
+								
 								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
+								
+								<form 
+								action="${pageContext.request.contextPath}/group/abouts/updateGroupType/${groupMain.groupId}" method="POST">
+								<p class="text-center">
+								<label for="groupType">社團型態</label>
+								<select id="inputType" name="type">
+　								<option value="sport">運動</option>
+　								<option value="food">美食</option>
+　								<option value="entertainment">娛樂</option>
+　								<option value="other">其他</option>
+								</select>
 
-								<input id="inputType" class="btn btn-default btn-lg btn-danger" type="text" style="display:none;" placeholder="修改內容" />
-								<button id="confirmType" class="btn btn-default btn-lg btn-danger" style="display:none;">確認修改</button>
+								<button id="confirmType" class="btn btn-default btn-lg btn-danger" style="display:none;" type="submit" >確認修改</button>
+								</p>
+						
+								</form>
+								<p class="text-right">
 								<button id="cancelType" class="btn btn-default btn-lg btn-danger" style="display:none;">取消</button>
 								<button id="updateType" class="btn btn-default btn-lg btn-danger">修改</button>
-								
+								</p>
 								</c:if>
-								</p>	
+									
 							</div>
 						</div>
 <!-- 			社團名稱			 -->
@@ -167,7 +181,7 @@
 								<p class="text-right">
 								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
 								<input id="inputName" class="btn btn-default btn-lg btn-danger" type="text" style="display:none;" placeholder="修改內容" />
-								<button id="confirmName" class="btn btn-default btn-lg btn-danger" style="display:none;">確認修改</button>
+								<button id="confirmName" class="btn btn-default btn-lg btn-danger" style="display:none;">確認修改</button>${groupMain.groupId}
 								<button id="cancelName" class="btn btn-default btn-lg btn-danger" style="display:none;">取消</button>
 								<button id="updateName" class="btn btn-default btn-lg btn-danger">修改</button>
 								</c:if>
@@ -219,14 +233,18 @@
 							<p class="text-center">
 								<span class="label label-defaulabel label-primary">${groupMain.groupIntro}</span>	
 								</p>
-								<p class="text-right">
+								
+								
 								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
+								<p class="text-right">
 								<input id="inputIntro" class="btn btn-default btn-lg btn-danger" type="text" style="display:none;" placeholder="修改內容" />
-								<button id="confirmIntro" class="btn btn-default btn-lg btn-danger" style="display:none;">確認修改</button>
-								<button id="cancelIntro" class="btn btn-default btn-lg btn-danger" style="display:none;">取消</button>
+								<button id="confirmIntro" class="btn btn-default btn-lg btn-danger" type="submit" style="display:none;">確認修改</button>
+								<button id="cancelIntro" class="btn btn-default btn-lg btn-danger" style="display:none;">取消</button>    
 								<button id="updateIntro" class="btn btn-default btn-lg btn-danger">修改</button>
+								</p>
 								</c:if>
-								</p>	
+								
+									
 							</div>
 						</div>
 <!-- 			社團管理人			 -->
