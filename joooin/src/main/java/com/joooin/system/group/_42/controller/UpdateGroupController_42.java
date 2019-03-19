@@ -31,7 +31,7 @@ public class UpdateGroupController_42 {
 	ServletContext context;
 
 	@RequestMapping(value = "/group/abouts/updateGroupType/{groupId}", method = RequestMethod.POST)
-	public String UpdateGroupType(	 String type,
+	public String updateGroupType(	 String type,
 			@PathVariable("groupId") Integer groupId) {
 		
 		service.updateGroupType(groupId, type);
