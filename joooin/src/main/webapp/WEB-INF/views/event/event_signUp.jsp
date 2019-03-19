@@ -99,6 +99,15 @@
 		.content{
  			clear:both; 
 		}
+		.agreedColor{
+			color:black;
+		}
+		.notAgreedColor{
+			color:red;
+		}
+		.modalBodySize{
+			font-size:20px;
+		}
 /* 	 ======= */
 </style>
 <script type="text/javascript">
@@ -144,6 +153,21 @@ $(document).ready(function() {
 		    	}
 		      } 
 			});
+		});
+		$(".iconAgree").click(function(){
+			var limit = ${event.eventMemberLimit - event.eventCurrentMembers};
+			var quantity = $(this).parent().prev().html();
+			var id = this.id.substr(2);
+			if(limit >= quantity){
+				$("#modalAgreedBody"+id).html("確定同意此會員申請?");
+				$("#modalAgreedBody"+id).removeClass("notAgreedColor");
+				$("#modalAgreedBody"+id).addClass("agreedColor");
+			}
+			 if(limit < quantity){
+				$("#modalAgreedBody"+id).html("超出人數上限 ")
+				$("#modalAgreedBody"+id).removeClass("agreedColor");
+				$("#modalAgreedBody"+id).addClass("notAgreedColor");
+			}
 		});
 		//拒絕
 		$(".iconRejected").click(function(){
@@ -207,7 +231,7 @@ function checkAll(bx) {
 					                <td class="tdCenter tdAll tdName"><a class="aName" href="<c:url value='/member/other/${memberList.memberId}' />">${memberList.memberName}</a></td>
 					                <td class="tdCenter tdAll">${eventMemberId[loop.count-1].quantity }</td>
 					              
-					                <td class="tdCenter tdAll"><i data-toggle="modal" data-target="#Modal${eventMemberId[loop.count-1].eventMemberId}" class="fas fa-check-double iconAgree" ></i></td>
+					                <td class="tdCenter tdAll"><i data-toggle="modal" id="qu${eventMemberId[loop.count-1].eventMemberId}" data-target="#Modal${eventMemberId[loop.count-1].eventMemberId}" class="fas fa-check-double iconAgree" ></i></td>
 					               
 					                <td class="tdCenter tdAll"><i data-toggle="modal" data-target="#RejModal${eventMemberId[loop.count-1].eventMemberId}" class="fas fa-times-circle iconReject"></i></td>
 					                
@@ -215,16 +239,16 @@ function checkAll(bx) {
 
 <div class="modal fade" id="Modal${eventMemberId[loop.count-1].eventMemberId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">確認同意</h5>
+        <h5 class="modal-title" id="exampleModalLabel" style="font-size:35px;font-weight:bold;">確認同意</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-                     確定同意此會員加入?
+      <div class="modal-body modalBodySize" id="modalAgreedBody${eventMemberId[loop.count-1].eventMemberId}">
+                     
       </div>
       <div class="modal-footer">
          <button type="button" id="ag${eventMemberId[loop.count-1].eventMemberId}" class="btn btn-primary iconAgreed">確認</button>
@@ -237,7 +261,7 @@ function checkAll(bx) {
 <!-- 			拒絕確認MODAL		                ========= -->
 <div class="modal fade" id="RejModal${eventMemberId[loop.count-1].eventMemberId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">確認拒絕</h5>
@@ -245,7 +269,7 @@ function checkAll(bx) {
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" >
                      確定拒絕此會員加入?
       </div>
       <div class="modal-footer">

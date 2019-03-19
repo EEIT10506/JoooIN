@@ -390,8 +390,10 @@ public class EventController {
 			EventMemberBean bean = eventService.getByEventMemberId(eventMemberId);
 			Integer current = event.getEventCurrentMembers();
 			Integer quantity = bean.getQuantity();
+			Integer limit = event.getEventMemberLimit();
 			int currenMember = current.intValue();
 			int updateQuantity = quantity.intValue();
+			
 			int newCurrent = currenMember + updateQuantity;
 			Integer eventNewCurrentMember = Integer.valueOf(newCurrent);
 			event.setEventCurrentMembers(eventNewCurrentMember);
