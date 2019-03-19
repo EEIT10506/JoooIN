@@ -27,7 +27,7 @@
 	margin-top: -2.5em;
 }
 </style>
-<script src="js/bootstrap.min.js"></script>
+
 <script>
 
 </script>
