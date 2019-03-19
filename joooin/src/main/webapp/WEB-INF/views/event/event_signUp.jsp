@@ -174,6 +174,7 @@ $(document).ready(function() {
 				$("#modalAgreedBody"+id).html("超出人數上限 ")
 				$("#modalAgreedBody"+id).removeClass("agreedColor");
 				$("#modalAgreedBody"+id).addClass("notAgreedColor");
+				$("#ag"+id).attr("display", "none");
 			}
 		});
 		//拒絕
@@ -258,9 +259,9 @@ function checkAll(bx) {
                      
       </div>
       <div class="modal-footer">
-<%--       	<c:if test="${event.eventMemberLimit - event.eventCurrentMembers > eventMemberId[loop.count-1].quantity }"> --%>
+      	<c:if test="${event.eventMemberLimit-event.eventCurrentMembers >= eventMemberId[loop.count-1].quantity }">
          <button type="button" id="ag${eventMemberId[loop.count-1].eventMemberId}" class="btn btn-primary iconAgreed">確認</button>
-<%--        	</c:if> --%>
+       	</c:if>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button> 
       </div>
     </div>

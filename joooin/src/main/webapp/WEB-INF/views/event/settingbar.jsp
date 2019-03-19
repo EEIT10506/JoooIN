@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,9 +11,9 @@
 <style>
 	.barBorder{
 		margin:auto;
-		width:250px;
+		width:200px;
 		height:60px;
-		font-size:30px;
+		font-size:25px;
 		font-weight:900px;
 		font-family:微軟正黑體;
 		background-color:	#828282;
@@ -33,6 +34,11 @@
 		width:100px;
 		font-size:30px;	
 	}
+	.disabled {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.8;
+}
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -43,6 +49,8 @@ $(document).ready(function(){
 			$("#signUp").attr("class", "nav-link barBorder active");
 		else if (location.href.search("participated") != -1)
 			$("#participated").attr("class", "nav-link barBorder active");
+		else if (location.href.search("attended") != -1)
+			$("#attended").attr("class", "nav-link barBorder active");
 		else 
 			$("#back").attr("class", "nav-link  barBorder active");
 	});
@@ -58,6 +66,10 @@ $(document).ready(function(){
   </li>
   <li class="nav-item">
     <a id="participated" class="nav-link barBorder" href="${pageContext.request.contextPath}/event/participated/${event.eventId}">已參加成員</a>
+  </li>
+ 
+   <li class="nav-item">
+    <a id="attended" class="nav-link barBorder" href="${pageContext.request.contextPath}/event/attended/${event.eventId}">成員出席狀況</a>
   </li>
   <li class="nav-item">
     <a id="back" class="nav-link barBorder" href="${pageContext.request.contextPath}/event/${event.eventId}">返回</a>

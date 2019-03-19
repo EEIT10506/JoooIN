@@ -185,12 +185,8 @@ public class EventsController {
 	@RequestMapping(value = "/event/good/dis/{eventId}", method = RequestMethod.POST)
 	public @ResponseBody Integer displayEventLike(Integer eventId,HttpSession session) {
 		
-		
 			Integer memberId = (Integer) session.getAttribute("memberId");			
 			return eventservice.displayeventlike(eventId, memberId);
-
-	  
-	
 	}	
 	
 	@ModelAttribute("EventTypeList") // 當有控制器方法被執行時,在控制器方法之前先執行,才執行該方法

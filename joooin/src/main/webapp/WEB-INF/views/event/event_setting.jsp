@@ -315,9 +315,9 @@
 								  <div class="modal-dialog modal-dialog-centered" role="document">
 								    <div class="modal-content">
 								      <div class="modal-header">
-								        <h5 class="pure-u-1-5 modal-title" id="exampleModalLongTitle">確認</h5>
+								        <h5 class="pure-u-1-5 modal-title" id="exampleModalLongTitle" style="font-size:30px;font-weight:bold;font-family:微軟正黑體;">確認</h5>
 								      </div>
-								      <div class="pure-u-1-2 modal-body">確認修改活動資料？</div>
+								      <div class="pure-u-1-2 modal-body" style="text-align:left;font-size:20px;font-weight:bold;font-family:微軟正黑體;">確認修改活動資料？</div>
 								      <div class="modal-footer">
 								      	<button type="submit" class="btn btn-primary">確認修改</button>
 								        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消修改</button>

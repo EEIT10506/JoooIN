@@ -73,7 +73,7 @@
 	}
 	#allMessage{
  		width:1200px; 
- 		height:400px; 
+  		height:300px;    
 		overflow-y: scroll;
 		overflow-x: hidden;
  		margin-right:200px; 
@@ -319,6 +319,15 @@ function ValidateNumber(e, pnumber)
     return false;
 }
  	$(document).ready(function(){
+ 		
+ 	
+ 		var message = $("#allMessage").val();
+ 		if(message != null){
+ 			$("#allMessage").attr("height", "400px");
+ 		}else{
+ 			$("#allMessage").attr("height", "0px");
+ 		}
+ 		
 // 		先隱藏 點地址顯示
 		$("#eventAddressImage").hide();
 		$(".eventaddress").click(function(){
@@ -513,8 +522,9 @@ function ValidateNumber(e, pnumber)
    			</span>
    		</div><hr class="hrr"/>
    		<p class="PostTitle" >留言板</p>
-  	   <div class="leavemessage">
   	  
+  	  
+  	   <div class="leavemessage">
   	   	<div class="hidAllMessage">
   	   	<div id="allMessage">
 <!--   	   	各留言 -->

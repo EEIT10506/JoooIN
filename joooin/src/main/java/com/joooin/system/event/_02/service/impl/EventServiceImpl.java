@@ -138,13 +138,8 @@ public class EventServiceImpl implements EventService {
 		
 		for(EventMemberBean bean : list) {
 		     if (bean.getEventId().equals(eventId) && bean.getMemberId().equals(memberId)) {
-//		    	 Integer quantity = bean.getQuantity();
 		    	 Integer current = event.getEventCurrentMembers();
 		    	 Integer limit = event.getEventMemberLimit();
-		    	
-//		    	 Integer newCurrent = current - quantity;
-//		    	 event.setEventCurrentMembers(newCurrent);
-//		    	 eventMainDao.update(event);
 		    	 Integer myQuantity = bean.getQuantity();
 		    	 if(bean.getIsAgreed()) {
 			    	 if(limit>(current-myQuantity)) {
@@ -156,12 +151,6 @@ public class EventServiceImpl implements EventService {
 		    	 }
 		    	 eventMainDao.update(event);
 		    	 eventMemberDao.deleteByEventMemberId(bean.getEventMemberId());
-		    	 
-//		    	 if(current < limit) {
-//		    		 event.setIsFull(false);
-//		    	 }else {
-//		    		event.setIsFull(true); 
-//		    	 }
 		     }
 		}
 	}

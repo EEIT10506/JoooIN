@@ -66,57 +66,39 @@
 			text-decoration:none !important;
    		    color:black;
 		}
-		.getOut{
+		.arrive{
+			color:green;
+			cursor: pointer;
+		}
+		.arrive:hover{
+			color:	#00CD00;
+			cursor: pointer;
+			position:relative;
+			bottom:3px;
+		}
+		.absent{
+			cursor: pointer;
 			color:red;
-			cursor: pointer;
 		}
-		.getOut:hover{
-			color:#B22222;
+		.absent:hover{
 			cursor: pointer;
 			position:relative;
 			bottom:3px;
 		}
-		.report{
-			cursor: pointer;
-			color:	#FFA500;	
-		}
-		.report:hover{
-			cursor: pointer;
-			position:relative;
-			bottom:3px;
-			color:#CD853F;
-		}
-		.eventCurrentShow{
-			font-size:25px;
-			font-weight:bold;
-			position:absolute;
-			top:30px;
-			left:20px;
-		}
-		.eventMyself{
-			font-size:25px;
-			font-weight:bold;
-			position:absolute;
-			top:30px;
-			left:250px;
-			color:blue;
-		}		
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
-	//踢出
-	$(".iconGetOut").click(function(){
+	//缺席
+	$(".absent").click(function(){
 		var eventId = ${event.eventId};
-		var getOutId = this.id;
-		var eventMemberId = getOutId.substr(3);
+		var eventMemberId = this.id.substr(6);
 			$.ajax({
 			type: "POST",                           
-	   		 url: "${pageContext.request.contextPath}/event/eventGetOut/"+eventId,
+	   		 url: "${pageContext.request.contextPath}/event/eventAbsent/"+eventId,
 	  	     data: {"eventId": eventId, "eventMemberId": eventMemberId},
-	         success: function (out){
-	    	if(out=="outed"){
-	   
-	    		location.href = "${pageContext.request.contextPath}/event/participated/"+eventId;
+	         success: function (absent){
+	    	if(absent=="absent"){
+	    		location.href = "${pageContext.request.contextPath}/event/attended/"+eventId;
 	    	}else{
 	    		location.href = "${pageContext.request.contextPath}/not_Login";
 	    	}
@@ -124,28 +106,23 @@ $(document).ready(function() {
 		});
 	});
 	
-	//檢舉
+	//出席
 		$(".arrive").click(function(){
-			$(this).parent().prev().html();
 		var eventId = ${event.eventId};
-		var arriveId = this.id;
-		var eventMemberId = arriveId.substr(6);
+		var eventMemberId = this.id.substr(6);
 			$.ajax({
 			type: "POST",                           
 	   		 url: "${pageContext.request.contextPath}/event/eventArrive/"+eventId,
 	  	     data: {"eventId": eventId, "eventMemberId": eventMemberId},
 	         success: function (arrive){
 	    	if(arrive=="arrived"){
-	   
-	    		location.href = "${pageContext.request.contextPath}/event/participated/"+eventId;
+	    		location.href = "${pageContext.request.contextPath}/event/attended/"+eventId;
 	    	}else{
 	    		location.href = "${pageContext.request.contextPath}/not_Login";
 	    	}
 	      } 
 		});
 	});
-	
-	
 	
 	var language = {
 	        "zeroRecords": "沒有結果",
@@ -160,19 +137,8 @@ $(document).ready(function() {
 	            "last": "  最後一頁"
 	        }
 	    };
-
-
 	$('#example').DataTable({"language":language, "lengthChange": false, "aLengthMenu" : 10, "bScrollCollapse": true});
 } );
-
-function checkAll(bx) {
-  var cbs = document.getElementsByTagName('input');
-  for(var i=0; i < cbs.length; i++) {
-    if(cbs[i].type == 'checkbox') {
-      cbs[i].checked = bx.checked;
-    }
-  }
-}
 </script>
 <title>Insert title here</title></head>
 <body class="settingBody">
@@ -185,17 +151,14 @@ function checkAll(bx) {
 			<div class="container">
 				<div class="row">
 					<table id="example" class="table table-striped table-bordered" style="width:100%">
-				       <span class="eventCurrentShow">目前人數 : ${event.eventCurrentMembers } 人</span>  <span class="eventMyself">自己報名 : ${eventMemberMyself.quantity } 人</span>
 				        <thead>
 				            <tr>
 				                <th style="display:none"><input type="checkbox" onclick="checkAll(this)"></th>
 				                <th class="tdCenter tdAll">頭像</th>
 				                <th class="tdCenter tdAll">名稱</th>
-<!-- 				                <th class="tdCenter tdAll">出席</th> -->
-<!-- 				                <th class="tdCenter tdAll">未出席</th> -->
-				                <th class="tdCenter tdAll">報名人數</th>
-				                <th class="tdCenter tdAll">踢除</th>
-				                <th class="tdCenter tdAll">檢舉</th>
+				                <th class="tdCenter tdAll">出席</th>
+				                <th class="tdCenter tdAll">未出席</th>
+				                
 				               
 				            </tr>
 				        </thead>
@@ -205,16 +168,12 @@ function checkAll(bx) {
 					                <td class="tdCenter tdAll" style="display:none"><input type="checkbox" name=""></td>
 					                <td class="tdCenter tdAll"><a class="aName" href="<c:url value='/member/other/${attendList.memberId}' />"><span><img src="<c:url value='/getMemberImage/${attendList.memberId}.jpg' />" width="50px" height="50px" style="border-radius:25px;"/></span></a></td>
 					                <td class="tdCenter tdAll tdName"><a class="aName" href="<c:url value='/member/other/${attendList.memberId}' />">${attendList.memberName}</a></td>
-					                <td class="tdCenter tdAll">${eventMemberId[loop.count-1].quantity }</td>
 					                
-<%-- 					                <td class="tdCenter tdAll"><i class="fas fa-check-circle arrive" id="arrive${eventMemberId[loop.count-1].eventMemberId}"></i></td> --%>
+					                
+					                <td class="tdCenter tdAll"><i class="fas fa-check-circle arrive" id="arrive${eventMemberId[loop.count-1].eventMemberId}"></i></td>
 					       					            
-<%-- 					                <td class="tdCenter tdAll"><i class="fas fa-times absent" id="absent${eventMemberId[loop.count-1].eventMemberId}"></i></i></td>					               --%>
-					       			    
-					                <td class="tdCenter tdAll"><i data-toggle="modal" data-target="#Out${eventMemberId[loop.count-1].eventMemberId}" class="far fa-times-circle getOut"></i></td>
-					               
-					                <td class="tdCenter tdAll"><i class="fas fa-exclamation-triangle report"></i></td>
-					                
+					                <td class="tdCenter tdAll"><i class="fas fa-times absent" id="absent${eventMemberId[loop.count-1].eventMemberId}"></i></i></td>					              
+					       	                
 <!-- 					                ========= -->
 <!-- 		踢出確認MODAL			                ========= -->
 
