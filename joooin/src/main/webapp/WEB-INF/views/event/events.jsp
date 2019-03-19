@@ -18,9 +18,10 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 	
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/flatly/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
 #main {
 	width: 1200px;
@@ -54,7 +55,15 @@ width:800px !important;
 height:600px !important;
 position:relative;
 right:50px;
-}
+} 
+ .div{
+/* width:1200px !important; */
+/* float:right;  */
+/* position:absolute; */
+/* top:80px; */
+/* left:455px;   */
+display:inline !important;
+} 
 </style>
 <title></title>
 
@@ -70,7 +79,7 @@ right:50px;
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
-
+<script type="text/javascript" src="<c:url value='/resources/js/events/datetimepicker/zh-tw.js'/> " charset="UTF-8"></script>	
 
 
 	<!-- 請把所有內容寫在此div內 -->
@@ -88,21 +97,20 @@ right:50px;
 
 					活動名稱:
 					<form:input path='eventName' required="required" maxlength="10" />
-				<p>
-					開始時間: <div class="input-group date" id="datetimepicker1" data-target-input="nearest" style="width:300px">
+				<p></p>
+					開始時間:<span class="input-group date" id="datetimepicker1" data-target-input="nearest" style="width:300px">
 					<form:input id="sd" path='eventDateStart' class="form-control datetimepicker-input" data-target="#datetimepicker1" required="required" type="datetime-local"/>
-					  <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                </div>
-				<p>
-					結束時間: <div class="input-group date" id="datetimepicker2" data-target-input="nearest" style="width:300px">
-					<form:input id="ed" path='eventDateEnd' class="form-control datetimepicker-input" data-target="#datetimepicker2" required="required" type="datetime-local"/>
-					<div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                </div>
-				<p>
+					  <span class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker" >
+                        <span class="input-group-text"><i class="fa fa-calendar" ></i></span>
+                    </span> 
+                </span>
+				<p></p>
+					結束時間: <span class="input-group date" id="datetimepicker2" data-target-input="nearest" style="width:300px">
+					<form:input id="ed" path='eventDateEnd' class="form-control datetimepicker-input" data-target="#datetimepicker2" required="required" type="datetime-local" />
+					<span class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                        <span class="input-group-text" ><i class="fa fa-calendar"></i></span>
+                    </span>
+                </span>				
 				<p></p>
            
                               請進行關鍵字搜尋後選取活動地點:<input type="text" size="20" class="controls" placeholder="Search Box"
@@ -114,7 +122,7 @@ right:50px;
 				<div id="map" style="width: 800px; height: 450px; display: none"></div>
 				<%--設定顯示 Google Maps 的大小--%>
 
-				<p></p><div >
+				<p></p><div>
 					活動地區:
 					<form:input path='eventLocation' id="local" required="required" style="width: 400px" readonly="true"/>
 					<p></p>
@@ -168,10 +176,8 @@ right:50px;
 
 		<div id="getdiv">
 
-			<table id="showevents">
-				<thead>
-					<tr>
-						<form>
+			<table id="showevents" class="display" >
+						
 							<select id="ewill">
 								<option value="allevent">所有活動</option>
 								<option value="all">所有未結束</option>
@@ -184,12 +190,22 @@ right:50px;
 								<option value="運動">運動</option>
 								<option value="娛樂">娛樂</option>
 								<option value="其他">其他</option>
-							</select> 地區:<input type="text" id="loc" style="width: 150px" /> 時間:<input
-								id="dcheck" type="datetime-local" />
-						</form>
+							</select> 
+							地區:<input type="text" id="loc" style="width: 150px" /> 
+							
+					<div class="div"><span class="input-group date" id="datetimepicker3" data-target-input="nearest" style="width:300px;display:inline !important">   
+					時間:<input id="dcheck" class="form-control datetimepicker-input" data-target="#datetimepicker3" type="datetime-local" style="width:250px;display:inline !important"/>
+					  <span class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker" style="display:inline !important">
+                        <span class="input-group-text" style="display:inline !important"><i class="fa fa-calendar" style="display:inline !important"></i></span>
+                    </span>
+                </span></div>
+							
+						
 
 						<button id="search" onclick="search()">篩選</button>
-
+						
+				<thead>
+					<tr>
 						<th>活動種類</th>
 						<th>活動名稱</th>
 						<th>活動地點</th>
@@ -246,7 +262,7 @@ right:50px;
       <div class="modal-body">
       												<iframe width='600' height='400' frameborder='0'
 									scrolling='no' marginheight='0' marginwidth='0'
-									src='https://www.google.com/maps?&q=${event.eventLatitude},${event.eventLongitude}&z=16&output=embed&hl=zh-TW&t=m'
+									src='https://www.google.com/maps?&q=${event.eventAddress}&z=16&output=embed&hl=zh-TW&t=m'
 									allowfullscreen></iframe>	
       
       </div>
@@ -261,22 +277,29 @@ right:50px;
 					</c:forEach>
 				</tbody>
 			</table>
-
+		
 <script type="text/javascript">
 $(function () {
 	var today=new Date();
     
     $('#datetimepicker1').datetimepicker({
+    locale: moment.locale('zh-tw'),
     format:"YYYY-MM-DDTHH:mm",
     minDate:today		           
     });   
 
             
     $('#datetimepicker2').datetimepicker({
+    locale: moment.locale('zh-tw'),	
     useCurrent: false,
     format:"YYYY-MM-DDTHH:mm",
     minDate:today
     });
+    
+    $('#datetimepicker3').datetimepicker({
+    	locale: moment.locale('zh-tw'),
+        format:"YYYY-MM-DDTHH:mm"        		           
+        });  
     
     $("#datetimepicker1").on("change.datetimepicker", function (e) {
     	//alert($("#sd").val());
@@ -308,7 +331,7 @@ $.fn.dataTable.ext.search.push(
 	    	var usertime = $('#dcheck').val();  //使用者輸入的時間
 	    	//alert(usertime);
 	        var time = new Date(usertime);   //使用者輸入的時間
-	        
+	        //alert(time);
 	        
 	        ewill = $('#ewill').val();	 //活動條件篩選器       
 	        var peopleminus = null;//最大人數與實際人數差
@@ -319,7 +342,12 @@ $.fn.dataTable.ext.search.push(
 	        
 	        var dateminus = null;  //現在時間與活動開始時間差
             
-	        if(ewill=="allevent"){ return true;}
+	        if(ewill=="allevent"){
+	        	if(tablemin <= time 
+	        		&& time <= tablemax  
+		            || (usertime==""))  return true;
+	        	else	return false;
+	        }
 	        
 	        if(ewill=="all"){}
 	        if(ewill=="alcome"){dateminus = tablemin-todaynow; }
@@ -371,7 +399,7 @@ function search(){
     
     //用空格隔开，达到多条件搜索的效果，相当于两个关键字
 
-     table.column(0).search(args1).columns([2,3]).search(args2).
+     table.column(0).search(args1).column(3).search(args2).
      draw();
     
      showLikeNum();
@@ -508,13 +536,26 @@ function check(){
 	}
 }
 
+var language = {
+        "zeroRecords": "沒有結果",
+        "info": "<span class='seperator'>  </span>" + "總共 _TOTAL_ 筆活動",
+        "infoFiltered": " (從所有 _MAX_ 筆活動中篩選出)",
+        "infoEmpty": "共 0 筆",
+        "search":"以關鍵字搜尋活動：",
+        "paginate": {
+            "previous": "上一頁",
+            "next": "下一頁",
+            "first": "第一頁  ",
+            "last": "  最後一頁"
+        }
+    };
 table = $('#showevents').DataTable({
-	"columnDefs": [
-	      {
-	        "targets": [ 3 ],
-	        "visible": false
-	      }
-	    ]
+	"aaSorting" : [[4, "asc"]],
+	"lengthChange": false, 
+	"aLengthMenu" : 10,
+	"language":language,
+	"columnDefs": [{"targets": [ 3 ],"visible": false},
+		{"className": "dt-center","targets": "_all"}]
 });
 </script>
 
