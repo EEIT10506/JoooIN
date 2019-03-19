@@ -9,6 +9,12 @@
 <meta charset="UTF-8">
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<!-- BEGIN Pre-requisites -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+  </script>
+  <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+  </script>
+  <!-- END Pre-requisites -->
 <style>
 	#main {
 		width: 1200px;
@@ -17,6 +23,18 @@
 		top: 50px;
 	}
 </style>
+<!-- Continuing the <head> section -->
+  <script>
+    function start() {
+      gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init({
+          client_id: '486218648179-mlo3cr1e8u32mg2tpj27ib91qk9lggjp.apps.googleusercontent.com',
+          // Scopes to request in addition to 'profile' and 'email'
+          //scope: 'additional_scope'
+        });
+      });
+    }
+  </script>
 <title>登入頁面</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
@@ -55,6 +73,7 @@
 <!--       <input type="checkbox"> 記住我 -->
 <!--     </label> -->
 <!--   </div> -->
+<button id="signinButton">Sign in with Google</button><br>
   <button type="submit" class="btn btn-primary">登入</button>
   <button type="button" class="btn btn-primary" onclick="location.href='/joooin/register'">註冊</button>
   <button type="button" class="btn btn-primary" onclick="location.href='/joooin/forgotPassword'">忘記密碼</button>
@@ -80,6 +99,42 @@ $('#oneSetadmin').click(function(){
 	
 	});
 	</script>
+	<script>
+  $('#signinButton').click(function() {
+    // signInCallback defined in step 6.
+    auth2.grantOfflineAccess().then(signInCallback);
+  });
+</script>
+
+<!-- Last part of BODY element in file index.html -->
+<script>
+function signInCallback(authResult) {
+  if (authResult['code']) {
+
+    // Hide the sign-in button now that the user is authorized, for example:
+    $('#signinButton').attr('style', 'display: none');
+
+    // Send the code to the server
+    $.ajax({
+      type: 'POST',
+      url: 'http://example.com/storeauthcode',
+      // Always include an `X-Requested-With` header in every AJAX request,
+      // to protect against CSRF attacks.
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      contentType: 'application/octet-stream; charset=utf-8',
+      success: function(result) {
+        // Handle or verify the server response.
+      },
+      processData: false,
+      data: authResult['code']
+    });
+  } else {
+    // There was an error.
+  }
+}
+</script>
 	<!-- Footer -->
 	</div>
 <!-- 請把所有內容寫在此div內 -->
