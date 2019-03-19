@@ -32,50 +32,6 @@
 
 </script>
 <body>
-<!-- <nav class="navbar navbar-default"> -->
- 
-<!--   <ul class="navbar-nav"> -->
-<!--     <li class="nav-item"> -->
-<%--       <a class="nav-link" href="${pageContext.request.contextPath}/">返回上一頁</a> --%>
-<!--     </li> -->
-<!--     <li class="nav-item"> -->
-<%--       <a class="nav-link" href="${pageContext.request.contextPath}/">關於 ${groupMain.groupName}</a> --%>
-<!--     </li> -->
-<!--     <li class="nav-item"> -->
-<%--       <a class="nav-link" href="${pageContext.request.contextPath}/">社團成員</a> --%>
-<!--     </li> -->
-<!--     <li id="loginNregister" class="nav-item"> -->
-<%--       <a class="nav-link" href="${pageContext.request.contextPath}/">最新活動</a> --%>
-<!--     </li> -->
-<!--     <li id="hasLogin" class="nav-item"> -->
-<%--       <a class="nav-link"" href="${pageContext.request.contextPath}/member/my">Reports</a> --%>
-<!--     </li> -->
-<!--     <li id="hasLogin" class="nav-item"> -->
-<%--       <a class="nav-link"" href="${pageContext.request.contextPath}/admin">其他相關類型社團</a> --%>
-<!--     </li> -->
-<!--   </ul> -->
-<!-- </nav> -->
-
-<!-- <nav class="navbar navbar-default " role="navigation"> -->
-<!--     <div class="nav nav-tabs "> -->
-<!--         <button type="button" class="navbar-toggle " data-toggle="collapse" -->
-<!--                 data-target="#left-navbar-collapse"> -->
-<!--             <span class="sr-only">功能選單</span> -->
-<!--             <span class="icon-bar"></span> -->
-<!--             <span class="icon-bar"></span> -->
-<!--             <span class="icon-bar"></span> -->
-<!--         </button> -->
-<!--         <ul class="nav nav-tabs " > -->
-<!--         <li class="navbar-header"><a class="navbar-brand col-md-12" href="#">功能選單</a></li> -->
-<!--         </ul> -->
-<!--     </div> -->
-<!--     <div class="collapse navbar-collapse " id="left-navbar-collapse"> -->
-<!--         <ul class="nav nav-tabs nav-stacked " > -->
-<!--                     <li>選單一</li> -->
-<!--           <li>選單二</li> -->
-<!--           <li>選單三</li> -->
-<!--         </ul> -->
-<!--     </div> -->
 
 		<div class="container-fluid">
 			<div class="row">

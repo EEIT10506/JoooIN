@@ -30,6 +30,13 @@
 </style>
 <script>
 	$('.collapse').collapse()
+	
+	$("#show").click(
+  function(){   
+    $(".show_info").text($(this).text());     
+    $(".show_cata").text ($(this).attr('type','text'));
+  }
+);
 </script>
 <title>Insert title here</title>
 </head>
@@ -59,7 +66,8 @@
 								</p>
 								<p class="text-right">
 								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
-								<button class="btn btn-default btn-lg btn-danger">修改</button>
+								<input type='hidden' size='8' value='修改輸入'>
+								<button id="show" class="btn btn-default btn-lg btn-danger">修改</button>
 								</c:if>
 								</p>	
 							</div>
