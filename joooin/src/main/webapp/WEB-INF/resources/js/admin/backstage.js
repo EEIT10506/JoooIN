@@ -299,6 +299,85 @@ $(document).ready(function () {
                 }
         	})
 //        	----------------------------------------------------------------------------------------------------
+        	var ri;
+        	$(document).on("click",'.reportId',function(){  //點選reportId動作
+        		ri = $(this).text();
+        		
+        		$('#content').empty();
+        		
+        		$.ajax({
+        			
+        			type:"GET",
+        			url:"/joooin/admin/getReportBean/" + ri,
+        			
+        			success:function(data){
+        				var reportId = data.reportId;
+        				var violatorId = data.reportViolatorId;
+        				var docFrag = $(document.createDocumentFragment());
+        				var format = $('<container></container>').html(
+        						'<row>'
+        						+'<div class="col-lg-8">'
+        						+'<h2>檢舉處理</h2>'
+        						+'<h4>被檢舉人ID:' + violatorId + '</h4>'
+        						+'<h4>檢舉日期:' + data.reportDate + '</h4>'
+        						+'<h4>檢舉類型:' + data.reportType + '</h4>'
+        						+'<h4>檢舉內容:' + data.reportContent + '</h4>'
+        						+'<form:form method="POST" class="form-horizontal" action="admin/reportProcess">'
+        						+'</br>'
+        						+'<p>懲罰天數</p>'
+        						+'<select name="punishDateEnd" id="punishDateEnd" path="punishDateEnd">'
+        						+'<option value="3">3天</option>'
+        						+'<option value="7">7天</option>'
+        						+'<option value="14">14天</option>'
+        						+'<option value="30">30天</option>'
+        						+'</select>'
+        						+'<br>'
+        						+'<p>管理員回復:</p>'
+        						+'<textarea id="punishType" path="punishType" class="form-control" rows="3"></textarea>'
+        						+'</br>'
+        						+'<button type="submit" class="btn btn-danger" id="reportProcess">處理檢舉</button>'
+        						+'<input type="hidden" value="'+reportId+'" class="reportId" id="reportId"/>' 
+        						+'<input type="hidden" value="'+violatorId+'" class="violatorId" id="violatorId"/>' 
+        						+'</form:form>'
+        						+'</div>'
+        						+'</row>'
+        						)
+        						docFrag.append(format);
+        						$('#content').html(docFrag);
+        			},
+        		error: function (xhr, ajaxOptions, thrownError){
+        			
+        		},
+        		})
+        	})//點選id end
+//        	----------------------------------------------------------------------------------------------------
+        	    $(document).on("click",'#reportProcess',function(){
+        	    var reportId =  $('#reportId').val();
+        	    var violatorId =  $('#violatorId').val();
+        	    var punishDateEnd =  $('#punishDateEnd').val();
+        	    var punishType = $('#punishType').val();
+    	
+    	
+    	$.ajax({
+    		
+    		type:"POST",
+    		url:"/joooin/admin/reportProcess",
+    		data:{reportId:reportId ,punishMemberId:violatorId, punishDateEnd:punishDateEnd, punishType:punishType},
+    		
+    		success:function(){
+    		
+    			alert('回覆檢舉完成!');
+    			$('.bg-primary').trigger("click");
+    		
+    		},
+    		
+    		error:function(e){
+    		}
+    		
+    	})
+    	
+    })
+//	----------------------------------------------------------------------------------------------------
         }
         
     	}		//selectCategory end;
