@@ -13,77 +13,88 @@
 <link rel="canonical" href="https://codepen.io/emilcarlsson/pen/ZOQZaV?limit=all&page=74&q=contact+" />
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://use.typekit.net/hoy3lrg.js"></script>
+<script src="<c:url value='/resources/js/md5.js'/>"></script>
 <script>try{Typekit.load({ async: true });}catch(e){}</script>
 <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
 <link rel="stylesheet" href='<c:url value="/resources/css/message.css" />'>
+<style>
+	.name {
+		position: relative;
+		top: 6px;
+	}
+	.contact {
+		height: 60px;
+	}
+	#my-name {
+		position: relative;
+		top: -5px;
+	}
+	textarea {
+		font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
+	    float: left;
+	    border: none;
+	    width: calc(100% - 90px);
+	    padding: 11px 32px 10px 8px;
+	    font-size: 0.8em;
+	    color: #32465a;
+		
+	}
+	@media screen and (max-width: 735px) {
+    textarea {
+    	padding: 15px 32px 16px 8px;
+    }
+	
+</style>
 <script>
 	
-		
 	var websocket = null;
 	if ('WebSocket' in window) {
-		websocket = new WebSocket("ws://localhost:8080/joooin/websocket/socketServer");
+		websocket = new WebSocket("ws://localhost:8080/joooin/member/message/${hash}");
 	}
 	else if ('MozWebSocket' in window) {
-		websocket = new MozWebSocket("ws://localhost:8080/joooin/websocket/socketServer");
+		websocket = new MozWebSocket("ws://localhost:8080/joooin/member/message/${hash}");
 	}
 	
 	function onMessage(message) {
-		$('<li class="replies"><p>' + message.data + '</p></li>').appendTo($('.messages ul'));
+		var messageMD5 = message.data.substring(0, 32);
+		
+		if (myMD5 == messageMD5){
+			$('<li class="replies"><p>' + message.data.substr(32) + '</p></li>').appendTo($('.messages ul'));
+		} else {
+			$('<li class="sent"><p>' + message.data.substr(32) + '</p></li>').appendTo($('.messages ul'));
+		}
 		$('.message-input #text').val(null);
-		$('.contact.active .preview').html('<span>You: </span>' + message.data);
-		$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+// 		$('.contact.active .preview').html('<span>You: </span>' + message.data);
+ 		$("#messageView").animate({ scrollTop: 999999 }, "fast");
 	}
 	
-	function onOpen(openEvt) {
-		alert(openEvt.Data);
-	}
-	
-// 	function onMessage(evt) {
-// 		$("#text").append("<p>" + evt.data + "</p>");
-// 		$("#inputMsg").val("");
-// 	}
-	function onOpen() {};
-	function onError() {alert("连接失败!");}
-	function onClose() {};
-	
-	websocket.onopen = onOpen;
-	websocket.onmessage = onMessage;
-	websocket.onerror = onError;
-	websocket.onclose = onClose;
-	
-// 	function doSendUser() {
-// 		if (websocket.readyState == websocket.OPEN) {
-// 			var msg = document.getElementById("text").value;
-// 			websocket.send("#anyone#"+msg);//调用后台handleTextMessage方法
-// 		} else {
-// 			alert("连接失败!");
-// 		}
-// 	}
-	
-	
-	function doSendUsers(message) {
+	function send(text) {
 		if (websocket.readyState == websocket.OPEN) {
-			websocket.send("#everyone#" + message);//调用后台handleTextMessage方法
+			websocket.send(text);
 		} else {
 			alert("连接失败!");
 		}    
 	}
 	
-	
+	function onError() {alert("连接失败!");}
+	websocket.onmessage = onMessage;
 	window.close = function() {websocket.onclose();}
 	function websocketClose() {websocket.close();}
+	
+	$(document).ready(function(){
+		
+		$(".contact").click(function(){
+			var hash = $(this).children();
+			location.href = "${pageContext.request.contextPath}/member/message/" + hash[0].value;
+		});
+ 		$("#messageView").animate({ scrollTop: 999999 }, "fast");
+	});
 </script>
-<style>
-	.friend {
-		display: none;
-	}
-</style>
 </head>
 <body>
 
@@ -92,34 +103,24 @@
 		<div id="profile">
 			<div class="wrap">
 				<img id="profile-img" src="<c:url value='/getMemberImage/${myself.memberId}' />" class="online" alt="" />
-				<p>${myself.memberName}</p>
+				<p id="my-name">${myself.memberName}</p>
 			</div>
 		</div>
 		<div id="search">
 			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-			<input type="text" placeholder="搜尋好友..." />
+			<input type="text" placeholder="搜尋好友...fffffewfewweffff" />
 		</div>
 		<div id="contacts">
 			<ul>
-<!-- 				<li class="contact"> -->
-<!-- 					<div class="wrap"> -->
-<!-- 						<span class="contact-status online"></span> -->
-<!-- 						<img src="http://emilcarlsson.se/assets/louislitt.png" alt="" /> -->
-<!-- 						<div class="meta"> -->
-<!-- 							<p class="name">Louis Litt</p> -->
-<!-- 							<p class="preview">You just got LITT up, Mike.</p> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</li> -->
-				<c:forEach var="friend" items="${friendList}">
+				<c:forEach var="friends" items="${friendList}">
 					<li class="contact active">
+						<input type="hidden" value="${friends.messageHash }">
 						<div class="wrap">
-							<input class="friend" value="${friend.memberId}">
 							<span class="contact-status busy"></span>
-							<img src="<c:url value='/getMemberImage/${friend.memberId}.jpg' />">
+							<img src="<c:url value='/getMemberImage/${friends.memberId}.jpg' />">
 							<div class="meta">
-								<p class="name">${friend.memberName}</p>
-								<p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
+								<p class="name">${friends.memberName}</p>
+<!-- 								<p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p> -->
 							</div>
 						</div>
 					</li>
@@ -132,27 +133,33 @@
 	<div class="content">
 <!-- 		訊息區上方的對方頭像 -->
 		<div class="contact-profile">
-			<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-			<p></p>
+			<img src="<c:url value='/getMemberImage/${friend.memberId}.jpg' />" alt="" />
+			<p>${friend.memberName }</p>
 		</div>
 <!-- 		訊息區內容 -->
-		<div class="messages">
+		<div class="messages" id="messageView">
 			<ul>
-				<li class="replies">
-					<p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
-				</li>
-				<li class="sent">
-					<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-					<p>When you're backed against the wall, break the god damn thing down.</p>
-				</li>
-				
+				<c:forEach var="message" items="${message}">
+					<c:choose>
+						<c:when test="${message.sendMemberId != myself.memberId}">
+							<li class="sent">				
+								<p>${message.messageText}</p>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="replies">
+								<p>${message.messageText}</p>
+							</li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
 			</ul>
 		</div>
 		<div class="message-input">
 			<div class="wrap">
-			<input id="text" type="text" placeholder="輸入訊息..." />
+			<textarea rows="2" cols="57" id="text" type="text" placeholder="輸入訊息..." wrap="hard"/></textarea>
 			<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
-			<button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+			<button id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</div>
 		</div>
 	</div>
@@ -194,20 +201,27 @@
 		$("#status-options").removeClass("active");
 	});
 	
-	function newMessage() {
-		var message = $("#text").val();
-		if($.trim(message) == '') return false;
-		doSendUsers(message);
-	};
 	
+	var myMD5 = hex_md5("${myself.memberId}");
 	
-	$('.submit').click(function() {
-		newMessage();
+	$('#send').click(function() {
+		var text = $("#text").val();
+		if($.trim(text) == '') return false;
+     
+        var receiveMemberId = "${friend.memberId}";
+		
+		$.ajax({
+		    type: "POST",                           
+		    url: "${pageContext.request.contextPath}/member/message/saveText",
+		    data: {"text": text, "receiveMemberId": receiveMemberId, "messageHash": "${hash}"},
+		});
+		
+		send(myMD5 + text);
 	});
 	
-	$(window).on('keydown', function(e) {
+	$('#text').on('keypress', function(e) {
 		if (e.which == 13) {
-			newMessage();
+			$("#send").click();
 			return false;
 		}
 	});

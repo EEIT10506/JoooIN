@@ -14,7 +14,7 @@ import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import org.springframework.web.socket.server.standard.SpringConfigurator;
 
-@ServerEndpoint(value="/chat/{userId}",configurator = SpringConfigurator.class)
+@ServerEndpoint(value="/member/message/{userId}",configurator = SpringConfigurator.class)
 public class WebSocketMessage {
 	
     //记录每个用户下多个终端的连接
@@ -43,6 +43,7 @@ public class WebSocketMessage {
             addUserSet.add(this);
             userSocket.put(this.userId, addUserSet);
         }
+        System.out.println("WebSocket連線已開啟　Hash：" + this.userId);
     }
    
     /**
@@ -57,6 +58,7 @@ public class WebSocketMessage {
         }else{
             userSocket.get(this.userId).remove(this);
         }
+        System.out.println("WebSocket連線已關閉　Hash：" + this.userId);
     }
    
     /**

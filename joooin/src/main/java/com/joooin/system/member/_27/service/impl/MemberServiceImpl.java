@@ -3,6 +3,7 @@ package com.joooin.system.member._27.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
@@ -124,8 +125,9 @@ public class MemberServiceImpl implements MemberService{
 				}
 			}
 			if (!isRequested) {
-				memberFriendDao.save(new MemberFriendBean(inviteMemberId, receiveMemberId, false, true));
-				memberFriendDao.save(new MemberFriendBean(receiveMemberId, inviteMemberId, false, false));
+				String hash = UUID.randomUUID().toString();
+				memberFriendDao.save(new MemberFriendBean(inviteMemberId, receiveMemberId, false, true, hash));
+				memberFriendDao.save(new MemberFriendBean(receiveMemberId, inviteMemberId, false, false, hash));
 			}
 		}
 		
@@ -167,6 +169,7 @@ public class MemberServiceImpl implements MemberService{
 				pojo.setMemberName(memberMainDao.getByMemberId(bean.getReceiveMemberId()).getMemberName());
 				pojo.setIsFriend(bean.getIsFriend());
 				pojo.setIsInviter(bean.getIsInviter());
+				pojo.setMessageHash(bean.getMessageHash());
 				friendPojoList.add(pojo);
 			}
 		}

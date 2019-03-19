@@ -16,13 +16,15 @@ public class MemberFriendBean implements Serializable {
 	private Integer receiveMemberId;
 	private Boolean isFriend;
 	private Boolean isInviter;
+	private String messageHash;
 	
-	public MemberFriendBean(Integer inviteMemberId, Integer receiveMemberId, Boolean isFriend, Boolean isInviter) {
+	public MemberFriendBean(Integer inviteMemberId, Integer receiveMemberId, Boolean isFriend, Boolean isInviter, String messageHash) {
 		super();
 		this.inviteMemberId = inviteMemberId;
 		this.receiveMemberId = receiveMemberId;
 		this.isFriend = isFriend;
 		this.isInviter = isInviter;
+		this.messageHash = messageHash;
 	}
 	public MemberFriendBean() {
 		super();
@@ -59,4 +61,11 @@ public class MemberFriendBean implements Serializable {
 	public void setIsInviter(Boolean isInviter) {
 		this.isInviter = isInviter;
 	}
+	public String getMessageHash() {
+		return messageHash;
+	}
+	public void setMessageHash(String messageHash) {
+		this.messageHash = messageHash;
+	}
+	
 }
