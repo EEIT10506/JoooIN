@@ -67,18 +67,42 @@
    		    color:black;
 		}
 		.arrive{
+			color:green;
 			cursor: pointer;
+		}
+		.arrive:hover{
+			color:	#00CD00;
+			cursor: pointer;
+			position:relative;
+			bottom:3px;
 		}
 		.absent{
 			cursor: pointer;
+		}
+		.absent:hover{
+			cursor: pointer;
+			position:relative;
+			bottom:3px;
 		}
 		.getOut{
 			color:red;
 			cursor: pointer;
 		}
+		.getOut:hover{
+			color:#B22222;
+			cursor: pointer;
+			position:relative;
+			bottom:3px;
+		}
 		.report{
 			cursor: pointer;
 			color:	#FFA500;	
+		}
+		.report:hover{
+			cursor: pointer;
+			position:relative;
+			bottom:3px;
+			color:#CD853F;
 		}
 </style>
 <script type="text/javascript">

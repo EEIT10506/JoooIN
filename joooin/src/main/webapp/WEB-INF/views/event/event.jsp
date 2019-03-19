@@ -453,7 +453,7 @@ function ValidateNumber(e, pnumber)
 		<c:if test="${memberId != inviterid and memberCheck == false and event.eventStatus == 'unchecked' and event.isFull == false and finish != false}">
 				<button type="button" id="signUp" class="btn btn-success eventJoin" data-toggle="modal" data-target="#exampleModalCenter">報名活動</button>
 		</c:if>
-		<c:if test="${memberId != inviterid and memberCheck != false and event.eventStatus == 'unchecked' and finish != false and myAgreed != true}">
+		<c:if test="${memberId != inviterid and memberCheck != false and event.eventStatus == 'unchecked' and finish != false and myAgreed == false}">
 				<button type="button" readonly id="joinWaitCheck" class="btn btn-success eventJoin joinWaitCheck">報名申請中</button>
  		</c:if>	
  		<c:if test="${memberId != inviterid and memberCheck != false and event.eventStatus == 'unchecked' and finish != false and myAgreed == true}">

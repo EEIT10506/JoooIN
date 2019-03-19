@@ -64,6 +64,8 @@
 		.iconAgree:hover{
 			color:#32CD32;
 			cursor: pointer;
+			position:relative;
+			bottom:3px;
 			
 		}
 		.iconReject{
@@ -72,6 +74,8 @@
 		}
 		.iconReject:hover{
 			color:#8B1A1A;
+			position:relative;
+			bottom:3px;
 		}
 		.tdName{
 			text-decoration:none !important;
@@ -147,6 +151,9 @@ $(document).ready(function() {
 // 		   			var trEventMemberId = "tr" + agreedId;
 // 		   			$("#trEventMemberId").attr("display","none");
 		    		location.href = "${pageContext.request.contextPath}/event/signUp/"+eventId;
+		    	}else if(agreed=="attendFail"){
+		    		location.href = "${pageContext.request.contextPath}/attendFail/"+eventId;
+		    	
 		    	}else{
 		    		
 		    		location.href = "${pageContext.request.contextPath}/not_Login";
@@ -251,7 +258,9 @@ function checkAll(bx) {
                      
       </div>
       <div class="modal-footer">
+<%--       	<c:if test="${event.eventMemberLimit - event.eventCurrentMembers > eventMemberId[loop.count-1].quantity }"> --%>
          <button type="button" id="ag${eventMemberId[loop.count-1].eventMemberId}" class="btn btn-primary iconAgreed">確認</button>
+<%--        	</c:if> --%>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button> 
       </div>
     </div>

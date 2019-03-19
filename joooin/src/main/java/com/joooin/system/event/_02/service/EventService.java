@@ -16,7 +16,10 @@ public interface EventService {
 	public List<EventMainBean> getAll();
 	public Integer save(EventMainBean eventMainBean);
 	public Boolean updateEvent(Integer eventId,EventMainBean eventMainBean, ServletContext context);
+//踢人更新數量
 	public void updateQuantityWhenOut(EventMainBean eventMainBean);
+//同意確認人數是否已滿
+//	public void updateIsfullWhenFull(EventMainBean eventMainBean);
 	public void deleteByEventId(Integer eventId);
 //	活動成員Bean
 	public EventMemberBean getByEventMemberId(Integer eventMemberId);

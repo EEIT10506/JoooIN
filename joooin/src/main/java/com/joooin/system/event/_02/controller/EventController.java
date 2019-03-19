@@ -110,6 +110,8 @@ public class EventController {
 	@RequestMapping(value = "/DeleteByEventMemberId", method = RequestMethod.POST)
 	public String deleteByEventMemberId(@RequestParam Integer eventId, HttpSession session, Model model) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
+		
+		
 		if (memberId != null) {
 			eventService.deleteEventMemberById(eventId, memberId);
 			return "redirect:/event/" + eventId;
@@ -156,7 +158,7 @@ public class EventController {
 		MemberMainBean eventmembers = null;
 		List<MemberMainBean> eventmemberlist = new ArrayList<MemberMainBean>();
 		List<MemberMainBean> emfindagreed = new ArrayList<MemberMainBean>();
-		Boolean myAgreed = false;
+		Boolean myAgreed = null;
 		for (EventMemberBean members : eventmember) {
 			Integer memberid = members.getMemberId();
 			Integer eventIds = members.getEventId();
@@ -166,13 +168,17 @@ public class EventController {
 				
 			
 			Boolean isAgreed = members.getIsAgreed();
-			if(isAgreed == true && memberid==memberId) {
-				myAgreed =true;
-			}
+
 			if (isAgreed == true ) {
 				emfindagreed.add(eventmembers);
+				if(memberid.equals(memberId)) {
+					myAgreed = true;
+				}
 			}
 		}
+		if(myAgreed==null) {
+			myAgreed=false;
+			}
 		// 抓留言資訊
 		List<EventPostBean> eventPost = event.getEventPostList();
 		List<GetPostContentBean> getPostContentlist = new ArrayList<>();
@@ -333,7 +339,7 @@ public class EventController {
 	@RequestMapping(value = "/notEnough/{eventId}")
 	public String notEnoughCurrentMember(@PathVariable Integer eventId, Model model) {
 			model.addAttribute("eventId", eventId);
-		return "not_Enough";
+		return "event/not_Enough";
 	}
 
 //	前端判斷BLUR
@@ -344,8 +350,14 @@ public class EventController {
 		int current = currentMember.intValue();
 		int limit = memberLimit.intValue();
 		if (current < limit) {
+			event.setIsFull(false);
+			eventService.updateQuantityWhenOut(event);
 			return "yes";
-		} else {
+		}else if(current == limit){
+			event.setIsFull(true);
+			eventService.updateQuantityWhenOut(event);
+			return "yes";
+		}else {
 			return "no";
 		}
 
@@ -390,20 +402,38 @@ public class EventController {
 			EventMemberBean bean = eventService.getByEventMemberId(eventMemberId);
 			Integer current = event.getEventCurrentMembers();
 			Integer quantity = bean.getQuantity();
-			Integer limit = event.getEventMemberLimit();
-			int currenMember = current.intValue();
-			int updateQuantity = quantity.intValue();
 			
-			int newCurrent = currenMember + updateQuantity;
+			Integer limit = event.getEventMemberLimit();
+//			int currenMember = current.intValue();
+//			int updateQuantity = quantity.intValue();
+//			int limitMember = limit.intValue();
+			Integer agreedMember = limit - current;
+			if(quantity <= agreedMember) {
+			int newCurrent = current + quantity;
 			Integer eventNewCurrentMember = Integer.valueOf(newCurrent);
 			event.setEventCurrentMembers(eventNewCurrentMember);
 			eventService.updateQuantityWhenOut(event);
 			bean.setIsAgreed(true);
 			eventService.updateIsAgreed(bean);
+			if(eventNewCurrentMember.equals(limit)) {
+				event.setIsFull(true);
+				eventService.updateQuantityWhenOut(event);
+			}
 			return "attended";
+			}else {
+				return "attendFail";
+			}
 		} else {
 			return "not_login";
 		}
+	}
+	//人數達到滿團 改isFull
+	
+	//人數超過限制
+	@RequestMapping(value = "/attendFail/{eventId}")
+	public String attendFail(@PathVariable Integer eventId, Model model) {
+			model.addAttribute("eventId", eventId);
+		return "event/attendFail";
 	}
 //	報名拒絕
 	@RequestMapping(value = "/event/eventReject/{eventId}")
@@ -431,14 +461,14 @@ public class EventController {
 			List<EventMemberBean> eventMemberId = new ArrayList<EventMemberBean>();
 			MemberMainBean eventMembers = null;
 			for (EventMemberBean bean : eventMemberList) {
-				if (bean.getIsAgreed() == true) {
+				if (bean.getIsAgreed() && !bean.getMemberId().equals(inviterId)) {
 					Integer memberid = bean.getMemberId();
 					Integer id = bean.getEventMemberId();
 					EventMemberBean eventMemberIds = eventService.getByEventMemberId(id);
 					eventMembers = eventService.getByMemberId(memberid);
 					attendList.add(eventMembers);
 					eventMemberId.add(eventMemberIds);
-					if(bean.getIsAttended() == true) {
+					if(bean.getIsAttended()) {
 						attendedGoodList.add(eventMembers);
 					}
 				}
@@ -470,6 +500,10 @@ public class EventController {
 			Integer currentMemberNow = Integer.valueOf(currentNow);
 			event.setEventCurrentMembers(currentMemberNow);
 			eventService.updateQuantityWhenOut(event);
+			if(event.getEventMemberLimit() > currentMemberNow) {
+				event.setIsFull(false);
+				eventService.updateQuantityWhenOut(event);
+			}
 			return "outed";
 		} else {
 			return "not_login";

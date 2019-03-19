@@ -57,7 +57,7 @@ public class EventServiceImpl implements EventService {
 		int oldInt = oldCurrent.intValue();
 		int updateInt = updateLimit.intValue();
 		
-		if(updateInt > oldInt) {
+		if(updateInt >= oldInt) {
 		oldBean.setEventName(updateBean.getEventName());
 		oldBean.setEventDateStart(updateBean.getEventDateStart());
 		oldBean.setEventDateEnd(updateBean.getEventDateEnd());
@@ -134,11 +134,34 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public void deleteEventMemberById(Integer eventId, Integer memberId) {
 		List<EventMemberBean> list = eventMemberDao.getAll();
+		EventMainBean event = eventMainDao.getByEventMainId(eventId);
 		
 		for(EventMemberBean bean : list) {
 		     if (bean.getEventId().equals(eventId) && bean.getMemberId().equals(memberId)) {
+//		    	 Integer quantity = bean.getQuantity();
+		    	 Integer current = event.getEventCurrentMembers();
+		    	 Integer limit = event.getEventMemberLimit();
+		    	
+//		    	 Integer newCurrent = current - quantity;
+//		    	 event.setEventCurrentMembers(newCurrent);
+//		    	 eventMainDao.update(event);
+		    	 Integer myQuantity = bean.getQuantity();
+		    	 if(bean.getIsAgreed()) {
+			    	 if(limit>(current-myQuantity)) {
+		    		 event.setIsFull(false);
+		    	 }else {
+		    		event.setIsFull(true); 
+		    	 }
+		    	 event.setEventCurrentMembers(current-myQuantity); 
+		    	 }
+		    	 eventMainDao.update(event);
 		    	 eventMemberDao.deleteByEventMemberId(bean.getEventMemberId());
-		    	 break;
+		    	 
+//		    	 if(current < limit) {
+//		    		 event.setIsFull(false);
+//		    	 }else {
+//		    		event.setIsFull(true); 
+//		    	 }
 		     }
 		}
 	}
@@ -158,8 +181,11 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public void updateQuantityWhenOut(EventMainBean eventMainBean) {
 		eventMainDao.update(eventMainBean);
-		
 	}
+//	@Override
+//	public void updateIsfullWhenFull(EventMainBean eventMainBean) {
+//		eventMainDao.update(eventMainBean);
+//	}
 
 	
 	

@@ -292,7 +292,8 @@
 				<span class="pure-u-1-3" id="spanLimit"></span>
 				
 				<div class="pure-u-1 ">
-				<label class="labelClass" for="eventFee">活動費用：</label><form:input class="pure-input-1-4" id="eventFee" readonly="true" onkeyup="value=value.replace(/[^\d]/g,'')" path='eventFee' /></div>
+<%-- 				<label class="labelClass" for="eventFee">活動費用：</label><form:input class="pure-input-1-4" id="eventFee" readonly="true" onkeyup="value=value.replace(/[^\d]/g,'')" path='eventFee' /></div> --%>
+				<label class="labelClass" for="eventFee">活動費用：${event.eventFee } $</label>
 				
 				<div class="pure-u-1 upload-btn-wrapper">
 				<label class="labelClass">活動圖片 : </label>
@@ -303,8 +304,8 @@
 				<div class="pure-u-1-2">
 				<img class="settingImage" src="<c:url value='/getEventImage/${event.eventId}.jpg' />"/></div>
 				<c:if test="${event.eventStatus != 'no'}">
-				<div class="pure-u-1-2 settingCheck">
-				<button type="button" class="btn btn-primary modifyButton" data-toggle="modal" data-target="#checkEvent">修改</button>
+				<div class="pure-u-1-3 settingCheck">
+				<button type="button" class="btn btn-primary modifyButton" data-toggle="modal" data-target="#checkEvent">確認修改</button>
 				</div>
 				</c:if>
 				
@@ -314,7 +315,7 @@
 								  <div class="modal-dialog modal-dialog-centered" role="document">
 								    <div class="modal-content">
 								      <div class="modal-header">
-								        <h5 class="pure-u-1-5 modal-title" id="exampleModalLongTitle">確認修改</h5>
+								        <h5 class="pure-u-1-5 modal-title" id="exampleModalLongTitle">確認</h5>
 								      </div>
 								      <div class="pure-u-1-2 modal-body">確認修改活動資料？</div>
 								      <div class="modal-footer">
