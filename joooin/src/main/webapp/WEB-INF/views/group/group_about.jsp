@@ -178,14 +178,21 @@
 							<p class="text-center">
 								<span class="label label-defaulabel label-primary">${groupMain.groupName}</span>	
 								</p>
-								<p class="text-right">
+								
 								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
-								<input id="inputName" class="btn btn-default btn-lg btn-danger" type="text" style="display:none;" placeholder="修改內容" />
-								<button id="confirmName" class="btn btn-default btn-lg btn-danger" style="display:none;">確認修改</button>${groupMain.groupId}
+								<form 
+								action="${pageContext.request.contextPath}/group/abouts/updateGroupName/${groupMain.groupId}" method="POST">
+								<p class="text-center">
+								<input id="inputName" class="btn btn-default btn-lg btn-danger" type="text" style="display:none;" placeholder="修改內容" name="groupname" />
+								<button id="confirmName" class="btn btn-default btn-lg btn-danger" style="display:none;" type="submit" >確認修改</button>
+								</p>
+								</form>
+								<p class="text-right">
 								<button id="cancelName" class="btn btn-default btn-lg btn-danger" style="display:none;">取消</button>
 								<button id="updateName" class="btn btn-default btn-lg btn-danger">修改</button>
+								</p>
 								</c:if>
-								</p>	
+									
 							</div>
 						</div>
 <!-- 			社團人數			 -->
@@ -236,10 +243,15 @@
 								
 								
 								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
+								<form 
+								action="${pageContext.request.contextPath}/group/abouts/updateGroupIntro/${groupMain.groupId}" method="POST">
+								<p class="text-center">
+								<input id="inputIntro" class="btn btn-default btn-lg btn-danger" type="text" style="display:none;" placeholder="修改內容" name="groupintro" />
+								<button id="confirmIntro" class="btn btn-default btn-lg btn-danger" style="display:none;" type="submit" >確認修改</button>
+								</p>
+								</form>
 								<p class="text-right">
-								<input id="inputIntro" class="btn btn-default btn-lg btn-danger" type="text" style="display:none;" placeholder="修改內容" />
-								<button id="confirmIntro" class="btn btn-default btn-lg btn-danger" type="submit" style="display:none;">確認修改</button>
-								<button id="cancelIntro" class="btn btn-default btn-lg btn-danger" style="display:none;">取消</button>    
+								<button id="cancelIntro" class="btn btn-default btn-lg btn-danger" style="display:none;">取消</button>
 								<button id="updateIntro" class="btn btn-default btn-lg btn-danger">修改</button>
 								</p>
 								</c:if>
