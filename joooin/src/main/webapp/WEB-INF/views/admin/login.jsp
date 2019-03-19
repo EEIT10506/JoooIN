@@ -14,6 +14,11 @@
   </script>
   <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
   </script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  
+  <meta name="google-signin-scope" content="profile email">
+<meta name="google-signin-client_id"
+	content='486218648179-mlo3cr1e8u32mg2tpj27ib91qk9lggjp.apps.googleusercontent.com'>
   <!-- END Pre-requisites -->
 <style>
 	#main {
@@ -23,18 +28,6 @@
 		top: 50px;
 	}
 </style>
-<!-- Continuing the <head> section -->
-  <script>
-    function start() {
-      gapi.load('auth2', function() {
-        auth2 = gapi.auth2.init({
-          client_id: '486218648179-mlo3cr1e8u32mg2tpj27ib91qk9lggjp.apps.googleusercontent.com',
-          // Scopes to request in addition to 'profile' and 'email'
-          //scope: 'additional_scope'
-        });
-      });
-    }
-  </script>
 <title>登入頁面</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
@@ -73,67 +66,59 @@
 <!--       <input type="checkbox"> 記住我 -->
 <!--     </label> -->
 <!--   </div> -->
-<button id="signinButton">Sign in with Google</button><br>
   <button type="submit" class="btn btn-primary">登入</button>
   <button type="button" class="btn btn-primary" onclick="location.href='/joooin/register'">註冊</button>
   <button type="button" class="btn btn-primary" onclick="location.href='/joooin/forgotPassword'">忘記密碼</button>
 </form:form>
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
 <button type="button" id="oneSetuser" class="btn btn-success">一鍵填入(user)</button><br>
 <button type="button" id="oneSetadmin" class="btn btn-success">一鍵填入(admin)</button>
  <!-- /.row -->
- 
  </div>
  <!-- /.container -->
- 	<script>
-$('#oneSetuser').click(function(){ 
-		
+ 
+ <!-- member&admin一鍵帶入 -->
+	<script>
+		$('#oneSetuser').click(function(){ 
 		$('#email').val('eeit105joooin@gmail.com'); 
 		$('#password').val('passw0rd');
-		
  	});
- 	
-$('#oneSetadmin').click(function(){ 
-	
-	$('#email').val('admin@admin'); 
-	$('#password').val('admin');
-	
+		$('#oneSetadmin').click(function(){ 
+		$('#email').val('admin@admin'); 
+		$('#password').val('admin');
 	});
 	</script>
-	<script>
-  $('#signinButton').click(function() {
-    // signInCallback defined in step 6.
-    auth2.grantOfflineAccess().then(signInCallback);
-  });
-</script>
-
-<!-- Last part of BODY element in file index.html -->
+	
 <script>
-function signInCallback(authResult) {
-  if (authResult['code']) {
-
-    // Hide the sign-in button now that the user is authorized, for example:
-    $('#signinButton').attr('style', 'display: none');
-
-    // Send the code to the server
+function onSignIn(googleUser) {
+	
+	var profile = googleUser.getBasicProfile();
+    console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+    console.log('Full Name: ' + profile.getName());
+    console.log('Given Name: ' + profile.getGivenName());
+    console.log('Family Name: ' + profile.getFamilyName());
+    console.log("Image URL: " + profile.getImageUrl());
+    console.log("Email: " + profile.getEmail());
+    
+ // The ID token you need to pass to your backend:
+    var id_token = googleUser.getAuthResponse().id_token;
+    console.log("ID Token: " + id_token);
+    
     $.ajax({
-      type: 'POST',
-      url: 'http://example.com/storeauthcode',
-      // Always include an `X-Requested-With` header in every AJAX request,
-      // to protect against CSRF attacks.
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest'
-      },
-      contentType: 'application/octet-stream; charset=utf-8',
-      success: function(result) {
-        // Handle or verify the server response.
-      },
-      processData: false,
-      data: authResult['code']
-    });
-  } else {
-    // There was an error.
-  }
-}
+        
+    	type:"POST",
+    	url:"/joooin/admin/googleLogin",
+    	data:{"ID_Token":id_token},
+    	
+    	success:function(data){
+    		location.href='/joooin/'
+    	},
+    	error : function(e) {
+			console.log("ERROR : ", e);
+		}
+    })
+  };
+
 </script>
 	<!-- Footer -->
 	</div>
