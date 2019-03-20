@@ -13,5 +13,5 @@ public interface EventsService {
 	
 	public Integer processeventlike(Integer eventId,Integer memberId);
     
-	public Integer displayeventlike(Integer eventId,Integer memberId);
+	public String displayeventlike(Integer eventId,Integer memberId);
 }
