@@ -13,4 +13,7 @@ public interface GroupService_42 {
 	
 	public void updateGroupType(Integer groupId, String type);
 	
+	public void updateGroupName(Integer groupId, String groupname);
+	
+	public void updateGroupIntro(Integer groupId, String groupintro);
 }
