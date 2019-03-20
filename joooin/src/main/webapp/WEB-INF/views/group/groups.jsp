@@ -16,6 +16,10 @@
 		position: relative;
 		top: 50px;
 	}
+	
+	.team-back{
+	Line-height:100pt;
+	}
 </style>
 <title>Insert title here</title>
  <!-- ---- Include the above in your HEAD tag -------- -->
@@ -43,7 +47,7 @@
                         
                     </div>
 
-                    <div class="team-back">
+                    <div class="team-back text-center">
                         <span>
                             <a href="${pageContext.request.contextPath}/groups/sport" >超連結</a>
                         </span>
@@ -63,7 +67,7 @@
                         
                     </div>
 
-                    <div class="team-back">
+                    <div class="team-back text-center">
                         <span>
                             <a href="${pageContext.request.contextPath}/groups/food" >超連結</a>
                         </span>
@@ -82,7 +86,7 @@
                         <h3>娛樂</h3>
                     </div>
 
-                    <div class="team-back">
+                    <div class="team-back text-center">
                         <span>
                              <a href="${pageContext.request.contextPath}/groups/entertainment" >超連結</a>
                         </span>
@@ -101,7 +105,7 @@
                         <h3>其他</h3>
                     </div>
 
-                    <div class="team-back">
+                    <div class="team-back text-center">
                         <span>
                              <a href="${pageContext.request.contextPath}/groups/other" >超連結</a>
                         </span>
@@ -120,7 +124,7 @@
                         <h3>全部</h3>
                     </div>
 
-                    <div class="team-back">
+                    <div class="team-back text-center">
                         <span>
                              <a href="${pageContext.request.contextPath}/groups/groups_type" >超連結</a>
                         </span>
@@ -139,7 +143,7 @@
                         <h3>創建</h3>
                     </div>
 
-                    <div class="team-back">
+                    <div class="team-back text-center">
                         <span>
                             	<a href="${pageContext.request.contextPath}/groups/create">創立社團</a>
                         </span>

@@ -1,6 +1,8 @@
 package com.joooin.system.group._22.controller;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -28,6 +30,9 @@ public class CreateGroupController {
 
 	@Autowired
 	ServletContext context;
+	
+	// 時間格式
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ahh:mm:ss");
 
 	// 送出空白社團表單
 	@RequestMapping(method = RequestMethod.GET, value = "/groups/create")
@@ -59,8 +64,8 @@ public class CreateGroupController {
 		if (!groupMainBean.getMultipartFile().isEmpty()) {
 			groupImage = ImageUtils.multipartFileToByteArray(groupMainBean.getMultipartFile());
 			groupMainBean.setGroupImage(groupImage);
-		
-		// 有空再精簡化
+
+			// 有空再精簡化
 		} else {
 			// 根據type配置預設圖片
 			if (groupMainBean.getGroupType().equals("sport")) {
@@ -85,7 +90,8 @@ public class CreateGroupController {
 		groupMainBean.setGroupCurrentMembers(1);
 
 		// 預設開團時間為當下
-		groupMainBean.setGroupCreateDate(LocalDateTime.now().toString());
+		
+		groupMainBean.setGroupCreateDate(sdf.format(new Date()).toString());
 
 		// 創社團
 		Integer groupId = service.createGroup(groupMainBean);
@@ -93,25 +99,6 @@ public class CreateGroupController {
 		service.leaderAddToGroup(groupId, memId);
 
 		return "redirect:/groups";
-	}
-
-	// 處理加入或進入{groupId}社團
-	@RequestMapping(method = RequestMethod.POST, value = "/group/addgroup/{groupId}")
-	public String processAddGroup(@PathVariable Integer groupId, HttpSession session, Model model) {
-		Integer memId = (Integer) session.getAttribute("memberId");
-
-		// 未登入不可加入社團
-		if (memId == null) {
-			return "not_login";
-		}
-
-		if (service.isInGroup(groupId, memId)) {
-			return "redirect:/group/" + groupId; // 已經在社團中了，前端按鈕顯示為進入社團
-		} else {
-			service.memberAddToGroup(groupId, memId);
-			model.addAttribute("status", "申請成功，待批准");
-			return "redirect:/groups/groups_type";
-		}
 	}
 
 }
