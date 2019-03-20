@@ -3,14 +3,17 @@ package com.joooin.system.group._42.service.impl;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import com.joooin.model.GroupMainBean;
 import com.joooin.repository.GroupMainDao;
+import com.joooin.repository.GroupPostReplyDao;
 import com.joooin.system.group._42.service.GroupService_42;
 @Service
 @Transactional
@@ -20,6 +23,10 @@ public class GroupServiceImpl_42 implements GroupService_42 {
 	
 	@Autowired
 	GroupMainDao dao;
+	
+	@Autowired
+	GroupPostReplyDao postdao;
+	
 	@Override
 	public List<GroupMainBean> getAll() {
 		// TODO Auto-generated method stub
@@ -53,6 +60,21 @@ public class GroupServiceImpl_42 implements GroupService_42 {
 		bean.setGroupIntro(groupintro);
 		dao.update(bean);
 		
+	}
+
+	
+	
+	@Override
+	public String processNewReplyForm(HttpSession session, String groupPostReplyContent) {
+		Integer memId = (Integer) session.getAttribute("memberId");
+		
+		return null;
+	}
+
+	@Override
+	public String getNewReplyForm(Model model, HttpSession session) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

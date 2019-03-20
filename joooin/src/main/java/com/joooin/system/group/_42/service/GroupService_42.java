@@ -3,6 +3,9 @@ package com.joooin.system.group._42.service;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.ui.Model;
 
 import com.joooin.model.GroupMainBean;
 
@@ -16,4 +19,9 @@ public interface GroupService_42 {
 	public void updateGroupName(Integer groupId, String groupname);
 	
 	public void updateGroupIntro(Integer groupId, String groupintro);
+	
+	public String getNewReplyForm(Model model, HttpSession session); 
+	
+	public String processNewReplyForm(HttpSession session,String groupPostReplyContent);
+
 }

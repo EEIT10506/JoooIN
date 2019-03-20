@@ -113,30 +113,26 @@
   	  	$('#updateIntro').show(); 
   	  	});
 	});
+  	
   	$(document).ready(function(){
-  	$(".checknull").click(function(event){
-		removeCheckUpdate();
+  		
+  		$("#confirmIntro").click(function(){
+  			var checkintro=$("#inputIntro").val().trim();
+	  		
+	  		if (checkintro == ""){
+	  			alert("介紹不得為空");
+	  			$("#updateIntro").click();
+	  			return false;
+	  		} else {
+	  			return true;
+	  		}
+  		})
+  		
 
-		var checkname=$("#inputName").val();
-		var checkintro=$("#inputIntro").val();
-		if(checkname==""){
-			event.stopPropagation();
-			$("#nameAlert").text("不得為空值，請確認");
-			
-		}
-		if(checkintro==""){
-			event.stopPropagation();
-			$("#IntroAlert").text("不得為空值，請確認");
-			
-		}
-		else{
-		  	  removeCheckUpdate();
-		
-		}
-  	});
+
   	});
 </script>
-<title>Insert title here</title>
+<title>關於社團</title>
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/navbar" />

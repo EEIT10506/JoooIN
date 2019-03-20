@@ -57,7 +57,7 @@ public class PostReplyGroupController_42 {
 			GroupPostReplyBean bean = new GroupPostReplyBean();
 			bean.setGroupPostReplyContent(groupPostReplyContent);
 			
-			return null;
+			return "group/group_article";
 			
 		}
 
