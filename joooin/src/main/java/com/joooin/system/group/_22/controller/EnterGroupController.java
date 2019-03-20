@@ -78,7 +78,6 @@ public class EnterGroupController {
 		return "group/group_members";
 	}
 
-
 	// 處理加入或進入{groupId}社團
 	@RequestMapping(method = RequestMethod.POST, value = "/group/addgroup/{groupId}")
 	public String processAddGroup(@PathVariable Integer groupId, HttpSession session, Model model) {
@@ -98,5 +97,4 @@ public class EnterGroupController {
 			return "redirect:/group/" + groupId; // 已經在申請中，前端按鈕顯示為申請中
 		}
 	}
-
 }

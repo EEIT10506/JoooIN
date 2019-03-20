@@ -195,7 +195,6 @@
 							<p class="text-center">
 								<span class="label label-defaulabel label-primary">${groupMain.groupName}</span>	
 								</p>
-								
 								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
 								<form 
 								action="${pageContext.request.contextPath}/group/abouts/updateGroupName/${groupMain.groupId}" method="POST">
