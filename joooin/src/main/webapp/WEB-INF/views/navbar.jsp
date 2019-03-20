@@ -8,6 +8,12 @@
 <meta charset="UTF-8">
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+  <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-scope" content="profile email">
+<meta name="google-signin-client_id" content='486218648179-mlo3cr1e8u32mg2tpj27ib91qk9lggjp.apps.googleusercontent.com'>
 <style>
 	#loginNregister {
 		position: absolute;
@@ -30,6 +36,19 @@
 			$("#loginNregister").css("visibility", "visible");
 		}
 	});
+</script>
+<script>
+function signOut() {
+	var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+	});
+}
+function onLoad() {
+    gapi.load('auth2', function() {
+      gapi.auth2.init();
+    });
+  }
 </script>
 <body>
 <nav class="navbar navbar-expand bg-dark navbar-dark">
@@ -58,7 +77,10 @@
       <a class="nav-link hasLogin" href="${pageContext.request.contextPath}/admin">${admin}</a>
     </li>
     <li id="logout" class="nav-item">
-      <a class="nav-link logout" href="${pageContext.request.contextPath}/logout" onclick="return(confirm('您確定要登出帳號嗎？'))">${logout}</a>
+      <a id="googleLogout" class="nav-link logout" href="${pageContext.request.contextPath}/logout" onclick="return(confirm('您確定要登出帳號嗎？'))">${logout}</a>
+    </li>
+    <li id="logout" class="nav-item">
+      <a class="nav-link logout" href="${pageContext.request.contextPath}/logout" onclick='signOut()'>${googleLogout}</a>
     </li>
   </ul>
 </nav>
