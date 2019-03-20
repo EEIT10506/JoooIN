@@ -113,7 +113,23 @@
   	  	$('#updateIntro').show(); 
   	  	});
 	});
+  	$(document).ready(function(){
+  	$("#checknull").click(function(event){
+		removeCheckUpdate();
 
+		var checkname=$("#inputName").val();
+		var checkintro=$("#inputIntro").val();
+		if(checkname==""){
+			$("#nameAlert").text("不得為空值，請確認");
+			event.stopPropagation();
+		}
+		if(checkintro=""){
+			$("#IntroAlert").text("不得為空值，請確認");
+			event.stopPropagation();
+		}
+		removeCheckUpdate();
+  	};
+  	});
 </script>
 <title>Insert title here</title>
 </head>
