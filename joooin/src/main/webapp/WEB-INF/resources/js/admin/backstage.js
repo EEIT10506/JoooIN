@@ -377,9 +377,85 @@ $(document).ready(function () {
     	})
     	
     })
-//	----------------------------------------------------------------------------------------------------
-        }
-        
+
+        }//檢舉end
+//    	----------------------------------------------------------------------------------------------------
+        if (title == '報表'){
+        	$.ajax({
+        		type: "GET",
+                url: "/joooin/admin/memberStatistics",
+                dataType: "json",
+                timeout: 600000,
+                
+                success: function (data){
+                	console.log(data.members);
+                	console.log(data.gender);
+                	var tab1 = $('<div></div>').addClass('statistics1');
+                	$('#content>h2').after(tab1);
+                	var memberId = data.members;
+					var gender = data.gender;
+					var arrayMember = memberId.split(',').map(Number);
+					
+					
+					var arrayGender = gender.split(',');
+					var removeGender =  arrayGender.map(Number);
+					console.log(arrayMember);
+					console.log(removeGender);
+					
+					
+					$(".statistics1")
+					.highcharts(
+							{
+								chart : {
+										type : "column", 
+														options3d: {
+																		enabled: true,
+																		alpha: 10,
+																		beta: 5,
+																		depth: 70
+																		}},
+																		xAxis: {
+																		        categories:arrayGender,
+																		        title: {
+																		            text: 'Gender'
+																		        }
+																		    }, 
+																		    
+																			title : {
+																				text : 'ratio'
+																			},yAxis: {
+																		        min: 0,
+																		        title: {
+																		            text: 'members',
+																		            align: 'high'
+																		        }
+																		        },
+																			tooltip : {
+																				valueSuffix: ''
+																			},
+//																			plotOptions : {
+//																				pie : {
+//																					allowPointSelect : true,
+//																					cursor : 'pointer',
+//																					depth : 35,
+//																					dataLabels : {
+//																						enabled : true,
+//																						format : '{point.name}'
+//																					}
+		//
+//																				}
+//																			},
+																			 series: [{
+																			        name: 'members',
+																			        data: arrayMember
+																			    }]
+																		})
+                },error:function(){
+                	alert("errorQQ")
+                }//success
+        	})// memberStatistics
+        }//報表
+//    	----------------------------------------------------------------------------------------------------
     	}		//selectCategory end;
     	
     	

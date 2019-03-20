@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.joooin.model.MemberMainBean;
 import com.joooin.repository.MemberMainDao;
+import com.joooin.system.admin._03.model.AllMemberQuantityBean;
 
 @Repository
 public class MemberMainDaoImpl implements MemberMainDao{
@@ -93,6 +94,17 @@ public class MemberMainDaoImpl implements MemberMainDao{
 		System.out.println("mmb="+mmb);
 		
 		return mmb;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<AllMemberQuantityBean> getAllMemberQuantity() {
+		Session session = factory.getCurrentSession();
+		return session.createNativeQuery("select COUNT(memberId) as memberId ,gender as gender from member_main group by gender").addEntity(AllMemberQuantityBean.class).list();
+//		return session.createQuery("select count(*) from MemberMainBean group by gender").list();
+//		return session.createNativeQuery("select count(memberId), gender from member_main group by gender").addEntity(AllMemberQuantityBean.class).list();
+//		return null;
+
 	}
 	
 }

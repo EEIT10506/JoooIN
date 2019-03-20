@@ -1,6 +1,8 @@
 package com.joooin.system.admin._03.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.joooin.model.EventMainBean;
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.MemberMainBean;
+import com.joooin.repository.MemberMainDao;
+import com.joooin.system.admin._03.model.AllMemberQuantityBean;
 import com.joooin.system.admin._03.service.AdminService;
 
 @Controller
@@ -21,6 +25,9 @@ public class AdminController {
 	
 	@Autowired
 	AdminService service;
+	
+	@Autowired
+	MemberMainDao memberDao;
 	
 	@RequestMapping("/admin")
 	public String admin() {
@@ -102,6 +109,35 @@ public class AdminController {
 	public ModelAndView eventPdf() {
 		List<EventMainBean> list = service.getAllEvent();
 		return new ModelAndView("eventPdfView", "allEvent", list);
+	}
+	
+	@RequestMapping(value="/admin/memberStatistics",method=RequestMethod.GET)
+	public @ResponseBody Map<String, Object> getAllMemberQuantity(){
+		List<AllMemberQuantityBean> list = memberDao.getAllMemberQuantity();
+		//
+		int i=0;
+		StringBuffer memberId=new StringBuffer();  
+        StringBuffer gender=new StringBuffer();  
+        
+        for (AllMemberQuantityBean aqb : list) {  
+        	memberId.append(aqb.getMemberId());  
+        	gender.append(aqb.getGender());   
+            //
+        	i++;
+            if(i<list.size()){  
+            	memberId.append(",");  
+            	gender.append(",");  
+            }  
+        }
+        
+        Map<String, Object> map = new HashMap<String, Object>();
+        System.out.println(map);
+		System.out.println(memberId);
+		System.out.println(gender);
+		map.put("members", memberId);
+		map.put("gender", gender);
+		return map;
+		
 	}
 
 }

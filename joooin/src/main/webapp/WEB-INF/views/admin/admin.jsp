@@ -37,7 +37,10 @@
 	top: 50px;
 }
 </style>
+
+
 <script src="<c:url value='/resources/js/admin/backstage.js'/> "></script>
+
 <title>後台管理系統</title>
 </head>
 <body>
@@ -80,5 +83,10 @@
 
 	</div>
 	<!-- 請把所有內容寫在此div內 -->
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/offline-exporting.js"></script>
 </body>
 </html>

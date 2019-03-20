@@ -71,10 +71,7 @@ function onLoad() {
       <a class="nav-link" href="${pageContext.request.contextPath}/login">登入／註冊</a>
     </li>
     <li id="hasLogin" class="nav-item">
-      <a class="nav-link hasLogin" href="${pageContext.request.contextPath}/member">${memberName}</a>
-    </li>
-    <li id="hasLogin" class="nav-item">
-      <a class="nav-link hasLogin" href="${pageContext.request.contextPath}/admin">${admin}</a>
+      <a class="nav-link hasLogin" href="${pageContext.request.contextPath}/member">${memberName}${admin}</a>
     </li>
     <li id="logout" class="nav-item">
       <a id="googleLogout" class="nav-link logout" href="${pageContext.request.contextPath}/logout" onclick="return(confirm('您確定要登出帳號嗎？'))">${logout}</a>
