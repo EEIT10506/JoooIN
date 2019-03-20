@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -50,14 +51,13 @@ public class PostReplyGroupController_42 {
 	}
 	
 	// 處理新增表單
-		@RequestMapping(method = RequestMethod.POST, value = "/group/postReply")
-		public String processNewReplyForm(
+		@RequestMapping(method = RequestMethod.POST, value = "/group/postReply/{groupId}")
+		public String processNewReplyForm(@PathVariable("groupId") Integer groupId,
 				 HttpSession session,String groupPostReplyContent) {
 			
-			GroupPostReplyBean bean = new GroupPostReplyBean();
-			bean.setGroupPostReplyContent(groupPostReplyContent);
 			
-			return "group/group_article";
+			
+			return "group/group_article/"+groupId;
 			
 		}
 
