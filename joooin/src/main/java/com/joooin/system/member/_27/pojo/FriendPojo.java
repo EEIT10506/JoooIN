@@ -5,6 +5,7 @@ public class FriendPojo {
 	private String memberName;
 	private Boolean isFriend;
 	private Boolean isInviter;
+	private String messageHash;
 	
 	public Integer getMemberId() {
 		return memberId;
@@ -30,10 +31,11 @@ public class FriendPojo {
 	public void setIsInviter(Boolean isInviter) {
 		this.isInviter = isInviter;
 	}
-	@Override
-	public String toString() {
-		return "FriendPojo [memberId=" + memberId + ", memberName=" + memberName + ", isFriend=" + isFriend
-				+ ", isInviter=" + isInviter + "]";
+	public String getMessageHash() {
+		return messageHash;
+	}
+	public void setMessageHash(String messageHash) {
+		this.messageHash = messageHash;
 	}
 	
 	

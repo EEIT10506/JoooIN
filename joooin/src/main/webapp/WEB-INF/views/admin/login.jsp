@@ -9,6 +9,17 @@
 <meta charset="UTF-8">
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<!-- BEGIN Pre-requisites -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+  </script>
+  <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+  </script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  
+  <meta name="google-signin-scope" content="profile email">
+<meta name="google-signin-client_id"
+	content='486218648179-mlo3cr1e8u32mg2tpj27ib91qk9lggjp.apps.googleusercontent.com'>
+  <!-- END Pre-requisites -->
 <style>
 	#main {
 		width: 1200px;
@@ -59,27 +70,56 @@
   <button type="button" class="btn btn-primary" onclick="location.href='/joooin/register'">註冊</button>
   <button type="button" class="btn btn-primary" onclick="location.href='/joooin/forgotPassword'">忘記密碼</button>
 </form:form>
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
 <button type="button" id="oneSetuser" class="btn btn-success">一鍵填入(user)</button><br>
 <button type="button" id="oneSetadmin" class="btn btn-success">一鍵填入(admin)</button>
  <!-- /.row -->
- 
  </div>
  <!-- /.container -->
- 	<script>
-$('#oneSetuser').click(function(){ 
-		
+ 
+ <!-- member&admin一鍵帶入 -->
+	<script>
+		$('#oneSetuser').click(function(){ 
 		$('#email').val('eeit105joooin@gmail.com'); 
 		$('#password').val('passw0rd');
-		
  	});
- 	
-$('#oneSetadmin').click(function(){ 
-	
-	$('#email').val('admin@admin'); 
-	$('#password').val('admin');
-	
+		$('#oneSetadmin').click(function(){ 
+		$('#email').val('admin@admin'); 
+		$('#password').val('admin');
 	});
 	</script>
+	
+<script>
+function onSignIn(googleUser) {
+	
+	var profile = googleUser.getBasicProfile();
+    console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+    console.log('Full Name: ' + profile.getName());
+    console.log('Given Name: ' + profile.getGivenName());
+    console.log('Family Name: ' + profile.getFamilyName());
+    console.log("Image URL: " + profile.getImageUrl());
+    console.log("Email: " + profile.getEmail());
+    
+ // The ID token you need to pass to your backend:
+    var id_token = googleUser.getAuthResponse().id_token;
+    console.log("ID Token: " + id_token);
+    
+    $.ajax({
+        
+    	type:"POST",
+    	url:"/joooin/admin/googleLogin",
+    	data:{"ID_Token":id_token},
+    	
+    	success:function(data){
+    		location.href='/joooin/'
+    	},
+    	error : function(e) {
+			console.log("ERROR : ", e);
+		}
+    })
+  };
+
+</script>
 	<!-- Footer -->
 	</div>
 <!-- 請把所有內容寫在此div內 -->

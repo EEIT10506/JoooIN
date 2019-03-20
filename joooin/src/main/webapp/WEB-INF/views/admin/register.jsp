@@ -152,8 +152,9 @@
   <button type="reset" class="btn btn-primary">重填</button>
   
 </form:form>
+<button type="button" id="oneSet" class="btn btn-success">一鍵填入</button>
 	</div>
-	<button type="button" id="oneSet" class="btn btn-success">一鍵填入</button>
+	
 	<script>
 $('#oneSet').click(function(){ 
 		

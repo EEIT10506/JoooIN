@@ -37,18 +37,21 @@ public class UpdateGroupController_42 {
 		service.updateGroupType(groupId, type);
 		
 		return "redirect:/group/about/" + groupId;
-
-//			
-//			@RequestMapping(value = "group/group_about", method = RequestMethod.POST)
-//			public String UpdateGroupName() {
-//				
-//				return "group/group_about";
-//			}
-//			
-//			@RequestMapping(value = "group/group_about", method = RequestMethod.POST)
-//			public String UpdateGroupIntro() {
-//				
-//				return "group/group_about";
+	
 
 	}
+	@RequestMapping(value = "/group/abouts/updateGroupName/{groupId}", method = RequestMethod.POST)
+	public String updateGroupName(	 String groupname,
+			@PathVariable("groupId") Integer groupId) {
+		service.updateGroupName(groupId, groupname);
+		return "redirect:/group/about/" + groupId;
+	}
+	
+	@RequestMapping(value = "/group/abouts/updateGroupIntro/{groupId}", method = RequestMethod.POST)
+	public String updateGroupIntro(	 String groupintro,
+			@PathVariable("groupId") Integer groupId) {
+		service.updateGroupIntro(groupId, groupintro);
+		return "redirect:/group/about/" + groupId;
+	}
+	
 }
