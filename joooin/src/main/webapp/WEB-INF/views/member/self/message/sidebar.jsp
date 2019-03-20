@@ -43,7 +43,6 @@
 		
 		$(".contact").click(function(){
 			var hash = $(this).children();
-			alert(hash[0].value);
 			location.href = "${pageContext.request.contextPath}/member/self/message/" + hash[0].value;
 		});
 		
@@ -71,8 +70,8 @@
 							<img src="<c:url value='/getMemberImage/${friend.memberId}.jpg' />">
 							<div class="meta">
 								<p class="name" style="">${friend.memberName}</p>
-								<c:if test="${friends.notRead != 0}">
-									<p class="not-read" style="bottom: 8px;position: relative;text-align: right;">未讀：${friends.notRead}</p>
+								<c:if test="${friend.notRead != 0}">
+									<p class="not-read" style="bottom: 8px;position: relative;text-align: right;">未讀：${friend.notRead}</p>
 								</c:if>
 <!--	<p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p> -->
 							</div>

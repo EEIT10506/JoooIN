@@ -22,7 +22,7 @@ public class MemberMessageController {
 	@RequestMapping(value = "/member/self/message", method = RequestMethod.GET)
 	public String messageHome(HttpSession session, Model model) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		System.out.println("跑錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯錯");
+		
 		if (memberId != null) {
 			model.addAttribute("friendList", memberService.getFriends(memberId));
 			model.addAttribute("myself", memberService.getMemberMainBean(memberId));
@@ -34,8 +34,7 @@ public class MemberMessageController {
 	@RequestMapping(value = "/member/self/message/{hash}", method = RequestMethod.GET)
 	public String showMessage(@PathVariable String hash, HttpSession session, Model model) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		System.out.println(memberId);
-		System.out.println(hash);
+		
 		if (memberId != null) {
 			model.addAttribute("friend", messageService.getFriendMemberMainBean(memberId, hash));
 			model.addAttribute("hash", hash);

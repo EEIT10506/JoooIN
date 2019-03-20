@@ -50,7 +50,8 @@
     }
 </style>
 <script>
-	
+	var myMD5 = hex_md5("${memberId}");
+
 	var websocket = null;
 	if ('WebSocket' in window) {
 		websocket = new WebSocket("ws://localhost:8080/joooin/member/message/${hash}");
@@ -95,8 +96,26 @@
 	function websocketClose() {websocket.close();}
 	
 	$(document).ready(function(){
+		$('#send').click(function() {
+			var text = $("#text").val();
+			if($.trim(text) == '') return false;
+	        var receiveMemberId = "${friend.memberId}";
+			
+			$.ajax({
+			    type: "POST",                           
+			    url: "${pageContext.request.contextPath}/member/self/message/saveText",
+			    data: {"text": text, "receiveMemberId": receiveMemberId, "messageHash": "${hash}"},
+			});
+			
+			send(myMD5 + text);
+		});
 		
-	
+		$('#text').on('keypress', function(e) {
+			if (e.which == 13) {
+				$("#send").click();
+				return false;
+			}
+		});
 	});
 </script>
 </head>
@@ -114,7 +133,7 @@
 			<ul>
 				<c:forEach var="message" items="${message}">
 					<c:choose>
-						<c:when test="${message.sendMemberId != myself.memberId}">
+						<c:when test="${message.sendMemberId != memberId}">
 							<li class="sent">				
 								<p>${message.messageText}</p>
 							</li>
@@ -139,30 +158,4 @@
 		</div>
 	</div>
 </div>
-
-<script>
-
-	var myMD5 = hex_md5("${myself.memberId}");
-	
-	$('#send').click(function() {
-		var text = $("#text").val();
-		if($.trim(text) == '') return false;
-        var receiveMemberId = "${friend.memberId}";
-		
-		$.ajax({
-		    type: "POST",                           
-		    url: "${pageContext.request.contextPath}/member/self/message/saveText",
-		    data: {"text": text, "receiveMemberId": receiveMemberId, "messageHash": "${hash}"},
-		});
-		
-		send(myMD5 + text);
-	});
-	
-	$('#text').on('keypress', function(e) {
-		if (e.which == 13) {
-			$("#send").click();
-			return false;
-		}
-	});
-</script>
 </body></html>
