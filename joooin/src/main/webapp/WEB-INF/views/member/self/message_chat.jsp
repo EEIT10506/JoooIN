@@ -48,6 +48,12 @@
     textarea {
     	padding: 15px 32px 16px 8px;
     }
+    .repliesText {
+    	text-align: right;
+    }
+    .sentText {
+    	text-align: left;
+    }
 	
 </style>
 <script>
@@ -108,12 +114,12 @@
 		</div>
 		<div id="search">
 			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-			<input type="text" placeholder="搜尋好友...fffffewfewweffff" />
+			<input type="text" placeholder="搜尋好友..." />
 		</div>
 		<div id="contacts">
 			<ul>
 				<c:forEach var="friends" items="${friendList}">
-					<li class="contact active">
+					<li class="contact <c:if test="${friends.memberId == friend.memberId}">active</c:if>">
 						<input type="hidden" value="${friends.messageHash }">
 						<div class="wrap">
 							<span class="contact-status busy"></span>
@@ -145,11 +151,13 @@
 							<li class="sent">				
 								<p>${message.messageText}</p>
 							</li>
+							<p class="sentText">${message.messageDate}</p>
 						</c:when>
 						<c:otherwise>
 							<li class="replies">
 								<p>${message.messageText}</p>
 							</li>
+							<p class="repliesText">${message.messageDate}</p>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>

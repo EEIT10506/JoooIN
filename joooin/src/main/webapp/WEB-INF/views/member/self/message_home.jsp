@@ -81,7 +81,7 @@
 <!-- 					</div> -->
 <!-- 				</li> -->
 				<c:forEach var="friend" items="${friendList}">
-					<li class="contact active">
+					<li class="contact">
 						<input type="hidden" value="${friend.messageHash }">
 						<div class="wrap">
 							<span class="contact-status busy"></span>
