@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupPostBean;
 import com.joooin.model.MemberMainBean;
+import com.joooin.system.group._22.pojo.Poster;
 import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.system.member._27.service.MemberService;
 import com.joooin.util.ImageUtils;
@@ -40,14 +41,14 @@ public class PostGroupController {
 
 	// 進入社團發文頁面
 	@RequestMapping(method = RequestMethod.GET, value = "/group/addpost/{groupId}")
-	public String mainPagePost(Model model, HttpSession session, @PathVariable Integer groupId) {
+	public String getNewPostForm(Model model, HttpSession session, @PathVariable Integer groupId) {
 
 		// 未登入不可創社團
 		Integer memberId = (Integer) session.getAttribute("memberId");
 		if (memberId == null) {
 			return "not_login";
 		}
-		
+
 		//
 //			待寫，非社團成員不可PO
 		//
@@ -66,11 +67,11 @@ public class PostGroupController {
 
 	// 處理新增發文
 	@RequestMapping(method = RequestMethod.POST, value = "/group/addpost/{groupId}")
-	public String processNewGroupForm(@ModelAttribute("groupPostBean") GroupPostBean groupPostBean,
+	public String processNewPostForm(@ModelAttribute("groupPostBean") GroupPostBean groupPostBean,
 			HttpSession session) {
 
 		Integer groupId = groupPostBean.getGroupId();
-		
+
 		// 回復用照片測試
 		Byte[] groupImage = null;
 		if (!groupPostBean.getMultipartFile().isEmpty()) {
@@ -78,18 +79,32 @@ public class PostGroupController {
 			groupPostBean.setGroupPostContent(groupImage);
 		}
 
-			// 沒有like
-			groupPostBean.setGroupPostLike(0);
+		// 沒有like
+		groupPostBean.setGroupPostLike(0);
 
-			// 預設發文時間為當下
-			groupPostBean.setGroupPostDate((sdf.format(new Date()).toString()));
+		// 預設發文時間為當下
+		groupPostBean.setGroupPostDate((sdf.format(new Date()).toString()));
 
-			// 預設顯示文章
-			groupPostBean.setIsDeleted(false);
+		// 預設顯示文章
+		groupPostBean.setIsDeleted(false);
 
-			// 文章建立
-			groupService.createPost(groupPostBean);
+		// 文章建立
+		groupService.createPost(groupPostBean);
 
-			return "redirect:/group/" + groupId;
+		return "redirect:/group/" + groupId;
 	}
+
+	// 進入文章頁面
+	@RequestMapping(method = RequestMethod.GET, value = "/group/post/{groupPostId}")
+	public String postMainPage(Model model, @PathVariable Integer groupPostId) {
+
+		Poster poster = groupService.getPosterByGroupPostId(groupPostId);
+		model.addAttribute("poster", poster);
+		
+		//準備回文資訊
+		//service.getReply...
+
+		return "group/group_article";
+	}
+
 }

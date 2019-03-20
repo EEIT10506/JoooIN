@@ -32,9 +32,13 @@ public interface GroupService_22 {
 	public Integer processApplyList(Integer groupId, Integer memberId, String decide);
 	
 	public List<MemberMainBean> getMembersInGroup(Integer groupId); // 取得該社團內成員
-/////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
+/////////////////////////////////////////////Post類別////////////////////////////////////////////////////	
+	
 	public Integer createPost(GroupPostBean groupPostBean); // 發布文章
 	
-	public List<Poster> getPostersByGroupId(Integer groupId); // 以id找文章列表
+	public List<Poster> getPostersByGroupId(Integer groupId); // 以groupId找文章列表
+	
+	public Poster getPosterByGroupPostId(Integer groupPostId); // 
 
 }

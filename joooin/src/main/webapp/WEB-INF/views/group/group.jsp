@@ -232,7 +232,7 @@ div {
 				<c:forEach var="poster" items="${groupPoster}" varStatus="loop">
 					<tr>
 						<td>${poster.groupPostLike}</td>
-						<td>${poster.groupPostTitle }</td>
+						<td><a href="${pageContext.request.contextPath}/group/post/${poster.groupPostId}">${poster.groupPostTitle}</a></td>
 						<td>${poster.memberName }</td>
 						<td>${poster.groupPostDate}</td>
 						<td>等待回覆</td>
