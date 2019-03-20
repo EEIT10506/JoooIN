@@ -29,4 +29,13 @@ public class GroupController {
 		return "group/groups";
 	}
 
+	
+	// 進入社團發文頁面
+		@RequestMapping(method = RequestMethod.GET, value = "/group/post/{groupId}")
+		public String mainPagePost() {
+
+			
+
+			return "group/group_post";
+		}
 }
