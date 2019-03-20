@@ -55,7 +55,7 @@
 	 .hideFile{
 /* 	 	display:none; */
 		position:absolute;
-		top:895px;
+		top:1013px;
 		left:131px;
 		z-index:-100;
 		border-style:none;
@@ -216,12 +216,14 @@
 	          map.fitBounds(bounds);
 	        });
 	        
-	        //$("#map").show();
-
+	       //$("#map").hide();
+			//$("#closeMap").show;
 	});             
 
 	             
-		$("#")
+		$("#address").blur(function(){
+			$("#map").show();
+		});
 		
 		$("#closeMap").click(function(){
 			$("#map").toggle();
@@ -258,24 +260,31 @@
 	
 	
 	$(function () {
-		var today=new Date();
-	    
+		var today = new Date();
+
+		
 	    $('#datetimepicker1').datetimepicker({
 	    locale: moment.locale('zh-tw'),
-	    minDate:today		           
+	    		           
 	    });   
 
 	            
 	    $('#datetimepicker2').datetimepicker({
 	    locale: moment.locale('zh-tw'),	
-	    useCurrent: false,
-	    minDate:today
+	    
 	    });
 	    $("#datetimepicker1").on("change.datetimepicker", function (e) {
 	        $('#datetimepicker2').datetimepicker('minDate', e.date);
 	    });
 	    $("#datetimepicker2").on("change.datetimepicker", function (e) {
 	        $('#datetimepicker1').datetimepicker('maxDate', e.date);
+	    });
+	    
+	    $("#datetimepicker1").click(function () {
+	        $('#datetimepicker1').datetimepicker('minDate', today);
+	    });
+	    $("#datetimepicker2").click(function () {
+	        $('#datetimepicker2').datetimepicker('minDate', today);
 	    });
 
 	});
@@ -373,7 +382,7 @@
 
 
 				
-				<div id="map" class="pure-u-1" style="width:600px;height:300px;display:none;"></div>
+				<div id="map" class="pure-u-1" style="width:600px;height:400px;"></div>
 				<%--設定顯示 Google Maps 的大小--%>
 				
 				<div class="pure-u-1-2">

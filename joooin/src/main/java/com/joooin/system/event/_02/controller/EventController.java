@@ -314,6 +314,7 @@ public class EventController {
 			}
 			boolean eventFinished = endTime.after(timeNow);
 			
+		
 			model.addAttribute("eventFinished", eventFinished);
 //			=============
 			model.addAttribute("event", event);
