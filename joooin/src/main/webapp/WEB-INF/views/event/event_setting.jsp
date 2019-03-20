@@ -221,7 +221,7 @@
 	});             
 
 	             
-
+		$("#")
 		
 		$("#closeMap").click(function(){
 			$("#map").toggle();
