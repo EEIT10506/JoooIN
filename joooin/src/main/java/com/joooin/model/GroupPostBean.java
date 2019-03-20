@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="group_post")
@@ -25,6 +28,7 @@ public class GroupPostBean implements Serializable {
 	private Integer groupPostLike;
 	private String groupPostDate;
 	private Boolean isDeleted;
+	private MultipartFile multipartFile;
 	private List<GroupPostLikeBean> groupPostLikeList = new ArrayList<GroupPostLikeBean>();
 	private List<GroupPostReplyBean> GroupPostReplyList = new ArrayList<GroupPostReplyBean>();
 	
@@ -116,6 +120,13 @@ public class GroupPostBean implements Serializable {
 				+ ", groupPostTitle=" + groupPostTitle + ", groupPostContent=" + Arrays.toString(groupPostContent)
 				+ ", groupPostLike=" + groupPostLike + ", groupPostDate=" + groupPostDate + ", isDeleted=" + isDeleted
 				+ "]";
+	}
+	@Transient
+	public MultipartFile getMultipartFile() {
+		return multipartFile;
+	}
+	public void setMultipartFile(MultipartFile multipartFile) {
+		this.multipartFile = multipartFile;
 	}
 	
 }
