@@ -14,17 +14,25 @@ public class MemberChatBean implements Serializable {
 	private Integer memberChatId;
 	private Integer sendMemberId;
 	private Integer receiveMemberId;
-	private Byte[] memberChatContent;
-	private String memberChatDate;
+	private String messageText;
+	private Byte[] messageImage;
+	private String messageDate;
+	private String messageType;	
+	private String messageHash;
 	private Boolean isRead;
 	
-	public MemberChatBean(Integer sendMemberId, Integer receiveMemberId, Byte[] memberChatContent,
-			String memberChatDate, Boolean isRead) {
+	
+	public MemberChatBean(Integer memberChatId, Integer sendMemberId, Integer receiveMemberId, String messageText,
+			Byte[] messageImage, String messageDate, String messageType, String messageHash, Boolean isRead) {
 		super();
+		this.memberChatId = memberChatId;
 		this.sendMemberId = sendMemberId;
 		this.receiveMemberId = receiveMemberId;
-		this.memberChatContent = memberChatContent;
-		this.memberChatDate = memberChatDate;
+		this.messageText = messageText;
+		this.messageImage = messageImage;
+		this.messageDate = messageDate;
+		this.messageType = messageType;
+		this.messageHash = messageHash;
 		this.isRead = isRead;
 	}
 	public MemberChatBean() {
@@ -50,23 +58,41 @@ public class MemberChatBean implements Serializable {
 	public void setReceiveMemberId(Integer receiveMemberId) {
 		this.receiveMemberId = receiveMemberId;
 	}
-	public Byte[] getMemberChatContent() {
-		return memberChatContent;
-	}
-	public void setMemberChatContent(Byte[] memberChatContent) {
-		this.memberChatContent = memberChatContent;
-	}
-	public String getMemberChatDate() {
-		return memberChatDate;
-	}
-	public void setMemberChatDate(String memberChatDate) {
-		this.memberChatDate = memberChatDate;
-	}
 	public Boolean getIsRead() {
 		return isRead;
 	}
 	public void setIsRead(Boolean isRead) {
 		this.isRead = isRead;
+	}
+	public String getMessageHash() {
+		return messageHash;
+	}
+	public void setMessageHash(String messageHash) {
+		this.messageHash = messageHash;
+	}
+	public String getMessageText() {
+		return messageText;
+	}
+	public void setMessageText(String messageText) {
+		this.messageText = messageText;
+	}
+	public Byte[] getMessageImage() {
+		return messageImage;
+	}
+	public void setMessageImage(Byte[] messageImage) {
+		this.messageImage = messageImage;
+	}
+	public String getMessageDate() {
+		return messageDate;
+	}
+	public void setMessageDate(String messageDate) {
+		this.messageDate = messageDate;
+	}
+	public String getMessageType() {
+		return messageType;
+	}
+	public void setMessageType(String messageType) {
+		this.messageType = messageType;
 	}
 	
 	

@@ -34,12 +34,27 @@ public class GroupServiceImpl_42 implements GroupService_42 {
 
 	@Override
 	public void updateGroupType(Integer groupId,String type) {
-//		System.out.println("更新前" + updateBean.getGroupType());
 		GroupMainBean bean = dao.getByGroupId(groupId);
 		bean.setGroupType(type);
 		dao.update(bean);
 	}
 
+	@Override
+	public void updateGroupName(Integer groupId, String groupname) {
+		GroupMainBean bean = dao.getByGroupId(groupId);
+		bean.setGroupName(groupname);
+		dao.update(bean);
+		
+	}
 
+	@Override
+	public void updateGroupIntro(Integer groupId, String groupintro) {
+		GroupMainBean bean = dao.getByGroupId(groupId);
+		bean.setGroupIntro(groupintro);
+		dao.update(bean);
+		
+	}
+
+	
 
 }

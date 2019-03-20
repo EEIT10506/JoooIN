@@ -91,7 +91,7 @@ public class EventsServiceImpl implements EventsService {
 	
 	
 	@Override
-	public Integer displayeventlike(Integer eventId, Integer memberId) {
+	public String displayeventlike(Integer eventId, Integer memberId) {
 		List<EventLikeBean> list = eventLikeDao.getAll();
 		int count = 0;
 		Integer reallike = -5;
@@ -100,7 +100,7 @@ public class EventsServiceImpl implements EventsService {
 				Integer like = eventDao.getByEventMainId(eventId).getEventLike();
 				reallike = Integer.valueOf(like);
 				count++;
-				break;
+				return "y"+reallike; //有按過讚的顏色+回傳讚數
 			}
 		}
 		if (count == 0) {
@@ -108,9 +108,9 @@ public class EventsServiceImpl implements EventsService {
 
 			reallike = Integer.valueOf(like);
 
-			return reallike;   //沒按過讚或按過讚的回傳讚數
+			return "n"+reallike;   //沒按過讚的顏色+回傳讚數
 		} else {
-			return eventDao.getByEventMainId(eventId).getEventLike();  //沒登入
+			return "n"+eventDao.getByEventMainId(eventId).getEventLike();  //沒登入的顏色+回傳讚數
 		}
 		
 		
