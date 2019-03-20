@@ -247,7 +247,7 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 	}
 
 	@Override
-	//新版320
+	//新版2019320
 	public List<MemberMainBean> getMembersInGroup(Integer groupId) {
 		List<MemberMainBean> memberInGroupList = new LinkedList<MemberMainBean>();
 		List<GroupMemberBean> allGroupMember = groupMainDao.getByGroupId(groupId).getGroupMemberList();

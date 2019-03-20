@@ -114,13 +114,6 @@ public class GroupPostBean implements Serializable {
 	public void setIsDeleted(Boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
-	@Override
-	public String toString() {
-		return "GroupPostBean [groupPostId=" + groupPostId + ", groupId=" + groupId + ", memberId=" + memberId
-				+ ", groupPostTitle=" + groupPostTitle + ", groupPostContent=" + Arrays.toString(groupPostContent)
-				+ ", groupPostLike=" + groupPostLike + ", groupPostDate=" + groupPostDate + ", isDeleted=" + isDeleted
-				+ "]";
-	}
 	@Transient
 	public MultipartFile getMultipartFile() {
 		return multipartFile;
@@ -129,4 +122,11 @@ public class GroupPostBean implements Serializable {
 		this.multipartFile = multipartFile;
 	}
 	
+	@Override
+	public String toString() {
+		return "GroupPostBean [groupPostId=" + groupPostId + ", groupId=" + groupId + ", memberId=" + memberId
+				+ ", groupPostTitle=" + groupPostTitle + ", groupPostContent=" + Arrays.toString(groupPostContent)
+				+ ", groupPostLike=" + groupPostLike + ", groupPostDate=" + groupPostDate + ", isDeleted=" + isDeleted
+				+ "]";
+	}
 }
