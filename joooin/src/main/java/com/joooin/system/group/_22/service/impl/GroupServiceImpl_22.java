@@ -118,6 +118,7 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 	}
 
 	@Override
+	//使用小心，這是複製人
 	public List<GroupMemberBean> getProcessGroupApplyList(Integer groupId) {
 		List<GroupMemberBean> groupApplyList = new LinkedList<GroupMemberBean>();
 		List<GroupMemberBean> allGroupMember = groupMainDao.getByGroupId(groupId).getGroupMemberList();
@@ -137,7 +138,27 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 	@Override
 	public Integer processApplyList(Integer groupId, Integer memberId, String decide) {
 		GroupMainBean groupMain = groupMainDao.getByGroupId(groupId);
-//		List<GroupMemberBean> gmList = groupMain.getGroupMemberList();
+		
+		//version.1
+		for(GroupMemberBean realGMBean : groupMemberDao.getAll()) {
+			if(realGMBean.getGroupId().equals(groupId) && realGMBean.getMemberId().equals(memberId) && decide.equals("approve")) {
+
+				realGMBean.setIsAgreed(true);
+				groupMemberDao.update(realGMBean);
+				
+				groupMain.setGroupCurrentMembers(groupMain.getGroupCurrentMembers() + 1);
+				groupMainDao.update(groupMain);
+				
+				return realGMBean.getMemberId();
+			}
+			else if(realGMBean.getGroupId().equals(groupId) && realGMBean.getMemberId().equals(memberId) && decide.equals("reject")) {
+				groupMemberDao.deleteByGroupMemberId(realGMBean.getGroupMemberId());
+				break;
+			}
+			
+		}
+		return null;
+		
 //
 //		for (GroupMemberBean member : gmList) {
 //			if(member.getMemberId().equals(memberId) && decide.equals("approve")) {
@@ -151,39 +172,78 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 //		groupMain.setGroupMemberList(gmList);
 //		groupMainDao.update(groupMain);
 		
-		List<GroupMemberBean> groupApplyList = getProcessGroupApplyList(groupId);
-		for(GroupMemberBean gmBean : groupApplyList) {
-			if(gmBean.getMemberId().equals(memberId) && decide.equals("approve")) {
-				
-				gmBean.setIsAgreed(true);
-				groupMemberDao.update(gmBean);
-				System.out.println("更新的GroupMemberBean：" + gmBean.getMemberId());
-				System.out.println("更新的GroupMemberBean：" + gmBean.getIsAgreed());
-				
-				groupMain.setGroupCurrentMembers(groupMain.getGroupCurrentMembers() + 1);
-				groupMainDao.update(groupMain);
-				System.out.println("更新的GroupMainBean：" + groupMain.getGroupId());
-				System.out.println("更新的GroupMainBean：" + groupMain.getGroupCurrentMembers());
-
-				
-				return gmBean.getMemberId();
-			}
-			else if(gmBean.getMemberId().equals(memberId) && decide.equals("reject")) {
-				List<GroupMemberBean> allGM = groupMemberDao.getAll();
-				for(GroupMemberBean gm : allGM) {
-					if(gm.getMemberId().equals(memberId)) {
-						groupMemberDao.deleteByGroupMemberId(gm.getGroupMemberId());
-					}
-				}
+//		List<GroupMemberBean> groupApplyList = getProcessGroupApplyList(groupId);
+//		for(GroupMemberBean gmBean : groupApplyList) {
+//			if(gmBean.getMemberId().equals(memberId) && decide.equals("approve")) {
+//				
+//				gmBean.setIsAgreed(true);
+//				groupMemberDao.update(gmBean);
+//				
+//				groupMain.setGroupCurrentMembers(groupMain.getGroupCurrentMembers() + 1);
+//				groupMainDao.update(groupMain);
+//
+//				
+//				return gmBean.getMemberId();
+//			}
+//			else if(gmBean.getMemberId().equals(memberId) && decide.equals("reject")) {
+//				try {
+//					groupApplyList.remove(gmBean);
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				try {
+//					groupMain.getGroupMemberList().remove(gmBean);
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
+//				try {
+//					groupMemberDao.deleteByGroupMemberId(gmBean.getGroupMemberId());
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
+//				try {
+//					groupMainDao.update(groupMain);
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
+////				for(GroupMemberBean realGMBean : groupMemberDao.getAll()) {
+////					if(gmBean.equals(realGMBean)) {
+////						groupApplyList.remove(gmBean);
+////						groupMemberDao.deleteByGroupMemberId(realGMBean.getGroupMemberId());
+////						break;
+////					}
+////				}
+//			}
+//			else {
+//				System.out.println("服務失敗");
+//				return null;
+//			}
+		
+//			 else if(gmBean.getMemberId().equals(memberId) && decide.equals("reject")) {
+//				System.out.println("gmId:" + gmBean.getGroupMemberId());
+//				List<GroupMemberBean> allGM = groupMemberDao.getAll();
+//	//			for(GroupMemberBean gm : groupMemberDao.getAll()) {
+//	//				if(gm.getMemberId().equals(memberId) && gm.getGroupId().equals(groupId) && decide.equals("reject")) {
+//	//					groupMemberDao.deleteByGroupMemberId(gm.getGroupMemberId());
+//	//					break;
+//	//				}
+//	//			}
 
 //				System.out.println("刪除的GroupMemberBean" + gmBean.getGroupId());
 //				groupMemberDao.deleteByGroupMemberId(gmBean.getGroupMemberId());
 //				System.out.println("刪除成功");
 //				return null;
-			}
-		}
-		System.out.println("服務失敗");
-		return null;
+//			}
+//		}
+//		return null;
+//		
 	}
 
 	@Override
