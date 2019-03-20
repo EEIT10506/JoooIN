@@ -35,23 +35,25 @@
 	<div id="main">
 	<jsp:include page="${request.contextPath}/group/group_navbar" />
 	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"> 
+	<c:if test="${}">
+	你有資格
+	</c:if>
 	<form class="text-center">
-	<table >
+		<table >
 	
-	<tr>
-    	<th>標題:<input type="text"></input></th>
-  	</tr>
-  	<tr>
-  		<th>${member.memberId}</th>
-  	</tr>
-  	<tr>
-    	<td><textarea rows="10" cols="60"></textarea></td> 
-  	</tr>
-	<tr>
-	<td class="text-right"><button>上傳檔案</button><button>送出</button></td>
-	</tr>
-	
-	</table>
+		<tr>
+    		<th>標題:<input type="text"></input></th>
+  		</tr>
+  		<tr>
+  			<th>${sessionScope.memberId}</th>
+  		</tr>
+  		<tr>
+    		<td><textarea rows="10" cols="60"></textarea></td> 
+  		</tr>
+		<tr>
+			<td class="text-right"><button>上傳檔案</button><button>送出</button></td>
+		</tr>
+		</table>
 	
 	</form>
 
