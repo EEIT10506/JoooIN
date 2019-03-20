@@ -63,14 +63,12 @@ public class EventServiceImpl implements EventService {
 		oldBean.setEventDateEnd(updateBean.getEventDateEnd());
 		oldBean.setEventAddress(updateBean.getEventAddress());
 		oldBean.setEventContent(updateBean.getEventContent());
-		oldBean.setEventFee(updateBean.getEventFee());
 		oldBean.setEventLocation(updateBean.getEventLocation());
 		oldBean.setEventLatitude(updateBean.getEventLatitude());
 		oldBean.setEventLongitude(updateBean.getEventLongitude());
 		oldBean.setEventMemberLimit(updateBean.getEventMemberLimit());
 		oldBean.setEventTypeId(updateBean.getEventTypeId());
 		oldBean.setEventStatus(updateBean.getEventStatus());
-		oldBean.setEventFee(oldBean.getEventFee());
 		Byte[] eventImage = null;
 		if (!updateBean.getMultipartFile().isEmpty()) {
 			eventImage = ImageUtils.multipartFileToByteArray(updateBean.getMultipartFile());
