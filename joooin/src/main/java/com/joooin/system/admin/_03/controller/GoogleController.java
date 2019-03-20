@@ -118,7 +118,7 @@ public class GoogleController {
         	mmb.setMemberImage(memberImg);
         	mmb.setMemberName(resJSON.getString("given_name"));
         	mmb.setGender("male");
-        	mmb.setBirthday("2018-10-10");
+        	mmb.setBirthday("2018-10-22");
         	mmb.setCity("臺北市");
         	mmb.setPhone("0987654321");
         	mmb.setLogins(0);
