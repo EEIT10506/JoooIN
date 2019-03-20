@@ -33,19 +33,5 @@ public class GroupController {
 	public String groupPage() {
 		return "group/groups";
 	}
-
 	
-	// 進入社團發文頁面
-		@RequestMapping(method = RequestMethod.GET, value = "/group/post/{groupId}")
-		public String mainPagePost(Model model, @PathVariable Integer groupId ){
-			List<MemberMainBean> members = groupService22.getMembersInGroup(groupId);
-			model.addAttribute("membersInGroup", members);
-			
-			//for group_navbar
-			GroupMainBean groupMain = groupService22.getByGroupId(groupId);
-			model.addAttribute("groupMain", groupMain);
-			
-			
-			return "group/group_post";
-		}
 }

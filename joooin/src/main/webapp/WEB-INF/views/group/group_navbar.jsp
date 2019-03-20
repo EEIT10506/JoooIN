@@ -55,7 +55,7 @@
 									<span data-feather="file">社團成員</span>
 							</a></li>
 							<li class="nav-item"><a class="nav-link" 
-								href="${pageContext.request.contextPath}/group/post/${groupMain.groupId}"> <span
+								href="${pageContext.request.contextPath}/group/addpost/${groupMain.groupId}"> <span
 									data-feather="shopping-cart"></span> 發文
 							</a></li>
 							<li class="nav-item"><a class="nav-link" href="#"> <span

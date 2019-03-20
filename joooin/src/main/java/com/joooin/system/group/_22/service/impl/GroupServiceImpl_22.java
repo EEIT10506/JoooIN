@@ -12,9 +12,11 @@ import org.springframework.stereotype.Service;
 
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupMemberBean;
+import com.joooin.model.GroupPostBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.repository.GroupMainDao;
 import com.joooin.repository.GroupMemberDao;
+import com.joooin.repository.GroupPostDao;
 import com.joooin.repository.MemberMainDao;
 import com.joooin.system.group._22.service.GroupService_22;
 
@@ -30,6 +32,9 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 
 	@Autowired
 	GroupMemberDao groupMemberDao;
+	
+	@Autowired
+	GroupPostDao groupPostDao;
 
 	@Autowired
 	MemberMainDao memMainDao;
@@ -261,5 +266,10 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 		}
 
 		return memberInGroupList;
+	}
+
+	@Override
+	public Integer createPost(GroupPostBean groupPostBean) {
+		return groupPostDao.save(groupPostBean);
 	}
 }

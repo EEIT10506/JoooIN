@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupMemberBean;
+import com.joooin.model.GroupPostBean;
 import com.joooin.model.MemberMainBean;
 
 public interface GroupService_22 {
@@ -30,5 +31,7 @@ public interface GroupService_22 {
 	public Integer processApplyList(Integer groupId, Integer memberId, String decide);
 	
 	public List<MemberMainBean> getMembersInGroup(Integer groupId); // 取得該社團內成員
+	
+	public Integer createPost(GroupPostBean groupPostBean);
 
 }
