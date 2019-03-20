@@ -43,7 +43,7 @@
     		<th>標題:<input type="text"></input></th>
   		</tr>
   		<tr>
-  			<th>${sessionScope.memberId}</th>
+  			<th></th>
   		</tr>
   		<tr>
     		<td><textarea rows="10" cols="60"></textarea></td> 
@@ -54,8 +54,26 @@
 		</table>
 	
 	</form>
-
+<!-- 	回覆呈現出內容區塊 -->
+	<form>
+	我是回覆內容
+	</form>
+<!-- 	回覆呈現出內容區塊 -->
+<!-- 	回覆輸出區域 -->
+	<form class="text-center" action="${pageContext.request.contextPath}/group/postReply" enctype="multipart/form-data">
+	<table>
+		<tr>
+    		<td><textarea rows="10" cols="60"></textarea></td> 
+  		</tr>
+  		<tr>
+			<td class="text-right"><button class="multipartFile">上傳檔案</button><button type="submit" >回覆</button></td>
+		</tr>
+  	</table>	
+	</form>
+	
+	<!-- 	回覆輸出區域 -->
 	</div>
+
 <!-- 請把所有內容寫在此div內 -->
 
 </body>
