@@ -10,6 +10,8 @@ public class Poster {
 	private String groupPostDate;
 	private Boolean isDeleted;
 	private String memberName;
+	//待新增
+//	private String postLastDate
 	
 	public Integer getGroupPostId() {
 		return groupPostId;
