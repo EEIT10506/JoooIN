@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupMemberBean;
+import com.joooin.model.GroupPostBean;
 import com.joooin.model.MemberMainBean;
+import com.joooin.system.group._22.pojo.Poster;
 import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.system.member._27.service.MemberService;
 import com.joooin.util.ImageUtils;
@@ -38,16 +40,19 @@ public class EnterGroupController {
 	// 依照groupId個別社團主頁連結
 	@RequestMapping(method = RequestMethod.GET, value = "/group/{groupId}")
 	public String groupMainPage(Model model, @PathVariable Integer groupId) {
-		LinkedList<MemberMainBean> applyMember = new LinkedList<>();
 		GroupMainBean groupMain = groupService.getByGroupId(groupId);
 		
+		LinkedList<MemberMainBean> applyMember = new LinkedList<>();
 		for(GroupMemberBean member : groupService.getProcessGroupApplyList(groupId)) {
 			MemberMainBean memberMain = memberService.getMemberMainBean(member.getMemberId());
 			applyMember.add(memberMain);
 		}
+
+		List<Poster> groupPosters = groupService.getPostersByGroupId(groupId);
 		
 		model.addAttribute("groupMain", groupMain);
 		model.addAttribute("applyMemberMain", applyMember);
+		model.addAttribute("groupPoster", groupPosters);
 		
 		return "group/group";
 	}
