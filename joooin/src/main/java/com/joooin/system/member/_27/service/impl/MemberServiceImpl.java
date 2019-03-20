@@ -27,6 +27,7 @@ import com.joooin.repository.MemberFriendDao;
 import com.joooin.repository.MemberMainDao;
 import com.joooin.system.member._27.pojo.FriendPojo;
 import com.joooin.system.member._27.service.MemberService;
+import com.joooin.system.member._27.service.MessageService;
 import com.joooin.util.ImageUtils;
 
 @Service
@@ -46,6 +47,8 @@ public class MemberServiceImpl implements MemberService{
 	GroupMainDao groupMainDao;
 	@Autowired
 	GroupMemberDao groupMemberDao;
+	@Autowired
+	MessageService messageService;
 	
 	@Override
 	public MemberMainBean getMemberMainBean(Integer memberId) {
@@ -170,6 +173,7 @@ public class MemberServiceImpl implements MemberService{
 				pojo.setIsFriend(bean.getIsFriend());
 				pojo.setIsInviter(bean.getIsInviter());
 				pojo.setMessageHash(bean.getMessageHash());
+				pojo.setNotRead(messageService.singleFriendNotReadQuantity(bean.getReceiveMemberId(), memberId));
 				friendPojoList.add(pojo);
 			}
 		}

@@ -10,10 +10,13 @@
 			$("#event").attr("class", "list-group-item list-group-item-action active");
 		else if (location.href.search("group") != -1)
 			$("#group").attr("class", "list-group-item list-group-item-action active");
-		else if (location.href.search("message") != -1)
-			$("#message").attr("class", "list-group-item list-group-item-action active");
 		else 
 			$("#home").attr("class", "list-group-item list-group-item-action active");
+		
+		$("#message").click(function(){
+			window.open("${pageContext.request.contextPath}/member/self/message");
+			
+		});
 	});
 </script>
 <style>
@@ -21,6 +24,7 @@
 	#memberName{font-size: 20px; position: relative;top: 20px;}
 	.list-group{text-align: center;}
 	#userImage {border-radius: 100px;}
+	#message {cursor: pointer;}
 </style>
 <div id="memberImage" >
 	<img id="userImage" src="<c:url value='/getMemberImage/${memberId}.jpg' />" width="160px" />
@@ -33,6 +37,6 @@
 	<a id="friend" href="${pageContext.request.contextPath}/member/self/friend/my_friend" class="list-group-item list-group-item-action">好友清單</a>
 	<a id="event" href="${pageContext.request.contextPath}/member/self/event/my_event" class="list-group-item list-group-item-action">活動清單</a>
 	<a id="group" href="${pageContext.request.contextPath}/member/self/group/my_group" class="list-group-item list-group-item-action">社團清單</a>
-	<a id="message" href="${pageContext.request.contextPath}/member/message" class="list-group-item list-group-item-action">訊息匣</a>
+	<a id="message" class="list-group-item list-group-item-action">訊息匣</a>
 </div>
 

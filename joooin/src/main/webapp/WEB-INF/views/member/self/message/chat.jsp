@@ -48,13 +48,6 @@
     textarea {
     	padding: 15px 32px 16px 8px;
     }
-    .repliesText {
-    	text-align: right;
-    }
-    .sentText {
-    	text-align: left;
-    }
-	
 </style>
 <script>
 	
@@ -68,11 +61,20 @@
 	
 	function onMessage(message) {
 		var messageMD5 = message.data.substring(0, 32);
+		var d = new Date();
+		var month = d.getMonth() + 1;  if (month < 10) month = "0" + month;
+		var minute = d.getMinutes();   if (minute < 10) minute = "0" + minute;
+		var date = d.getFullYear() + "-" + month + "-" + d.getDate() + " " + d.getHours() + ":" + minute;
 		
 		if (myMD5 == messageMD5){
 			$('<li class="replies"><p>' + message.data.substr(32) + '</p></li>').appendTo($('.messages ul'));
+			$('<div class="repliesText" style="text-align:right;position:relative;right:10px;margin-bottom: 15px;">' + date + '</div>').appendTo($('.messages ul'));
 		} else {
 			$('<li class="sent"><p>' + message.data.substr(32) + '</p></li>').appendTo($('.messages ul'));
+			$('<div class="sentText" style="text-align:left;position:relative;left:15px;margin-bottom: 15px;">' + date + '</div>').appendTo($('.messages ul'));
+			
+// 			console.log($(":focus"));
+			
 		}
 		$('.message-input #text').val(null);
 // 		$('.contact.active .preview').html('<span>You: </span>' + message.data);
@@ -94,47 +96,12 @@
 	
 	$(document).ready(function(){
 		
-		$(".contact").click(function(){
-			var hash = $(this).children();
-			location.href = "${pageContext.request.contextPath}/member/message/" + hash[0].value;
-		});
- 		$("#messageView").animate({ scrollTop: 999999 }, "fast");
+	
 	});
 </script>
 </head>
 <body>
-
-<div id="frame">
-	<div id="sidepanel">
-		<div id="profile">
-			<div class="wrap">
-				<img id="profile-img" src="<c:url value='/getMemberImage/${myself.memberId}' />" class="online" alt="" />
-				<p id="my-name">${myself.memberName}</p>
-			</div>
-		</div>
-		<div id="search">
-			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-			<input type="text" placeholder="搜尋好友..." />
-		</div>
-		<div id="contacts">
-			<ul>
-				<c:forEach var="friends" items="${friendList}">
-					<li class="contact <c:if test="${friends.memberId == friend.memberId}">active</c:if>">
-						<input type="hidden" value="${friends.messageHash }">
-						<div class="wrap">
-							<span class="contact-status busy"></span>
-							<img src="<c:url value='/getMemberImage/${friends.memberId}.jpg' />">
-							<div class="meta">
-								<p class="name">${friends.memberName}</p>
-<!-- 								<p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p> -->
-							</div>
-						</div>
-					</li>
-				</c:forEach>
-				
-			</ul>
-		</div>
-	</div>
+	<jsp:include page="${request.contextPath}/member/self/message"/>
 <!-- 	右訊息區 -->
 	<div class="content">
 <!-- 		訊息區上方的對方頭像 -->
@@ -151,13 +118,13 @@
 							<li class="sent">				
 								<p>${message.messageText}</p>
 							</li>
-							<p class="sentText">${message.messageDate}</p>
+							<div class="sentText" style="text-align:left;position:relative;left:15px;margin-bottom: 15px;">${message.messageDate}</div>
 						</c:when>
 						<c:otherwise>
 							<li class="replies">
-								<p>${message.messageText}</p>
+								<p>${message.messageText}</p>						
 							</li>
-							<p class="repliesText">${message.messageDate}</p>
+							<div class="repliesText" style="text-align:right;position:relative;right:10px;margin-bottom: 15px;">${message.messageDate}</div>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -172,55 +139,19 @@
 		</div>
 	</div>
 </div>
-<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-<script >
 
-	$(".messages").animate({ scrollTop: $(document).height() }, "fast");
-	
-	$("#profile-img").click(function() {
-		$("#status-options").toggleClass("active");
-	});
-	
-	$(".expand-button").click(function() {
-	  $("#profile").toggleClass("expanded");
-		$("#contacts").toggleClass("expanded");
-	});
-	
-	$("#status-options ul li").click(function() {
-		$("#profile-img").removeClass();
-		$("#status-online").removeClass("active");
-		$("#status-away").removeClass("active");
-		$("#status-busy").removeClass("active");
-		$("#status-offline").removeClass("active");
-		$(this).addClass("active");
-		
-		if($("#status-online").hasClass("active")) {
-			$("#profile-img").addClass("online");
-		} else if ($("#status-away").hasClass("active")) {
-			$("#profile-img").addClass("away");
-		} else if ($("#status-busy").hasClass("active")) {
-			$("#profile-img").addClass("busy");
-		} else if ($("#status-offline").hasClass("active")) {
-			$("#profile-img").addClass("offline");
-		} else {
-			$("#profile-img").removeClass();
-		};
-		
-		$("#status-options").removeClass("active");
-	});
-	
-	
+<script>
+
 	var myMD5 = hex_md5("${myself.memberId}");
 	
 	$('#send').click(function() {
 		var text = $("#text").val();
 		if($.trim(text) == '') return false;
-     
         var receiveMemberId = "${friend.memberId}";
 		
 		$.ajax({
 		    type: "POST",                           
-		    url: "${pageContext.request.contextPath}/member/message/saveText",
+		    url: "${pageContext.request.contextPath}/member/self/message/saveText",
 		    data: {"text": text, "receiveMemberId": receiveMemberId, "messageHash": "${hash}"},
 		});
 		
@@ -233,6 +164,5 @@
 			return false;
 		}
 	});
-//# sourceURL=pen.js
 </script>
 </body></html>

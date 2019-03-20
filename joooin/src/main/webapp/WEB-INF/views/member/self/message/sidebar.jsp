@@ -33,14 +33,9 @@
 		position: relative;
 		top: -5px;
 	}
-	#tip {
-		font-size: 30px;
-		text-align: center;
-		vertical-align: middle;
-		position: absolute;
-		left: 30%;
-		top: 50%;
-		height: 500px;
+	.name {
+		width: 70%;
+		display: inline;
 	}
 </style>
 <script>
@@ -48,14 +43,12 @@
 		
 		$(".contact").click(function(){
 			var hash = $(this).children();
-			location.href = "${pageContext.request.contextPath}/member/message/" + hash[0].value;
+			alert(hash[0].value);
+			location.href = "${pageContext.request.contextPath}/member/self/message/" + hash[0].value;
 		});
 		
 	});
 </script>
-</head>
-<body>
-
 <div id="frame">
 	<div id="sidepanel">
 		<div id="profile">
@@ -70,25 +63,18 @@
 		</div>
 		<div id="contacts">
 			<ul>
-<!-- 				<li class="contact"> -->
-<!-- 					<div class="wrap"> -->
-<!-- 						<span class="contact-status online"></span> -->
-<!-- 						<img src="http://emilcarlsson.se/assets/louislitt.png" alt="" /> -->
-<!-- 						<div class="meta"> -->
-<!-- 							<p class="name">Louis Litt</p> -->
-<!-- 							<p class="preview">You just got LITT up, Mike.</p> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</li> -->
 				<c:forEach var="friend" items="${friendList}">
-					<li class="contact">
+					<li class="contact" onclick="">
 						<input type="hidden" value="${friend.messageHash }">
 						<div class="wrap">
 							<span class="contact-status busy"></span>
 							<img src="<c:url value='/getMemberImage/${friend.memberId}.jpg' />">
 							<div class="meta">
-								<p class="name">${friend.memberName}</p>
-<!-- 								<p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p> -->
+								<p class="name" style="">${friend.memberName}</p>
+								<c:if test="${friends.notRead != 0}">
+									<p class="not-read" style="bottom: 8px;position: relative;text-align: right;">未讀：${friends.notRead}</p>
+								</c:if>
+<!--	<p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p> -->
 							</div>
 						</div>
 					</li>
@@ -98,10 +84,6 @@
 		</div>
 	</div>
 <!-- 	右訊息區 -->
-	<div class="content">
-		<div id="tip">請點選好友進行聊天</div>
-	</div>
-</div>
 <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
 <script >
 
@@ -138,20 +120,4 @@
 		
 		$("#status-options").removeClass("active");
 	});
-	
-	
-	$('.submit').click(function() {
-		var message = $("#text").val();
-		if($.trim(message) == '') return false;
-		send(message);
-	});
-	
-	$('.submit').on('keypress', function(e) {
-		if (e.which == 13) {
-			newMessage();
-			return false;
-		}
-	});
-//# sourceURL=pen.js
 </script>
-</body></html>

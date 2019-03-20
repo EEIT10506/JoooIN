@@ -79,9 +79,6 @@
 			});
 		});
 
-		
-		
-		
 		//DataTable
 		var language = {
 		        "zeroRecords": "沒有結果",

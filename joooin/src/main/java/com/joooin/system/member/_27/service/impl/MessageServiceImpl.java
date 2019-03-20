@@ -36,9 +36,9 @@ public class MessageServiceImpl implements MessageService {
 		for (MemberFriendBean bean : list) {
 			if (bean.getInviteMemberId().equals(memberId) && bean.getMessageHash().equals(messageHash)) {
 				friendId = bean.getReceiveMemberId();
-				System.out.println(bean.getReceiveMemberId());
 			}
 		}
+		System.out.println(friendId);
 		return memberService.getMemberMainBean(friendId);
 	}
 
@@ -46,7 +46,7 @@ public class MessageServiceImpl implements MessageService {
 	public void saveTextMessage(Integer sendMemberId, Integer receiveMemberId, String messageHash, String text) {
 		MemberChatBean bean = new MemberChatBean();
 		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		String sd = sdf.format(date);	
 		
 		bean.setSendMemberId(sendMemberId);
@@ -70,6 +70,30 @@ public class MessageServiceImpl implements MessageService {
 			}
 		}
 		return myList;
+	}
+
+	@Override
+	public Integer singleFriendNotReadQuantity(Integer sendMemberId, Integer receiveMemberId) {
+		List<MemberChatBean> list = memberChatDao.getAll();
+		Integer quantity = 0;
+		
+		for (MemberChatBean bean : list) {
+			if (bean.getSendMemberId().equals(sendMemberId) && bean.getReceiveMemberId().equals(receiveMemberId) && !bean.getIsRead())
+				quantity++;
+		}
+		return quantity;
+	}
+
+	@Override
+	public Integer allFriendNotReadQuantity(Integer receiveMemberId) {
+		List<MemberChatBean> list = memberChatDao.getAll();
+		Integer quantity = 0;
+		
+		for (MemberChatBean bean : list) {
+			if (bean.getReceiveMemberId().equals(receiveMemberId) && !bean.getIsRead())
+				quantity++;
+		}
+		return quantity;
 	}
 	
 	

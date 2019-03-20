@@ -6,6 +6,7 @@ public class FriendPojo {
 	private Boolean isFriend;
 	private Boolean isInviter;
 	private String messageHash;
+	private Integer notRead;
 	
 	public Integer getMemberId() {
 		return memberId;
@@ -36,6 +37,12 @@ public class FriendPojo {
 	}
 	public void setMessageHash(String messageHash) {
 		this.messageHash = messageHash;
+	}
+	public Integer getNotRead() {
+		return notRead;
+	}
+	public void setNotRead(Integer notRead) {
+		this.notRead = notRead;
 	}
 	
 	
