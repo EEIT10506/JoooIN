@@ -206,7 +206,7 @@
 								      </div>
 								      <div class="modal-body">是否確認修改密碼？</div>
 								      <div class="modal-footer">
-								      	<button id="checkPwdBtn" type="submit" class="btn btn-primary">確認修改</button>
+								      	<button type="submit" class="btn btn-primary">確認修改</button>
 								        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消修改</button>
 								      </div>
 								    </div>
