@@ -78,12 +78,6 @@ public class EnterGroupController {
 		return "group/group_members";
 	}
 
-	// 傳回社團主頁的照片
-	@RequestMapping(value = "/getGroupImage/{groupId}", method = RequestMethod.GET)
-	public ResponseEntity<byte[]> getGroupImage(@PathVariable Integer groupId) {
-		GroupMainBean bean = groupService.getByGroupId(groupId);
-		return ImageUtils.byteArrayToImage(bean.getGroupImage());
-	}
 
 	// 處理加入或進入{groupId}社團
 	@RequestMapping(method = RequestMethod.POST, value = "/group/addgroup/{groupId}")

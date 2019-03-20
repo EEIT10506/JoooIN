@@ -11,12 +11,11 @@
 <script>
 	$(document).ready(function(){
 		var url = location.href;
-		$(".friend-link").removeClass("active");
 		
 		if (url.search("my_event") != -1)
 			$("#my-event-link").addClass("active");
 		if (url.search("joined_event") != -1)
-			$("#joined_event-link").addClass("active");
+			$("#joined-event-link").addClass("active");
 		if (url.search("request_event") != -1)
 			$("#request-event-link").addClass("active");
 		if (url.search("like_event") != -1)
@@ -29,8 +28,8 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav event-navbar">
       <a href="${pageContext.request.contextPath}/member/self/event/my_event" id="my-event-link" class="event-link nav-item nav-link" href="#">我所創立</a>　　　
-       <a href="${pageContext.request.contextPath}/member/self/event/joined_event" id="joined_event-link" class="event-link nav-item nav-link" href="#">報名成功</a>　　　
-      <a href="${pageContext.request.contextPath}/member/self/event/request_event" id="request-event-link" class="event-link nav-item nav-link" href="#">提出報名</a>　　
+      <a href="${pageContext.request.contextPath}/member/self/event/joined_event" id="joined-event-link" class="event-link nav-item nav-link" href="#">報名成功</a>　　　
+      <a href="${pageContext.request.contextPath}/member/self/event/request_event" id="request-event-link" class="event-link nav-item nav-link" href="#">待接受報名</a>　　
       <a href="${pageContext.request.contextPath}/member/self/event/like_event" id="like-event-link" class="event-link nav-item nav-link" href="#">喜歡</a>　　
     </div>
   </div>

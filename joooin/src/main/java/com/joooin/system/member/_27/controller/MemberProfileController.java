@@ -13,7 +13,7 @@ import com.joooin.model.MemberMainBean;
 import com.joooin.system.member._27.service.MemberService;
 
 @Controller
-public class ProfileController {
+public class MemberProfileController {
 	@Autowired
 	MemberService memberService;
 	@Autowired

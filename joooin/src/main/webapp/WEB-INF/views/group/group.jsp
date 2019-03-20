@@ -63,9 +63,6 @@ div {
 <script>
 
 
-
-		  
-
 	$(document).ready(function() {
 		$('#table_id').DataTable();
 	});
@@ -77,6 +74,7 @@ div {
 		var target_div2 = "#" + target + "_div2";
 		$(target_div2).hide();
 		var target_div3 = "#" + target + "_div3";
+
 		$(target_div3).hide();
 
 		

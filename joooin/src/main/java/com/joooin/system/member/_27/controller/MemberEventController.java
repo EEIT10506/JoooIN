@@ -7,36 +7,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.joooin.system.member._27.service.MemberService;
 
 @Controller
 public class MemberEventController {
 	@Autowired
 	MemberService memberService;
-	                       
-//	@RequestMapping(value = "/member/friendShow", method = RequestMethod.GET)
-//	public @ResponseBody String friendShow(Integer otherMemberId, HttpSession session) {
-//		Integer selfMemberId = (Integer)session.getAttribute("memberId");
-//		
-//		if (selfMemberId != null) {
-//			return memberService.checkFriendStatus(selfMemberId, otherMemberId);
-//		} else {
-//			return "NOT_FRIEND";
-//		}
-//	}
-//	 
-//	@RequestMapping(value = "/member/friendProcess", method = RequestMethod.POST)
-//	public @ResponseBody String friendProcess(Integer otherMemberId, String process, HttpSession session) {
-//		Integer selfMemberId = (Integer)session.getAttribute("memberId");
-//		
-//		if (selfMemberId != null) {
-//			memberService.friendProcess(selfMemberId, otherMemberId, process);
-//			return null;
-//		} else {
-//			return "not_login";
-//		}
-//	}
-//	                         
+	                                               
 	@RequestMapping(value = "/member/self/event/{link}", method = RequestMethod.GET)
 	public String getEvents(@PathVariable String link, HttpSession session, Model model) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
@@ -49,4 +28,39 @@ public class MemberEventController {
 		}	
 	}
 
+	@RequestMapping(value = "/member/deleteEvent", method = RequestMethod.POST)
+	public @ResponseBody String deleteEvent(Integer eventId, HttpSession session) {
+		Integer memberId = (Integer)session.getAttribute("memberId");
+		
+		if (memberId != null) {
+			memberService.deleteEvent(memberId, eventId);
+			return null;
+		} else {
+			return "not_login";
+		}	
+	}
+	
+	@RequestMapping(value = "/member/cancelEvent", method = RequestMethod.POST)
+	public @ResponseBody String cancelEvent(Integer eventId, HttpSession session) {
+		Integer memberId = (Integer)session.getAttribute("memberId");
+		
+		if (memberId != null) {
+			memberService.cancelEvent(memberId, eventId);
+			return null;
+		} else {
+			return "not_login";
+		}	
+	}
+	
+	@RequestMapping(value = "/member/noLikeEvent", method = RequestMethod.POST)
+	public @ResponseBody String noLikeEvent(Integer eventId, HttpSession session) {
+		Integer memberId = (Integer)session.getAttribute("memberId");
+		
+		if (memberId != null) {
+			memberService.noLikeEvent(memberId, eventId);
+			return null;
+		} else {
+			return "not_login";
+		}	
+	}
 }

@@ -38,11 +38,13 @@
 	
 	.body{
 		font-family:微軟正黑體;
+/* 		background-color:#F5F5F5; */
 		background-color:#F5F5F5;
 		font-weight:bold;
 	}
 	.outer{
-		background-color:#FFDEAD;
+/* 		background-color:#FFDEAD; */
+		background-color:#FFEDCB;
 		width:75%;
 		margin: auto;
 /* 		border:1px solid #DCDCDC; */
@@ -71,7 +73,7 @@
 	}
 	#allMessage{
  		width:1200px; 
- 		height:400px; 
+  		height:300px;    
 		overflow-y: scroll;
 		overflow-x: hidden;
  		margin-right:200px; 
@@ -170,12 +172,12 @@
 		font-family:微軟正黑體 !important;
 		font-size:18px !important;
 		font-weight:bold !important;
- 		left:180px; 
+ 		left:100px; 
 		
 	}
 	.eventCancels{
 		position:relative;
- 		left:180px; 
+ 		left:100px; 
 		top:3px;
 		font-weight:bold !important;
 	}
@@ -189,7 +191,8 @@
 	}
 	.messageContent{
 		word-break:break-all;
- 		width:60%; 
+  		width:60%;  
+	
 		margin:auto;
  		margin-left:100px; 
 	}
@@ -248,11 +251,11 @@
 		opacity:0.8;
 	}
 	.backButton{
-		margin-left:800px;
+  		margin-left:170px;  
+  		margin-top:45px;  
 	}
 	.deleteMessage{
  		float:left; 
- 		margin-left:0px;
 /*  		margin-left:700px;  */
 	}
 	.addressShow{
@@ -263,6 +266,8 @@
 		font-size:30px;
  		color:black; 
 		text-decoration:none !important;
+		
+		height:50px;
 	}
  	.joinIsAgreedName:hover{ 
  		text-decoration:none !important; 
@@ -303,6 +308,11 @@
  		font-weight:700px;  
 		text-align:center;  
  	}  
+ 	.delete{
+		width:50px;
+		height:25px; 
+		font-size:12px !important;	
+ 	}  
 </style>
 <script>
 function ValidateNumber(e, pnumber)
@@ -314,22 +324,15 @@ function ValidateNumber(e, pnumber)
     return false;
 }
  	$(document).ready(function(){
-// 		按讚收回
-		
-//  		$("#allmessage").scroll();
-// 		$("#e${event.eventId}").click(function(){
-// 			//var liked = $("#e${event.eventId }");
-// 			if($("#e${event.eventId }").attr("class") == "btn btn-default eventNotLike"){
-// 				$(this).removeClass("eventNotLike");
-// 			    $(this).addClass("eventLike");
-// 			    $(this).html("<i class='far fa-thumbs-up'></i> 讚");
-			   
-// 			}else {
-// 				$(this).removeClass("eventLike");
-// 				$(this).addClass("eventNotLike");
-// 			    $(this).html("<i class='far fa-thumbs-up'></i> 讚");
-// 			}
-// 		});
+ 		
+ 	
+ 		var message = $("#allMessage").val();
+ 		if(message != null){
+ 			$("#allMessage").attr("height", "400px");
+ 		}else{
+ 			$("#allMessage").attr("height", "0px");
+ 		}
+ 		
 // 		先隱藏 點地址顯示
 		$("#eventAddressImage").hide();
 		$(".eventaddress").click(function(){
@@ -340,43 +343,40 @@ function ValidateNumber(e, pnumber)
 			history.go(-1);
 		});
 // 		按讚 
-	
+ 	   	
+ 	   	var eventId = ${event.eventId};
+			$.ajax({
+				type: "POST",                           
+	    	    url: "${pageContext.request.contextPath}/event/checkLike/"+eventId,
+	    	    data: {"eventId": eventId},
+	    	    success: function (check){
+	    	    	if(check=="liked"){
+	    	    		$("#e${event.eventId }").attr("class", "btn btn-default eventLike");
+	    	    	}else{
+	    	    		$("#e${event.eventId }").attr("class", "btn btn-default eventNotLike");
+	    	    	}
+	    	    } 
+			});
 		
 		
-		
-// }	
- 	    $("#e${event.eventId}").click();
 	    $("#e${event.eventId}").click(function(){
-// 		setTimeout("Autofresh()",2000);
-	    	      var eventId = ${event.eventId};
-	    	
+	    	$("#e${event.eventId}").toggleClass("eventNotLike eventLike");
+	      var eventId = ${event.eventId};
 	    	 $.ajax({
 	    	    type: "POST",                           
 	    	    url: "${pageContext.request.contextPath}/event/goods/"+eventId,
 	    	    data: {"eventId": eventId},
 	    	    success: function (result) {
-	    	    	if (result=="realLike") {
-	    	    		$("#e${event.eventId }").attr("class", "btn btn-default eventLike");
-	    					$("#e${event.eventId }").removeClass("eventNotLike");
-	    					
-	    	    			var a = parseInt($(".eventLikeNum").html());
-	                    	 a++;
+	    	    	if (result != -4) {
+	    					 var a = result;
 	                    	 $(".eventLikeNum").html(a);
-		    	    }else if(result=="not_login"){
-		    	    	location.href = "${pageContext.request.contextPath}/not_Login";
 		    	    }else{ 
-		    	    	var b = parseInt($(".eventLikeNum").html());
-	                     b--;
-	                     $(".eventLikeNum").html(b);
-
-	                    	$("#e${event.eventId }").attr("class", "btn btn-default eventNotLike");
-							$("#e${event.eventId }").removeClass("eventLike");
+	                    	location.href = "${pageContext.request.contextPath}/not_Login";
 	    	    	     }
 	   	    	   } 
 	    	});
 	    });
 	});
-	
 </script>
 <title>Insert title here</title></head>
 <body class="body">
@@ -395,7 +395,7 @@ function ValidateNumber(e, pnumber)
 				</c:when>	<c:when test="${eventtype.eventType == '娛樂'}">
 			<span class="eventtype"><img class="eventtypeimg" src="<c:url value='/resources/img/icon_entertainment_01.png' />" />休閒娛樂</span>
 				</c:when>	<c:when test="${eventtype.eventType == '其他'}">
-			<span class="eventtype"><img class="eventtypeimg" src="<c:url value='/resources/img/icon_other_01.png' />" />綜合</span>
+			<span class="eventtype"><img class="eventtypeimg" src="<c:url value='/resources/img/icon_other_01.png' />" />其他</span>
 				</c:when>
 			</c:choose>
 			<c:choose >
@@ -419,12 +419,9 @@ function ValidateNumber(e, pnumber)
 			   <c:if test="${memberId == inviterid}">
 			 <span class="eventmodify">
 			
-			 <form class="manager" action="${pageContext.request.contextPath}/event/setting/${event.eventId}" method="POST">
-			
-			 <input type="text" class="hid" name="eventAdminId" value="${event.eventId}">
-			 
-			 <input type="submit" value="活動管理" class="btn btn-dark manager">
-			 </form>
+			<a href="${pageContext.request.contextPath}/event/setting/${event.eventId}">
+			 <button type="button" class="btn btn-dark manager">活動管理</button>
+			 </a>
 			 </span>
 				</c:if>
 			
@@ -449,30 +446,23 @@ function ValidateNumber(e, pnumber)
     				</c:otherwise>
     				</c:choose>
     				
-    				<p class="eventliketotal"><i class="far fa-thumbs-up">&nbsp;</i><span class="eventLikeNum"> ${event.eventLike}</span> 個人覺得讚</p><hr class="hrr">
+    				<p class="eventliketotal"><i class="far fa-thumbs-up">&nbsp;</i><span class="eventLikeNum">${event.eventLike}</span> 個人覺得讚</p><hr class="hrr">
  
  <p>
- 			
- 			<c:if test="${empty likedCheck}">
     		<span id="likedspan">
-    		 <button type="button" id="e${event.eventId }" class="btn btn-default eventNotLikeStart"><i class="far fa-thumbs-up"></i> 讚</button>
+    		 <button type="button" id="e${event.eventId }" class="btn btn-default eventNotLike"><i class="far fa-thumbs-up"></i> 讚</button>
     		</span>
-    		</c:if>
-  			
-   			<c:if test="${!empty likedCheck}"> 
-    		<span id="likedspan">
-    		 <button type="button" id="e${event.eventId }" class="btn btn-default eventLike"><i class="far fa-thumbs-up"></i> 讚</button>
-    		</span>
-  			</c:if>
-  			
 
   <span id="joinOrNot">
 		<c:if test="${memberId != inviterid and memberCheck == false and event.eventStatus == 'unchecked' and event.isFull == false and finish != false}">
-				<button type="button" id="signUp" class="btn btn-success eventJoin" data-toggle="modal" data-target="#exampleModalCenter">報名</button>
+				<button type="button" id="signUp" class="btn btn-success eventJoin" data-toggle="modal" data-target="#exampleModalCenter">報名活動</button>
 		</c:if>
-		<c:if test="${memberId != inviterid and memberCheck != false and event.eventStatus == 'unchecked' and finish != false}">
-				<button type="button" readonly id="joinWaitCheck" class="btn btn-success eventJoin joinWaitCheck">報名中</button>
+		<c:if test="${memberId != inviterid and memberCheck != false and event.eventStatus == 'unchecked' and finish != false and myAgreed == false}">
+				<button type="button" readonly id="joinWaitCheck" class="btn btn-success eventJoin joinWaitCheck">報名申請中</button>
  		</c:if>	
+ 		<c:if test="${memberId != inviterid and memberCheck != false and event.eventStatus == 'unchecked' and finish != false and myAgreed == true}">
+				<button type="button" readonly id="joinWaitCheck" class="btn btn-success eventJoin joinWaitCheck">報名已成功</button>
+ 		</c:if>
  </span> 	
     		<span>
     		 <c:if test="${memberId != inviterid and memberCheck != false and event.eventStatus == 'unchecked' and finish != false}">
@@ -494,14 +484,10 @@ function ValidateNumber(e, pnumber)
       			<c:if test="${finish == false}">
       				<span class="eventtime">活動時間 :${event.eventDateStart} - ${event.eventDateEnd}<p><span style="background-color:red;color:white;font-size:20px;margin-left:20px;">活動已結束</span></p></span>		
       			</c:if>
-<%--       			<c:if test="${finish == false}"> --%>
-<!--       						<span></span> -->
-<%--       			</c:if> --%>
-      			
       		</p>
       		<p class="eventaddress">
       				<i class="fas fa-map-marker-alt">
-      					<span class="addressShow">地點 : ${event.eventLocation} ,${event.eventAddress}</span>
+      					<span class="addressShow">地點 : ${event.eventLocation}</span>
       				</i>
       		</p>
       			<iframe id="eventAddressImage" width='350' height='200' frameborder='0' scrolling='no' marginheight='0' marginwidth='0'  
@@ -517,19 +503,25 @@ function ValidateNumber(e, pnumber)
       		<p>人數限制 : 
       			<span>${event.eventMemberLimit} 人</span>
       		</p>
+      		<p>費用 : 
+      			<span>${event.eventFee} $</span>
+      		</p>
       		<p>活動內容 : 
       			<span> ${event.eventContent}</span>
       		</p>
+      		<span class="backButton">
+   				<a href="${pageContext.request.contextPath}/events" id="backbutton"class="btn btn-secondary btn-lg backButton active" role="button" aria-pressed="true">返回</a>
+   			</span>
      			 </div>
    			</div>
-   		<div>
-   			<span class="backButton">
-   				<a href="#" id="backbutton"class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">返回</a>
-   			</span>
-   		</div><hr class="hrr"/>
-   		<p class="PostTitle" >留言版</p>
-  	   <div class="leavemessage">
+<!--    		<div> -->
+   			
+<!--    		</div> -->
+   		<hr class="hrr"/>
+   		<p class="PostTitle" >留言板</p>
   	  
+  	  
+  	   <div class="leavemessage">
   	   	<div class="hidAllMessage">
   	   	<div id="allMessage">
 <!--   	   	各留言 -->
@@ -545,7 +537,7 @@ function ValidateNumber(e, pnumber)
   	   			<form class="deleteMessage" action="${pageContext.request.contextPath}/DeleteEventPost" method="Post">
   	   				<input type="text" class="hid" name="eventPostId" value="${getPostContentlist.eventPostId}"/>  
   	   				<input type="text" class="hid" name="eventId" value="${event.eventId}">  
-  	   				<button id="" type="submit" class="btn btn-danger">Delete</button>
+  	   				<button id="" type="submit" class="btn btn-dark delete" >刪除</button>
   	   			</form>
   	   			</span>
   	   		</c:if>
@@ -554,7 +546,7 @@ function ValidateNumber(e, pnumber)
   	   			<form class="deleteMessage" action="${pageContext.request.contextPath}/DeleteEventPost" method="Post">
   	   				<input type="text" class="hid" name="eventPostId" value="${getPostContentlist.eventPostId}"/>  
   	   				<input type="text" class="hid" name="eventId" value="${event.eventId}">  
-  	   				<button id="" type="submit" class="btn btn-danger">Delete</button>
+  	   				<button id="" type="submit" class="btn btn-dark delete">刪除</button>
   	   			</form>
   	   			</span>
   	   		</c:if>
@@ -597,9 +589,10 @@ function ValidateNumber(e, pnumber)
             	<span><img src="<c:url value='/getMemberImage/${emfindagreed.memberId}.jpg' />" width="50px" height="50px" style="border-radius:25px;"/></span>
           	   
           	   <span >${emfindagreed.memberName}</span>
+          	   
             </p>
             </a>
-          	<hr/>
+<!--             <hr/> -->
         </c:forEach>
       </div>
       <div class="modal-footer">

@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.mail.MessagingException;
@@ -153,6 +154,22 @@ public class RegisterServiceImpl implements RegisterService {
 	@Override
 	public void certificationChangeStatus(String certificationHash) {
 		dao.activeUser(certificationHash);
+	}
+
+	@Override
+	public MemberMainBean getMemberByEmail(String email) {
+		List<MemberMainBean> list = dao.getAll();
+		for(MemberMainBean mmb : list) {
+			if(mmb.getEmail().equals(email)) {
+				return mmb;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public void googleSave(MemberMainBean mmb) {
+		dao.save(mmb);
 	}
 
 }
