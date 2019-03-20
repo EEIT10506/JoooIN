@@ -99,14 +99,14 @@ display:inline !important;
 					<form:input path='eventName' required="required" maxlength="10" />
 				<p></p>
 					開始時間:<span class="input-group date" id="datetimepicker1" data-target-input="nearest" style="width:300px">
-					<form:input id="sd" path='eventDateStart' class="form-control datetimepicker-input" data-target="#datetimepicker1" required="required" type="datetime-local"/>
+					<form:input id="sd" path='eventDateStart' class="form-control datetimepicker-input" data-target="#datetimepicker1" required="required"/>
 					  <span class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker" >
                         <span class="input-group-text"><i class="fa fa-calendar" ></i></span>
                     </span> 
                 </span>
 				<p></p>
 					結束時間: <span class="input-group date" id="datetimepicker2" data-target-input="nearest" style="width:300px">
-					<form:input id="ed" path='eventDateEnd' class="form-control datetimepicker-input" data-target="#datetimepicker2" required="required" type="datetime-local" />
+					<form:input id="ed" path='eventDateEnd' class="form-control datetimepicker-input" data-target="#datetimepicker2" required="required"/>
 					<span class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
                         <span class="input-group-text" ><i class="fa fa-calendar"></i></span>
                     </span>
@@ -194,7 +194,7 @@ display:inline !important;
 							地區:<input type="text" id="loc" style="width: 150px" /> 
 							
 					<div class="div"><span class="input-group date" id="datetimepicker3" data-target-input="nearest" style="width:300px;display:inline !important">   
-					時間:<input id="dcheck" class="form-control datetimepicker-input" data-target="#datetimepicker3" type="datetime-local" style="width:250px;display:inline !important"/>
+					時間:<input id="dcheck" class="form-control datetimepicker-input" data-target="#datetimepicker3"  style="width:250px;display:inline !important"/>
 					  <span class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker" style="display:inline !important">
                         <span class="input-group-text" style="display:inline !important"><i class="fa fa-calendar" style="display:inline !important"></i></span>
                     </span>
@@ -206,15 +206,16 @@ display:inline !important;
 						
 				<thead>
 					<tr>
-						<th>活動種類</th>
-						<th>活動名稱</th>
-						<th>活動地點</th>
-						<th>活動地址</th>
+						<th>種類</th>
+						<th>名稱</th>
+						<th>地點</th>
+						<th>地址</th>
 						<th>開始時間</th>
 						<th>結束時間</th>
 						<th>上限人數</th>
 						<th>目前人數</th>
 						<th>人數已滿</th>
+						<th>給讚</th>
 						<th>活動地圖</th>
 
 					</tr>
@@ -232,7 +233,6 @@ display:inline !important;
     其他
   </c:if></td>
 							<td><a href="${pageContext.request.contextPath}/event/${event.eventId}">${event.eventName}</a>
-								<p style="margin:0px; padding:0px"></p><button id="e${event.eventId}" value="${event.eventId}" class="likeBtn btn btn-primary btn-sm">讚:${event.eventLike}</button>
 							</td>
 							<td>${event.eventLocation}</td>
 							<td>${event.eventAddress}</td>
@@ -245,6 +245,7 @@ display:inline !important;
       </c:if> <c:if test="${event.isFull==false}">
               未滿
      </c:if></td>
+                            <td><button id="e${event.eventId}" value="${event.eventId}" class="likeBtn btn btn-primary btn-sm">讚:${event.eventLike}</button></td>
 							<td><button type="button" id="m${event.eventId}" class="btn btn-success eventJoin" data-toggle="modal" data-target="#map${event.eventId}">地圖</button></td>
 						</tr>
 							
@@ -284,7 +285,6 @@ $(function () {
     
     $('#datetimepicker1').datetimepicker({
     locale: moment.locale('zh-tw'),
-    format:"YYYY-MM-DDTHH:mm",
     minDate:today		           
     });   
 
@@ -292,13 +292,12 @@ $(function () {
     $('#datetimepicker2').datetimepicker({
     locale: moment.locale('zh-tw'),	
     useCurrent: false,
-    format:"YYYY-MM-DDTHH:mm",
     minDate:today
     });
     
     $('#datetimepicker3').datetimepicker({
-    	locale: moment.locale('zh-tw'),
-        format:"YYYY-MM-DDTHH:mm"        		           
+    	locale: moment.locale('zh-tw')
+               		           
         });  
     
     $("#datetimepicker1").on("change.datetimepicker", function (e) {
@@ -401,8 +400,6 @@ function search(){
 
      table.column(0).search(args1).column(3).search(args2).
      draw();
-    
-     showLikeNum();
 
 }
 </script>
@@ -428,33 +425,62 @@ function newEventProcess(){
 }
 
 var table;
+var array = $(".likeBtn");
+
+
+//顯示讚
+ <c:forEach var='event' items='${AllEvents}'>
+$.ajax({
+    type: "POST",                           
+    url: "${pageContext.request.contextPath}/event/good/dis/"+${event.eventId},
+    data: {"eventId": ${event.eventId}}, 
+    success: function (result) {
+
+    	//var array = document.getElementsByClassName("likeBtn");
+    	 
+    	for (var i = 0; i < array.length; i++){
+    		if (array[i].value == ${event.eventId} && result.substr(0,1)=="n"){
+    			array[i].innerHTML ="讚:"+result.substr(1);
+    		    array[i].className = "likeBtn btn btn-secondary btn-sm";}
+    		    
+    	  else if (array[i].value == ${event.eventId} && result.substr(0,1)=="y"){
+        		array[i].innerHTML ="讚:"+result.substr(1);
+    	    	array[i].className = "likeBtn btn btn-primary btn-sm";}	    
+    	}
+	 
+    }
+});
+</c:forEach>
+
+    var good;
+    //按讚功能   
+    $(".likeBtn").click(function(){
+    	$(this).toggleClass('btn-primary btn-secondary');
+    	var eventId = $(this).val();
+    	
+    	good = $(this);
+    	//alert(array.length);
+    	//alert(array2.length);
+    	$.ajax({
+    	    type: "POST",                           
+    	    url: "${pageContext.request.contextPath}/event/good/"+eventId,
+    	    data: {"eventId": eventId},
+    	    success: function (result) {
+    	    	if (result==-5)
+    	    		{location.href = "${pageContext.request.contextPath}/notLogin";}
+    	    	else {
+    	    		
+	    	    }
+    	    	good.html("讚:"+result);
+    	    	
+   	    	}
+    	});
+    });
+
+
 
 $(document).ready(function () {
 
-	//顯示讚
-	 <c:forEach var='event' items='${AllEvents}'>
-	$.ajax({
-	    type: "POST",                           
-	    url: "${pageContext.request.contextPath}/event/good/dis/"+${event.eventId},
-	    data: {"eventId": ${event.eventId}}, 
-	    success: function (result) {
-
-	    	var array = document.getElementsByClassName("likeBtn");
-	    	 
-	    	for (var i = 0; i < array.length; i++){
-	    		if (array[i].value == ${event.eventId} && result.substr(0,1)=="n"){
-	    			array[i].innerHTML ="讚:"+result.substr(1);
-	    		    array[i].className = "likeBtn btn btn-secondary btn-sm";}
-	    		    
-	    	  else if (array[i].value == ${event.eventId} && result.substr(0,1)=="y"){
-	        		array[i].innerHTML ="讚:"+result.substr(1);
-	    	    	array[i].className = "likeBtn btn btn-primary btn-sm";}	    
-	    	}
- 	 
-	    }
-	});
-	</c:forEach>
-	
 	//table = $('#showevents').DataTable();
 	 
 	// 切換顯示 新增活動與尋找活動
@@ -466,32 +492,7 @@ $(document).ready(function () {
     	$("#newdiv").hide();
     	$("#getdiv").show();
     });
-  
-    //按讚功能   
-    $(".likeBtn").click(function(){
-    	$(this).toggleClass('btn-primary btn-secondary');
-    	var eventId = $(this).val();
-    	//alert(eventId);
-    	$.ajax({
-    	    type: "POST",                           
-    	    url: "${pageContext.request.contextPath}/event/good/"+eventId,
-    	    data: {"eventId": eventId},
-    	    success: function (result) {
-    	    	if (result==-5)
-    	    		{location.href = "${pageContext.request.contextPath}/notLogin";}
-    	    	else {
-    	    		
-	    	    }
-    	    	
-    	    	var array = document.getElementsByClassName("likeBtn");
-    	    	
-    	    	for (var i = 0; i < array.length; i++){
-    	    		if (array[i].value == eventId)
-    	    			array[i].innerHTML ="讚:"+result;
-    	    	}
-   	    	}
-    	});
-    });
+
 
 	//活動時間驗證處理 
     var now = new Date();

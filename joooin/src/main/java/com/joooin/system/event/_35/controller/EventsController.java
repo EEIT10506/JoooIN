@@ -103,7 +103,7 @@ public class EventsController {
 		//event.getEventDateStart();
 		//event.getEventDateEnd();
 		
-	    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+	    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 	    SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
 	    Date dates = null;
