@@ -42,7 +42,7 @@
     	<th>標題:<input type="text"></input></th>
   	</tr>
   	<tr>
-  		<th></th>
+  		<th>${member.memberId}</th>
   	</tr>
   	<tr>
     	<td><textarea rows="10" cols="60"></textarea></td> 
