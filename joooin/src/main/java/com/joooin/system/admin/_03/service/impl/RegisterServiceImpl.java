@@ -167,4 +167,9 @@ public class RegisterServiceImpl implements RegisterService {
 		return null;
 	}
 
+	@Override
+	public void googleSave(MemberMainBean mmb) {
+		dao.save(mmb);
+	}
+
 }

@@ -80,7 +80,8 @@ public class GoogleController {
         JSONObject resJSON = new JSONObject(response.toString());
         
         String email = resJSON.getString("email").substring(0,resJSON.getString("email").lastIndexOf("@"));
-        if(registerService.getMemberByEmail(email)==null) {
+        if(registerService.getMemberByEmail(resJSON.getString("email"))==null) {
+        	System.out.println("bean="+registerService.getMemberByEmail(email));
         	MemberMainBean mmb = new MemberMainBean();
         	mmb.setEmail(resJSON.getString("email"));
         	mmb.setPassword("googlePassw0rd");//ID_Token太長
@@ -105,11 +106,13 @@ public class GoogleController {
 			bi = ImageIO.read(img);
 			ImageIO.write(bi, "jpg", baos);
 			bytes = baos.toByteArray();
+			baos.close();
         	
             Byte[] memberImg = ArrayUtils.toObject(bytes);
-        	System.out.println(memberImg);
+        	System.out.println("fileName_https="+fileName_https);
+
+        	System.out.println("memberImg="+memberImg);
         	
-        	System.out.println(fileName_https);
         	
 //        	---------------------------------------------------------------------------
         	mmb.setMemberImage(memberImg);
@@ -128,18 +131,21 @@ public class GoogleController {
 			mmb.setCityDisplay(false);
 			mmb.setEmailDisplay(false);
 			mmb.setPhoneDisplay(false);
-			registerService.save(mmb);
+			registerService.googleSave(mmb);
 			
 			session.setAttribute("memberName", mmb.getMemberName());
 			session.setAttribute("memberId", mmb.getMemberId());
+			session.setAttribute("googleLogout", "登出");
         
             }else {
-            	MemberMainBean mmb = registerService.getMemberByEmail(email);
+            	MemberMainBean mmb = registerService.getMemberByEmail(resJSON.getString("email"));
             	mmb.setCertificationStatus(true);
             	mmb.setCertificationHash("Google");
             	mmb.setLogins(mmb.getLogins()+1);
+            	registerService.googleSave(mmb);
             	session.setAttribute("memberName", mmb.getMemberName());
     			session.setAttribute("memberId", mmb.getMemberId());
+    			session.setAttribute("googleLogout", "登出");
             }
 		return map;
 	}

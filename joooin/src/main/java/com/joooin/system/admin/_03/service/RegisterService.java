@@ -20,4 +20,6 @@ public interface RegisterService {
 	public void certificationChangeStatus(String certificationHash);
 	
 	public MemberMainBean getMemberByEmail(String email);
+	
+	public void googleSave(MemberMainBean mmb);
 }
