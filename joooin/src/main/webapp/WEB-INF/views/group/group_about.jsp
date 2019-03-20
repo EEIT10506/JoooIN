@@ -113,26 +113,26 @@
   	  	$('#updateIntro').show(); 
   	  	});
 	});
-//   	$(document).ready(function(){
-//   	$("#checknull").click(function(event){
-// 		removeCheckUpdate();
+  	
+  	$(document).ready(function(){
+  		
+  		$("#confirmIntro").click(function(){
+  			var checkintro=$("#inputIntro").val().trim();
+	  		
+	  		if (checkintro == ""){
+	  			alert("介紹不得為空");
+	  			$("#updateIntro").click();
+	  			return false;
+	  		} else {
+	  			return true;
+	  		}
+  		})
+  		
 
-// 		var checkname=$("#inputName").val();
-// 		var checkintro=$("#inputIntro").val();
-// 		if(checkname==""){
-// 			$("#nameAlert").text("不得為空值，請確認");
-// 			event.stopPropagation();
-// 		}
-// 		if(checkintro=""){
-// 			$("#IntroAlert").text("不得為空值，請確認");
-// 			event.stopPropagation();
-// 		}else{
-// 		removeCheckUpdate();
-// 		}
-//   	});
-//   	});
+
+  	});
 </script>
-<title>Insert title here</title>
+<title>關於社團</title>
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/navbar" />
@@ -200,7 +200,7 @@
 								action="${pageContext.request.contextPath}/group/abouts/updateGroupName/${groupMain.groupId}" method="POST">
 								<p class="text-center">
 								<input id="inputName" class="btn btn-default btn-lg btn-danger" type="text" style="display:none;" placeholder="修改內容" name="groupname" />
-								<button id="confirmName" class="btn btn-default btn-lg btn-danger" style="display:none;" type="submit" >確認修改</button>
+								<button id="confirmName" class="btn btn-default btn-lg btn-danger checknull" style="display:none;" type="submit" >確認修改</button><label class="nameAlert" id="nameAlert"></label>
 								</p>
 								</form>
 								<p class="text-right">
@@ -263,7 +263,7 @@
 								action="${pageContext.request.contextPath}/group/abouts/updateGroupIntro/${groupMain.groupId}" method="POST">
 								<p class="text-center">
 								<input id="inputIntro" class="btn btn-default btn-lg btn-danger" type="text" style="display:none;" placeholder="修改內容" name="groupintro" />
-								<button id="confirmIntro" class="btn btn-default btn-lg btn-danger" style="display:none;" type="submit" >確認修改</button>
+								<button id="confirmIntro" class="btn btn-default btn-lg btn-danger checknull" style="display:none;" type="submit" >確認修改</button><label class="introAlert" id="introAlert"></label>
 								</p>
 								</form>
 								<p class="text-right">

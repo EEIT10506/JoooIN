@@ -35,9 +35,7 @@
 	<div id="main">
 	<jsp:include page="${request.contextPath}/group/group_navbar" />
 	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"> 
-	<c:if test="${}">
-	你有資格
-	</c:if>
+	
 	<form class="text-center">
 		<table >
 	
