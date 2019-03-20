@@ -28,7 +28,6 @@
 	top: 50px;
 }
 </style>
-
 <script type="text/javascript">
 	function checkImage(image) {
 		var validExts = new Array(".jpg", ".png", ".gif");
