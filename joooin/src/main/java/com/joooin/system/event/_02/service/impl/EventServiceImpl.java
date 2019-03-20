@@ -70,6 +70,7 @@ public class EventServiceImpl implements EventService {
 		oldBean.setEventMemberLimit(updateBean.getEventMemberLimit());
 		oldBean.setEventTypeId(updateBean.getEventTypeId());
 		oldBean.setEventStatus(updateBean.getEventStatus());
+		oldBean.setEventFee(oldBean.getEventFee());
 		Byte[] eventImage = null;
 		if (!updateBean.getMultipartFile().isEmpty()) {
 			eventImage = ImageUtils.multipartFileToByteArray(updateBean.getMultipartFile());

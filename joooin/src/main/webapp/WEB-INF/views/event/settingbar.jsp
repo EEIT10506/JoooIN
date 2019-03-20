@@ -38,6 +38,7 @@
     pointer-events: none;
     cursor: default;
     opacity: 0.8;
+    color:black !important;
 }
 </style>
 <script type="text/javascript">
@@ -67,10 +68,16 @@ $(document).ready(function(){
   <li class="nav-item">
     <a id="participated" class="nav-link barBorder" href="${pageContext.request.contextPath}/event/participated/${event.eventId}">已參加成員</a>
   </li>
- 
+ <c:if test="${eventFinished == false}">
    <li class="nav-item">
     <a id="attended" class="nav-link barBorder" href="${pageContext.request.contextPath}/event/attended/${event.eventId}">成員出席狀況</a>
   </li>
+ </c:if>
+  <c:if test="${eventFinished == true}">
+   <li class="nav-item">
+    <a id="attended" class="nav-link barBorder disabled" href="${pageContext.request.contextPath}/event/attended/${event.eventId}">成員出席狀況</a>
+  </li>
+ </c:if>
   <li class="nav-item">
     <a id="back" class="nav-link barBorder" href="${pageContext.request.contextPath}/event/${event.eventId}">返回</a>
   </li>

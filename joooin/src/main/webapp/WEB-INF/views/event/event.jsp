@@ -172,12 +172,12 @@
 		font-family:微軟正黑體 !important;
 		font-size:18px !important;
 		font-weight:bold !important;
- 		left:130px; 
+ 		left:100px; 
 		
 	}
 	.eventCancels{
 		position:relative;
- 		left:130px; 
+ 		left:100px; 
 		top:3px;
 		font-weight:bold !important;
 	}
@@ -251,11 +251,11 @@
 		opacity:0.8;
 	}
 	.backButton{
-		margin-left:800px;
+  		margin-left:170px;  
+  		margin-top:45px;  
 	}
 	.deleteMessage{
  		float:left; 
- 		margin-left:0px;
 /*  		margin-left:700px;  */
 	}
 	.addressShow{
@@ -307,6 +307,11 @@
  		font-family: 'Noto Sans TC', sans-serif;  
  		font-weight:700px;  
 		text-align:center;  
+ 	}  
+ 	.delete{
+		width:50px;
+		height:25px; 
+		font-size:12px !important;	
  	}  
 </style>
 <script>
@@ -444,19 +449,9 @@ function ValidateNumber(e, pnumber)
     				<p class="eventliketotal"><i class="far fa-thumbs-up">&nbsp;</i><span class="eventLikeNum">${event.eventLike}</span> 個人覺得讚</p><hr class="hrr">
  
  <p>
- 			
-<%--  			<c:if test="${likedCheck.memberId != null}"> --%>
-<!--     		<span id="likedspan"> -->
-<%--     		 <button type="button" id="e${event.eventId }" class="btn btn-default eventLike"><i class="far fa-thumbs-up"></i> 讚</button> --%>
-<!--     		</span> -->
-<%--     		</c:if> --%>
-  			
-<%--    			<c:if test="${likedCheck.memberId == null}">  --%>
     		<span id="likedspan">
     		 <button type="button" id="e${event.eventId }" class="btn btn-default eventNotLike"><i class="far fa-thumbs-up"></i> 讚</button>
     		</span>
-<%--   			</c:if> --%>
-  			
 
   <span id="joinOrNot">
 		<c:if test="${memberId != inviterid and memberCheck == false and event.eventStatus == 'unchecked' and event.isFull == false and finish != false}">
@@ -514,13 +509,15 @@ function ValidateNumber(e, pnumber)
       		<p>活動內容 : 
       			<span> ${event.eventContent}</span>
       		</p>
+      		<span class="backButton">
+   				<a href="${pageContext.request.contextPath}/events" id="backbutton"class="btn btn-secondary btn-lg backButton active" role="button" aria-pressed="true">返回</a>
+   			</span>
      			 </div>
    			</div>
-   		<div>
-   			<span class="backButton">
-   				<a href="${pageContext.request.contextPath}/events" id="backbutton"class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">返回</a>
-   			</span>
-   		</div><hr class="hrr"/>
+<!--    		<div> -->
+   			
+<!--    		</div> -->
+   		<hr class="hrr"/>
    		<p class="PostTitle" >留言板</p>
   	  
   	  
@@ -540,7 +537,7 @@ function ValidateNumber(e, pnumber)
   	   			<form class="deleteMessage" action="${pageContext.request.contextPath}/DeleteEventPost" method="Post">
   	   				<input type="text" class="hid" name="eventPostId" value="${getPostContentlist.eventPostId}"/>  
   	   				<input type="text" class="hid" name="eventId" value="${event.eventId}">  
-  	   				<button id="" type="submit" class="btn btn-danger">Delete</button>
+  	   				<button id="" type="submit" class="btn btn-dark delete" >刪除</button>
   	   			</form>
   	   			</span>
   	   		</c:if>
@@ -549,7 +546,7 @@ function ValidateNumber(e, pnumber)
   	   			<form class="deleteMessage" action="${pageContext.request.contextPath}/DeleteEventPost" method="Post">
   	   				<input type="text" class="hid" name="eventPostId" value="${getPostContentlist.eventPostId}"/>  
   	   				<input type="text" class="hid" name="eventId" value="${event.eventId}">  
-  	   				<button id="" type="submit" class="btn btn-danger">Delete</button>
+  	   				<button id="" type="submit" class="btn btn-dark delete">刪除</button>
   	   			</form>
   	   			</span>
   	   		</c:if>

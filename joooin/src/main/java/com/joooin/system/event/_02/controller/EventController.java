@@ -300,7 +300,22 @@ public class EventController {
 			EventMainBean event = eventService.getByEventMainId(eventId);
 			Integer typeid = event.getEventTypeId();
 			EventTypeBean eventtype = eventService.getByEventTypeId(typeid);
-
+			
+//			=============
+			Date timeNow = new Date();
+			String endDate = event.getEventDateEnd();
+			SimpleDateFormat format = new SimpleDateFormat();
+			format.applyPattern("yyyy/MM/dd HH:mm");
+			Date endTime = null;
+			try {
+				endTime = format.parse(endDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			boolean eventFinished = endTime.after(timeNow);
+			
+			model.addAttribute("eventFinished", eventFinished);
+//			=============
 			model.addAttribute("event", event);
 			model.addAttribute("eventtype", eventtype);
 
@@ -321,8 +336,7 @@ public class EventController {
 		if (memberId != null && memberId.equals(inviterId)) {
 
 			Boolean checkLimit = eventService.updateEvent(eventId, updateBean, context);
-			// session.setAttribute("memberName", memberName);
-
+		
 			model.addAttribute("event", event);
 			if (checkLimit == true)
 				return "redirect:/event/setting/" + eventId;
@@ -382,6 +396,21 @@ public class EventController {
 					eventMemberId.add(eventMemberIds);
 				}
 			}
+//			==============
+			Date timeNow = new Date();
+			String endDate = event.getEventDateEnd();
+			SimpleDateFormat format = new SimpleDateFormat();
+			format.applyPattern("yyyy/MM/dd HH:mm");
+			Date endTime = null;
+			try {
+				endTime = format.parse(endDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			boolean eventFinished = endTime.after(timeNow);
+			
+			model.addAttribute("eventFinished", eventFinished);
+//			===============
 			model.addAttribute("eventMemberId", eventMemberId);
 			model.addAttribute("memberList", memberList);
 			model.addAttribute("event", event);
@@ -468,6 +497,24 @@ public class EventController {
 					 eventMemberMyself = eventService.getByEventMemberId(idMyself);
 				}
 			}
+//			=======
+			Date timeNow = new Date();
+			String endDate = event.getEventDateEnd();
+			SimpleDateFormat format = new SimpleDateFormat();
+			format.applyPattern("yyyy/MM/dd HH:mm");
+			Date endTime = null;
+			try {
+				endTime = format.parse(endDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			boolean eventFinished = endTime.after(timeNow);
+			
+			model.addAttribute("eventFinished", eventFinished);
+			//			=======
+
+
+			
 			
 			model.addAttribute("attendList", attendList);
 			model.addAttribute("event", event);
