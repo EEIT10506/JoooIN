@@ -299,7 +299,8 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 	}
 
 	@Override
-	public Poster getPosterByGroupPostId(Integer groupPostId) {
+	// 回傳單篇文章資訊
+	public Poster getPosterByGroupPostId(Integer groupPostId) { 
 		GroupPostBean post = groupPostDao.getByGroupPostId(groupPostId);
 		Poster poster = new Poster();
 		

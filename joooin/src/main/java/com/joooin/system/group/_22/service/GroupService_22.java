@@ -39,6 +39,6 @@ public interface GroupService_22 {
 	
 	public List<Poster> getPostersByGroupId(Integer groupId); // 以groupId找文章列表
 	
-	public Poster getPosterByGroupPostId(Integer groupPostId); // 
+	public Poster getPosterByGroupPostId(Integer groupPostId); // 以POJO傳遞單篇文章資訊
 
 }
