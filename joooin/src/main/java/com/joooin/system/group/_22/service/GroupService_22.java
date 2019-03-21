@@ -5,6 +5,7 @@ import java.util.List;
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupMemberBean;
 import com.joooin.model.GroupPostBean;
+import com.joooin.model.GroupPostReplyBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.system.group._22.pojo.Poster;
 
@@ -40,5 +41,9 @@ public interface GroupService_22 {
 	public List<Poster> getPostersByGroupId(Integer groupId); // 以groupId找文章列表
 	
 	public Poster getPosterByGroupPostId(Integer groupPostId); // 以POJO傳遞單篇文章資訊
+	
+	public Integer createReply(GroupPostReplyBean groupPostReplyBean); // 發布回文
+	
+	public List<GroupPostReplyBean> getReplyByPostId(Integer groupPostId); //以groupPostId 取得所有回文
 
 }

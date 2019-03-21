@@ -34,18 +34,33 @@
 		$("#usermsg").keypress(function(e) {
 			 if(e.which == 13 && !e.shiftKey) { //按下enter不包含shift+enter
 				 
+				var reply_content = ($(this).val() + "<br/>"); 
 				//submit form via ajax, this is not JS but server side scripting so not showing here
+				
+				var groupId = ${poster.groupId};
+				var groupPostId = ${poster.groupPostId};
 				$.ajax({
 					type: "POST",                           
-    	    		url: "${pageContext.request.contextPath}/group/applygroup/"+groupId+"/member/"+memberId+"/result/"+decide,
-    	   			data: {"groupId": groupId},
+    	    		url: "${pageContext.request.contextPath}/group/recive/reply/"+groupPostId+"/group/"+groupId,
+    	   			data: {"reply": reply_content},
             		success: function (result) {
-						//完成後的callback            			
+						//完成後的callback
+// 						console.log("List<reply>", result);
+// 						console.log("reply1", result[0].groupPostReplyContent);
+						//顯示留言
+						$("#chatbox").html("");
+						for (var i = 0; i < result.length; i++) {
+							$("#chatbox").append(
+						        "<tr>" +
+						            "<td>" + result[i].groupPostReplyContent + "</td>" +
+						            "<td>" + result[i].groupPostReplyDate + "</td>" +
+						        "</tr>");
+						}
             		}, 
 				});
+				
 				//submit form via ajax, this is not JS but server side scripting so not showing here
 								
-				$("#chatbox").append($(this).val() + "<br/>");
 				$(this).val("");
 				e.preventDefault();
 			}
@@ -94,11 +109,12 @@
 				
 				<form name="message" action="">
 					<textarea name="usermsg" autocomplete="off" type="text"
-						id="usermsg" rows="4" cols="30"
-						style="width: 450px; margin-left: 25px;"></textarea>
+						id="usermsg" rows="4" cols="30" 
+						onFocus="if(this.value==this.defaultValue) this.value=''" onBlur="if(this.value=='') this.value=this.defaultValue"
+						style="width: 450px; margin-left: 25px;">按下Enter送出</textarea>
 					<br />
 					<p style="margin-left: 420px;">
-						<input name="submitmsg" type="submit" id="submitmsg" value="Send" />
+<!-- 						<input name="submitmsg" type="submit" id="submitmsg" value="Send" /> -->
 					</p>
 				</form>
 			</div>
