@@ -231,6 +231,7 @@ div {
 				<tbody>
 				<c:forEach var="poster" items="${groupPoster}" varStatus="loop">
 					<tr>
+<!-- 					文章及連結 -->
 						<td>${poster.groupPostLike}</td>
 						<td><a href="${pageContext.request.contextPath}/group/post/${poster.groupPostId}">${poster.groupPostTitle}</a></td>
 						<td>${poster.memberName }</td>
