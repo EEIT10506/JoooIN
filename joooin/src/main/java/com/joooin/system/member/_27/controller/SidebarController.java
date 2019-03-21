@@ -68,7 +68,7 @@ public class SidebarController {
 	public String otherLink(@PathVariable String link, @PathVariable Integer otherMemberId, Model model, HttpSession session) {
 		Integer selfMemberId = (Integer)session.getAttribute("memberId");
 		
-		if (selfMemberId == null || selfMemberId.equals(otherMemberId) == false) {
+		if (selfMemberId == null || !selfMemberId.equals(otherMemberId)) {
 			model.addAttribute("memberMainBean", memberService.getMemberMainBean(otherMemberId));
 			return "member/other/" + link;
 		} else {
