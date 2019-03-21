@@ -48,6 +48,7 @@
     textarea {
     	padding: 15px 32px 16px 8px;
     }
+
 </style>
 <script>
 	var myMD5 = hex_md5("${memberId}");
@@ -86,16 +87,19 @@
 		if (websocket.readyState == websocket.OPEN) {
 			websocket.send(text);
 		} else {
-			alert("连接失败!");
+			alert("連線失敗，請重新整理");
 		}    
 	}
 	
-	function onError() {alert("连接失败!");}
+	function onError() {alert("連線失敗，請重新整理");}
 	websocket.onmessage = onMessage;
 	window.close = function() {websocket.onclose();}
 	function websocketClose() {websocket.close();}
 	
+	
 	$(document).ready(function(){
+		$("#messageView").animate({ scrollTop: 999999 }, "fast");
+		
 		$('#send').click(function() {
 			var text = $("#text").val();
 			if($.trim(text) == '') return false;
@@ -116,6 +120,8 @@
 				return false;
 			}
 		});
+		
+		
 	});
 </script>
 </head>
@@ -123,6 +129,11 @@
 	<jsp:include page="${request.contextPath}/member/self/message"/>
 <!-- 	右訊息區 -->
 	<div class="content">
+		<div alt="關閉對話" style="float:right;padding-right:18px;padding-top:18px;cursor: pointer">
+			<a href="${pageContext.request.contextPath}/member/self/message">
+				<img src="<c:url value='/resources/img/icon_close.png' /> ">
+			</a>
+		</div>
 <!-- 		訊息區上方的對方頭像 -->
 		<div class="contact-profile">
 			<img src="<c:url value='/getMemberImage/${friend.memberId}.jpg' />" alt="" />
@@ -130,20 +141,20 @@
 		</div>
 <!-- 		訊息區內容 -->
 		<div class="messages" id="messageView">
-			<ul>
+			<ul style="padding-bottom: 50px;">
 				<c:forEach var="message" items="${message}">
 					<c:choose>
 						<c:when test="${message.sendMemberId != memberId}">
 							<li class="sent">				
 								<p>${message.messageText}</p>
 							</li>
-							<div class="sentText" style="text-align:left;position:relative;left:15px;margin-bottom: 15px;">${message.messageDate}</div>
+							<div class="sentText" style="text-align:left;position:relative;left:15px;">${message.messageDate}</div>
 						</c:when>
 						<c:otherwise>
 							<li class="replies">
 								<p>${message.messageText}</p>						
 							</li>
-							<div class="repliesText" style="text-align:right;position:relative;right:10px;margin-bottom: 15px;">${message.messageDate}</div>
+							<div class="repliesText" style="text-align:right;position:relative;right:10px;">${message.messageDate}</div>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>

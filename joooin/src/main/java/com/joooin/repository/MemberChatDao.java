@@ -9,4 +9,6 @@ public interface MemberChatDao {
 	public Integer save(MemberChatBean memberChatBean);
 	public void update(MemberChatBean memberChatBean);
 	public void deleteByMemberChatId(Integer memberChatId);
+	public List<MemberChatBean> getByMessageHash(String messageHash);
+	public List<MemberChatBean> getBySendAndReceiveMemberId(Integer sendMemberId, Integer receiveMemberId);
 }

@@ -161,7 +161,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List<FriendPojo> getFriends(Integer memberId) {
+	public List<FriendPojo> getFriendsOnFriendPage(Integer memberId) {
 		List<MemberFriendBean> memberFriendList = memberFriendDao.getAll();
 		List<FriendPojo> friendPojoList = new ArrayList<FriendPojo>();
 		
@@ -172,8 +172,6 @@ public class MemberServiceImpl implements MemberService{
 				pojo.setMemberName(memberMainDao.getByMemberId(bean.getReceiveMemberId()).getMemberName());
 				pojo.setIsFriend(bean.getIsFriend());
 				pojo.setIsInviter(bean.getIsInviter());
-				pojo.setMessageHash(bean.getMessageHash());
-				pojo.setNotRead(messageService.singleFriendNotReadQuantity(bean.getReceiveMemberId(), memberId));
 				friendPojoList.add(pojo);
 			}
 		}

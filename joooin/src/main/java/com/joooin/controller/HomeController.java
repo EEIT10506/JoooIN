@@ -42,7 +42,7 @@ public class HomeController {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		
 		if (memberId != null) 
-			model.addAttribute("notReadQuantity", messageService.allFriendNotReadQuantity(memberId));
+			model.addAttribute("notReadQuantity", messageService.getAllFriendNotReadQuantity(memberId));
 		
 		return "navbar";
 	}
