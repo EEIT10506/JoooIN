@@ -27,7 +27,7 @@
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
 		<div class="title"></div>
-			<div class="bd-example" style="width:1200px;height:300px;margin:auto;background-color:#48D1CC;">
+			<div class="bd-example" style="width:1200px;height:400px;margin:auto;background-color:#48D1CC;">
 				  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" >
 				    <ol class="carousel-indicators">
 				      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -36,35 +36,45 @@
 				      
 				    </ol>
 				    <div class="carousel-inner">
-				      <div class="carousel-item active" style="width:1200px;height:230px;margin-top:20px;">
+				    
+				      <div class="carousel-item active" style="width:1200px;height:380px;margin-top:20px;">
 				        <a href="#"><img src="<c:url value='/resources/img/cover_other.jpg'/>" alt="其他"  style="margin-left:90px;width:320px;height:230px;display:inline;"></a>
 
 				        <a href="#"><img src="<c:url value='/resources/img/cover_sport.jpg'/>"  alt="運動"  style="margin-left:20px;width:320px;height:230px;display:inline;"></a>
 				        <a href="#"><img src="<c:url value='/resources/img/cover_food.jpg'/>" alt="食物"  style="margin-left:20px;width:320px;height:230px;display:inline;"></a>
 
-				        <div class="carousel-caption d-none d-block" style="margin-left:10px;background-color:red;height:50px;position:relative;top:300px;">
-				         		
+				        <div class="carousel-caption d-none d-block" style="background-color:red;bottom:60px;right:2000px;width:300px;">
+				         		<span>1231231</span></br>
+				         		<span>內容ccccccccc我是內容</span>
+				        </div>
+				        <div class="carousel-caption d-none d-block" style="height:50px;bottom:100px;">
+				         		<span>1231231</span></br>
+				         		<span>內容222222222222我是內容</span>
+				        </div>
+				        <div class="carousel-caption d-none d-block" style="height:50px;">
+				         		<span>1231231</span></br>
+				         		<span>內容ccccccccc我是內容</span>
 				        </div>
 				        
 				      </div>
 				      
 				      
-				      <div class="carousel-item" style="width:1200px;height:230px;margin-top:20px;">
+				      <div class="carousel-item" style="width:1200px;height:340px;margin-top:20px;">
 				         <img src="<c:url value='/resources/img/cover_other.jpg'/>" alt="其他"  style="margin-left:90px;width:320px;height:230px;display:inline;">
 				        <img src="<c:url value='/resources/img/cover_sport.jpg'/>"  alt="運動"  style="margin-left:20px;width:320px;height:230px;display:inline;">
 				        <img src="<c:url value='/resources/img/cover_food.jpg'/>" alt="食物"  style="margin-left:20px;width:320px;height:230px;display:inline;">
 				        <div class="carousel-caption d-none d-md-block">
 				          <h5>Second slide label</h5>
-				          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+				          <p>sssssssssssssssssss</p>
 				        </div>
 				      </div>
-				      <div class="carousel-item" style="width:1200px;height:230px;margin-top:20px;">
+				      <div class="carousel-item" style="width:1200px;height:340px;margin-top:20px;">
 				         <img src="<c:url value='/resources/img/cover_other.jpg'/>" alt="其他"  style="margin-left:90px;width:320px;height:230px;display:inline;">
 				        <img src="<c:url value='/resources/img/cover_sport.jpg'/>"  alt="運動"  style="margin-left:20px;width:320px;height:230px;display:inline;">
 				        <img src="<c:url value='/resources/img/cover_food.jpg'/>" alt="食物"  style="margin-left:20px;width:320px;height:230px;display:inline;">
 				        <div class="carousel-caption d-none d-md-block">
 				          <h5>Third slide label</h5>
-				          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+				          <p>ttttttttttttttttttttttttt</p>
 				        </div>
 				      </div>
 				    </div>
