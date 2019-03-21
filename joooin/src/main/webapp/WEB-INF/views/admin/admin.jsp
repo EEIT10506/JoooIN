@@ -88,5 +88,7 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/offline-exporting.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/7.0.3/modules/cylinder.js"></script>
 </body>
 </html>

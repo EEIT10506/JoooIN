@@ -407,12 +407,13 @@ $(document).ready(function () {
 					.highcharts(
 							{
 								chart : {
-										type : "column", 
+										type : "cylinder", 
 														options3d: {
-																		enabled: true,
-																		alpha: 10,
-																		beta: 5,
-																		depth: 70
+															enabled: true,
+										                    alpha: 15,
+										                    beta: 15,
+										                    depth: 50,
+										                    viewDistance: 25
 																		}},
 																		xAxis: {
 																		        categories:arrayGender,
@@ -454,6 +455,127 @@ $(document).ready(function () {
                 	alert("errorQQ")
                 }//success
         	})// memberStatistics
+        	$.ajax({
+        		type: "GET",
+                url: "/joooin/admin/groupStatistics",
+                dataType: "json",
+                timeout: 600000,
+                
+                success: function (data){
+                	console.log(data.groupCurrentMember);
+                	console.log(data.type);
+                	var tab2 = $('<div></div>').addClass('statistics2');
+                	$('#content>h2').after(tab2);
+                	
+                	var groupCurrentMember = data.groupCurrentMember;
+					var type = data.type;
+					var arrayGroupCurrentMember = groupCurrentMember.split(',').map(Number);
+					
+					
+					var arrayType = type.split(',');
+					var removeType =  arrayType.map(Number);
+					console.log(arrayGroupCurrentMember);
+					console.log(removeType);
+					
+					$(".statistics2")
+					.highcharts(
+							{
+								chart : {
+										type : "line", 
+														options3d: {
+															enabled: true,
+										                    alpha: 15,
+										                    beta: 15,
+										                    depth: 50,
+										                    viewDistance: 25
+																		}},
+																		xAxis: {
+																		        categories:arrayType,
+																		        title: {
+																		            text: 'Type'
+																		        }
+																		    }, 
+																		    
+																			title : {
+																				text : '社團種類比例'
+																			},yAxis: {
+																		        min: 0,
+																		        title: {
+																		            text: 'members',
+																		            align: 'high'
+																		        }
+																		        },
+																			tooltip : {
+																				valueSuffix: '個'
+																			},
+																			 series: [{
+																			        name: '社團數',
+																			        data: arrayGroupCurrentMember
+																			    }]
+																		})
+                },error:function(){
+                	alert("errorQQ")
+                }//success
+        	})//groupStatistics
+        	$.ajax({
+        		type: "GET",
+                url: "/joooin/admin/eventStatistics",
+                dataType: "json",
+                timeout: 600000,
+                
+                success: function (data){
+                	console.log(data.eventId);
+                	console.log(data.eventType);
+                	var tab3 = $('<div></div>').addClass('statistics3');
+                	$('#content>h2').after(tab3);
+                	var eventId = data.eventId;
+					var eventType = data.eventType;
+					var arrayEventId = eventId.split(',').map(Number);
+					
+					var arrayEventType = eventType.split(',');
+					var removeEventType =  arrayEventType.map(Number);
+					console.log(arrayEventId);
+					console.log(removeEventType);
+					$(".statistics3")
+					.highcharts(
+							{
+								chart : {
+										type : "bar", 
+														options3d: {
+															enabled: true,
+										                    alpha: 15,
+										                    beta: 15,
+										                    depth: 50,
+										                    viewDistance: 25
+																		}},
+																		xAxis: {
+																		        categories:arrayEventType,
+																		        title: {
+																		            text: 'Type'
+																		        }
+																		    }, 
+																		    
+																			title : {
+																				text : '活動種類比例'
+																			},yAxis: {
+																		        min: 0,
+																		        title: {
+																		            text: 'events',
+																		            align: 'high'
+																		        }
+																		        },
+																			tooltip : {
+																				valueSuffix: '人'
+																			},
+																			 series: [{
+																			        name: '總人數',
+																			        data: arrayEventId
+																			    }]
+																		})
+                },error:function(){
+                	alert("errorQQ")
+                }//success
+        	})//eventStatistics
         }//報表
 //    	----------------------------------------------------------------------------------------------------
     	}		//selectCategory end;

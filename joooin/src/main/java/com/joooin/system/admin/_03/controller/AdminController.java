@@ -16,7 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.joooin.model.EventMainBean;
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.MemberMainBean;
+import com.joooin.repository.EventMainDao;
+import com.joooin.repository.GroupMainDao;
 import com.joooin.repository.MemberMainDao;
+import com.joooin.system.admin._03.model.AllEventQuantityBean;
+import com.joooin.system.admin._03.model.AllGroupQuantityBean;
 import com.joooin.system.admin._03.model.AllMemberQuantityBean;
 import com.joooin.system.admin._03.service.AdminService;
 
@@ -28,6 +32,12 @@ public class AdminController {
 	
 	@Autowired
 	MemberMainDao memberDao;
+	
+	@Autowired
+	GroupMainDao groupDao;
+	
+	@Autowired
+	EventMainDao eventDao;
 	
 	@RequestMapping("/admin")
 	public String admin() {
@@ -139,5 +149,61 @@ public class AdminController {
 		return map;
 		
 	}
-
+	
+	@RequestMapping(value="/admin/groupStatistics",method=RequestMethod.GET)
+	public @ResponseBody Map<String, Object> getAllGroupQuantity(){
+		List<AllGroupQuantityBean> list = groupDao.getAllGroupQuantity();
+		System.out.println(list);
+		//
+		int i=0;
+		StringBuffer id=new StringBuffer();  
+        StringBuffer type=new StringBuffer();  
+        
+        for (AllGroupQuantityBean agb : list) {  
+        	System.out.println("type="+agb.getGroupType());
+        	id.append(agb.getGroupId());  
+        	type.append(agb.getGroupType());   
+            //
+        	i++;
+            if(i<list.size()){  
+            	id.append(",");  
+            	type.append(",");  
+            }  
+        }
+        
+        Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println(id);
+		System.out.println(type);
+		map.put("groupCurrentMember", id);
+		map.put("type", type);
+		return map;
+		
+	}
+	
+	@RequestMapping(value="/admin/eventStatistics",method=RequestMethod.GET)
+	public @ResponseBody Map<String, Object> getAllEventQuantity(){
+		List<AllEventQuantityBean> list = eventDao.getAllEventQuantity();
+		//
+		int i=0;
+		StringBuffer id=new StringBuffer();  
+        StringBuffer type=new StringBuffer();  
+        
+        for (AllEventQuantityBean aqb : list) {  
+        	id.append(aqb.getEventId());  
+        	type.append(aqb.getEventTypeId());   
+            //
+        	i++;
+            if(i<list.size()){  
+            	id.append(",");  
+            	type.append(",");  
+            }  
+        }
+        
+        Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println(id);
+		System.out.println(type);
+		map.put("eventId", id);
+		map.put("eventType", type);
+		return map;
+	}
 }
