@@ -41,7 +41,7 @@ public class MemberMessageController {
 		if (memberId != null) {
 			MemberMainBean bean = messageService.getFriendMemberMainBean(memberId, hash);
 			if (bean != null) {
-				messageService.setMessageRead(memberId, hash);
+				messageService.setOneFriendMessagesRead(memberId, hash);
 				model.addAttribute("friend", messageService.getFriendMemberMainBean(memberId, hash));
 				model.addAttribute("hash", hash);
 				model.addAttribute("message", messageService.getOneFriendMessage(hash));
@@ -60,6 +60,18 @@ public class MemberMessageController {
 		
 		if (memberId != null) {
 			messageService.saveTextMessage(memberId, receiveMemberId, messageHash, text);
+			return null;
+		} else {
+			return "not_login";
+		}	
+	}
+	
+	@RequestMapping(value = "/member/self/message/setOneMessageRead", method = RequestMethod.POST)
+	public @ResponseBody String setOneMessageRead(String messageHash, HttpSession session) {
+		Integer memberId = (Integer)session.getAttribute("memberId");
+		
+		if (memberId != null) {
+			messageService.setOneMessageRead(memberId, messageHash);
 			return null;
 		} else {
 			return "not_login";

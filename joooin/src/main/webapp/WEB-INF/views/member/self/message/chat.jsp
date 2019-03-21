@@ -75,7 +75,11 @@
 			$('<li class="sent"><p>' + message.data.substr(32) + '</p></li>').appendTo($('.messages ul'));
 			$('<div class="sentText" style="text-align:left;position:relative;left:15px;margin-bottom: 15px;">' + date + '</div>').appendTo($('.messages ul'));
 			
-// 			console.log($(":focus"));
+			$.ajax({
+			    type: "POST",                           
+			    url: "${pageContext.request.contextPath}/member/self/message/setOneMessageRead",
+			    data: {"messageHash": "${hash}"},
+			});
 			
 		}
 		$('.message-input #text').val(null);

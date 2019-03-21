@@ -101,7 +101,7 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public void setMessageRead(Integer receiveMemberId, String messageHash) {
+	public void setOneFriendMessagesRead(Integer receiveMemberId, String messageHash) {
 		List<MemberChatBean> list = memberChatDao.getByMessageHash(messageHash);
 		
 		for (MemberChatBean bean : list) {
@@ -156,5 +156,25 @@ public class MessageServiceImpl implements MessageService {
 		
 		return friendPojoList;
 	}
+
+	@Override
+	public void setOneMessageRead(Integer receiveMemberId, String messageHash)  {
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		List<MemberChatBean> list = memberChatDao.getByMessageHash(messageHash);
+		
+		for (int i = list.size() - 1; i >= 0; i--) {
+			if (list.get(i).getReceiveMemberId().equals(receiveMemberId)) {
+				list.get(i).setIsRead(true);
+				memberChatDao.update(list.get(i));
+				break;
+			}
+		}
+	}
+	
 	
 }

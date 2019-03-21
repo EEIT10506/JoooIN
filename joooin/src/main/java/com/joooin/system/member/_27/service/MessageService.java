@@ -12,7 +12,8 @@ public interface MessageService {
 	public List<MemberChatBean> getOneFriendMessage(String messageHash);
 	public Integer getOneFriendNotReadQuantity(Integer sendMemberId, Integer receiveMemberId);
 	public Integer getAllFriendNotReadQuantity(Integer receiveMemberId);
-	public void setMessageRead(Integer receiveMemberId, String messageHash);
+	public void setOneFriendMessagesRead(Integer receiveMemberId, String messageHash);
+	public void setOneMessageRead(Integer receiveMemberId, String messageHash);
 	public String getOneFriendLastMessage(String messageHash);
 	public Integer getOneFriendLastMessageId(String messageHash);
 	public List<FriendPojo> getFriendsOnMessagePage(Integer memberId);
