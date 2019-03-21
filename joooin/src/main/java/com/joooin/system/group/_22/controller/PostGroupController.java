@@ -106,5 +106,11 @@ public class PostGroupController {
 
 		return "group/group_article";
 	}
-
+	
+	//產生回文
+	@RequestMapping(method = RequestMethod.POST, value = "/group/reply/{groupPostId}")
+	public String createReply() {
+		return null;
+		
+	}
 }

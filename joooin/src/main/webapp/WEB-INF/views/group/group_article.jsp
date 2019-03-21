@@ -28,6 +28,30 @@
 	top: 50px;
 }
 </style>
+<script>
+	// 送出回文
+	$(function() {
+		$("#usermsg").keypress(function(e) {
+			 if(e.which == 13 && !e.shiftKey) { //按下enter不包含shift+enter
+				 
+				//submit form via ajax, this is not JS but server side scripting so not showing here
+				$.ajax({
+					type: "POST",                           
+    	    		url: "${pageContext.request.contextPath}/group/applygroup/"+groupId+"/member/"+memberId+"/result/"+decide,
+    	   			data: {"groupId": groupId},
+            		success: function (result) {
+						//完成後的callback            			
+            		}, 
+				});
+				//submit form via ajax, this is not JS but server side scripting so not showing here
+								
+				$("#chatbox").append($(this).val() + "<br/>");
+				$(this).val("");
+				e.preventDefault();
+			}
+		});
+	});
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -36,14 +60,55 @@
 	<div id="main">
 		<jsp:include page="${request.contextPath}/group/group_navbar" />
 		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"> <!-- 	test -->
-		<h1>test</h1>
-		<div>${poster.memberName }</div><br>
-		<div>${poster.groupPostTitle }</div><br>
-		<div>${poster.groupPostContent }</div><br>
-		<div>${poster.groupPostDate }</div><br>
-		<h1>testover</h1>
-		<!-- 	test -->
-		</main>	
+
+		<section>
+			<div class="side">
+				<div class="user">
+					<div class="user_name">${poster.memberName }</div>
+					<div class="user_img">
+						<img
+							src="<c:url value='/getMemberImage/${poster.memberId}.jpg' />"
+							class="" src="logo.jpg" alt="Responsive image">
+					</div>
+				</div>
+			</div>
+			<div class="post">
+				<div class="post_title">
+					<h3>${poster.groupPostTitle }</h3>
+				</div>
+				<div class="post_date">${poster.groupPostDate }</div>
+				<div class="post_content">
+					<p>${poster.groupPostContent }</p>
+				</div>
+			</div>
+		</section>
+<!-- 		作為分隔線 -->
+<hr>
+<!-- 		作為分隔線 -->
+		<div>
+			<div>
+				<h5>回文區</h5>
+			</div>
+			<div>
+				<div id="chatbox"></div>
+				
+				<form name="message" action="">
+					<textarea name="usermsg" autocomplete="off" type="text"
+						id="usermsg" rows="4" cols="30"
+						style="width: 450px; margin-left: 25px;"></textarea>
+					<br />
+					<p style="margin-left: 420px;">
+						<input name="submitmsg" type="submit" id="submitmsg" value="Send" />
+					</p>
+				</form>
+			</div>
+		</div>
+
+
+
+
+
+		<!-- 	test --> </main>
 	</div>
 
 	<!-- 請把所有內容寫在此div內 -->
