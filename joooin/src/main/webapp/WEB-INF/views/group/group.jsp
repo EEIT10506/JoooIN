@@ -231,6 +231,7 @@ div {
 				<tbody>
 				<c:forEach var="poster" items="${groupPoster}" varStatus="loop">
 					<tr>
+<!-- 					文章及連結 -->
 						<td>${poster.groupPostLike}</td>
 						<td>${poster.groupPostTitle }</td>
 						<td>${poster.memberName }</td>
