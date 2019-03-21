@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupPostBean;
 import com.joooin.model.MemberMainBean;
+import com.joooin.system.group._22.pojo.Poster;
 import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.system.member._27.service.MemberService;
 import com.joooin.util.ImageUtils;
@@ -91,5 +92,26 @@ public class PostGroupController {
 			groupService.createPost(groupPostBean);
 
 			return "redirect:/group/" + groupId;
+	}
+
+
+	// 進入文章頁面
+	@RequestMapping(method = RequestMethod.GET, value = "/group/post/{groupPostId}")
+	public String postMainPage(Model model, @PathVariable Integer groupPostId) {
+
+		Poster poster = groupService.getPosterByGroupPostId(groupPostId);
+		model.addAttribute("poster", poster);
+		
+		//準備回文資訊
+		//service.getReply...
+
+		return "group/group_article";
+	}
+	
+	//產生回文
+	@RequestMapping(method = RequestMethod.POST, value = "/group/reply/{groupPostId}")
+	public String createReply() {
+		return null;
+		
 	}
 }

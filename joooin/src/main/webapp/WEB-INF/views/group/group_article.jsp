@@ -28,50 +28,89 @@
 		top: 50px;
 	}
 </style>
-<title>Insert title here</title></head>
+
+<script>
+	// 送出回文
+	$(function() {
+		$("#usermsg").keypress(function(e) {
+			 if(e.which == 13 && !e.shiftKey) { //按下enter不包含shift+enter
+				 
+				//submit form via ajax, this is not JS but server side scripting so not showing here
+				$.ajax({
+					type: "POST",                           
+    	    		url: "${pageContext.request.contextPath}/group/applygroup/"+groupId+"/member/"+memberId+"/result/"+decide,
+    	   			data: {"groupId": groupId},
+            		success: function (result) {
+						//完成後的callback            			
+            		}, 
+				});
+				//submit form via ajax, this is not JS but server side scripting so not showing here
+								
+				$("#chatbox").append($(this).val() + "<br/>");
+				$(this).val("");
+				e.preventDefault();
+			}
+		});
+	});
+</script>
+<title>Insert title here</title>
+</head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
-	<jsp:include page="${request.contextPath}/group/group_navbar" />
-	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"> 
-	
-	<form class="text-center">
-		<table >
-	
-		<tr>
-    		<th>標題:<input type="text"></input></th>
-  		</tr>
-  		<tr>
-  			<th></th>
-  		</tr>
-  		<tr>
-    		<td><textarea rows="10" cols="60"></textarea></td> 
-  		</tr>
-		<tr>
-			<td class="text-right"><button>上傳檔案</button><button>送出</button></td>
-		</tr>
-		</table>
-	
-	</form>
-<!-- 	回覆呈現出內容區塊 -->
-	<form>
-	我是回覆內容
-	</form>
-<!-- 	回覆呈現出內容區塊 -->
-<!-- 	回覆輸出區域 -->
-	<form class="text-center" action="${pageContext.request.contextPath}/group/postReply" enctype="multipart/form-data">
-	<table>
-		<tr>
-    		<td><textarea rows="10" cols="60"></textarea></td> 
-  		</tr>
-  		<tr>
-			<td class="text-right"><button class="multipartFile">上傳檔案</button><button type="submit" >回覆</button></td>
-		</tr>
-  	</table>	
-	</form>
-	
-	<!-- 	回覆輸出區域 -->
+
+		<jsp:include page="${request.contextPath}/group/group_navbar" />
+		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"> <!-- 	test -->
+
+		<section>
+			<div class="side">
+				<div class="user">
+					<div class="user_name">${poster.memberName }</div>
+					<div class="user_img">
+						<img
+							src="<c:url value='/getMemberImage/${poster.memberId}.jpg' />"
+							class="" src="logo.jpg" alt="Responsive image">
+					</div>
+				</div>
+			</div>
+			<div class="post">
+				<div class="post_title">
+					<h3>${poster.groupPostTitle }</h3>
+				</div>
+				<div class="post_date">${poster.groupPostDate }</div>
+				<div class="post_content">
+					<p>${poster.groupPostContent }</p>
+				</div>
+			</div>
+		</section>
+<!-- 		作為分隔線 -->
+<hr>
+<!-- 		作為分隔線 -->
+		<div>
+			<div>
+				<h5>回文區</h5>
+			</div>
+			<div>
+				<div id="chatbox"></div>
+				
+				<form name="message" action="">
+					<textarea name="usermsg" autocomplete="off" type="text"
+						id="usermsg" rows="4" cols="30"
+						style="width: 450px; margin-left: 25px;"></textarea>
+					<br />
+					<p style="margin-left: 420px;">
+						<input name="submitmsg" type="submit" id="submitmsg" value="Send" />
+					</p>
+				</form>
+			</div>
+		</div>
+
+
+
+
+
+		<!-- 	test --> </main>
 	</div>
 
 <!-- 請把所有內容寫在此div內 -->
