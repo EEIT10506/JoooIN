@@ -96,7 +96,7 @@ public class MemberMainDaoImpl implements MemberMainDao{
 		return mmb;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<AllMemberQuantityBean> getAllMemberQuantity() {
 		Session session = factory.getCurrentSession();
