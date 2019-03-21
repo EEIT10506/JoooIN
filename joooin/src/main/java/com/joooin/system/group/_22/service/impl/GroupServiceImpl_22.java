@@ -297,4 +297,25 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 		}
 		return postersByGroupId;
 	}
+
+
+	@Override
+	// 回傳單篇文章資訊
+	public Poster getPosterByGroupPostId(Integer groupPostId) { 
+		GroupPostBean post = groupPostDao.getByGroupPostId(groupPostId);
+		Poster poster = new Poster();
+		
+		poster.setGroupId(post.getGroupId());
+		poster.setGroupPostContent(post.getGroupPostContent());
+		poster.setGroupPostDate(post.getGroupPostDate());
+		poster.setGroupPostId(post.getGroupPostId());
+		poster.setGroupPostLike(post.getGroupPostLike());
+		poster.setGroupPostTitle(post.getGroupPostTitle());
+		poster.setIsDeleted(post.getIsDeleted());
+		poster.setMemberId(post.getMemberId());
+		String memberName = memMainDao.getByMemberId(post.getMemberId()).getMemberName();
+		poster.setMemberName(memberName);
+		
+		return poster;
+	}
 }
