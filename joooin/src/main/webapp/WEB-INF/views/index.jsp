@@ -18,7 +18,7 @@
 		width: 1200px;
 		margin: auto;
 		position: relative;
-		top: 50px;
+		top: 0px;
 	}
 </style>
 <title>Insert title here</title></head>
@@ -26,6 +26,7 @@
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
+		<div style="border:1px solid black;width:1200px;height:400px;margin:auto"></div>
 		<div class="title"></div>
 			<div class="bd-example" style="width:1200px;height:400px;margin:auto;background-color:#48D1CC;">
 				  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" >
@@ -43,36 +44,32 @@
 				        <a href="#"><img src="<c:url value='/resources/img/cover_sport.jpg'/>"  alt="運動"  style="margin-left:20px;width:320px;height:230px;display:inline;"></a>
 				        <a href="#"><img src="<c:url value='/resources/img/cover_food.jpg'/>" alt="食物"  style="margin-left:20px;width:320px;height:230px;display:inline;"></a>
 
-				        <div class="carousel-caption d-none d-block" style="background-color:red;bottom:60px;right:2000px;width:300px;">
-				         		<span>1231231</span></br>
-				         		<span>內容ccccccccc我是內容</span>
-				        </div>
-				        <div class="carousel-caption d-none d-block" style="height:50px;bottom:100px;">
-				         		<span>1231231</span></br>
-				         		<span>內容222222222222我是內容</span>
-				        </div>
-				        <div class="carousel-caption d-none d-block" style="height:50px;">
-				         		<span>1231231</span></br>
-				         		<span>內容ccccccccc我是內容</span>
-				        </div>
-				        
+<!-- 				        <div class="carousel-caption d-none d-block" style="position:absolute;background-color:red;height:50px;right:1000px;bottom:100px;"> -->
+<!-- 				         		<span style="background-color:red;width:500px;bottom:300px;">1231231</span></br> -->
+<!-- 				         		<span style="background-color:red;width:500px;bottom:300px;">內容ccccccccc我是內容</span> -->
+<!-- 				        </div> -->
+				     	<p style="margin-top:10px;">
+					     	<span style="margin-left:185px;word-break:break-all;width:5px;">我是 c第一個saassasaasaaasaNAsME</span>
+					     	<span style="margin-left:200px;">我是第二個NAME</span>
+					     	<span style="margin-left:220px;">我是第三個NAME</span>
+				     	</p>
+				      	<p style=""><span style="background-color:red;width:20px;">xfsfddddddddddddddddddddsssssssssssssssssssssssssddddddddddddddsafaaf</span><span></span><span></span>
 				      </div>
 				      
-				      
-				      <div class="carousel-item" style="width:1200px;height:340px;margin-top:20px;">
+				      <div class="carousel-item" style="width:1200px;height:380px;margin-top:20px;">
 				         <img src="<c:url value='/resources/img/cover_other.jpg'/>" alt="其他"  style="margin-left:90px;width:320px;height:230px;display:inline;">
 				        <img src="<c:url value='/resources/img/cover_sport.jpg'/>"  alt="運動"  style="margin-left:20px;width:320px;height:230px;display:inline;">
 				        <img src="<c:url value='/resources/img/cover_food.jpg'/>" alt="食物"  style="margin-left:20px;width:320px;height:230px;display:inline;">
-				        <div class="carousel-caption d-none d-md-block">
+				        <div class="carousel-caption d-none d-md-block" style="background-color:red;height:50px;width:500px;">
 				          <h5>Second slide label</h5>
 				          <p>sssssssssssssssssss</p>
 				        </div>
 				      </div>
-				      <div class="carousel-item" style="width:1200px;height:340px;margin-top:20px;">
+				      <div class="carousel-item" style="width:1200px;height:380px;margin-top:20px;">
 				         <img src="<c:url value='/resources/img/cover_other.jpg'/>" alt="其他"  style="margin-left:90px;width:320px;height:230px;display:inline;">
 				        <img src="<c:url value='/resources/img/cover_sport.jpg'/>"  alt="運動"  style="margin-left:20px;width:320px;height:230px;display:inline;">
 				        <img src="<c:url value='/resources/img/cover_food.jpg'/>" alt="食物"  style="margin-left:20px;width:320px;height:230px;display:inline;">
-				        <div class="carousel-caption d-none d-md-block">
+				        <div class="carousel-caption d-none d-md-block" style="background-color:red;height:50px;width:500px;">
 				          <h5>Third slide label</h5>
 				          <p>ttttttttttttttttttttttttt</p>
 				        </div>
