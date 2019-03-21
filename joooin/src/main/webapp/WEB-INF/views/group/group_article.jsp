@@ -27,6 +27,13 @@
 		position: relative;
 		top: 50px;
 	}
+table{
+   	
+   	width: 770px; 	
+/*    	自動斷行 */
+   	word-wrap: break-word;
+   	table-layout: fixed;
+   }	
 </style>
 
 <script>
@@ -52,6 +59,27 @@
 			}
 		});
 	});
+	
+	function accept(butObj){
+		
+		$("postename").hide();
+		$("reportbutton").hide();
+
+		
+// 		var groupId = ${groupMain.groupId};
+// 		var memberId = target;
+// 		var decide = "approve";
+// 		$.ajax({
+// 			type: "POST",                           
+//     	    url: ,
+//     	    data: {"groupId": groupId},
+//             success: function (result) {
+//             }, failure: function (result) {
+//                 alert('系統異常');
+//             }
+		
+// 		});
+	}
 </script>
 <title>Insert title here</title>
 </head>
@@ -64,25 +92,134 @@
 		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"> <!-- 	test -->
 
 		<section>
-			<div class="side">
-				<div class="user">
-					<div class="user_name">${poster.memberName }</div>
-					<div class="user_img">
+		<table class="border border-secondary text-center" border='1'>
+		 
+		 <thead style="border:3px green solid;">
+			
+				<tr >
+					
+				
+				<th rowspan="2"  >
+					<span class="user_img" >
 						<img
 							src="<c:url value='/getMemberImage/${poster.memberId}.jpg' />"
 							class="" src="logo.jpg" alt="Responsive image">
+					</span>
+				</th>
+				<th width="50%">
+					<span class="user_name" >發文人:${poster.memberName }</span>
+				</th>
+				<th>
+					<span class="post_date">發文日期:${poster.groupPostDate }</span>
+				</th>
+				
+				<tr >
+						
+					<th colspan="2">
+						<span class="post_title">
+						標題:${poster.groupPostTitle }
+						</span>
+<%-- 						<c:if test="${sessionScope.memberName == }"> --%>
+						<button type="button" class="btn btn-sm btn-outline-secondary"
+							data-toggle="modal" data-target="#reportModal">檢舉</button>
+<%-- 						</c:if> --%>
+					</th>
+					
+				
+				</tr>	
+				
+			</thead>
+			
+			<tbody style="border:3px red solid;">
+			
+				
+				<tr >
+					<td colspan="3">
+					<span class="post_content" >
+					內容:${poster.groupPostContent }
+					</span>
+					</td>
+				
+				</tr>
+				
+			
+			 </tbody>
+			 
+			</table>
+					<!-- Modal管理者管理成員 -->
+		<div id="reportModal" class="modal inmodal fade" tabindex="-1" role="dialog"
+			aria-hidden="true" data-backdrop="static" data-keyboard="true">
+			<div class="modal-dialog modal-lg modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">檢舉申請表</h4>
+						<label class="col-5">檢舉人:</label>
+						<span  background-color:Blue">${sessionScope.memberName}</span>
+						<button type="button" class="close" data-dismiss="modal"
+							onClick="window.location.reload()">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="container">
+
+							<div class="row justify-content-end">
+
+
+								
+									
+									<div class="col-8 div-a apply" id="postename">
+										<span >${poster.memberName }</span>
+										<span style="display:none; background-color:Blue">${poster.memberId}</span>
+										<span style="display:none; background-color:Blue"></span>
+									</div>
+									<div class="col div-a apply" id="reportbutton">
+										<button id="reportConfirm"  data-toggle="modal" data-target="#reportModal2"
+											class="btn btn pull-right btn-primary" onclick="accept(this)">檢舉</button>
+									</div>
+									
+									
+								
+
+
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn" class="close" data-dismiss="modal"
+							onClick="window.location.reload()">Cancel</button>
 					</div>
 				</div>
 			</div>
-			<div class="post">
-				<div class="post_title">
-					<h3>${poster.groupPostTitle }</h3>
-				</div>
-				<div class="post_date">${poster.groupPostDate }</div>
-				<div class="post_content">
-					<p>${poster.groupPostContent }</p>
+		</div>
+<!-- 	點選reportConfirm的button後出現的modal確認檢舉表	 -->
+		<div id="reportModal2" class="modal inmodal fade" tabindex="-1" role="dialog"
+			aria-hidden="true" data-backdrop="static" data-keyboard="true">
+			<div class="modal-dialog modal-lg modal-dialog-centered" >
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" class="col-8 div-a apply">確認單</h4>
+						<label class="col-4 div-a apply">檢舉人:</label>
+						<span style="display:none; background-color:Blue">${sessionScope.memberName}</span>
+						<button type="button" class="close" data-dismiss="modal"
+							onClick="window.location.reload()">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="container">
+
+							<div class="row justify-content-end">
+
+							<span class="col-8 div-a apply">確定要檢舉${poster.memberName}?</span>
+	<button id="reportConfirm2" type="submit"
+		class="btn btn pull-right btn-primary" onclick="accept(this)">是</button>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn" class="close" data-dismiss="modal"
+							onClick="window.location.reload()">Cancel</button>
+					</div>
 				</div>
 			</div>
+		</div>
 		</section>
 <!-- 		作為分隔線 -->
 <hr>
@@ -97,7 +234,7 @@
 				<form name="message" action="">
 					<textarea name="usermsg" autocomplete="off" type="text"
 						id="usermsg" rows="4" cols="30"
-						style="width: 450px; margin-left: 25px;"></textarea>
+						style="width: 680px; margin-left: 25px;"></textarea>
 					<br />
 					<p style="margin-left: 420px;">
 						<input name="submitmsg" type="submit" id="submitmsg" value="Send" />
@@ -114,6 +251,7 @@
 	</div>
 
 <!-- 請把所有內容寫在此div內 -->
+
 
 </body>
 </html>

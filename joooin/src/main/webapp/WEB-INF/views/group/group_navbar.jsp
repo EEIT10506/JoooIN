@@ -35,41 +35,41 @@
 
 		<div class="container-fluid">
 			<div class="row">
-				<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+				<nav class="col-md-2 d-none d-md-block bg-light sidebar navbar-light bg-info">
 				<div class="sidebar-sticky">
-											<ul class="nav flex-column">
+<!-- 					<ul class="nav flex-column navbar-dark"> -->
 					<div class=.pull-right>
-						<ul id="menu" class="nav flex-column">
-							<li class="nav-item"><a class="nav-link active"
+						<ul id="menu" class="list-group list-group-flush">
+							<li class="list-group-item "><a class="nav-link active"
 								href="${pageContext.request.contextPath}/group/${groupMain.groupId}">
-									<span data-feather="home"></span> ${groupMain.groupName} <span
+									<span data-feather="home"></span> ${groupMain.groupName}<span
 									class="sr-only"></span>
 							</a></li>
-							<li class="nav-item"><a class="nav-link active"
+							<li class="list-group-item "><a class="nav-link active"
 								href="${pageContext.request.contextPath}/group/about/${groupMain.groupId}">
 									<span data-feather="home"></span> 關於 ${groupMain.groupName} <span
 									class="sr-only"></span>
 							</a></li>
-							<li class="nav-item"><a class="nav-link"
+							<li class="list-group-item"><a class="nav-link"
 								href="${pageContext.request.contextPath}/group/members/${groupMain.groupId}">
 									<span data-feather="file">社團成員</span>
 							</a></li>
-							<li class="nav-item"><a class="nav-link" 
+							<li class="list-group-item"><a class="nav-link" 
 								href="${pageContext.request.contextPath}/group/addpost/${groupMain.groupId}"> <span
 									data-feather="shopping-cart"></span> 發文
 							</a></li>
-							<li class="nav-item"><a class="nav-link" href="#"> <span
+							<li class="list-group-item"><a class="nav-link" href="#"> <span
 									data-feather="users"></span> 聊天
 							</a></li>
-							<li class="nav-item"><a class="nav-link" href="#"> <span
+							<li class="list-group-item"><a class="nav-link" href="#"> <span
 									data-feather="bar-chart-2"></span> 相簿
 							</a></li>
-							<li class="nav-item"><a class="nav-link" href="#"> <span
+							<li class="list-group-item"><a class="nav-link" href="#"> <span
 									data-feather="layers"></span> 投票
 							</a></li>
 						</ul>
 						</div>
-						</ul>
+<!-- 						</ul> -->
 						</div>
 						</nav>
 						</div>

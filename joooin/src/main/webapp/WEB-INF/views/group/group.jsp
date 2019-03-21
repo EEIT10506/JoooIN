@@ -163,7 +163,7 @@ div {
 		<!-- Modal管理者管理成員 -->
 		<div id="ooo" class="modal inmodal fade" tabindex="-1" role="dialog"
 			aria-hidden="true" data-backdrop="static" data-keyboard="true">
-			<div class="modal-dialog modal-lg modal-dialog-centered">
+			<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title">成員申請表</h4>
@@ -233,7 +233,7 @@ div {
 					<tr>
 <!-- 					文章及連結 -->
 						<td>${poster.groupPostLike}</td>
-						<td>${poster.groupPostTitle }</td>
+						<td><a href="${pageContext.request.contextPath}/group/post/${poster.groupPostId}">${poster.groupPostTitle}</a></td>
 						<td>${poster.memberName }</td>
 						<td>${poster.groupPostDate}</td>
 						<td>等待回覆</td>

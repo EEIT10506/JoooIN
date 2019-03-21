@@ -20,8 +20,8 @@ public interface GroupService_42 {
 	
 	public void updateGroupIntro(Integer groupId, String groupintro);
 	
-	public String getNewReplyForm(Model model, HttpSession session); 
-	
-	public String processNewReplyForm(HttpSession session,String groupPostReplyContent);
+//	public String getNewReplyForm(Model model, HttpSession session); 
+//	
+//	public String processNewReplyForm(HttpSession session,String groupPostReplyContent);
 
 }

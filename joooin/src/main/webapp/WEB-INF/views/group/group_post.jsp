@@ -68,37 +68,35 @@
 		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"> <form:form
 			method="POST" modelAttribute="groupPostBean" 
 			enctype="multipart/form-data" class="text-center">
-			<table>
+			<table border="1">
 
 				<tr>
-					<th><label for="groupPostTitle">文章標題 : </label> <form:input
+					<th rowspan="2" width="30%"><img src="<c:url value='/getMemberImage/${member.memberId}.jpg' />"></th>
+					<th>發文人:${member.memberName}</th>
+					
+				</tr>
+				
+
+				<tr>
+					<th colspan="1"><label for="groupPostTitle">文章標題 : </label> <form:input
 							path="groupPostTitle" type='text' id="groupPostTitle" /></th>
 				</tr>
+				
 				<tr>
-					<th><form:input
+					<th colspan="2"><form:input
 							path="groupId" type="hidden" id="groupId" value="${groupMain.groupId}"/></th>
-				</tr>
-				<tr>
-					<th><form:input
-							path="memberId" type="hidden" id="memberId" value="${member.memberId}"/></th>
-				</tr>
-
-				<tr>
-					<th>${member.memberName}</th>
-				</tr>
-				
-				<tr>
-					<img src="<c:url value='/getMemberImage/${member.memberId}.jpg' />">
+					<th colspan="2"><form:input
+							path="memberId" type="hidden" id="memberId" value="${member.memberId}"/></th>		
 				</tr>
 				
 				<!-- 				放文章內容 -->
 				<tr>
-					<td><textarea rows="10" cols="60"></textarea></td>
+					<td colspan="2"><textarea rows="10" cols="150"></textarea></td>
 				</tr>
 				<!-- 				放文章內容 -->
 				
 				<tr>
-					<td class="text-right"><label for="multipartFile">上傳文章照片</label>
+					<td colspan="2" class="text-right"><label for="multipartFile">上傳文章照片</label>
 						<form:input type="file" accept="image/*" path="multipartFile"
 							id="multipartFile" onchange="checkImage(this)"></form:input> 
 							<input type="submit" value="送出">
