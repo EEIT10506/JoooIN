@@ -12,8 +12,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9cpXz2HFE2Dw_vITbm-T6Z-6v-TJujBQ"></script> -->
- 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
 <!-- =============================== -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9cpXz2HFE2Dw_vITbm-T6Z-6v-TJujBQ&libraries=places" defer></script>
 
@@ -146,6 +145,10 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function () {
+ 	    var check = "${check}";
+	       if(check == '1'){
+	   		$("#successful").click();
+	        }
 		var map = new google.maps.Map(document.getElementById('map'), {
 	          center: {lat: 25.047814, lng: 121.516949},
 	          zoom: 13,
@@ -215,24 +218,17 @@
 	          });
 	          map.fitBounds(bounds);
 	        });
-	        
-	       //$("#map").hide();
-			//$("#closeMap").show;
+	    
 	});             
 
-	             
-		$("#address").blur(function(){
-			$("#map").show();
-		});
-		
-		$("#closeMap").click(function(){
-			$("#map").toggle();
-			
-		});
-		
+	$(document).ready(function () {         
 			<c:if test="${event.eventStatus == 'no'}">
-				$("#eventName ,#eventTypeId, #eventDateStart, #eventDateEnd, #eventFee, #eventContent, #eventMemberLimit, #multipartFile, #findAddress,#labelFile, #eventStatus").attr("readonly", true);
+				$("#sd, #ed, #eventName ,#eventTypeId, #eventContent, #eventMemberLimit, #multipartFile, #address, #labelFile, #eventStatus").attr("readonly", true);
 			</c:if>
+			<c:if test="${eventFinished == false }">
+			    $("#sd, #ed, #eventName ,#eventTypeId, #eventContent, #eventMemberLimit, #multipartFile, #address, #labelFile, #eventStatus").attr("readonly", true);
+			</c:if>																																		
+		
 		$("#eventMemberLimit").blur(function(){
 			var eventId = ${event.eventId};
 			var memberLimit = $("#eventMemberLimit").val();
@@ -254,7 +250,7 @@
 			
 		});
 		
-
+	});
 	
 	
 	
@@ -297,7 +293,7 @@
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
 	<jsp:include page="${request.contextPath}/event/settingbar"/>
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
@@ -307,18 +303,21 @@
 	        <form:form class="pure-form pure-g" modelAttribute="event" action="${pageContext.request.contextPath}/event/setting/${eventId}" method="POST" enctype="multipart/form-data">
 				<div class="pure-u-1-2">
 				<label class="labelClass" for="eventName" path="eventName">活動名稱 : </label>　
-				<form:input class="pure-input-2-3" path="eventName" maxlength="10" id="eventName" required="required"></form:input></div>
+				<form:input  class="pure-input-2-3" path="eventName" maxlength="10" id="eventName" required="required"></form:input></div>
 				
 				<div class="pure-u-1-4"><label class="labelClass"> &nbsp;按讚人數 : <span class="likeColor"> ${event.eventLike} </span> <i class="far fa-thumbs-up"></i></label></div>
 				
 				<c:if test="${event.eventStatus == 'no'}">
 				<div class="pure-u-1-5 noEvent">活動已流團</div>
 				</c:if>
-				<c:if test="${event.eventStatus == 'yes'}">
+				<c:if test="${event.eventStatus == 'yes' and eventFinished != false}">
 				<div class="pure-u-1-5 noEvent">活動已成團</div>
 				</c:if>
 				<c:if test="${event.eventStatus == 'unchecked'}">
 				<span class="pure-u-1-5 uncheckEvent">活動尚未成團</span>
+				</c:if>
+				<c:if test="${event.eventStatus == 'yes' and eventFinished == false}">
+				<span class="pure-u-1-5 noEvent">活動已結束</span>
 				</c:if>
 				<div class="pure-u-1-2">
 				<label class="labelClass" for="eventTypeId">活動類型：</label>
@@ -329,8 +328,7 @@
 				<form:option class="pure-input-1-4" value="4">其他</form:option>
 				</form:select></div>
 				<div class="pure-u-1-2">
-					<label class="labelClass">設定活動狀態 : </label>
-					
+					<label class="labelClass">設定活動狀態 : </label>					
 					<form:select class="pure-input-1-2" path='eventStatus' id="eventStatus" required="required">
 				<form:option class="pure-input-1-4" value="unchecked">尚未成團</form:option>
 				<form:option class="pure-input-1-4" value="yes">成團</form:option>
@@ -345,7 +343,7 @@
 							<span class="labelClass">開始時間：</span>
 							<span class="input-group date" id="datetimepicker1" data-target-input="nearest" style="width:300px;display:inline !important;">
 									
-							<form:input id="sd" path='eventDateStart' class="pure-input-1 form-control datetimepicker-input " data-target="#datetimepicker1" required="required" style="width:300px;display:inline !important"/>
+							<form:input  id="sd" path='eventDateStart' class="pure-input-1 form-control datetimepicker-input " data-target="#datetimepicker1" required="required" style="width:300px;display:inline !important;text-align:left;"/>
 					 		
 					 		<span class="input-group-append " data-target="#datetimepicker1" data-toggle="datetimepicker" style="display:inline !important;">
                     	    <span class="input-group-text" style="display:inline !important"><i class="fa fa-calendar" style="display:inline !important;"></i></span>
@@ -356,7 +354,7 @@
 							<span class="input-group date" id="datetimepicker2" data-target-input="nearest" style="width:300px;display:inline !important;">
 							
 							<span class="input-group-append " data-target="#datetimepicker2" data-toggle="datetimepicker" style="display:inline !important;"> 
-		                     <form:input id="ed" path='eventDateEnd' class="pure-input-1 form-control datetimepicker-input" data-target="#datetimepicker2" required="required" style="width:300px;display:inline !important"/>
+		                     <form:input  id="ed" path='eventDateEnd' class="pure-input-1 form-control datetimepicker-input" data-target="#datetimepicker2" required="required" style="width:300px;display:inline !important;text-align:left;"/>
 		                    <span class="input-group-text" style="display:inline !important;"><i class="fa fa-calendar" style="display:inline !important;"></i></span>
 		                    </span> 
 		                   </span>
@@ -366,7 +364,7 @@
 <!-- 				<input class=""  type="text" size="20" value="" id="address" required="required"/></div> -->
 <%-- 				<form:input class="" path="eventLocation" type="text" size="20" value="${event.eventLocation}" id="location" required="required"/></div> --%>
 				<span>
-				<button id="closeMap" type="button" class="btn btn-dark">Google Map</button>
+<!-- 				<button id="closeMap" type="button" class="btn btn-dark">Google Map</button> -->
 				
 				</span>
 				
@@ -375,7 +373,7 @@
 <!-- 				地圖 -->
 				<div id="" class="pure-u-1 ">
 				
-				<label class="labelClass" style="margin-top:15px;">請進行關鍵字搜尋後選取活動地點 :</label>
+				<label class="labelClass" style="margin-top:15px;">請進行關鍵字搜尋後<span style="color:red;">選取</span>活動地點 :</label>
 				<input type="text" size="20" class="controls" placeholder="Search Box"
 					id="address" value="" style="width:200px; height:50px"/>
 				</div>
@@ -387,7 +385,7 @@
 				
 				<div class="pure-u-1-2">
 					<label class="labelClass" path='eventLocation' for="local">活動地區:</label>
-					<form:input path='eventLocation' class="pure-input-1-3" id="local" required="required" readonly="true"/></div>
+					<form:input path='eventLocation' class="pure-input-2-3" id="local" required="required" readonly="true"/></div>
 					
 					<div class="pure-u-3-4">
 						<label class="labelClass" path='eventAddress' for="add">活動地址:</label>
@@ -423,7 +421,7 @@
 				</c:if>
 				<div class="pure-u-1-2">
 				<img class="settingImage" src="<c:url value='/getEventImage/${event.eventId}.jpg' />"/></div>
-				<c:if test="${event.eventStatus != 'no'}">
+				<c:if test="${event.eventStatus != 'no' and eventFinished != false}">
 				<div class="pure-u-1-3 settingCheck">
 				<button type="button" class="btn btn-primary modifyButton" data-toggle="modal" data-target="#checkEvent">確認修改</button>
 				</div>
@@ -449,6 +447,22 @@
 					
 					
 					</form:form>	
+					<button type="button" id="successful" style="display:none;"class="btn btn-primary modifyButton" data-toggle="modal" data-target="#check"></button>
+					<div class="profile-button" align="center">
+								<div class="modal fade" id="check" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+								  <div class="modal-dialog modal-dialog-centered" role="document">
+								    <div class="modal-content">
+<!-- 								      <div class="modal-header"> -->
+<!-- 								        <h5 class="pure-u-1-5 modal-title" id="exampleModalLongTitle" style="font-size:30px;font-weight:bold;font-family:微軟正黑體;"></h5> -->
+<!-- 								      </div> -->
+								      <div class="pure-u-1-2 modal-body" style="text-align:left;font-size:30px;font-weight:bold;font-family:微軟正黑體;text-align:center;">修改成功<i class="fas fa-check" style="color:green;"></i></div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								      </div>
+								    </div>
+								  </div>
+								</div>　　　　　　
+							</div>	
 		</div>
 	
 	</div>

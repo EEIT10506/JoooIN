@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.joooin.model.EventLikeBean;
 import com.joooin.model.EventMainBean;
@@ -313,8 +314,9 @@ public class EventController {
 				e.printStackTrace();
 			}
 			boolean eventFinished = endTime.after(timeNow);
-			
-		
+			if(!model.containsAttribute("check")){
+			model.addAttribute("check", "undo");
+			}
 			model.addAttribute("eventFinished", eventFinished);
 //			=============
 			model.addAttribute("event", event);
@@ -329,21 +331,25 @@ public class EventController {
 	// 修改活動資料
 	@RequestMapping(value = "/event/setting/{eventId}", method = RequestMethod.POST)
 	public String eventSettingUpdate(@ModelAttribute("event") EventMainBean updateBean,
-			@PathVariable("eventId") Integer eventId, Model model, HttpSession session) {
+			@PathVariable("eventId") Integer eventId, Model model, HttpSession session, RedirectAttributes attributes) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
 		EventMainBean event = eventService.getByEventMainId(eventId);
 		Integer inviterId = event.getEventInviterId();
-
+		Integer check =0;
 		if (memberId != null && memberId.equals(inviterId)) {
 
 			Boolean checkLimit = eventService.updateEvent(eventId, updateBean, context);
-		
+			
 			model.addAttribute("event", event);
-			if (checkLimit == true)
+			if (checkLimit == true) {
+				check = 1;
+				attributes.addFlashAttribute("check", check);
 				return "redirect:/event/setting/" + eventId;
-			else
+			}else {
 				return "redirect:/notEnough/" + eventId;
+			}
 		} else {
+			System.out.println(check);
 			return "not_login";
 		}
 	}
