@@ -8,6 +8,7 @@ import com.joooin.model.GroupPostBean;
 import com.joooin.model.GroupPostReplyBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.system.group._22.pojo.Poster;
+import com.joooin.system.group._22.pojo.Replyer;
 
 public interface GroupService_22 {
 	public Integer createGroup(GroupMainBean groupMainBean); // new group then set and save
@@ -42,6 +43,7 @@ public interface GroupService_22 {
 	
 	public Integer createReply(GroupPostReplyBean groupPostReplyBean); // 發布回文
 	
-	public List<GroupPostReplyBean> getReplyByPostId(Integer groupPostId); //以groupPostId 取得所有回文
+	public List<GroupPostReplyBean> getReplyByPostId(Integer groupPostId); //以groupPostId 取得所有回文 並排序
 	
+	public List<Replyer> getReplyerByGroupPostId(Integer groupPostId); // 以POJO傳遞多篇回文資訊
 }

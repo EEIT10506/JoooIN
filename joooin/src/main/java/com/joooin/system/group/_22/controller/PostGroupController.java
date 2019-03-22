@@ -22,6 +22,7 @@ import com.joooin.model.GroupPostBean;
 import com.joooin.model.GroupPostReplyBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.system.group._22.pojo.Poster;
+import com.joooin.system.group._22.pojo.Replyer;
 import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.system.member._27.service.MemberService;
 import com.joooin.util.ImageUtils;
@@ -145,11 +146,11 @@ public class PostGroupController {
 	@RequestMapping(method = RequestMethod.GET, 
 			value = "/group/return/reply/{groupPostId}/group/{groupId}")
 	@ResponseBody
-	public List<GroupPostReplyBean> getReplies(@PathVariable Integer groupPostId, @PathVariable Integer groupId) {
+	public List<Replyer> getReplyers(@PathVariable Integer groupPostId, @PathVariable Integer groupId) {
 		
-		List<GroupPostReplyBean> replyByDate = groupService.getReplyByPostId(groupPostId);
+		List<Replyer> replyerByDate = groupService.getReplyerByGroupPostId(groupPostId);
 		
-		return replyByDate;
+		return replyerByDate;
 	}
 	
 }

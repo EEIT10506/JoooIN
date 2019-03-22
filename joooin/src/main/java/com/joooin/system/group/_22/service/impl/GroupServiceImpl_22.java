@@ -23,6 +23,7 @@ import com.joooin.repository.GroupPostDao;
 import com.joooin.repository.GroupPostReplyDao;
 import com.joooin.repository.MemberMainDao;
 import com.joooin.system.group._22.pojo.Poster;
+import com.joooin.system.group._22.pojo.Replyer;
 import com.joooin.system.group._22.service.GroupService_22;
 
 @Transactional
@@ -358,4 +359,36 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 //		}
 		return postReply;
 	}
+
+	@Override
+	public List<Replyer> getReplyerByGroupPostId(Integer groupPostId) {
+		LinkedList<Replyer> replyers = new LinkedList<Replyer>();
+		List<GroupPostReplyBean> groupReply = getReplyByPostId(groupPostId);
+		for(GroupPostReplyBean reply : groupReply) {
+			if(! reply.getIsDeleted()) {
+				Replyer replyer = new Replyer();
+				replyer.setGroupPostReplyId(reply.getGroupPostReplyId());
+				replyer.setGroupId(reply.getGroupId());
+				replyer.setGroupPostId(reply.getGroupPostId());
+				replyer.setMemberId(reply.getMemberId());
+				replyer.setGroupPostReplyContent(reply.getGroupPostReplyContent());
+				replyer.setGroupPostReplyDate(reply.getGroupPostReplyDate());
+				replyer.setIsDeleted(reply.getIsDeleted());
+				String memberName = memMainDao.getByMemberId(reply.getMemberId()).getMemberName();
+				replyer.setMemberName(memberName);
+				replyers.add(replyer);
+			}
+		}
+		
+		return replyers;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

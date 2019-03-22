@@ -8,6 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link
 	href="https://code.jquery.com/jquery-1.12.4.min.css">	
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"
 	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
@@ -15,7 +20,7 @@
 	
 <!-- 	comment style -->
 <link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>	
+ <script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>	
 <!-- 	comment style -->
 
 <style>	
@@ -51,16 +56,16 @@ $( document ).ready(function() {
 						//開始擴增
 						"<article class='row'>" +
 			              "<div class='col-md-2 col-sm-2 hidden-xs'>"+
-			                "<figure class='thumbnail'>"+
-			                  "<img class='img-responsive' src='http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png' />"+
-			                  "<figcaption class='text-center'>"+"xx_username_xx"+"</figcaption>"+
+			                "<figure class='thumbnail'>"+ 
+			                  "<img class='img-responsive' src='${pageContext.request.contextPath}/getMemberImage/"+ result[i].memberId +"'/>"+
+			                  "<figcaption class='text-center'>"+ result[i].memberName +"</figcaption>"+
 			                "</figure>"+
 			              "</div>"+
 			              "<div class='col-md-10 col-sm-10'>"+
 			                "<div class='panel panel-default arrow left'>"+
 			                  "<div class='panel-body'>"+
 			                    "<header class='text-left'>"+
-			                      "<div class='comment-user'>"+"<i class='fa fa-user'>"+"</i>"+ "ThatGuy"+"</div>"+
+			                      "<div class='comment-user'>"+"<i class='fa fa-user'>"+"</i>"+ (i+1) + "樓" +"</div>"+
 			                      "<time class='comment-date' datetime='16-12-2014 01:05'>"+"<i class='fa fa-clock-o'>"+"</i>"+ result[i].groupPostReplyDate +"</time>"+
 			                    "</header>"+
 			                    "<div class='comment-post'>"+
@@ -108,30 +113,30 @@ $( document ).ready(function() {
 						for (var i = 0; i < result.length; i++) {
 							$("#chatbox").append(
 								//開始擴增
-								"<article class='row'>" +
-					              "<div class='col-md-2 col-sm-2 hidden-xs'>"+
-					                "<figure class='thumbnail'>"+
-					                  "<img class='img-responsive' src='http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png' />"+
-					                  "<figcaption class='text-center'>"+"xx_username_xx"+"</figcaption>"+
-					                "</figure>"+
-					              "</div>"+
-					              "<div class='col-md-10 col-sm-10'>"+
-					                "<div class='panel panel-default arrow left'>"+
-					                  "<div class='panel-body'>"+
-					                    "<header class='text-left'>"+
-					                      "<div class='comment-user'>"+"<i class='fa fa-user'>"+"</i>"+ "ThatGuy"+"</div>"+
-					                      "<time class='comment-date' datetime='16-12-2014 01:05'>"+"<i class='fa fa-clock-o'>"+"</i>"+ result[i].groupPostReplyDate +"</time>"+
-					                    "</header>"+
-					                    "<div class='comment-post'>"+
-					                      "<p>"+
-					                      result[i].groupPostReplyContent
-					                      +"</p>"+
-					                    "</div>"+
-					                    "<p class='text-right'>"+"<a href='#' class='btn btn-default btn-sm'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉按鈕"+"</a>"+"</p>"+
-					                  "</div>"+
-					                "</div>"+
-					                "</div>"+
-					            "</article>");
+									"<article class='row'>" +
+						              "<div class='col-md-2 col-sm-2 hidden-xs'>"+
+						                "<figure class='thumbnail'>"+ 
+						                  "<img class='img-responsive' src='${pageContext.request.contextPath}/getMemberImage/"+ result[i].memberId +"'/>"+
+						                  "<figcaption class='text-center'>"+ result[i].memberName +"</figcaption>"+
+						                "</figure>"+
+						              "</div>"+
+						              "<div class='col-md-10 col-sm-10'>"+
+						                "<div class='panel panel-default arrow left'>"+
+						                  "<div class='panel-body'>"+
+						                    "<header class='text-left'>"+
+						                      "<div class='comment-user'>"+"<i class='fa fa-user'>"+"</i>"+ (i+1) + "樓" +"</div>"+
+						                      "<time class='comment-date' datetime='16-12-2014 01:05'>"+"<i class='fa fa-clock-o'>"+"</i>"+ result[i].groupPostReplyDate +"</time>"+
+						                    "</header>"+
+						                    "<div class='comment-post'>"+
+						                      "<p>"+
+						                      result[i].groupPostReplyContent
+						                      +"</p>"+
+						                    "</div>"+
+						                    "<p class='text-right'>"+"<a href='#' class='btn btn-default btn-sm'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉按鈕"+"</a>"+"</p>"+
+						                  "</div>"+
+						                "</div>"+
+						                "</div>"+
+						            "</article>");
 								//結束擴增
 						}
             		}, 
