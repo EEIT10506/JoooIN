@@ -8,6 +8,8 @@ import com.joooin.model.EventMainBean;
 import com.joooin.model.EventMemberBean;
 import com.joooin.model.EventPostBean;
 import com.joooin.model.EventTypeBean;
+import com.joooin.model.GroupMainBean;
+import com.joooin.model.GroupPostBean;
 import com.joooin.model.MemberMainBean;
 
 public interface EventService {
@@ -40,5 +42,6 @@ public interface EventService {
 	//刪除一筆報名
 	public void deleteEventMemberById(Integer eventId,Integer memberId);
 	public void rejectSignUp(Integer eventMemberId);
+	//首頁
 	
 }

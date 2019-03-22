@@ -45,23 +45,8 @@ public class GroupController_42 {
 		List<GroupMainBean> typeOne = service.getGroupType(groupOneType);
 		model.addAttribute("groupsType", typeOne);
 		
-//		Integer memId = (Integer) session.getAttribute("memberId");	
-//		List<GroupMemberBean> groupList = groupMemberDao.getAll();
-//		
-//
-//			for(GroupMemberBean gb:groupList) {
-//			if(groupId.equals(gb.getGroupId())&& memberId.equals(gb.getMemberId())) {
-//				if(gb.getIsAgreed()) {
-//					model.addAttribute("isInGroup","進入社團" );
-//					return "group/groups_type";
-//				}
-//				else {
-//					return"redirect:/group/"+ groupId;
-//				}
-//				}
-//			
-//			}
-			
+
+		List<GroupMainBean> list = service.getGroupType(groupOneType);
 		
 
 

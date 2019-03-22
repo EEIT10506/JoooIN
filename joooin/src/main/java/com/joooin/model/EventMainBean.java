@@ -38,6 +38,7 @@ public class EventMainBean implements Serializable {
 	private Byte[] eventImage;
 	private String eventStatus;
 	private String eventCreateDate;
+	private String eventPlaceId;
 	private MultipartFile multipartFile;
 	private List<EventMemberBean> eventMemberList = new ArrayList<EventMemberBean>();
 	private List<EventPostBean> eventPostList = new ArrayList<EventPostBean>();
@@ -48,8 +49,7 @@ public class EventMainBean implements Serializable {
 			String eventAddress, Double eventLatitude, Double eventLongitude, String eventContent, Integer eventTypeId,
 			Integer eventInviterId, Integer eventLike, Integer eventMemberLimit, Integer eventFee, Boolean isFull,
 			Integer eventCurrentMembers, Byte[] eventImage, String eventStatus, String eventCreateDate,
-			List<EventMemberBean> eventMemberList, List<EventPostBean> eventPostList,
-			List<EventLikeBean> eventLikeList) {
+			String eventPlaceId) {
 		super();
 		this.eventName = eventName;
 		this.eventDateStart = eventDateStart;
@@ -69,9 +69,7 @@ public class EventMainBean implements Serializable {
 		this.eventImage = eventImage;
 		this.eventStatus = eventStatus;
 		this.eventCreateDate = eventCreateDate;
-		this.eventMemberList = eventMemberList;
-		this.eventPostList = eventPostList;
-		this.eventLikeList = eventLikeList;
+		this.eventPlaceId = eventPlaceId;
 	}
 
 	public EventMainBean() {
@@ -225,6 +223,14 @@ public class EventMainBean implements Serializable {
 
 	public void setMultipartFile(MultipartFile multipartFile) {
 		this.multipartFile = multipartFile;
+	}
+
+	public String getEventPlaceId() {
+		return eventPlaceId;
+	}
+
+	public void setEventPlaceId(String eventPlaceId) {
+		this.eventPlaceId = eventPlaceId;
 	}
 	
 }

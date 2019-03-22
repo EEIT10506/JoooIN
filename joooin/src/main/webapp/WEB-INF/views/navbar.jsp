@@ -31,24 +31,26 @@
 <script>
 	$(document).ready(function(){
 		if ($(".hasLogin").text() != ""){
-			$("#loginNregister").css("visibility", "hidden");
+			$("#loginNregister").css("display", "none");
 		} else {
-			$("#loginNregister").css("visibility", "visible");
+			$("#loginNregister").css("display", "none");
+		}
+		
+		if ($("#notRead").text() != "訊息匣（未讀訊息：0）"){
+			$("#notRead").css("color", "red");
 		}
 	});
-</script>
-<script>
-function signOut() {
-	var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-	});
-}
-function onLoad() {
-    gapi.load('auth2', function() {
-      gapi.auth2.init();
-    });
-  }
+	function signOut() {
+		var auth2 = gapi.auth2.getAuthInstance();
+	    auth2.signOut().then(function () {
+	      console.log('User signed out.');
+		});
+	}
+	function onLoad() {
+	    gapi.load('auth2', function() {
+	      gapi.auth2.init();
+	    });
+	  }
 </script>
 <body>
 <nav class="navbar navbar-expand bg-dark navbar-dark">
@@ -67,14 +69,21 @@ function onLoad() {
     <li class="nav-item">
       <a class="nav-link" href="${pageContext.request.contextPath}/groups">社團</a>
     </li>
+    <li class="nav-item">
+      <c:choose>
+      	<c:when test="${memberId != null}">
+       		<a id="notRead" class="nav-link" target="_blank" href="${pageContext.request.contextPath}/member/self/message">訊息匣（未讀訊息：${notReadQuantity}）</a>
+        </c:when>
+        <c:otherwise>
+            <a class="nav-link" target="_blank" href="${pageContext.request.contextPath}/member/self/message">訊息匣</a>
+        </c:otherwise>
+      </c:choose>
+    </li>
     <li id="loginNregister" class="nav-item">
       <a class="nav-link" href="${pageContext.request.contextPath}/login">登入／註冊</a>
     </li>
     <li id="hasLogin" class="nav-item">
-      <a class="nav-link hasLogin" href="${pageContext.request.contextPath}/member">${memberName}</a>
-    </li>
-    <li id="hasLogin" class="nav-item">
-      <a class="nav-link hasLogin" href="${pageContext.request.contextPath}/admin">${admin}</a>
+      <a class="nav-link hasLogin" href="${pageContext.request.contextPath}/member">${memberName}${admin}</a>
     </li>
     <li id="logout" class="nav-item">
       <a id="googleLogout" class="nav-link logout" href="${pageContext.request.contextPath}/logout" onclick="return(confirm('您確定要登出帳號嗎？'))">${logout}</a>

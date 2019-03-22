@@ -39,6 +39,7 @@ public class MemberMainBean implements Serializable {
 	private Boolean cityDisplay;
 	private Boolean emailDisplay;
 	private Boolean phoneDisplay;
+	private String memberIntro;
 	private MultipartFile multipartFile;
 	private List<GroupMainBean> groupMainList = new ArrayList<GroupMainBean>();
 	private List<GroupMemberBean> groupMemberList = new ArrayList<GroupMemberBean>();
@@ -63,7 +64,7 @@ public class MemberMainBean implements Serializable {
 	public MemberMainBean(String memberName, String email, String password, String gender,
 			String birthday, String city, String phone, Byte[] memberImage, Integer logins, String memberCreateDate,
 			Boolean certificationStatus, String certificationHash, Boolean genderDisplay, Boolean birthdayDisplay,
-			Boolean cityDisplay, Boolean emailDisplay, Boolean phoneDisplay) {
+			Boolean cityDisplay, Boolean emailDisplay, Boolean phoneDisplay, String memberIntro) {
 		this.memberName = memberName;
 		this.email = email;
 		this.password = password;
@@ -81,6 +82,8 @@ public class MemberMainBean implements Serializable {
 		this.cityDisplay = cityDisplay;
 		this.emailDisplay = emailDisplay;
 		this.phoneDisplay = phoneDisplay;
+		this.memberIntro = memberIntro;
+		
 	}
 	public MemberMainBean() {
 	}
@@ -389,6 +392,12 @@ public class MemberMainBean implements Serializable {
 				+ ", certificationHash=" + certificationHash + ", genderDisplay=" + genderDisplay + ", birthdayDisplay="
 				+ birthdayDisplay + ", cityDisplay=" + cityDisplay + ", emailDisplay=" + emailDisplay
 				+ ", phoneDisplay=" + phoneDisplay + "]";
+	}
+	public String getMemberIntro() {
+		return memberIntro;
+	}
+	public void setMemberIntro(String memberIntro) {
+		this.memberIntro = memberIntro;
 	}
 	
 

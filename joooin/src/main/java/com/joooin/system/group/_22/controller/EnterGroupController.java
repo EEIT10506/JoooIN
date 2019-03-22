@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupMemberBean;
+import com.joooin.model.GroupPostBean;
 import com.joooin.model.MemberMainBean;
+import com.joooin.system.group._22.pojo.Poster;
 import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.system.member._27.service.MemberService;
 import com.joooin.util.ImageUtils;
@@ -28,7 +30,7 @@ public class EnterGroupController {
 
 	@Autowired
 	MemberService memberService;
-	
+
 	@Autowired
 	GroupService_22 groupService;
 
@@ -38,17 +40,20 @@ public class EnterGroupController {
 	// 依照groupId個別社團主頁連結
 	@RequestMapping(method = RequestMethod.GET, value = "/group/{groupId}")
 	public String groupMainPage(Model model, @PathVariable Integer groupId) {
-		LinkedList<MemberMainBean> applyMember = new LinkedList<>();
 		GroupMainBean groupMain = groupService.getByGroupId(groupId);
-		
-		for(GroupMemberBean member : groupService.getProcessGroupApplyList(groupId)) {
+
+		LinkedList<MemberMainBean> applyMember = new LinkedList<>();
+		for (GroupMemberBean member : groupService.getProcessGroupApplyList(groupId)) {
 			MemberMainBean memberMain = memberService.getMemberMainBean(member.getMemberId());
 			applyMember.add(memberMain);
 		}
-		
+
+		List<Poster> groupPosters = groupService.getPostersByGroupId(groupId);
+
 		model.addAttribute("groupMain", groupMain);
 		model.addAttribute("applyMemberMain", applyMember);
-		
+		model.addAttribute("groupPoster", groupPosters);
+
 		return "group/group";
 	}
 
@@ -66,18 +71,23 @@ public class EnterGroupController {
 
 	// 進入社團成員
 	@RequestMapping(method = RequestMethod.GET, value = "/group/members/{groupId}")
-	public String mainPageMember(Model model, @PathVariable Integer groupId) {
-		
+	public String mainPageMember(Model model, @PathVariable Integer groupId, HttpSession session) {
+
+		// 未登入不可看成員
+		Integer memberId = (Integer) session.getAttribute("memberId");
+		if (memberId == null) {
+			return "not_login";
+		}
+
 		List<MemberMainBean> members = groupService.getMembersInGroup(groupId);
 		model.addAttribute("membersInGroup", members);
-		
-		//for group_navbar
+
+		// for group_navbar
 		GroupMainBean groupMain = groupService.getByGroupId(groupId);
 		model.addAttribute("groupMain", groupMain);
-		
+
 		return "group/group_members";
 	}
-
 
 	// 處理加入或進入{groupId}社團
 	@RequestMapping(method = RequestMethod.POST, value = "/group/addgroup/{groupId}")
@@ -98,5 +108,4 @@ public class EnterGroupController {
 			return "redirect:/group/" + groupId; // 已經在申請中，前端按鈕顯示為申請中
 		}
 	}
-
 }

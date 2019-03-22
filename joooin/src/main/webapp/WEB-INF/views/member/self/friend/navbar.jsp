@@ -25,7 +25,7 @@
     <div class="navbar-nav friend-navbar">
       <a href="${pageContext.request.contextPath}/member/self/friend/my_friend" id="my-friend-link" class="nav-item nav-link" href="#">我的好友</a>　　　
       <a href="${pageContext.request.contextPath}/member/self/friend/request_friend" id="request-friend-link" class="nav-item nav-link" href="#">好友申請中</a>　　　
-      <a href="${pageContext.request.contextPath}/member/self/friend/receive_friend" id="receive-friend-link" class="nav-item nav-link" href="#">好友受邀中</a>
+      <a href="${pageContext.request.contextPath}/member/self/friend/receive_friend" id="receive-friend-link" class="nav-item nav-link" href="#">收到好友申請</a>
     </div>
   </div>
 </nav>

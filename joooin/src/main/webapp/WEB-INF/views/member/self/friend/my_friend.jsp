@@ -44,6 +44,10 @@
 			window.open("${pageContext.request.contextPath}/member/other/" + $(this).val());
 		});
 		
+		$(document).on("click", ".friendChatBtn", function(){
+			window.open("${pageContext.request.contextPath}/member/self/message/" + $(this).val());
+		});
+		
 		$(document).on("click", ".friendDeleteBtn", function(){
 			var otherMemberId = $(this).val();
 			
@@ -59,6 +63,8 @@
 			    }
 			});
 		});
+		
+		
 		
 		//DataTable
 		var language = {
@@ -85,7 +91,7 @@
 	});
 	
 </script>
-<title>會員</title></head>
+<title>我的好友</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
@@ -112,7 +118,7 @@
 										<tr>
 											<td><img id="friendImage" src='<c:url value='/getMemberImage/${friend.memberId}.jpg' />' />　${friend.memberName} </td>
 				                            <td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="個人頁面"><button value="${friend.memberId}" class="friendPageBtn btn btn-primary btn-xs" data-title="個人頁面" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
-				                            <td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="聊天"><button value="${friend.memberId}" class="friendChatBtn btn btn-primary btn-xs" data-title="聊天" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_chat.png' />"/></button></p></td>
+				                            <td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="聊天"><button value="${friend.messageHash}" class="friendChatBtn btn btn-primary btn-xs" data-title="聊天" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_chat.png' />"/></button></p></td>
 				    						<td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="解除好友"><button value="${friend.memberId}" class="friendDeleteBtn btn btn-danger btn-xs" data-title="解除好友" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_delete.png' />"/></button></p></td>
 										</tr>
 									</c:if>

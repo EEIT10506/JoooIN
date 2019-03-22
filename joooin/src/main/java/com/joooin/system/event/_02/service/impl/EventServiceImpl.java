@@ -1,6 +1,9 @@
 package com.joooin.system.event._02.service.impl;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -14,11 +17,15 @@ import com.joooin.model.EventMainBean;
 import com.joooin.model.EventMemberBean;
 import com.joooin.model.EventPostBean;
 import com.joooin.model.EventTypeBean;
+import com.joooin.model.GroupMainBean;
+import com.joooin.model.GroupPostBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.repository.EventMainDao;
 import com.joooin.repository.EventMemberDao;
 import com.joooin.repository.EventPostDao;
 import com.joooin.repository.EventTypeDao;
+import com.joooin.repository.GroupMainDao;
+import com.joooin.repository.GroupPostDao;
 import com.joooin.repository.MemberMainDao;
 import com.joooin.system.event._02.service.EventService;
 import com.joooin.util.ImageUtils;
@@ -36,7 +43,10 @@ public class EventServiceImpl implements EventService {
 	MemberMainDao memberMainDao;
 	@Autowired
 	EventPostDao eventPostDao;
-	
+	@Autowired
+	GroupPostDao groupPostDao;
+	@Autowired
+	GroupMainDao groupMainDao;
 	public EventMainBean getByEventMainId(Integer eventId) {
 
 		return eventMainDao.getByEventMainId(eventId);
@@ -63,14 +73,12 @@ public class EventServiceImpl implements EventService {
 		oldBean.setEventDateEnd(updateBean.getEventDateEnd());
 		oldBean.setEventAddress(updateBean.getEventAddress());
 		oldBean.setEventContent(updateBean.getEventContent());
-		oldBean.setEventFee(updateBean.getEventFee());
 		oldBean.setEventLocation(updateBean.getEventLocation());
 		oldBean.setEventLatitude(updateBean.getEventLatitude());
 		oldBean.setEventLongitude(updateBean.getEventLongitude());
 		oldBean.setEventMemberLimit(updateBean.getEventMemberLimit());
 		oldBean.setEventTypeId(updateBean.getEventTypeId());
 		oldBean.setEventStatus(updateBean.getEventStatus());
-		oldBean.setEventFee(oldBean.getEventFee());
 		Byte[] eventImage = null;
 		if (!updateBean.getMultipartFile().isEmpty()) {
 			eventImage = ImageUtils.multipartFileToByteArray(updateBean.getMultipartFile());
@@ -176,8 +184,5 @@ public class EventServiceImpl implements EventService {
 //	public void updateIsfullWhenFull(EventMainBean eventMainBean) {
 //		eventMainDao.update(eventMainBean);
 //	}
-
 	
-	
-		
 }

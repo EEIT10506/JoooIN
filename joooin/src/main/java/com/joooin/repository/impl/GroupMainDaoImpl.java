@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.joooin.model.GroupMainBean;
 import com.joooin.repository.GroupMainDao;
+import com.joooin.system.admin._03.model.AllGroupQuantityBean;
 
 @Repository
 public class GroupMainDaoImpl implements GroupMainDao{
@@ -55,6 +56,16 @@ public class GroupMainDaoImpl implements GroupMainDao{
 		String hql = "FROM GroupMainBean WHERE groupType =:grouponetype";
 		return session.createQuery(hql).setParameter("grouponetype", groupOneType).getResultList();
 
+		}
+
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	@Override
+	public List<AllGroupQuantityBean> getAllGroupQuantity() {
+		Session session = factory.getCurrentSession();
+		String SQL = "SELECT groupType as groupType , COUNT(groupId) as groupId FROM group_main GROUP BY groupType";
+		List<AllGroupQuantityBean> list = session.createSQLQuery(SQL).addEntity(AllGroupQuantityBean.class).getResultList();
+		System.out.println("別再錯了="+list);
+		return list;
 		}
 
 }
