@@ -292,16 +292,10 @@ $( document ).ready(function() {
 		</div>
 		<!-- 	test --> </main>
 	</div>
-<<<<<<< HEAD
-
-<!-- 請把所有內容寫在此div內 -->
-
-=======
 	<br>
 	<br>
 	<br>
 	<!-- 請把所有內容寫在此div內 -->
->>>>>>> refs/remotes/origin/陳昭樺
 
 </body>
 </html>
