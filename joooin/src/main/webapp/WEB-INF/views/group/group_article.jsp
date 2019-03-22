@@ -7,19 +7,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/grouptype.css'/>">
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
 <link
 	href="https://code.jquery.com/jquery-1.12.4.min.css">	
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"
 	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
 	crossorigin="anonymous"></script>	
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
+<!-- 	comment style -->
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>	
+<!-- 	comment style -->
+
 <style>	
 	#main {
 		width: 1200px;
@@ -50,10 +48,36 @@ $( document ).ready(function() {
 			$("#chatbox").html("");
 			for (var i = 0; i < result.length; i++) {
 				$("#chatbox").append(
-			        "<tr>" +
-			            "<td>" + result[i].groupPostReplyContent + "</td>" +
-			            "<td>" + result[i].groupPostReplyDate + "</td>" +
-			        "</tr>");
+						//開始擴增
+						"<article class='row'>" +
+			              "<div class='col-md-2 col-sm-2 hidden-xs'>"+
+			                "<figure class='thumbnail'>"+
+			                  "<img class='img-responsive' src='http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png' />"+
+			                  "<figcaption class='text-center'>"+"xx_username_xx"+"</figcaption>"+
+			                "</figure>"+
+			              "</div>"+
+			              "<div class='col-md-10 col-sm-10'>"+
+			                "<div class='panel panel-default arrow left'>"+
+			                  "<div class='panel-body'>"+
+			                    "<header class='text-left'>"+
+			                      "<div class='comment-user'>"+"<i class='fa fa-user'>"+"</i>"+ "ThatGuy"+"</div>"+
+			                      "<time class='comment-date' datetime='16-12-2014 01:05'>"+"<i class='fa fa-clock-o'>"+"</i>"+ result[i].groupPostReplyDate +"</time>"+
+			                    "</header>"+
+			                    "<div class='comment-post'>"+
+			                      "<p>"+
+			                      result[i].groupPostReplyContent
+			                      +"</p>"+
+			                    "</div>"+
+			                    "<p class='text-right'>"+"<a href='#' class='btn btn-default btn-sm'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉按鈕"+"</a>"+"</p>"+
+			                  "</div>"+
+			                "</div>"+
+			                "</div>"+
+			            "</article>");
+						//結束擴增
+// 			        "<tr>" +
+// 			            "<td>" + result[i].groupPostReplyContent + "</td>" +
+// 			            "<td>" + result[i].groupPostReplyDate + "</td>" +
+// 			        "</tr>");
 			}
 		}, 
 	});
@@ -83,10 +107,32 @@ $( document ).ready(function() {
 						$("#chatbox").html("");
 						for (var i = 0; i < result.length; i++) {
 							$("#chatbox").append(
-						        "<tr>" +
-						            "<td>" + result[i].groupPostReplyContent + "</td>" +
-						            "<td>" + result[i].groupPostReplyDate + "</td>" +
-						        "</tr>");
+								//開始擴增
+								"<article class='row'>" +
+					              "<div class='col-md-2 col-sm-2 hidden-xs'>"+
+					                "<figure class='thumbnail'>"+
+					                  "<img class='img-responsive' src='http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png' />"+
+					                  "<figcaption class='text-center'>"+"xx_username_xx"+"</figcaption>"+
+					                "</figure>"+
+					              "</div>"+
+					              "<div class='col-md-10 col-sm-10'>"+
+					                "<div class='panel panel-default arrow left'>"+
+					                  "<div class='panel-body'>"+
+					                    "<header class='text-left'>"+
+					                      "<div class='comment-user'>"+"<i class='fa fa-user'>"+"</i>"+ "ThatGuy"+"</div>"+
+					                      "<time class='comment-date' datetime='16-12-2014 01:05'>"+"<i class='fa fa-clock-o'>"+"</i>"+ result[i].groupPostReplyDate +"</time>"+
+					                    "</header>"+
+					                    "<div class='comment-post'>"+
+					                      "<p>"+
+					                      result[i].groupPostReplyContent
+					                      +"</p>"+
+					                    "</div>"+
+					                    "<p class='text-right'>"+"<a href='#' class='btn btn-default btn-sm'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉按鈕"+"</a>"+"</p>"+
+					                  "</div>"+
+					                "</div>"+
+					                "</div>"+
+					            "</article>");
+								//結束擴增
 						}
             		}, 
 				});
@@ -174,8 +220,8 @@ $( document ).ready(function() {
 				
 				<tr >
 					<td colspan="3">
-					<span class="post_content" >
-					內容:${poster.groupPostContent }
+					<span class="post_image" >
+					內容:${poster.groupPostImage }
 					</span>
 					</td>
 				
@@ -274,7 +320,17 @@ $( document ).ready(function() {
 			<hr>
 			<br>
 			<div>
-				<div id="chatbox"></div>
+<!-- 			回文區 -->
+				<div class="container">
+				    <div class="row">
+				      <div class="col-md-8">
+				        <h2 class="page-header">Comments</h2>
+				          <section class="comment-list" id="chatbox">
+				           </section>
+				      </div>
+				    </div>
+				  </div>
+<!-- 			回文區 -->
 				<br>
 				<hr>
 				<br>

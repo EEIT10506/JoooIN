@@ -313,6 +313,7 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 		Poster poster = new Poster();
 		
 		poster.setGroupId(post.getGroupId());
+		poster.setGroupPostText(post.getGroupPostText());
 		poster.setGroupPostImage(post.getGroupPostImage());
 		poster.setGroupPostDate(post.getGroupPostDate());
 		poster.setGroupPostId(post.getGroupPostId());
