@@ -23,7 +23,7 @@ $(document).ready(function () {
                 timeout: 600000,
                 
                 success: function (data){
-                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">會員編號</th><th>會員姓名</th><th>會員信箱</th><th>會員密碼</th><th>會員性別</th><th>會員電話</th><th>會員登入次數</th><th>會員加入日期</th><th>會員認證狀態</th></tr></thead><tbody></tbody>');
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">No.</th><th>Name</th><th>Email</th><th>Password</th><th>Gender</th><th>Phone</th><th>Logins</th><th>SignUp</th><th>Status</th></tr></thead><tbody></tbody>');
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
                 		console.log(data);
@@ -109,7 +109,7 @@ $(document).ready(function () {
                 timeout: 600000,
                 
                 success: function (data){
-                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">社團編號</th><th>社團類型</th><th>社團名稱</th><th>團長ID</th><th>創建日期</th><th>社團人數</th></tr></thead><tbody></tbody>');
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">No.</th><th>Type</th><th>Name</th><th>LeaderId</th><th>SignUp</th><th>Total</th></tr></thead><tbody></tbody>');
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
                 		console.log(data);
@@ -193,11 +193,23 @@ $(document).ready(function () {
                 timeout: 600000,
                 
                 success: function (data){
-                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">活動編號</th><th>活動名稱</th><th>活動地點</th><th>活動類型</th><th>參加人數</th></tr></thead><tbody></tbody>');
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">No.</th><th>Name</th><th>Location</th><th>Type</th><th>Total</th></tr></thead><tbody></tbody>');
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
-                		console.log(data);
                 		$.each(data, function (index, Event){
+                			console.log("test="+Event.eventTypeId);
+                			if(Event.eventTypeId==1){
+                				Event.eventTypeId="food"
+                			}
+                			if(Event.eventTypeId==2){
+                				Event.eventTypeId="sport"
+                			}
+                			if(Event.eventTypeId==3){
+                				Event.eventTypeId="entertainment"
+                			}
+                			if(Event.eventTypeId==4){
+                				Event.eventTypeId="other"
+                			}
                 			var cell1 = $('<td></td>').text(Event.eventId).addClass('pointer text-primary text-center eventId');
                 			var cell2 = $('<td></td>').text(Event.eventName)
                 			var cell3 = $('<td></td>').text(Event.eventAddress)
@@ -277,7 +289,7 @@ $(document).ready(function () {
                 timeout: 600000,
                 
                 success: function (data){
-                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">檢舉編號</th><th>檢舉時間</th><th>檢舉人</th><th>被檢舉人</th><th>檢舉類型</th><th>檢舉內容</th><th>處理狀態</th></tr></thead><tbody></tbody>');
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">No.</th><th>Time</th><th>ReportId</th><th>ViolatorId</th><th>Type</th><th>Content</th><th>Status</th></tr></thead><tbody></tbody>');
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
                 		console.log(data);
@@ -377,9 +389,207 @@ $(document).ready(function () {
     	})
     	
     })
-//	----------------------------------------------------------------------------------------------------
-        }
-        
+
+        }//檢舉end
+//    	----------------------------------------------------------------------------------------------------
+        if (title == '報表'){
+        	$.ajax({
+        		type: "GET",
+                url: "/joooin/admin/memberStatistics",
+                dataType: "json",
+                timeout: 600000,
+                
+                success: function (data){
+                	console.log(data.members);
+                	console.log(data.gender);
+                	var tab1 = $('<div></div>').addClass('statistics1');
+                	$('#content>h2').after(tab1);
+                	var memberId = data.members;
+					var gender = data.gender;
+					var arrayMember = memberId.split(',').map(Number);
+					
+					
+					var arrayGender = gender.split(',');
+					var removeGender =  arrayGender.map(Number);
+					console.log(arrayMember);
+					console.log(removeGender);
+					
+					
+					$(".statistics1")
+					.highcharts(
+							{
+								chart : {
+										type : "cylinder", 
+														options3d: {
+															enabled: true,
+										                    alpha: 15,
+										                    beta: 15,
+										                    depth: 50,
+										                    viewDistance: 25
+																		}},
+																		xAxis: {
+																		        categories:arrayGender,
+																		        title: {
+																		            text: 'Gender'
+																		        }
+																		    }, 
+																		    
+																			title : {
+																				text : 'ratio'
+																			},yAxis: {
+																		        min: 0,
+																		        title: {
+																		            text: 'members',
+																		            align: 'high'
+																		        }
+																		        },
+																			tooltip : {
+																				valueSuffix: ''
+																			},
+//																			plotOptions : {
+//																				pie : {
+//																					allowPointSelect : true,
+//																					cursor : 'pointer',
+//																					depth : 35,
+//																					dataLabels : {
+//																						enabled : true,
+//																						format : '{point.name}'
+//																					}
+		//
+//																				}
+//																			},
+																			 series: [{
+																			        name: 'members',
+																			        data: arrayMember
+																			    }]
+																		})
+                },error:function(){
+                	alert("errorQQ")
+                }//success
+        	})// memberStatistics
+        	$.ajax({
+        		type: "GET",
+                url: "/joooin/admin/groupStatistics",
+                dataType: "json",
+                timeout: 600000,
+                
+                success: function (data){
+                	console.log(data.groupCurrentMember);
+                	console.log(data.type);
+                	var tab2 = $('<div></div>').addClass('statistics2');
+                	$('#content>h2').after(tab2);
+                	
+                	var groupCurrentMember = data.groupCurrentMember;
+					var type = data.type;
+					var arrayGroupCurrentMember = groupCurrentMember.split(',').map(Number);
+					
+					
+					var arrayType = type.split(',');
+					var removeType =  arrayType.map(Number);
+					console.log(arrayGroupCurrentMember);
+					console.log(removeType);
+					
+					$(".statistics2")
+					.highcharts(
+							{
+								chart : {
+										type : "line", 
+														options3d: {
+															enabled: true,
+										                    alpha: 15,
+										                    beta: 15,
+										                    depth: 50,
+										                    viewDistance: 25
+																		}},
+																		xAxis: {
+																		        categories:arrayType,
+																		        title: {
+																		            text: 'Type'
+																		        }
+																		    }, 
+																		    
+																			title : {
+																				text : '社團種類比例'
+																			},yAxis: {
+																		        min: 0,
+																		        title: {
+																		            text: 'members',
+																		            align: 'high'
+																		        }
+																		        },
+																			tooltip : {
+																				valueSuffix: '個'
+																			},
+																			 series: [{
+																			        name: '社團數',
+																			        data: arrayGroupCurrentMember
+																			    }]
+																		})
+                },error:function(){
+                	alert("errorQQ")
+                }//success
+        	})//groupStatistics
+        	$.ajax({
+        		type: "GET",
+                url: "/joooin/admin/eventStatistics",
+                dataType: "json",
+                timeout: 600000,
+                
+                success: function (data){
+                	console.log(data.eventId);
+                	console.log(data.eventType);
+                	var tab3 = $('<div></div>').addClass('statistics3');
+                	$('#content>h2').after(tab3);
+                	var eventId = data.eventId;
+					var eventType = data.eventType;
+					var arrayEventId = eventId.split(',').map(Number);
+					
+					var arrayEventType = eventType.split(',');
+					var removeEventType =  arrayEventType.map(Number);
+					console.log(arrayEventId);
+					console.log(removeEventType);
+					$(".statistics3")
+					.highcharts(
+							{
+								chart : {
+										type : "bar", 
+														options3d: {
+															enabled: true,
+										                    alpha: 15,
+										                    beta: 15,
+										                    depth: 50,
+										                    viewDistance: 25
+																		}},
+																		xAxis: {
+																		        categories:arrayEventType,
+																		        title: {
+																		            text: 'Type'
+																		        }
+																		    }, 
+																		    
+																			title : {
+																				text : '活動種類比例'
+																			},yAxis: {
+																		        min: 0,
+																		        title: {
+																		            text: 'events',
+																		            align: 'high'
+																		        }
+																		        },
+																			tooltip : {
+																				valueSuffix: '人'
+																			},
+																			 series: [{
+																			        name: '總人數',
+																			        data: arrayEventId
+																			    }]
+																		})
+                },error:function(){
+                	alert("errorQQ")
+                }//success
+        	})//eventStatistics
+        }//報表
+//    	----------------------------------------------------------------------------------------------------
     	}		//selectCategory end;
     	
     	

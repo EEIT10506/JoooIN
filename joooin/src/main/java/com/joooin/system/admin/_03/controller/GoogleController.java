@@ -84,7 +84,7 @@ public class GoogleController {
         	System.out.println("bean="+registerService.getMemberByEmail(email));
         	MemberMainBean mmb = new MemberMainBean();
         	mmb.setEmail(resJSON.getString("email"));
-        	mmb.setPassword("googlePassw0rd");//ID_Token太長
+        	mmb.setPassword(ID_Token);
         	
         	String photoPath = resJSON.getString("picture");
         	System.out.println(photoPath);
