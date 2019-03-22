@@ -31,9 +31,9 @@
 <script>
 	$(document).ready(function(){
 		if ($(".hasLogin").text() != ""){
-			$("#loginNregister").css("visibility", "hidden");
+			$("#loginNregister").css("display", "none");
 		} else {
-			$("#loginNregister").css("visibility", "visible");
+			$("#loginNregister").css("display", "none");
 		}
 	});
 </script>
