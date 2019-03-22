@@ -68,9 +68,14 @@ $(document).ready(function(){
   <li class="nav-item">
     <a id="participated" class="nav-link barBorder" href="${pageContext.request.contextPath}/event/participated/${event.eventId}">已參加成員</a>
   </li>
- <c:if test="${eventFinished == false}">
+ <c:if test="${eventFinished == false and event.eventStatus == 'yes'}">
    <li class="nav-item">
     <a id="attended" class="nav-link barBorder" href="${pageContext.request.contextPath}/event/attended/${event.eventId}">成員出席狀況</a>
+  </li>
+ </c:if>
+ <c:if test="${eventFinished == false and event.eventStatus != 'yes'}">
+   <li class="nav-item">
+    <a id="attended" class="nav-link barBorder disabled" href="${pageContext.request.contextPath}/event/attended/${event.eventId}">成員出席狀況</a>
   </li>
  </c:if>
   <c:if test="${eventFinished == true}">
