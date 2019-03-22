@@ -2,6 +2,8 @@ package com.joooin.system.event._35.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,25 +14,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.joooin.model.EventLikeBean;
 import com.joooin.model.EventMainBean;
 import com.joooin.model.EventMemberBean;
 import com.joooin.model.EventTypeBean;
-import com.joooin.repository.EventLikeDao;
-import com.joooin.repository.impl.EventLikeDaoImpl;
-import com.joooin.system.event._35.service.EventsService;
 import com.joooin.system.event._35.service.EventMemberService;
 import com.joooin.system.event._35.service.EventTypeService;
+import com.joooin.system.event._35.service.EventsService;
 import com.joooin.util.ImageUtils;
 
 
@@ -50,8 +47,32 @@ public class EventsController {
 	@Autowired
 	EventTypeService eventtypeservice;
 	
-	@Autowired
-	EventLikeDao eventLikeDao;
+//	@RequestMapping(value = "/events/top5", method = RequestMethod.GET)
+//	public String top5EventsPage(Model model) {
+//		
+//		EventMainBean newevent = new EventMainBean();
+//		
+//		List<EventMainBean> allevents = eventservice.getAll();	
+//		
+//		for(EventMainBean event:allevents) {
+//			System.out.println(event.getEventId());
+//		}
+//		
+//		Collections.sort(allevents,
+//				new Comparator<EventMainBean>() {
+//			public int compare(EventMainBean o1,EventMainBean o2) {
+//				//System.out.println(o2.getEventDateStart().compareTo(o1.getEventDateStart()));
+//				return o2.getEventLike().compareTo(o1.getEventLike());				
+//			}
+//		});
+//		
+//		for(EventMainBean event:allevents) {
+//			System.out.println(event.getEventId());
+//		}
+//		model.addAttribute("AllEvents", allevents);
+//		model.addAttribute("NewEvent", newevent);
+//		return "event/events";
+//	}
 	
 	@RequestMapping(value = "/events", method = RequestMethod.GET)
 	public String eventspage(Model model) {
@@ -133,9 +154,12 @@ public class EventsController {
 		event.setEventCurrentMembers(1+realquan);
 		event.setEventLike(0);
 		event.setEventStatus("unchecked");
-		
+		if(event.getEventMemberLimit()>(realquan+1)) {
 		event.setIsFull(false);
-
+		}
+		else {
+	     event.setIsFull(true);	
+		}
 		
 
 		Integer eventId = eventservice.save(event);

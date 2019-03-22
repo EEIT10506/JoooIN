@@ -1,16 +1,20 @@
 package com.joooin.controller;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.joooin.model.EventMainBean;
 import com.joooin.model.GroupMainBean;
+import com.joooin.model.GroupPostBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.system.event._35.service.EventsService;
 import com.joooin.system.group._22.service.GroupService_22;
@@ -29,7 +33,13 @@ public class HomeController {
 	ServletContext context;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String homepage() {
+	public String homepage(Model model) {
+		List<EventMainBean> top8Events = eventService.getTop8Events();
+		List<GroupMainBean> top8Groups = eventService.getTop8Groups();
+		List<GroupPostBean> top8GroupPosts = eventService.getTop8GroupPosts();
+		model.addAttribute("top8Events", top8Events);
+		model.addAttribute("top8Groups", top8Groups);
+		model.addAttribute("top8GroupPosts", top8GroupPosts);
 		return "index";
 	}
 	@RequestMapping(value = "/navbar", method = RequestMethod.GET)

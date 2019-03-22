@@ -57,15 +57,14 @@ position:relative;
 right:50px;
 } 
  .div{
-/* width:1200px !important; */
-/* float:right;  */
-/* position:absolute; */
-/* top:80px; */
-/* left:455px;   */
 display:inline !important;
 } 
+
+.container{
+background-color:silver; 
+}
 </style>
-<title></title>
+<title>JoooIN</title>
 
 
 </head>
@@ -84,37 +83,40 @@ display:inline !important;
 
 	<!-- 請把所有內容寫在此div內 -->
 	<div id="main" class="container">
-		<button id="new">開新活動</button>
-		<button id="get">尋找活動</button>
+		<button id="new" class="btn btn-secondary btn-sm">開新活動</button>
+		<button id="get" class="btn btn-primary btn-sm">尋找活動</button>
+		
+
 		<div style="margin-bottom: 50px"></div>
 
 		<div id="newdiv" style="display: none">
 
-
+	    <button id="oneclick" class="btn btn-primary btn-sm">一鍵帶入</button>
+<p></p>
 			<form:form modelAttribute="NewEvent" method='POST'
 				onsubmit="return check();" enctype="multipart/form-data">
 				<p>
 
 					活動名稱:
-					<form:input path='eventName' required="required" maxlength="10" />
+					<form:input id="ename" path='eventName' required="required" maxlength="10" />
 				<p></p>
 					開始時間:<span class="input-group date" id="datetimepicker1" data-target-input="nearest" style="width:300px">
-					<form:input id="sd" path='eventDateStart' class="form-control datetimepicker-input" data-target="#datetimepicker1" required="required"/>
+					<form:input id="sd" path='eventDateStart' class="form-control datetimepicker-input" data-target="#datetimepicker1" required="required" onkeyup="return Validate(this,value)"/>
 					  <span class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker" >
                         <span class="input-group-text"><i class="fa fa-calendar" ></i></span>
                     </span> 
                 </span>
 				<p></p>
 					結束時間: <span class="input-group date" id="datetimepicker2" data-target-input="nearest" style="width:300px">
-					<form:input id="ed" path='eventDateEnd' class="form-control datetimepicker-input" data-target="#datetimepicker2" required="required"/>
+					<form:input id="ed" path='eventDateEnd' class="form-control datetimepicker-input" data-target="#datetimepicker2" required="required" onkeyup="return Validate(this,value)"/>
 					<span class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
                         <span class="input-group-text" ><i class="fa fa-calendar"></i></span>
                     </span>
                 </span>				
 				<p></p>
            
-                              請進行關鍵字搜尋後選取活動地點:<input type="text" size="20" class="controls" placeholder="Search Box"
-					id="address" value="" required="required" style="width:300px, height:50px"/>
+                              進行關鍵字搜尋後請<h3 style="color: red">務必選取地圖上的座標並確認地點是否正確!!</h3><input type="text" size="20" class="controls" placeholder="Search Box"
+					id="address" value="" required="required" style="width:300px; height:50px"/>
 
 
 
@@ -123,22 +125,23 @@ display:inline !important;
 				<%--設定顯示 Google Maps 的大小--%>
 
 				<p></p><div>
-					活動地區:
+					活動地點:
 					<form:input path='eventLocation' id="local" required="required" style="width: 400px" readonly="true"/>
 					<p></p>
 					活動地址:
 					<form:input path='eventAddress' id="add" required="required" style="width: 400px" readonly="true"/>
+
+					<form:input path='eventLatitude' id="lat" required="required" readonly="true" style="display:none"/>
+
+					<form:input path='eventLongitude' id="lng" required="required" readonly="true" style="display:none"/>
 					<p></p>
-					活動座標經度:
-					<form:input path='eventLatitude' id="lat" required="required" readonly="true"/>
-					<p></p>
-					活動座標緯度:
-					<form:input path='eventLongitude' id="lng" required="required" readonly="true"/>
+<!-- 					活動pid -->
+					<input id="pid" style="display:none" readonly="readonly" />
 					<p></p>
 				</div>
 				<p></p>
 			活動內容(可省略):<p></p>
-				<form:textarea path='eventContent' style="width:300px;height:100px;" />
+				<form:textarea id="evcontent" path='eventContent' style="width:300px;height:100px;" />
 				<p>
 
 					活動類型:
@@ -149,22 +152,20 @@ display:inline !important;
 						<form:option value="4">其他</form:option>
 					</form:select>
 				<p>
-					活動圖片(不上傳依類型提供預設圖片):
+					活動圖片(不上傳則依類型提供預設圖片):
 					<form:input path='multipartFile' type="file" accept="image/*" />
 				<p>
 					人員上限:
-					<form:input path='eventMemberLimit' type="number" required="required" onkeydown="if(event.keyCode==13)event.keyCode=9" onKeyPRess="if 
-　　 ((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/>
+					<form:input id="plimit" type="number" min="1" path='eventMemberLimit' required="required" onkeyup="return ValidateNumber(this,value)"/>
 				<p>
-					參加人數(單獨參加免輸入):<input name="quantity" type="number" onkeydown="if(event.keyCode==13)event.keyCode=9" onKeyPRess="if 
-　　 ((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/>
+					自行攜帶的人數(單獨參加免輸入):<input id="quan" type="number" min="1" name="quantity" onkeyup="return ValidateNumber(this,value)"/>
 				<p>
+				<div style="display: none">
 					參加費(不輸入設為免費):
-					<form:input path='eventFee' type="number" onkeydown="if(event.keyCode==13)event.keyCode=9" onKeyPRess="if 
-　　 ((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/>
-				<p>
+					<form:input path='eventFee' onkeyup="return ValidateNumber(this,value)"/>
+				<p></div>
 
-					<br> <br> <input id="submit" type='submit' value='提交'
+					<br> <input id="submit" type='submit' value='提交'
 						class="btn btn-primary btn-lg active"> <input type='reset'
 						value='還原' class="btn btn-secondary btn-lg active"> <br>
 					<br> <a href='${pageContext.request.contextPath}'>回到首頁</a>
@@ -176,7 +177,7 @@ display:inline !important;
 
 		<div id="getdiv">
 
-			<table id="showevents" class="display" >
+			
 						
 							<select id="ewill">
 								<option value="allevent">所有活動</option>
@@ -184,7 +185,9 @@ display:inline !important;
 								<option value="alcome">即將開始</option>
 								<option value="alfull">即將滿團</option>
 								<option value="lost">已結束的團</option>
-							</select> 類別:<select id="etype">
+							</select>
+							
+							 類別:<select id="etype">
 								<option value="">全部</option>
 								<option value="美食">美食</option>
 								<option value="運動">運動</option>
@@ -193,17 +196,15 @@ display:inline !important;
 							</select> 
 							地區:<input type="text" id="loc" style="width: 150px" /> 
 							
-					<div class="div"><span class="input-group date" id="datetimepicker3" data-target-input="nearest" style="width:300px;display:inline !important">   
-					時間:<input id="dcheck" class="form-control datetimepicker-input" data-target="#datetimepicker3"  style="width:250px;display:inline !important"/>
+					<div class="input-group date" id="datetimepicker3" data-target-input="nearest" style="width:300px;display:inline !important">   
+					時間:<input id="dcheck" class="form-control datetimepicker-input" data-target="#datetimepicker3"  style="width:250px;display:inline !important" onkeyup="return Validate(this,value)"/>
 					  <span class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker" style="display:inline !important">
                         <span class="input-group-text" style="display:inline !important"><i class="fa fa-calendar" style="display:inline !important"></i></span>
                     </span>
-                </span></div>
-							
-						
+                  </div>
 
-						<button id="search" onclick="search()">篩選</button>
-						
+               <button id="search" onclick="search()">篩選</button>
+					<table id="showevents" class="display" >	
 				<thead>
 					<tr>
 						<th>種類</th>
@@ -212,9 +213,9 @@ display:inline !important;
 						<th>地址</th>
 						<th>開始時間</th>
 						<th>結束時間</th>
-						<th>上限人數</th>
-						<th>目前人數</th>
-						<th>人數已滿</th>
+						<th>上限</th>
+						<th>目前</th>
+						<th>已滿</th>
 						<th>給讚</th>
 						<th>活動地圖</th>
 
@@ -232,21 +233,22 @@ display:inline !important;
   </c:if> <c:if test="${event.eventTypeId=='4'}">
     其他
   </c:if></td>
-							<td><a href="${pageContext.request.contextPath}/event/${event.eventId}">${event.eventName}</a>
+							<td><a href="${pageContext.request.contextPath}/event/${event.eventId}"><c:out value="${event.eventName}"></c:out></a>
 							</td>
 							<td>${event.eventLocation}</td>
 							<td>${event.eventAddress}</td>
 							<td>${event.eventDateStart}</td>
 							<td>${event.eventDateEnd}</td>
-							<td>${event.eventMemberLimit}</td>
-							<td>${event.eventCurrentMembers}</td>
+							<td>${event.eventMemberLimit}人</td>
+							<td>${event.eventCurrentMembers}人</td>
 							<td><c:if test="${event.isFull==true}">
                 滿員
       </c:if> <c:if test="${event.isFull==false}">
               未滿
      </c:if></td>
                             <td><button id="e${event.eventId}" value="${event.eventId}" class="likeBtn btn btn-primary btn-sm">讚:${event.eventLike}</button></td>
-							<td><button type="button" id="m${event.eventId}" class="btn btn-success eventJoin" data-toggle="modal" data-target="#map${event.eventId}">地圖</button></td>
+							<td><button type="button" id="m${event.eventId}" class="btn btn-success eventJoin" data-toggle="modal" data-target="#map${event.eventId}">地圖</button>
+							<input style="display: none;" value="https://www.google.com/maps/embed/v1/place?key=AIzaSyC9cpXz2HFE2Dw_vITbm-T6Z-6v-TJujBQ&q=${event.eventAddress}" /></td>
 						</tr>
 							
 							
@@ -255,16 +257,18 @@ display:inline !important;
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content map">
       <div class="modal-header">
-        <h5 class="modal-title ModalTitle" id="exampleModalCenterTitle">${event.eventName}</h5>
+        <h5 class="modal-title ModalTitle" id="exampleModalCenterTitle"><c:out value="${event.eventName}"></c:out></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-      												<iframe width='600' height='400' frameborder='0'
-									scrolling='no' marginheight='0' marginwidth='0'
-									src='https://www.google.com/maps?&q=${event.eventAddress}&z=16&output=embed&hl=zh-TW&t=m'
-									allowfullscreen></iframe>	
+<iframe id="if${event.eventId}"
+  width="600"
+  height="450"
+  frameborder="0" style="border:0"
+  allowfullscreen>
+</iframe>
       
       </div>
       <div class="modal-footer">
@@ -296,18 +300,17 @@ $(function () {
     });
     
     $('#datetimepicker3').datetimepicker({
-    	locale: moment.locale('zh-tw')
-               		           
+    	locale: moment.locale('zh-tw')              		           
         });  
     
     $("#datetimepicker1").on("change.datetimepicker", function (e) {
-    	//alert($("#sd").val());
         $('#datetimepicker2').datetimepicker('minDate', e.date);
     });
     $("#datetimepicker2").on("change.datetimepicker", function (e) {
-    	//alert($("#ed").val());
         $('#datetimepicker1').datetimepicker('maxDate', e.date);
     });
+     
+    
 
 });
 </script>
@@ -320,9 +323,45 @@ $(function () {
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
 <script>
+function ValidateNumber(e, pnumber)
+{
+    if (!/^\d+$/.test(pnumber))
+    {
+        e.value = /^\d+/.exec(e.value);
+    }
+    return false;
+}
+
+function Validate(e, pnumber)
+{
+
+    return false;
+}
+
+$(document).ready(function () { 
+$("#plimit").blur(function (){
+	$("#quan").attr("max",parseInt($("#plimit").val())-1);
+});
+$("#quan").blur(function (){
+	$("#plimit").attr("min",parseInt($("#quan").val())+1);	
+});
+
+});
+
 var ewill;
 
 $(document).ready(function () {  
+	
+	$(".eventJoin").click(function (){
+		var id = this.id.substring(1);
+		var mapsrc = $(this).next().val();
+		//alert(id);
+		//alert(mapsrc);
+		var iframe = "#if"+id;
+		//alert($(iframe).attr("src"));
+		$(iframe).attr("src",mapsrc);
+	});	
+	
 	
 //datatable搜尋設定
 $.fn.dataTable.ext.search.push(
@@ -447,7 +486,7 @@ $.ajax({
         		array[i].innerHTML ="讚:"+result.substr(1);
     	    	array[i].className = "likeBtn btn btn-primary btn-sm";}	    
     	}
-	 
+	  
     }
 });
 </c:forEach>
@@ -469,9 +508,9 @@ $.ajax({
     	    	if (result==-5)
     	    		{location.href = "${pageContext.request.contextPath}/notLogin";}
     	    	else {
-    	    		
+    	    		good.html("讚:"+result);	
 	    	    }
-    	    	good.html("讚:"+result);
+    	    	//good.html("讚:"+result);
     	    	
    	    	}
     	});
@@ -485,10 +524,18 @@ $(document).ready(function () {
 	 
 	// 切換顯示 新增活動與尋找活動
     $("#new").click(function () {
+    	$("#new").removeClass('btn-secondary');
+    	$("#get").removeClass('btn-primary');
+    	$("#new").addClass('btn-primary');
+    	$("#get").addClass('btn-secondary');
     	newEventProcess();  	
     });
     
     $("#get").click(function () {
+    	$("#new").removeClass('btn-primary');
+    	$("#get").removeClass('btn-secondary');
+    	$("#new").addClass('btn-secondary');
+    	$("#get").addClass('btn-primary');
     	$("#newdiv").hide();
     	$("#getdiv").show();
     });
@@ -524,16 +571,18 @@ $(document).ready(function () {
 
 //送出新活動確認用函式
 function check(){
+	if (  $("#local").val()!= "" &&  $("#add").val()!=null){
 	var Ans = confirm("確定送交?");   	
 	if (Ans==true)
-	{
-	alert("資料送出中");
-	return true;
-	}
-	else
-	{
+	{alert("資料送出中");
+	return true;}
+	else{
 	alert("送出已取消");
-	return false ;
+	return false ;}
+	}
+	else{
+		alert("請先選取地圖上的座標確認地點與地址已填入!");
+		return false ;
 	}
 }
 
@@ -623,13 +672,10 @@ $(document).ready(function () {
             	document.getElementById("add").value = place.formatted_address;
             	document.getElementById("lng").value = place.geometry.location.lng();
             	document.getElementById("lat").value = place.geometry.location.lat();
+            	document.getElementById("pid").value = place.place_id;
             });
             markers.push(point);   
-           
-            //alert(place.name);
-            //alert(place.formatted_address);
-            //alert(place.geometry.location.lng());
-            //alert(place.geometry.location.lat());
+
        
 //document.getElementById("local").value = place.name;
 //document.getElementById("add").value = place.formatted_address;
@@ -648,6 +694,20 @@ $(document).ready(function () {
         
         $("#map").show();
 
+        
+        
+$("#oneclick").click(function (){
+	$("#ename").val("超COOOL的聚餐");
+	
+	$("#sd").val("2019/04/01 14:49");
+	$("#ed").val("2019/04/18 14:50");
+	$("#evcontent").val("很COOL COOL到不行，最新潮的飲食！");
+	
+	$("#plimit").val("8");
+	$("#quan").val("5");
+	
+});
+        
 });             
 
              

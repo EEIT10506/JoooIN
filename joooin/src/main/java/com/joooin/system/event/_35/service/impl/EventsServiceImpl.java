@@ -1,5 +1,8 @@
 package com.joooin.system.event._35.service.impl;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -9,8 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.joooin.model.EventLikeBean;
 import com.joooin.model.EventMainBean;
+import com.joooin.model.GroupMainBean;
+import com.joooin.model.GroupPostBean;
 import com.joooin.repository.EventLikeDao;
 import com.joooin.repository.EventMainDao;
+import com.joooin.repository.GroupMainDao;
+import com.joooin.repository.GroupPostDao;
 import com.joooin.system.event._35.service.EventsService;
 
 @Service
@@ -25,6 +32,12 @@ public class EventsServiceImpl implements EventsService {
 
 	@Autowired
 	EventLikeDao eventLikeDao;
+	
+	@Autowired
+    GroupMainDao groupMainDao;
+	
+	@Autowired
+	GroupPostDao groupPostDao;
 
 	@Override
 	public EventMainBean getByEventMainId(Integer eventId) {
@@ -88,19 +101,18 @@ public class EventsServiceImpl implements EventsService {
 			return reallike;
 		}
 	}
-	
-	
+
 	@Override
 	public String displayeventlike(Integer eventId, Integer memberId) {
 		List<EventLikeBean> list = eventLikeDao.getAll();
 		int count = 0;
 		Integer reallike = -5;
 		for (EventLikeBean eventLikeBean : list) {
-			if (eventLikeBean.getEventId().equals(eventId) && eventLikeBean.getMemberId().equals(memberId)) {				
+			if (eventLikeBean.getEventId().equals(eventId) && eventLikeBean.getMemberId().equals(memberId)) {
 				Integer like = eventDao.getByEventMainId(eventId).getEventLike();
 				reallike = Integer.valueOf(like);
 				count++;
-				return "y"+reallike; //有按過讚的顏色+回傳讚數
+				return "y" + reallike; // 有按過讚的顏色+回傳讚數
 			}
 		}
 		if (count == 0) {
@@ -108,11 +120,79 @@ public class EventsServiceImpl implements EventsService {
 
 			reallike = Integer.valueOf(like);
 
-			return "n"+reallike;   //沒按過讚的顏色+回傳讚數
+			return "n" + reallike; // 沒按過讚的顏色+回傳讚數
 		} else {
-			return "n"+eventDao.getByEventMainId(eventId).getEventLike();  //沒登入的顏色+回傳讚數
+			return "n" + eventDao.getByEventMainId(eventId).getEventLike(); // 沒登入的顏色+回傳讚數
 		}
-		
-		
 	}
+	@Override
+	public List<EventMainBean> getTop8Events() {
+
+		List<EventMainBean> events = eventDao.getAll();
+		List<EventMainBean> top8Events = new LinkedList<EventMainBean>();
+		Collections.sort(events, new Comparator<EventMainBean>() {
+			public int compare(EventMainBean o1, EventMainBean o2) {
+				return o2.getEventLike().compareTo(o1.getEventLike());
+			}
+		});
+		if (events.size() >= 9) {
+			for (int i = 0; i <= 8; i++) {
+				top8Events.add(events.get(i));
+			}return top8Events;
+		} else {
+			for (int i = 0; i < events.size(); i++) {
+				top8Events.add(events.get(i));
+			}
+			return top8Events;
+		}
+        //return null;
+	}
+	
+	@Override
+	public List<GroupMainBean> getTop8Groups() {
+
+		List<GroupMainBean> groups = groupMainDao.getAll();
+		List<GroupMainBean> top8Groups = new LinkedList<GroupMainBean>();
+		Collections.sort(groups, new Comparator<GroupMainBean>() {
+			public int compare(GroupMainBean o1, GroupMainBean o2) {
+				return o2.getGroupCurrentMembers().compareTo(o1.getGroupCurrentMembers());
+			}
+		});
+		if (groups.size() >= 9) {
+			for (int i = 0; i <= 8; i++) {
+				top8Groups.add(groups.get(i));
+			}return top8Groups;
+		}else {
+			for (int i = 0; i < groups.size(); i++) {
+				top8Groups.add(groups.get(i));
+			}return top8Groups;
+			
+		} 
+        //return null;
+	}
+	
+	@Override
+	public List<GroupPostBean> getTop8GroupPosts() {
+
+		List<GroupPostBean> groupPosts = groupPostDao.getAll();
+		List<GroupPostBean> top8GroupPosts = new LinkedList<GroupPostBean>();
+		Collections.sort(groupPosts, new Comparator<GroupPostBean>() {
+			public int compare(GroupPostBean o1, GroupPostBean o2) {
+				return o2.getGroupPostLike().compareTo(o1.getGroupPostLike());
+			}
+		});
+		if (groupPosts.size() >= 9) {
+			for (int i = 0; i <= 8; i++) {
+				top8GroupPosts.add(groupPosts.get(i));
+			}return top8GroupPosts;
+		} 
+		else {
+			for (int i = 0; i < groupPosts.size(); i++) {
+				top8GroupPosts.add(groupPosts.get(i));
+			}return top8GroupPosts;
+			
+		}
+        //return null;
+	}
+	
 }
