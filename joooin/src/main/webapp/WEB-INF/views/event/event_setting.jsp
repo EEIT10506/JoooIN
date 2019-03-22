@@ -54,7 +54,7 @@
 	 .hideFile{
 /* 	 	display:none; */
 		position:absolute;
-		top:1013px;
+		top:957px;
 		left:131px;
 		z-index:-100;
 		border-style:none;
@@ -409,9 +409,6 @@
 				<label class="labelClass" for="eventMemberLimit">人數上限：</label><form:input class="pure-input-1-2" path='eventMemberLimit' id="eventMemberLimit" onkeyup="value=value.replace(/[^\d]/g,'')" required="required"/></div>
 				<span class="pure-u-1-3" id="spanLimit"></span>
 				
-				<div class="pure-u-1 ">
-
-				<label class="labelClass" for="eventFee">活動費用：${event.eventFee } $</label>
 				
 				<div class="pure-u-1 upload-btn-wrapper">
 				<label class="labelClass">活動圖片 : </label>

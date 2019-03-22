@@ -53,6 +53,7 @@ public class EventController {
 			EventPostBean eventPostBean = new EventPostBean();
 			eventPostBean.setEventId(eventId);
 			eventPostBean.setMemberId(memberId);
+			eventPostContent = eventPostContent.replace("\n", "<br />");
 			eventPostBean.setEventPostContent(eventPostContent);
 
 			Date date = new Date();

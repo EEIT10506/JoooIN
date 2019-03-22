@@ -38,26 +38,26 @@
 		<div class="title" style="border:solid 1px black;width:1200px;height:100px;"></div>
 			
 <!-- 	event		===================== -->
-<c:forEach var="topEvent" items="${top8Events}" varStatus="loop">
+<%-- <c:forEach var="topEvent" items="${top8Events}" varStatus="loop"> --%>
 
-	<p>${topEvent.eventId}</p>
-	<p>${topEvent.eventName}</p>
-	<p>${topEvent.eventDateStart}</p>
-	<p>${topEvent.eventDateEnd}</p>
-	<p>${topEvent.eventLocation}</p>
-	<p>${topEvent.eventAddress}</p>
-	<p>${topEvent.eventContent}</p>
-	<p>${topEvent.eventTypeId}</p>
-	<p>${topEvent.eventInviterId}</p>
-	<p>${topEvent.eventLike}</p>
-	<p>${topEvent.eventMemberLimit}</p>
-	<p>${topEvent.eventCurrentMembers}</p>
-	<p>${topEvent.isFull}</p>
-	<p>${topEvent.eventStatus}</p>
-	<p>${topEvent.eventCreateDate}</p>
-<%-- 	<p><img src="<c:url value='/getEventImage/${topEvent.eventId}.jpg' />"/></p> --%>
+<%-- 	<p>${topEvent.eventId}</p> --%>
+<%-- 	<p>${topEvent.eventName}</p> --%>
+<%-- 	<p>${topEvent.eventDateStart}</p> --%>
+<%-- 	<p>${topEvent.eventDateEnd}</p> --%>
+<%-- 	<p>${topEvent.eventLocation}</p> --%>
+<%-- 	<p>${topEvent.eventAddress}</p> --%>
+<%-- 	<p>${topEvent.eventContent}</p> --%>
+<%-- 	<p>${topEvent.eventTypeId}</p> --%>
+<%-- 	<p>${topEvent.eventInviterId}</p> --%>
+<%-- 	<p>${topEvent.eventLike}</p> --%>
+<%-- 	<p>${topEvent.eventMemberLimit}</p> --%>
+<%-- 	<p>${topEvent.eventCurrentMembers}</p> --%>
+<%-- 	<p>${topEvent.isFull}</p> --%>
+<%-- 	<p>${topEvent.eventStatus}</p> --%>
+<%-- 	<p>${topEvent.eventCreateDate}</p> --%>
+<%-- <%-- 	<p><img src="<c:url value='/getEventImage/${topEvent.eventId}.jpg' />"/></p> --%> 
 	
-</c:forEach>
+<%-- </c:forEach> --%>
 
 <!-- ================================= -->
 				<div class="bd-example" style="width:1200px;height:500px;margin:auto;background-color:#20B2AA;border-radius:40px;">
@@ -72,9 +72,9 @@
 				<div class="carousel-item active" style="width:1200px;height:380px;margin-top:80px;">
 <!-- 					   名稱 -->
 					 	 <div style="margin-bottom:50px;">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;">${topEvent[0].eventName}</p>
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;">${topEvent[1].eventName}</p>
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;">${topEvent[2].eventName}</p>
+						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;">${top8Events[0].eventName}</p>
+						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;">${top8Events[1].eventName}</p>
+						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;">${top8Events[2].eventName}</p>
 					     </div>
 					 
 					  <a href="#"><img src="<c:url value='/resources/img/cover_other.jpg'/>" alt="其他"  style="margin-left:90px;width:320px;height:230px;"></a>
@@ -86,13 +86,24 @@
 				       <a href="#"><img src="<c:url value='/resources/img/cover_food.jpg'/>" alt="食物"  style="margin-left:20px;width:320px;height:230px;"></a>
 <!-- 						時間  -->
 						 <div style="margin-top:2px;">
-						   <p style="font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:black;">2019-12-22 12:00</p>
-						   <p style="font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:	black;">2019-12-22 12:00</p>
-						   <p style="font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	black;">2019-12-22 12:00</p>
+						   <p style="font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:black;">${top8Events[0].eventDateStart}</p>
+						   <p style="font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:	black;">${top8Events[1].eventDateStart}</p>
+						   <p style="font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	black;">${top8Events[2].eventDateStart}</p>
 					     </div>
 <!-- 					     備用 -->
 					      <div style="margin-top:30px;">
+<!-- 					     第一頁第一張 三種狀態======= --> 
+					      <c:if test="${(top8Events[0].eventMemberLimit-top8Events[0].eventCurrentMembers) < 5 and}">
 						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">即將成團</p>  
+						  </c:if>
+						   <c:if test="${(top8Events[0].eventMemberLimit-top8Events[0].eventCurrentMembers) > 5}">
+						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">開放報名</p>  
+						  </c:if> 
+						  <c:if test="${top8Events[0].eventMemberLimit == top8Events[0].eventCurrentMembers}">
+						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:red;">人數已滿</p>  
+						  </c:if>
+<!-- 					     第一頁第一張 三種狀態======= -->						  
+						  
 						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">開放報名</p>
 						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:white;">人數已滿</p>
 					     </div>
