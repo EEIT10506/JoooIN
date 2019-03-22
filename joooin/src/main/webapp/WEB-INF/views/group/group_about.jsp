@@ -33,7 +33,8 @@
 
 	//修改按鈕
 	$(document).ready(function(){
-	  	$('#updateType').click(function(){  
+	  	$('#updateType').click(function(){
+	  		$('.option1').show();	
 		  	$('#updateType').hide();	
 		  	$('#inputType').show(); 			
 		   	$('#confirmType').show();
@@ -43,6 +44,7 @@
   	//取消
   	$(document).ready(function(){
   	  	$('#cancelType').click(function(){
+  	  	$('.option1').hide();
   	   	$('#cancelType').hide();
   	  	$('#inputType').hide();
   	    $('#confirmType').hide();
@@ -52,6 +54,7 @@
   	//確認修改
   	$(document).ready(function(){
   	  	$('#confirmType').click(function(){
+  	  	$('.option1').hide();	
   	   	$('#cancelType').hide();
   	  	$('#inputType').hide();
   	    $('#confirmType').hide();
@@ -113,9 +116,36 @@
   	  	$('#updateIntro').show(); 
   	  	});
 	});
+  	
+  	$(document).ready(function(){
+  		
+  		$("#confirmIntro").click(function(){
+  			var checkintro=$("#inputIntro").val().trim();
+	  		
+	  		if (checkintro == ""){
+	  			$("#introAlert").show();
+	  			$("#updateIntro").click();
+	  			return false;
+	  		} else {
+	  			return true;
+	  		}
+  		})
+  		
+		$("#confirmName").click(function(){
+  			var checkintro=$("#inputName").val().trim();
+	  		
+	  		if (checkintro == ""){
+	  			$("#nameAlert").show();
+	  			$("#updateName").click();
+	  			return false;
+	  		} else {
+	  			return true;
+	  		}
+  		})
 
+  	});
 </script>
-<title>Insert title here</title>
+<title>關於社團</title>
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/navbar" />
@@ -147,12 +177,12 @@
 								<form 
 								action="${pageContext.request.contextPath}/group/abouts/updateGroupType/${groupMain.groupId}" method="POST">
 								<p class="text-center">
-								<label for="groupType">社團型態</label>
-								<select id="inputType" name="type">
-　								<option value="sport">運動</option>
-　								<option value="food">美食</option>
-　								<option value="entertainment">娛樂</option>
-　								<option value="other">其他</option>
+								
+								<select id="inputType" name="type" style="display:none;">
+　								<option class="option1" style="display:none;" value="sport">運動</option>
+　								<option class="option1" style="display:none;" value="food">美食</option>
+　								<option class="option1" style="display:none;" value="entertainment">娛樂</option>
+　								<option class="option1" style="display:none;" value="other">其他</option>
 								</select>
 
 								<button id="confirmType" class="btn btn-default btn-lg btn-danger" style="display:none;" type="submit" >確認修改</button>
@@ -178,13 +208,12 @@
 							<p class="text-center">
 								<span class="label label-defaulabel label-primary">${groupMain.groupName}</span>	
 								</p>
-								
 								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
 								<form 
 								action="${pageContext.request.contextPath}/group/abouts/updateGroupName/${groupMain.groupId}" method="POST">
 								<p class="text-center">
-								<input id="inputName" class="btn btn-default btn-lg btn-danger" type="text" style="display:none;" placeholder="修改內容" name="groupname" />
-								<button id="confirmName" class="btn btn-default btn-lg btn-danger" style="display:none;" type="submit" >確認修改</button>
+								<input id="inputName" class="btn btn-default btn-lg btn-info" type="text" style="display:none;" placeholder="修改內容" name="groupname" />
+								<button id="confirmName" class="btn btn-default btn-lg btn-info" style="display:none;" type="submit" >確認修改</button><label class="btn-danger" id="nameAlert" style="display:none;" >不可為空白</label>
 								</p>
 								</form>
 								<p class="text-right">
@@ -246,8 +275,8 @@
 								<form 
 								action="${pageContext.request.contextPath}/group/abouts/updateGroupIntro/${groupMain.groupId}" method="POST">
 								<p class="text-center">
-								<input id="inputIntro" class="btn btn-default btn-lg btn-danger" type="text" style="display:none;" placeholder="修改內容" name="groupintro" />
-								<button id="confirmIntro" class="btn btn-default btn-lg btn-danger" style="display:none;" type="submit" >確認修改</button>
+								<input id="inputIntro" class="btn btn-default btn-lg btn-info" type="text" style="display:none;" placeholder="修改內容" name="groupintro" />
+								<button id="confirmIntro" class="btn btn-default btn-lg  btn-info" style="display:none;" type="submit" >確認修改</button><label class="btn-danger" id="introAlert" style="display:none;" >不可為空白</label>
 								</p>
 								</form>
 								<p class="text-right">

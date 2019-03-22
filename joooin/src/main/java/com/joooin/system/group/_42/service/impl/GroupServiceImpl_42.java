@@ -3,14 +3,26 @@ package com.joooin.system.group._42.service.impl;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.joooin.model.GroupMainBean;
+import com.joooin.model.GroupPostBean;
+import com.joooin.model.ReportBean;
 import com.joooin.repository.GroupMainDao;
+import com.joooin.repository.GroupPostReplyDao;
+import com.joooin.repository.ReportDao;
+import com.joooin.system.admin._03.service.ReportService;
+import com.joooin.system.group._22.pojo.Poster;
 import com.joooin.system.group._42.service.GroupService_42;
 @Service
 @Transactional
@@ -20,6 +32,13 @@ public class GroupServiceImpl_42 implements GroupService_42 {
 	
 	@Autowired
 	GroupMainDao dao;
+	
+	@Autowired
+	ReportDao reportdao;
+	
+	@Autowired
+	GroupPostReplyDao postdao;
+	
 	@Override
 	public List<GroupMainBean> getAll() {
 		// TODO Auto-generated method stub
@@ -54,6 +73,34 @@ public class GroupServiceImpl_42 implements GroupService_42 {
 		dao.update(bean);
 		
 	}
+
+	@Override
+	public String reportGroupPage(Model model, Integer groupId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String reportGroupProcess(ReportBean rb, RedirectAttributes redirectAttributes, Integer groupId,
+			Integer groupPostId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
+//	@Override
+//	public String processNewReplyForm(HttpSession session, String groupPostReplyContent) {
+//		Integer memId = (Integer) session.getAttribute("memberId");
+//		
+//		return null;
+//	}
+//
+//	@Override
+//	public String getNewReplyForm(Model model, HttpSession session) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	
 
