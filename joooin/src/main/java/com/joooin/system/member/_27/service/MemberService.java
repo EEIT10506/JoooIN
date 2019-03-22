@@ -20,7 +20,7 @@ public interface MemberService {
 	public void noLikeEvent(Integer memberId, Integer eventId);
 	public void deleteGroup(Integer memberId, Integer groupId);
 	public void cancelGroup(Integer memberId, Integer groupId);
-	public List<FriendPojo> getFriends(Integer memberId);
+	public List<FriendPojo> getFriendsOnFriendPage(Integer memberId);
 	public List<EventMainBean> getEvents(Integer memberId, String process);
 	public List<GroupMainBean> getGroups(Integer memberId, String process);
 }

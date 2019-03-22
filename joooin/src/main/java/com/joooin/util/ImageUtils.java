@@ -40,8 +40,7 @@ public class ImageUtils {
 		byte[] b = null;
 		File file = new File(fileLoction);
 		BufferedImage bi;
-		
-		System.out.println(filePath);
+
 		try {
 			bi = ImageIO.read(file);
 			ImageIO.write(bi, "png", baos);
@@ -71,7 +70,6 @@ public class ImageUtils {
 	         
 	    headers.setCacheControl(CacheControl.noCache().getHeaderValue());
 	    MediaType mediaType = MediaType.valueOf("image/jpg");
-	    System.out.println("mediaType =" + mediaType);
 	    headers.setContentType(mediaType);
 	    ResponseEntity<byte[]> responseEntity = 
 	                new ResponseEntity<>(media, headers, HttpStatus.OK);

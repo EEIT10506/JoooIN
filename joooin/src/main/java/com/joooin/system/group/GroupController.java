@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.joooin.model.GroupMainBean;
+import com.joooin.model.MemberMainBean;
+import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.system.group.service.GroupService;
 
 
@@ -21,6 +23,9 @@ public class GroupController {
 	GroupService service;
 	
 	@Autowired
+	GroupService_22 groupService22;
+	
+	@Autowired
 	ServletContext context;
 	
 	//回社團主頁
@@ -28,5 +33,5 @@ public class GroupController {
 	public String groupPage() {
 		return "group/groups";
 	}
-
+	
 }

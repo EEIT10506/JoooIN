@@ -44,7 +44,7 @@ public class MemberFriendController {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		
 		if (memberId != null) {
-			model.addAttribute("friendList", memberService.getFriends(memberId));
+			model.addAttribute("friendList", memberService.getFriendsOnFriendPage(memberId));
 			return "member/self/friend/" + link;
 		} else {
 			return "not_login";

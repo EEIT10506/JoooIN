@@ -503,9 +503,6 @@ function ValidateNumber(e, pnumber)
       		<p>人數限制 : 
       			<span>${event.eventMemberLimit} 人</span>
       		</p>
-      		<p>費用 : 
-      			<span>${event.eventFee} $</span>
-      		</p>
       		<p>活動內容 : 
       			<span> ${event.eventContent}</span>
       		</p>
@@ -560,7 +557,7 @@ function ValidateNumber(e, pnumber)
   </div>
   	   <div class="message">
   	   	 <form action="${pageContext.request.contextPath}/event/eventPost" method="Post">
-  	   		<textarea class="textArea" name="eventPostContent" id="textAreaId" required></textarea>
+  	   		<textarea class="textArea" name="eventPostContent" id="textAreaId" required wrap="hard"></textarea>
   	   			<input type="text" class="hid" name="eventId" value="${event.eventId}"/>  
       		<c:if test="${memberId != null}">
       			<input type="submit" value="留言" id="checkTextArea" class="btn btn-primary btn-md btn-block writeMessage" />

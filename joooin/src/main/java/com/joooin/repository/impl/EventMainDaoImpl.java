@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.joooin.model.EventMainBean;
 import com.joooin.repository.EventMainDao;
+import com.joooin.system.admin._03.model.AllEventQuantityBean;
+import com.joooin.system.admin._03.model.AllMemberQuantityBean;
 
 @Repository
 public class EventMainDaoImpl implements EventMainDao{
@@ -44,6 +46,12 @@ public class EventMainDaoImpl implements EventMainDao{
 	public void deleteByEventId(Integer eventId) {
 		Session session = factory.getCurrentSession();
 		session.delete(session.get(EventMainBean.class, eventId));
+	}
+
+	@Override
+	public List<AllEventQuantityBean> getAllEventQuantity() {
+		Session session = factory.getCurrentSession();
+		return session.createNativeQuery("select COUNT(eventId) as eventId ,eventTypeId as eventTypeId from event_main group by eventTypeId").addEntity(AllEventQuantityBean.class).list();
 	}
 	
 	

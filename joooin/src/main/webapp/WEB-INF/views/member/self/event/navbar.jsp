@@ -28,9 +28,9 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav event-navbar">
       <a href="${pageContext.request.contextPath}/member/self/event/my_event" id="my-event-link" class="event-link nav-item nav-link" href="#">我所創立</a>　　　
-      <a href="${pageContext.request.contextPath}/member/self/event/joined_event" id="joined-event-link" class="event-link nav-item nav-link" href="#">報名成功</a>　　　
+      <a href="${pageContext.request.contextPath}/member/self/event/joined_event" id="joined-event-link" class="event-link nav-item nav-link" href="#">已加入</a>　　　
       <a href="${pageContext.request.contextPath}/member/self/event/request_event" id="request-event-link" class="event-link nav-item nav-link" href="#">待接受報名</a>　　
-      <a href="${pageContext.request.contextPath}/member/self/event/like_event" id="like-event-link" class="event-link nav-item nav-link" href="#">喜歡</a>　　
+      <a href="${pageContext.request.contextPath}/member/self/event/like_event" id="like-event-link" class="event-link nav-item nav-link" href="#">您覺得讚</a>　　
     </div>
   </div>
 </nav>
