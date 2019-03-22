@@ -78,7 +78,7 @@ public class PostGroupController {
 		Byte[] groupImage = null;
 		if (!groupPostBean.getMultipartFile().isEmpty()) {
 			groupImage = ImageUtils.multipartFileToByteArray(groupPostBean.getMultipartFile());
-			groupPostBean.setGroupPostContent(groupImage);
+			groupPostBean.setGroupPostImage(groupImage);
 		}
 
 			// 沒有like

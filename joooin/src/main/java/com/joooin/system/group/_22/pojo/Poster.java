@@ -5,7 +5,7 @@ public class Poster {
 	private Integer groupId;
 	private Integer memberId;
 	private String groupPostTitle;
-	private Byte[] groupPostContent;
+	private Byte[] groupPostImage;
 	private Integer groupPostLike;
 	private String groupPostDate;
 	private Boolean isDeleted;
@@ -35,11 +35,11 @@ public class Poster {
 	public void setGroupPostTitle(String groupPostTitle) {
 		this.groupPostTitle = groupPostTitle;
 	}
-	public Byte[] getGroupPostContent() {
-		return groupPostContent;
+	public Byte[] getGroupPostImage() {
+		return groupPostImage;
 	}
-	public void setGroupPostContent(Byte[] groupPostContent) {
-		this.groupPostContent = groupPostContent;
+	public void setGroupPostImage(Byte[] groupPostImage) {
+		this.groupPostImage = groupPostImage;
 	}
 	public Integer getGroupPostLike() {
 		return groupPostLike;

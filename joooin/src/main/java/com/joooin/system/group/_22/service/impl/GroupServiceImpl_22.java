@@ -289,7 +289,7 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 			if(post.getGroupId().equals(groupId)) {
 				Poster poster = new Poster();
 				poster.setGroupId(groupId);
-				poster.setGroupPostContent(post.getGroupPostContent());
+				poster.setGroupPostImage(post.getGroupPostImage());
 				poster.setGroupPostDate(post.getGroupPostDate());
 				poster.setGroupPostId(post.getGroupPostId());
 				poster.setGroupPostLike(post.getGroupPostLike());
@@ -313,7 +313,7 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 		Poster poster = new Poster();
 		
 		poster.setGroupId(post.getGroupId());
-		poster.setGroupPostContent(post.getGroupPostContent());
+		poster.setGroupPostImage(post.getGroupPostImage());
 		poster.setGroupPostDate(post.getGroupPostDate());
 		poster.setGroupPostId(post.getGroupPostId());
 		poster.setGroupPostLike(post.getGroupPostLike());
