@@ -28,6 +28,31 @@
 	top: 50px;
 }
 </style>
+<script type="text/javascript">
+$( document ).ready(function() {
+	var groupId = ${poster.groupId};
+	var groupPostId = ${poster.groupPostId};
+	$.ajax({
+		type: "GET",                           
+		url: "${pageContext.request.contextPath}/group/return/reply/"+groupPostId+"/group/"+groupId,
+		success: function (result) {
+			//完成後的callback
+//				console.log("List<reply>", result);
+//				console.log("reply1", result[0].groupPostReplyContent);
+			//顯示留言
+			$("#chatbox").html("");
+			for (var i = 0; i < result.length; i++) {
+				$("#chatbox").append(
+			        "<tr>" +
+			            "<td>" + result[i].groupPostReplyContent + "</td>" +
+			            "<td>" + result[i].groupPostReplyDate + "</td>" +
+			        "</tr>");
+			}
+		}, 
+	});
+});
+
+</script>
 <script>
 	// 送出回文
 	$(function() {
@@ -104,9 +129,14 @@
 			<div>
 				<h5>回文區</h5>
 			</div>
+			<br>
+			<hr>
+			<br>
 			<div>
 				<div id="chatbox"></div>
-				
+				<br>
+				<hr>
+				<br>
 				<form name="message" action="">
 					<textarea name="usermsg" autocomplete="off" type="text"
 						id="usermsg" rows="4" cols="30" 
