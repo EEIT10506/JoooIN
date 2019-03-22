@@ -57,10 +57,15 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/getMemberImage/{memberId}", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> getMemberImage(@PathVariable Integer memberId) {
-		MemberMainBean bean = memberService.getMemberMainBean(memberId);
 		
-		if (bean != null) {
-			return ImageUtils.byteArrayToImage(bean.getMemberImage());
+		if (memberId != null) {
+			MemberMainBean bean = memberService.getMemberMainBean(memberId);
+			if (bean != null) {
+				return ImageUtils.byteArrayToImage(bean.getMemberImage());
+			} else {
+				Byte[] b = ImageUtils.localImageToByteArray("no_image.png", context);
+				return ImageUtils.byteArrayToImage(b);
+			}
 		} else {
 			Byte[] b = ImageUtils.localImageToByteArray("no_image.png", context);
 			return ImageUtils.byteArrayToImage(b);
@@ -69,10 +74,15 @@ public class HomeController {
 	
 	@RequestMapping(value = "/getEventImage/{eventId}", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> getEventImage(@PathVariable Integer eventId) {
-		EventMainBean bean = eventService.getByEventMainId(eventId);
-		
-		if (bean != null) {
-			return ImageUtils.byteArrayToImage(bean.getEventImage());
+			
+		if (eventId != null) {
+			EventMainBean bean = eventService.getByEventMainId(eventId);
+			if (bean != null) {
+				return ImageUtils.byteArrayToImage(bean.getEventImage());
+			} else {
+				Byte[] b = ImageUtils.localImageToByteArray("no_image.png", context);
+				return ImageUtils.byteArrayToImage(b);
+			}
 		} else {
 			Byte[] b = ImageUtils.localImageToByteArray("no_image.png", context);
 			return ImageUtils.byteArrayToImage(b);
@@ -81,10 +91,15 @@ public class HomeController {
 	
 	@RequestMapping(value = "/getGroupImage/{groupId}", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> getGroupImage(@PathVariable Integer groupId) {
-		GroupMainBean bean = groupService.getByGroupId(groupId);
 		
-		if (bean != null) {
-			return ImageUtils.byteArrayToImage(bean.getGroupImage());
+		if (groupId != null) {
+			GroupMainBean bean = groupService.getByGroupId(groupId);
+			if (bean != null) {
+				return ImageUtils.byteArrayToImage(bean.getGroupImage());
+			} else {
+				Byte[] b = ImageUtils.localImageToByteArray("no_image.png", context);
+				return ImageUtils.byteArrayToImage(b);
+			}
 		} else {
 			Byte[] b = ImageUtils.localImageToByteArray("no_image.png", context);
 			return ImageUtils.byteArrayToImage(b);

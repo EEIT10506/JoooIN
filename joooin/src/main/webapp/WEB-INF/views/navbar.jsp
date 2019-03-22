@@ -32,9 +32,7 @@
 	$(document).ready(function(){
 		if ($(".hasLogin").text() != ""){
 			$("#loginNregister").css("display", "none");
-		} else {
-			$("#loginNregister").css("display", "none");
-		}
+		} 
 		
 		if ($("#notRead").text() != "訊息匣（未讀訊息：0）"){
 			$("#notRead").css("color", "red");
