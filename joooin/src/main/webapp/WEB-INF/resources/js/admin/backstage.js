@@ -23,7 +23,7 @@ $(document).ready(function () {
                 timeout: 600000,
                 
                 success: function (data){
-                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">會員編號</th><th>會員姓名</th><th>會員信箱</th><th>會員密碼</th><th>會員性別</th><th>會員電話</th><th>會員登入次數</th><th>會員加入日期</th><th>會員認證狀態</th></tr></thead><tbody></tbody>');
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">No.</th><th>Name</th><th>Email</th><th>Password</th><th>Gender</th><th>Phone</th><th>Logins</th><th>SignUp</th><th>Status</th></tr></thead><tbody></tbody>');
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
                 		console.log(data);
@@ -109,7 +109,7 @@ $(document).ready(function () {
                 timeout: 600000,
                 
                 success: function (data){
-                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">社團編號</th><th>社團類型</th><th>社團名稱</th><th>團長ID</th><th>創建日期</th><th>社團人數</th></tr></thead><tbody></tbody>');
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">No.</th><th>Type</th><th>Name</th><th>LeaderId</th><th>SignUp</th><th>Total</th></tr></thead><tbody></tbody>');
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
                 		console.log(data);
@@ -193,11 +193,23 @@ $(document).ready(function () {
                 timeout: 600000,
                 
                 success: function (data){
-                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">活動編號</th><th>活動名稱</th><th>活動地點</th><th>活動類型</th><th>參加人數</th></tr></thead><tbody></tbody>');
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">No.</th><th>Name</th><th>Location</th><th>Type</th><th>Total</th></tr></thead><tbody></tbody>');
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
-                		console.log(data);
                 		$.each(data, function (index, Event){
+                			console.log("test="+Event.eventTypeId);
+                			if(Event.eventTypeId==1){
+                				Event.eventTypeId="food"
+                			}
+                			if(Event.eventTypeId==2){
+                				Event.eventTypeId="sport"
+                			}
+                			if(Event.eventTypeId==3){
+                				Event.eventTypeId="entertainment"
+                			}
+                			if(Event.eventTypeId==4){
+                				Event.eventTypeId="other"
+                			}
                 			var cell1 = $('<td></td>').text(Event.eventId).addClass('pointer text-primary text-center eventId');
                 			var cell2 = $('<td></td>').text(Event.eventName)
                 			var cell3 = $('<td></td>').text(Event.eventAddress)
@@ -277,7 +289,7 @@ $(document).ready(function () {
                 timeout: 600000,
                 
                 success: function (data){
-                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">檢舉編號</th><th>檢舉時間</th><th>檢舉人</th><th>被檢舉人</th><th>檢舉類型</th><th>檢舉內容</th><th>處理狀態</th></tr></thead><tbody></tbody>');
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">No.</th><th>Time</th><th>ReportId</th><th>ViolatorId</th><th>Type</th><th>Content</th><th>Status</th></tr></thead><tbody></tbody>');
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
                 		console.log(data);
