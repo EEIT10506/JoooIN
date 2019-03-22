@@ -21,6 +21,7 @@ import com.joooin.model.GroupMemberBean;
 import com.joooin.model.GroupPostBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.system.group._22.pojo.Poster;
+import com.joooin.system.group._22.service.GroupNotification;
 import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.system.member._27.service.MemberService;
 import com.joooin.util.ImageUtils;
@@ -33,6 +34,9 @@ public class EnterGroupController {
 
 	@Autowired
 	GroupService_22 groupService;
+	
+	@Autowired
+	GroupNotification notifGroup;
 
 	@Autowired
 	ServletContext context;
@@ -93,6 +97,7 @@ public class EnterGroupController {
 	@RequestMapping(method = RequestMethod.POST, value = "/group/addgroup/{groupId}")
 	public String processAddGroup(@PathVariable Integer groupId, HttpSession session, Model model) {
 		Integer memId = (Integer) session.getAttribute("memberId");
+		
 		// 未登入不可加入社團
 		if (memId == null) {
 			return "not_login";
@@ -101,6 +106,10 @@ public class EnterGroupController {
 			return "redirect:/group/" + groupId; // 已經在社團中了，前端按鈕顯示為進入社團
 		} else if (groupService.statusApplyGroup(groupId, memId).equals("NOT_IN")) {
 			groupService.memberAddToGroupApply(groupId, memId);
+			
+			// 申請入團，通知leader，是哪個member
+			notifGroup.groupNotifRequest(memId, groupId);
+			
 			model.addAttribute("status", "申請成功，待批准");
 			return "redirect:/groups/groups_type";
 		} else { //

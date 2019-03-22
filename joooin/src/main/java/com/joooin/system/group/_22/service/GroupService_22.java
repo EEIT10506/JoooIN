@@ -43,5 +43,5 @@ public interface GroupService_22 {
 	public Integer createReply(GroupPostReplyBean groupPostReplyBean); // 發布回文
 	
 	public List<GroupPostReplyBean> getReplyByPostId(Integer groupPostId); //以groupPostId 取得所有回文
-
+	
 }
