@@ -59,6 +59,7 @@ public class MemberMessageController {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		
 		if (memberId != null) {
+			text = text.replace("\n", "<br />");
 			messageService.saveTextMessage(memberId, receiveMemberId, messageHash, text);
 			return null;
 		} else {

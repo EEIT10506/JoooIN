@@ -8,32 +8,11 @@
 <head>
 <meta charset='UTF-8'>
 <meta name="robots" content="noindex">
-<link rel="shortcut icon" type="image/x-icon" href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
-<link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
-<link rel="canonical" href="https://codepen.io/emilcarlsson/pen/ZOQZaV?limit=all&page=74&q=contact+" />
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="https://use.typekit.net/hoy3lrg.js"></script>
-<script src="<c:url value='/resources/js/md5.js'/>"></script>
-<script>try{Typekit.load({ async: true });}catch(e){}</script>
-<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
-<link rel="stylesheet" href='<c:url value="/resources/css/message.css" />'>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src='<c:url value="/resources/js/md5.js" />' ></script>
 <style>
-	.name {
-		position: relative;
-		top: 6px;
-	}
-	.contact {
-		height: 60px;
-	}
-	#my-name {
-		position: relative;
-		top: -5px;
-	}
 	textarea {
 		font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
 	    float: left;
@@ -101,7 +80,7 @@
 	function websocketClose() {websocket.close();}
 	
 	
-	$(document).ready(function(){
+	$(document).ready(function(){	
 		$("#messageView").animate({ scrollTop: 999999 }, "fast");
 		
 		$('#send').click(function() {
@@ -119,7 +98,7 @@
 		});
 		
 		$('#text').on('keypress', function(e) {
-			if (e.which == 13) {
+			if (e.which == 13 && !e.shiftKey) {
 				$("#send").click();
 				return false;
 			}

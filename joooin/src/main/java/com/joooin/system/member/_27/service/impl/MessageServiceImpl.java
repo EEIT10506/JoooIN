@@ -113,9 +113,9 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public String getOneFriendLastMessage(String messageHash) {
 		List<MemberChatBean> list = memberChatDao.getByMessageHash(messageHash);
-
-		if (list.size() != 0)
-			return list.get(list.size() - 1).getMessageText();
+		
+		if (list.size() != 0) 
+			return list.get(list.size() - 1).getMessageText().replace("<br />", " ");
 		else
 			return null;
 	}
