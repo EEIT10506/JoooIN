@@ -86,7 +86,7 @@ public class EventController {
 			return "not_login";
 		}
 	}
-//確認報名數量
+//確認報名數量 要通知
 	@RequestMapping(value = "/event/eventCheckQuantity", method = RequestMethod.POST)
 	public String checkQuantity(@RequestParam Integer eventId, @RequestParam String quantity, Model model,
 			HttpSession session) {
@@ -329,7 +329,7 @@ public class EventController {
 		}
 	}
 
-	// 修改活動資料
+	// 修改活動資料 //要通知
 	@RequestMapping(value = "/event/setting/{eventId}", method = RequestMethod.POST)
 	public String eventSettingUpdate(@ModelAttribute("event") EventMainBean updateBean,
 			@PathVariable("eventId") Integer eventId, Model model, HttpSession session, RedirectAttributes attributes) {
@@ -383,7 +383,7 @@ public class EventController {
 
 	}
 
-//	已報名人員名單
+//	已報名人員名單  
 	@RequestMapping(value = "/event/signUp/{eventId}")
 	public String eventSignUp(@PathVariable("eventId") Integer eventId, Model model, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
@@ -427,7 +427,7 @@ public class EventController {
 			return "not_login";
 		}
 	}
-//報名同意
+//報名同意   通知
 	@RequestMapping(value = "/event/eventAgreed/{eventId}")
 	public @ResponseBody String agreedMember(Integer eventId, Integer eventMemberId, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
@@ -533,6 +533,7 @@ public class EventController {
 			return "not_login";
 		}
 	}
+	//踢人 要通知
 	@RequestMapping(value = "/event/eventGetOut/{eventId}")
 	public @ResponseBody String getOutMember(Integer eventId, Integer eventMemberId, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
@@ -555,6 +556,7 @@ public class EventController {
 			return "not_login";
 		}
 	}
+	
 	@RequestMapping(value = "/event/attended/{eventId}")
 	public String eventAttented(@PathVariable("eventId") Integer eventId, Model model, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
@@ -597,7 +599,7 @@ public class EventController {
 			return "not_login";
 		}
 	}
-	//出席 未出席
+	//出席 
 	@RequestMapping(value = "/event/eventArrive/{eventId}")
 	public @ResponseBody String arrive(Integer eventId, Integer eventMemberId, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
