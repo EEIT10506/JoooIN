@@ -119,14 +119,11 @@
 				</form>
 			</div>
 		</div>
-
-
-
-
-
 		<!-- 	test --> </main>
 	</div>
-
+	<br>
+	<br>
+	<br>
 	<!-- 請把所有內容寫在此div內 -->
 
 </body>

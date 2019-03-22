@@ -102,6 +102,10 @@ public class PostGroupController {
 
 		Poster poster = groupService.getPosterByGroupPostId(groupPostId);
 		model.addAttribute("poster", poster);
+		
+		
+		GroupMainBean groupMain = groupService.getByGroupId(poster.getGroupId());
+		model.addAttribute("groupMain", groupMain);
 
 		// 準備回文資訊
 		// service.getReply...
