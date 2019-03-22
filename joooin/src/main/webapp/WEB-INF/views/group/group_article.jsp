@@ -154,7 +154,7 @@ table{
 					<div class="modal-header">
 						<h4 class="modal-title">檢舉申請表</h4>
 						<label class="col-5">檢舉人:</label>
-						<span  background-color:Blue">${sessionScope.memberName}</span>
+						<span >${sessionScope.memberName}</span>
 						<button type="button" class="close" data-dismiss="modal"
 							onClick="window.location.reload()">&times;</button>
 					</div>
@@ -193,12 +193,14 @@ table{
 <!-- 	點選reportConfirm的button後出現的modal確認檢舉表	 -->
 		<div id="reportModal2" class="modal inmodal fade" tabindex="-1" role="dialog"
 			aria-hidden="true" data-backdrop="static" data-keyboard="true">
+			<from action="${pageContext.request.contextPath}/report/${groupId}" method="POST">
 			<div class="modal-dialog modal-lg modal-dialog-centered" >
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title" class="col-8 div-a apply">確認單</h4>
+						
 						<label class="col-4 div-a apply">檢舉人:</label>
-						<span style="display:none; background-color:Blue">${sessionScope.memberName}</span>
+						<span >${sessionScope.memberName}</span>
 						<button type="button" class="close" data-dismiss="modal"
 							onClick="window.location.reload()">&times;</button>
 					</div>
@@ -208,8 +210,8 @@ table{
 							<div class="row justify-content-end">
 
 							<span class="col-8 div-a apply">確定要檢舉${poster.memberName}?</span>
-	<button id="reportConfirm2" type="submit"
-		class="btn btn pull-right btn-primary" onclick="accept(this)">是</button>
+	<button id="reportConfirm2"  type="submit"
+		class="btn btn pull-right btn-primary" >是</button>
 							</div>
 						</div>
 					</div>
@@ -219,6 +221,7 @@ table{
 					</div>
 				</div>
 			</div>
+			</from>
 		</div>
 		</section>
 <!-- 		作為分隔線 -->

@@ -37,21 +37,21 @@ public class ReportGroupController_42 {
 	@Autowired
 	ReportService reportService;
 	
-//	@RequestMapping(value = "/report", method = RequestMethod.GET)
-//	public String reportPage(Model model) {
-//		ReportBean rb = new ReportBean();
-//		model.addAttribute("reportBean", rb);
-//		return "admin/report";
-//	}
-//	
-//	@RequestMapping(value ="/report/{groupId}", method = RequestMethod.POST)
-//	public String reportProcess(@ModelAttribute("reportBean")ReportBean rb, RedirectAttributes redirectAttributes) {
-//		rb.setReportViolatorId(2);
-//		reportService.ReportBeanSave(rb);
-//		
-//		redirectAttributes.addFlashAttribute("success", "檢舉成功");
-//		
-//		return "redirect:/report";
-//	}
+	@RequestMapping(value = "/report/{groupId}", method = RequestMethod.GET)
+	public String reportGroupPage(Model model,Integer groupId) {
+		ReportBean rb = new ReportBean();
+		model.addAttribute("reportBean", rb);
+		return "admin/report";
+	}
+	
+	@RequestMapping(value ="/report/{groupId}", method = RequestMethod.POST)
+	public String reportGroupProcess(@ModelAttribute("reportBean")ReportBean rb, RedirectAttributes redirectAttributes,Integer groupId,Integer groupPostId) {
+		rb.setReportViolatorId(groupPostId);
+		reportService.ReportBeanSave(rb);
+		
+		redirectAttributes.addFlashAttribute("success", "檢舉成功");
+		
+		return "redirect:/report";
+	}
 	
 }
