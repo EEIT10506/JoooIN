@@ -38,6 +38,28 @@
 		<div class="title" style="border:solid 1px black;width:1200px;height:100px;"></div>
 			
 <!-- 	event		===================== -->
+<c:forEach var="topEvent" items="${top8Events}" varStatus="loop">
+
+	<p>${topEvent.eventId}</p>
+	<p>${topEvent.eventName}</p>
+	<p>${topEvent.eventDateStart}</p>
+	<p>${topEvent.eventDateEnd}</p>
+	<p>${topEvent.eventLocation}</p>
+	<p>${topEvent.eventAddress}</p>
+	<p>${topEvent.eventContent}</p>
+	<p>${topEvent.eventTypeId}</p>
+	<p>${topEvent.eventInviterId}</p>
+	<p>${topEvent.eventLike}</p>
+	<p>${topEvent.eventMemberLimit}</p>
+	<p>${topEvent.eventCurrentMembers}</p>
+	<p>${topEvent.isFull}</p>
+	<p>${topEvent.eventStatus}</p>
+	<p>${topEvent.eventCreateDate}</p>
+<%-- 	<p><img src="<c:url value='/getEventImage/${topEvent.eventId}.jpg' />"/></p> --%>
+	
+</c:forEach>
+
+<!-- ================================= -->
 				<div class="bd-example" style="width:1200px;height:500px;margin:auto;background-color:#20B2AA;border-radius:40px;">
 					<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" style="height:500px;">
 					  <ol class="carousel-indicators">
@@ -50,9 +72,9 @@
 				<div class="carousel-item active" style="width:1200px;height:380px;margin-top:80px;">
 <!-- 					   名稱 -->
 					 	 <div style="margin-bottom:50px;">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;">個團我個團個團我個團</p>
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;">個團我個團</p>
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;">我個個團我個團</p>
+						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;">${topEvent[0].eventName}</p>
+						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;">${topEvent[1].eventName}</p>
+						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;">${topEvent[2].eventName}</p>
 					     </div>
 					 
 					  <a href="#"><img src="<c:url value='/resources/img/cover_other.jpg'/>" alt="其他"  style="margin-left:90px;width:320px;height:230px;"></a>
@@ -172,6 +194,7 @@
 				     </a>
 				 </div>
 				</div>
+	
 <!-- 		event	===================== -->
 <div style="border:1px solid black;width:1200px;height:100px;"></div>
 <!-- =======group==================================== -->
@@ -312,7 +335,9 @@
 			
 			
 <!-- 		group	=========== -->
-			
+<!--測試資料區 		===================	 -->
+
+<!-- 測試資料		===================	 -->
 			
 	</div>
 <!-- 請把所有內容寫在此div內 -->
