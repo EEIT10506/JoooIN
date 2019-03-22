@@ -14,16 +14,23 @@ public class GroupChatBean implements Serializable {
 	private Integer groupChatId;
 	private Integer groupId;
 	private Integer memberId;
-	private Byte[] groupChatContent;
+	private Byte[] groupChatImage;
+	private String groupChatText;
 	private String groupChatDate;
+	private String groupChatType;
 	
-	public GroupChatBean(Integer groupId, Integer memberId, Byte[] groupChatContent, String groupChatDate) {
+	
+	public GroupChatBean(Integer groupId, Integer memberId, Byte[] groupChatImage, String groupChatText,
+			String groupChatDate, String groupChatType) {
 		super();
 		this.groupId = groupId;
 		this.memberId = memberId;
-		this.groupChatContent = groupChatContent;
+		this.groupChatImage = groupChatImage;
+		this.groupChatText = groupChatText;
 		this.groupChatDate = groupChatDate;
+		this.groupChatType = groupChatType;
 	}
+
 	public GroupChatBean() {
 		super();
 	}
@@ -48,17 +55,29 @@ public class GroupChatBean implements Serializable {
 	public void setMemberId(Integer memberId) {
 		this.memberId = memberId;
 	}
-	public Byte[] getGroupChatContent() {
-		return groupChatContent;
+	public Byte[] getGroupChatImage() {
+		return groupChatImage;
 	}
-	public void setGroupChatContent(Byte[] groupChatContent) {
-		this.groupChatContent = groupChatContent;
+	public void setGroupChatImage(Byte[] groupChatImage) {
+		this.groupChatImage = groupChatImage;
 	}
 	public String getGroupChatDate() {
 		return groupChatDate;
 	}
 	public void setGroupChatDate(String groupChatDate) {
 		this.groupChatDate = groupChatDate;
+	}
+	public String getGroupChatText() {
+		return groupChatText;
+	}
+	public void setGroupChatText(String groupChatText) {
+		this.groupChatText = groupChatText;
+	}
+	public String getGroupChatType() {
+		return groupChatType;
+	}
+	public void setGroupChatType(String groupChatType) {
+		this.groupChatType = groupChatType;
 	}
 	
 	

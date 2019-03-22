@@ -24,7 +24,8 @@ public class GroupPostBean implements Serializable {
 	private Integer groupId;
 	private Integer memberId;
 	private String groupPostTitle;
-	private Byte[] groupPostContent;
+	private Byte[] groupPostImage;
+	private String groupPostText;
 	private Integer groupPostLike;
 	private String groupPostDate;
 	private Boolean isDeleted;
@@ -32,13 +33,14 @@ public class GroupPostBean implements Serializable {
 	private List<GroupPostLikeBean> groupPostLikeList = new ArrayList<GroupPostLikeBean>();
 	private List<GroupPostReplyBean> GroupPostReplyList = new ArrayList<GroupPostReplyBean>();
 	
-	public GroupPostBean(Integer groupId, Integer memberId, String groupPostTitle, Byte[] groupPostContent,
-			Integer groupPostLike, String groupPostDate, Boolean isDeleted) {
+	public GroupPostBean(Integer groupId, Integer memberId, String groupPostTitle, Byte[] groupPostImage,
+			Integer groupPostLike, String groupPostDate, Boolean isDeleted, String groupPostText) {
 		super();
 		this.groupId = groupId;
 		this.memberId = memberId;
 		this.groupPostTitle = groupPostTitle;
-		this.groupPostContent = groupPostContent;
+		this.groupPostImage = groupPostImage;
+		this.groupPostText = groupPostText;
 		this.groupPostLike = groupPostLike;
 		this.groupPostDate = groupPostDate;
 		this.isDeleted = isDeleted;
@@ -90,11 +92,11 @@ public class GroupPostBean implements Serializable {
 	public void setGroupPostTitle(String groupPostTitle) {
 		this.groupPostTitle = groupPostTitle;
 	}
-	public Byte[] getGroupPostContent() {
-		return groupPostContent;
+	public Byte[] getGroupPostImage() {
+		return groupPostImage;
 	}
-	public void setGroupPostContent(Byte[] groupPostContent) {
-		this.groupPostContent = groupPostContent;
+	public void setGroupPostImage(Byte[] groupPostImage) {
+		this.groupPostImage = groupPostImage;
 	}
 	public Integer getGroupPostLike() {
 		return groupPostLike;
@@ -121,11 +123,16 @@ public class GroupPostBean implements Serializable {
 	public void setMultipartFile(MultipartFile multipartFile) {
 		this.multipartFile = multipartFile;
 	}
-	
+	public String getGroupPostText() {
+		return groupPostText;
+	}
+	public void setGroupPostText(String groupPostText) {
+		this.groupPostText = groupPostText;
+	}
 	@Override
 	public String toString() {
 		return "GroupPostBean [groupPostId=" + groupPostId + ", groupId=" + groupId + ", memberId=" + memberId
-				+ ", groupPostTitle=" + groupPostTitle + ", groupPostContent=" + Arrays.toString(groupPostContent)
+				+ ", groupPostTitle=" + groupPostTitle + ", groupPostContent=" + Arrays.toString(groupPostImage)
 				+ ", groupPostLike=" + groupPostLike + ", groupPostDate=" + groupPostDate + ", isDeleted=" + isDeleted
 				+ "]";
 	}
