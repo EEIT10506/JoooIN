@@ -135,8 +135,8 @@ background-color:silver;
 
 					<form:input path='eventLongitude' id="lng" required="required" readonly="true" style="display:none"/>
 					<p></p>
-<!-- 					活動pid -->
-					<input id="pid" style="display:none" readonly="readonly" />
+					活動pid
+					<input id="pid"  readonly="readonly" />
 					<p></p>
 				</div>
 				<p></p>
