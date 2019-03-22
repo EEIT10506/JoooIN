@@ -82,10 +82,10 @@
 		//DataTable
 		var language = {
 		        "zeroRecords": "沒有結果",
-		        "info": "<span class='seperator'>  </span>" + "總共 _TOTAL_ 位受邀好友",
-		        "infoFiltered": " (從所有 _MAX_ 位受邀好友中篩選出)",
-		        "infoEmpty": "共 0 位",
-		        "search":"搜尋受邀好友：",
+		        "info": "<span class='seperator'>  </span>" + "總共 _TOTAL_ 則申請",
+		        "infoFiltered": " (從所有 _MAX_ 位申請中篩選出)",
+		        "infoEmpty": "共 0 則",
+		        "search":"搜尋申請：",
 		        "paginate": {
 		            "previous": "上一頁",
 		            "next": "下一頁",
@@ -104,7 +104,7 @@
 	});
 	
 </script>
-<title>會員1</title></head>
+<title>收到好友申請</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->

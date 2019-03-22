@@ -152,8 +152,7 @@ public class MessageServiceImpl implements MessageService {
 			public int compare(FriendPojo f1, FriendPojo f2){
 				return f2.getMemberChatId().compareTo(f1.getMemberChatId());
 			}
-		});
-		
+		});	
 		return friendPojoList;
 	}
 

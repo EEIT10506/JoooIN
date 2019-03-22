@@ -17,7 +17,7 @@
 		top: 50px;
 	}
 </style>
-<title>Insert title here</title></head>
+<title>JoooIN</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->

@@ -72,10 +72,10 @@
     <li class="nav-item">
       <c:choose>
       	<c:when test="${memberId != null}">
-       		<a id="notRead" class="nav-link" href="${pageContext.request.contextPath}/member/self/message">訊息匣（未讀訊息：${notReadQuantity}）</a>
+       		<a id="notRead" class="nav-link" target="_blank" href="${pageContext.request.contextPath}/member/self/message">訊息匣（未讀訊息：${notReadQuantity}）</a>
         </c:when>
         <c:otherwise>
-            <a class="nav-link" href="${pageContext.request.contextPath}/member/self/message">訊息匣</a>
+            <a class="nav-link" target="_blank" href="${pageContext.request.contextPath}/member/self/message">訊息匣</a>
         </c:otherwise>
       </c:choose>
     </li>

@@ -52,6 +52,7 @@
 		})
 	});
 </script>
+<title>訊息匣首頁</title>
 <div id="frame">
 	<div id="sidepanel">
 		<div id="profile">
@@ -61,16 +62,15 @@
 			</div>
 		</div>
 		<div id="search">
-			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-			<input type="text" placeholder="搜尋好友..." />
+<!-- 			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label> -->
+<!-- 			<input type="text" placeholder="搜尋好友..." /> -->
 		</div>
 		<div id="contacts">
 			<ul>
 				<c:forEach var="friend" items="${friendList}">
-					<li class="contact" onclick="">
+					<li class="contact">
 						<input type="hidden" value="${friend.messageHash }">
 						<div class="wrap">
-							<span class="contact-status busy"></span>
 							<img src="<c:url value='/getMemberImage/${friend.memberId}.jpg' />">
 							<div class="meta">
 								<p class="name" style="">${friend.memberName}</p>

@@ -172,6 +172,7 @@ public class MemberServiceImpl implements MemberService{
 				pojo.setMemberName(memberMainDao.getByMemberId(bean.getReceiveMemberId()).getMemberName());
 				pojo.setIsFriend(bean.getIsFriend());
 				pojo.setIsInviter(bean.getIsInviter());
+				pojo.setMessageHash(bean.getMessageHash());
 				friendPojoList.add(pojo);
 			}
 		}

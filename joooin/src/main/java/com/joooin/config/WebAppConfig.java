@@ -32,7 +32,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public ViewResolver jspViewResolver() {
-		System.out.println("jspViewResolver");
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 		viewResolver.setViewClass(JstlView.class);
 		viewResolver.setPrefix("/WEB-INF/views/");
@@ -42,7 +41,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	
 	@Bean
 	public ViewResolver pdfViewResolver() {
-		System.out.println("pdfViewResolver");
 		ResourceBundleViewResolver pdfView = new ResourceBundleViewResolver();
 		pdfView.setBasename("views");
 		pdfView.setOrder(1);

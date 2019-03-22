@@ -128,6 +128,7 @@
 		
 	});
 </script>
+<title>與會員 ${friend.memberName } 的聊天訊息</title>
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/member/self/message"/>

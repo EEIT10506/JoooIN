@@ -12,11 +12,6 @@
 			$("#group").attr("class", "list-group-item list-group-item-action active");
 		else 
 			$("#home").attr("class", "list-group-item list-group-item-action active");
-		
-		$("#message").click(function(){
-			window.open("${pageContext.request.contextPath}/member/self/message");
-			
-		});
 	});
 </script>
 <style>
@@ -37,6 +32,6 @@
 	<a id="friend" href="${pageContext.request.contextPath}/member/self/friend/my_friend" class="list-group-item list-group-item-action">好友清單</a>
 	<a id="event" href="${pageContext.request.contextPath}/member/self/event/my_event" class="list-group-item list-group-item-action">活動清單</a>
 	<a id="group" href="${pageContext.request.contextPath}/member/self/group/my_group" class="list-group-item list-group-item-action">社團清單</a>
-	<a id="message" class="list-group-item list-group-item-action">訊息匣</a>
+	<a id="message" target="_blank" href="${pageContext.request.contextPath}/member/self/message" class="list-group-item list-group-item-action">訊息匣</a>
 </div>
 
