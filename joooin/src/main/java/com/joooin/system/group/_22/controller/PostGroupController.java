@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupPostBean;
+import com.joooin.model.GroupPostReplyBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.system.group._22.pojo.Poster;
 import com.joooin.system.group._22.service.GroupService_22;
@@ -43,7 +45,7 @@ public class PostGroupController {
 	@RequestMapping(method = RequestMethod.GET, value = "/group/addpost/{groupId}")
 	public String mainPagePost(Model model, HttpSession session, @PathVariable Integer groupId) {
 
-		// 未登入不可創社團
+		// 未登入不可發文
 		Integer memberId = (Integer) session.getAttribute("memberId");
 		if (memberId == null) {
 			return "not_login";
@@ -102,16 +104,52 @@ public class PostGroupController {
 		Poster poster = groupService.getPosterByGroupPostId(groupPostId);
 		model.addAttribute("poster", poster);
 		
-		//準備回文資訊
-		//service.getReply...
+		
+		GroupMainBean groupMain = groupService.getByGroupId(poster.getGroupId());
+		model.addAttribute("groupMain", groupMain);
+
+		// 準備回文資訊
+		// service.getReply...
 
 		return "group/group_article";
 	}
-	
-	//產生回文
-	@RequestMapping(method = RequestMethod.POST, value = "/group/reply/{groupPostId}")
-	public String createReply() {
-		return null;
+
+	// 產生回文
+	@RequestMapping(method = RequestMethod.POST, 
+			value = "/group/recive/reply/{groupPostId}/group/{groupId}")
+	public String createReply(@PathVariable Integer groupPostId, @PathVariable Integer groupId,String reply, HttpSession session) {
+
+		// 未登入不可回文
+		Integer memberId = (Integer) session.getAttribute("memberId");
+		if (memberId == null) {
+			return "not_login";
+		}
 		
+//		待寫，非社團成員不可reply
+//		待寫，非社團成員不可reply
+		
+		GroupPostReplyBean replyBean = new GroupPostReplyBean();
+		replyBean.setGroupPostId(groupPostId);
+		replyBean.setGroupId(groupId);
+		replyBean.setMemberId(memberId);
+		replyBean.setGroupPostReplyDate((sdf.format(new Date()).toString()));
+		replyBean.setIsDeleted(false);
+		replyBean.setGroupPostReplyContent(reply);
+		
+		groupService.createReply(replyBean);
+
+		return "redirect:/group/return/reply/"+groupPostId+"/group/"+groupId; // 先測試ajax redirect
 	}
+	
+	//顯示所有回文
+	@RequestMapping(method = RequestMethod.GET, 
+			value = "/group/return/reply/{groupPostId}/group/{groupId}")
+	@ResponseBody
+	public List<GroupPostReplyBean> getReplies(@PathVariable Integer groupPostId, @PathVariable Integer groupId) {
+		
+		List<GroupPostReplyBean> replyByDate = groupService.getReplyByPostId(groupPostId);
+		
+		return replyByDate;
+	}
+	
 }

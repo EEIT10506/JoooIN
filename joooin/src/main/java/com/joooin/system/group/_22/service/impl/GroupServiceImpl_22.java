@@ -1,5 +1,7 @@
 package com.joooin.system.group._22.service.impl;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,10 +15,12 @@ import org.springframework.stereotype.Service;
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupMemberBean;
 import com.joooin.model.GroupPostBean;
+import com.joooin.model.GroupPostReplyBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.repository.GroupMainDao;
 import com.joooin.repository.GroupMemberDao;
 import com.joooin.repository.GroupPostDao;
+import com.joooin.repository.GroupPostReplyDao;
 import com.joooin.repository.MemberMainDao;
 import com.joooin.system.group._22.pojo.Poster;
 import com.joooin.system.group._22.service.GroupService_22;
@@ -36,6 +40,9 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 
 	@Autowired
 	GroupPostDao groupPostDao;
+	
+	@Autowired
+	GroupPostReplyDao groupReplyDao;
 
 	@Autowired
 	MemberMainDao memMainDao;
@@ -317,5 +324,37 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 		poster.setMemberName(memberName);
 		
 		return poster;
+	}
+
+	@Override
+	public Integer createReply(GroupPostReplyBean groupReplyBean) {
+		groupReplyDao.save(groupReplyBean);
+		return null;
+	}
+
+	@Override
+	public List<GroupPostReplyBean> getReplyByPostId(Integer groupPostId) {
+		List<GroupPostReplyBean> allReply = groupReplyDao.getAll();
+		
+		List<GroupPostReplyBean> postReply = new LinkedList<GroupPostReplyBean>();
+		
+		for(GroupPostReplyBean reply : allReply) {
+			
+			// 尚未判斷delete
+			if(reply.getGroupPostId().equals(groupPostId)) {
+				postReply.add(reply);
+			}
+		}
+		// 依照日期 sort
+		Collections.sort(postReply, new Comparator<GroupPostReplyBean>() {
+			public int compare(GroupPostReplyBean replyA, GroupPostReplyBean replyB) {
+				return replyA.getGroupPostReplyDate().compareTo(replyB.getGroupPostReplyDate());
+			}
+		});
+//		List<GroupPostReplyBean> postReplyByDate = new LinkedList<GroupPostReplyBean>();
+//		for(GroupPostReplyBean poReply : postReply) {
+//			postReplyByDate.add(poReply);
+//		}
+		return postReply;
 	}
 }
