@@ -67,6 +67,10 @@ public class HomeController {
 		
 		return "navbar";
 	}
+	@RequestMapping(value = "/footerbar", method = RequestMethod.GET)
+	public String footerbar(HttpSession session, Model model) {
+		return "footerbar";
+	}
 	@RequestMapping(value = "/getMemberImage/{memberId}", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> getMemberImage(@PathVariable Integer memberId) {
 		

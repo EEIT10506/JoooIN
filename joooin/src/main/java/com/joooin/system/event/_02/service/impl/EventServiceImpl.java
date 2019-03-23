@@ -66,6 +66,7 @@ public class EventServiceImpl implements EventService {
 		Integer updateLimit = updateBean.getEventMemberLimit();
 		int oldInt = oldCurrent.intValue();
 		int updateInt = updateLimit.intValue();
+//		String eventContent = updateBean.getEventContent().replace("\n", "<br />");
 		
 		if(updateInt >= oldInt) {
 		oldBean.setEventName(updateBean.getEventName());
@@ -73,6 +74,7 @@ public class EventServiceImpl implements EventService {
 		oldBean.setEventDateEnd(updateBean.getEventDateEnd());
 		oldBean.setEventAddress(updateBean.getEventAddress());
 		oldBean.setEventContent(updateBean.getEventContent());
+//		oldBean.setEventContent(eventContent);
 		oldBean.setEventLocation(updateBean.getEventLocation());
 		oldBean.setEventLatitude(updateBean.getEventLatitude());
 		oldBean.setEventLongitude(updateBean.getEventLongitude());

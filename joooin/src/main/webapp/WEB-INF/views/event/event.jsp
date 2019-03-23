@@ -386,7 +386,7 @@ function ValidateNumber(e, pnumber)
 	    });
 	});
 </script>
-<title>Insert title here</title></head>
+<title>Event </title></head>
 <body class="body">
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
@@ -586,7 +586,7 @@ function ValidateNumber(e, pnumber)
   	   		
   	   		
   	   		<span>
-  	   		<c:if test="${memberId != getPostContentlist.memberId }"> 
+  	   		<c:if test="${memberId != getPostContentlist.memberId and memberId != null}"> 
   	   		 <a href="${pageContext.request.contextPath}/event/report/${event.eventId}/${getPostContentlist.eventPostId}/${getPostContentlist.memberId}"><button type="button" class="btn btn-dark delete report">檢舉</button></a>
   	   		</c:if>
   	   		</span><hr class="contentHr"/></p>
@@ -654,13 +654,13 @@ function ValidateNumber(e, pnumber)
           	   <span style="color:black;">${emfindagreed.memberName}&nbsp;&nbsp;&nbsp;</span> 
 <!--           	   ===== -->
           	 
-          	   <span style="color:black;">
-          	      <c:if test="${memberId != emfindagreed.memberId}"> 
-          	        <a style="position:relative;right:10px;float:right;" href="${pageContext.request.contextPath}/event/report/${event.eventId}/${emfindagreed.memberId}/${emfindagreed.memberId}">  
-  	   		          <button type="button" class="btn btn-dark delete">檢舉</button>
-  	   		        </a>
-  	   		     </c:if>
-          	   </span>
+<!--           	   <span style="color:black;"> -->
+<%--           	      <c:if test="${memberId != emfindagreed.memberId}">  --%>
+<%--           	        <a style="position:relative;right:10px;float:right;" href="${pageContext.request.contextPath}/event/report/${event.eventId}/${emfindagreed.memberId}/${emfindagreed.memberId}">   --%>
+<!--   	   		          <button type="button" class="btn btn-dark delete">檢舉</button> -->
+<!--   	   		        </a> -->
+<%--   	   		     </c:if> --%>
+<!--           	   </span> -->
           	
 <!--           	   ==== -->
             </p>
@@ -755,6 +755,7 @@ function ValidateNumber(e, pnumber)
   </div>
 </div>
 </div>
+
 <!-- 請把所有內容寫在此div內 -->
 </body>
 </html>
