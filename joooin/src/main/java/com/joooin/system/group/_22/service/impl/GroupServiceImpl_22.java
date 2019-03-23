@@ -386,6 +386,18 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 		
 		return replyers;
 	}
+
+	@Override
+	public boolean getPermission(Integer groupId, Integer memberId) {
+
+		List<MemberMainBean> memberList = getMembersInGroup(groupId);
+		for(MemberMainBean member : memberList) {
+			if(member.getMemberId().equals(memberId)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	
 	

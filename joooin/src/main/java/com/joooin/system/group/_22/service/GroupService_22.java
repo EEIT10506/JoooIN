@@ -48,4 +48,6 @@ public interface GroupService_22 {
 	public List<GroupPostReplyBean> getReplyByPostId(Integer groupPostId); //以groupPostId 取得所有回文 並排序
 	
 	public List<Replyer> getReplyerByGroupPostId(Integer groupPostId); // 以POJO傳遞多篇回文資訊
+	
+	public boolean getPermission(Integer groupId, Integer memberId); // 決定使用者能不能回文
 }

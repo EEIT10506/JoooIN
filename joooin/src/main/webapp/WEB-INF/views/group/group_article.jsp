@@ -51,6 +51,7 @@ $( document ).ready(function() {
 		url: "${pageContext.request.contextPath}/group/return/reply/"+groupPostId+"/group/"+groupId,
 		success: function (result) {
 			//完成後的callback
+			console.log("有沒有ready回傳",result);
 			//顯示留言
 			$("#chatbox").html("");
 			for (var i = 0; i < result.length; i++) {
@@ -85,7 +86,7 @@ $( document ).ready(function() {
 		success: function (likeResult){
 			console.log(likeResult);
 			//回傳like
-			var selfId = ${sessionScope.memberId};
+			var selfId = "${sessionScope.memberId}";
 			for (var i = 0; i < likeResult.length; i++){
 				if(likeResult[i].memberId == selfId){
 					$("#like").attr("class", "float-right btn text-white btn-danger");
@@ -166,6 +167,10 @@ $( document ).ready(function() {
 <script>
 	$(function(){
 		$("#like").click(function(){
+			var selfId = "${sessionScope.memberId}";
+			if(selfId == ""){
+				location.href = "${pageContext.request.contextPath}/notLogin";
+			}
 			var groupPostId = ${poster.groupPostId};
 			var likeCount = this.text;
 			var likeStatus = this.className;
@@ -252,12 +257,20 @@ $( document ).ready(function() {
 	        </div>
 	    </div>
 	</div>
-	<div class="justify-content-center">
+	<c:choose>
+	<c:when test="${Permission}">
 		<textarea name="usermsg" autocomplete="off" type="text"
 						id="usermsg" rows="4" cols="30" 
 						onFocus="if(this.value==this.defaultValue) this.value=''" onBlur="if(this.value=='') this.value=this.defaultValue"
 						style="width: 450px; margin-left: 25px;">按下Enter送出</textarea>
-	</div>
+	</c:when>
+			<c:otherwise>
+				<span class="d-block p-2 bg-dark text-white">
+					社團成員才可以回文
+				</span>
+            </c:otherwise>
+	 </c:choose>
+	 
 </div>
 		<!-- 		主文及回文 -->
 		<!-- 		id="chatbox" 回文 -->

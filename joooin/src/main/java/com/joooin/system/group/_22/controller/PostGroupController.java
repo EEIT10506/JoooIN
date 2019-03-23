@@ -100,17 +100,18 @@ public class PostGroupController {
 
 	// 進入文章頁面
 	@RequestMapping(method = RequestMethod.GET, value = "/group/post/{groupPostId}")
-	public String postMainPage(Model model, @PathVariable Integer groupPostId) {
+	public String postMainPage(Model model, @PathVariable Integer groupPostId, HttpSession session) {
 
 		Poster poster = groupService.getPosterByGroupPostId(groupPostId);
 		model.addAttribute("poster", poster);
 		
-		
 		GroupMainBean groupMain = groupService.getByGroupId(poster.getGroupId());
 		model.addAttribute("groupMain", groupMain);
 
-		// 準備回文資訊
-		// service.getReply...
+		//設定留言權限
+		Integer memberId = (Integer) session.getAttribute("memberId");
+		boolean Permission = groupService.getPermission(poster.getGroupId(), memberId);
+		model.addAttribute("Permission", Permission);
 
 		return "group/group_article";
 	}
