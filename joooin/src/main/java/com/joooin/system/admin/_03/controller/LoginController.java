@@ -41,7 +41,7 @@ public class LoginController {
 		member = service.checkEmailPassword(mmb.getEmail(), mmb.getPassword());
 		admin = service.checkAdmin(mmb.getEmail(), mmb.getPassword());
 
-		if (member != null) {
+		if (member != null && member.getCertificationStatus()==true) {
 			session.setAttribute("memberName", member.getMemberName());
 			session.setAttribute("memberId", member.getMemberId());
 			Integer logins = member.getLogins() + 1;
@@ -49,6 +49,11 @@ public class LoginController {
 			service.update(member);
 			session.setAttribute("logout", "登出");
 			return "redirect:/";
+		}
+		
+		if(member != null && member.getCertificationStatus()==false) {
+			redirectAttributes.addFlashAttribute("error", member.getMemberName()+"您好，請至信箱收信驗證後才可登入");
+			return "redirect:/login";
 		}
 
 		if (admin != null) {
