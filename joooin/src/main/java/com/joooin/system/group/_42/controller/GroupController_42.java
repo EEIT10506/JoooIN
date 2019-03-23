@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupMemberBean;
+import com.joooin.model.MemberMainBean;
+import com.joooin.repository.GroupMainDao;
 import com.joooin.repository.GroupMemberDao;
 import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.system.group._42.service.GroupService_42;
@@ -22,6 +24,9 @@ import com.joooin.system.group._42.service.GroupService_42;
 public class GroupController_42 {
 	@Autowired
 	GroupMemberDao groupMemberDao;
+	
+	@Autowired
+	GroupMainDao groupMainDao;
 	
 	@Autowired
 	GroupService_42 service;
@@ -45,9 +50,24 @@ public class GroupController_42 {
 		List<GroupMainBean> typeOne = service.getGroupType(groupOneType);
 		model.addAttribute("groupsType", typeOne);
 		
-
-		List<GroupMainBean> list = service.getGroupType(groupOneType);
 		
+		Integer memId = (Integer) session.getAttribute("memberId"); //會員紀錄
+		List<GroupMemberBean> groupMemberList = groupMemberDao.getAll();  
+		
+		if (memId == null) {
+			model.addAttribute("status", "加入社團");
+		}
+//		for (GroupMainBean typeGMB : typeOne) {            
+//				for (GroupMemberBean singleGroupMember : groupMemberList) {
+//					if (groupId.equals(typeGMB.getGroupId()&&(groupId.equals(singleGroupMember.getGroupId()) && memId.equals(singleGroupMember.getMemberId()))) {
+//						model.addAttribute("status", "進入社團");
+//		}else {
+//			model.addAttribute("status", "申請成功，待同意");
+//		}
+//		}
+//
+//			
+//		}
 
 
 		return "group/groups_type"; 

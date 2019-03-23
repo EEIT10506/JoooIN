@@ -14,10 +14,16 @@
 	crossorigin="anonymous"></script>	
 	
 <!-- 	comment style -->
-<link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>	
+<!-- <link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<!--   <script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>	 -->
 <!-- 	comment style -->
-
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">	
 <style>	
 	#main {
 		width: 1200px;
@@ -52,7 +58,7 @@ $( document ).ready(function() {
 						"<article class='row'>" +
 			              "<div class='col-md-2 col-sm-2 hidden-xs'>"+
 			                "<figure class='thumbnail'>"+
-			                  "<img class='img-responsive' src='http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png' />"+
+			                  "<img  class='img-responsive' src='http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png' />"+
 			                  "<figcaption class='text-center'>"+"xx_username_xx"+"</figcaption>"+
 			                "</figure>"+
 			              "</div>"+
@@ -145,10 +151,10 @@ $( document ).ready(function() {
 		});
 	});
 	
-	function accept(butObj){
+// 	function accept(butObj){
 		
-		$("postename").hide();
-		$("reportbutton").hide();
+// 		$("postename").hide();
+// 		$("reportbutton").hide();
 
 		
 // 		var groupId = ${groupMain.groupId};
@@ -164,7 +170,7 @@ $( document ).ready(function() {
 //             }
 		
 // 		});
-	}
+// 	}
 </script>
 <title>Insert title here</title>
 </head>
@@ -175,7 +181,6 @@ $( document ).ready(function() {
 
 		<jsp:include page="${request.contextPath}/group/group_navbar" />
 		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"> <!-- 	test -->
-
 		<section>
 		<table class="border border-secondary text-center" border='1'>
 		 
@@ -232,6 +237,7 @@ $( document ).ready(function() {
 			 
 			</table>
 					<!-- Modal管理者管理成員 -->
+					
 		<div id="reportModal" class="modal inmodal fade" tabindex="-1" role="dialog"
 			aria-hidden="true" data-backdrop="static" data-keyboard="true">
 			<div class="modal-dialog modal-lg modal-dialog-centered">
@@ -257,8 +263,10 @@ $( document ).ready(function() {
 										<span style="display:none; background-color:Blue"></span>
 									</div>
 									<div class="col div-a apply" id="reportbutton">
-										<button id="reportConfirm"  data-toggle="modal" data-target="#reportModal2"
-											class="btn btn pull-right btn-primary" onclick="accept(this)">檢舉</button>
+									<from action="${pageContext.request.contextPath}/report/${poster.groupId}" method="POST" name="poster">
+										<button id="reportConfirm"   value="${poster.memberId}" name="poster" type="submit"
+											class="btn btn pull-right btn-primary" >檢舉</button>
+									</from>	
 									</div>
 									
 									
@@ -275,39 +283,7 @@ $( document ).ready(function() {
 				</div>
 			</div>
 		</div>
-<!-- 	點選reportConfirm的button後出現的modal確認檢舉表	 -->
-		<div id="reportModal2" class="modal inmodal fade" tabindex="-1" role="dialog"
-			aria-hidden="true" data-backdrop="static" data-keyboard="true">
-			<from action="${pageContext.request.contextPath}/report/${groupId}" method="POST">
-			<div class="modal-dialog modal-lg modal-dialog-centered" >
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title" class="col-8 div-a apply">確認單</h4>
-						
-						<label class="col-4 div-a apply">檢舉人:</label>
-						<span >${sessionScope.memberName}</span>
-						<button type="button" class="close" data-dismiss="modal"
-							onClick="window.location.reload()">&times;</button>
-					</div>
-					<div class="modal-body">
-						<div class="container">
 
-							<div class="row justify-content-end">
-
-							<span class="col-8 div-a apply">確定要檢舉${poster.memberName}?</span>
-	<button id="reportConfirm2"  type="submit"
-		class="btn btn pull-right btn-primary" >是</button>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button class="btn" class="close" data-dismiss="modal"
-							onClick="window.location.reload()">Cancel</button>
-					</div>
-				</div>
-			</div>
-			</from>
-		</div>
 		</section>
 <!-- 		作為分隔線 -->
 <hr>

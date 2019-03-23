@@ -1,5 +1,6 @@
 package com.joooin.system.group._42.service.impl;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -19,7 +20,9 @@ import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupPostBean;
 import com.joooin.model.ReportBean;
 import com.joooin.repository.GroupMainDao;
+import com.joooin.repository.GroupPostDao;
 import com.joooin.repository.GroupPostReplyDao;
+import com.joooin.repository.MemberMainDao;
 import com.joooin.repository.ReportDao;
 import com.joooin.system.admin._03.service.ReportService;
 import com.joooin.system.group._22.pojo.Poster;
@@ -38,6 +41,12 @@ public class GroupServiceImpl_42 implements GroupService_42 {
 	
 	@Autowired
 	GroupPostReplyDao postdao;
+	
+	@Autowired
+	GroupPostDao groupPostDao;
+	
+	@Autowired
+	MemberMainDao memMainDao;
 	
 	@Override
 	public List<GroupMainBean> getAll() {
@@ -73,19 +82,15 @@ public class GroupServiceImpl_42 implements GroupService_42 {
 		dao.update(bean);
 		
 	}
-
-	@Override
-	public String reportGroupPage(Model model, Integer groupId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String reportGroupProcess(ReportBean rb, RedirectAttributes redirectAttributes, Integer groupId,
-			Integer groupPostId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	
+//	@Override
+//	public String reportGroupProcess(ReportBean rb, RedirectAttributes redirectAttributes, Integer groupId,
+//			Integer groupPostId) {
+//		Poster poster =new Poster();
+//		poster.setGroupPostId(poster.getGroupPostId()); 
+//		return ;
+//	}
 
 	
 	

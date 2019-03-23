@@ -22,10 +22,12 @@ public interface GroupService_42 {
 	public void updateGroupName(Integer groupId, String groupname);
 	
 	public void updateGroupIntro(Integer groupId, String groupintro);
+
 	
-	public String reportGroupPage(Model model,Integer groupId);
 	
-	public String reportGroupProcess(ReportBean rb, RedirectAttributes redirectAttributes,Integer groupId,Integer groupPostId);
+	
+	
+//	public String reportGroupProcess(ReportBean rb, RedirectAttributes redirectAttributes,Integer groupId,Integer groupPostId);
 
 
 	
