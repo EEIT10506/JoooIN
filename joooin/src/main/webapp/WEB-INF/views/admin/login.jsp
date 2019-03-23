@@ -52,7 +52,7 @@
 	<h4>${welcome}</h4>
 	<h4>${error}</h4>
 	</div>
-	<form:form method="POST" modelAttribute="memberMainBean">
+	<form:form method="POST" modelAttribute="memberMainBean" name="form1">
   <div class="form-group">
     <label for="email">帳號</label>
     <form:input type="email" class="form-control" id="email" placeholder="Email" path="email"/>
@@ -66,10 +66,27 @@
 <!--       <input type="checkbox"> 記住我 -->
 <!--     </label> -->
 <!--   </div> -->
-  <button type="submit" class="btn btn-primary">登入</button>
+<script>
+	function appliy(){ 
+    document.form1.method= "post";     
+    document.form1.action= "login"; 
+    document.form1.submit(); 
+    return   true; 
+} 
+
+	function ali(){ 
+    document.form1.method= "post"; 
+    document.form1.action= "forgotEmaiStatus"; 
+    document.form1.submit(); 
+    return   true; 
+} 
+</script>
+  <button type="submit" class="btn btn-primary" onclick="appliy()">登入</button>
   <button type="button" class="btn btn-primary" onclick="location.href='/joooin/register'">註冊</button>
   <button type="button" class="btn btn-primary" onclick="location.href='/joooin/forgotPassword'">忘記密碼</button>
+  <button type="submit" class="btn btn-primary" onclick="ali()">驗證碼重發</button>
 </form:form>
+
 <div class="g-signin2" data-onsuccess="onSignIn"></div>
 <button type="button" id="oneSetuser" class="btn btn-success">一鍵填入(user)</button><br>
 <button type="button" id="oneSetadmin" class="btn btn-success">一鍵填入(admin)</button>
