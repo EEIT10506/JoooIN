@@ -41,6 +41,7 @@ table{
    	table-layout: fixed;
    }	
 </style>
+<!-- reply like ready -->
 <script type="text/javascript">
 $( document ).ready(function() {
 	var groupId = ${poster.groupId};
@@ -77,9 +78,30 @@ $( document ).ready(function() {
 			}
 		}, 
 	});
+	
+	$.ajax({
+		type: "GET", 
+		url: "${pageContext.request.contextPath}/group/return/like/"+groupPostId,
+		success: function (likeResult){
+			console.log(likeResult);
+			//回傳like
+			var selfId = ${sessionScope.memberId};
+			for (var i = 0; i < likeResult.length; i++){
+				if(likeResult[i].memberId == selfId){
+					$("#like").attr("class", "float-right btn text-white btn-danger");
+				}
+				else{
+					$("#like").attr("class", "float-right btn text-danger btn-light");
+				}
+			}
+			$("#like").html("<i class='fa fa-heart'>"+"</i>"+" Like "+likeResult.length);
+		},
+	});
 });
 
 </script>
+<!-- reply ready -->
+<!-- reply update -->
 <script>
 	// 送出回文
 	$(function() {
@@ -139,6 +161,50 @@ $( document ).ready(function() {
 
 	}
 </script>
+<!-- reply update -->
+<!-- like update -->
+<script>
+	$(function(){
+		$("#like").click(function(){
+			var groupPostId = ${poster.groupPostId};
+			var likeCount = this.text;
+			var likeStatus = this.className;
+			console.log("likeClass", likeStatus);
+			console.log("likeText", likeCount);
+			//"float-right btn text-danger btn-light" 白
+			//"float-right btn text-white btn-danger" 紅
+			if(likeStatus == "float-right btn text-danger btn-light"){
+				console.log("白");
+				$.ajax({
+					type: "POST",                           
+    	    		url: "${pageContext.request.contextPath}/groupPost/like/"+groupPostId,
+    	    		success: function (likeResult){
+    	    			$("#like").attr("class", "float-right btn text-white btn-danger");
+    	    			console.log(likeResult);
+    	    			console.log("size",likeResult.length);
+    	    			$("#like").html("<i class='fa fa-heart'>"+"</i>"+" Like "+likeResult.length);
+    	    		},
+				});
+			}
+			
+			else if(likeStatus == "float-right btn text-white btn-danger"){
+				console.log("紅");
+				$.ajax({
+					type: "POST",                           
+    	    		url: "${pageContext.request.contextPath}/groupPost/dislike/"+groupPostId,
+    	    		success: function (likeResult){
+    	    			$("#like").attr("class", "float-right btn text-danger btn-light");
+    	    			console.log(likeResult);
+    	    			console.log("size",likeResult.length);
+    	    			$("#like").html("<i class='fa fa-heart'>"+"</i>"+" Like "+likeResult.length);
+    	    		},
+				});
+			}
+			
+		});
+	});
+</script>
+<!-- like update -->
 <title>Insert title here</title>
 </head>
 <body>
@@ -174,8 +240,9 @@ $( document ).ready(function() {
         	        <p> ${poster.groupPostText }</p>
         	        <p>
         	            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> 檢舉</a>
-        	            <a class="float-right btn text-white btn-danger" id="like"> <i class="fa fa-heart"></i> Like</a>
+        	            <a class="float-right btn text-danger btn-light" id="like"> <i class="fa fa-heart"></i> Like</a>
 <!--         	        <a class="float-right btn text-danger btn-light" id="like"> 變換按鈕-->
+<!--         	        <a class="float-right btn text-white btn-danger" id="like"> 變換按鈕-->
                    </p>
                    <img class="img-thumbnail" alt="" src="<c:url value='/getPostImage/${poster.groupPostId}.jpg' />">
         	    </div>
