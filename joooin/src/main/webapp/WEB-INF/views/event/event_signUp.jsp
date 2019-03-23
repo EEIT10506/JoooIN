@@ -100,6 +100,14 @@
 			left:250px;
 			color:red;
 		}
+		.timesOut{
+		    font-size:25px;
+			font-weight:bold;
+			position:absolute;
+			top:30px;
+			left:250px;
+			color:red;
+		}
 		.content{
  			clear:both; 
 		}
@@ -220,7 +228,14 @@ function checkAll(bx) {
 				<div class="row">
 					  
 					<table id="example" class="table table-striped table-bordered" style="width:100%">
-				        <span class="eventLimitShow">人數限制 : ${event.eventMemberLimit } 人</span> <span class="eventCurrentShow">尚可加入 : ${event.eventMemberLimit - event.eventCurrentMembers } 人</span>
+				        <span class="eventLimitShow">人數限制 : ${event.eventMemberLimit } 人</span>
+				        
+				       <c:if test="${eventFinished == true}"> 
+				        <span class="eventCurrentShow">尚可加入 : ${event.eventMemberLimit - event.eventCurrentMembers } 人</span>
+				       </c:if>
+				       <c:if test="${eventFinished == false}">
+				        <span class="timesOut">活動已結束</span>
+				       </c:if>
 				        <thead>
 				            <tr>
 				                <th style="display:none"><input type="checkbox" onclick="checkAll(this)"></th>
@@ -238,11 +253,18 @@ function checkAll(bx) {
 					                <td class="tdCenter tdAll"><a class="aName" href="<c:url value='/member/other/${memberList.memberId}' />"><span><img src="<c:url value='/getMemberImage/${memberList.memberId}.jpg' />" width="50px" height="50px" style="border-radius:25px;"/></span></a></td>
 					                <td class="tdCenter tdAll tdName"><a class="aName" href="<c:url value='/member/other/${memberList.memberId}' />">${memberList.memberName}</a></td>
 					                <td class="tdCenter tdAll">${eventMemberId[loop.count-1].quantity }</td>
-					              
+					               <c:if test="${eventFinished == true}"> 
 					                <td class="tdCenter tdAll"><i data-toggle="modal" id="qu${eventMemberId[loop.count-1].eventMemberId}" data-target="#Modal${eventMemberId[loop.count-1].eventMemberId}" class="fas fa-check-double iconAgree" ></i></td>
-					               
+					               </c:if>
+					               <c:if test="${eventFinished == false}"> 
+					                <td class="tdCenter tdAll"><i class="fas fa-check-double" style="color:#696969"></i></td>
+					               </c:if>
+					               <c:if test="${eventFinished == true}"> 
 					                <td class="tdCenter tdAll"><i data-toggle="modal" data-target="#RejModal${eventMemberId[loop.count-1].eventMemberId}" class="fas fa-times-circle iconReject"></i></td>
-					                
+					               </c:if> 
+					               <c:if test="${eventFinished == false}"> 
+					                <td class="tdCenter tdAll"><i class="fas fa-times-circle" style="color:#696969"></i></td>
+					               </c:if> 
 <!-- 		同意確認MODAL			                ========= -->
 
 <div class="modal fade" id="Modal${eventMemberId[loop.count-1].eventMemberId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

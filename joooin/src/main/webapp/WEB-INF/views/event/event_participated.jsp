@@ -100,7 +100,15 @@
 			top:30px;
 			left:250px;
 			color:blue;
-		}		
+		}	
+		.timesOut{
+		    font-size:25px;
+			font-weight:bold;
+			position:absolute;
+			top:30px;
+			left:450px;
+			color:red;
+		}	
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -185,7 +193,12 @@ function checkAll(bx) {
 			<div class="container">
 				<div class="row">
 					<table id="example" class="table table-striped table-bordered" style="width:100%">
-				       <span class="eventCurrentShow">目前人數 : ${event.eventCurrentMembers } 人</span>  <span class="eventMyself">自己報名 : ${eventMemberMyself.quantity } 人</span>
+				       <span class="eventCurrentShow">目前人數 : ${event.eventCurrentMembers } 人</span> 
+				       <span class="eventMyself">自己報名 : ${eventMemberMyself.quantity } 人</span>
+				     <c:if test="${eventFinished == false}">
+				        <span class="timesOut">活動已結束</span>
+				     </c:if> 
+				        
 				        <thead>
 				            <tr>
 				                <th style="display:none"><input type="checkbox" onclick="checkAll(this)"></th>
@@ -210,10 +223,17 @@ function checkAll(bx) {
 <%-- 					                <td class="tdCenter tdAll"><i class="fas fa-check-circle arrive" id="arrive${eventMemberId[loop.count-1].eventMemberId}"></i></td> --%>
 					       					            
 <%-- 					                <td class="tdCenter tdAll"><i class="fas fa-times absent" id="absent${eventMemberId[loop.count-1].eventMemberId}"></i></i></td>					               --%>
-					       			    
+					       		  <c:if test="${eventFinished == true}">    
 					                <td class="tdCenter tdAll"><i data-toggle="modal" data-target="#Out${eventMemberId[loop.count-1].eventMemberId}" class="far fa-times-circle getOut"></i></td>
-					               
-					                <td class="tdCenter tdAll"><i class="fas fa-exclamation-triangle report"></i></td>
+					              </c:if>
+					       		  <c:if test="${eventFinished == false}">    
+					                <td class="tdCenter tdAll"><i class="far fa-times-circle" style="color:#696969"></i></td>
+					              </c:if>
+					                <td class="tdCenter tdAll">
+					                     <a style="" href="${pageContext.request.contextPath}/event/report/${event.eventId}/${attendList.memberId}/${attendList.memberId}">
+					               			 <i class="fas fa-exclamation-triangle report"></i>
+					                	 </a>	
+					                </td>
 					                
 <!-- 					                ========= -->
 <!-- 		踢出確認MODAL			                ========= -->

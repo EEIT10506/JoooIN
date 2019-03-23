@@ -38,13 +38,14 @@
 	
 	.body{
 		font-family:微軟正黑體;
+ 		background-color:#F5F5F5; 
 /* 		background-color:#F5F5F5; */
-		background-color:#F5F5F5;
 		font-weight:bold;
 	}
 	.outer{
-/* 		background-color:#FFDEAD; */
-		background-color:#FFEDCB;
+/*  		background-color:	#A2B5CD;  */
+ 		background-color:#FFEDCB;  
+/* 		background-color:#CFCFCF; */
 		width:75%;
 		margin: auto;
 /* 		border:1px solid #DCDCDC; */
@@ -311,8 +312,12 @@
  	.delete{
 		width:50px;
 		height:25px; 
-		font-size:12px !important;	
+		font-size:12px !important;
  	}  
+ 	.report{
+/*  		margin-left:500px; */
+ 		margin-left:100px;
+ 	}
 </style>
 <script>
 function ValidateNumber(e, pnumber)
@@ -324,7 +329,10 @@ function ValidateNumber(e, pnumber)
     return false;
 }
  	$(document).ready(function(){
+ 		<c:if test="${!empty success}">
+ 		   $("#clickMessageReport").click();
  		
+ 		</c:if>
  	
  		var message = $("#allMessage").val();
  		if(message != null){
@@ -490,7 +498,7 @@ function ValidateNumber(e, pnumber)
       					<span class="addressShow">地點 : ${event.eventLocation}</span>
       				</i>
       		</p>
-      			<iframe id="eventAddressImage" width='350' height='200' frameborder='0' scrolling='no' marginheight='0' marginwidth='0'  
+      			<iframe id="eventAddressImage" width='400' height='250' frameborder='0' scrolling='no' marginheight='0' marginwidth='0'  
       			src='https://www.google.com/maps?&q=${event.eventLatitude},${event.eventLongitude}&z=16&output=embed&hl=zh-TW&t=m' allowfullscreen>
 <!--       				位置icon圖 -->
 				</iframe>	
@@ -526,30 +534,62 @@ function ValidateNumber(e, pnumber)
 <!-- 			留言區 -->
   	   		<p class="messageContent">
   	   	<c:if test="${getPostContentlist.isDeleted == false }">
-  	   			<a class="a leaveMessageName" href="<c:url value='/member/other/${inviterid}' />"><span><img class="eventbuilderName" src="<c:url value='/getMemberImage/${getPostContentlist.memberId}.jpg' />" width="30px" height=30px" style="border-radius:25px;"/></span>
+  	   			<a class="a leaveMessageName" href="<c:url value='/member/other/${getPostContentlist.memberId}' />"><span><img class="eventbuilderName" src="<c:url value='/getMemberImage/${getPostContentlist.memberId}.jpg' />" width="30px" height=30px" style="border-radius:25px;"/></span>
   	   			<span class="leaveMessageName"> ${getPostContentlist.memberName} </span></a>
-  	   			
-  	   		<c:if test="${admin != null}">
-  	   			<span class="deleteMessage">
-  	   			<form class="deleteMessage" action="${pageContext.request.contextPath}/DeleteEventPost" method="Post">
-  	   				<input type="text" class="hid" name="eventPostId" value="${getPostContentlist.eventPostId}"/>  
-  	   				<input type="text" class="hid" name="eventId" value="${event.eventId}">  
-  	   				<button id="" type="submit" class="btn btn-dark delete" >刪除</button>
-  	   			</form>
-  	   			</span>
-  	   		</c:if>
-  	   		<c:if test="${memberId == getPostContentlist.memberId and admin == null}">
-  	   			<span class="deleteMessage">
-  	   			<form class="deleteMessage" action="${pageContext.request.contextPath}/DeleteEventPost" method="Post">
-  	   				<input type="text" class="hid" name="eventPostId" value="${getPostContentlist.eventPostId}"/>  
-  	   				<input type="text" class="hid" name="eventId" value="${event.eventId}">  
-  	   				<button id="" type="submit" class="btn btn-dark delete">刪除</button>
-  	   			</form>
-  	   			</span>
-  	   		</c:if>
   	   		</p>
   	   		<p class="messageContent">${getPostContentlist.eventPostContent}</p>
-  	   		<p class="messageContent"><span class="eventpostDate">${getPostContentlist.eventPostDate}</span><hr class="contentHr"/></p>
+  	   		<p class="messageContent"><span class="eventpostDate">${getPostContentlist.eventPostDate}</span>
+  	   		
+  	   		<span>
+  	   		 <c:if test="${memberId == getPostContentlist.memberId and admin == null}">
+  	   			<button type="button" id="" class="btn btn-dark delete" data-toggle="modal" data-target="#messageDelete${getPostContentlist.eventPostId}">
+				      刪除
+				</button>
+  	   		 </c:if>
+  	   		 <c:if test="${admin != null}">
+  	   		    <button type="button" id="" class="btn btn-dark delete" data-toggle="modal" data-target="#messageDelete${getPostContentlist.eventPostId}">
+				      刪除
+				</button>
+  	   		 </c:if>
+			  <div class="modal fade" id="messageDelete${getPostContentlist.eventPostId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel"></h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				       		 確認刪除 ?
+				      </div>
+				      <div class="modal-footer">
+				      
+				      
+				         <form class="deleteMessage" action="${pageContext.request.contextPath}/DeleteEventPost" method="Post">
+		  	   				<input type="text" class="hid" name="eventPostId" value="${getPostContentlist.eventPostId}"/>  
+		  	   				<input type="text" class="hid" name="eventId" value="${event.eventId}">  
+		  	   				<button type="submit" class="btn btn-primary">確認</button>
+  	   					</form>
+				       	
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				        </div>
+				    </div>
+				  </div>
+				</div>
+				  	   		
+				  	   		
+  	   		
+  	   		
+  	   		</span>
+  	   		
+  	   		
+  	   		
+  	   		<span>
+  	   		<c:if test="${memberId != getPostContentlist.memberId }"> 
+  	   		 <a href="${pageContext.request.contextPath}/event/report/${event.eventId}/${getPostContentlist.eventPostId}/${getPostContentlist.memberId}"><button type="button" class="btn btn-dark delete report">檢舉</button></a>
+  	   		</c:if>
+  	   		</span><hr class="contentHr"/></p>
   	   	</c:if>
   	  </c:forEach>
   	  
@@ -560,7 +600,33 @@ function ValidateNumber(e, pnumber)
   	   		<textarea class="textArea" name="eventPostContent" id="textAreaId" required wrap="hard"></textarea>
   	   			<input type="text" class="hid" name="eventId" value="${event.eventId}"/>  
       		<c:if test="${memberId != null}">
-      			<input type="submit" value="留言" id="checkTextArea" class="btn btn-primary btn-md btn-block writeMessage" />
+      			<!-- Button trigger modal -->
+<button type="button" id="checkTextArea" class="btn btn-primary btn-md btn-block writeMessage" data-toggle="modal" data-target="#messageCheck">
+  留言
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="messageCheck" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       		 確認送出留言 ?
+      </div>
+      <div class="modal-footer">
+       	<button type="submit" class="btn btn-primary">確認</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+  </div>
+</div>
+      				
+      			
       		</c:if>
       		<c:if test="${memberId == null}">
       			<input type="button" value="請先登入" readonly id="checkTextArea" class="btn btn-primary btn-md btn-block writeMessage" />
@@ -585,10 +651,20 @@ function ValidateNumber(e, pnumber)
             <p class="joinIsAgreedName">
             	<span><img src="<c:url value='/getMemberImage/${emfindagreed.memberId}.jpg' />" width="50px" height="50px" style="border-radius:25px;"/></span>
           	   
-          	   <span >${emfindagreed.memberName}</span>
-          	   
+          	   <span style="color:black;">${emfindagreed.memberName}&nbsp;&nbsp;&nbsp;</span> 
+<!--           	   ===== -->
+          	 
+          	   <span style="color:black;">
+          	      <c:if test="${memberId != emfindagreed.memberId}"> 
+          	        <a style="position:relative;right:10px;float:right;" href="${pageContext.request.contextPath}/event/report/${event.eventId}/${emfindagreed.memberId}/${emfindagreed.memberId}">  
+  	   		          <button type="button" class="btn btn-dark delete">檢舉</button>
+  	   		        </a>
+  	   		     </c:if>
+          	   </span>
+          	
+<!--           	   ==== -->
             </p>
-            </a>
+           </a> 
 <!--             <hr/> -->
         </c:forEach>
       </div>
@@ -624,6 +700,36 @@ function ValidateNumber(e, pnumber)
   </div>
 </div>
 <!-- 以上報名MODAL -->
+<!-- 檢舉成功 -->
+<!-- Button trigger modal -->
+<button type="button" id="clickMessageReport" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#messageReport">
+  click
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="messageReport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">檢舉成功</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       		 檢舉已送出 感謝您的意見 !
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 <!--退出 modal ------------------ -->
 <div class="modal fade" id="CancelJoinEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">

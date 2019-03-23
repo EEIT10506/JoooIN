@@ -1,6 +1,5 @@
 package com.joooin.system.event._02.controller;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,6 +9,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,12 +27,12 @@ import com.joooin.model.EventMemberBean;
 import com.joooin.model.EventPostBean;
 import com.joooin.model.EventTypeBean;
 import com.joooin.model.MemberMainBean;
+import com.joooin.model.ReportBean;
 import com.joooin.repository.EventLikeDao;
-import com.joooin.repository.EventMainDao;
+import com.joooin.system.admin._03.service.ReportService;
 import com.joooin.system.event._02.service.EventService;
 import com.joooin.system.event._02.service.impl.GetPostContentBean;
 import com.joooin.system.event._35.service.EventsService;
-import com.joooin.util.ImageUtils;
 
 @Controller
 public class EventController {
@@ -44,6 +44,8 @@ public class EventController {
 	EventLikeDao eventLikeDao;
 	@Autowired
 	EventsService eventMainService;
+	@Autowired
+	ReportService reportService;
 	//新增留言
 	@RequestMapping(value = "/event/eventPost", method = RequestMethod.POST)
 	public String submitEventPost(@RequestParam Integer eventId, @RequestParam String eventPostContent,
@@ -628,6 +630,27 @@ public class EventController {
 		} else {
 			return "not_login";
 		}
+	}
+//  檢舉
+	@RequestMapping(value = "/event/report/{eventId}/{eventPostId}/{reportViolatorId}", method = RequestMethod.GET)
+	public String eventReportPage(@PathVariable Integer reportViolatorId,@PathVariable Integer eventId, Model model) {
+		ReportBean rb = new ReportBean();
+		MemberMainBean bean = eventService.getByMemberId(reportViolatorId);
+		EventMainBean event = eventService.getByEventMainId(eventId);
+		rb.setReportViolatorId(reportViolatorId);
+		model.addAttribute("eventReportBean", rb);
+		model.addAttribute("bean", bean);
+		model.addAttribute("event", event);
+		return "event/event_report";
+	}
+	@RequestMapping(value ="/event/report/{eventId}", method = RequestMethod.POST)
+	public String eventReportProcess(@ModelAttribute("eventReportBean")ReportBean rb,@PathVariable Integer eventId, RedirectAttributes redirectAttributes) {
+		
+		reportService.ReportBeanSave(rb);
+		
+		redirectAttributes.addFlashAttribute("success", "檢舉成功");
+		
+		return "redirect:/event/"+eventId;
 	}
 //	尚未登入前端判斷
 	@RequestMapping("/not_Login")
