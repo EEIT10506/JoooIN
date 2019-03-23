@@ -19,9 +19,8 @@
 	crossorigin="anonymous"></script>	
 	
 <!-- 	comment style -->
-
-
-
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous">
 <!-- 	comment style -->
 
 <style>	
@@ -64,7 +63,7 @@ $( document ).ready(function() {
 	                    	        "<p class='text-secondary text-center'>"+result[i].groupPostReplyDate+"</p>"+
 	                    	    "</div>"+
 	                    	    "<div class='col-md-10'>"+
-	                    	        "<p>"+"<a href='https://maniruzzaman-akash.blogspot.com/p/contact.html'>"+"<strong>"+result[i].memberName+"</strong>"+"</a>"+
+	                    	        "<p>"+"<a href='${pageContext.request.contextPath}/member/other/"+result[i].memberId +"'>"+"<strong>"+result[i].memberName+"</strong>"+"</a>"+
 	                    	        "<span class='float-right'>"+(i+1)+"樓"+"</i>"+"</span>"+"</p>"+
 	                    	        "<p>"+result[i].groupPostReplyContent+"</p>"+
 	                    	        "<p>"+
@@ -111,7 +110,7 @@ $( document ).ready(function() {
 				                    	        "<p class='text-secondary text-center'>"+result[i].groupPostReplyDate+"</p>"+
 				                    	    "</div>"+
 				                    	    "<div class='col-md-10'>"+
-				                    	        "<p>"+"<a href='https://maniruzzaman-akash.blogspot.com/p/contact.html'>"+"<strong>"+result[i].memberName+"</strong>"+"</a>"+
+				                    	        "<p>"+"<a href='${pageContext.request.contextPath}/member/other/"+result[i].memberId +"'>"+"<strong>"+result[i].memberName+"</strong>"+"</a>"+
 				                    	        "<span class='float-right'>"+(i+1)+"樓"+"</i>"+"</span>"+"</p>"+
 				                    	        "<p>"+result[i].groupPostReplyContent+"</p>"+
 				                    	        "<p>"+
@@ -156,6 +155,7 @@ $( document ).ready(function() {
 <div class="container">
 <!-- 		標題 -->
 	<h2 class="text-center">${poster.groupPostTitle }</h2>
+	<br>
 <!-- 		標題 -->
 	<div class="card">
 	    <div class="card-body">
@@ -166,7 +166,7 @@ $( document ).ready(function() {
         	    </div>
         	    <div class="col-md-10">
         	        <p>
-        	            <a class="float-left" href="https://Xxxxx.jo"><strong>${poster.memberName }</strong></a>
+        	            <a class="float-left" href="${pageContext.request.contextPath}/member/other/${poster.memberId}"><strong>${poster.memberName }</strong></a>
         	            
 
         	       </p>
@@ -174,9 +174,10 @@ $( document ).ready(function() {
         	        <p> ${poster.groupPostText }</p>
         	        <p>
         	            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> 檢舉</a>
-        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+        	            <a class="float-right btn text-white btn-danger" id="like"> <i class="fa fa-heart"></i> Like</a>
+<!--         	        <a class="float-right btn text-danger btn-light" id="like"> 變換按鈕-->
                    </p>
-                   <img class="img-thumbnail" src="">
+                   <img class="img-thumbnail" alt="" src="<c:url value='/getPostImage/${poster.groupPostId}.jpg' />">
         	    </div>
 	        </div>
 	        <div id="chatbox">
@@ -184,15 +185,16 @@ $( document ).ready(function() {
 	        </div>
 	    </div>
 	</div>
-</div>
-		<!-- 		主文及回文 -->
-		<!-- 		id="chatbox" 回文 -->
-		
+	<div class="justify-content-center">
 		<textarea name="usermsg" autocomplete="off" type="text"
 						id="usermsg" rows="4" cols="30" 
 						onFocus="if(this.value==this.defaultValue) this.value=''" onBlur="if(this.value=='') this.value=this.defaultValue"
 						style="width: 450px; margin-left: 25px;">按下Enter送出</textarea>
-					<br />
+	</div>
+</div>
+		<!-- 		主文及回文 -->
+		<!-- 		id="chatbox" 回文 -->
+		
 <!-- 		id="chatbox" 回文 -->
 
 <!-- For fu -->

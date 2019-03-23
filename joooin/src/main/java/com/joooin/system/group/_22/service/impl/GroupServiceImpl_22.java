@@ -306,6 +306,10 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 		return postersByGroupId;
 	}
 
+	@Override
+	public GroupPostBean getPostByGroupPostId(Integer groupPostId) {
+		return groupPostDao.getByGroupPostId(groupPostId);
+	}
 
 	@Override
 	// 回傳單篇文章資訊
@@ -382,8 +386,6 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 		
 		return replyers;
 	}
-	
-	
 	
 	
 	

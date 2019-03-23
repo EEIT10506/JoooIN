@@ -40,6 +40,8 @@ public interface GroupService_22 {
 	public List<Poster> getPostersByGroupId(Integer groupId); // 以groupId找文章列表
 	
 	public Poster getPosterByGroupPostId(Integer groupPostId); // 以POJO傳遞單篇文章資訊
+
+	public GroupPostBean getPostByGroupPostId(Integer groupPostId); // 以POJO傳遞單篇文章資訊
 	
 	public Integer createReply(GroupPostReplyBean groupPostReplyBean); // 發布回文
 	
