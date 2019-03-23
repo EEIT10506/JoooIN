@@ -85,9 +85,12 @@ div {
             {"data": "poster", name:"發文人" , "orderable":false },
             {"data": "postdate", name:"發文日期" , "orderable":true },
             {"data": "replydate", name:"最後回覆日期" , "orderable":true }
-           ];	
+           ];
 		
-		$('#table_id').DataTable({"columns":column, "language":language, "lengthChange": false, "aLengthMenu" : 10, "bScrollCollapse": true});
+		//讚數降冪排列
+		$('#table_id').DataTable({"columns":column, "language":language, "lengthChange": false, "aLengthMenu" : 10,
+			 "bScrollCollapse": true, "order" : [ 1, 'desc' ]});
+		
 	});
 	
 // 	隱藏申請人按鈕功能
@@ -260,7 +263,7 @@ div {
 						<td><a href="${pageContext.request.contextPath}/group/post/${poster.groupPostId}">${poster.groupPostTitle}</a></td>
 						<td>${poster.memberName }</td>
 						<td>${poster.groupPostDate}</td>
-						<td>等待回覆</td>
+						<td>${poster.lastReplyDate}</td>
 					</tr>
 				</c:forEach>
 				</tbody>

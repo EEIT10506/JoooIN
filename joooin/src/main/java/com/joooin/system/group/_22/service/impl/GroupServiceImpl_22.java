@@ -300,6 +300,15 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 				String memberName = memMainDao.getByMemberId(post.getMemberId()).getMemberName();
 				poster.setMemberName(memberName);
 				
+				List<GroupPostReplyBean> replys = getReplyByPostId(post.getGroupPostId());
+				if(replys.size() == 0) {
+					poster.setLastReplyDate("等待回覆");
+				}
+				else {
+					poster.setLastReplyDate(replys.get(replys.size() - 1).getGroupPostReplyDate());
+				}
+				
+				
 				postersByGroupId.add(poster);
 			}
 		}
