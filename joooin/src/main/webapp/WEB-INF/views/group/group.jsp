@@ -64,8 +64,32 @@ div {
 
 
 	$(document).ready(function() {
-		$('#table_id').DataTable();
+		//DataTable
+		var language = {
+		        "zeroRecords": "沒有結果",
+		        "info": "<span class='seperator'>  </span>" + "總共 _TOTAL_ 篇文章",
+		        "infoFiltered": " (從所有 _MAX_ 篇文章中篩選出)",
+		        "infoEmpty": "共 0 篇",
+		        "search":"搜尋文章：",
+		        "paginate": {
+		            "previous": "上一頁",
+		            "next": "下一頁",
+		            "first": "第一頁  ",
+		            "last": "  最後一頁"
+		        }
+		    };
+		
+		var column=[
+            {"data": "like", name:"讚數" , "orderable":true },
+            {"data": "title", name:"標題" , "orderable":false },
+            {"data": "poster", name:"發文人" , "orderable":false },
+            {"data": "postdate", name:"發文日期" , "orderable":true },
+            {"data": "replydate", name:"最後回覆日期" , "orderable":true }
+           ];	
+		
+		$('#table_id').DataTable({"columns":column, "language":language, "lengthChange": false, "aLengthMenu" : 10, "bScrollCollapse": true});
 	});
+	
 // 	隱藏申請人按鈕功能
 	function accept(butObj){
 		var target = butObj.id;
