@@ -19,8 +19,9 @@
 	crossorigin="anonymous"></script>	
 	
 <!-- 	comment style -->
-<link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
- <script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>	
+
+
+
 <!-- 	comment style -->
 
 <style>	
@@ -54,35 +55,40 @@ $( document ).ready(function() {
 			for (var i = 0; i < result.length; i++) {
 				$("#chatbox").append(
 						//開始擴增
-						"<article class='row'>" +
-			              "<div class='col-md-2 col-sm-2 hidden-xs'>"+
-			                "<figure class='thumbnail'>"+ 
-			                  "<img class='img-responsive' src='${pageContext.request.contextPath}/getMemberImage/"+ result[i].memberId +"'/>"+
-			                  "<figcaption class='text-center'>"+ result[i].memberName +"</figcaption>"+
-			                "</figure>"+
-			              "</div>"+
-			              "<div class='col-md-10 col-sm-10'>"+
-			                "<div class='panel panel-default arrow left'>"+
-			                  "<div class='panel-body'>"+
-			                    "<header class='text-left'>"+
-			                      "<div class='comment-user'>"+"<i class='fa fa-user'>"+"</i>"+ (i+1) + "樓" +"</div>"+
-			                      "<time class='comment-date' datetime='16-12-2014 01:05'>"+"<i class='fa fa-clock-o'>"+"</i>"+ result[i].groupPostReplyDate +"</time>"+
-			                    "</header>"+
-			                    "<div class='comment-post'>"+
-			                      "<p>"+
-			                      result[i].groupPostReplyContent
-			                      +"</p>"+
-			                    "</div>"+
-			                    "<p class='text-right'>"+"<a href='#' class='btn btn-default btn-sm'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉按鈕"+"</a>"+"</p>"+
-			                  "</div>"+
-			                "</div>"+
-			                "</div>"+
-			            "</article>");
+// 						"<article class='row'>" +
+// 			              "<div class='col-md-2 col-sm-2 hidden-xs'>"+
+// 			                "<figure class='thumbnail'>"+ 
+// 			                  "<img class='img-responsive' src='${pageContext.request.contextPath}/getMemberImage/"+ result[i].memberId +"'/>"+
+// 			                  "<figcaption class='text-center'>"+ result[i].memberName +"</figcaption>"+
+// 			                "</figure>"+
+// 			              "</div>"+
+// 			              "<div class='col-md-10 col-sm-10'>"+
+// 			                "<div class='panel panel-default arrow left'>"+
+// 			                  "<div class='panel-body'>"+
+// 			                    "<header class='text-left'>"+
+// 			                      "<div class='comment-user'>"+"<i class='fa fa-user'>"+"</i>"+ (i+1) + "樓" +"</div>"+
+// 			                      "<time class='comment-date' datetime='16-12-2014 01:05'>"+"<i class='fa fa-clock-o'>"+"</i>"+ result[i].groupPostReplyDate +"</time>"+
+// 			                    "</header>"+
+// 			                    "<div class='comment-post'>"+
+// 			                      "<p>"+
+// 			                      result[i].groupPostReplyContent
+// 			                      +"</p>"+
+// 			                    "</div>"+
+// 			                    "<p class='text-right'>"+"<a href='#' class='btn btn-default btn-sm'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉按鈕"+"</a>"+"</p>"+
+// 			                  "</div>"+
+// 			                "</div>"+
+// 			                "</div>"+
+// 			            "</article>");
+				
+		        "<li class='media'>"+
+		          "<img class='mr-3 img-thumbnail' src='${pageContext.request.contextPath}/getMemberImage/"+ result[i].memberId +"' alt='Generic placeholder image'>"+
+		          "<div class='media-body'>"+
+		            "<h5 class='mt-0 mb-1'>"+ result[i].memberName +"</h5>"+
+		            result[i].groupPostReplyContent + 
+		            "</div>"+
+		        "</li>");
+		    	
 						//結束擴增
-// 			        "<tr>" +
-// 			            "<td>" + result[i].groupPostReplyContent + "</td>" +
-// 			            "<td>" + result[i].groupPostReplyDate + "</td>" +
-// 			        "</tr>");
 			}
 		}, 
 	});
@@ -330,7 +336,9 @@ $( document ).ready(function() {
 				    <div class="row">
 				      <div class="col-md-8">
 				        <h2 class="page-header">Comments</h2>
-				          <section class="comment-list" id="chatbox">
+				          <section class="comment-list">
+				          <ul class="list-unstyled" id="chatbox">
+				          </ul>
 				           </section>
 				      </div>
 				    </div>
