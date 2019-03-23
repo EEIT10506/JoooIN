@@ -8,7 +8,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.joooin.model.GroupPostBean;
 import com.joooin.model.GroupPostLikeBean;
+import com.joooin.repository.GroupPostDao;
 import com.joooin.repository.GroupPostLikeDao;
 import com.joooin.repository.MemberMainDao;
 import com.joooin.system.group._22.pojo.Liker;
@@ -24,6 +26,9 @@ public class LikeServiceImpl implements LikeService {
 	GroupPostLikeDao likeDao;
 	
 	@Autowired
+	GroupPostDao postDao;
+	
+	@Autowired
 	MemberMainDao memMainDao;
 	
 	@Override
@@ -32,6 +37,10 @@ public class LikeServiceImpl implements LikeService {
 		like.setGroupPostId(groupPostId);
 		like.setMemberId(memberId);
 		likeDao.save(like);
+		
+		GroupPostBean post = postDao.getByGroupPostId(groupPostId);
+		post.setGroupPostLike((post.getGroupPostLike() + 1));
+		postDao.update(post);
 	}
 
 	@Override
@@ -40,6 +49,9 @@ public class LikeServiceImpl implements LikeService {
 		for(GroupPostLikeBean like : likeList) {
 			if(like.getGroupPostId().equals(groupPostId) && like.getMemberId().equals(memberId)) {
 				likeDao.deleteByGroupPostLikeId(like.getGroupPostLikeId());
+				GroupPostBean post = postDao.getByGroupPostId(groupPostId);
+				post.setGroupPostLike((post.getGroupPostLike() - 1));
+				postDao.update(post);
 				break;
 			}
 		}
