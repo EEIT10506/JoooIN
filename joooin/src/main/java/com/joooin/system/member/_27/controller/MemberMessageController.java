@@ -21,7 +21,7 @@ public class MemberMessageController {
 	@Autowired
 	MessageService messageService;
 	
-	@RequestMapping(value = "/member/self/message", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/message", method = RequestMethod.GET)
 	public String messageHome(HttpSession session, Model model) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		
@@ -34,7 +34,7 @@ public class MemberMessageController {
 		}	
 	}
 	
-	@RequestMapping(value = "/member/self/message/{hash}", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/message/{hash}", method = RequestMethod.GET)
 	public String showMessage(@PathVariable String hash, HttpSession session, Model model) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		
@@ -42,19 +42,19 @@ public class MemberMessageController {
 			MemberMainBean bean = messageService.getFriendMemberMainBean(memberId, hash);
 			if (bean != null) {
 				messageService.setOneFriendMessagesRead(memberId, hash);
-				model.addAttribute("friend", messageService.getFriendMemberMainBean(memberId, hash));
+				model.addAttribute("friend", bean);
 				model.addAttribute("hash", hash);
 				model.addAttribute("message", messageService.getOneFriendMessage(hash));
 				return "member/self/message/chat";
 			} else {
-				return null;
+				return "member/self/message/not_friend";
 			}
 		} else {
 			return "not_login";
 		}	
 	}	
 	
-	@RequestMapping(value = "/member/self/message/saveText", method = RequestMethod.POST)
+	@RequestMapping(value = "/member/message/saveText", method = RequestMethod.POST)
 	public @ResponseBody String saveTextMessage(String text, Integer receiveMemberId, String messageHash, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		
@@ -67,7 +67,7 @@ public class MemberMessageController {
 		}	
 	}
 	
-	@RequestMapping(value = "/member/self/message/setOneMessageRead", method = RequestMethod.POST)
+	@RequestMapping(value = "/member/message/setOneMessageRead", method = RequestMethod.POST)
 	public @ResponseBody String setOneMessageRead(String messageHash, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		

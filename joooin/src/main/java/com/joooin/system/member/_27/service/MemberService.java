@@ -22,5 +22,8 @@ public interface MemberService {
 	public void cancelGroup(Integer memberId, Integer groupId);
 	public List<FriendPojo> getFriendsOnFriendPage(Integer memberId);
 	public List<EventMainBean> getEvents(Integer memberId, String process);
+	public List<EventMainBean> getOtherEvents(Integer memberId);
 	public List<GroupMainBean> getGroups(Integer memberId, String process);
+	public List<GroupMainBean> getOtherGroups(Integer memberId);
+	public void modifyIntro(Integer memberId, String memberIntro);
 }

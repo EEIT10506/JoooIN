@@ -71,7 +71,7 @@
 	}
 	
 </script>
-<title>會員1</title></head>
+<title>${memberMainBean.memberName} 的首頁</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
@@ -81,12 +81,27 @@
 				<jsp:include page="${request.contextPath}/member/other/sidebar"/>
 			</div>
 			<div id="x" class="col-9">
-				<button id="request" type="button" class="friendBtn btn btn-primary">申請好友</button>
-				<button id="cancel" type="button" class="friendBtn btn btn-secondary">取消申請</button>
-				<button id="agree" type="button" class="friendBtn btn btn-success">同意</button>
-				<button id="reject" type="button" class="friendBtn btn btn-danger">拒絕</button>
-				<button id="delete" type="button" class="friendBtn btn btn-danger">解除好友</button>
-				<label>　好友關係：</label><label id="friendText"></label>
+				<div class="jumbotron">
+					<h1 class="display-4">關於我</h1>
+					<p class="lead">
+					<c:choose>
+						<c:when test="${memberMainBean.memberIntro == null}">該會員尚未新增自我介紹</c:when>
+						<c:otherwise>${memberMainBean.memberIntro}</c:otherwise>
+					</c:choose>
+					</p>
+					<hr class="my-4">
+					<h2 class="display-4">好友關係：<label id="friendText"></label></h2>
+	<!-- 				  <p>Itf</p> -->
+	<!-- 				  <p class="lead"> -->
+	<!-- 				      <a class="btn btn-primary btn-md" href="#" role="button">Learn more</a> -->
+	<!-- 				  </p> -->
+					<button id="request" type="button" class="friendBtn btn btn-primary">申請好友</button>
+					<button id="cancel" type="button" class="friendBtn btn btn-secondary">取消申請</button>
+					<button id="agree" type="button" class="friendBtn btn btn-success">同意</button>
+					<button id="reject" type="button" class="friendBtn btn btn-danger">拒絕</button>
+					<button id="delete" type="button" class="friendBtn btn btn-danger">解除好友</button>
+				</div>
+				
 			</div>
 		</div>
 	</div>

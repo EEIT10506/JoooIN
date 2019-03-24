@@ -17,17 +17,90 @@
 		position: relative;
 		top: 50px;
 	}
+	#main-view{
+		position: relative;
+	}
+	.profile-navbar {
+		font-size: 24px;
+		margin: auto;
+	}
+	.profile-view {
+		font-size: 20px;
+	}
+	.param-label {
+		width: 150px;
+		display: inline-block;
+		text-align: right;
+		margin-bottom: 20px;
+	}
 </style>
-<title>會員</title></head>
-<body>
+<script>
+	$(document).ready(function(){
+		
+		
+	});
+	
+	
+</script>
+<title>${memberMainBean.memberName} 的會員資訊</title></head>
+<body>ff
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main" class="container">
 		<div class="row">
 			<div class="col-3">
-				<jsp:include page="${request.contextPath}/member/sidebar"/>
+				<jsp:include page="${request.contextPath}/member/other/sidebar"/>
 			</div>
-			<div id="x" class="col-9">
+			<div class="col-9">
+				<nav class="navbar navbar-expand-sm navbar-light bg-light">
+				  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				    <div class="navbar-nav profile-navbar">
+				      <a id="show-data-link" class="profile-link nav-item nav-link active" href="#">${memberMainBean.memberName } 的會員資訊</a>
+				    </div>
+				  </div>
+				</nav>
+				<div id="main-view">
+					<br /><br />
+					<div id="show-data" class="profile-view">
+						<div class="param-label">名稱：</div>　${memberMainBean.memberName } <br />
+						<div class="param-label">性別：</div>
+							<c:choose>
+								<c:when test="${memberMainBean.genderDisplay == true}">
+									<c:if test="${memberMainBean.gender == 'male'}">　男</c:if>
+									<c:if test="${memberMainBean.gender == 'female'}">　女</c:if>
+								</c:when>
+								<c:otherwise>　不透漏</c:otherwise>
+							</c:choose><br />
+						<div class="param-label">生日：</div>
+							<c:choose>
+								<c:when test="${memberMainBean.birthdayDisplay == true}">
+								　${memberMainBean.birthday }
+								</c:when>
+								<c:otherwise>　不透漏</c:otherwise>
+							</c:choose><br />
+						<div class="param-label">城市：</div>
+							<c:choose>
+								<c:when test="${memberMainBean.cityDisplay == true}">
+								　${memberMainBean.city }
+								</c:when>
+								<c:otherwise>　不透漏</c:otherwise>
+							</c:choose><br />
+						<div class="param-label">信箱：</div>
+							<c:choose>
+								<c:when test="${memberMainBean.emailDisplay == true}">
+								　${memberMainBean.email }
+								</c:when>
+								<c:otherwise>　不透漏</c:otherwise>
+							</c:choose><br />
+						<div class="param-label">電話：</div>
+							<c:choose>
+								<c:when test="${memberMainBean.phoneDisplay == true}">
+								　${memberMainBean.phone }
+								</c:when>
+								<c:otherwise>　不透漏</c:otherwise>
+							</c:choose><br />
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

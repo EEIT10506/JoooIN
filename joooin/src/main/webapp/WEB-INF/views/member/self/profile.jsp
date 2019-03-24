@@ -146,8 +146,8 @@
 						<div class="param-label">性別：</div><c:if test="${memberMainBean.gender == 'male'}">　男</c:if><c:if test="${memberMainBean.gender == 'female'}">　女</c:if><br />
 						<div class="param-label">生日：</div>　${memberMainBean.birthday }<br />
 						<div class="param-label">城市：</div>　${memberMainBean.city }<br />
+						<div class="param-label">信箱：</div>　${memberMainBean.email }<br />
 						<div class="param-label">電話：</div>　${memberMainBean.phone }<br />
-						<div class="param-label">Email：</div>　${memberMainBean.email }<br />
 					</div>
 					<div id="edit-data" class="profile-view">
 						<form:form modelAttribute="memberMainBean" action="${pageContext.request.contextPath}/member/updateProfile" method="POST" enctype="multipart/form-data">
