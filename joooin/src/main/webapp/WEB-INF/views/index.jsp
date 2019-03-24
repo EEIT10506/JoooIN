@@ -241,9 +241,15 @@
 				<div class="carousel-item active insideCarousel" style="">
 <!-- 					   名稱 -->
 					 	 <div style="margin-bottom:50px;">
-						    <p class="eventFname" style="">${top8Events[0].eventName}</p>
-						    <p class="eventSname" style="">${top8Events[1].eventName}</p>
-						    <p class="eventTname" style=" ">${top8Events[2].eventName}</p>
+						  <c:if test="${!empty top8Events[0]}">				 	 
+						    <p class="eventFname" style="">1. ${top8Events[0].eventName}</p>
+						  </c:if>
+						  <c:if test="${!empty top8Events[1]}">
+						    <p class="eventSname" style="">2. ${top8Events[1].eventName}</p>
+						  </c:if>
+						  <c:if test="${!empty top8Events[2]}"> 
+						    <p class="eventTname" style=" ">3. ${top8Events[2].eventName}</p>
+					      </c:if>
 					     </div>
 					     
 					     <div style="">
@@ -362,9 +368,15 @@
 				 <div class="carousel-item SecondPage">
 <!-- 					   名稱 -->
 						<div style="margin-bottom:50px;">
-						   <p class="eventFname">${top8Events[3].eventName}</p>
-						   <p class="eventSname">${top8Events[4].eventName}</p>
-						   <p class="eventTname">${top8Events[5].eventName}</p>
+						  <c:if test="${!empty top8Events[3]}">
+						   <p class="eventFname">4. ${top8Events[3].eventName}</p>
+						  </c:if>
+						  <c:if test="${!empty top8Events[4]}"> 
+						   <p class="eventSname">5. ${top8Events[4].eventName}</p>
+						  </c:if>
+						  <c:if test="${!empty top8Events[5]}">
+						   <p class="eventTname">6. ${top8Events[5].eventName}</p>
+					      </c:if>	
 					     </div>
 <!-- ================= 沒團時顯示===================== -->
 						
@@ -484,9 +496,15 @@
 				<div class="carousel-item SecondPage">
 <!-- 					   名稱 -->
 					 	 <div style="margin-bottom:50px;">
-						   <p class="eventFname">${top8Events[6].eventName}</p>
-						   <p class="eventSname" >${top8Events[7].eventName}</p>
-						   <p class="eventTname" >${top8Events[8].eventName}</p>
+						  <c:if test="${!empty top8Events[6]}">
+						   <p class="eventFname">7. ${top8Events[6].eventName}</p>
+						  </c:if>
+						  <c:if test="${!empty top8Events[7]}">
+						   <p class="eventSname" >8. ${top8Events[7].eventName}</p>
+						  </c:if>
+						  <c:if test="${!empty top8Events[8]}">
+						   <p class="eventTname" >9. ${top8Events[8].eventName}</p>
+					      </c:if>
 					     </div>
 					 
 					 	<div style="margin-bottom:50px;">
@@ -630,9 +648,15 @@
 				<div class="carousel-item active" style="width:1200px;height:380px;margin-top:80px;">
 <!-- 					   名稱 -->
 					 	 <div style="margin-bottom:50px;">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;">${top8Groups[0].groupName}</p>
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;">${top8Groups[1].groupName}</p>
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;">${top8Groups[2].groupName}</p>
+					 	  <c:if test="${!empty top8Groups[0]}">
+						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;">1. ${top8Groups[0].groupName}</p>
+						  </c:if>
+						  <c:if test="${!empty top8Groups[1]}">
+						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;">2. ${top8Groups[1].groupName}</p>
+						  </c:if>
+						  <c:if test="${!empty top8Groups[2]}"> 
+						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;">3. ${top8Groups[2].groupName}</p>
+					      </c:if>
 					     </div>
 					     
 					     <div style="margin-bottom:50px;">
@@ -743,9 +767,15 @@
 				 <div class="carousel-item" style="width:1200px;height:380px;margin-top:80px;">
 <!-- 					   名稱 -->
 					 	 <div style="margin-bottom:50px;">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;">${top8Groups[3].groupName}</p>
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;">${top8Groups[4].groupName}</p>
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;">${top8Groups[5].groupName}</p>
+					 	  <c:if test="${!empty top8Groups[3]}">
+						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;">4. ${top8Groups[3].groupName}</p>
+						  </c:if>
+						  <c:if test="${!empty top8Groups[4]}"> 
+						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;">5. ${top8Groups[4].groupName}</p>
+						  </c:if>
+						  <c:if test="${!empty top8Groups[5]}">
+						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;">6. ${top8Groups[5].groupName}</p>
+					      </c:if>
 					     </div>
 					     
 					     <div style="margin-bottom:50px;">
@@ -854,9 +884,15 @@
 				 <div class="carousel-item" style="width:1200px;height:380px;margin-top:80px;">
 <!-- 					   名稱 -->
 					 	 <div style="margin-bottom:50px;">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;">${top8Groups[6].groupName}</p>
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;">${top8Groups[7].groupName}</p>
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;">${top8Groups[8].groupName}</p>
+					 	  <c:if test="${!empty top8Groups[6]}">
+						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;">7. ${top8Groups[6].groupName}</p>
+						  </c:if>
+						  <c:if test="${!empty top8Groups[7]}">
+						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;">8. ${top8Groups[7].groupName}</p>
+						  </c:if>
+						  <c:if test="${!empty top8Groups[8]}"> 
+						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;">9. ${top8Groups[8].groupName}</p>
+						  </c:if>					     
 					     </div>
 					     
 					     <div style="margin-bottom:50px;">
