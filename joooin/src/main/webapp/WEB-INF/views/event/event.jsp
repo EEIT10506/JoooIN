@@ -634,7 +634,8 @@ function ValidateNumber(e, pnumber)
          </form>
       	</div>
       </div>
- </div> <hr/>
+ </div> 
+ <div style="height:50px;"></div>
 <!-- 參加成員Modal -->
 <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -754,8 +755,9 @@ function ValidateNumber(e, pnumber)
     </div>
   </div>
 </div>
-</div>
 
+</div>
+<jsp:include page="${request.contextPath}/footerbar"/>
 <!-- 請把所有內容寫在此div內 -->
 </body>
 </html>

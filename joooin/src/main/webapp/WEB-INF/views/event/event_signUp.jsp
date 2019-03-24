@@ -318,9 +318,11 @@ function checkAll(bx) {
 					    </table>
 					</div>
 				</div>
+				<jsp:include page="${request.contextPath}/footerbar"/> 
 		<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 		<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 		</div>
+		
 	</div>
 	
 <!-- 請把所有內容寫在此div內 -->

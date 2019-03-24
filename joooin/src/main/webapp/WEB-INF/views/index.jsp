@@ -70,7 +70,7 @@
 	       cursor:pointer;
 	       font-size:40px;
 	}
-	.spanE{
+	.spanE{ 
 		 position:relative;
 		 top:22px;		
 	}
@@ -106,7 +106,78 @@
 		font-size:50px; 
 		 color:Red;	
 	}
-	
+	.firstCarousel{
+		width:1200px;margin:auto;margin-top: 30px;
+	}
+	.radiusCarousel{
+		background-color:#3F5867;height:500px;border-radius:40px;
+	}
+	.insideCarousel{
+		width:1200px;height:380px;margin-top:80px;
+	}
+	.eventFname{
+		font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;
+	}
+	.eventSname{
+		font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;
+	}
+	.eventTname{
+		font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;
+	}
+	.noEventFNow{
+		font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;bottom:20px;text-align:center;display:inline;width:300px;color:white;
+	}
+	.noEventSNow{
+		font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;bottom:20px;text-align:center;display:inline;width:300px;color:white;
+	}
+	.noEventTNow{
+		font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;bottom:20px;text-align:center;display:inline;width:300px;color:white;
+	}
+	.imgFirst{
+		margin-left:90px;width:320px;height:230px;
+	}
+	.imgSecond{
+		margin-left:20px;width:320px;height:230px;
+	}
+	.imgThird{
+		margin-left:20px;width:320px;height:230px;
+	}
+	.eventTime{
+		font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;text-align:left;display:inline;width:300px;color:	black;
+	}
+	.eventInviter{
+		font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;text-align:left;display:inline;width:300px;color:white;
+	}
+	.eventStatusUncheck{
+		font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;
+	}
+	.eventStatusYes{
+		font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:85px;border-radius:10px;color:white;background-color:red;
+	}
+	.eventStatusUncheckSe{
+		font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;
+	}
+	.eventStatusYesSe{
+		font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:85px;border-radius:10px;color:white;background-color:red;
+	}
+	.eventStatusUncheckTh{
+		font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:white;
+	}
+	.eventStatusYesTh{
+		font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:85px;border-radius:10px;color:white;background-color:red;
+	}
+	.eventLikeNum{
+		position:absolute;top:288px;font-size:20px;font-family:微軟正黑體;color:black;
+	}
+	.eventCurrentNum{
+		position:absolute;top:288px;font-size:20px;font-family:微軟正黑體;color:black;
+	}
+	.TopEvent{
+		font-size:30px !important;color:white;font-famliy:微軟正黑體 !important;font-weight:bold!important;
+	}
+	.SecondPage{
+		width:1200px;height:380px;margin-top:80px;
+	}
 </style>
 <script>
 	$(document).ready(function(){
@@ -152,383 +223,383 @@
 			</p>
 			<p class="buttonG">
 			<span class="font spanG" id="findGroups"><i class="fas fa-globe-americas iconsG"></i> 人氣社團</span>
-			</p>
+			</p> 
 		</div> 
 	
 			
 <!-- 	event		===================== -->
 <!-- ================================= -->
-	<div  id="eventDiv" class="bd-example" style="width:1200px;margin:auto;margin-top: 30px;">
+	<div  id="eventDiv" class="bd-example firstCarousel" style="">
 		<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 					  <ol class="carousel-indicators">
 					     <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
 					     <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
 					     <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
 					  </ol>
-			<div class="carousel-inner" style="background-color:#3F5867;height:500px;border-radius:40px;">
+			<div class="carousel-inner radiusCarousel" style="">
 <!-- 	第一頁			======	       -->
-				<div class="carousel-item active" style="width:1200px;height:380px;margin-top:80px;">
+				<div class="carousel-item active insideCarousel" style="">
 <!-- 					   名稱 -->
 					 	 <div style="margin-bottom:50px;">
-						    <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;">${top8Events[0].eventName}</p>
-						    <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;">${top8Events[1].eventName}</p>
-						    <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;">${top8Events[2].eventName}</p>
+						    <p class="eventFname" style="">${top8Events[0].eventName}</p>
+						    <p class="eventSname" style="">${top8Events[1].eventName}</p>
+						    <p class="eventTname" style=" ">${top8Events[2].eventName}</p>
 					     </div>
 					     
 					     <div style="">
 					 	   <c:if test="${empty top8Events[0]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;bottom:20px;text-align:center;display:inline;width:300px;color:white;">目前暫無活動</p>
+						   <p class="noEventFNow" style="">目前暫無活動</p>
 						   </c:if>
 						   <c:if test="${empty top8Events[1]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;bottom:20px;text-align:center;display:inline;width:300px;color:white;">目前暫無活動</p>
+						   <p class="noEventSNow" style="">目前暫無活動</p>
 						   </c:if>
 						   <c:if test="${empty top8Events[2]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;bottom:20px;text-align:center;display:inline;width:300px;color:white;">目前暫無活動</p>
+						   <p class="noEventTNow" style="">目前暫無活動</p>
 					       </c:if>	
 					     </div>
 					 <c:if test="${!empty top8Events[0]}">    
-					  <a href="<c:url value='/event/${top8Events[0].eventId}' />"><img src="<c:url value='/getEventImage/${top8Events[0].eventId}.jpg' />" alt="其他"  style="margin-left:90px;width:320px;height:230px;" class="hover"></a>
+					  <a href="<c:url value='/event/${top8Events[0].eventId}' />"><img src="<c:url value='/getEventImage/${top8Events[0].eventId}.jpg' />" alt="其他"  style="" class="hover imgFirst"></a>
 					 </c:if>
 					 <c:if test="${empty top8Events[0]}">    
-					  <a href="<c:url value='/events' />"><img src="<c:url value='/getEventImage/${top8Events[0].eventId}.jpg' />" alt="其他"  style="margin-left:90px;width:320px;height:230px;" class="hover"></a>
+					  <a href="<c:url value='/events' />"><img src="<c:url value='/getEventImage/${top8Events[0].eventId}.jpg' />" alt="其他"  style="" class="hover imgFirst"></a>
 					 </c:if>
 					 <c:if test="${!empty top8Events[1]}">
-				      <a href="<c:url value='/event/${top8Events[1].eventId}' />"><img src="<c:url value='/getEventImage/${top8Events[1].eventId}.jpg' />"  alt="運動"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/event/${top8Events[1].eventId}' />"><img src="<c:url value='/getEventImage/${top8Events[1].eventId}.jpg' />"  alt="運動"  style="" class="hover imgSecond"></a>
 					 </c:if>
 					 <c:if test="${empty top8Events[1]}">
-				      <a href="<c:url value='/events' />"><img src="<c:url value='/getEventImage/${top8Events[1].eventId}.jpg' />"  alt="運動"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/events' />"><img src="<c:url value='/getEventImage/${top8Events[1].eventId}.jpg' />"  alt="運動"  style="" class="hover imgSecond"></a>
 					 </c:if>
 					 <c:if test="${!empty top8Events[2]}">
-				      <a href="<c:url value='/event/${top8Events[2].eventId}' />"><img src="<c:url value='/getEventImage/${top8Events[2].eventId}.jpg' />" alt="食物"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/event/${top8Events[2].eventId}' />"><img src="<c:url value='/getEventImage/${top8Events[2].eventId}.jpg' />" alt="食物"  style="" class="hover imgThird"></a>
 					 </c:if>
-					 <c:if test="${empty top8Events[2]}">
-				      <a href="<c:url value='/events' />"><img src="<c:url value='/getEventImage/${top8Events[2].eventId}.jpg' />" alt="食物"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+					  <c:if test="${empty top8Events[2]}"> 
+				      <a href="<c:url value='/events' />"><img src="<c:url value='/getEventImage/${top8Events[2].eventId}.jpg' />" alt="食物"  style="" class="hover imgThird"></a>
 					 </c:if>
 <!-- 						時間  -->
 						 <div style="margin-top:10px;">
 						 <c:if test="${!empty top8Events[0]}">
-						   <p style="font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:black;"><i class="fas fa-clock"></i> ${top8Events[0].eventDateEnd}</p>
+						   <p class="eventTime" style="left:90px;"><i class="fas fa-clock"></i> ${top8Events[0].eventDateEnd}</p>
 						 </c:if>
 						 <c:if test="${!empty top8Events[1]}">  
-						   <p style="font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:	black;"><i class="fas fa-clock"></i> ${top8Events[1].eventDateEnd}</p>
+						   <p class="eventTime" style="left:435px;"><i class="fas fa-clock"></i> ${top8Events[1].eventDateEnd}</p>
 						 </c:if>
 						 <c:if test="${!empty top8Events[2]}">  
-						   <p style="font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	black;"><i class="fas fa-clock"></i> ${top8Events[2].eventDateEnd}</p>
+						   <p class="eventTime" style="left:780px;"><i class="fas fa-clock"></i> ${top8Events[2].eventDateEnd}</p>
 					     </c:if>
 					     </div>
 <!-- 					   開團者  ============ -->
 						<div style="margin-top:40px;">
 						  <c:if test="${!empty top8Events[0]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">開團人 : ${top8EventInviterNames[0]}</p>
+						   <p class="eventInviter" style="left:90px;">開團人 : ${top8EventInviterNames[0]}</p>
 						  </c:if>																																						   		
 						  <c:if test="${!empty top8Events[1]}"> 
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">開團人 :  ${top8EventInviterNames[1]}</p>
+						   <p class="eventInviter" style="left:435px;">開團人 :  ${top8EventInviterNames[1]}</p>
 						  </c:if>
 						  <c:if test="${!empty top8Events[2]}"> 
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:white;">開團人 :  ${top8EventInviterNames[2]}</p>
+						   <p class="eventInviter" style="left:780px;">開團人 :  ${top8EventInviterNames[2]}</p>
 						  </c:if>
 						</div>
 <!-- 					     備用 -->
 					      <div style="margin-top:70px;">
 <!-- 					     第一頁第一張 三種狀態======= --> 
 					      <c:if test="${(top8Events[0].eventMemberLimit-top8Events[0].eventCurrentMembers) < 5 and top8Events[0].eventMemberLimit != top8Events[0].eventCurrentMembers and !empty top8Events[0]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">即將成團 尚餘 ${top8Events[0].eventMemberLimit-top8Events[0].eventCurrentMembers} 個名額</p>  
+						   <p class="eventStatusUncheck" style="">即將成團 尚餘 ${top8Events[0].eventMemberLimit-top8Events[0].eventCurrentMembers} 個名額</p>  
 						  </c:if>
 						   <c:if test="${(top8Events[0].eventMemberLimit-top8Events[0].eventCurrentMembers) > 5 and !empty top8Events[0]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">開放報名中 尚餘 ${top8Events[0].eventMemberLimit-top8Events[0].eventCurrentMembers} 個名額</p>  
+						   <p class="eventStatusUncheck" style="">開放報名中 尚餘 ${top8Events[0].eventMemberLimit-top8Events[0].eventCurrentMembers} 個名額</p>  
 						  </c:if> 
 						  <c:if test="${top8Events[0].eventMemberLimit == top8Events[0].eventCurrentMembers and !empty top8Events[0]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:85px;border-radius:10px;color:white;background-color:red;">人數已滿</p>  
+						   <p class="eventStatusYes" style="">人數已滿</p>  
 						  </c:if>
 <!-- 					     第一頁第二張 三種狀態======= -->						  
 						  <c:if test="${(top8Events[1].eventMemberLimit-top8Events[1].eventCurrentMembers) < 5 and top8Events[1].eventMemberLimit != top8Events[1].eventCurrentMembers and !empty top8Events[1]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">即將成團 尚餘 ${top8Events[1].eventMemberLimit-top8Events[1].eventCurrentMembers} 個名額</p>
+						   <p class="eventStatusUncheckSe" style="">即將成團 尚餘 ${top8Events[1].eventMemberLimit-top8Events[1].eventCurrentMembers} 個名額</p>
 						  </c:if> 
 						  <c:if test="${(top8Events[1].eventMemberLimit-top8Events[1].eventCurrentMembers) > 5 and !empty top8Events[1]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">開放報名中 尚餘 ${top8Events[1].eventMemberLimit-top8Events[1].eventCurrentMembers} 個名額</p>
+						   <p class="eventStatusUncheckSe" style="">開放報名中 尚餘 ${top8Events[1].eventMemberLimit-top8Events[1].eventCurrentMembers} 個名額</p>
 						  </c:if>
 						  <c:if test="${top8Events[1].eventMemberLimit == top8Events[1].eventCurrentMembers and !empty top8Events[1]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:85px;border-radius:10px;color:white;background-color:red;">人數已滿</p>
+						   <p class="eventStatusYesSe" style="">人數已滿</p>
 						  </c:if> 
 						   
 <!-- 					     第一頁第3張 三種狀態======= -->	
 						   <c:if test="${(top8Events[2].eventMemberLimit-top8Events[2].eventCurrentMembers) < 5 and top8Events[2].eventMemberLimit != top8Events[2].eventCurrentMembers and !empty top8Events[2]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:white;">即將成團 尚餘 ${top8Events[2].eventMemberLimit-top8Events[2].eventCurrentMembers} 個名額</p>
+						   <p class="eventStatusUncheckTh" style="">即將成團 尚餘 ${top8Events[2].eventMemberLimit-top8Events[2].eventCurrentMembers} 個名額</p>
 						  </c:if> 
 						  <c:if test="${(top8Events[2].eventMemberLimit-top8Events[2].eventCurrentMembers) > 5 and !empty top8Events[2]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:white;">開放報名中 尚餘 ${top8Events[2].eventMemberLimit-top8Events[2].eventCurrentMembers} 個名額</p>
+						   <p class="eventStatusUncheckTh" style="">開放報名中 尚餘 ${top8Events[2].eventMemberLimit-top8Events[2].eventCurrentMembers} 個名額</p>
 						  </c:if>
 						  <c:if test="${top8Events[2].eventMemberLimit == top8Events[2].eventCurrentMembers and !empty top8Events[2]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:85px;border-radius:10px;color:white;background-color:red;">人數已滿</p>
+						   <p class="eventStatusYesTh" style="">人數已滿</p>
 						  </c:if>  
 					     </div>
 <!-- 					     人數+讚數 -->
 						 <c:if test="${!empty top8Events[0]}">
-					     <span style="position:absolute;top:288px;left:300px;font-size:20px;font-family:微軟正黑體;color:black;">${top8Events[0].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
+					     <span class="eventLikeNum" style="left:300px;">${top8Events[0].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
 					     </c:if>
 					     <c:if test="${!empty top8Events[1]}">
-					     <span style="position:absolute;top:288px;left:645px;font-size:20px;font-family:微軟正黑體;color:black;">${top8Events[1].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
+					     <span class="eventLikeNum" style="left:645px;">${top8Events[1].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
 					     </c:if>
 					     <c:if test="${!empty top8Events[2]}">
-					     <span style="position:absolute;top:288px;left:990px;font-size:20px;font-family:微軟正黑體;color:black;">${top8Events[2].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
+					     <span class="eventLikeNum" style="left:990px;">${top8Events[2].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
 					     </c:if>
 					     
 					     <c:if test="${!empty top8Events[0]}">
-					     <span style="position:absolute;top:288px;left:360px;font-size:20px;font-family:微軟正黑體;color:black;">${top8Events[0].eventLike} <i class="far fa-thumbs-up"></i></span>
+					     <span class="eventCurrentNum" style="left:360px;">${top8Events[0].eventLike} <i class="far fa-thumbs-up"></i></span>
 					     </c:if>
 					     <c:if test="${!empty top8Events[1]}">
-					     <span style="position:absolute;top:288px;left:705px;font-size:20px;font-family:微軟正黑體;color:black;">${top8Events[1].eventLike} <i class="far fa-thumbs-up"></i></span>
+					     <span class="eventCurrentNum" style="left:705px;">${top8Events[1].eventLike} <i class="far fa-thumbs-up"></i></span>
 					     </c:if>
 					     <c:if test="${!empty top8Events[2]}">
-					     <span style="position:absolute;top:288px;left:1050px;font-size:20px;font-family:微軟正黑體;color:black;">${top8Events[2].eventLike} <i class="far fa-thumbs-up"></i></span>
+					     <span class="eventCurrentNum" style="left:1050px;">${top8Events[2].eventLike} <i class="far fa-thumbs-up"></i></span>
 					     </c:if>
 					     
 					   <div class="carousel-caption d-none d-block" style="bottom:370px;">
-						   	<h5 style="font-size:30px !important;color:white;font-famliy:微軟正黑體 !important;font-weight:bold!important;">TOP 9 熱門活動</h5>
+						   	<h5 class="TopEvent" style="">TOP 9 熱門活動</h5>
 				   	   </div>
 				</div>
 					   <!-- 	第二頁			======	       -->  
-				 <div class="carousel-item" style="width:1200px;height:380px;margin-top:80px;">
+				 <div class="carousel-item SecondPage">
 <!-- 					   名稱 -->
 						<div style="margin-bottom:50px;">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;">${top8Events[3].eventName}</p>
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;">${top8Events[4].eventName}</p>
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;">${top8Events[5].eventName}</p>
+						   <p class="eventFname">${top8Events[3].eventName}</p>
+						   <p class="eventSname">${top8Events[4].eventName}</p>
+						   <p class="eventTname">${top8Events[5].eventName}</p>
 					     </div>
 <!-- ================= 沒團時顯示===================== -->
 						
 					 	 <div style="margin-bottom:50px;">
 					 	   <c:if test="${empty top8Events[3]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;bottom:20px;text-align:center;display:inline;width:300px;color:white;">目前暫無活動</p>
+						   <p class="noEventFNow">目前暫無活動</p>
 						   </c:if>
 						   <c:if test="${empty top8Events[4]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;bottom:20px;text-align:center;display:inline;width:300px;color:white;">目前暫無活動</p>
+						   <p class="noEventSNow">目前暫無活動</p>
 						   </c:if>
 						   <c:if test="${empty top8Events[5]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;bottom:20px;text-align:center;display:inline;width:300px;color:white;">目前暫無活動</p>
+						   <p class="noEventTNow">目前暫無活動</p>
 					       </c:if>	
 					     </div>
 					 <c:if test="${!empty top8Events[3]}">
-					  <a href="<c:url value='/event/${top8Events[3].eventId}' />"><img src="<c:url value='/getEventImage/${top8Events[3].eventId}.jpg' />" alt="其他"  style="margin-left:90px;width:320px;height:230px;" class="hover"></a>
+					  <a href="<c:url value='/event/${top8Events[3].eventId}' />"><img src="<c:url value='/getEventImage/${top8Events[3].eventId}.jpg' />" alt="其他"  class="hover imgFirst"></a>
 					 </c:if> 
 					 <c:if test="${empty top8Events[3]}">
-					  <a href="<c:url value='/events' />"><img src="<c:url value='/getEventImage/${top8Events[3].eventId}.jpg' />" alt="其他"  style="margin-left:90px;width:320px;height:230px;" class="hover"></a>
+					  <a href="<c:url value='/events' />"><img src="<c:url value='/getEventImage/${top8Events[3].eventId}.jpg' />" alt="其他" class="hover imgFirst"></a>
 					 </c:if> 
 					 <c:if test="${!empty top8Events[4]}">
-				      <a href="<c:url value='/event/${top8Events[4].eventId}' />"><img src="<c:url value='/getEventImage/${top8Events[4].eventId}.jpg' />"  alt="運動"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/event/${top8Events[4].eventId}' />"><img src="<c:url value='/getEventImage/${top8Events[4].eventId}.jpg' />"  alt="運動"  class="hover imgSecond"></a>
 					 </c:if>
 					 <c:if test="${empty top8Events[4]}">
-				      <a href="<c:url value='/events' />"><img src="<c:url value='/getEventImage/${top8Events[4].eventId}.jpg' />"  alt="運動"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/events' />"><img src="<c:url value='/getEventImage/${top8Events[4].eventId}.jpg' />"  alt="運動"  class="hover imgSecond"></a>
 					 </c:if>
 					 <c:if test="${!empty top8Events[5]}">
-				      <a href="<c:url value='/event/${top8Events[5].eventId}' />"><img src="<c:url value='/getEventImage/${top8Events[5].eventId}.jpg' />" alt="食物"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/event/${top8Events[5].eventId}' />"><img src="<c:url value='/getEventImage/${top8Events[5].eventId}.jpg' />" alt="食物"  class="hover imgThird"></a>
 					 </c:if>
 					 <c:if test="${empty top8Events[5]}">
-				      <a href="<c:url value='/events' />"><img src="<c:url value='/getEventImage/${top8Events[5].eventId}.jpg' />" alt="食物"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/events' />"><img src="<c:url value='/getEventImage/${top8Events[5].eventId}.jpg' />" alt="食物"  class="hover imgThird"></a>
 					 </c:if>
 <!-- 						時間  -->
 						 <div style="margin-top:10px;">
 						   <c:if test="${!empty top8Events[3]}">
-						   <p style="font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:black;"><i class="fas fa-clock"></i> ${top8Events[3].eventDateEnd}</p>
+						   <p class="eventTime" style="left:90px;"><i class="fas fa-clock"></i> ${top8Events[3].eventDateEnd}</p>
 						   </c:if>
 						   <c:if test="${!empty top8Events[4]}">
-						   <p style="font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:	black;"><i class="fas fa-clock"></i> ${top8Events[4].eventDateEnd}</p>
+						   <p class="eventTime" style="left:435px;"><i class="fas fa-clock"></i> ${top8Events[4].eventDateEnd}</p>
 						   </c:if>
 						   <c:if test="${!empty top8Events[5]}">
-						   <p style="font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	black;"><i class="fas fa-clock"></i> ${top8Events[5].eventDateEnd}</p>
+						   <p class="eventTime" style="left:780px;"><i class="fas fa-clock"></i> ${top8Events[5].eventDateEnd}</p>
 					       </c:if>
 					     </div>
 					     <!-- 					   開團者  ============ -->
 						<div style="margin-top:40px;">
 						  <c:if test="${!empty top8Events[3]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">開團人 : ${top8EventInviterNames[3]}</p>
+						   <p class="eventInviter" style="left:90px;">開團人 : ${top8EventInviterNames[3]}</p>
 						  </c:if>
 						  <c:if test="${!empty top8Events[4]}"> 
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">開團人 :  ${top8EventInviterNames[4]}</p>
+						   <p class="eventInviter" style="left:435px;">開團人 :  ${top8EventInviterNames[4]}</p>
 						  </c:if>
 						  <c:if test="${!empty top8Events[5]}"> 
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:white;">開團人 :  ${top8EventInviterNames[5]}</p>
+						   <p class="eventInviter" style="left:780px;">開團人 :  ${top8EventInviterNames[5]}</p>
 						  </c:if>
 						</div>
 <!-- 					     備用 -->
 					      <div style="margin-top:70px;">
 <!-- 					     第一頁第一張 三種狀態======= --> 
 					      <c:if test="${(top8Events[3].eventMemberLimit-top8Events[3].eventCurrentMembers) < 5 and top8Events[3].eventMemberLimit != top8Events[3].eventCurrentMembers and !empty top8Events[3]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">即將成團 尚餘 ${top8Events[3].eventMemberLimit-top8Events[3].eventCurrentMembers} 個名額</p>  
+						   <p class="eventStatusUncheck" style="left:90px;">即將成團 尚餘 ${top8Events[3].eventMemberLimit-top8Events[3].eventCurrentMembers} 個名額</p>  
 						  </c:if>
 						   <c:if test="${(top8Events[3].eventMemberLimit-top8Events[3].eventCurrentMembers) > 5 and !empty top8Events[3]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">開放報名中 尚餘 ${top8Events[3].eventMemberLimit-top8Events[3].eventCurrentMembers} 個名額</p>  
+						   <p class="eventStatusUncheck" style="left:90px;">開放報名中 尚餘 ${top8Events[3].eventMemberLimit-top8Events[3].eventCurrentMembers} 個名額</p>  
 						  </c:if> 
 						  <c:if test="${top8Events[3].eventMemberLimit == top8Events[3].eventCurrentMembers and !empty top8Events[3]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:85px;border-radius:10px;color:white;background-color:red;">人數已滿</p>  
+						   <p class="eventStatusYes">人數已滿</p>  
 						  </c:if>
 <!-- 					     第一頁第二張 三種狀態======= -->						  
 						  <c:if test="${(top8Events[4].eventMemberLimit-top8Events[4].eventCurrentMembers) < 5 and top8Events[4].eventMemberLimit != top8Events[4].eventCurrentMembers and !empty top8Events[4]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">即將成團 尚餘 ${top8Events[4].eventMemberLimit-top8Events[4].eventCurrentMembers} 個名額</p>
+						   <p class="eventStatusUncheckSe" >即將成團 尚餘 ${top8Events[4].eventMemberLimit-top8Events[4].eventCurrentMembers} 個名額</p>
 						  </c:if> 
 						  <c:if test="${(top8Events[4].eventMemberLimit-top8Events[4].eventCurrentMembers) > 5 and !empty top8Events[4]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">開放報名中 尚餘 ${top8Events[4].eventMemberLimit-top8Events[4].eventCurrentMembers} 個名額</p>
+						   <p class="eventStatusUncheckSe" >開放報名中 尚餘 ${top8Events[4].eventMemberLimit-top8Events[4].eventCurrentMembers} 個名額</p>
 						  </c:if>
 						  <c:if test="${top8Events[4].eventMemberLimit == top8Events[4].eventCurrentMembers and !empty top8Events[4]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:85px;border-radius:10px;color:white;background-color:red;">人數已滿</p>
+						   <p class="eventStatusYesSe">人數已滿</p>
 						  </c:if> 
 						   
 <!-- 					     第一頁第3張 三種狀態======= -->	
 						   <c:if test="${(top8Events[5].eventMemberLimit-top8Events[5].eventCurrentMembers) < 5 and top8Events[5].eventMemberLimit != top8Events[5].eventCurrentMembers and !empty top8Events[5]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:white;">即將成團 尚餘 ${top8Events[5].eventMemberLimit-top8Events[5].eventCurrentMembers} 個名額</p>
+						   <p class="eventStatusUncheckTh">即將成團 尚餘 ${top8Events[5].eventMemberLimit-top8Events[5].eventCurrentMembers} 個名額</p>
 						  </c:if> 
 						  <c:if test="${(top8Events[5].eventMemberLimit-top8Events[5].eventCurrentMembers) > 5 and !empty top8Events[5]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:white;">開放報名中 尚餘 ${top8Events[5].eventMemberLimit-top8Events[5].eventCurrentMembers} 個名額</p>
+						   <p class="eventStatusUncheckTh">開放報名中 尚餘 ${top8Events[5].eventMemberLimit-top8Events[5].eventCurrentMembers} 個名額</p>
 						  </c:if>
 						  <c:if test="${top8Events[5].eventMemberLimit == top8Events[5].eventCurrentMembers and !empty top8Events[5]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:white;background-color:red;">人數已滿</p>
+						   <p class="eventStatusYesTh">人數已滿</p>
 						  </c:if>  
 					     </div>
 <!-- 					     人數+讚數 -->
 						<c:if test="${!empty top8Events[3]}">
-					     <span style="position:absolute;top:288px;left:300px;font-size:20px;font-family:微軟正黑體;color:black;">${top8Events[3].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
+					     <span class="eventLikeNum" style="left:300px;">${top8Events[3].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
 					    </c:if>
 					    <c:if test="${!empty top8Events[4]}"> 
-					     <span style="position:absolute;top:288px;left:645px;font-size:20px;font-family:微軟正黑體;color:black;">${top8Events[4].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
+					     <span class="eventLikeNum" style="left:645px;">${top8Events[4].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
 					    </c:if>
 					    <c:if test="${!empty top8Events[5]}">  
-					     <span style="position:absolute;top:288px;left:990px;font-size:20px;font-family:微軟正黑體;color:black;">${top8Events[5].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
+					     <span class="eventLikeNum" style="left:990px;">${top8Events[5].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
 					    </c:if>
 					    
 					    <c:if test="${!empty top8Events[3]}">
-					     <span style="position:absolute;top:288px;left:360px;font-size:20px;font-family:微軟正黑體;color:black;">${top8Events[3].eventLike} <i class="far fa-thumbs-up"></i></span>
+					     <span class="eventCurrentNum" style="left:360px;">${top8Events[3].eventLike} <i class="far fa-thumbs-up"></i></span>
 					    </c:if>
 					    <c:if test="${!empty top8Events[4]}">
-					     <span style="position:absolute;top:288px;left:705px;font-size:20px;font-family:微軟正黑體;color:black;">${top8Events[4].eventLike} <i class="far fa-thumbs-up"></i></span>
+					     <span class="eventCurrentNum" style="left:705px;">${top8Events[4].eventLike} <i class="far fa-thumbs-up"></i></span>
 					    </c:if>
 					    <c:if test="${!empty top8Events[5]}"> 
-					     <span style="position:absolute;top:288px;left:1050px;font-size:20px;font-family:微軟正黑體;color:black;">${top8Events[5].eventLike} <i class="far fa-thumbs-up"></i></span>
+					     <span  class="eventCurrentNum" style="left:1050px;">${top8Events[5].eventLike} <i class="far fa-thumbs-up"></i></span>
 					    </c:if>
 					     
 					   <div class="carousel-caption d-none d-block" style="bottom:370px;">
-						   	<h5 style="font-size:30px !important;color:	white;font-famliy:微軟正黑體 !important;font-weight:bold!important;">TOP 9 熱門活動</h5>
+						   	<h5 class="TopEvent">TOP 9 熱門活動</h5>
 				   	   </div>
 				</div>
 					     <!-- 	第三頁			======	       -->
-				<div class="carousel-item" style="width:1200px;height:380px;margin-top:80px;">
+				<div class="carousel-item SecondPage">
 <!-- 					   名稱 -->
 					 	 <div style="margin-bottom:50px;">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;">${top8Events[6].eventName}</p>
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;">${top8Events[7].eventName}</p>
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;">${top8Events[8].eventName}</p>
+						   <p class="eventFname">${top8Events[6].eventName}</p>
+						   <p class="eventSname" >${top8Events[7].eventName}</p>
+						   <p class="eventTname" >${top8Events[8].eventName}</p>
 					     </div>
 					 
 					 	<div style="margin-bottom:50px;">
 					 	   <c:if test="${empty top8Events[6]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;bottom:20px;text-align:center;display:inline;width:300px;color:white;">目前尚無活動</p>
+						   <p class="noEventFNow">目前尚無活動</p>
 						   </c:if>
 						   <c:if test="${empty top8Events[7]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;bottom:20px;text-align:center;display:inline;width:300px;color:white;">目前尚無活動</p>
+						   <p class="noEventSNow">目前尚無活動</p>
 						   </c:if>
 						   <c:if test="${empty top8Events[8]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;bottom:20px;text-align:center;display:inline;width:300px;color:white;">目前尚無活動</p>
+						   <p class="noEventTNow">目前尚無活動</p>
 					       </c:if>	
 					     </div>
 				 	<c:if test="${!empty top8Events[6]}">  
-					  <a href="<c:url value='/event/${top8Events[6].eventId}' />"><img src="<c:url value='/getEventImage/${top8Events[6].eventId}.jpg' />" alt="其他"  style="margin-left:90px;width:320px;height:230px;" class="hover"></a>
+					  <a href="<c:url value='/event/${top8Events[6].eventId}' />"><img src="<c:url value='/getEventImage/${top8Events[6].eventId}.jpg' />" alt="其他"  class="hover imgFirst"></a>
 					</c:if>  
 				 	<c:if test="${empty top8Events[6]}">   
-					  <a href="<c:url value='/events' />"><img src="<c:url value='/getEventImage/${top8Events[6].eventId}.jpg' />" alt="其他"  style="margin-left:90px;width:320px;height:230px;" class="hover"></a>
+					  <a href="<c:url value='/events' />"><img src="<c:url value='/getEventImage/${top8Events[6].eventId}.jpg' />" alt="其他"  class="hover imgFirst"></a>
 					</c:if>  
    					<c:if test="${!empty top8Events[7]}">
-				      <a href="<c:url value='/event/${top8Events[7].eventId}' />"><img src="<c:url value='/getEventImage/${top8Events[7].eventId}.jpg' />"  alt="運動"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/event/${top8Events[7].eventId}' />"><img src="<c:url value='/getEventImage/${top8Events[7].eventId}.jpg' />"  alt="運動"  class="hover imgSecond"></a>
 					</c:if>
    					<c:if test="${empty top8Events[7]}">
-				      <a href="<c:url value='/events' />"><img src="<c:url value='/getEventImage/${top8Events[7].eventId}.jpg' />"  alt="運動"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/events' />"><img src="<c:url value='/getEventImage/${top8Events[7].eventId}.jpg' />"  alt="運動"  class="hover imgSecond"></a>
 					</c:if>
 					<c:if test="${!empty top8Events[8]}">
-				      <a href="<c:url value='/event/${top8Events[8].eventId}' />"><img src="<c:url value='/getEventImage/${top8Events[8].eventId}.jpg' />" alt="食物"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/event/${top8Events[8].eventId}' />"><img src="<c:url value='/getEventImage/${top8Events[8].eventId}.jpg' />" alt="食物"  class="hover imgThird"></a>
 					</c:if>
 					<c:if test="${empty top8Events[8]}">
-				      <a href="<c:url value='/events' />"><img src="<c:url value='/getEventImage/${top8Events[8].eventId}.jpg' />" alt="食物"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/events' />"><img src="<c:url value='/getEventImage/${top8Events[8].eventId}.jpg' />" alt="食物"  class="hover imgThird"></a>
 					</c:if>
 
 <!-- 						時間  -->
 						 <div style="margin-top:10px;">
 						  <c:if test="${!empty top8Events[6]}">
-						   <p style="font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:black;"><i class="fas fa-clock"></i> ${top8Events[6].eventDateEnd}</p>
+						   <p class="eventTime" style="left:90px;"><i class="fas fa-clock"></i> ${top8Events[6].eventDateEnd}</p>
 						  </c:if>
 						  <c:if test="${!empty top8Events[7]}">
-						   <p style="font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:	black;"><i class="fas fa-clock"></i> ${top8Events[7].eventDateEnd}</p>
+						   <p class="eventTime" style="left:435px;"><i class="fas fa-clock"></i> ${top8Events[7].eventDateEnd}</p>
 						  </c:if>
 						  <c:if test="${!empty top8Events[8]}">
-						   <p style="font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	black;"><i class="fas fa-clock"></i> ${top8Events[8].eventDateEnd}</p>
+						   <p class="eventTime" style="left:780px;"><i class="fas fa-clock"></i> ${top8Events[8].eventDateEnd}</p>
 					      </c:if>
 					     </div>
 					     <!-- 					   開團者  ============ -->
 						<div style="margin-top:40px;">
 						  <c:if test="${!empty top8Events[6]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">開團人 : ${top8EventInviterNames[6]}</p>
+						   <p class="eventInviter" style="left:90px;">開團人 : ${top8EventInviterNames[6]}</p>
 						  </c:if>
 						  <c:if test="${!empty top8Events[7]}"> 
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">開團人 :  ${top8EventInviterNames[7]}</p>
+						   <p class="eventInviter" style="left:435px;">開團人 :  ${top8EventInviterNames[7]}</p>
 						  </c:if>
 						  <c:if test="${!empty top8Events[8]}"> 
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:white;">開團人 :  ${top8EventInviterNames[8]}</p>
+						   <p class="eventInviter" style="left:780px;">開團人 :  ${top8EventInviterNames[8]}</p>
 						  </c:if>
 						</div>
 <!-- 					     備用 -->
 					      <div style="margin-top:70px;">
 <!-- 					     第一頁第一張 三種狀態======= --> 
 					      <c:if test="${(top8Events[6].eventMemberLimit-top8Events[6].eventCurrentMembers) < 5 and top8Events[6].eventMemberLimit != top8Events[6].eventCurrentMembers and !empty top8Events[6]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">即將成團 尚餘 ${top8Events[6].eventMemberLimit-top8Events[6].eventCurrentMembers} 個名額</p>  
+						   <p class="eventStatusUncheck" style="left:90px;">即將成團 尚餘 ${top8Events[6].eventMemberLimit-top8Events[6].eventCurrentMembers} 個名額</p>  
 						  </c:if>
 						   <c:if test="${(top8Events[6].eventMemberLimit-top8Events[6].eventCurrentMembers) > 5 and !empty top8Events[6]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">開放報名中 尚餘 ${top8Events[6].eventMemberLimit-top8Events[6].eventCurrentMembers} 個名額</p>  
+						   <p class="eventStatusUncheck" style="left:90px;">開放報名中 尚餘 ${top8Events[6].eventMemberLimit-top8Events[6].eventCurrentMembers} 個名額</p>  
 						  </c:if> 
 						  <c:if test="${top8Events[6].eventMemberLimit == top8Events[6].eventCurrentMembers and !empty top8Events[6]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:85px;border-radius:10px;color:white;background-color:red;">人數已滿</p>  
+						   <p class="eventStatusYes">人數已滿</p>  
 						  </c:if>
 <!-- 					     第一頁第二張 三種狀態======= -->						  
 						  <c:if test="${(top8Events[7].eventMemberLimit-top8Events[7].eventCurrentMembers) < 5 and top8Events[7].eventMemberLimit != top8Events[7].eventCurrentMembers and !empty top8Events[7]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">即將成團 尚餘 ${top8Events[7].eventMemberLimit-top8Events[7].eventCurrentMembers} 個名額</p>
+						   <p class="eventStatusUncheckSe" style="left:435px;">即將成團 尚餘 ${top8Events[7].eventMemberLimit-top8Events[7].eventCurrentMembers} 個名額</p>
 						  </c:if> 
 						  <c:if test="${(top8Events[7].eventMemberLimit-top8Events[7].eventCurrentMembers) > 5 and !empty top8Events[7]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">開放報名中 尚餘 ${top8Events[7].eventMemberLimit-top8Events[7].eventCurrentMembers} 個名額</p>
+						   <p class="eventStatusUncheckSe"  style="left:435px;">開放報名中 尚餘 ${top8Events[7].eventMemberLimit-top8Events[7].eventCurrentMembers} 個名額</p>
 						  </c:if>
 						  <c:if test="${top8Events[7].eventMemberLimit == top8Events[7].eventCurrentMembers and !empty top8Events[7]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:85px;border-radius:10px;color:white;background-color:red;">人數已滿</p>
+						   <p class="eventStatusYesSe">人數已滿</p>
 						  </c:if> 
 						   
 <!-- 					     第一頁第3張 三種狀態======= -->	
 						   <c:if test="${(top8Events[8].eventMemberLimit-top8Events[8].eventCurrentMembers) < 5 and top8Events[8].eventMemberLimit != top8Events[8].eventCurrentMembers and !empty top8Events[8]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:white;">即將成團 尚餘 ${top8Events[8].eventMemberLimit-top8Events[8].eventCurrentMembers} 個名額</p>
+						   <p class="eventStatusUncheckTh" style="left:780px;">即將成團 尚餘 ${top8Events[8].eventMemberLimit-top8Events[8].eventCurrentMembers} 個名額</p>
 						  </c:if> 
 						  <c:if test="${(top8Events[8].eventMemberLimit-top8Events[8].eventCurrentMembers) > 5 and !empty top8Events[8]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:white;">開放報名中 尚餘 ${top8Events[8].eventMemberLimit-top8Events[8].eventCurrentMembers} 個名額</p>
+						   <p class="eventStatusUncheckTh" style="left:780px;">開放報名中 尚餘 ${top8Events[8].eventMemberLimit-top8Events[8].eventCurrentMembers} 個名額</p>
 						  </c:if>
 						  <c:if test="${top8Events[8].eventMemberLimit == top8Events[8].eventCurrentMembers and !empty top8Events[8]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:85px;border-radius:10px;color:white;background-color:red;">人數已滿</p>
+						   <p class="eventStatusYesTh">人數已滿</p>
 						  </c:if>  
 					     </div>
 <!-- 					     人數+讚數 -->
 						<c:if test="${!empty top8Events[6]}">
-					     <span style="position:absolute;top:288px;left:300px;font-size:20px;font-family:微軟正黑體;color:black;">${top8Events[6].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
+					     <span class="eventLikeNum" style="left:300px;">${top8Events[6].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
 					    </c:if>
 					    <c:if test="${!empty top8Events[7]}"> 
-					     <span style="position:absolute;top:288px;left:645px;font-size:20px;font-family:微軟正黑體;color:black;">${top8Events[7].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
+					     <span style="left:645px;">${top8Events[7].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
 					    </c:if>
 					    <c:if test="${!empty top8Events[8]}">
-					     <span style="position:absolute;top:288px;left:990px;font-size:20px;font-family:微軟正黑體;color:black;">${top8Events[8].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
+					     <span style="left:990px;">${top8Events[8].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
 					    </c:if>
 					    
 					    <c:if test="${!empty top8Events[6]}">
-					     <span style="position:absolute;top:288px;left:360px;font-size:20px;font-family:微軟正黑體;color:black;">${top8Events[6].eventLike} <i class="far fa-thumbs-up"></i></span>
+					     <span class="eventCurrentNum" style="left:360px;">${top8Events[6].eventLike} <i class="far fa-thumbs-up"></i></span>
 					    </c:if>
 					    <c:if test="${!empty top8Events[7]}">
-					     <span style="position:absolute;top:288px;left:705px;font-size:20px;font-family:微軟正黑體;color:black;">${top8Events[7].eventLike} <i class="far fa-thumbs-up"></i></span>
+					     <span style="left:705px;">${top8Events[7].eventLike} <i class="far fa-thumbs-up"></i></span>
 					    </c:if>
 					    <c:if test="${!empty top8Events[8]}">
-					     <span style="position:absolute;top:288px;left:1050px;font-size:20px;font-family:微軟正黑體;color:black;">${top8Events[8].eventLike} <i class="far fa-thumbs-up"></i></span>
+					     <span style="left:1050px;">${top8Events[8].eventLike} <i class="far fa-thumbs-up"></i></span>
 					    </c:if>
 					     
 					   <div class="carousel-caption d-none d-block" style="bottom:370px;">
-						   	<h5 style="font-size:30px !important;color:	white;font-famliy:微軟正黑體 !important;font-weight:bold!important;">TOP 9 熱門活動</h5>
+						   	<h5 class="TopEvent" >TOP 9 熱門活動</h5>
 				   	   </div>
 				</div>
 <!-- x		next prev			   =============== -->

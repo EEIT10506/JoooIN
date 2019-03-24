@@ -463,6 +463,8 @@
 		</div>
 	
 	</div>
+	<div style="height:520px;"></div>
+	<jsp:include page="${request.contextPath}/footerbar"/>
 <!-- 請把所有內容寫在此div內 -->
 </body>
 </html>
