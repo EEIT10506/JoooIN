@@ -16,28 +16,24 @@
 <meta name="google-signin-client_id" content='486218648179-mlo3cr1e8u32mg2tpj27ib91qk9lggjp.apps.googleusercontent.com'>
 <style>
 	footer{
-	   height:200px;
-	   border:solid 1px black;
+	   height:100px;
 	   margin-top:30px;
+	   background-color:#333333;
 	}
 	.footer2{
-	   height:80px;
-	   border:solid 1px black;
+	   height:50px;
+	   background-color:#265753;
 	}
 </style>
-<script>
-	$(document).ready(function(){
-			
-	  }
-</script>
+
 <body>
 	<footer>
-		
-		
+		<p></p>
+		<p></p>
 		
 	</footer>
 	<div class="footer2">
-	
+		<p></p>
 	</div>
 </body>
 </html>
