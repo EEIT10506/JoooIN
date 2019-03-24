@@ -38,27 +38,30 @@ public class ReportGroupController_42 {
 	@Autowired
 	ReportService reportService;
 	
-	@RequestMapping(value = "/report/{groupId}", method = RequestMethod.GET)
-	public String reportGroupPage(Model model,Integer groupId) {
+	@RequestMapping(value = "/report/{reportId}", method = RequestMethod.GET)
+	public String reportGroupPage(Model model,@PathVariable("reportId") Integer memberId, HttpSession session) {
 		
+		Integer memberIdNow = (Integer) session.getAttribute("memberId");
+		if (memberIdNow == null) {
+			return "not_login";
+		}
 		
 		ReportBean rb = new ReportBean();
 		model.addAttribute("reportBean", rb);
-		return "admin/report" +groupId;
+		return "admin/report" ;
 	}
 	
-	@RequestMapping(value ="/report/{groupId}", method = RequestMethod.POST)
-	public String reportGroupProcess(@ModelAttribute("reportBean")ReportBean rb, RedirectAttributes redirectAttributes,Integer memberId,Integer groupId,Model model) {
+	@RequestMapping(value ="/report/{reportId}", method = RequestMethod.POST)
+	public String reportGroupProcess(@ModelAttribute("reportBean")ReportBean rb, RedirectAttributes redirectAttributes,@PathVariable("reportId") Integer memberId, Integer groupId,Model model) {
 		
-		Poster poster = service2.getPosterByGroupPostId(memberId);
-		model.addAttribute("poster", poster);
 		
-		rb.setReportViolatorId(poster.getGroupPostId());
+		
+		rb.setReportViolatorId(memberId);
 		reportService.ReportBeanSave(rb);
 		
 		redirectAttributes.addFlashAttribute("success", "檢舉成功");
 		
-		return "redirect:/report/"+ groupId;
+		return "redirect:/report/"+ memberId;
 	}
 	
 }
