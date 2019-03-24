@@ -40,34 +40,42 @@ public class GroupController_42 {
 	public String getGrouptypeAll(Model model) {
 		List<GroupMainBean> list =service.getAll();
 		model.addAttribute("groupsType", list);
+		
+		
 		return "group/groups_type"; 
 	}
 	//加判斷是否為group會員顯示前端加入社團 進入社團
 	@RequestMapping(method = RequestMethod.GET, value = "/groups/{grouponetype}")
 	public String getGroupTypeOne(@PathVariable("grouponetype") String groupOneType ,Model model, HttpSession session,Integer groupId,Integer memberId) {
-
-		
-		List<GroupMainBean> typeOne = service.getGroupType(groupOneType);
-		model.addAttribute("groupsType", typeOne);
-		
 		
 		Integer memId = (Integer) session.getAttribute("memberId"); //會員紀錄
-		List<GroupMemberBean> groupMemberList = groupMemberDao.getAll();  
+		List<GroupMainBean> typeOne = service.getGroupType(groupOneType);
 		
-		if (memId == null) {
+		model.addAttribute("groupsType", typeOne);
+		
+		if(memId == null) {
 			model.addAttribute("status", "加入社團");
+		}else {
+			model.addAttribute("status", "進入社團/加入社團");
 		}
-//		for (GroupMainBean typeGMB : typeOne) {            
-//				for (GroupMemberBean singleGroupMember : groupMemberList) {
-//					if (groupId.equals(typeGMB.getGroupId()&&(groupId.equals(singleGroupMember.getGroupId()) && memId.equals(singleGroupMember.getMemberId()))) {
+//		
+//		List<GroupMemberBean> groupMemberList = groupMemberDao.getAll();  
+//		         
+//				for (GroupMemberBean singleGroupMember : groupMemberList) {	
+//					if(memId == null) model.addAttribute("status", "加入社團");
+//					if (    //類型中GroupId和社團中相同
+//							memId.equals(singleGroupMember.getGroupMemberId())      //登入會員的g memberId 相同
+//							 &&(singleGroupMember.getIsAgreed())
+//							){
+//						
 //						model.addAttribute("status", "進入社團");
-//		}else {
-//			model.addAttribute("status", "申請成功，待同意");
-//		}
-//		}
-//
+//		} 
 //			
+//		
 //		}
+
+			
+		
 
 
 		return "group/groups_type"; 

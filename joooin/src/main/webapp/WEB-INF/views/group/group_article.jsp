@@ -69,7 +69,7 @@ $( document ).ready(function() {
 	                    	        "<span class='float-right'>"+(i+1)+"樓"+"</i>"+"</span>"+"</p>"+
 	                    	        "<p>"+result[i].groupPostReplyContent+"</p>"+
 	                    	        "<p>"+
-	                    	            "<a href='${pageContext.request.contextPath}/report/"+result[i].memberId +"' class='float-right btn btn-outline-primary ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉"+"</a>"+
+	                    	            "<a href='${pageContext.request.contextPath}/report/"+result[i].memberId +"/"+result[i].memberName +"' class='float-right btn btn-outline-primary ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉"+"</a>"+
 	                    	       "</p>"+
 	                    	    "</div>"+
 	            	        "</div>"+
@@ -136,7 +136,7 @@ $( document ).ready(function() {
 				                    	        "<span class='float-right'>"+(i+1)+"樓"+"</i>"+"</span>"+"</p>"+
 				                    	        "<p>"+result[i].groupPostReplyContent+"</p>"+
 				                    	        "<p>"+
-				                    	            "<a href='${pageContext.request.contextPath}/report/"+result[i].memberId +"' class='float-right btn btn-outline-primary ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉"+"</a>"+
+				                    	            "<a href='${pageContext.request.contextPath}/report/"+result[i].memberId +"/"+result[i].memberName +"' class='float-right btn btn-outline-primary ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉"+"</a>"+
 				                    	       "</p>"+
 				                    	    "</div>"+
 				            	        "</div>"+
@@ -247,7 +247,7 @@ $(document).ready(function () {
         	       <div class="clearfix"></div>
         	        <p> ${poster.groupPostText }</p>
         	        <p> 	
-        	            <a class="float-right btn btn-outline-primary ml-2" href="${pageContext.request.contextPath}/report/${poster.memberId}"> <i class="fa fa-reply" ></i> 檢舉</a>
+        	            <a class="float-right btn btn-outline-primary ml-2" href="${pageContext.request.contextPath}/report/${poster.memberId}/${poster.memberName}"> <i class="fa fa-reply" ></i> 檢舉</a>
         	            <a class="float-right btn text-danger btn-light" id="like"> <i class="fa fa-heart"></i> Like</a>
 <!--         	        <a class="float-right btn text-danger btn-light" id="like"> 變換按鈕-->
 <!--         	        <a class="float-right btn text-white btn-danger" id="like"> 變換按鈕-->

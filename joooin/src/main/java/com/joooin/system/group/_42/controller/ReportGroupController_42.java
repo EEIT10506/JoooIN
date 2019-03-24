@@ -38,8 +38,8 @@ public class ReportGroupController_42 {
 	@Autowired
 	ReportService reportService;
 	
-	@RequestMapping(value = "/report/{reportId}", method = RequestMethod.GET)
-	public String reportGroupPage(Model model,@PathVariable("reportId") Integer memberId, HttpSession session) {
+	@RequestMapping(value = "/report/{reportId}/{reportName}", method = RequestMethod.GET)
+	public String reportGroupPage(Model model,@PathVariable("reportId") Integer memberId, HttpSession session,@PathVariable("reportName") String memberName) {
 		
 		Integer memberIdNow = (Integer) session.getAttribute("memberId");
 		if (memberIdNow == null) {
@@ -51,8 +51,8 @@ public class ReportGroupController_42 {
 		return "admin/report" ;
 	}
 	
-	@RequestMapping(value ="/report/{reportId}", method = RequestMethod.POST)
-	public String reportGroupProcess(@ModelAttribute("reportBean")ReportBean rb, RedirectAttributes redirectAttributes,@PathVariable("reportId") Integer memberId, Integer groupId,Model model) {
+	@RequestMapping(value ="/report/{reportId}/{reportName}", method = RequestMethod.POST)
+	public String reportGroupProcess(@ModelAttribute("reportBean")ReportBean rb, RedirectAttributes redirectAttributes,@PathVariable("reportId") Integer memberId, Integer groupId,String memberName) {
 		
 		
 		
@@ -61,7 +61,7 @@ public class ReportGroupController_42 {
 		
 		redirectAttributes.addFlashAttribute("success", "檢舉成功");
 		
-		return "redirect:/report/"+ memberId;
+		return "redirect:/report/"+ memberId+"/"+memberName;
 	}
 	
 }

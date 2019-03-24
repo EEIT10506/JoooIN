@@ -47,7 +47,7 @@
 		</div>
 		
 		<div class="form-group">
-			<label for="reportViolatorId">被檢舉人：${reportId} </label>
+			<label for="reportViolatorId">被檢舉人：${reportName} </label>
 			<form:input type="hidden" value='${reportId}' path="reportViolatorId" id="reportViolatorId"/>
 		</div>
 		
