@@ -20,6 +20,7 @@ import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupMemberBean;
 import com.joooin.model.GroupPostBean;
 import com.joooin.model.MemberMainBean;
+import com.joooin.system.group._22.pojo.MemPostInfo;
 import com.joooin.system.group._22.pojo.Poster;
 import com.joooin.system.group._22.service.GroupNotification;
 import com.joooin.system.group._22.service.GroupService_22;
@@ -82,10 +83,10 @@ public class EnterGroupController {
 		if (memberId == null) {
 			return "not_login";
 		}
-
-		List<MemberMainBean> members = groupService.getMembersInGroup(groupId);
-		model.addAttribute("membersInGroup", members);
-
+//
+		List<MemPostInfo> memberInfos = groupService.getMemInfoInGroup(groupId);
+		model.addAttribute("memberInfos", memberInfos);
+//
 		// for group_navbar
 		GroupMainBean groupMain = groupService.getByGroupId(groupId);
 		model.addAttribute("groupMain", groupMain);

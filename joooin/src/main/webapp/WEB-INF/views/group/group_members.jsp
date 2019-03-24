@@ -23,6 +23,20 @@
 	top: 50px;
 }
 </style>
+<!-- 限制字數 -->
+<script>
+$( document ).ready(function() {
+var $len = 15; // 超過15個字以"..."取代
+$(".textacc").each(function(){
+	console.log($(this).text());
+    if($(this).text().length > $len){
+        var $text=$(this).text().substring(0,$len-1)+"...";
+        $(this).text($text);
+    }
+});
+});
+</script>
+<!-- 限制字數 -->
 <title>Insert title here</title>
 </head>
 <body>
@@ -40,7 +54,7 @@
 		<div class="content">
 			<div class="container mt-3">
 				<div class="card-columns">
-					<c:forEach var="member" items="${membersInGroup}">
+					<c:forEach var="member" items="${memberInfos}">
 						<div class="card" style="width: 18rem; height: 40rem">
 							<img
 								src="<c:url value='/getMemberImage/${member.memberId}.jpg' />"
@@ -50,17 +64,20 @@
 								<h3 class="card-title">
 									<a href="${pageContext.request.contextPath}/member/other/${member.memberId}">${member.memberName}</a>
 								</h3>
-								<p class="card-text">會員自我介紹:</p>
+								<p>會員介紹 : </p>
+								<p class="card-text textacc">${member.memberIntro }</p>
 							</div>
 							<ul class="list-group list-group-flush">
-								<li class="list-group-item">發文數量 : xxx</li>
-								<li class="list-group-item">Dapibus ac facilisis in</li>
-								<li class="list-group-item">Vestibulum at eros</li>
+								<li class="list-group-item">發文 :  ${member.postCount } 次</li>
+								<li class="list-group-item">回文 :  ${member.replyCount } 次</li>
+								<li class="list-group-item">登入 :  ${member.logins } 次</li>
+<!-- 								<li class="list-group-item">Vestibulum at eros</li> -->
 							</ul>
-							<!-- 							<div class="card-body"> -->
-							<!-- 								<a href="#" class="card-link">Card link</a> <a href="#" -->
-							<!-- 									class="card-link">Another link</a> -->
-							<!-- 							</div> -->
+								<div class="card-body">
+								<form action="${pageContext.request.contextPath}/group/${groupMain.groupId}/members/delete/${member.memberId}" method="post">
+									<button type="submit" class="float-right btn btn-outline-danger" id="${member.memberId}"><strong>刪除成員</strong></button>
+								</form>
+								</div>
 						</div>
 					</c:forEach>
 				</div>
