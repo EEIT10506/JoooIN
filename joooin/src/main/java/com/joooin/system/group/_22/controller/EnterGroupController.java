@@ -83,13 +83,18 @@ public class EnterGroupController {
 		if (memberId == null) {
 			return "not_login";
 		}
+		
+		// for group_navbar
+		GroupMainBean groupMain = groupService.getByGroupId(groupId);
+		model.addAttribute("groupMain", groupMain);
+		
+		// leaderId for 判斷踢出會員按鈕
+		model.addAttribute("leaderId",groupMain.getGroupLeaderId());
+		
 //
 		List<MemPostInfo> memberInfos = groupService.getMemInfoInGroup(groupId);
 		model.addAttribute("memberInfos", memberInfos);
 //
-		// for group_navbar
-		GroupMainBean groupMain = groupService.getByGroupId(groupId);
-		model.addAttribute("groupMain", groupMain);
 
 		return "group/group_members";
 	}

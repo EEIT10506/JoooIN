@@ -74,9 +74,11 @@ $(".textacc").each(function(){
 <!-- 								<li class="list-group-item">Vestibulum at eros</li> -->
 							</ul>
 								<div class="card-body">
+								<c:if test="${leaderId == sessionScope.memberId }">
 								<form action="${pageContext.request.contextPath}/group/${groupMain.groupId}/members/delete/${member.memberId}" method="post">
 									<button type="submit" class="float-right btn btn-outline-danger" id="${member.memberId}"><strong>刪除成員</strong></button>
 								</form>
+								</c:if>
 								</div>
 						</div>
 					</c:forEach>
