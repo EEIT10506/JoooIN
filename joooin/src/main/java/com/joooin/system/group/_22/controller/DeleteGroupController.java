@@ -18,8 +18,8 @@ public class DeleteGroupController {
 	
 	@Autowired
 	GroupNotification notifGroup;
-	
-	
+
+	// 踢出成員
 	@RequestMapping(method = RequestMethod.POST, value = "/group/{groupId}/members/delete/{memberId}")
 	public String deleteGroupMember(Model model, @PathVariable Integer groupId, @PathVariable Integer memberId) {
 		if(groupId != null && memberId != null)
