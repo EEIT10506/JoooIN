@@ -7,9 +7,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width,
-minimum-scale=1.0, maximum-scale=2.0" />
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/grouptype.css'/>">
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -23,7 +20,6 @@ minimum-scale=1.0, maximum-scale=2.0" />
 	crossorigin="anonymous"></script>	
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
 <style>
 #main {
 	width: 1200px;
@@ -33,9 +29,7 @@ minimum-scale=1.0, maximum-scale=2.0" />
 }
 </style>
 <script>
-
-	$('.collapse').collapse();
-
+	$('.collapse').collapse()
 
 	//修改按鈕
 	$(document).ready(function(){
@@ -155,7 +149,11 @@ minimum-scale=1.0, maximum-scale=2.0" />
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/navbar" />
-
+	<!-- 	解決include jQuery衝突 -->
+	<script type="text/javascript">
+		var xxx = jQuery.noConflict(true);
+	</script>
+	<!-- 	解決include jQuery衝突 -->
 	<!-- 請把所有內容寫在此div內 -->
 	<div id="main">
 		<jsp:include page="${request.contextPath}/group/group_navbar" />
@@ -166,9 +164,8 @@ minimum-scale=1.0, maximum-scale=2.0" />
 			<div class="panel panel-default">
 				<div class="panel-heading">
 <!-- 		類型 -->
-
 					<h2 class="panel-title">
-						<button class="btn btn-primary btn-lg btn-block " data-toggle="collapse" 
+						<button class="btn btn-primary btn-lg btn-block" data-toggle="collapse" 
 							data-parent="#accordion" href="#collapseOne">類型</button>
 						
 					</h2>
@@ -194,7 +191,7 @@ minimum-scale=1.0, maximum-scale=2.0" />
 
 								<button id="confirmType" class="btn btn-default btn-lg btn-danger" style="display:none;" type="submit" >確認修改</button>
 								</p>
-								
+						
 								</form>
 								<p class="text-right">
 								<button id="cancelType" class="btn btn-default btn-lg btn-danger" style="display:none;">取消</button>

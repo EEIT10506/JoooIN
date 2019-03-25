@@ -32,7 +32,7 @@ body {
   z-index: 1;
   top: 7.5%;
   left: 0;
-  background-color: #111;
+  background-color:  #22292f;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
