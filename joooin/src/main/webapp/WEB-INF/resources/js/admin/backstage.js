@@ -237,22 +237,22 @@ $(document).ready(function () {
                 timeout: 600000,
                 
                 success: function (data){
-                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">No.</th><th>Name</th><th>Location</th><th>Type</th><th>Total</th></tr></thead><tbody></tbody>');
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">編號</th><th>Name</th><th>地點</th><th>類型</th><th>人數</th></tr></thead><tbody></tbody>');
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
                 		$.each(data, function (index, Event){
                 			console.log("test="+Event.eventTypeId);
                 			if(Event.eventTypeId==1){
-                				Event.eventTypeId="food"
+                				Event.eventTypeId="美食"
                 			}
                 			if(Event.eventTypeId==2){
-                				Event.eventTypeId="sport"
+                				Event.eventTypeId="運動"
                 			}
                 			if(Event.eventTypeId==3){
-                				Event.eventTypeId="entertainment"
+                				Event.eventTypeId="娛樂"
                 			}
                 			if(Event.eventTypeId==4){
-                				Event.eventTypeId="other"
+                				Event.eventTypeId="其它"
                 			}
                 			var cell1 = $('<td></td>').text(Event.eventId).addClass('pointer text-primary text-center eventId');
                 			var cell2 = $('<td></td>').text(Event.eventName)
