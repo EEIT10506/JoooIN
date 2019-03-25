@@ -53,11 +53,13 @@ public class GroupController_42 {
 		
 		model.addAttribute("groupsType", typeOne);
 		
-		if(memId == null) {
-			model.addAttribute("status", "加入社團");
-		}else {
-			model.addAttribute("status", "進入社團/加入社團");
-		}
+		// 入團判斷
+		
+//		if(memId == null) {
+//			model.addAttribute("status", "加入社團");
+//		}else {
+//			model.addAttribute("status", "進入社團/加入社團");
+//		}
 //		
 //		List<GroupMemberBean> groupMemberList = groupMemberDao.getAll();  
 //		         
@@ -74,6 +76,7 @@ public class GroupController_42 {
 //		
 //		}
 
+		// 入團判斷
 			
 		
 

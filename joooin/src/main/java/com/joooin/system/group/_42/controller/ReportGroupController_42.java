@@ -12,12 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.joooin.model.GroupMainBean;
-import com.joooin.model.MemberMainBean;
 import com.joooin.model.ReportBean;
 import com.joooin.repository.GroupMemberDao;
 import com.joooin.system.admin._03.service.ReportService;
-import com.joooin.system.group._22.pojo.Poster;
 import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.system.group._42.service.GroupService_42;
 
@@ -52,8 +49,11 @@ public class ReportGroupController_42 {
 	}
 	
 	@RequestMapping(value ="/report/{reportId}/{reportName}", method = RequestMethod.POST)
-	public String reportGroupProcess(@ModelAttribute("reportBean")ReportBean rb, RedirectAttributes redirectAttributes,@PathVariable("reportId") Integer memberId, Integer groupId,String memberName) {
+	public String reportGroupProcess(@ModelAttribute("reportBean")ReportBean rb, RedirectAttributes redirectAttributes,@PathVariable("reportId") Integer memberId, Integer groupId,String memberName,
+			HttpSession session) {
+		session.removeAttribute("memberName");
 		
+		session.getAttribute(memberName);
 		
 		
 		rb.setReportViolatorId(memberId);

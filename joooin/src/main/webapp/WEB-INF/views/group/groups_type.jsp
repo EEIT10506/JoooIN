@@ -75,7 +75,7 @@
 											
 											<form action="${pageContext.request.contextPath}/group/addgroup/${groupsType.groupId}" method="post">
 												<button type="submit"
-													class="btn btn-sm btn-outline-secondary">${status}</button>
+													class="btn btn-sm btn-outline-secondary">進入社團</button>
 											</form>
 											
 											
