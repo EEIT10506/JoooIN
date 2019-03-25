@@ -119,7 +119,7 @@
 	    return true;
 	}
 </script>
-<title>會員資訊</title></head>
+<title>我的會員資訊</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->

@@ -18,17 +18,19 @@
 		$("#btn").click();
 		
 		$("#login").click(function(){
-			location.href = $("#str").text() + "/login";
+			location.href = "${pageContext.request.contextPath}/login";
 		});
 		$("#register").click(function(){
-			location.href = $("#str").text() + "/register";
+			location.href = "${pageContext.request.contextPath}/register";
+		});
+		$("#back").click(function(){
+			history.go(-1);
 		});
 	});
 </script>
 <title></title>
 </head>
 <body>
-<p id="str">${pageContext.request.contextPath}</p>
 <button id="btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"></button>
 
 <!-- Modal -->
@@ -44,6 +46,7 @@
       <div class="modal-footer">
       	<button id="login" type="button" class="btn btn-primary">登入</button>
         <button id="register" type="button" class="btn btn-primary">註冊</button>
+        <button id="back" type="button" class="btn btn-secondary">回上一頁</button>
       </div>
     </div>
   </div>

@@ -43,7 +43,7 @@
 	
 </script>
 <title>${memberMainBean.memberName} 的會員資訊</title></head>
-<body>ff
+<body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main" class="container">

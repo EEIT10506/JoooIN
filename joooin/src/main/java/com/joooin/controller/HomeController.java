@@ -50,8 +50,10 @@ public class HomeController {
 	public String navbar(HttpSession session, Model model) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		
-		if (memberId != null) 
-			model.addAttribute("notReadQuantity", messageService.getAllFriendNotReadQuantity(memberId));
+		if (memberId != null) {
+			model.addAttribute("messageNotReadQuantity", messageService.getAllFriendNotReadQuantity(memberId));
+		}
+			
 		
 		return "navbar";
 	}
