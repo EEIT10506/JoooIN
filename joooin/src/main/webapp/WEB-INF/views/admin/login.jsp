@@ -25,7 +25,7 @@
 		width: 1200px;
 		margin: auto;
 		position: relative;
-		top: 70px;
+		top: 120px;
 	}
 </style>
 <title>登入頁面</title></head>
@@ -50,7 +50,7 @@
 	<div style="text-align: center;color: red;">
 	<h4 >${name}</h4>
 	<h4>${welcome}</h4>
-	<h4>${error}</h4>
+	<h6>${error}</h6>
 	</div>
 	<form:form method="POST" modelAttribute="memberMainBean" name="form1">
   <div class="form-group">

@@ -15,7 +15,7 @@
 		width: 1200px;
 		margin: auto;
 		position: relative;
-		top: 70px;
+		top: 120px;
 	}
 </style>
 <title>檢舉頁面</title></head>

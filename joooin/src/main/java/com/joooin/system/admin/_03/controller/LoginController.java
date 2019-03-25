@@ -96,7 +96,7 @@ public class LoginController {
 
 			if (member.getCertificationStatus() == false) {
 				session.setAttribute("AAA", member.getEmail());
-				registerService.certification(mmb, request);
+				registerService.certification(member, request);
 				redirectAttributes.addFlashAttribute("error", "已發送驗證信，請至Email查看");
 				return "redirect:/login";
 			}
