@@ -171,7 +171,9 @@ div {
 			<div class="btn-toolbar mb-2 mb-md-0">
 				<div class="btn-group mr-2">
 <!-- 				fb 分享 -->
+					
 					<iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&size=large&width=65&height=28&appId" width="65" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+					
 <!-- 				fb 分享 -->
 
 					<!-- 					團長按鈕顯示判斷		 -->
