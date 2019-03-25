@@ -1,15 +1,16 @@
 package com.joooin.system.event._02.controller;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,12 +28,14 @@ import com.joooin.model.EventMemberBean;
 import com.joooin.model.EventPostBean;
 import com.joooin.model.EventTypeBean;
 import com.joooin.model.MemberMainBean;
+import com.joooin.model.ReportBean;
 import com.joooin.repository.EventLikeDao;
-import com.joooin.repository.EventMainDao;
+import com.joooin.system.admin._03.service.ReportService;
 import com.joooin.system.event._02.service.EventService;
 import com.joooin.system.event._02.service.impl.GetPostContentBean;
+import com.joooin.system.event._35.service.EventMemberService;
 import com.joooin.system.event._35.service.EventsService;
-import com.joooin.util.ImageUtils;
+import com.joooin.system.member._27.service.MemberService;
 
 @Controller
 public class EventController {
@@ -44,6 +47,10 @@ public class EventController {
 	EventLikeDao eventLikeDao;
 	@Autowired
 	EventsService eventMainService;
+	@Autowired
+	ReportService reportService;
+	@Autowired
+	EventMemberService eventMemberService;
 	//新增留言
 	@RequestMapping(value = "/event/eventPost", method = RequestMethod.POST)
 	public String submitEventPost(@RequestParam Integer eventId, @RequestParam String eventPostContent,
@@ -86,11 +93,18 @@ public class EventController {
 			return "not_login";
 		}
 	}
-//確認報名數量
+//確認報名數量 要通知 OK
 	@RequestMapping(value = "/event/eventCheckQuantity", method = RequestMethod.POST)
 	public String checkQuantity(@RequestParam Integer eventId, @RequestParam String quantity, Model model,
 			HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
+		
+		Integer inviterId = eventMainService.getByEventMainId(eventId).getEventInviterId();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date now = new Date();
+		String eventupdate = sdf.format(now);
+		String notificationContent = "event_request_eventId=" + eventId;
 		if (memberId != null) {
 			EventMemberBean eventMemberBean = new EventMemberBean();
 
@@ -101,8 +115,9 @@ public class EventController {
 			eventMemberBean.setIsPaid(null);
 			eventMemberBean.setIsAgreed(false);
 			eventMemberBean.setIsAttended(null);
+			
 			Integer i = eventService.saveEventMember(eventMemberBean);
-
+			eventMainService.addnotification(inviterId, notificationContent, eventupdate, false);
 			return "redirect:/event/" + eventId;
 		} else {
 			return "not_login";
@@ -329,7 +344,7 @@ public class EventController {
 		}
 	}
 
-	// 修改活動資料
+	// 修改活動資料 //僅通知已被同意的活動成員 OK
 	@RequestMapping(value = "/event/setting/{eventId}", method = RequestMethod.POST)
 	public String eventSettingUpdate(@ModelAttribute("event") EventMainBean updateBean,
 			@PathVariable("eventId") Integer eventId, Model model, HttpSession session, RedirectAttributes attributes) {
@@ -337,6 +352,10 @@ public class EventController {
 		EventMainBean event = eventService.getByEventMainId(eventId);
 		Integer inviterId = event.getEventInviterId();
 		Integer check =0;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date now = new Date();
+		String eventupdate = sdf.format(now);
+		String notificationContent = "event_modified_eventId=" + eventId;
 		if (memberId != null && memberId.equals(inviterId)) {
 
 			Boolean checkLimit = eventService.updateEvent(eventId, updateBean, context);
@@ -345,6 +364,20 @@ public class EventController {
 			if (checkLimit == true) {
 				check = 1;
 				attributes.addFlashAttribute("check", check);
+				List<EventMemberBean> myMemberList = eventMemberService.getAll();
+				Iterator<EventMemberBean> iterator = myMemberList.iterator();
+			     while(iterator.hasNext()) {  			    	
+			    	 EventMemberBean eventMember = iterator.next();					
+				         if(eventMember.getMemberId().equals(memberId) || !(eventMember.getEventId().equals(eventId))) {  
+				             iterator.remove();  
+				         }   	
+			     }
+			     for(EventMemberBean myMember : myMemberList) {
+			    	 if(myMember.getIsAgreed()) {
+			    	 Integer myMember_memberId = myMember.getMemberId();
+				   eventMainService.addnotification(myMember_memberId, notificationContent, eventupdate, false);
+			    	 }
+			     }
 				return "redirect:/event/setting/" + eventId;
 			}else {
 				return "redirect:/notEnough/" + eventId;
@@ -383,7 +416,7 @@ public class EventController {
 
 	}
 
-//	已報名人員名單
+//	已報名人員名單  
 	@RequestMapping(value = "/event/signUp/{eventId}")
 	public String eventSignUp(@PathVariable("eventId") Integer eventId, Model model, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
@@ -427,12 +460,16 @@ public class EventController {
 			return "not_login";
 		}
 	}
-//報名同意
+//報名同意   通知OK
 	@RequestMapping(value = "/event/eventAgreed/{eventId}")
 	public @ResponseBody String agreedMember(Integer eventId, Integer eventMemberId, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
 		EventMainBean event = eventService.getByEventMainId(eventId);
 		Integer inviterId = event.getEventInviterId();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date now = new Date();
+		String eventupdate = sdf.format(now);
+		String notificationContent = "event_joined_eventId=" + eventId;
 		if (memberId != null && memberId.equals(inviterId)) {
 			EventMemberBean bean = eventService.getByEventMemberId(eventMemberId);
 			Integer current = event.getEventCurrentMembers();
@@ -446,6 +483,7 @@ public class EventController {
 			eventService.updateQuantityWhenOut(event);
 			bean.setIsAgreed(true);
 			eventService.updateIsAgreed(bean);
+			eventMainService.addnotification(bean.getMemberId(), notificationContent, eventupdate, false);
 			if(eventNewCurrentMember.equals(limit)) {
 				event.setIsFull(true);
 				eventService.updateQuantityWhenOut(event);
@@ -533,18 +571,24 @@ public class EventController {
 			return "not_login";
 		}
 	}
+	//踢人 要通知OK
 	@RequestMapping(value = "/event/eventGetOut/{eventId}")
 	public @ResponseBody String getOutMember(Integer eventId, Integer eventMemberId, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
 		EventMainBean event = eventService.getByEventMainId(eventId);
 		EventMemberBean bean = eventService.getByEventMemberId(eventMemberId);
 		Integer inviterId = event.getEventInviterId();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date now = new Date();
+		String eventupdate = sdf.format(now);
+		String notificationContent = "event_reject_eventId=" + eventId;
 		if (memberId != null && memberId.equals(inviterId)) {
 			eventService.rejectSignUp(eventMemberId);
 			Integer quantity = bean.getQuantity();
 			Integer current = event.getEventCurrentMembers();
 			Integer currentNow = current - quantity;
 			event.setEventCurrentMembers(currentNow);
+			eventMainService.addnotification(bean.getMemberId(), notificationContent, eventupdate, false);
 			eventService.updateQuantityWhenOut(event);
 			if(event.getEventMemberLimit() > currentNow) {
 				event.setIsFull(false);
@@ -555,6 +599,7 @@ public class EventController {
 			return "not_login";
 		}
 	}
+	
 	@RequestMapping(value = "/event/attended/{eventId}")
 	public String eventAttented(@PathVariable("eventId") Integer eventId, Model model, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
@@ -597,7 +642,7 @@ public class EventController {
 			return "not_login";
 		}
 	}
-	//出席 未出席
+	//出席 
 	@RequestMapping(value = "/event/eventArrive/{eventId}")
 	public @ResponseBody String arrive(Integer eventId, Integer eventMemberId, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
@@ -626,6 +671,27 @@ public class EventController {
 		} else {
 			return "not_login";
 		}
+	}
+//  檢舉
+	@RequestMapping(value = "/event/report/{eventId}/{eventPostId}/{reportViolatorId}", method = RequestMethod.GET)
+	public String eventReportPage(@PathVariable Integer reportViolatorId,@PathVariable Integer eventId, Model model) {
+		ReportBean rb = new ReportBean();
+		MemberMainBean bean = eventService.getByMemberId(reportViolatorId);
+		EventMainBean event = eventService.getByEventMainId(eventId);
+		rb.setReportViolatorId(reportViolatorId);
+		model.addAttribute("eventReportBean", rb);
+		model.addAttribute("bean", bean);
+		model.addAttribute("event", event);
+		return "event/event_report";
+	}
+	@RequestMapping(value ="/event/report/{eventId}", method = RequestMethod.POST)
+	public String eventReportProcess(@ModelAttribute("eventReportBean")ReportBean rb,@PathVariable Integer eventId, RedirectAttributes redirectAttributes) {
+		
+		reportService.ReportBeanSave(rb);
+		
+		redirectAttributes.addFlashAttribute("success", "檢舉成功");
+		
+		return "redirect:/event/"+eventId;
 	}
 //	尚未登入前端判斷
 	@RequestMapping("/not_Login")
