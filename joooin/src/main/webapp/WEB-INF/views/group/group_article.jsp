@@ -299,17 +299,14 @@ $(document).ready(function () {
 				</span>
             </c:otherwise>
 	 </c:choose>
-<<<<<<< HEAD
+
 	 
 </div>
 
 
-<div>
-文章已被刪除
-</div>
 
-=======
->>>>>>> refs/heads/陳昭樺
+
+
 		<!-- 		主文及回文 -->
 		<!-- 		id="chatbox" 回文 -->
 		

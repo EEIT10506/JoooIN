@@ -85,21 +85,7 @@
 <%-- 												</form> --%>
 <%-- 											</c:when> --%>
 											
-<<<<<<< HEAD
-											<c:otherwise>
-												<form action="${pageContext.request.contextPath}/group/addgroup/${groupsType.groupId}" method="post">
-												<button type="submit"
 
-													class="btn btn-sm btn-outline-secondary">進入社團</button>
-											</form>
-											
-											
-									
-
-												
-											</c:otherwise>
-											</c:choose>
-=======
 <%-- 											<c:otherwise> --%>
 <%-- 												<form action="${pageContext.request.contextPath}/group/addgroup/${groupsType.groupId}" method="post"> --%>
 <!-- 												<button type="submit" -->
@@ -108,7 +94,7 @@
 <%-- 											</c:otherwise> --%>
 <%-- 											</c:choose> --%>
 <!-- 										入團按鈕 -->
->>>>>>> refs/heads/陳昭樺
+
 
 
 										</div>
