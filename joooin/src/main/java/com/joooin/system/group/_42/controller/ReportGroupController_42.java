@@ -51,9 +51,6 @@ public class ReportGroupController_42 {
 	@RequestMapping(value ="/report/{reportId}/{reportName}", method = RequestMethod.POST)
 	public String reportGroupProcess(@ModelAttribute("reportBean")ReportBean rb, RedirectAttributes redirectAttributes,@PathVariable("reportId") Integer memberId, Integer groupId,String memberName,
 			HttpSession session) {
-		session.removeAttribute("memberName");
-		
-		session.getAttribute(memberName);
 		
 		
 		rb.setReportViolatorId(memberId);
