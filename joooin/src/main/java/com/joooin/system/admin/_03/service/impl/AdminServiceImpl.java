@@ -156,5 +156,10 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 
+	@Override
+	public void putMember(MemberMainBean mmb) {
+		mmd.update(mmb);
+	}
+
 
 }

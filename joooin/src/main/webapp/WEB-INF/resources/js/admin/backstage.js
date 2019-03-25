@@ -67,14 +67,23 @@ $(document).ready(function () {
         						+'<h2>會員修改</h2>'
         						+'<h4>' + name + '</h4>'
         						+'<form:form method="POST" modelAttribute="memberBean" class="form-horizontal">'
-//        						+'<button type="submit" class="btn btn-primary" id="memberButton">修改</button>'
+        						+'<div class="form-group">'
+        						+'姓名:<input id="name" type="text" value="'+data.memberName+'" class="form-control" style="max-width:400px;">'
+        						+'<br>'
+        						+'信箱:<input id="email" type="text" value="'+data.email+'" class="form-control" style="max-width:400px;">'
+        						+'<br>'
+        						+'<button type="submit" class="btn btn-primary" id="memberButton">修改</button>'
         						+'<button type="submit" class="btn btn-danger" id="memberDelete">刪除</button>'
+        						+'</div>'
         						+'</form>'
         						+'</div>'
         						+'</row>'
         						)
         						docFrag.append(format);
         						$('#content').html(docFrag);
+        						
+        						console.log(memberName);
+        						console.log(email);
         			},
         		error: function (xhr, ajaxOptions, thrownError){
         			
@@ -97,6 +106,23 @@ $(document).ready(function () {
         			}
         		})
         	})		// 刪除end
+        	
+        	
+        	
+        	
+        	$(document).on("click",'#memberButton',function(){
+        		var memberName = $("#name").val();
+				var email = $("#email").val();
+        		$.ajax({
+        			type:"POST",
+        			url:"/joooin/admin/putMember",
+        			data:{memberId:mi,memberName:memberName,email:email},
+        			success:function(){
+        				alert('修改完成!');
+        				$('.bg-primary').trigger("click");
+        			}
+        		})
+        	})
 //        	----------------------------------------------------------------------------------------------------
         	
         }		//會員資料end;
