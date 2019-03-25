@@ -67,7 +67,7 @@ $(document).ready(function () {
         						+'<h2>會員修改</h2>'
         						+'<h4>' + name + '</h4>'
         						+'<form:form method="POST" modelAttribute="memberBean" class="form-horizontal">'
-        						+'<button type="submit" class="btn btn-primary" id="memberButton">修改</button>'
+//        						+'<button type="submit" class="btn btn-primary" id="memberButton">修改</button>'
         						+'<button type="submit" class="btn btn-danger" id="memberDelete">刪除</button>'
         						+'</form>'
         						+'</div>'
@@ -119,7 +119,7 @@ $(document).ready(function () {
                 			var cell3 = $('<td></td>').text(Group.groupName)
                 			var cell4 = $('<td></td>').text(Group.groupLeaderId)
                 			var cell5 = $('<td></td>').text(Group.groupCreateDate)
-                			var cell6 = $('<td></td>').text(Group.groupMemberList.length)
+                			var cell6 = $('<td></td>').text(Group.groupCurrentMembers)
                 			
                 			var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6]);
                 			
@@ -150,7 +150,7 @@ $(document).ready(function () {
         						+'<h2>社團修改</h2>'
         						+'<h4>' + name + '</h4>'
         						+'<form:form method="POST" class="form-horizontal">'
-        						+'<button type="submit" class="btn btn-primary" id="groupButton">修改</button>'
+//        						+'<button type="submit" class="btn btn-primary" id="groupButton">修改</button>'
         						+'<button type="submit" class="btn btn-danger" id="groupDelete">刪除</button>'
         						+'</form>'
         						+'</div>'
