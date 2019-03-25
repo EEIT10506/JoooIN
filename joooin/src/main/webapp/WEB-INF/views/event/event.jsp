@@ -316,10 +316,17 @@
 		width:50px;
 		height:25px; 
 		font-size:12px !important;
+		 position:relative;
+		 left:530px; 
  	}  
  	.report{
+	 	font-size:12px !important;
+	 	width:50px;
+		height:25px; 
+		 position:relative;
+		 left:520px;   
 /*  		margin-left:500px; */
- 		margin-left:100px;
+/*  		margin-left:100px; */ 
  	}
  	.shareIcon{
  	    background-color:red;
@@ -473,9 +480,9 @@ function ValidateNumber(e, pnumber)
     				</c:choose>
     				
     				<p class="eventliketotal"><i class="far fa-thumbs-up">&nbsp;</i><span class="eventLikeNum">${event.eventLike}</span> 個人覺得讚 
-    						<span style="position: relative;top:5px;left:45px;">
-    						 <iframe src="https://www.facebook.com/plugins/share_button.php?href=https://www.w3schools.com/&layout=button_count&size=small&width=92&height=20&margin=0&padding=0&appId" width="90" height="20" style="border:none;overflow:hidden;margin: 0;padding: 0" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
-							 <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html" style="width:60px; height:20px;margin: 0;padding: 0"></iframe>
+    						<span style="position: relative;top:5px;left:20px;">
+    						 <iframe src="https://www.facebook.com/plugins/share_button.php?href=https://zh.wikipedia.org/zh-tw/%E8%B3%87%E8%A8%8A%E5%B7%A5%E6%A5%AD%E7%AD%96%E9%80%B2%E6%9C%83&layout=button_count&size=small&width=92&height=20&margin=0&padding=0&appId" width="20%"  height="20" style="border:none;overflow:hidden;margin: 0;padding: 0" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+							 <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html" style="width:80px ; height:20px;margin: 0;padding: 0"></iframe>
 							 <a title="Share to Plurk" href="javascript:void(window.open('http://www.plurk.com/?qualifier=shares&status='.concat(encodeURIComponent(window.location.href)).concat(' ').concat('(').concat(encodeURIComponent(document.title)).concat(')')));" style="margin:  0;padding: 0"><img title="share" src="http://statics.plurk.com/bda225d234426cccca300c551f60438e.png" width="92" height="20" border="0" align="top" style="vertical-align: top;margin-left: 0;padding-left: 0"/></a>
 						    </span>	
     				</p><hr class="hrr">
@@ -562,11 +569,7 @@ function ValidateNumber(e, pnumber)
   	   	<c:if test="${getPostContentlist.isDeleted == false }">
   	   			<a class="a leaveMessageName" href="<c:url value='/member/other/${getPostContentlist.memberId}' />"><span><img class="eventbuilderName" src="<c:url value='/getMemberImage/${getPostContentlist.memberId}.jpg' />" width="30px" height=30px" style="border-radius:25px;"/></span>
   	   			<span class="leaveMessageName"> ${getPostContentlist.memberName} </span></a>
-  	   		</p>
-  	   		<p class="messageContent">${getPostContentlist.eventPostContent}</p>
-  	   		<p class="messageContent"><span class="eventpostDate">${getPostContentlist.eventPostDate}</span>
-  	   		
-  	   		<span>
+  	   			<span>
   	   		 <c:if test="${memberId == getPostContentlist.memberId and adminId == null}">
   	   			<button type="button" id="" class="btn btn-dark delete" data-toggle="modal" data-target="#messageDelete${getPostContentlist.eventPostId}">
 				      刪除
@@ -609,13 +612,16 @@ function ValidateNumber(e, pnumber)
   	   		
   	   		</span>
   	   		
-  	   		
-  	   		
+  	   			
+  	   		</p>
+  	   		<p class="messageContent">${getPostContentlist.eventPostContent}</p>
+  	   		<p class="messageContent"><span class="eventpostDate">${getPostContentlist.eventPostDate}</span>
   	   		<span>
   	   		<c:if test="${memberId != getPostContentlist.memberId and memberId != null}"> 
-  	   		 <a href="${pageContext.request.contextPath}/event/report/${event.eventId}/${getPostContentlist.eventPostId}/${getPostContentlist.memberId}"><button type="button" class="btn btn-dark delete report">檢舉</button></a>
+  	   		 <a style="display:inline;" href="${pageContext.request.contextPath}/event/postReport/${event.eventId}/${getPostContentlist.eventPostId}/${getPostContentlist.memberId}"><button type="button" class="btn btn-dark report">檢舉</button></a>
   	   		</c:if>
-  	   		</span><hr class="contentHr"/></p>
+  	   		</span>	
+  	   		<hr class="contentHr"/></p>
   	   	</c:if>
   	  </c:forEach>
   	  

@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.mail.Session;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
@@ -678,17 +679,33 @@ public class EventController {
 			return "not_login";
 		}
 	}
-//  檢舉
-	@RequestMapping(value = "/event/report/{eventId}/{eventPostId}/{reportViolatorId}", method = RequestMethod.GET)
-	public String eventReportPage(@PathVariable Integer reportViolatorId,@PathVariable Integer eventId, Model model) {
+//  檢舉/event/report/${event.eventId}/${attendList.memberId}
+	@RequestMapping(value = "/event/postReport/{eventId}/{eventPostId}/{reportViolatorId}", method = RequestMethod.GET)
+	public String eventPostReport(@PathVariable Integer reportViolatorId,@PathVariable Integer eventId,@PathVariable Integer eventPostId, Model model) {
 		ReportBean rb = new ReportBean();
 		MemberMainBean bean = eventService.getByMemberId(reportViolatorId);
 		EventMainBean event = eventService.getByEventMainId(eventId);
 		rb.setReportViolatorId(reportViolatorId);
+		rb.setReportType("punish_event_post_eventPostId="+eventPostId);
 		model.addAttribute("eventReportBean", rb);
 		model.addAttribute("bean", bean);
 		model.addAttribute("event", event);
 		return "event/event_report";
+	}
+	@RequestMapping(value = "/event/attendReport/{eventId}/{memberId}", method = RequestMethod.GET)
+	public String eventAttendReport(@PathVariable Integer eventId,@PathVariable Integer memberId, Model model) {
+		ReportBean rb = new ReportBean();
+		
+		MemberMainBean bean = eventService.getByMemberId(memberId);
+		EventMainBean event = eventService.getByEventMainId(eventId);
+		
+		
+		rb.setReportViolatorId(memberId);
+		rb.setReportType("punish_event_attend_eventId="+eventId);
+		model.addAttribute("eventReportBean", rb);
+		model.addAttribute("bean", bean);
+		model.addAttribute("event", event);
+		return "event/event_attend_report";
 	}
 	@RequestMapping(value ="/event/report/{eventId}", method = RequestMethod.POST)
 	public String eventReportProcess(@ModelAttribute("eventReportBean")ReportBean rb,@PathVariable Integer eventId, RedirectAttributes redirectAttributes) {

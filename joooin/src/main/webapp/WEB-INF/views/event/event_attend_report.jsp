@@ -68,7 +68,7 @@
 		</div>
 		
 		<div class="form-group">
-			<label for="reportType">檢舉類型： 活動留言不當</label>
+			<label for="reportType">檢舉類型： 活動未出席</label>
 			<form:input type="hidden" name="reportType" id="reportType" path="reportType" class="form-control"/>
 		</div>
 		<div class="form-group">

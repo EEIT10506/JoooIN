@@ -229,22 +229,22 @@ function checkAll(bx) {
 					       		  <c:if test="${eventFinished == false}">    
 					                <td class="tdCenter tdAll"><i class="far fa-times-circle" style="color:#696969"></i></td>
 					              </c:if>
-					                
-					                 <c:if test="${eventFinished == false}"> 
+					                <c:choose>
+					                 <c:when test="${eventFinished == false and event.eventStatus == 'yes'}"> 
 					                    <td class="tdCenter tdAll">
-					                     <a style="" href="${pageContext.request.contextPath}/event/report/${event.eventId}/${attendList.memberId}/${attendList.memberId}">
+					                     <a style="" href="${pageContext.request.contextPath}/event/attendReport/${event.eventId}/${attendList.memberId}">
 					               			 <i class="fas fa-exclamation-triangle report"></i>
 					                	 </a>	
 					                    </td>
-					                 </c:if>
-					                 <c:if test="${eventFinished == true}"> 
+					                 </c:when>
+					                 <c:otherwise> 
 					                    <td class="tdCenter tdAll">
 					                     <a>
 					               			  <i style="color:#696969;" class="fas fa-exclamation-triangle report"></i>
 					                	 </a>	
 					                	</td>
-					                 </c:if>
-					                
+					                 </c:otherwise>
+					                </c:choose>
 					                
 <!-- 					                ========= -->
 <!-- 		踢出確認MODAL			                ========= -->
