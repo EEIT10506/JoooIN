@@ -77,6 +77,7 @@ public class GroupServiceImpl_42 implements GroupService_42 {
 	@Override
 	public String reportGroupPage(Model model, Integer groupId) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
