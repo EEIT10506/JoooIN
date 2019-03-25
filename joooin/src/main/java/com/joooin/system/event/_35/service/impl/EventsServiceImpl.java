@@ -1,7 +1,11 @@
 package com.joooin.system.event._35.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -127,8 +131,24 @@ public class EventsServiceImpl implements EventsService {
 	}
 	@Override
 	public List<EventMainBean> getTop8Events() {
-
-		List<EventMainBean> events = eventDao.getAll();
+        Date today = new Date();
+	    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+	    
+		List<EventMainBean> events = eventDao.getAll();		
+		Iterator<EventMainBean> iterator = events.iterator();  
+	     while(iterator.hasNext()) {  
+	    	  Date endDate;
+	    	  EventMainBean event = iterator.next();
+			try {
+				endDate = sdf1.parse(event.getEventDateEnd());
+		         if(endDate.before(today) || event.getEventStatus().equals("no")) {  
+		             iterator.remove();  
+		         }  
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}  	
+	     }  
+		
 		List<EventMainBean> top8Events = new LinkedList<EventMainBean>();
 		Collections.sort(events, new Comparator<EventMainBean>() {
 			public int compare(EventMainBean o1, EventMainBean o2) {
@@ -175,7 +195,7 @@ public class EventsServiceImpl implements EventsService {
 	public List<GroupPostBean> getTop8GroupPosts() {
 
 		List<GroupPostBean> groupPosts = groupPostDao.getAll();
-		List<GroupPostBean> top8GroupPosts = new LinkedList<GroupPostBean>();
+		List<GroupPostBean> top8GroupPosts = new LinkedList<GroupPostBean>();		
 		Collections.sort(groupPosts, new Comparator<GroupPostBean>() {
 			public int compare(GroupPostBean o1, GroupPostBean o2) {
 				return o2.getGroupPostLike().compareTo(o1.getGroupPostLike());

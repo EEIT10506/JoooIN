@@ -27,6 +27,10 @@
 		position: absolute;
 		right: 30px;
 	}
+	.barfont{
+	    font-family:微軟正黑體;
+	    font-weight:bold;
+	}
 </style>
 <script>
 	$(document).ready(function(){
@@ -51,7 +55,7 @@
 	  }
 </script>
 <body>
-<nav class="navbar navbar-expand bg-dark navbar-dark">
+<nav class="navbar navbar-expand bg-dark navbar-dark barfont">
   <!-- Brand/logo -->
   <a class="navbar-brand" href="${pageContext.request.contextPath}">
     <img src="<c:url value='/resources/img/logo_94x94_07.png'/>" alt="logo" style="width:45px;">

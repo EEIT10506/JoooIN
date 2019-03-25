@@ -286,7 +286,7 @@
 	});
 	
 </script>
-<title>Insert title here</title></head>
+<title>Event Setting</title></head>
 <body class="settingBody">
 <jsp:include page="${request.contextPath}/navbar"/>
 
@@ -302,7 +302,7 @@
 		<div class="outSide" >
 	        <form:form class="pure-form pure-g" modelAttribute="event" action="${pageContext.request.contextPath}/event/setting/${eventId}" method="POST" enctype="multipart/form-data">
 				<div class="pure-u-1-2">
-				<label class="labelClass" for="eventName" path="eventName">活動名稱 : </label>　
+				<label class="labelClass" for="eventName" path="eventName"> 活動名稱  : </label>　
 				<form:input  class="pure-input-2-3" path="eventName" maxlength="10" id="eventName" required="required"></form:input></div>
 				
 				<div class="pure-u-1-4"><label class="labelClass"> &nbsp;按讚人數 : <span class="likeColor"> ${event.eventLike} </span> <i class="far fa-thumbs-up"></i></label></div>
@@ -384,11 +384,11 @@
 				<%--設定顯示 Google Maps 的大小--%>
 				
 				<div class="pure-u-1-2">
-					<label class="labelClass" path='eventLocation' for="local">活動地區:</label>
+					<label class="labelClass" path='eventLocation' for="local">活動地區 : </label>
 					<form:input path='eventLocation' class="pure-input-2-3" id="local" required="required" readonly="true"/></div>
 					
 					<div class="pure-u-3-4">
-						<label class="labelClass" path='eventAddress' for="add">活動地址:</label>
+						<label class="labelClass" path='eventAddress' for="add">活動地址 : </label>
 					<form:input path='eventAddress' class="pure-input-2-3" id="add" required="required" readonly="true"/></div>
 				<p style="display:none;">
 					活動座標經度:
@@ -400,7 +400,7 @@
 				
 				
 				<div class="pure-u-3-4">
-				<label class="labelClass" for="eventContent">活動內容：</label><form:textarea path='eventContent' id="eventContent" class="pure-u-1-2" style="width:500px;height:100px;position:relative;top:30px;"/></div>
+				<label class="labelClass" for="eventContent">活動內容：</label><form:textarea path='eventContent' id="eventContent" class="pure-u-1-2" wrap="hard" style="width:500px;height:100px;position:relative;top:30px;"/></div>
 				
 				<div class="pure-u-1-3 topMaigin">
 				<label class="labelClass">目前人數：${event.eventCurrentMembers} 人</label></div>
@@ -463,6 +463,8 @@
 		</div>
 	
 	</div>
+	<div style="height:520px;"></div>
+	<jsp:include page="${request.contextPath}/footerbar"/>
 <!-- 請把所有內容寫在此div內 -->
 </body>
 </html>
