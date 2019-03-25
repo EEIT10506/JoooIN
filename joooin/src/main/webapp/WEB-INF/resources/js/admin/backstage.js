@@ -245,7 +245,7 @@ $(document).ready(function () {
         						+'<h2>活動修改</h2>'
         						+'<h4>' + name + '</h4>'
         						+'<form:form method="POST" class="form-horizontal">'
-        						+'<button type="submit" class="btn btn-primary" id="eventButton">修改</button>'
+//        						+'<button type="submit" class="btn btn-primary" id="eventButton">修改</button>'
         						+'<button type="submit" class="btn btn-danger" id="eventDelete">刪除</button>'
         						+'</form>'
         						+'</div>'
