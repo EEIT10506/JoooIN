@@ -140,13 +140,26 @@ $(document).ready(function () {
                 timeout: 600000,
                 
                 success: function (data){
-                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">No.</th><th>Type</th><th>Name</th><th>LeaderId</th><th>SignUp</th><th>Total</th></tr></thead><tbody></tbody>');
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">編號</th><th>類型</th><th>名稱</th><th>管理員Id</th><th>建立日期</th><th>總人數</th></tr></thead><tbody></tbody>');
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
                 		console.log(data);
                 		$.each(data, function (index, Group){
+                			var type = null;
+                			if(Group.groupType=='sport'){
+                				type='運動'
+                			}
+                			if(Group.groupType=='food'){
+                				type='美食'
+                			}
+                			if(Group.groupType=='entertainment'){
+                				type='娛樂'
+                			}
+                			if(Group.groupType=='other'){
+                				type='其它'
+                			}
                 			var cell1 = $('<td></td>').text(Group.groupId).addClass('pointer text-primary text-center groupId');
-                			var cell2 = $('<td></td>').text(Group.groupType)
+                			var cell2 = $('<td></td>').text(type)
                 			var cell3 = $('<td></td>').text(Group.groupName)
                 			var cell4 = $('<td></td>').text(Group.groupLeaderId)
                 			var cell5 = $('<td></td>').text(Group.groupCreateDate)
