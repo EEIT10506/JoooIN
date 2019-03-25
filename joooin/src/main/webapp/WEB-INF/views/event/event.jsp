@@ -35,7 +35,10 @@
    		 text-decoration:none !important;
    		 color:black:
 	}
-	
+	.font{
+	    font-family:微軟正黑體;
+	    font-weight:bold;
+	}
 	.body{
 		font-family:微軟正黑體;
  		background-color:#F5F5F5; 
@@ -318,9 +321,16 @@
 /*  		margin-left:500px; */
  		margin-left:100px;
  	}
+ 	.shareIcon{
+ 	    background-color:red;
+ 	    border-radius:10px;
+ 	    cursor: pointer;
+ 	    width:200px;
+ 	    height:200px;
+ 	}
 </style>
 <script>
-function ValidateNumber(e, pnumber)
+function ValidateNumber(e, pnumber) 
 {
     if (!/^\d+$/.test(pnumber))
     {
@@ -329,7 +339,9 @@ function ValidateNumber(e, pnumber)
     return false;
 }
  	$(document).ready(function(){
- 		<c:if test="${!empty success}">
+ 		 
+
+ 		<c:if test="${!empty success}"> 
  		   $("#clickMessageReport").click();
  		
  		</c:if>
@@ -341,6 +353,12 @@ function ValidateNumber(e, pnumber)
  			$("#allMessage").attr("height", "0px");
  		}
  		
+ 		//報名完成顯示
+ 		<c:if test="${!empty signUpSuccess}"> 
+ 		   $("#ccccc").click();
+ 		
+ 		</c:if>
+
 // 		先隱藏 點地址顯示
 		$("#eventAddressImage").hide();
 		$(".eventaddress").click(function(){
@@ -454,13 +472,21 @@ function ValidateNumber(e, pnumber)
     				</c:otherwise>
     				</c:choose>
     				
-    				<p class="eventliketotal"><i class="far fa-thumbs-up">&nbsp;</i><span class="eventLikeNum">${event.eventLike}</span> 個人覺得讚</p><hr class="hrr">
+    				<p class="eventliketotal"><i class="far fa-thumbs-up">&nbsp;</i><span class="eventLikeNum">${event.eventLike}</span> 個人覺得讚 
+    						<span style="position: relative;top:5px;left:45px;">
+    						 <iframe src="https://www.facebook.com/plugins/share_button.php?href=https://www.w3schools.com/&layout=button_count&size=small&width=92&height=20&margin=0&padding=0&appId" width="90" height="20" style="border:none;overflow:hidden;margin: 0;padding: 0" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+							 <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html" style="width:60px; height:20px;margin: 0;padding: 0"></iframe>
+							 <a title="Share to Plurk" href="javascript:void(window.open('http://www.plurk.com/?qualifier=shares&status='.concat(encodeURIComponent(window.location.href)).concat(' ').concat('(').concat(encodeURIComponent(document.title)).concat(')')));" style="margin:  0;padding: 0"><img title="share" src="http://statics.plurk.com/bda225d234426cccca300c551f60438e.png" width="92" height="20" border="0" align="top" style="vertical-align: top;margin-left: 0;padding-left: 0"/></a>
+						    </span>	
+    				</p><hr class="hrr">
  
  <p>
     		<span id="likedspan">
     		 <button type="button" id="e${event.eventId }" class="btn btn-default eventNotLike"><i class="far fa-thumbs-up"></i> 讚</button>
-    		</span>
-
+    		</span>	
+<!-- 				<button type="button" class="btn btn-light font" style="background-color:#696969;color:white;">分享<i class="fas fa-share-alt"></i></button> -->
+			 
+			 
   <span id="joinOrNot">
 		<c:if test="${memberId != inviterid and memberCheck == false and event.eventStatus == 'unchecked' and event.isFull == false and finish != false}">
 				<button type="button" id="signUp" class="btn btn-success eventJoin" data-toggle="modal" data-target="#exampleModalCenter">報名活動</button>
@@ -499,7 +525,7 @@ function ValidateNumber(e, pnumber)
       				</i>
       		</p>
       			<iframe id="eventAddressImage" width='400' height='250' frameborder='0' scrolling='no' marginheight='0' marginwidth='0'  
-      			src='https://www.google.com/maps?&q=${event.eventLatitude},${event.eventLongitude}&z=16&output=embed&hl=zh-TW&t=m' allowfullscreen>
+      			src='https://www.google.com/maps/embed/v1/place?key=AIzaSyC9cpXz2HFE2Dw_vITbm-T6Z-6v-TJujBQ&q=place_id:${event.eventPlaceId}' allowfullscreen>
 <!--       				位置icon圖 -->
 				</iframe>	
       		<p class="eventjoinmember">目前人數 : 
@@ -541,12 +567,12 @@ function ValidateNumber(e, pnumber)
   	   		<p class="messageContent"><span class="eventpostDate">${getPostContentlist.eventPostDate}</span>
   	   		
   	   		<span>
-  	   		 <c:if test="${memberId == getPostContentlist.memberId and admin == null}">
+  	   		 <c:if test="${memberId == getPostContentlist.memberId and adminId == null}">
   	   			<button type="button" id="" class="btn btn-dark delete" data-toggle="modal" data-target="#messageDelete${getPostContentlist.eventPostId}">
 				      刪除
 				</button>
   	   		 </c:if>
-  	   		 <c:if test="${admin != null}">
+  	   		 <c:if test="${adminId != null}">
   	   		    <button type="button" id="" class="btn btn-dark delete" data-toggle="modal" data-target="#messageDelete${getPostContentlist.eventPostId}">
 				      刪除
 				</button>
@@ -709,7 +735,7 @@ function ValidateNumber(e, pnumber)
 
 <!-- Modal -->
 <div class="modal fade" id="messageReport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">檢舉成功</h5>
@@ -727,9 +753,30 @@ function ValidateNumber(e, pnumber)
     </div>
   </div>
 </div>
-
-
-
+<!-- ===報名成功=== -->
+<!-- Button trigger modal -->
+<button type="button" id="ccccc" style="display:none;"class="btn btn-primary" data-toggle="modal" data-target="#cccccS">
+  SUCCESS
+</button>
+<div class="modal fade" id="cccccS" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        		報名申請已成功
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    
+      </div>
+    </div>
+  </div>
+</div>
 
 <!--退出 modal ------------------ -->
 <div class="modal fade" id="CancelJoinEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
