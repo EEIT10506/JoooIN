@@ -118,9 +118,12 @@ public class EventController {
 			eventMemberBean.setIsAttended(null);
 			
 			Integer i = eventService.saveEventMember(eventMemberBean);
-//			eventMainService.addnotification(inviterId, notificationContent, eventupdate, false);
+
+
 			String check = "OK";
 			attributes.addFlashAttribute("signUpSuccess", check);
+			eventMainService.addnotification(inviterId, notificationContent, eventupdate, false);
+
 			return "redirect:/event/" + eventId;
 		} else {
 			return "not_login";
@@ -317,7 +320,9 @@ public class EventController {
 			@PathVariable("eventId") Integer eventId, Model model, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
 		EventMainBean event = eventService.getByEventMainId(eventId);
+
 		if (memberId != null && memberId.equals(event.getEventInviterId())) {
+
 			
 			Integer typeid = event.getEventTypeId();
 			EventTypeBean eventtype = eventService.getByEventTypeId(typeid);
@@ -343,7 +348,9 @@ public class EventController {
 			model.addAttribute("eventtype", eventtype);
 
 			return "event/event_setting";
+
 		} else if(memberId != null && !memberId.equals(event.getEventInviterId())) {
+
 		    return "event/not_eventManager";	
 		}
 		
@@ -383,7 +390,9 @@ public class EventController {
 			     for(EventMemberBean myMember : myMemberList) {
 			    	 if(myMember.getIsAgreed()) {
 			    	 Integer myMember_memberId = myMember.getMemberId();
-//				   eventMainService.addnotification(myMember_memberId, notificationContent, eventupdate, false);
+
+				   eventMainService.addnotification(myMember_memberId, notificationContent, eventupdate, false);
+
 			    	 }
 			     }
 				return "redirect:/event/setting/" + eventId;
@@ -490,7 +499,9 @@ public class EventController {
 			eventService.updateQuantityWhenOut(event);
 			bean.setIsAgreed(true);
 			eventService.updateIsAgreed(bean);
-//			eventMainService.addnotification(bean.getMemberId(), notificationContent, eventupdate, false);
+
+			eventMainService.addnotification(bean.getMemberId(), notificationContent, eventupdate, false);
+
 			if(eventNewCurrentMember.equals(limit)) {
 				event.setIsFull(true);
 				eventService.updateQuantityWhenOut(event);
@@ -595,7 +606,9 @@ public class EventController {
 			Integer current = event.getEventCurrentMembers();
 			Integer currentNow = current - quantity;
 			event.setEventCurrentMembers(currentNow);
-//			eventMainService.addnotification(bean.getMemberId(), notificationContent, eventupdate, false);
+
+			eventMainService.addnotification(bean.getMemberId(), notificationContent, eventupdate, false);
+
 			eventService.updateQuantityWhenOut(event);
 			if(event.getEventMemberLimit() > currentNow) {
 				event.setIsFull(false);
@@ -679,6 +692,7 @@ public class EventController {
 			return "not_login";
 		}
 	}
+
 //  檢舉/event/report/${event.eventId}/${attendList.memberId}
 	@RequestMapping(value = "/event/postReport/{eventId}/{eventPostId}/{reportViolatorId}", method = RequestMethod.GET)
 	public String eventPostReport(@PathVariable Integer reportViolatorId,@PathVariable Integer eventId,@PathVariable Integer eventPostId, Model model) {
@@ -706,6 +720,7 @@ public class EventController {
 		model.addAttribute("bean", bean);
 		model.addAttribute("event", event);
 		return "event/event_attend_report";
+
 	}
 	@RequestMapping(value ="/event/report/{eventId}", method = RequestMethod.POST)
 	public String eventReportProcess(@ModelAttribute("eventReportBean")ReportBean rb,@PathVariable Integer eventId, RedirectAttributes redirectAttributes) {

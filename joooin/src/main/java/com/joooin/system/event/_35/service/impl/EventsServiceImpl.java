@@ -18,10 +18,12 @@ import com.joooin.model.EventLikeBean;
 import com.joooin.model.EventMainBean;
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupPostBean;
+import com.joooin.model.NotificationBean;
 import com.joooin.repository.EventLikeDao;
 import com.joooin.repository.EventMainDao;
 import com.joooin.repository.GroupMainDao;
 import com.joooin.repository.GroupPostDao;
+import com.joooin.repository.NotificationDao;
 import com.joooin.system.event._35.service.EventsService;
 
 @Service
@@ -42,6 +44,9 @@ public class EventsServiceImpl implements EventsService {
 	
 	@Autowired
 	GroupPostDao groupPostDao;
+	
+	@Autowired
+	NotificationDao notificationDao;
 
 	@Override
 	public EventMainBean getByEventMainId(Integer eventId) {
@@ -213,6 +218,13 @@ public class EventsServiceImpl implements EventsService {
 			
 		}
         //return null;
+	}
+	
+	public NotificationBean addnotification(Integer memberId, String notificationContent, String notificationDate, Boolean isRead) {
+		NotificationBean notification = new NotificationBean(memberId,notificationContent,notificationDate,isRead);
+		notificationDao.save(notification);
+		return	notification;
+
 	}
 	
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import com.joooin.model.EventMainBean;
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupPostBean;
+import com.joooin.model.NotificationBean;
 
 public interface EventsService {
 	public EventMainBean getByEventMainId(Integer eventId);
@@ -26,5 +27,5 @@ public interface EventsService {
 	
 	public List<GroupPostBean> getTop8GroupPosts();
 	
-	
+	public NotificationBean addnotification(Integer memberId, String notificationContent, String notificationDate, Boolean isRead);
 }
