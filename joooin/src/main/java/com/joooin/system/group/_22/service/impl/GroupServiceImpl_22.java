@@ -354,7 +354,6 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 				} else {
 					poster.setLastReplyDate(replys.get(replys.size() - 1).getGroupPostReplyDate());
 				}
-				//
 				postersByGroupId.add(poster);
 			}
 		}
