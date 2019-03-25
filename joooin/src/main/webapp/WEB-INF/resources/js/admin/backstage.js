@@ -23,22 +23,27 @@ $(document).ready(function () {
                 timeout: 600000,
                 
                 success: function (data){
-                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">No.</th><th>Name</th><th>Email</th><th>Password</th><th>Gender</th><th>Phone</th><th>Logins</th><th>SignUp</th><th>Status</th></tr></thead><tbody></tbody>');
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">編號</th><th>名稱</th><th>Email</th><th>性別</th><th>上站次數</th><th>加入日期</th><th>認證狀態</th></tr></thead><tbody></tbody>');
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
                 		console.log(data);
                 		$.each(data, function (index, Member){
+                			var gender = null;
+                			if(Member.gender=='male'){
+                				gender = '男'
+                			}
+                			if(Member.gender=='female'){
+                				gender = '女'
+                			}
                 			var cell1 = $('<td></td>').text(Member.memberId).addClass('pointer text-primary text-center memberId');
                 			var cell2 = $('<td></td>').text(Member.memberName)
                 			var cell3 = $('<td></td>').text(Member.email)
-                			var cell4 = $('<td></td>').text(Member.password)
-                			var cell5 = $('<td></td>').text(Member.gender)
-                			var cell6 = $('<td></td>').text(Member.phone)
-                			var cell7 = $('<td></td>').text(Member.logins)
-                			var cell8 = $('<td></td>').text(Member.memberCreateDate)
-                			var cell9 = $('<td></td>').text(Member.certificationStatus)
+                			var cell4 = $('<td></td>').text(gender)
+                			var cell5 = $('<td></td>').text(Member.logins)
+                			var cell6 = $('<td></td>').text(Member.memberCreateDate)
+                			var cell7 = $('<td></td>').text(Member.certificationStatus)
                 			
-                			var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9]);
+                			var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7]);
                 			
                 			docFrag.append(row);
                 		})
