@@ -1,5 +1,7 @@
 package com.joooin.system.admin._03.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.joooin.model.PunishmentBean;
+import com.joooin.model.NotificationBean;
 import com.joooin.model.ReportBean;
 import com.joooin.system.admin._03.service.ReportService;
 
@@ -63,8 +65,15 @@ public class ReportController {
 			, @RequestParam("punishDateEnd")Integer punishDateEnd, @RequestParam("punishType")String punishType) {
 		ReportBean rb = reportService.getReportBean(reportId);
 		rb.setIsDone(true);
-		reportService.ReportBeanSave(rb);
 		reportService.PunishmentBeanSave(reportId, punishMemberId, punishDateEnd, punishType);
+		NotificationBean nb = new NotificationBean();
+		nb.setMemberId(rb.getReportViolatorId());
+		nb.setIsRead(false);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		nb.setNotificationDate(sdf.format(new Date()).toString());
+		nb.setNotificationContent(rb.getReportType());
+		reportService.saveNotification(nb);
+		reportService.ReportBeanSave(rb);
 		return "";
 	}
 }

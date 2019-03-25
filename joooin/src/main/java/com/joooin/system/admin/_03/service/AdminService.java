@@ -21,5 +21,6 @@ public interface AdminService {
 	public void deleteEventMemberBean(Integer eventId);
 	public void deleteEventLike(Integer eventId);
 	public void deleteEventPost(Integer eventId);
+	public void putMember(MemberMainBean mmb);
 
 }

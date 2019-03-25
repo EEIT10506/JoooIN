@@ -59,11 +59,10 @@
 		<div class="form-group">
 			<label for="reportType">檢舉類型： </label>
 			<form:select name="reportType" id="reportType" path="reportType" class="form-control">
-				<form:option value="色情內容">色情內容</form:option>  	
-				<form:option value="暴力言語">暴力言語</form:option>  	
-				<form:option value="廢文">廢文</form:option>  	
-				<form:option value="活動未到">活動未到</form:option>  	
-				<form:option value="其他">其他</form:option>  
+				<form:option value="punish_event_attend_eventId=${1}">活動未到</form:option>  	
+				<form:option value="punish_event_post_eventPostId=${1}">活動留言</form:option>  	
+				<form:option value="punish_group_post_groupPostId=${1}">社團貼文</form:option>  	
+				<form:option value="punish_group_reply_groupPostReplyId=${1}">社團留言</form:option>  	
 			</form:select>
 		</div>
 		<div class="form-group">

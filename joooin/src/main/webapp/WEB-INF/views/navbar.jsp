@@ -27,15 +27,30 @@
 		position: absolute;
 		right: 30px;
 	}
+
 	.barfont{
 	    font-family:微軟正黑體;
 	    font-weight:bold;
+
+	#AdminHasLogin {
+		position: absolute;
+		right: 75px;
+
 	}
 </style>
 <script>
 	$(document).ready(function(){
+		$("#AdminHasLogin").hide();
+		$("#hasLogin").hide();
+		
 		if ($(".hasLogin").text() != ""){
-			$("#loginNregister").css("display", "none");
+			$("#loginNregister").hide();
+			$("#hasLogin").show();
+		} 
+		
+		if ($(".AdminHasLogin").text() != ""){
+			$("#loginNregister").hide();
+			$("#AdminHasLogin").show();
 		} 
 		
 		if ($("#notRead").text() != "訊息匣（未讀訊息：0）"){
@@ -85,7 +100,10 @@
       <a class="nav-link" href="${pageContext.request.contextPath}/login">登入／註冊</a>
     </li>
     <li id="hasLogin" class="nav-item">
-      <a class="nav-link hasLogin" href="${pageContext.request.contextPath}/member">${memberName}${admin}</a>
+      <a class="nav-link hasLogin" href="${pageContext.request.contextPath}/member">${memberName}</a>
+    </li>
+    <li id="AdminHasLogin" class="nav-item">
+      <a class="nav-link AdminHasLogin" href="${pageContext.request.contextPath}/admin">${admin}</a>
     </li>
     <li id="logout" class="nav-item">
       <a id="googleLogout" class="nav-link logout" href="${pageContext.request.contextPath}/logout" onclick="return(confirm('您確定要登出帳號嗎？'))">${logout}</a>
