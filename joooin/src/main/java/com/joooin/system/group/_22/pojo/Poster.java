@@ -6,10 +6,12 @@ public class Poster {
 	private Integer memberId;
 	private String groupPostTitle;
 	private Byte[] groupPostImage;
+	private String groupPostText;
 	private Integer groupPostLike;
 	private String groupPostDate;
 	private Boolean isDeleted;
 	private String memberName;
+	private String lastReplyDate;
 	
 	public Integer getGroupPostId() {
 		return groupPostId;
@@ -64,6 +66,18 @@ public class Poster {
 	}
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
+	}
+	public String getGroupPostText() {
+		return groupPostText;
+	}
+	public void setGroupPostText(String groupPostText) {
+		this.groupPostText = groupPostText;
+	}
+	public String getLastReplyDate() {
+		return lastReplyDate;
+	}
+	public void setLastReplyDate(String lastReplyDate) {
+		this.lastReplyDate = lastReplyDate;
 	}
 
 }

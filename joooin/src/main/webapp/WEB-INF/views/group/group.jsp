@@ -64,8 +64,35 @@ div {
 
 
 	$(document).ready(function() {
-		$('#table_id').DataTable();
+		//DataTable
+		var language = {
+		        "zeroRecords": "沒有結果",
+		        "info": "<span class='seperator'>  </span>" + "總共 _TOTAL_ 篇文章",
+		        "infoFiltered": " (從所有 _MAX_ 篇文章中篩選出)",
+		        "infoEmpty": "共 0 篇",
+		        "search":"搜尋文章：",
+		        "paginate": {
+		            "previous": "上一頁",
+		            "next": "下一頁",
+		            "first": "第一頁  ",
+		            "last": "  最後一頁"
+		        }
+		    };
+		
+		var column=[
+            {"data": "like", name:"讚數" , "orderable":true },
+            {"data": "title", name:"標題" , "orderable":false },
+            {"data": "poster", name:"發文人" , "orderable":false },
+            {"data": "postdate", name:"發文日期" , "orderable":true },
+            {"data": "replydate", name:"最後回覆日期" , "orderable":true }
+           ];
+		
+		//讚數降冪排列
+		$('#table_id').DataTable({"columns":column, "language":language, "lengthChange": false, "aLengthMenu" : 10,
+			 "bScrollCollapse": true, "order" : [ 1, 'desc' ]});
+		
 	});
+	
 // 	隱藏申請人按鈕功能
 	function accept(butObj){
 		var target = butObj.id;
@@ -140,7 +167,7 @@ div {
 
 		<div
 			class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-			<div class="display-4">社團名稱: ${groupMain.groupName}</div>
+			<div class="display-4">${groupMain.groupName}</div>
 			<div class="btn-toolbar mb-2 mb-md-0">
 				<div class="btn-group mr-2">
 					<button type="button" class="btn btn-sm btn-outline-secondary">分享</button>
@@ -236,7 +263,7 @@ div {
 						<td><a href="${pageContext.request.contextPath}/group/post/${poster.groupPostId}">${poster.groupPostTitle}</a></td>
 						<td>${poster.memberName }</td>
 						<td>${poster.groupPostDate}</td>
-						<td>等待回覆</td>
+						<td>${poster.lastReplyDate}</td>
 					</tr>
 				</c:forEach>
 				</tbody>

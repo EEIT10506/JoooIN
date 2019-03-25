@@ -7,7 +7,9 @@ import com.joooin.model.GroupMemberBean;
 import com.joooin.model.GroupPostBean;
 import com.joooin.model.GroupPostReplyBean;
 import com.joooin.model.MemberMainBean;
+import com.joooin.system.group._22.pojo.MemPostInfo;
 import com.joooin.system.group._22.pojo.Poster;
+import com.joooin.system.group._22.pojo.Replyer;
 
 public interface GroupService_22 {
 	public Integer createGroup(GroupMainBean groupMainBean); // new group then set and save
@@ -33,15 +35,30 @@ public interface GroupService_22 {
 	public Integer processApplyList(Integer groupId, Integer memberId, String decide);
 	
 	public List<MemberMainBean> getMembersInGroup(Integer groupId); // 取得該社團內成員
+	
+	public List<MemPostInfo> getMemInfoInGroup(Integer groupId); // 取得該社團內成員活動資訊
+	
+	public void removeGroupMember(Integer groupId, Integer memberId);
+	
 /////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
 	public Integer createPost(GroupPostBean groupPostBean); // 發布文章
 	
 	public List<Poster> getPostersByGroupId(Integer groupId); // 以groupId找文章列表
 	
 	public Poster getPosterByGroupPostId(Integer groupPostId); // 以POJO傳遞單篇文章資訊
+
+	public GroupPostBean getPostByGroupPostId(Integer groupPostId); // 以POJO傳遞單篇文章資訊
 	
 	public Integer createReply(GroupPostReplyBean groupPostReplyBean); // 發布回文
 	
-	public List<GroupPostReplyBean> getReplyByPostId(Integer groupPostId); //以groupPostId 取得所有回文
+	public List<GroupPostReplyBean> getReplyByPostId(Integer groupPostId); //以groupPostId 取得所有回文 並排序
+	
+	public List<Replyer> getReplyerByGroupPostId(Integer groupPostId); // 以POJO傳遞多篇回文資訊
+	
+	public boolean getPermission(Integer groupId, Integer memberId); // 決定使用者能不能回文
+	
+	public Integer getPostAccount(Integer groupId, Integer memberId); // 找出該會員在該社團的發文
 
+	public Integer getReplyAccount(Integer groupId, Integer memberId); // 找出該會員在該社團的回文
 }

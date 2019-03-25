@@ -106,6 +106,21 @@ public class HomeController {
 		}
 	}
 	
+	@RequestMapping(value = "/getPostImage/{groupPostId}", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> getGroupPostImage(@PathVariable Integer groupPostId) {
+		
+		if (groupPostId != null) {
+			GroupPostBean bean = groupService.getPostByGroupPostId(groupPostId);
+			if (bean.getGroupPostImage() != null) {
+				return ImageUtils.byteArrayToImage(bean.getGroupPostImage());
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
+	
 	@RequestMapping(value = "/notLogin", method = RequestMethod.GET)
 	public String notLogin() {
 		return "not_login";

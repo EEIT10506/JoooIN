@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.joooin.model.MemberMainBean;
+import com.joooin.system.group._22.service.GroupNotification;
 import com.joooin.system.group._22.service.GroupService_22;
 
 @Controller
@@ -22,6 +23,8 @@ public class ProcessGroupController {
 	GroupService_22 service;
 	@Autowired
 	ServletContext context;
+	@Autowired
+	GroupNotification notifGroup;
 	
 //	// Ajax送回申請清單
 //	@RequestMapping(method = RequestMethod.GET, value = "/group/applygroup/{groupId}")
@@ -47,9 +50,14 @@ public class ProcessGroupController {
 		System.out.println("M::" + memberId);
 		System.out.println("D::" + decide);
 		// 根據approve，reject 改變清單中的會員狀態，許可的話回傳新增的會員ID
-		Integer sss = service.processApplyList(groupId, memberId, decide);
+		Integer acceptMember = service.processApplyList(groupId, memberId, decide);
 		
-		System.out.println(sss); //紀錄成功入團的會員
+		// 允許入團通知 該會員
+		if( ! acceptMember.equals(null)) {
+			notifGroup.groupNotifJoined(acceptMember, groupId);
+		}
+		
+		System.out.println(acceptMember); //紀錄成功入團的會員
 		
 //		List<MemberMainBean> groupApplyList = service.getGroupApplyMembers(groupId);
 		

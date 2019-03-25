@@ -22,7 +22,9 @@ import com.joooin.repository.GroupMemberDao;
 import com.joooin.repository.GroupPostDao;
 import com.joooin.repository.GroupPostReplyDao;
 import com.joooin.repository.MemberMainDao;
+import com.joooin.system.group._22.pojo.MemPostInfo;
 import com.joooin.system.group._22.pojo.Poster;
+import com.joooin.system.group._22.pojo.Replyer;
 import com.joooin.system.group._22.service.GroupService_22;
 
 @Transactional
@@ -40,7 +42,7 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 
 	@Autowired
 	GroupPostDao groupPostDao;
-	
+
 	@Autowired
 	GroupPostReplyDao groupReplyDao;
 
@@ -276,17 +278,64 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 		return memberInGroupList;
 	}
 
+	
+	@Override
+	public List<MemPostInfo> getMemInfoInGroup(Integer groupId) {
+		List<MemPostInfo> membInfoInGroupList = new LinkedList<MemPostInfo>();
+		List<GroupMemberBean> allGroupMember = groupMainDao.getByGroupId(groupId).getGroupMemberList();
+
+		for (GroupMemberBean gmBean : allGroupMember) {
+			if (gmBean.getIsAgreed()) {
+				MemberMainBean member = memMainDao.getByMemberId(gmBean.getMemberId());
+				MemPostInfo memInfo = new MemPostInfo();
+				
+				memInfo.setMemberId(member.getMemberId());
+				memInfo.setLogins(member.getLogins());
+				memInfo.setMemberName(member.getMemberName());
+				
+				if(member.getMemberIntro() == null) {
+					memInfo.setMemberIntro("「尚未新增自我介紹」");
+					System.out.println("無自介");
+				}else {
+					memInfo.setMemberIntro(member.getMemberIntro());
+					System.out.println("自介 :" + memInfo.getMemberIntro());
+				}
+				
+				Integer postCount = getPostAccount(groupId, member.getMemberId());
+				memInfo.setPostCount(postCount);
+				
+				Integer replyCount = getReplyAccount(groupId, member.getMemberId());
+				memInfo.setReplyCount(replyCount);
+				
+				membInfoInGroupList.add(memInfo);
+			}
+		}
+
+		return membInfoInGroupList;
+	}
+	
+	@Override
+	public void removeGroupMember(Integer groupId, Integer memberId) {
+		List<GroupMemberBean> allGM = groupMemberDao.getAll();
+		for (GroupMemberBean gmBean : allGM) {
+			if (gmBean.getGroupId().equals(groupId) && gmBean.getMemberId().equals(memberId)) {
+				groupMemberDao.deleteByGroupMemberId(gmBean.getGroupMemberId());
+				break;
+			}
+		}
+	}
+
 	@Override
 	public Integer createPost(GroupPostBean groupPostBean) {
 		return groupPostDao.save(groupPostBean);
 	}
 
 	@Override
-	public List<Poster> getPostersByGroupId (Integer groupId) {
+	public List<Poster> getPostersByGroupId(Integer groupId) {
 		List<GroupPostBean> groupPosts = groupPostDao.getAll();
 		List<Poster> postersByGroupId = new LinkedList<Poster>();
-		for(GroupPostBean post : groupPosts) {
-			if(post.getGroupId().equals(groupId)) {
+		for (GroupPostBean post : groupPosts) {
+			if (post.getGroupId().equals(groupId)) {
 				Poster poster = new Poster();
 				poster.setGroupId(groupId);
 				poster.setGroupPostImage(post.getGroupPostImage());
@@ -298,21 +347,33 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 				poster.setMemberId(post.getMemberId());
 				String memberName = memMainDao.getByMemberId(post.getMemberId()).getMemberName();
 				poster.setMemberName(memberName);
-				
+
+				List<GroupPostReplyBean> replys = getReplyByPostId(post.getGroupPostId());
+				if (replys.size() == 0) {
+					poster.setLastReplyDate("等待回覆");
+				} else {
+					poster.setLastReplyDate(replys.get(replys.size() - 1).getGroupPostReplyDate());
+				}
+
 				postersByGroupId.add(poster);
 			}
 		}
 		return postersByGroupId;
 	}
 
+	@Override
+	public GroupPostBean getPostByGroupPostId(Integer groupPostId) {
+		return groupPostDao.getByGroupPostId(groupPostId);
+	}
 
 	@Override
 	// 回傳單篇文章資訊
-	public Poster getPosterByGroupPostId(Integer groupPostId) { 
+	public Poster getPosterByGroupPostId(Integer groupPostId) {
 		GroupPostBean post = groupPostDao.getByGroupPostId(groupPostId);
 		Poster poster = new Poster();
-		
+
 		poster.setGroupId(post.getGroupId());
+		poster.setGroupPostText(post.getGroupPostText());
 		poster.setGroupPostImage(post.getGroupPostImage());
 		poster.setGroupPostDate(post.getGroupPostDate());
 		poster.setGroupPostId(post.getGroupPostId());
@@ -322,7 +383,7 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 		poster.setMemberId(post.getMemberId());
 		String memberName = memMainDao.getByMemberId(post.getMemberId()).getMemberName();
 		poster.setMemberName(memberName);
-		
+
 		return poster;
 	}
 
@@ -335,13 +396,13 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 	@Override
 	public List<GroupPostReplyBean> getReplyByPostId(Integer groupPostId) {
 		List<GroupPostReplyBean> allReply = groupReplyDao.getAll();
-		
+
 		List<GroupPostReplyBean> postReply = new LinkedList<GroupPostReplyBean>();
-		
-		for(GroupPostReplyBean reply : allReply) {
-			
+
+		for (GroupPostReplyBean reply : allReply) {
+
 			// 尚未判斷delete
-			if(reply.getGroupPostId().equals(groupPostId)) {
+			if (reply.getGroupPostId().equals(groupPostId)) {
 				postReply.add(reply);
 			}
 		}
@@ -357,4 +418,70 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 //		}
 		return postReply;
 	}
+
+	@Override
+	public List<Replyer> getReplyerByGroupPostId(Integer groupPostId) {
+		LinkedList<Replyer> replyers = new LinkedList<Replyer>();
+		List<GroupPostReplyBean> groupReply = getReplyByPostId(groupPostId);
+		for (GroupPostReplyBean reply : groupReply) {
+			if (!reply.getIsDeleted()) {
+				Replyer replyer = new Replyer();
+				replyer.setGroupPostReplyId(reply.getGroupPostReplyId());
+				replyer.setGroupId(reply.getGroupId());
+				replyer.setGroupPostId(reply.getGroupPostId());
+				replyer.setMemberId(reply.getMemberId());
+				replyer.setGroupPostReplyContent(reply.getGroupPostReplyContent());
+				replyer.setGroupPostReplyDate(reply.getGroupPostReplyDate());
+				replyer.setIsDeleted(reply.getIsDeleted());
+				String memberName = memMainDao.getByMemberId(reply.getMemberId()).getMemberName();
+				replyer.setMemberName(memberName);
+				replyers.add(replyer);
+			}
+		}
+
+		return replyers;
+	}
+
+	@Override
+	public boolean getPermission(Integer groupId, Integer memberId) {
+
+		List<MemberMainBean> memberList = getMembersInGroup(groupId);
+		for (MemberMainBean member : memberList) {
+			if (member.getMemberId().equals(memberId)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public Integer getPostAccount(Integer groupId, Integer memberId) {
+		int postAccount = 0;
+		
+		List<GroupPostBean> allPost = groupPostDao.getAll();
+		for(GroupPostBean post : allPost) {
+			if(post.getGroupId().equals(groupId) && post.getMemberId().equals(memberId)
+					&& (! post.getIsDeleted())) {
+				postAccount ++ ;
+			}
+		}
+		
+		return postAccount;
+	}
+
+	@Override
+	public Integer getReplyAccount(Integer groupId, Integer memberId) {
+		int replyAccount = 0;
+		
+		List<GroupPostReplyBean> allReply = groupReplyDao.getAll();
+		for(GroupPostReplyBean reply : allReply) {
+			if(reply.getGroupId().equals(groupId) && reply.getMemberId().equals(memberId)
+					&& (! reply.getIsDeleted())) {
+				replyAccount ++ ;
+			}
+		}
+		
+		return replyAccount;
+	}
+
 }

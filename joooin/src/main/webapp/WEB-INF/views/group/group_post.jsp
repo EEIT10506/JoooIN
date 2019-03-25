@@ -91,7 +91,7 @@
 				
 				<!-- 				放文章內容 -->
 				<tr>
-					<td colspan="2"><textarea rows="10" cols="150"></textarea></td>
+					<td colspan="2"><form:textarea rows="10" cols="150" path="groupPostText"/></td>
 				</tr>
 				<!-- 				放文章內容 -->
 				

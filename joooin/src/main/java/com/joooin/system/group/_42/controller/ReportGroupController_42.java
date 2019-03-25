@@ -17,6 +17,7 @@ import com.joooin.model.MemberMainBean;
 import com.joooin.model.ReportBean;
 import com.joooin.repository.GroupMemberDao;
 import com.joooin.system.admin._03.service.ReportService;
+import com.joooin.system.group._22.pojo.Poster;
 import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.system.group._42.service.GroupService_42;
 
@@ -37,21 +38,30 @@ public class ReportGroupController_42 {
 	@Autowired
 	ReportService reportService;
 	
-	@RequestMapping(value = "/report/{groupId}", method = RequestMethod.GET)
-	public String reportGroupPage(Model model,Integer groupId) {
+	@RequestMapping(value = "/report/{reportId}/{reportName}", method = RequestMethod.GET)
+	public String reportGroupPage(Model model,@PathVariable("reportId") Integer memberId, HttpSession session,@PathVariable("reportName") String memberName) {
+		
+		Integer memberIdNow = (Integer) session.getAttribute("memberId");
+		if (memberIdNow == null) {
+			return "not_login";
+		}
+		
 		ReportBean rb = new ReportBean();
 		model.addAttribute("reportBean", rb);
-		return "admin/report";
+		return "admin/report" ;
 	}
 	
-	@RequestMapping(value ="/report/{groupId}", method = RequestMethod.POST)
-	public String reportGroupProcess(@ModelAttribute("reportBean")ReportBean rb, RedirectAttributes redirectAttributes,Integer groupId,Integer groupPostId) {
-		rb.setReportViolatorId(groupPostId);
+	@RequestMapping(value ="/report/{reportId}/{reportName}", method = RequestMethod.POST)
+	public String reportGroupProcess(@ModelAttribute("reportBean")ReportBean rb, RedirectAttributes redirectAttributes,@PathVariable("reportId") Integer memberId, Integer groupId,String memberName) {
+		
+		
+		
+		rb.setReportViolatorId(memberId);
 		reportService.ReportBeanSave(rb);
 		
 		redirectAttributes.addFlashAttribute("success", "檢舉成功");
 		
-		return "redirect:/report";
+		return "redirect:/report/"+ memberId+"/"+memberName;
 	}
 	
 }
