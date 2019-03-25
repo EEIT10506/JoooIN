@@ -17,6 +17,13 @@
 		position: relative;
 		top: 50px;
 	}
+	.backButton{
+	    margin-left:630px;
+	}
+	
+	.backsButton:hover{
+		background-color:#1C1C1C !important;;
+	}
 </style>
 <title>檢舉頁面</title></head>
 <body>
@@ -25,7 +32,11 @@
 	<div id="main" class="container">
 	<h1 class="mt-4 mb-3 font-weight-bold">檢舉頁面
         <small>Report</small>
-      </h1> 
+         
+         <span class="backButton">
+   		   <a href="${pageContext.request.contextPath}/event/${event.eventId}" id="backbutton" class="btn btn-secondary btn-lg backsbutton" role="button" aria-pressed="true">返回活動</a>
+   		 </span>
+   	</h1> 
       <div class="row">
         <div class="col-md-11">
         </div>
@@ -40,15 +51,15 @@
 		<div style="text-align: center;color: red;">
 			<h4 >${success}</h4>
 		</div>
-      <form:form method="POST" modelAttribute="reportBean">
+      <form:form method="POST" modelAttribute="eventReportBean" action="${pageContext.request.contextPath}/event/report/${event.eventId}">
 		<div class="form-group">
 			<label for="reportMemberId">檢舉人：${memberName}</label>
 			<form:input type="hidden" value='${memberId}' path="reportMemberId" id="reportMemberId"/>
 		</div>
 		
 		<div class="form-group">
-			<label for="reportViolatorId">被檢舉人：${reportName} </label>
-			<form:input type="hidden" value='${reportId}' path="reportViolatorId" id="reportViolatorId"/>
+			<label for="reportViolatorId">被檢舉人： ${bean.memberName }   </label>
+			<form:input type="hidden" path="reportViolatorId" id="reportViolatorId"/>
 		</div>
 		
 		<div class="form-group">
@@ -57,13 +68,8 @@
 		</div>
 		
 		<div class="form-group">
-			<label for="reportType">檢舉類型： </label>
-			<form:select name="reportType" id="reportType" path="reportType" class="form-control">
-				<form:option value="punish_event_attend_eventId=${1}">活動未到</form:option>  	
-				<form:option value="punish_event_post_eventPostId=${1}">活動留言</form:option>  	
-				<form:option value="punish_group_post_groupPostId=${1}">社團貼文</form:option>  	
-				<form:option value="punish_group_reply_groupPostReplyId=${1}">社團留言</form:option>  	
-			</form:select>
+			<label for="reportType">檢舉類型： 活動未出席</label>
+			<form:input type="hidden" name="reportType" id="reportType" path="reportType" class="form-control"/>
 		</div>
 		<div class="form-group">
 			<label for=reportContent>內容： </label>

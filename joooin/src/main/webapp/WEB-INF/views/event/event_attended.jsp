@@ -140,7 +140,7 @@ $(document).ready(function() {
 	$('#example').DataTable({"language":language, "lengthChange": false, "aLengthMenu" : 10, "bScrollCollapse": true});
 } );
 </script>
-<title>Insert title here</title></head>
+<title>Event Setting</title></head>
 <body class="settingBody">
 <jsp:include page="${request.contextPath}/navbar"/>
 
@@ -226,12 +226,15 @@ $(document).ready(function() {
 					        </tbody>
 					    </table>
 					</div>
+			<jsp:include page="${request.contextPath}/footerbar"/>	
 				</div>	
 				
 		<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 		<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 		</div>
+
 	</div>
 <!-- 請把所有內容寫在此div內 -->
+
 </body>
 </html>

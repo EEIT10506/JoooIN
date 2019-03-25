@@ -1,7 +1,11 @@
 package com.joooin.system.event._35.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,10 +18,12 @@ import com.joooin.model.EventLikeBean;
 import com.joooin.model.EventMainBean;
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupPostBean;
+import com.joooin.model.NotificationBean;
 import com.joooin.repository.EventLikeDao;
 import com.joooin.repository.EventMainDao;
 import com.joooin.repository.GroupMainDao;
 import com.joooin.repository.GroupPostDao;
+import com.joooin.repository.NotificationDao;
 import com.joooin.system.event._35.service.EventsService;
 
 @Service
@@ -38,6 +44,9 @@ public class EventsServiceImpl implements EventsService {
 	
 	@Autowired
 	GroupPostDao groupPostDao;
+	
+	@Autowired
+	NotificationDao notificationDao;
 
 	@Override
 	public EventMainBean getByEventMainId(Integer eventId) {
@@ -127,8 +136,24 @@ public class EventsServiceImpl implements EventsService {
 	}
 	@Override
 	public List<EventMainBean> getTop8Events() {
-
-		List<EventMainBean> events = eventDao.getAll();
+        Date today = new Date();
+	    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+	    
+		List<EventMainBean> events = eventDao.getAll();		
+		Iterator<EventMainBean> iterator = events.iterator();  
+	     while(iterator.hasNext()) {  
+	    	  Date endDate;
+	    	  EventMainBean event = iterator.next();
+			try {
+				endDate = sdf1.parse(event.getEventDateEnd());
+		         if(endDate.before(today) || event.getEventStatus().equals("no")) {  
+		             iterator.remove();  
+		         }  
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}  	
+	     }  
+		
 		List<EventMainBean> top8Events = new LinkedList<EventMainBean>();
 		Collections.sort(events, new Comparator<EventMainBean>() {
 			public int compare(EventMainBean o1, EventMainBean o2) {
@@ -175,7 +200,7 @@ public class EventsServiceImpl implements EventsService {
 	public List<GroupPostBean> getTop8GroupPosts() {
 
 		List<GroupPostBean> groupPosts = groupPostDao.getAll();
-		List<GroupPostBean> top8GroupPosts = new LinkedList<GroupPostBean>();
+		List<GroupPostBean> top8GroupPosts = new LinkedList<GroupPostBean>();		
 		Collections.sort(groupPosts, new Comparator<GroupPostBean>() {
 			public int compare(GroupPostBean o1, GroupPostBean o2) {
 				return o2.getGroupPostLike().compareTo(o1.getGroupPostLike());
@@ -193,6 +218,13 @@ public class EventsServiceImpl implements EventsService {
 			
 		}
         //return null;
+	}
+	
+	public NotificationBean addnotification(Integer memberId, String notificationContent, String notificationDate, Boolean isRead) {
+		NotificationBean notification = new NotificationBean(memberId,notificationContent,notificationDate,isRead);
+		notificationDao.save(notification);
+		return	notification;
+
 	}
 	
 }

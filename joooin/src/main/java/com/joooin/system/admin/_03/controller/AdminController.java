@@ -67,6 +67,17 @@ public class AdminController {
 		return service.getMemberBean(memberId);
 	}
 	
+	@RequestMapping(value = "/admin/putMember", method = RequestMethod.POST)
+	@ResponseBody
+	public void putMember(@RequestParam("memberId")Integer memberId,
+			@RequestParam("memberName")String memberName,
+			@RequestParam("email")String email) {
+		MemberMainBean mmb = service.getMemberBean(memberId);
+		mmb.setMemberName(memberName);
+		mmb.setEmail(email);
+		service.putMember(mmb);
+	}
+	
 	@RequestMapping(value = "/admin/deleteMember", method = RequestMethod.POST)
 	@ResponseBody
 	public void deleteMember(@RequestParam("memberId")Integer memberId) {

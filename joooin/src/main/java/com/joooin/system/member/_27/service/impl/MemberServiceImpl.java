@@ -1,7 +1,9 @@
 package com.joooin.system.member._27.service.impl;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,6 +20,7 @@ import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupMemberBean;
 import com.joooin.model.MemberFriendBean;
 import com.joooin.model.MemberMainBean;
+import com.joooin.model.NotificationBean;
 import com.joooin.repository.EventLikeDao;
 import com.joooin.repository.EventMainDao;
 import com.joooin.repository.EventMemberDao;
@@ -25,6 +28,7 @@ import com.joooin.repository.GroupMainDao;
 import com.joooin.repository.GroupMemberDao;
 import com.joooin.repository.MemberFriendDao;
 import com.joooin.repository.MemberMainDao;
+import com.joooin.repository.NotificationDao;
 import com.joooin.system.member._27.pojo.FriendPojo;
 import com.joooin.system.member._27.service.MemberService;
 import com.joooin.system.member._27.service.MessageService;
@@ -49,10 +53,22 @@ public class MemberServiceImpl implements MemberService{
 	GroupMemberDao groupMemberDao;
 	@Autowired
 	MessageService messageService;
+	@Autowired
+	NotificationDao notificationDao;
 	
 	@Override
 	public MemberMainBean getMemberMainBean(Integer memberId) {
 		return memberMainDao.getByMemberId(memberId);
+	}
+	
+	@Override
+	public EventMainBean getEventMainBean(Integer eventId) {
+		return eventMainDao.getByEventMainId(eventId);
+	}
+	
+	@Override
+	public GroupMainBean getGroupMainBean(Integer groupId) {
+		return groupMainDao.getByGroupId(groupId);
 	}
 	
 	@Override
@@ -100,9 +116,9 @@ public class MemberServiceImpl implements MemberService{
 		if (!list.isEmpty()) {
 			for (MemberFriendBean bean : list) {
 				if (bean.getReceiveMemberId().equals(receiveMemberId)) {
-					if (bean.getIsFriend() == true)
+					if (bean.getIsFriend())
 						return "FRIEND";
-					else if (bean.getIsFriend() == false && bean.getIsInviter() == true)
+					else if (!bean.getIsFriend() && bean.getIsInviter())
 						return "REQUEST";
 					else 
 						return "RECEIVE";
@@ -131,6 +147,13 @@ public class MemberServiceImpl implements MemberService{
 				String hash = UUID.randomUUID().toString();
 				memberFriendDao.save(new MemberFriendBean(inviteMemberId, receiveMemberId, false, true, hash));
 				memberFriendDao.save(new MemberFriendBean(receiveMemberId, inviteMemberId, false, false, hash));
+				
+				Date date = new Date();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+				String newDate = sdf.format(date);
+				
+				NotificationBean bean = new NotificationBean(receiveMemberId, "friend_request_memberId=" + inviteMemberId.toString(), newDate, false);
+				notificationDao.save(bean);
 			}
 		}
 		
@@ -154,6 +177,15 @@ public class MemberServiceImpl implements MemberService{
 					bean.setIsFriend(true);
 					memberFriendDao.update(bean);
 					breakPoint++;
+					
+					if (breakPoint == 1) {
+						Date date = new Date();
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+						String newDate = sdf.format(date);
+						
+						NotificationBean notiBean = new NotificationBean(receiveMemberId, "friend_accepted_memberId=" + inviteMemberId.toString(), newDate, false);
+						notificationDao.save(notiBean);	
+					}
 					if (breakPoint == 2) break;
 				}
 			}
@@ -179,6 +211,21 @@ public class MemberServiceImpl implements MemberService{
 		return friendPojoList;
 	}
 
+	
+	
+	
+	@Override
+	public List<EventMainBean> getOtherEvents(Integer memberId) {
+		List<EventMemberBean> eventMemberlist = eventMemberDao.getAll();
+		List<EventMainBean> eventMainlist = new ArrayList<EventMainBean>();
+		
+		for (EventMemberBean bean : eventMemberlist) {
+			if (bean.getMemberId().equals(memberId) && bean.getIsAgreed()) 
+				eventMainlist.add(eventMainDao.getByEventMainId(bean.getEventId()));
+		}
+		return eventMainlist;
+	}
+
 	@Override
 	public List<EventMainBean> getEvents(Integer memberId, String process)  {
 		if (process.equals("my_event")) {
@@ -196,7 +243,7 @@ public class MemberServiceImpl implements MemberService{
 			List<EventMainBean> eventMainlist = new ArrayList<EventMainBean>();
 			
 			for (EventMemberBean bean : eventMemberlist) {
-				if (bean.getMemberId().equals(memberId) && bean.getIsAgreed() == true && 
+				if (bean.getMemberId().equals(memberId) && bean.getIsAgreed() && 
 					!eventMainDao.getByEventMainId(bean.getEventId()).getEventInviterId().equals(memberId)) {
 					eventMainlist.add(eventMainDao.getByEventMainId(bean.getEventId()));
 				}
@@ -208,7 +255,7 @@ public class MemberServiceImpl implements MemberService{
 			List<EventMainBean> eventMainlist = new ArrayList<EventMainBean>();
 			
 			for (EventMemberBean bean : eventMemberlist) {
-				if (bean.getMemberId().equals(memberId) && bean.getIsAgreed() == false) 
+				if (bean.getMemberId().equals(memberId) && !bean.getIsAgreed()) 
 					eventMainlist.add(eventMainDao.getByEventMainId(bean.getEventId()));
 			}
 			return eventMainlist;
@@ -233,7 +280,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		for (EventMemberBean eventMemberBean : list) {
 			if (eventMemberBean.getMemberId().equals(memberId) && eventMemberBean.getEventId().equals(eventId) &&
-				eventMemberBean.getIsAgreed() == true) {
+				eventMemberBean.getIsAgreed()) {
 				quantity = eventMemberBean.getQuantity();
 				EventMainBean eventMainBean = eventMainDao.getByEventMainId(eventId);
 				eventMainBean.setEventCurrentMembers(eventMainBean.getEventCurrentMembers() - quantity);
@@ -248,8 +295,7 @@ public class MemberServiceImpl implements MemberService{
 		List<EventMemberBean> list = eventMemberDao.getAll();
 		
 		for (EventMemberBean bean : list) {
-			if (bean.getMemberId().equals(memberId) && bean.getEventId().equals(eventId) && 
-				bean.getIsAgreed() == false) 
+			if (bean.getMemberId().equals(memberId) && bean.getEventId().equals(eventId) && !bean.getIsAgreed()) 
 				eventMemberDao.deleteByEventMemberId(bean.getEventMemberId());
 		}
 	}
@@ -266,6 +312,18 @@ public class MemberServiceImpl implements MemberService{
 				eventLikeDao.deleteByEventLikeId(eventLikeBean.getEventLikeId());
 			}
 		}
+	}
+	
+	@Override
+	public List<GroupMainBean> getOtherGroups(Integer memberId) {
+		List<GroupMemberBean> groupMemberlist = groupMemberDao.getAll();
+		List<GroupMainBean> groupMainList = new ArrayList<GroupMainBean>();
+
+		for (GroupMemberBean bean : groupMemberlist) {
+			if (bean.getMemberId().equals(memberId) && bean.getIsAgreed()) 
+				groupMainList.add(groupMainDao.getByGroupId(bean.getGroupId()));
+		}
+		return groupMainList;
 	}
 
 	@Override
@@ -286,7 +344,7 @@ public class MemberServiceImpl implements MemberService{
 			List<GroupMainBean> groupMainList = new ArrayList<GroupMainBean>();
 			
 			for (GroupMemberBean bean : groupMemberlist) {
-				if (bean.getMemberId().equals(memberId) && bean.getIsAgreed() == true &&
+				if (bean.getMemberId().equals(memberId) && bean.getIsAgreed() &&
 					!groupMainDao.getByGroupId(bean.getGroupId()).getGroupLeaderId().equals(memberId)) 
 					groupMainList.add(groupMainDao.getByGroupId(bean.getGroupId()));
 			}
@@ -298,7 +356,7 @@ public class MemberServiceImpl implements MemberService{
 			List<GroupMainBean> groupMainList = new ArrayList<GroupMainBean>();
 			
 			for (GroupMemberBean bean : groupMemberlist) {
-				if (bean.getMemberId().equals(memberId) && bean.getIsAgreed() == false) 
+				if (bean.getMemberId().equals(memberId) && !bean.getIsAgreed()) 
 					groupMainList.add(groupMainDao.getByGroupId(bean.getGroupId()));
 			}
 			return groupMainList;
@@ -312,7 +370,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		for (GroupMemberBean groupMemberBean : list) {
 			if (groupMemberBean.getMemberId().equals(memberId) && groupMemberBean.getGroupId().equals(groupId) && 
-				groupMemberBean.getIsAgreed() == true) {
+				groupMemberBean.getIsAgreed()) {
 				GroupMainBean groupMainBean = groupMainDao.getByGroupId(groupId);
 				Integer quantity = groupMainBean.getGroupCurrentMembers();
 				groupMainBean.setGroupCurrentMembers(quantity - 1);
@@ -330,6 +388,13 @@ public class MemberServiceImpl implements MemberService{
 			if (bean.getMemberId().equals(memberId) && bean.getGroupId().equals(groupId)) 
 				groupMemberDao.deleteByGroupMemberId(bean.getGroupMemberId());
 		}
+	}
+
+	@Override
+	public void modifyIntro(Integer memberId, String memberIntro) {
+		MemberMainBean bean = memberMainDao.getByMemberId(memberId);
+		bean.setMemberIntro(memberIntro.replace("\n", "<br />"));
+		memberMainDao.update(bean);
 	}
 	
 	

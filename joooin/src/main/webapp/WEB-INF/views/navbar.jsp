@@ -27,15 +27,38 @@
 		position: absolute;
 		right: 30px;
 	}
+
+	.barfont{
+	    font-family:微軟正黑體;
+	    font-weight:bold;
+
+	#AdminHasLogin {
+		position: absolute;
+		right: 75px;
+
+	}
 </style>
 <script>
 	$(document).ready(function(){
+		$("#AdminHasLogin").hide();
+		$("#hasLogin").hide();
+		
 		if ($(".hasLogin").text() != ""){
-			$("#loginNregister").css("display", "none");
+			$("#loginNregister").hide();
+			$("#hasLogin").show();
 		} 
 		
-		if ($("#notRead").text() != "訊息匣（未讀訊息：0）"){
-			$("#notRead").css("color", "red");
+		if ($(".AdminHasLogin").text() != ""){
+			$("#loginNregister").hide();
+			$("#AdminHasLogin").show();
+		} 
+		
+		if ($("#messageNotRead").text() != "訊息匣（未讀訊息：0）"){
+			$("#messageNotRead").css("color", "red");
+		}
+		
+		if ($("#notiNotRead").text() != "通知（未讀通知：0）"){
+			$("#notiNotRead").css("color", "yellow");
 		}
 	});
 	function signOut() {
@@ -51,7 +74,7 @@
 	  }
 </script>
 <body>
-<nav class="navbar navbar-expand bg-dark navbar-dark">
+<nav class="navbar navbar-expand bg-dark navbar-dark barfont">
   <!-- Brand/logo -->
   <a class="navbar-brand" href="${pageContext.request.contextPath}">
     <img src="<c:url value='/resources/img/logo_94x94_07.png'/>" alt="logo" style="width:45px;">
@@ -70,10 +93,20 @@
     <li class="nav-item">
       <c:choose>
       	<c:when test="${memberId != null}">
-       		<a id="notRead" class="nav-link" target="_blank" href="${pageContext.request.contextPath}/member/self/message">訊息匣（未讀訊息：${notReadQuantity}）</a>
+       		<a id="messageNotRead" class="nav-link" target="_blank" href="${pageContext.request.contextPath}/member/message">訊息匣（未讀訊息：${messageNotReadQuantity}）</a>
         </c:when>
         <c:otherwise>
-            <a class="nav-link" target="_blank" href="${pageContext.request.contextPath}/member/self/message">訊息匣</a>
+            <a class="nav-link" target="_blank" href="${pageContext.request.contextPath}/member/message">訊息匣</a>
+        </c:otherwise>
+      </c:choose>
+    </li>
+    <li class="nav-item">
+      <c:choose>
+      	<c:when test="${memberId != null}">
+       		<a id="notiNotRead" class="nav-link" target="_blank" href="${pageContext.request.contextPath}/member/notification">通知（未讀通知：${notiNotReadQuantity}）</a>
+        </c:when>
+        <c:otherwise>
+            <a class="nav-link" target="_blank" href="${pageContext.request.contextPath}/member/notification">通知</a>
         </c:otherwise>
       </c:choose>
     </li>
@@ -81,7 +114,10 @@
       <a class="nav-link" href="${pageContext.request.contextPath}/login">登入／註冊</a>
     </li>
     <li id="hasLogin" class="nav-item">
-      <a class="nav-link hasLogin" href="${pageContext.request.contextPath}/member">${memberName}${admin}</a>
+      <a class="nav-link hasLogin" href="${pageContext.request.contextPath}/member">${memberName}</a>
+    </li>
+    <li id="AdminHasLogin" class="nav-item">
+      <a class="nav-link AdminHasLogin" href="${pageContext.request.contextPath}/admin">${admin}</a>
     </li>
     <li id="logout" class="nav-item">
       <a id="googleLogout" class="nav-link logout" href="${pageContext.request.contextPath}/logout" onclick="return(confirm('您確定要登出帳號嗎？'))">${logout}</a>

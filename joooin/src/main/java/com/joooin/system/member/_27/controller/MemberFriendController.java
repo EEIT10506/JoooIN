@@ -50,5 +50,18 @@ public class MemberFriendController {
 			return "not_login";
 		}	
 	}
+	
+	@RequestMapping(value = "/member/other/friend/{otherMemberId}", method = RequestMethod.GET)
+	public String otherFriend( @PathVariable Integer otherMemberId, Model model, HttpSession session) {
+		Integer selfMemberId = (Integer)session.getAttribute("memberId");
+		
+		if (selfMemberId == null || !selfMemberId.equals(otherMemberId)) {
+			model.addAttribute("memberMainBean", memberService.getMemberMainBean(otherMemberId));
+			model.addAttribute("friendList", memberService.getFriendsOnFriendPage(otherMemberId));
+			return "member/other/friend";
+		} else {
+			return "redirect:/member/self/friend/my_friend";
+		}
+	}
 
 }

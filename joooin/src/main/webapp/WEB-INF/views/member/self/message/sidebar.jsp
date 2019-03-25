@@ -44,7 +44,7 @@
 		
 		$(".contact").click(function(){
 			var hash = $(this).children();
-			location.href = "${pageContext.request.contextPath}/member/self/message/" + hash[0].value;
+			location.href = "${pageContext.request.contextPath}/member/message/" + hash[0].value;
 		});
 		
 		$(".preview").each(function(){

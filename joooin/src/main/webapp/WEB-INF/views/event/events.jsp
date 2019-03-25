@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <!-- dataTables样式表 -->
 <link
 	href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"
@@ -61,7 +62,12 @@ display:inline !important;
 } 
 
 .container{
-background-color:silver; 
+background-color:#FFEDCB;
+width:75%; 
+}
+
+iframe{
+margin: 0; padding: 0;
 }
 </style>
 <title>JoooIN</title>
@@ -82,12 +88,12 @@ background-color:silver;
 
 
 	<!-- 請把所有內容寫在此div內 -->
-	<div id="main" class="container">
-		<button id="new" class="btn btn-secondary btn-sm">開新活動</button>
-		<button id="get" class="btn btn-primary btn-sm">尋找活動</button>
-		
-
-		<div style="margin-bottom: 50px"></div>
+	<div id="main">
+	<div  class="container">
+		<button id="new" class="btn btn-secondary btn-lg" >開新活動</button>
+		<button id="get" class="btn btn-primary btn-lg" >尋找活動</button>
+        <hr>
+		<div style="margin-bottom: 20px"></div>
 
 		<div id="newdiv" style="display: none">
 
@@ -135,8 +141,8 @@ background-color:silver;
 
 					<form:input path='eventLongitude' id="lng" required="required" readonly="true" style="display:none"/>
 					<p></p>
-<!-- 					活動pid -->
-					<input id="pid" style="display:none" readonly="readonly" />
+					
+					<form:input id="pid" path='eventPlaceId' required="required"  readonly="true" style="display:none"/>
 					<p></p>
 				</div>
 				<p></p>
@@ -217,7 +223,7 @@ background-color:silver;
 						<th>目前</th>
 						<th>已滿</th>
 						<th>給讚</th>
-						<th>活動地圖</th>
+						<th>地圖</th>
 
 					</tr>
 				</thead>
@@ -248,7 +254,7 @@ background-color:silver;
      </c:if></td>
                             <td><button id="e${event.eventId}" value="${event.eventId}" class="likeBtn btn btn-primary btn-sm">讚:${event.eventLike}</button></td>
 							<td><button type="button" id="m${event.eventId}" class="btn btn-success eventJoin" data-toggle="modal" data-target="#map${event.eventId}">地圖</button>
-							<input style="display: none;" value="https://www.google.com/maps/embed/v1/place?key=AIzaSyC9cpXz2HFE2Dw_vITbm-T6Z-6v-TJujBQ&q=${event.eventAddress}" /></td>
+							<input style="display: none;" value="https://www.google.com/maps/embed/v1/place?key=AIzaSyC9cpXz2HFE2Dw_vITbm-T6Z-6v-TJujBQ&q=place_id:${event.eventPlaceId}" /></td>
 						</tr>
 							
 							
@@ -315,10 +321,6 @@ $(function () {
 });
 </script>
 
-
-
-
-
 <!-- DataTables v1.10.16 -->
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
@@ -334,7 +336,6 @@ function ValidateNumber(e, pnumber)
 
 function Validate(e, pnumber)
 {
-
     return false;
 }
 
@@ -355,10 +356,7 @@ $(document).ready(function () {
 	$(".eventJoin").click(function (){
 		var id = this.id.substring(1);
 		var mapsrc = $(this).next().val();
-		//alert(id);
-		//alert(mapsrc);
 		var iframe = "#if"+id;
-		//alert($(iframe).attr("src"));
 		$(iframe).attr("src",mapsrc);
 	});	
 	
@@ -389,7 +387,7 @@ $.fn.dataTable.ext.search.push(
 	        
 	        if(ewill=="all"){}
 	        if(ewill=="alcome"){dateminus = tablemin-todaynow; }
-	        if(ewill=="alfull"){peopleminus = data[6]-data[7]; }
+	        if(ewill=="alfull"){peopleminus = (data[6].slice(0,-1))-(data[7].slice(0,-1)); }
 	        
  	        if(ewill=="lost"){ 
  	          if(tablemax<todaynow){
@@ -407,7 +405,7 @@ $.fn.dataTable.ext.search.push(
 	               
 	                                    //滿團限制
 	               && (peopleminus<=1 && peopleminus>0 || peopleminus==null)   //上限人數與實際人數差一(有篩選)  或者未篩選快滿人
-	               && data[6]-data[7]>=0 //上限人數大於實際人數(人數未滿)
+	               && data[6].slice(0,-1)-data[7].slice(0,-1)>=0 //上限人數大於實際人數(人數未滿)
 	               
 	               
  	               && (tablemax-todaynow>0) //活動結束時間大於現在時間(活動未結束)
@@ -467,7 +465,7 @@ var table;
 var array = $(".likeBtn");
 
 
-//顯示讚
+//顯示讚 
  <c:forEach var='event' items='${AllEvents}'>
 $.ajax({
     type: "POST",                           
@@ -475,7 +473,6 @@ $.ajax({
     data: {"eventId": ${event.eventId}}, 
     success: function (result) {
 
-    	//var array = document.getElementsByClassName("likeBtn");
     	 
     	for (var i = 0; i < array.length; i++){
     		if (array[i].value == ${event.eventId} && result.substr(0,1)=="n"){
@@ -498,8 +495,7 @@ $.ajax({
     	var eventId = $(this).val();
     	
     	good = $(this);
-    	//alert(array.length);
-    	//alert(array2.length);
+
     	$.ajax({
     	    type: "POST",                           
     	    url: "${pageContext.request.contextPath}/event/good/"+eventId,
@@ -510,8 +506,7 @@ $.ajax({
     	    	else {
     	    		good.html("讚:"+result);	
 	    	    }
-    	    	//good.html("讚:"+result);
-    	    	
+
    	    	}
     	});
     });
@@ -540,32 +535,6 @@ $(document).ready(function () {
     	$("#getdiv").show();
     });
 
-
-	//活動時間驗證處理 
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = now.getMonth()+1;
-    if(month<10){month="0"+month;}
-    var date = now.getDate();
-    if(date<10){date="0"+date;}
-    var hour = now.getHours(); 
-    if(hour<10){hour="0"+hour;}
-    var minute = now.getMinutes();
-
-    var sec = now.getSeconds();
-
-    var nows = year + "-" + month + "-" + date + "T" + hour + ":" + minute;
-
-    var nowe = year + "-" + month + "-" + date + "T" + 23 + ":" + 59;
-
-
-    $('#sd').attr("min",nows);
-    $('#ed').attr("min",nowe);
-    
-    $('#sd').blur( function(){
-    //alert($('#sd').val());
-    $('#ed').attr("min",$('#sd').val());
-    });
     
 });
 
@@ -676,11 +645,7 @@ $(document).ready(function () {
             });
             markers.push(point);   
 
-       
-//document.getElementById("local").value = place.name;
-//document.getElementById("add").value = place.formatted_address;
-//document.getElementById("lng").value = place.geometry.location.lng();
-//document.getElementById("lat").value = place.geometry.location.lat();
+
 
             if (place.geometry.viewport) {
               // Only geocodes have viewport.
@@ -710,11 +675,9 @@ $("#oneclick").click(function (){
         
 });             
 
-             
-
     
   </script>
-
+            </div>
 		</div>
 	</div>
 	<!-- 請把所有內容寫在此div內 -->

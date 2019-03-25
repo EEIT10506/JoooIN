@@ -104,7 +104,7 @@
 	});
 	
 </script>
-<title>收到好友申請</title></head>
+<title>我的好友</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->

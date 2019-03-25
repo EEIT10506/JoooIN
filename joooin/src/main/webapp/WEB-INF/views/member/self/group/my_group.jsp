@@ -77,15 +77,14 @@
 		    };
 		var column=[
             {"data": "name", name:"社團名稱" , "orderable":true },
-            {"data": "link", name:"社團連結" , "orderable":false },
-            {"data": "setting", name:"社團設定" , "orderable":false }
+            {"data": "link", name:"社團連結" , "orderable":false }
            ];
 
 		$('#datatable').DataTable({"columns":column, "language":language, "lengthChange": false, "aLengthMenu" : 10, "bScrollCollapse": true});
 	});
 	
 </script>
-<title>我所創立的社團</title></head>
+<title>我的社團</title></head>
 <body>
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
@@ -102,7 +101,6 @@
 							<tr>
 								<th>社團名稱</th>
 	                            <th>社團連結</th>
-	                            <th>社團設定</th>
 							</tr>
 						</thead>		
 						<tbody>
@@ -110,7 +108,6 @@
 								<tr>
 									<td><img id="groupImage" src="<c:url value='/getGroupImage/${group.groupId}.jpg' />" />　${group.groupName}</td>
 		                            <td class="groupBtn"><p data-placement="top" data-toggle="tooltip" title="社團連結"><button value="${group.groupId}" class="groupPageBtn btn btn-primary btn-xs" data-title="社團連結" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
-		    						<td class="groupBtn"><p data-placement="top" data-toggle="tooltip" title="社團設定"><button value="${group.groupId}" class="groupSettingBtn btn btn-success btn-xs" data-title="社團設定" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_setting.png' />"/></button></p></td>
 								</tr>
 							</c:forEach>
 						</tbody>

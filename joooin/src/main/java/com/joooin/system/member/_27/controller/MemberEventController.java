@@ -63,4 +63,18 @@ public class MemberEventController {
 			return "not_login";
 		}	
 	}
+	
+	@RequestMapping(value = "/member/other/event/{otherMemberId}", method = RequestMethod.GET)
+	public String getOtherEvents(@PathVariable Integer otherMemberId, HttpSession session, Model model) {
+		Integer selfMemberId = (Integer)session.getAttribute("memberId");
+
+		if (selfMemberId == null || !selfMemberId.equals(otherMemberId)) {
+			model.addAttribute("memberMainBean", memberService.getMemberMainBean(otherMemberId));
+			model.addAttribute("eventList", memberService.getOtherEvents(otherMemberId));
+			return "member/other/event";
+		} else {
+			return "redirect:/member/self/event/my_event";
+		}
+	}
+	
 }

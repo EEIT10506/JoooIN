@@ -52,8 +52,10 @@ public class PostGroupController {
 			return "not_login";
 		}
 		
-		//
-//			待寫，非社團成員不可PO
+		//成員才可以發文
+		boolean Permission = groupService.getPermission(groupId, memberId);
+		model.addAttribute("Permission", Permission);
+		
 		//
 		GroupMainBean groupMain = groupService.getByGroupId(groupId);
 		model.addAttribute("groupMain", groupMain); // pass group資訊

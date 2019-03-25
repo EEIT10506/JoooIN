@@ -11,42 +11,41 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <style>
-	#btn, #str{visibility: hidden;}
+	#btns {visibility: hidden;}
+	
 </style>
 <script>
 	$(document).ready(function(){
-		$("#btn").click();
+		var eventId = ${eventId}
+		$("#btns").click();
 		
-		$("#login").click(function(){
-			location.href = "${pageContext.request.contextPath}/login";
+		$("#notEventManager").click(function(){
+			location.href = "${pageContext.request.contextPath}/event/"+eventId;
 		});
-		$("#register").click(function(){
-			location.href = "${pageContext.request.contextPath}/register";
-		});
-		$("#back").click(function(){
-			history.go(-1);
-		});
+		setTimeout(function() { 
+			$("#notEventManager").click();
+	    }, 3000);
+		 
 	});
 </script>
 <title></title>
 </head>
 <body>
-<button id="btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"></button>
+<button id="btns" type="button" class="btn btn-primary" data-toggle="modal" data-target="#notEventM"></button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="notEventM" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">尚未登入</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle" style="font-family:微軟正黑體;font-weight:bold;font-size:30px;color:red;">警告</h5>
       </div>
-      <div class="modal-body">
-       	您尚未登入，請先登入來使用此功能
+      <div class="modal-body" style="font-family:微軟正黑體;font-weight:bold;font-size:20px;">
+       	非此活動管理者  將在三秒後返活動頁面
       </div>
       <div class="modal-footer">
-      	<button id="login" type="button" class="btn btn-primary">登入</button>
-        <button id="register" type="button" class="btn btn-primary">註冊</button>
-        <button id="back" type="button" class="btn btn-secondary">回上一頁</button>
+      	<button id="notEventManager" type="button" class="btn btn-primary">回到活動</button>
+       
       </div>
     </div>
   </div>

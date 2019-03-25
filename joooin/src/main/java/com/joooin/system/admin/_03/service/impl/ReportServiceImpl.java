@@ -1,7 +1,6 @@
 package com.joooin.system.admin._03.service.impl;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -10,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.joooin.model.NotificationBean;
 import com.joooin.model.PunishmentBean;
 import com.joooin.model.ReportBean;
+import com.joooin.repository.NotificationDao;
 import com.joooin.repository.PunishmentDao;
 import com.joooin.repository.ReportDao;
 import com.joooin.system.admin._03.service.ReportService;
@@ -25,6 +26,9 @@ public class ReportServiceImpl implements ReportService {
 	
 	@Autowired
 	PunishmentDao punishmentDao;
+	
+	@Autowired
+	NotificationDao notificationDao;
 
 	@Override
 	public void ReportBeanSave(ReportBean rb) {
@@ -61,6 +65,11 @@ public class ReportServiceImpl implements ReportService {
 		pb.setReportId(reportId);
 		punishmentDao.save(pb);
 		
+	}
+
+	@Override
+	public void saveNotification(NotificationBean nb) {
+		notificationDao.save(nb);
 	}
 
 }

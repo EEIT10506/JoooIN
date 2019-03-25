@@ -50,5 +50,17 @@ public class MemberGroupController {
 		}	
 	}
 	
+	@RequestMapping(value = "/member/other/group/{otherMemberId}", method = RequestMethod.GET)
+	public String getOtherGroups(@PathVariable Integer otherMemberId, HttpSession session, Model model) {
+		Integer selfMemberId = (Integer)session.getAttribute("memberId");
+
+		if (selfMemberId == null || !selfMemberId.equals(otherMemberId)) {
+			model.addAttribute("memberMainBean", memberService.getMemberMainBean(otherMemberId));
+			model.addAttribute("groupList", memberService.getOtherGroups(otherMemberId));
+			return "member/other/group";
+		} else {
+			return "redirect:/member/self/group/my_group";
+		}
+	}
 	
 }

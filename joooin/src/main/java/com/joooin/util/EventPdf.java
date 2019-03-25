@@ -66,12 +66,24 @@ public class EventPdf extends AbstractITextPdfView{
 		table.addCell(cell);
 		
 		for (EventMainBean emb : list) {
+			
 			table.addCell(String.valueOf(emb.getEventId()));
 			cell.setPhrase(new Phrase(String.valueOf(emb.getEventName()), normalFont));
 			table.addCell(cell);
 			cell.setPhrase(new Phrase(String.valueOf(emb.getEventLocation()), normalFont));
 			table.addCell(cell);
-			cell.setPhrase(new Phrase(String.valueOf(emb.getEventTypeId()), normalFont));
+			if(emb.getEventTypeId().equals(1)) {
+				cell.setPhrase(new Phrase(String.valueOf("美食"), normalFont));
+			}
+			if(emb.getEventTypeId().equals(2)) {
+				cell.setPhrase(new Phrase(String.valueOf("運動"), normalFont));
+			}
+			if(emb.getEventTypeId().equals(3)) {
+				cell.setPhrase(new Phrase(String.valueOf("娛樂"), normalFont));
+			}
+			if(emb.getEventTypeId().equals(4)) {
+				cell.setPhrase(new Phrase(String.valueOf("其他"), normalFont));
+			}
 			table.addCell(cell);
 			cell.setPhrase(new Phrase(String.valueOf(emb.getEventCurrentMembers()), normalFont));
 			table.addCell(cell);

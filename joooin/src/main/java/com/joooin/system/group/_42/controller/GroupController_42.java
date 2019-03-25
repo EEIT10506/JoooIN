@@ -46,11 +46,13 @@ public class GroupController_42 {
 	}
 	//加判斷是否為group會員顯示前端加入社團 進入社團
 	@RequestMapping(method = RequestMethod.GET, value = "/groups/{grouponetype}")
-	public String getGroupTypeOne(@PathVariable("grouponetype") String groupOneType ,Model model, HttpSession session,Integer groupId,Integer memberId) {
+	public String getGroupTypeOne(@PathVariable("grouponetype") String groupOneType ,Model model, HttpSession session) {
+
 		
 		Integer memId = (Integer) session.getAttribute("memberId"); //會員紀錄
 		List<GroupMainBean> typeOne = service.getGroupType(groupOneType);
 		
+
 		model.addAttribute("groupsType", typeOne);
 		
 		// 入團判斷
@@ -76,11 +78,20 @@ public class GroupController_42 {
 //		
 //		}
 
+		model.addAttribute("groupsType", typeOne);
+		List<GroupMainBean> list = service.getGroupType(groupOneType);
+
+
+
 		// 入團判斷
 			
+
+		//判斷是否為成員by ZH
+
 		
 
 
+		//判斷是否為成員by ZH
 		return "group/groups_type"; 
 			}
 

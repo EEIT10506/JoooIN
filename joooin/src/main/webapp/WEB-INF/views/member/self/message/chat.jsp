@@ -56,7 +56,7 @@
 			
 			$.ajax({
 			    type: "POST",                           
-			    url: "${pageContext.request.contextPath}/member/self/message/setOneMessageRead",
+			    url: "${pageContext.request.contextPath}/member/message/setOneMessageRead",
 			    data: {"messageHash": "${hash}"},
 			});
 			
@@ -90,7 +90,7 @@
 			
 			$.ajax({
 			    type: "POST",                           
-			    url: "${pageContext.request.contextPath}/member/self/message/saveText",
+			    url: "${pageContext.request.contextPath}/member/message/saveText",
 			    data: {"text": text, "receiveMemberId": receiveMemberId, "messageHash": "${hash}"},
 			});
 			
@@ -110,11 +110,11 @@
 <title>與會員 ${friend.memberName } 的聊天訊息</title>
 </head>
 <body>
-	<jsp:include page="${request.contextPath}/member/self/message"/>
+	<jsp:include page="${request.contextPath}/member/message"/>
 <!-- 	右訊息區 -->
 	<div class="content">
 		<div alt="關閉對話" style="float:right;padding-right:18px;padding-top:18px;cursor: pointer">
-			<a href="${pageContext.request.contextPath}/member/self/message">
+			<a href="${pageContext.request.contextPath}/member/message">
 				<img src="<c:url value='/resources/img/icon_close.png' /> ">
 			</a>
 		</div>
