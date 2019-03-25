@@ -41,7 +41,7 @@ body {
 .sidenav a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 25px;
   color: #818181;
   display: block;
   transition: 0.3s;
@@ -82,7 +82,7 @@ function openNav() {
 			<div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="${pageContext.request.contextPath}/group/${groupMain.groupId}">${groupMain.groupName}</a>
-  <a href="${pageContext.request.contextPath}/group/about/${groupMain.groupId}">關於 ${groupMain.groupName}</a>
+  <a href="${pageContext.request.contextPath}/group/about/${groupMain.groupId}">關於我們</a>
   <a href="${pageContext.request.contextPath}/group/members/${groupMain.groupId}">社團成員</a>
   <a href="${pageContext.request.contextPath}/group/addpost/${groupMain.groupId}">發文</a>
   <a href="#">聊天</a>

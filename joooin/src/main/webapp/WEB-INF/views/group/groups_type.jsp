@@ -85,6 +85,7 @@
 <%-- 												</form> --%>
 <%-- 											</c:when> --%>
 											
+
 <%-- 											<c:otherwise> --%>
 <%-- 												<form action="${pageContext.request.contextPath}/group/addgroup/${groupsType.groupId}" method="post"> --%>
 <!-- 												<button type="submit" -->
@@ -93,6 +94,8 @@
 <%-- 											</c:otherwise> --%>
 <%-- 											</c:choose> --%>
 <!-- 										入團按鈕 -->
+
+
 
 										</div>
 										<small class="text-muted"></small>

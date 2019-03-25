@@ -335,7 +335,7 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 		List<GroupPostBean> groupPosts = groupPostDao.getAll();
 		List<Poster> postersByGroupId = new LinkedList<Poster>();
 		for (GroupPostBean post : groupPosts) {
-			if (post.getGroupId().equals(groupId) && (!post.getIsDeleted())) {
+			if (post.getGroupId().equals(groupId)) {
 				Poster poster = new Poster();
 				poster.setGroupId(groupId);
 				poster.setGroupPostImage(post.getGroupPostImage());
@@ -354,7 +354,7 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 				} else {
 					poster.setLastReplyDate(replys.get(replys.size() - 1).getGroupPostReplyDate());
 				}
-				//
+
 				postersByGroupId.add(poster);
 			}
 		}

@@ -187,7 +187,7 @@
 
 								<button id="confirmType" class="btn btn-default btn-lg btn-danger" style="display:none;" type="submit" >確認修改</button>
 								</p>
-						
+								
 								</form>
 								<p class="text-right">
 								<button id="cancelType" class="btn btn-default btn-lg btn-danger" style="display:none;">取消</button>

@@ -52,10 +52,42 @@ public class GroupController_42 {
 		Integer memId = (Integer) session.getAttribute("memberId"); //會員紀錄
 		List<GroupMainBean> typeOne = service.getGroupType(groupOneType);
 		
+
 		model.addAttribute("groupsType", typeOne);
+		
+		// 入團判斷
+		
+//		if(memId == null) {
+//			model.addAttribute("status", "加入社團");
+//		}else {
+//			model.addAttribute("status", "進入社團/加入社團");
+//		}
+//		
+//		List<GroupMemberBean> groupMemberList = groupMemberDao.getAll();  
+//		         
+//				for (GroupMemberBean singleGroupMember : groupMemberList) {	
+//					if(memId == null) model.addAttribute("status", "加入社團");
+//					if (    //類型中GroupId和社團中相同
+//							memId.equals(singleGroupMember.getGroupMemberId())      //登入會員的g memberId 相同
+//							 &&(singleGroupMember.getIsAgreed())
+//							){
+//						
+//						model.addAttribute("status", "進入社團");
+//		} 
+//			
+//		
+//		}
+
+		
 		List<GroupMainBean> list = service.getGroupType(groupOneType);
 
+
+
+		// 入團判斷
+			
+
 		//判斷是否為成員by ZH
+
 		
 
 
