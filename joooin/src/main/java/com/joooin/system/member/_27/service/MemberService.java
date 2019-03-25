@@ -10,6 +10,8 @@ import com.joooin.system.member._27.pojo.FriendPojo;
 
 public interface MemberService {
 	public MemberMainBean getMemberMainBean(Integer memberId);
+	public EventMainBean getEventMainBean(Integer eventId);
+	public GroupMainBean getGroupMainBean(Integer groupId);
 	public String updateProfile(Integer memberId, MemberMainBean updateBean, ServletContext context);
 	public void updatePassword(String password1, String password2, Integer memberId);
 	public void updatePrivacy(Integer memberId, MemberMainBean updateBean);

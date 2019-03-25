@@ -13,16 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.joooin.model.EventMainBean;
 import com.joooin.model.GroupMainBean;
-import com.joooin.model.GroupPostBean;
 import com.joooin.model.MemberMainBean;
-import com.joooin.repository.MemberMainDao;
 import com.joooin.system.event._35.service.EventsService;
 import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.system.member._27.service.MemberService;
 import com.joooin.system.member._27.service.MessageService;
+import com.joooin.system.member._27.service.NotificationService;
 import com.joooin.util.ImageUtils;
 
 @Controller
@@ -37,6 +35,8 @@ public class HomeController {
 	ServletContext context;
 	@Autowired
 	MessageService messageService;
+	@Autowired
+	NotificationService notificationService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String homepage(Model model) {
@@ -64,9 +64,8 @@ public class HomeController {
 		
 		if (memberId != null) {
 			model.addAttribute("messageNotReadQuantity", messageService.getAllFriendNotReadQuantity(memberId));
+			model.addAttribute("notiNotReadQuantity", notificationService.getNotiNotReadQuantity(memberId));
 		}
-			
-		
 		return "navbar";
 	}
 	@RequestMapping(value = "/getMemberImage/{memberId}", method = RequestMethod.GET)

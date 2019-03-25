@@ -17,7 +17,7 @@
 		position: relative;
 		top: 50px;
 	}
-	.friendBtn {
+	.btnTd {
 		width: 90px;
 		text-align: center;
 	}
@@ -35,6 +35,14 @@
 		position: relative;
 		top: 7px;
 	}
+	.type, .time, .link {
+		text-align: center;
+	}
+	.linkP {
+		position:relative;
+		top:3px;
+	}
+	
 </style>
 <script>
 	$(document).ready(function(){	
@@ -102,19 +110,19 @@
    				<thead>
 					<tr>
 						<th>類型</th>
-                           <th>內容</th>
-                           <th>時間</th>
-                           <th>查看</th>
+                        <th>內容</th>
+                        <th>時間</th>
+                        <th>查看</th>
 					</tr>
 				</thead>		
 				<tbody>
-					<c:forEach var="friend" items="${friendList}">
-						<c:if test="${friend.isFriend == true}">
-							<tr>
-								<td>　${friend.memberName} </td>
-	                            <td><p data-placement="top" data-toggle="tooltip" title="內容"></p></td>
-	                            <td><p data-placement="top" data-toggle="tooltip" title="時間"></p></td>
-	                            <td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="查看"><button value="${friend.messageHash}" class="friendChatBtn btn btn-primary btn-xs" data-title="查看" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
+					<c:forEach var="pojo" items="${list}">
+						<c:if test="${pojo != null}">
+							<tr style="height: 20px;">
+								<td class="type" style="vertical-align:middle">${pojo.type}</td>
+	                            <td class="content" style="vertical-align:middle"><p data-placement="top" data-toggle="tooltip" title="內容">${pojo.content }</p></td>
+	                            <td class="time" style="vertical-align:middle"><p data-placement="top" data-toggle="tooltip" title="時間">${pojo.notificationDate }</p></td>
+	                            <td class="link" style="padding: 0px;"><p class="linkP" data-placement="top" data-toggle="tooltip" title="查看"><button value="${pojo.linkId}" class="btn btn-primary btn-xs" data-title="查看" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
 	    					</tr>
 						</c:if>
 					</c:forEach>

@@ -90,7 +90,7 @@
 					</c:choose>
 					</p>
 					<hr class="my-4">
-					<h2 class="display-4">好友關係：<label id="friendText"></label></h2>
+					<h1 class="display-6">好友關係：<label id="friendText"></label></h1>
 	<!-- 				  <p>Itf</p> -->
 	<!-- 				  <p class="lead"> -->
 	<!-- 				      <a class="btn btn-primary btn-md" href="#" role="button">Learn more</a> -->
