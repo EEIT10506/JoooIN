@@ -39,11 +39,11 @@ public class DeleteGroupController_42 {
 	//刪除文章功能(進行中)
 	@RequestMapping(value = "/DeleteGroupPost", method = RequestMethod.POST)
 	public String DeleteGroupPostartice(Integer groupId,Integer groupPostId,HttpSession session) {
-		Integer adminId = (Integer) session.getAttribute("admin");
+		
 		Integer memberId = (Integer) session.getAttribute("memberId");
 		
 		
-		if(adminId !=null&&memberId!=null) {
+		if(memberId!=null) {
 			GroupPostBean groupPostBean =service2.getPostByGroupPostId(groupPostId);
 			groupPostBean.setIsDeleted(true);
 			service.updateGroupPostIsDeleted(groupPostBean);

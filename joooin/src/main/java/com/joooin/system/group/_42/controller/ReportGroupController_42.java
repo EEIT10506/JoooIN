@@ -49,13 +49,12 @@ public class ReportGroupController_42 {
 	}
 	
 	@RequestMapping(value ="/report/{reportId}/{reportName}", method = RequestMethod.POST)
-	public String reportGroupProcess(@ModelAttribute("reportBean")ReportBean rb, RedirectAttributes redirectAttributes,@PathVariable("reportId") Integer memberId, Integer groupId,String memberName,
+	public String reportGroupProcess(@ModelAttribute("reportBean")ReportBean rb, RedirectAttributes redirectAttributes,@PathVariable("reportId") Integer memberId, Integer groupId,@PathVariable("reportName")String memberName,
 			HttpSession session) {
 		
 		
 		rb.setReportViolatorId(memberId);
 		reportService.ReportBeanSave(rb);
-		
 		redirectAttributes.addFlashAttribute("success", "檢舉成功");
 		
 		return "redirect:/report/"+ memberId+"/"+memberName;

@@ -235,14 +235,14 @@ $(document).ready(function () {
 	    <div class="card-body">
 	        <div class="row">
         	    <div class="col-md-2">
-        	    <c:if test="${poster.isDeleted==false}">
+        	    
         	        <img src="<c:url value='/getMemberImage/${poster.memberId}.jpg' />" class="img img-rounded img-fluid"/>
         	        <p class="text-secondary text-center">${poster.groupPostDate }</p>
         	    </div>
         	    <div class="col-md-10">
         	        <p>
         	            <a class="float-left" href="${pageContext.request.contextPath}/member/other/${poster.memberId}"><strong>${poster.memberName }</strong></a>
-        	           <c:if test="${admin != null}"> 
+        	           <c:if test="${sessionScope.memberId == poster.memberId}"> 
         	           <form class="DeleteGroupPost" Action="${pageContext.request.contextPath}/DeleteGroupPost" method="POST">
         	           <input type="hidden"  name="groupId" value="${poster.groupId}">
         	           <input type="hidden"  name="groupPostId" value="${poster.memberId}">  
@@ -255,10 +255,9 @@ $(document).ready(function () {
         	       <div class="clearfix"></div>
         	        <p> ${poster.groupPostText }</p>
         	        <p> 
-        	        	<from action="${pageContext.request.contextPath}/report/${poster.memberId}/${poster.memberName}" method="POST">	
-        	        	<input type="hidden" name="" value="">
-        	            <button type="submit"  class="float-right btn btn-outline-primary ml-2" > <i class="fa fa-reply" ></i> 檢舉</button>
-        	            </from>
+        	        	
+        	            <a   class="float-right btn btn-outline-primary ml-2" href="${pageContext.request.contextPath}/report/${poster.memberId}/${poster.memberName}" > <i class="fa fa-reply"  ></i> 檢舉</a>
+        	            
         	            <a class="float-right btn text-danger btn-light" id="like"> <i class="fa fa-heart"></i> Like</a>
 <!--         	        <a class="float-right btn text-danger btn-light" id="like"> 變換按鈕-->
 <!--         	        <a class="float-right btn text-white btn-danger" id="like"> 變換按鈕-->
@@ -287,12 +286,12 @@ $(document).ready(function () {
 	 </c:choose>
 	 
 </div>
-</c:if>
-<c:if test="${poster.isDeleted==true}">
+
+
 <div>
 文章已被刪除
 </div>
-</c:if>
+
 		<!-- 		主文及回文 -->
 		<!-- 		id="chatbox" 回文 -->
 		
