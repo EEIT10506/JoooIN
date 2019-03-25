@@ -107,6 +107,11 @@ $( document ).ready(function() {
 	$(function() {
 		$("#usermsg").keypress(function(e) {
 			 if(e.which == 13 && !e.shiftKey) { //按下enter不包含shift+enter
+				// 回文不可是空
+				if($(this).val().trim() == ""){
+					e.preventDefault();
+					return;
+				}
 				 
 				var reply_content = ($(this).val() + "<br/>"); 
 				//submit form via ajax, this is not JS but server side scripting so not showing here
@@ -150,7 +155,10 @@ $( document ).ready(function() {
 								
 				$(this).val("");
 				e.preventDefault();
-			}
+			
+			 
+			 
+			 }
 		});
 	});
 	
@@ -262,7 +270,7 @@ $(document).ready(function () {
 <!--         	        <a class="float-right btn text-danger btn-light" id="like"> 變換按鈕-->
 <!--         	        <a class="float-right btn text-white btn-danger" id="like"> 變換按鈕-->
                    </p>
-                   <img class="img-thumbnail" alt="" src="<c:url value='/getPostImage/${poster.groupPostId}.jpg' />">
+                   <img class="img-thumbnail" alt="" width="50%" src="<c:url value='/getPostImage/${poster.groupPostId}.jpg' />">
         	    </div>
 	        </div>
 	       
@@ -271,12 +279,19 @@ $(document).ready(function () {
 	        </div>
 	    </div>
 	</div>
+	 
+</div>
+	<br>
 	<c:choose>
 	<c:when test="${Permission}">
-		<textarea name="usermsg" autocomplete="off" type="text"
-						id="usermsg" rows="4" cols="30" 
+		<div class="form-group">
+	  		<label for="usermsg"><i class="fa fa-pencil"></i>回覆文章:</label>
+	  		<br>
+	  		<textarea name="usermsg" autocomplete="off" type="text"
+						id="usermsg" rows="5" cols="30" 
 						onFocus="if(this.value==this.defaultValue) this.value=''" onBlur="if(this.value=='') this.value=this.defaultValue"
 						style="width: 450px; margin-left: 25px;">按下Enter送出</textarea>
+		</div>
 	</c:when>
 			<c:otherwise>
 				<span class="d-block p-2 bg-dark text-white">
@@ -284,6 +299,7 @@ $(document).ready(function () {
 				</span>
             </c:otherwise>
 	 </c:choose>
+<<<<<<< HEAD
 	 
 </div>
 
@@ -292,6 +308,8 @@ $(document).ready(function () {
 文章已被刪除
 </div>
 
+=======
+>>>>>>> refs/heads/陳昭樺
 		<!-- 		主文及回文 -->
 		<!-- 		id="chatbox" 回文 -->
 		
