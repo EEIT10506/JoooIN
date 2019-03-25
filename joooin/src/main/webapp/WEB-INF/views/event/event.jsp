@@ -317,14 +317,14 @@
 		height:25px; 
 		font-size:12px !important;
 		 position:relative;
-		 left:530px; 
+/* 		 left:543px;  */ 
  	}  
  	.report{
 	 	font-size:12px !important;
 	 	width:50px;
-		height:25px; 
+		height:25px;  
 		 position:relative;
-		 left:520px;   
+		 left:537px;    
 /*  		margin-left:500px; */
 /*  		margin-left:100px; */ 
  	}
@@ -565,18 +565,18 @@ function ValidateNumber(e, pnumber)
 <!--   	   	各留言 -->
 			<c:forEach var="getPostContentlist" items="${getPostContentlist}">
 <!-- 			留言區 -->
-  	   		<p class="messageContent">
+  	   		<p class="messageContent"> 
   	   	<c:if test="${getPostContentlist.isDeleted == false }">
   	   			<a class="a leaveMessageName" href="<c:url value='/member/other/${getPostContentlist.memberId}' />"><span><img class="eventbuilderName" src="<c:url value='/getMemberImage/${getPostContentlist.memberId}.jpg' />" width="30px" height=30px" style="border-radius:25px;"/></span>
-  	   			<span class="leaveMessageName"> ${getPostContentlist.memberName} </span></a>
+  	   			<span class="leaveMessageName" "> ${getPostContentlist.memberName} </span></a>
   	   			<span>
   	   		 <c:if test="${memberId == getPostContentlist.memberId and adminId == null}">
-  	   			<button type="button" id="" class="btn btn-dark delete" data-toggle="modal" data-target="#messageDelete${getPostContentlist.eventPostId}">
+  	   			<button style="float:right;" type="button" id="" class="btn btn-dark delete" data-toggle="modal" data-target="#messageDelete${getPostContentlist.eventPostId}">
 				      刪除
 				</button>
   	   		 </c:if>
   	   		 <c:if test="${adminId != null}">
-  	   		    <button type="button" id="" class="btn btn-dark delete" data-toggle="modal" data-target="#messageDelete${getPostContentlist.eventPostId}">
+  	   		    <button style="float:right;" type="button" id="" class="btn btn-dark delete" data-toggle="modal" data-target="#messageDelete${getPostContentlist.eventPostId}">
 				      刪除
 				</button>
   	   		 </c:if>
