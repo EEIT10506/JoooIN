@@ -53,8 +53,12 @@
 			$("#AdminHasLogin").show();
 		} 
 		
-		if ($("#notRead").text() != "訊息匣（未讀訊息：0）"){
-			$("#notRead").css("color", "red");
+		if ($("#messageNotRead").text() != "訊息匣（未讀訊息：0）"){
+			$("#messageNotRead").css("color", "red");
+		}
+		
+		if ($("#notiNotRead").text() != "通知（未讀通知：0）"){
+			$("#notiNotRead").css("color", "yellow");
 		}
 	});
 	function signOut() {
@@ -89,10 +93,20 @@
     <li class="nav-item">
       <c:choose>
       	<c:when test="${memberId != null}">
-       		<a id="notRead" class="nav-link" target="_blank" href="${pageContext.request.contextPath}/member/self/message">訊息匣（未讀訊息：${notReadQuantity}）</a>
+       		<a id="messageNotRead" class="nav-link" target="_blank" href="${pageContext.request.contextPath}/member/message">訊息匣（未讀訊息：${messageNotReadQuantity}）</a>
         </c:when>
         <c:otherwise>
-            <a class="nav-link" target="_blank" href="${pageContext.request.contextPath}/member/self/message">訊息匣</a>
+            <a class="nav-link" target="_blank" href="${pageContext.request.contextPath}/member/message">訊息匣</a>
+        </c:otherwise>
+      </c:choose>
+    </li>
+    <li class="nav-item">
+      <c:choose>
+      	<c:when test="${memberId != null}">
+       		<a id="notiNotRead" class="nav-link" target="_blank" href="${pageContext.request.contextPath}/member/notification">通知（未讀通知：${notiNotReadQuantity}）</a>
+        </c:when>
+        <c:otherwise>
+            <a class="nav-link" target="_blank" href="${pageContext.request.contextPath}/member/notification">通知</a>
         </c:otherwise>
       </c:choose>
     </li>

@@ -15,22 +15,14 @@
 </style>
 <script>
 	$(document).ready(function(){
-		$("#btn").click();
-		
-		$("#login").click(function(){
-			location.href = "${pageContext.request.contextPath}/login";
-		});
-		$("#register").click(function(){
-			location.href = "${pageContext.request.contextPath}/register";
-		});
-		$("#back").click(function(){
-			history.go(-1);
-		});
+		$("#btn").click();		
+		$("#ok").click(function(){history.back();});
 	});
 </script>
 <title></title>
 </head>
 <body>
+<p id="str">${pageContext.request.contextPath}</p>
 <button id="btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"></button>
 
 <!-- Modal -->
@@ -38,15 +30,13 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">尚未登入</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">尚未成為好友</h5>
       </div>
       <div class="modal-body">
-       	您尚未登入，請先登入來使用此功能
+       	您與該會員尚未成為好友，請先成為好友後方可發送訊息
       </div>
       <div class="modal-footer">
-      	<button id="login" type="button" class="btn btn-primary">登入</button>
-        <button id="register" type="button" class="btn btn-primary">註冊</button>
-        <button id="back" type="button" class="btn btn-secondary">回上一頁</button>
+      	<button id="ok" type="button" class="btn btn-primary">確定</button>
       </div>
     </div>
   </div>
