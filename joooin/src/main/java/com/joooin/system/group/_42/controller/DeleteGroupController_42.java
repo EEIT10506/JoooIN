@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupPostBean;
@@ -38,16 +39,16 @@ public class DeleteGroupController_42 {
 	
 	//刪除文章功能(進行中)
 	@RequestMapping(value = "/DeleteGroupPost", method = RequestMethod.POST)
-	public String DeleteGroupPostartice(Integer groupId,Integer groupPostId,HttpSession session) {
-		
-		Integer memberId = (Integer) session.getAttribute("memberId");
+	public String DeleteGroupPostartice(@RequestParam("groupId") Integer groupId,@RequestParam("groupPostId") Integer groupPostId,HttpSession session) {
 		
 		
-		if(memberId!=null) {
-			GroupPostBean groupPostBean =service2.getPostByGroupPostId(groupPostId);
+		GroupPostBean groupPostBean =service2.getPostByGroupPostId(groupPostId);
+		
+		
+			
 			groupPostBean.setIsDeleted(true);
 			service.updateGroupPostIsDeleted(groupPostBean);
-		}
+		
 		return "redirect:/group/" + groupId;
 		
 	}
