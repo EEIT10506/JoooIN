@@ -15,7 +15,7 @@
 		width: 1200px;
 		margin: auto;
 		position: relative;
-		top: 50px;
+		top: 120px;
 	}
 	.btnTd {
 		width: 90px;
@@ -26,10 +26,6 @@
 	}
 	thead {
 		text-align: center;
-	}
-	#friendImage {
-		width: 50px;
-		border-radius: 100px;
 	}
 	button {
 		position: relative;
@@ -69,7 +65,6 @@
 			    }
 			});
 		});
-		
 		
 		
 		//DataTable
@@ -119,9 +114,9 @@
 					<c:forEach var="pojo" items="${list}">
 						<c:if test="${pojo != null}">
 							<tr style="height: 20px;">
-								<td class="type" style="vertical-align:middle">${pojo.type}</td>
-	                            <td class="content" style="vertical-align:middle"><p data-placement="top" data-toggle="tooltip" title="內容">${pojo.content }</p></td>
-	                            <td class="time" style="vertical-align:middle"><p data-placement="top" data-toggle="tooltip" title="時間">${pojo.notificationDate }</p></td>
+								<td class="type" style="width:60px;vertical-align:middle">${pojo.type}</td>
+	                            <td class="content" style="vertical-align:middle">${pojo.content }</td>
+	                            <td class="time" style="width:150px;vertical-align:middle">${pojo.notificationDate }</td>
 	                            <td class="link" style="padding: 0px;"><p class="linkP" data-placement="top" data-toggle="tooltip" title="查看"><button value="${pojo.linkId}" class="btn btn-primary btn-xs" data-title="查看" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
 	    					</tr>
 						</c:if>

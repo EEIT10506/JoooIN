@@ -13,7 +13,7 @@
 	   font-family:微軟正黑體;
 	   font-weight:bold;
 	   height:110px;
-	   margin-top:30px;
+	   margin-top:100px;
 	   
 	   background-color:#333333;
 	}

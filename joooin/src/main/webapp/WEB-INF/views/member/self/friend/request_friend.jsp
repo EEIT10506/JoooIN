@@ -17,7 +17,7 @@
 		width: 1200px;
 		margin: auto;
 		position: relative;
-		top: 50px;
+		top: 120px;
 	}
 	.friendBtn {
 		width: 90px;

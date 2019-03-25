@@ -29,13 +29,20 @@
 	}
 
 	.barfont{
-	    font-family:微軟正黑體;
 	    font-weight:bold;
-
+	}
 	#AdminHasLogin {
-		position: absolute;
+		position: relative;
 		right: 75px;
 
+	}
+	* {
+		font-family:微軟正黑體;
+	}
+	#navbar-top {
+		position: fixed;
+		width: 100%;
+		z-index: 100;
 	}
 </style>
 <script>
@@ -74,7 +81,7 @@
 	  }
 </script>
 <body>
-<nav class="navbar navbar-expand bg-dark navbar-dark barfont">
+<nav id="navbar-top" class="navbar navbar-expand bg-dark navbar-dark barfont">
   <!-- Brand/logo -->
   <a class="navbar-brand" href="${pageContext.request.contextPath}">
     <img src="<c:url value='/resources/img/logo_94x94_07.png'/>" alt="logo" style="width:45px;">
