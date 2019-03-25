@@ -69,17 +69,29 @@
 									<p class="card-text">社團介紹:${groupsType.groupIntro}</p>
 									<div class="d-flex justify-content-between align-items-center">
 										<div class="btn-group">
-
-									
+											<c:choose>
+											<c:when test="isInGroup">
+												<form action="${pageContext.request.contextPath}/group/addgroup/${groupsType.groupId}" method="post">
+													<button type="submit"
+														class="btn btn-sm btn-outline-secondary">進入社團</button>
+												</form>
+											</c:when>
 											
+											<c:when test="isInGroup">
+												<form action="${pageContext.request.contextPath}/group/addgroup/${groupsType.groupId}" method="post">
+													<button type="submit"
+														class="btn btn-sm btn-outline-secondary">申請中</button>
+												</form>
+											</c:when>
 											
-											<form action="${pageContext.request.contextPath}/group/addgroup/${groupsType.groupId}" method="post">
+											<c:otherwise>
+												<form action="${pageContext.request.contextPath}/group/addgroup/${groupsType.groupId}" method="post">
 												<button type="submit"
-													class="btn btn-sm btn-outline-secondary">${status}</button>
-											</form>
-											
-											
-									
+													class="btn btn-sm btn-outline-secondary">加入社團</button>
+												</form>
+											</c:otherwise>
+											</c:choose>
+
 										</div>
 										<small class="text-muted"></small>
 									</div>

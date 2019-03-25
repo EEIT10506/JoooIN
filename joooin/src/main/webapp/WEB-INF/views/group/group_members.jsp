@@ -53,9 +53,11 @@ $(".textacc").each(function(){
 		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 		<div class="content">
 			<div class="container mt-3">
-				<div class="card-columns">
+				<div class="row">
+<!-- 				<div class="card-columns"> -->
 					<c:forEach var="member" items="${memberInfos}">
-						<div class="card" style="width: 18rem; height: 40rem">
+					<div class="col-sm-3">
+						<div class="card mt-3" style="width: 14rem; height: 40rem">
 							<img
 								src="<c:url value='/getMemberImage/${member.memberId}.jpg' />"
 								class="img-fluid card-img-top img-thumbnail rounded-circle"
@@ -81,7 +83,9 @@ $(".textacc").each(function(){
 								</c:if>
 								</div>
 						</div>
+						</div>
 					</c:forEach>
+<!-- 					</div> -->
 				</div>
 			</div>
 		</div>

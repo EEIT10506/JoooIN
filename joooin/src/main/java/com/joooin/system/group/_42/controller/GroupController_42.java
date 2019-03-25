@@ -46,38 +46,20 @@ public class GroupController_42 {
 	}
 	//加判斷是否為group會員顯示前端加入社團 進入社團
 	@RequestMapping(method = RequestMethod.GET, value = "/groups/{grouponetype}")
-	public String getGroupTypeOne(@PathVariable("grouponetype") String groupOneType ,Model model, HttpSession session,Integer groupId,Integer memberId) {
+	public String getGroupTypeOne(@PathVariable("grouponetype") String groupOneType ,Model model, HttpSession session) {
+
 		
 		Integer memId = (Integer) session.getAttribute("memberId"); //會員紀錄
 		List<GroupMainBean> typeOne = service.getGroupType(groupOneType);
 		
 		model.addAttribute("groupsType", typeOne);
-		
-		if(memId == null) {
-			model.addAttribute("status", "加入社團");
-		}else {
-			model.addAttribute("status", "進入社團/加入社團");
-		}
-//		
-//		List<GroupMemberBean> groupMemberList = groupMemberDao.getAll();  
-//		         
-//				for (GroupMemberBean singleGroupMember : groupMemberList) {	
-//					if(memId == null) model.addAttribute("status", "加入社團");
-//					if (    //類型中GroupId和社團中相同
-//							memId.equals(singleGroupMember.getGroupMemberId())      //登入會員的g memberId 相同
-//							 &&(singleGroupMember.getIsAgreed())
-//							){
-//						
-//						model.addAttribute("status", "進入社團");
-//		} 
-//			
-//		
-//		}
+		List<GroupMainBean> list = service.getGroupType(groupOneType);
 
-			
+		//判斷是否為成員by ZH
 		
 
 
+		//判斷是否為成員by ZH
 		return "group/groups_type"; 
 			}
 
