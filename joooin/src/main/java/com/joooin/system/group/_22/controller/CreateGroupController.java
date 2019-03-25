@@ -32,7 +32,7 @@ public class CreateGroupController {
 	ServletContext context;
 	
 	// 時間格式
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ahh:mm:ss");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	// 送出空白社團表單
 	@RequestMapping(method = RequestMethod.GET, value = "/groups/create")

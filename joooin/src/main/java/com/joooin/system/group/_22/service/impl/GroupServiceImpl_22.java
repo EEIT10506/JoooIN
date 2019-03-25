@@ -335,7 +335,7 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 		List<GroupPostBean> groupPosts = groupPostDao.getAll();
 		List<Poster> postersByGroupId = new LinkedList<Poster>();
 		for (GroupPostBean post : groupPosts) {
-			if (post.getGroupId().equals(groupId)) {
+			if (post.getGroupId().equals(groupId) && (!post.getIsDeleted())) {
 				Poster poster = new Poster();
 				poster.setGroupId(groupId);
 				poster.setGroupPostImage(post.getGroupPostImage());
