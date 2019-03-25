@@ -28,8 +28,8 @@
 		width: 1200px;
 		margin: auto;
 		position: relative;
-		top: 50px;
-	}
+		top: 120px; 
+	}  
 	
 	.a{
    		 text-decoration:none !important;
@@ -46,13 +46,11 @@
 		font-weight:bold;
 	}
 	.outer{
-/*  		background-color:	#A2B5CD;  */
- 		background-color:#FFEDCB;  
-/* 		background-color:#CFCFCF; */
+ 		background-color:#FFEDCB;   
 		width:75%;
 		margin: auto;
 /* 		border:1px solid #DCDCDC; */
-		border:1px solid #DCDCDC;
+		border:2px solid black;
 	}
 	.row{
 		padding:10px;
@@ -132,7 +130,9 @@
 		margin-right:5px;
 /* 		float:right; */
 	  font-size:16px;
-	 color:	#B22222;
+/*  	 color:	#B22222;  */
+	 color:#436EEE;
+/* 	 color:	blue; */
 	}
 	.eventtypeimg{
 		width:20px;
@@ -154,7 +154,7 @@
 		background-color:#EEEEE0;
 	}
  	.eventNotLike{ 
- 		background-color:#CDCDC1 !important;  
+ 		background-color:#C4C6C5 !important;  
  		font-weight:bold !important;
  		width:80px;
  	} 
@@ -167,6 +167,7 @@
   		background-color:#4876FF !important;  
 		font-weight:bold !important;
 		width:80px;
+		color:white !important ;
  	} 
 	.eventJoin{
 		position:relative;
@@ -311,6 +312,10 @@
  		font-family: 'Noto Sans TC', sans-serif;  
  		font-weight:700px;  
 		text-align:center;  
+		background-color:#8B3E2F;
+		color:white;
+		width:720px;  
+		margin:auto;
  	}  
  	.delete{
 		width:50px;
@@ -335,6 +340,19 @@
  	    width:200px;
  	    height:200px;
  	}
+ 	.Joinmembers{
+ 	    font-size:30px;
+ 	    cursor:pointer;
+ 	     color:blue;
+ 	}
+ 	.Joinmembers:hover{
+ 	    font-size:30px;
+ 	    color:red;
+ 	}
+ 	#goodGood{
+ 	    color:#436EEE;
+ 	    font-size:20px;
+ 	}
 </style>
 <script>
 function ValidateNumber(e, pnumber) 
@@ -348,7 +366,7 @@ function ValidateNumber(e, pnumber)
  	$(document).ready(function(){
  		 
 
- 		<c:if test="${!empty success}"> 
+ 		<c:if test="${!empty success}">  
  		   $("#clickMessageReport").click();
  		
  		</c:if>
@@ -401,8 +419,14 @@ function ValidateNumber(e, pnumber)
 	    	    data: {"eventId": eventId},
 	    	    success: function (result) {
 	    	    	if (result != -4) {
+	    	    		var b = $(".eventLikeNum").html();
 	    					 var a = result;
 	                    	 $(".eventLikeNum").html(a);
+	                    	 if(b < a){
+	                    	 $("#goodGood, .eventLikeNum").css("font-size", "30px");
+	                    	 setTimeout(function() { 
+	                 			$("#goodGood, .eventLikeNum").css("font-size", "20px");
+	                 	    }, 200);}
 		    	    }else{ 
 	                    	location.href = "${pageContext.request.contextPath}/not_Login";
 	    	    	     }
@@ -479,11 +503,11 @@ function ValidateNumber(e, pnumber)
     				</c:otherwise>
     				</c:choose>
     				
-    				<p class="eventliketotal"><i class="far fa-thumbs-up">&nbsp;</i><span class="eventLikeNum">${event.eventLike}</span> 個人覺得讚 
+    				<p class="eventliketotal"><i id="goodGood" class="far fa-thumbs-up">&nbsp;</i><span class="eventLikeNum">${event.eventLike}</span> 個人覺得讚 
     						<span style="position: relative;top:5px;left:20px;">
     						 <iframe src="https://www.facebook.com/plugins/share_button.php?href=https://zh.wikipedia.org/zh-tw/%E8%B3%87%E8%A8%8A%E5%B7%A5%E6%A5%AD%E7%AD%96%E9%80%B2%E6%9C%83&layout=button_count&size=small&width=92&height=20&margin=0&padding=0&appId" width="20%"  height="20" style="border:none;overflow:hidden;margin: 0;padding: 0" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
 							 <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html" style="width:80px ; height:20px;margin: 0;padding: 0"></iframe>
-							 <a title="Share to Plurk" href="javascript:void(window.open('http://www.plurk.com/?qualifier=shares&status='.concat(encodeURIComponent(window.location.href)).concat(' ').concat('(').concat(encodeURIComponent(document.title)).concat(')')));" style="margin:  0;padding: 0"><img title="share" src="http://statics.plurk.com/bda225d234426cccca300c551f60438e.png" width="92" height="20" border="0" align="top" style="vertical-align: top;margin-left: 0;padding-left: 0"/></a>
+							 <a title="Share to Plurk" href="javascript:void(window.open('http://www.plurk.com/?qualifier=shares&status='.concat(encodeURIComponent(window.location.href)).concat(' ').concat('(').concat(encodeURIComponent(document.title)).concat(')')));" style="margin:  0;padding: 0"><img title="share" src="http://statics.plurk.com/bda225d234426cccca300c551f60438e.png" width="92" height="20" border="0" style="margin-bottom:10px;margin-left: 0;padding-left: 0"/></a>
 						    </span>	
     				</p><hr class="hrr">
  
@@ -526,19 +550,21 @@ function ValidateNumber(e, pnumber)
       				<span class="eventtime">活動時間 :${event.eventDateStart} - ${event.eventDateEnd}<p><span style="background-color:red;color:white;font-size:20px;margin-left:20px;">活動已結束</span></p></span>		
       			</c:if>
       		</p>
-      		<p class="eventaddress">
+      		<p >
       				<i class="fas fa-map-marker-alt">
       					<span class="addressShow">地點 : ${event.eventLocation}</span>
       				</i>
       		</p>
-      			<iframe id="eventAddressImage" width='400' height='250' frameborder='0' scrolling='no' marginheight='0' marginwidth='0'  
+      			<iframe style="border:1px solid grey;" id="eventAddressImage" width='400' height='250' frameborder='0' scrolling='no' marginheight='0' marginwidth='0'  
       			src='https://www.google.com/maps/embed/v1/place?key=AIzaSyC9cpXz2HFE2Dw_vITbm-T6Z-6v-TJujBQ&q=place_id:${event.eventPlaceId}' allowfullscreen>
 <!--       				位置icon圖 -->
-				</iframe>	
+				</iframe>
+				
+				<p><button type="button" class="btn btn-dark eventaddress" style="width:">Google Map</button></p>	
       		<p class="eventjoinmember">目前人數 : 
-      			<span>${event.eventCurrentMembers} 人</span>
+      			<span><span style="" class="Joinmembers" data-toggle="modal" data-target="#exampleModalScrollable">${event.eventCurrentMembers} </span> 人</span>
       			<span class="joinDetail">
-      				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">已參加會員</button>
+      				
       			</span> 
       		</p>
       		<p>人數限制 : 
@@ -679,12 +705,13 @@ function ValidateNumber(e, pnumber)
         </button>
       </div>
       <div class="modal-body">
-        <c:forEach var="emfindagreed" items="${emfindagreed}">
+        <c:forEach var="emfindagreed" items="${emfindagreed}" varStatus="loop">
             <a class="a" href="<c:url value='/member/other/${emfindagreed.memberId}' />">
             <p class="joinIsAgreedName">
             	<span><img src="<c:url value='/getMemberImage/${emfindagreed.memberId}.jpg' />" width="50px" height="50px" style="border-radius:25px;"/></span>
           	   
           	   <span style="color:black;">${emfindagreed.memberName}&nbsp;&nbsp;&nbsp;</span> 
+          	   <span style="float:right;position:relative;right:130px;">人數 : ${eventMemberQuantity[loop.count-1].quantity }</span>
 <!--           	   ===== -->
           	 
 <!--           	   <span style="color:black;"> -->
@@ -768,13 +795,13 @@ function ValidateNumber(e, pnumber)
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle"></h5>
+        <h5 class="modal-title font" id="exampleModalScrollableTitle">待審核中</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        		報名申請已成功
+        		報名申請已成功<i style="color:green;" class="fas fa-check"></i>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

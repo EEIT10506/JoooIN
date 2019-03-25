@@ -146,6 +146,8 @@ public class EventController {
 		Integer memberId = (Integer) session.getAttribute("memberId");
 
 		EventMainBean event = eventService.getByEventMainId(eventId);
+		if(event == null)
+		return null;
 		Integer typeid = event.getEventTypeId();
 		Integer inviterid = event.getEventInviterId();
 		String endDate = event.getEventDateEnd();
@@ -179,6 +181,7 @@ public class EventController {
 		MemberMainBean eventmembers = null;
 		List<MemberMainBean> eventmemberlist = new ArrayList<MemberMainBean>();
 		List<MemberMainBean> emfindagreed = new ArrayList<MemberMainBean>();
+		List<EventMemberBean> eventMemberQuantity = new ArrayList<EventMemberBean>();
 		Boolean myAgreed = null;
 		for (EventMemberBean members : eventmember) {
 			Integer memberid = members.getMemberId();
@@ -192,6 +195,7 @@ public class EventController {
 
 			if (isAgreed == true ) {
 				emfindagreed.add(eventmembers);
+				eventMemberQuantity.add(members);
 				if(memberid.equals(memberId)) {
 					myAgreed = true;
 				}
@@ -237,6 +241,7 @@ public class EventController {
 			}
 		}
 		model.addAttribute("myAgreed", myAgreed);
+		model.addAttribute("eventMemberQuantity", eventMemberQuantity);
 		model.addAttribute("findAgreed", findAgreed);
 		model.addAttribute("finish", finish);
 		model.addAttribute("event", event);
