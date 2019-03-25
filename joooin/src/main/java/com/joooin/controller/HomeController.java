@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.joooin.model.EventMainBean;
 import com.joooin.model.GroupMainBean;
+import com.joooin.model.GroupPostBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.system.event._35.service.EventsService;
 import com.joooin.system.group._22.service.GroupService_22;
