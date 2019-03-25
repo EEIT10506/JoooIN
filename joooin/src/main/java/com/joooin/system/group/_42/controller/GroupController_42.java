@@ -51,15 +51,8 @@ public class GroupController_42 {
 		
 		Integer memId = (Integer) session.getAttribute("memberId"); //會員紀錄
 		List<GroupMainBean> typeOne = service.getGroupType(groupOneType);
-		
 		model.addAttribute("groupsType", typeOne);
-		List<GroupMainBean> list = service.getGroupType(groupOneType);
 
-		//判斷是否為成員by ZH
-		
-
-
-		//判斷是否為成員by ZH
 		return "group/groups_type"; 
 			}
 

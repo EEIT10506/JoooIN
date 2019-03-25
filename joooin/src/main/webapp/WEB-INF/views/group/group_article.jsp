@@ -268,8 +268,8 @@ $(document).ready(function () {
 	        </div>
 	    </div>
 	</div>
-	 
 </div>
+	<br>
 	<br>
 	<c:choose>
 	<c:when test="${Permission}">

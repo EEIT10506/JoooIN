@@ -20,6 +20,10 @@
 	.team-back{
 	Line-height:100pt;
 	}
+	
+	p {
+		font-size:40px;
+	}
 </style>
 <title>Insert title here</title>
  <!-- ---- Include the above in your HEAD tag -------- -->
@@ -49,7 +53,7 @@
 
                     <div class="team-back text-center">
                         <span>
-                            <a href="${pageContext.request.contextPath}/groups/sport" >超連結</a>
+                            <a href="${pageContext.request.contextPath}/groups/sport" ><p><strong>目前 :${sport} 個</strong></p></a>
                         </span>
                     </div>
 
@@ -69,7 +73,7 @@
 
                     <div class="team-back text-center">
                         <span>
-                            <a href="${pageContext.request.contextPath}/groups/food" >超連結</a>
+                            <a href="${pageContext.request.contextPath}/groups/food" ><p><strong>目前 :  ${food}個</strong></p></a>
                         </span>
                     </div>
 
@@ -88,7 +92,7 @@
 
                     <div class="team-back text-center">
                         <span>
-                             <a href="${pageContext.request.contextPath}/groups/entertainment" >超連結</a>
+                             <a href="${pageContext.request.contextPath}/groups/entertainment" ><p><strong>目前 : ${entertainment}個</strong></p></a>
                         </span>
                     </div>
 
@@ -107,7 +111,7 @@
 
                     <div class="team-back text-center">
                         <span>
-                             <a href="${pageContext.request.contextPath}/groups/other" >超連結</a>
+                             <a href="${pageContext.request.contextPath}/groups/other" ><p><strong>目前 : ${other} 個</strong></p></a>
                         </span>
                     </div>
 
@@ -126,7 +130,7 @@
 
                     <div class="team-back text-center">
                         <span>
-                             <a href="${pageContext.request.contextPath}/groups/groups_type" >超連結</a>
+                             <a href="${pageContext.request.contextPath}/groups/groups_type" ><p><strong>全部 :  ${all}個</strong></p></a>
                         </span>
                     </div>
 
@@ -145,7 +149,7 @@
 
                     <div class="team-back text-center">
                         <span>
-                            	<a href="${pageContext.request.contextPath}/groups/create">創立社團</a>
+                            	<a href="${pageContext.request.contextPath}/groups/create"><p style="color:red"><strong>創立社團</strong></p></a>
                         </span>
                     </div>
 
