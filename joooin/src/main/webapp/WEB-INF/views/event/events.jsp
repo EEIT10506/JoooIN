@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <!-- dataTables样式表 -->
 <link
 	href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"
@@ -61,7 +62,12 @@ display:inline !important;
 } 
 
 .container{
-background-color:silver; 
+background-color:#FFEDCB;
+width:75%; 
+}
+
+iframe{
+margin: 0; padding: 0;
 }
 </style>
 <title>JoooIN</title>
@@ -82,12 +88,12 @@ background-color:silver;
 
 
 	<!-- 請把所有內容寫在此div內 -->
-	<div id="main" class="container">
-		<button id="new" class="btn btn-secondary btn-sm">開新活動</button>
-		<button id="get" class="btn btn-primary btn-sm">尋找活動</button>
-		
-
-		<div style="margin-bottom: 50px"></div>
+	<div id="main">
+	<div  class="container">
+		<button id="new" class="btn btn-secondary btn-lg" >開新活動</button>
+		<button id="get" class="btn btn-primary btn-lg" >尋找活動</button>
+        <hr>
+		<div style="margin-bottom: 20px"></div>
 
 		<div id="newdiv" style="display: none">
 
@@ -671,7 +677,7 @@ $("#oneclick").click(function (){
 
     
   </script>
-
+            </div>
 		</div>
 	</div>
 	<!-- 請把所有內容寫在此div內 -->

@@ -81,7 +81,7 @@ public class EventController {
 	@RequestMapping(value = "/DeleteEventPost", method = RequestMethod.POST)
 	public String deleteEventPost(@RequestParam Integer eventPostId, @RequestParam Integer eventId,
 			HttpSession session) {
-		Integer adminId = (Integer) session.getAttribute("admin");
+		Integer adminId = (Integer) session.getAttribute("adminId");
 		Integer memberId = (Integer) session.getAttribute("memberId");
 
 		if (adminId != null || memberId != null) {
@@ -313,8 +313,9 @@ public class EventController {
 	public String eventSetting(@ModelAttribute("event") EventMainBean updateBean,
 			@PathVariable("eventId") Integer eventId, Model model, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
-		if (memberId != null) {
-			EventMainBean event = eventService.getByEventMainId(eventId);
+		EventMainBean event = eventService.getByEventMainId(eventId);
+		if (memberId.equals(event.getEventInviterId())) {
+			
 			Integer typeid = event.getEventTypeId();
 			EventTypeBean eventtype = eventService.getByEventTypeId(typeid);
 			
@@ -339,7 +340,11 @@ public class EventController {
 			model.addAttribute("eventtype", eventtype);
 
 			return "event/event_setting";
-		} else {
+		} else if(memberId!=null && !memberId.equals(event.getEventInviterId())) {
+		    return "event/not_eventManager";	
+		}
+		
+		else {
 			return "not_login";
 		}
 	}
