@@ -251,11 +251,12 @@ $(document).ready(function () {
         	        <p>
         	            <a class="float-left" href="${pageContext.request.contextPath}/member/other/${poster.memberId}"><strong>${poster.memberName }</strong></a>
         	           <c:if test="${sessionScope.memberId == poster.memberId}"> 
-        	           <form id="DeleteGroupPost" Action="${pageContext.request.contextPath}/DeleteGroupPost" method="POST">
-        	           <input type="hidden"  name="groupId" value="${poster.groupId}">
-        	           <input type="hidden"  name="groupPostId" value="${poster.memberId}">  
+        	           <form id="DeleteGroupMessage" action="${pageContext.request.contextPath}/DeleteGroupPost" method="post">
+        	           <input type="hidden"  name="groupPostId" value="${poster.groupPostId}">
+        	           <input type="hidden"  name="memberId" value="${poster.memberId}">
+        	           <input type="hidden"  name="groupId" value="${poster.groupId}">    
 						<a class="float-right">
-						<button id="DeleteGroupPost" type="submit" class="btn btn-dark delete">刪除文章</button>
+						<button  type="submit" class="btn btn-dark delete">刪除文章</button>
 						</a>
 						</form>
 						</c:if>

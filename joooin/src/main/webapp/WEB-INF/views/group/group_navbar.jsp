@@ -10,7 +10,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
 #menu {
   position: fixed;
@@ -36,6 +36,7 @@ body {
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
+  
 }
 
 .sidenav a {
@@ -55,7 +56,7 @@ body {
   position: absolute;
   top: 0;
   right: 25px;
-  font-size: 20px;
+  font-size: 30px;
   margin-left: 50px;
 }
 
@@ -73,6 +74,16 @@ function openNav() {
 	function closeNav() {
 	  document.getElementById("mySidenav").style.width = "0";
 	}
+	$(document).ready(function(){
+  	  	$('.closebtn').click(function(){
+  	   	$('.openbtn').show();
+  	  	});
+	});
+  	  $(document).ready(function(){
+    	  	$('.openbtn').click(function(){
+    	   	$('.openbtn').hide();
+    	  	});
+  	});
 </script>
 <body>
 
@@ -91,7 +102,7 @@ function openNav() {
 </div>
 
 
-<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; 選單</span>
+<span class="openbtn" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; 選單</span>
 			
 
 			

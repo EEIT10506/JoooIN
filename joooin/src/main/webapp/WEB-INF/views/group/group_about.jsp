@@ -7,6 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,
+minimum-scale=1.0, maximum-scale=2.0" />
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/grouptype.css'/>">
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -20,16 +23,19 @@
 	crossorigin="anonymous"></script>	
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <style>
 #main {
 	width: 1200px;
 	margin: auto;
 	position: relative;
-	top: 50px;
+	top: 120px;
 }
 </style>
 <script>
-	$('.collapse').collapse()
+
+	$('.collapse').collapse();
+
 
 	//修改按鈕
 	$(document).ready(function(){
@@ -160,8 +166,9 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 <!-- 		類型 -->
+
 					<h2 class="panel-title">
-						<button class="btn btn-primary btn-lg btn-block" data-toggle="collapse" 
+						<button class="btn btn-primary btn-lg btn-block " data-toggle="collapse" 
 							data-parent="#accordion" href="#collapseOne">類型</button>
 						
 					</h2>
