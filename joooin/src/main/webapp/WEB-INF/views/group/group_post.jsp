@@ -65,7 +65,11 @@
 		<jsp:include page="${request.contextPath}/group/group_navbar" />
 		
 		
-		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"> <form:form
+		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+		
+		<c:choose>
+			<c:when test="${Permission}">
+		 <form:form
 			method="POST" modelAttribute="groupPostBean" 
 			enctype="multipart/form-data" class="text-center">
 			<table border="1">
@@ -105,6 +109,13 @@
 			</table>
 
 		</form:form>
+		</c:when>
+		<c:otherwise>
+				<span class="d-block p-2 bg-dark text-white">
+					社團成員才可以發文
+				</span>
+            </c:otherwise>
+	 </c:choose>
 	</div>
 	<!-- 請把所有內容寫在此div內 -->
 
