@@ -235,7 +235,7 @@ $(document).ready(function () {
 	    <div class="card-body">
 	        <div class="row">
         	    <div class="col-md-2">
-        	    <c:if test="${poster.isDeleted==false}">
+        	    
         	        <img src="<c:url value='/getMemberImage/${poster.memberId}.jpg' />" class="img img-rounded img-fluid"/>
         	        <p class="text-secondary text-center">${poster.groupPostDate }</p>
         	    </div>
@@ -250,7 +250,7 @@ $(document).ready(function () {
 						<button type="submit" class="btn btn-dark delete">刪除文章</button>
 						</a>
 						</form>
-						</c:if>
+						
         	       </p>
         	       <div class="clearfix"></div>
         	        <p> ${poster.groupPostText }</p>

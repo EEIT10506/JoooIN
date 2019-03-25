@@ -87,19 +87,18 @@
 											<c:otherwise>
 												<form action="${pageContext.request.contextPath}/group/addgroup/${groupsType.groupId}" method="post">
 												<button type="submit"
-<<<<<<< HEAD
+
 													class="btn btn-sm btn-outline-secondary">進入社團</button>
 											</form>
 											
 											
 									
-=======
-													class="btn btn-sm btn-outline-secondary">加入社團</button>
-												</form>
+
+												
 											</c:otherwise>
 											</c:choose>
 
->>>>>>> refs/heads/master
+
 										</div>
 										<small class="text-muted"></small>
 									</div>
