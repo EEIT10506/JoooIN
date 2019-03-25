@@ -54,13 +54,13 @@
     <label>
       <form:radiobutton name="emailDisplay" value="false" path="emailDisplay" checked="true"/> 否
     </label></span>
-    <form:input type="email" class="form-control" id="email" name="email" placeholder="Email" path="email"/>
+    <form:input type="email" class="form-control" id="email" name="email" placeholder="Email" path="email" style="max-width:400px;"/>
   </div>
 
 	
   <div class="form-group">
     <label for="memberName">會員姓名</label>
-    <form:input type="text" class="form-control" id="memberName" name="memberName" placeholder="Name" path="memberName"/>
+    <form:input type="text" class="form-control" id="memberName" name="memberName" placeholder="Name" path="memberName" style="max-width:400px;"/>
   </div>
   
   <div class="form-group">
@@ -70,12 +70,12 @@
     <label>
       <form:radiobutton name="phoneDisplay" value="false" path="phoneDisplay" checked="true"/> 否
     </label></span>
-    <form:input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" path="phone"/>
+    <form:input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" path="phone" style="max-width:400px;"/>
   </div>
 
   <div class="form-group">
     <label for="password">會員密碼</label>
-    <form:input type="password" class="form-control" id="password" placeholder="Password" path="password"/>
+    <form:input type="password" class="form-control" id="password" placeholder="Password" path="password" style="max-width:400px;"/>
   </div>
   
     <div class="form-group">

@@ -55,11 +55,11 @@
 	<form:form method="POST" modelAttribute="memberMainBean" name="form1">
   <div class="form-group">
     <label for="email">帳號</label>
-    <form:input type="email" class="form-control" id="email" placeholder="Email" path="email"/>
+    <form:input type="email" class="form-control" id="email" placeholder="Email" path="email" style="max-width:400px;"/>
   </div>
   <div class="form-group">
     <label for="password">密碼</label>
-    <form:input type="password" class="form-control" id="password" placeholder="Password" path="password"/>
+    <form:input type="password" class="form-control" id="password" placeholder="Password" path="password" style="max-width:400px;"/>
   </div>
 <!--   <div class="checkbox"> -->
 <!--     <label> -->
