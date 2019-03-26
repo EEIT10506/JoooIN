@@ -42,6 +42,9 @@
 	.pwdAlert {
 		color: red;
 	}
+	#inputName {
+		position:relative; top: 0px;
+	}
 </style>
 <script>
 	$(document).ready(function(){
@@ -152,7 +155,7 @@
 					<div id="edit-data" class="profile-view">
 						<form:form modelAttribute="memberMainBean" action="${pageContext.request.contextPath}/member/updateProfile" method="POST" enctype="multipart/form-data">
 							<div class="param-label"><form:label class="edit-data-text" for="memberName" path="memberName">名稱：</form:label></div>　
-							<form:input path="memberName"></form:input><br />
+							<form:input id="inputName" path="memberName"></form:input><br />
 							
 							<div class="param-label"><form:label class="edit-data-text" for="gender" path="gender">性別：</form:label></div>　
 							<form:radiobutton path="gender" value="male"></form:radiobutton>　男　　　　
