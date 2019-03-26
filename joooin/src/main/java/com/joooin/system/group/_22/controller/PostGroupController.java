@@ -83,6 +83,9 @@ public class PostGroupController {
 			groupImage = ImageUtils.multipartFileToByteArray(groupPostBean.getMultipartFile());
 			groupPostBean.setGroupPostImage(groupImage);
 		}
+		
+			String text = groupPostBean.getGroupPostText().replace("\n", "<br />");
+			groupPostBean.setGroupPostText(text);
 
 			// 沒有like
 			groupPostBean.setGroupPostLike(0);

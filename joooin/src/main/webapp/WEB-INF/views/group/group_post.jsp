@@ -102,7 +102,7 @@
 				
 				<tr>
 				
-					<td colspan="2" ><form:textarea rows="10" cols="80" path="groupPostText"/></td>
+					<td colspan="2" ><form:textarea wrap="hard" rows="10" cols="80" path="groupPostText"/></td>
 				</tr>
 				<!-- 				放文章內容 -->
 				
