@@ -15,9 +15,10 @@
 	crossorigin="anonymous">
 <link
 	href="https://code.jquery.com/jquery-1.12.4.min.css">	
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+	crossorigin="anonymous"></script>	
 
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <style>
 #main {
 	width: 1200px;
@@ -27,12 +28,12 @@
 }
 </style>
 <script>
-	$('.collapse').collapse();
+
 
 	//修改按鈕
 	$(document).ready(function(){
 	  	$('#updateType').click(function(){
-	  		$('.option1').show();	
+// 	  		$('.option1').show();	
 		  	$('#updateType').hide();	
 		  	$('#inputType').show(); 			
 		   	$('#confirmType').show();
@@ -42,7 +43,7 @@
   	//取消
   	$(document).ready(function(){
   	  	$('#cancelType').click(function(){
-  	  	$('.option1').hide();
+//   	  	$('.option1').hide();
   	   	$('#cancelType').hide();
   	  	$('#inputType').hide();
   	    $('#confirmType').hide();
@@ -52,7 +53,7 @@
   	//確認修改
   	$(document).ready(function(){
   	  	$('#confirmType').click(function(){
-  	  	$('.option1').hide();	
+//   	  	$('.option1').hide();	
   	   	$('#cancelType').hide();
   	  	$('#inputType').hide();
   	    $('#confirmType').hide();
@@ -155,13 +156,9 @@
 	<!-- 請把所有內容寫在此div內 -->
 	<div id="main">
 		<jsp:include page="${request.contextPath}/group/group_navbar" />
-		<script type="text/javascript">
-		var xxx = jQuery.noConflict(true);
-	</script>
+		
 	
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js"
-	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-	crossorigin="anonymous"></script>	
+	
 		<!-- 	測試資料正確性 -->
 		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"> 
 
@@ -169,56 +166,49 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 <!-- 		類型 -->
-					<h2 class="panel-title">
-						<button class="btn btn-primary btn-lg btn-block" data-toggle="collapse" 
-							data-parent="#accordion" href="#collapseOne">類型</button>
-						
-					</h2>
-					
-						<div id="collapseOne" class="panel-collapse collapse in" >
-							<div class="panel-body">
-							<p class="text-center">
-								<span class="label label-defaulabel label-primary">${groupMain.groupType}</span>	
-								</p>
-								
-								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
-								
-								<form 
-								action="${pageContext.request.contextPath}/group/abouts/updateGroupType/${groupMain.groupId}" method="POST">
-								<p class="text-center">
-								
-								<select id="inputType" name="type" style="display:none;">
-　								<option class="option1" style="display:none;" value="sport">運動</option>
-　								<option class="option1" style="display:none;" value="food">美食</option>
-　								<option class="option1" style="display:none;" value="entertainment">娛樂</option>
-　								<option class="option1" style="display:none;" value="other">其他</option>
-								</select>
+					<table class="table-dark" border="1" style="width:100%" >
+  <tr>
+  <th>
+  
+  </th>
+  </tr>
+  
+  <tr style="font-size:25px;">
+    <th >社團屬性</th>
+    <th>現在狀態</th> 
+    <th></th>
 
-								<button id="confirmType" class="btn btn-default btn-lg btn-danger" style="display:none;" type="submit" >確認修改</button>
-								</p>
-						
-								</form>
-								<p class="text-right">
-								<button id="cancelType" class="btn btn-default btn-lg btn-danger" style="display:none;">取消</button>
-								<button id="updateType" class="btn btn-default btn-lg btn-danger">修改</button>
-								</p>
-								</c:if>
-									
-							</div>
-						</div>
-<!-- 			社團名稱			 -->
-						<h2 class="panel-title">
-						<button class="btn btn-primary btn-lg btn-block" data-toggle="collapse" 
-							data-parent="#accordion" href="#collapseTwo">社團名稱</button>	
-						</h2>
-					
-						<div id="collapseTwo" class="panel-collapse collapse in" >
-							<div class="panel-body">
-							<p class="text-center">
-								<span class="label label-defaulabel label-primary">${groupMain.groupName}</span>	
-								</p>
-								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
-								<form 
+  </tr>
+  <tr style="font-size:20px;">
+    <td>社團類型</td>
+    <td>${groupMain.groupType}</td>
+    <c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
+    <td><form action="${pageContext.request.contextPath}/group/abouts/updateGroupType/${groupMain.groupId}" method="POST">
+		<p class="text-center">
+		<span id="inputType" style="display:none;">
+		<select id="option1" name="type" >
+　								<option class="option1"  value="sport">運動</option>
+　								<option class="option1"  value="food">美食</option>
+　								<option class="option1"  value="entertainment">娛樂</option>
+　								<option class="option1"  value="other">其他</option>
+		</select>
+		</span>
+		<button id="confirmType" class="btn btn-default btn-lg btn-danger" style="display:none;" type="submit" >確認修改</button>
+		</p>
+		<p class="text-right">
+		<button id="cancelType" class="btn btn-default btn-lg btn-danger" style="display:none;">取消</button>
+		<button id="updateType" class="btn btn-default btn-lg btn-danger">修改</button>
+		</p>
+		</form>
+	</td>
+    </c:if>
+  </tr>
+  <tr style="font-size:20px;">
+    <td>社團名稱</td>
+    <td>${groupMain.groupName}</td>
+    <c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
+    <td>
+    <form 
 								action="${pageContext.request.contextPath}/group/abouts/updateGroupName/${groupMain.groupId}" method="POST">
 								<p class="text-center">
 								<input id="inputName" class="btn btn-default btn-lg btn-info" type="text" style="display:none;" placeholder="修改內容" name="groupname" />
@@ -229,59 +219,25 @@
 								<button id="cancelName" class="btn btn-default btn-lg btn-danger" style="display:none;">取消</button>
 								<button id="updateName" class="btn btn-default btn-lg btn-danger">修改</button>
 								</p>
-								</c:if>
-									
-							</div>
-						</div>
-<!-- 			社團人數			 -->
-						<h2 class="panel-title">
-						<button class="btn btn-primary btn-lg btn-block" data-toggle="collapse" 
-							data-parent="#accordion" href="#collapseThree">社團人數</button>	
-						</h2>
-					
-						<div id="collapseThree" class="panel-collapse collapse in" >
-							<div class="panel-body">
-							<p class="text-center">
-								<span class="label label-defaulabel label-primary">${groupMain.groupCurrentMembers}</span>	
-								</p>
-								<p class="text-right">
-								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
-								</c:if>
-								</p>	
-							</div>
-						</div>					
-<!-- 			社團創建日期			 -->
-						<h2 class="panel-title">
-						<button class="btn btn-primary btn-lg btn-block" data-toggle="collapse" 
-							data-parent="#accordion" href="#collapseFour">社團創建日期</button>	
-						</h2>
-					
-						<div id="collapseFour" class="panel-collapse collapse in" >
-							<div class="panel-body">
-							<p class="text-center">
-								<span class="label label-defaulabel label-primary">${groupMain.groupCreateDate}</span>	
-								</p>
-								<p class="text-right">
-								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
-								</c:if>
-								</p>	
-							</div>
-						</div>
-<!-- 			社團介紹			 -->
-						<h2 class="panel-title">
-						<button class="btn btn-primary btn-lg btn-block" data-toggle="collapse" 
-							data-parent="#accordion" href="#collapseFive">社團介紹</button>	
-						</h2>
-					
-						<div id="collapseFive" class="panel-collapse collapse in" >
-							<div class="panel-body">
-							<p class="text-center">
-								<span class="label label-defaulabel label-primary">${groupMain.groupIntro}</span>	
-								</p>
-								
-								
-								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
-								<form 
+    </td>
+    </c:if>
+  </tr>
+  <tr style="font-size:20px;">
+    <td>社團人數</td>
+    <td>${groupMain.groupCurrentMembers}</td>
+    <td></td>
+  </tr>
+   <tr style="font-size:20px;">
+    <td>社團創建日期</td>
+    <td>${groupMain.groupCreateDate}</td>
+    <td></td>
+  </tr style="font-size:20px;">
+   <tr>
+    <td>社團介紹</td>
+    <td>${groupMain.groupIntro}</td>
+    <c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
+    <td>
+    <form 
 								action="${pageContext.request.contextPath}/group/abouts/updateGroupIntro/${groupMain.groupId}" method="POST">
 								<p class="text-center">
 								<input id="inputIntro" class="btn btn-default btn-lg btn-info" type="text" style="display:none;" placeholder="修改內容" name="groupintro" />
@@ -292,29 +248,15 @@
 								<button id="cancelIntro" class="btn btn-default btn-lg btn-danger" style="display:none;">取消</button>
 								<button id="updateIntro" class="btn btn-default btn-lg btn-danger">修改</button>
 								</p>
-								</c:if>
-								
-									
-							</div>
-						</div>
-<!-- 			社團管理人			 -->
-						<h2 class="panel-title">
-						<button class="btn btn-primary btn-lg btn-block" data-toggle="collapse" 
-							data-parent="#accordion" href="#collapseSix">社團管理者</button>	
-						</h2>
-					
-						<div id="collapseSix" class="panel-collapse collapse in" >
-							<div class="panel-body">
-							<p class="text-center">
-								<span class="label label-defaulabel label-primary">${leader}</span>	
-								</p>
-								<p class="text-right">
-								<c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
-								
-								</c:if>
-								</p>	
-							</div>
-						</div>
+    </td>
+    </c:if>
+  </tr>
+  <tr style="font-size:20px;">
+    <td>社團管理者</td>
+    <td>${leader}</td>
+    <td></td>
+  </tr>
+</table>
 
 				</div>
 			</div>

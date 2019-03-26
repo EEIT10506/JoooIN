@@ -62,8 +62,8 @@ body {
 
 .openbtn{
 position: fixed;
-  left: 15%;
-  top: 5%;
+  left: 0;
+  top: 0;
   width: 10%;
   margin-top: 3.5em;
 }
@@ -104,9 +104,7 @@ function openNav() {
   <a href="${pageContext.request.contextPath}/group/about/${groupMain.groupId}">關於我們</a>
   <a href="${pageContext.request.contextPath}/group/members/${groupMain.groupId}">社團成員</a>
   <a href="${pageContext.request.contextPath}/group/addpost/${groupMain.groupId}">發文</a>
-  <a href="#">聊天</a>
-  <a href="#">相簿</a>
-  <a href="#">投票</a>
+  
 </div>
 
 

@@ -261,7 +261,7 @@ div {
 
 		<img class="container"
 			src="<c:url value='/getGroupImage/${groupMain.groupId}'/>"
-			height="350" />
+			style="max-height:350px;"  />
 		<p></p>
 		<h4>文章列表</h4>
 
