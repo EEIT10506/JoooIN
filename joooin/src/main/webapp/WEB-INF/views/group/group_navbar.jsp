@@ -105,7 +105,7 @@ function openNav() {
   <a href="${pageContext.request.contextPath}/group/members/${groupMain.groupId}">社團成員</a>
   <a href="${pageContext.request.contextPath}/group/addpost/${groupMain.groupId}">發文</a>
   <a href="#">聊天</a>
-  <a href="#">相簿</a>
+  <a href="${pageContext.request.contextPath}/group/photograph/${groupMain.groupId}">相簿</a>
   <a href="#">投票</a>
 </div>
 
