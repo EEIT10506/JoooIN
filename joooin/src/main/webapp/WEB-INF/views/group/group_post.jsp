@@ -62,40 +62,47 @@
 	<jsp:include page="${request.contextPath}/navbar" />
 	<!-- 請把所有內容寫在此div內 -->
 	<div id="main">
+	
 		<jsp:include page="${request.contextPath}/group/group_navbar" />
+	
 		
-		
-		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+		<main role="main" class="container">
 		
 		<c:choose>
 			<c:when test="${Permission}">
 		 <form:form
 			method="POST" modelAttribute="groupPostBean" 
 			enctype="multipart/form-data" class="text-center">
-			<table border="1">
+			<table style="margin-left:30%;" class="table table-borderless table-dark col-xs-6 col-sm-3"  >
 
 				<tr>
-					<th rowspan="2" width="30%"><img src="<c:url value='/getMemberImage/${member.memberId}.jpg' />"></th>
-					<th>發文人:${member.memberName}</th>
+					<th rowspan="2" width="40%"><img src="<c:url value='/getMemberImage/${member.memberId}.jpg' />"></th>
+					<th class="text-left">社團名稱:${groupMain.groupName}</th>
 					
 				</tr>
 				
 
 				<tr>
-					<th colspan="1"><label for="groupPostTitle">文章標題 : </label> <form:input
+					<th class="text-left" colspan="1"><label for="groupPostTitle">文章標題 : </label> <form:input
 							path="groupPostTitle" type='text' id="groupPostTitle" /></th>
 				</tr>
 				
 				<tr>
-					<th colspan="2"><form:input
-							path="groupId" type="hidden" id="groupId" value="${groupMain.groupId}"/></th>
-					<th colspan="2"><form:input
-							path="memberId" type="hidden" id="memberId" value="${member.memberId}"/></th>		
+				<th></th>
+				<th class="text-left" colspan="1">發文人:  ${member.memberName}</th>
+				</tr>
+				<tr>
+					<form:input
+							path="groupId" type="hidden" id="groupId" value="${groupMain.groupId}"/>
+					<form:input
+							path="memberId" type="hidden" id="memberId" value="${member.memberId}"/>		
 				</tr>
 				
 				<!-- 				放文章內容 -->
+				
 				<tr>
-					<td colspan="2"><form:textarea rows="10" cols="150" path="groupPostText"/></td>
+				
+					<td colspan="2" ><form:textarea rows="10" cols="80" path="groupPostText"/></td>
 				</tr>
 				<!-- 				放文章內容 -->
 				

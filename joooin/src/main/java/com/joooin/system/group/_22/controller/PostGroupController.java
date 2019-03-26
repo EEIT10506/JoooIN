@@ -40,7 +40,7 @@ public class PostGroupController {
 	MemberService memService;
 
 	// 時間格式
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ahh:mm:ss");
 
 	// 進入社團發文頁面
 	@RequestMapping(method = RequestMethod.GET, value = "/group/addpost/{groupId}")

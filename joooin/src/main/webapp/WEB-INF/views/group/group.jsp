@@ -26,11 +26,11 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 
+<!-- <script type="text/javascript" charset="utf8" -->
+<!-- 	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script> -->
+
 <!-- DataTable -->
 
-<!-- icon -->
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<!-- icon -->
 <style>
 #main {
 	width: 1200px;
@@ -89,7 +89,7 @@ div {
 		
 		//讚數降冪排列
 		$('#table_id').DataTable({"columns":column, "language":language, "lengthChange": false, "aLengthMenu" : 10,
-			 "bScrollCollapse": true, "order" : [ 4, 'desc' ]});
+			 "bScrollCollapse": true, "order" : [ 1, 'desc' ]});
 		
 	});
 	
@@ -182,25 +182,29 @@ div {
 							data-toggle="modal" data-target="#ooo">社團申請管理</button>
 					</c:if>
 					<!-- 					團長按鈕顯示判斷		 -->
+
 				</div>
+<!-- 				網路掛掉 -->
 <!-- 				<ING> -->
-					<c:choose>
-						<c:when test="${status == 'IN' }">
-							<span><i class="fa fa-user">成員</i></span>
-						</c:when>
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test="isInGroup"> --%>
+<%-- 							<form action="${pageContext.request.contextPath}/group/addgroup/${groupsType.groupId}" method="post"> --%>
+<!-- 								<button type="submit" class="btn btn-sm btn-outline-secondary">進入社團</button> -->
+<%-- 							</form> --%>
+<%-- 						</c:when> --%>
 											
-						<c:when test="${status == 'PROCESS' }">
-							<form action="${pageContext.request.contextPath}/group/addgroup/${groupMain.groupId}" method="post">
-								<button type="submit" class="btn btn-sm btn-outline-secondary">申請中</button>
-							</form>
-						</c:when>
+<%-- 						<c:when test="isInGroup"> --%>
+<%-- 							<form action="${pageContext.request.contextPath}/group/addgroup/${groupsType.groupId}" method="post"> --%>
+<!-- 								<button type="submit" class="btn btn-sm btn-outline-secondary">申請中</button> -->
+<%-- 							</form> --%>
+<%-- 						</c:when> --%>
 											
-						<c:otherwise>
-							<form action="${pageContext.request.contextPath}/group/addgroup/${groupMain.groupId}" method="post">
-								<button type="submit" class="btn btn-sm btn-outline-secondary">加入社團</button>
-							</form>
-						</c:otherwise>
-					</c:choose>
+<%-- 						<c:otherwise> --%>
+<%-- 							<form action="${pageContext.request.contextPath}/group/addgroup/${groupsType.groupId}" method="post"> --%>
+<!-- 								<button type="submit" class="btn btn-sm btn-outline-secondary">加入社團</button> -->
+<%-- 							</form> --%>
+<%-- 						</c:otherwise> --%>
+<%-- 					</c:choose> --%>
 <!-- 				<ING> -->
 <!-- 				<button type="button" -->
 <!-- 					class="btn btn-sm btn-outline-secondary dropdown-toggle"> -->

@@ -82,6 +82,12 @@ public class GroupServiceImpl_42 implements GroupService_42 {
 		dao.update(bean);
 		
 	}
+
+	@Override
+	public void updateGroupPostIsDeleted(GroupPostBean groupPostBean) {
+		// TODO Auto-generated method stub
+		groupPostDao.update(groupPostBean);
+	}
 	
 	
 //	@Override

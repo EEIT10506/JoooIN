@@ -53,6 +53,8 @@ public class GroupController_42 {
 		List<GroupMainBean> typeOne = service.getGroupType(groupOneType);
 		model.addAttribute("groupsType", typeOne);
 
+
+
 		return "group/groups_type"; 
 			}
 
