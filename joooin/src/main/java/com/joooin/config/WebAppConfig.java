@@ -18,8 +18,9 @@ import org.springframework.web.servlet.resource.VersionResourceResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.ResourceBundleViewResolver;
-
 import com.joooin.system.admin._03.interceptor.LoginInterceptor;
+import com.joooin.system.event._35.interceptor.EventInter;
+
 
 
 @Configuration
@@ -50,17 +51,23 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	}
 	
 	@Bean
-	LoginInterceptor loginInterceptor() {
+	public LoginInterceptor loginInterceptor() {
 		return new LoginInterceptor();
+	}
+	@Bean
+	public EventInter addEventInter() {
+		return new EventInter();
+
 	}
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		OpenSessionInViewInterceptor sessionInterceptor = new OpenSessionInViewInterceptor();
 	    sessionInterceptor.setSessionFactory(sessionFactory);
-	    registry.addWebRequestInterceptor(sessionInterceptor);
-	    
+	    registry.addWebRequestInterceptor(sessionInterceptor);	 
 	    registry.addInterceptor(loginInterceptor()).addPathPatterns(""); // 字串可用,隔開 指定controller路徑將會攔截返回登入頁面
+	    registry.addInterceptor(addEventInter()).excludePathPatterns("/");
+
 	}
 
 	@Override

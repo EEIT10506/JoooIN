@@ -24,11 +24,21 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
+.link:hover{
+text-decoration: none;
+color:blue;
+font-size: 15px;
+}
+
+.link{
+color: black;
+}
+
 #main {
 	width: 1200px;
 	margin: auto;
 	position: relative;
-	top: 50px;
+	top: 120px;
 }
 
 #address {
@@ -64,17 +74,44 @@ display:inline !important;
 .container{
 background-color:#FFEDCB;
 width:75%; 
+border: 1px solid black;
 }
 
 iframe{
 margin: 0; padding: 0;
+}
+.buttonLeft{
+	position:relative;
+	right:100px;
+	width:200px; 
+	height:100px;
+	bottom:30px;
+	font-family:微軟正黑體;
+	font-weight:bold;
+	font-size:35px !important; 
+}
+.buttonright{
+	position:relative;
+	left:100px;
+	width:200px;
+	height:100px;
+	bottom:30px;
+	font-family:微軟正黑體;
+	font-weight:bold;
+	font-size:35px !important;
+}
+
+.bgcolor{
+		font-family:微軟正黑體;
+ 		background-color:#F5F5F5; 
+		font-weight:bold;
 }
 </style>
 <title>JoooIN</title>
 
 
 </head>
-<body>
+<body class="bgcolor">
 	<jsp:include page="${request.contextPath}/navbar" />
 	
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9cpXz2HFE2Dw_vITbm-T6Z-6v-TJujBQ&libraries=places" defer></script>
@@ -90,14 +127,18 @@ margin: 0; padding: 0;
 	<!-- 請把所有內容寫在此div內 -->
 	<div id="main">
 	<div  class="container">
-		<button id="new" class="btn btn-secondary btn-lg" >開新活動</button>
-		<button id="get" class="btn btn-primary btn-lg" >尋找活動</button>
-        <hr>
+		<div style="height:50px;margin-bottom: 20px"></div>
+	<div style="text-align:center;">
+		<button id="new" class="btn btn-secondary btn-lg buttonLeft" >開新活動</button>
+		<button id="get" class="btn btn-primary btn-lg buttonright" >尋找活動</button>
+	</div>
+        <hr style="background-color: black">
 		<div style="margin-bottom: 20px"></div>
 
 		<div id="newdiv" style="display: none">
 
 	    <button id="oneclick" class="btn btn-primary btn-sm">一鍵帶入</button>
+	    <button id="nowclick" class="btn btn-primary btn-sm">一鍵帶入(即將到期)</button>
 <p></p>
 			<form:form modelAttribute="NewEvent" method='POST'
 				onsubmit="return check();" enctype="multipart/form-data">
@@ -239,7 +280,7 @@ margin: 0; padding: 0;
   </c:if> <c:if test="${event.eventTypeId=='4'}">
     其他
   </c:if></td>
-							<td><a href="${pageContext.request.contextPath}/event/${event.eventId}"><c:out value="${event.eventName}"></c:out></a>
+							<td><a href="${pageContext.request.contextPath}/event/${event.eventId}" class="link"><c:out value="${event.eventName}"></c:out></a>
 							</td>
 							<td>${event.eventLocation}</td>
 							<td>${event.eventAddress}</td>
@@ -579,6 +620,8 @@ table = $('#showevents').DataTable({
 </script>
 
 <script> 
+
+var dateTimeNow = new Date();
   //googlemap 分析使用者輸入地點名後 找出符合地點(可能複數)  獲得 地圖上地名 真實地址 經緯度
 $(document).ready(function () {    
         
@@ -672,7 +715,33 @@ $("#oneclick").click(function (){
 	$("#quan").val("5");
 	
 });
-        
+
+$("#nowclick").click(function (){
+	$("#ename").val("快過期的聚餐");
+	var t = dateTimeNow.getTime();
+	function formatDate(date) {
+		  var month = (date.getMonth()+1); if(month<10){month="0"+month;}
+		  var todaydate = date.getDate(); if(todaydate<10){todaydate="0"+todaydate;}
+		  var hours = date.getHours();
+		  var minutes = date.getMinutes();
+		  //var ampm = hours >= 12 ? 'pm' : 'am';
+// 		  hours = hours % 12;
+// 		  hours = hours ? hours : 12; // the hour '0' should be '12'
+		  minutes = minutes < 10 ? '0'+minutes : minutes;
+		  var strTime = hours + ':' + minutes;
+		  return   date.getFullYear() + "/" + month + "/" + todaydate + " " + strTime;
+		}
+	$("#sd").val(formatDate(new Date(t+60000)));
+	$("#ed").val(formatDate(new Date(t+360000)));
+
+	//$("#ed").val("2019/04/18 14:50");
+	$("#evcontent").val("快過期了！快點報名!要流團了!");
+	
+	$("#plimit").val("8");
+	$("#quan").val("5");
+	
+});
+
 });             
 
     
