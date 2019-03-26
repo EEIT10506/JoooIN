@@ -33,7 +33,7 @@
 	//修改按鈕
 	$(document).ready(function(){
 	  	$('#updateType').click(function(){
-// 	  		$('.option1').show();	
+ 	  		$('.option1').show();	
 		  	$('#updateType').hide();	
 		  	$('#inputType').show(); 			
 		   	$('#confirmType').show();
@@ -43,7 +43,7 @@
   	//取消
   	$(document).ready(function(){
   	  	$('#cancelType').click(function(){
-//   	  	$('.option1').hide();
+   	  	$('.option1').hide();
   	   	$('#cancelType').hide();
   	  	$('#inputType').hide();
   	    $('#confirmType').hide();
@@ -166,12 +166,8 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 <!-- 		類型 -->
-					<table class="table-dark" border="1" style="width:100%" >
-  <tr>
-  <th>
+					<table class="table table-striped"  style="width:100%" >
   
-  </th>
-  </tr>
   
   <tr style="font-size:25px;">
     <th >社團屬性</th>
@@ -185,15 +181,17 @@
     <c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
     <td><form action="${pageContext.request.contextPath}/group/abouts/updateGroupType/${groupMain.groupId}" method="POST">
 		<p class="text-center">
-		<span id="inputType" style="display:none;">
-		<select id="option1" name="type" >
-　								<option class="option1"  value="sport">運動</option>
-　								<option class="option1"  value="food">美食</option>
-　								<option class="option1"  value="entertainment">娛樂</option>
-　								<option class="option1"  value="other">其他</option>
+		<span id="inputType" >
+		<select class="option1" name="type" style="display:none;">
+　								<option class="option1"  value="sport" style="display:none;">運動</option>
+　								<option class="option1"  value="food" style="display:none;">美食</option>
+　								<option class="option1"  value="entertainment" style="display:none;">娛樂</option>
+　								<option class="option1"  value="other" style="display:none;">其他</option>
 		</select>
 		</span>
+		<p>
 		<button id="confirmType" class="btn btn-default btn-lg btn-danger" style="display:none;" type="submit" >確認修改</button>
+		<p>
 		</p>
 		<p class="text-right">
 		<button id="cancelType" class="btn btn-default btn-lg btn-danger" style="display:none;">取消</button>
@@ -203,7 +201,7 @@
 	</td>
     </c:if>
   </tr>
-  <tr style="font-size:20px;">
+  <tr style="font-size:20px; ">
     <td>社團名稱</td>
     <td>${groupMain.groupName}</td>
     <c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">

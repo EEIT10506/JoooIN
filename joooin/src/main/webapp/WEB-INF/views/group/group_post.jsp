@@ -27,6 +27,10 @@
 	position: relative;
 	top: 120px;
 }
+#imgposter{
+-webkit-clip-path: circle(42.5% at 50% 50%);
+clip-path: circle(42.5% at 50% 50%);
+}
 </style>
 
 <script type="text/javascript">
@@ -73,10 +77,10 @@
 		 <form:form
 			method="POST" modelAttribute="groupPostBean" 
 			enctype="multipart/form-data" class="text-center">
-			<table style="margin-left:30%;" class="table table-borderless table-dark col-xs-6 col-sm-3"  >
+			<table style="margin-left:30%; " class="table  col-xs-6 col-sm-3"   >
 
 				<tr>
-					<th rowspan="2" width="40%"><img src="<c:url value='/getMemberImage/${member.memberId}.jpg' />"></th>
+					<th rowspan="2" width="20%"><img id="imgposter" class="card-img-right flex-auto d-none d-lg-block" alt="Thumbnail [200x200]"  style="width: 200px; height: 200px;" src="<c:url value='/getMemberImage/${member.memberId}.jpg' />"></th>
 					<th class="text-left">社團名稱:${groupMain.groupName}</th>
 					
 				</tr>
@@ -87,6 +91,7 @@
 							path="groupPostTitle" type='text' id="groupPostTitle" /></th>
 				</tr>
 				
+<!-- 				<tr><th class="text-left" colspan="1">321</th></tr> -->
 				<tr>
 				<th></th>
 				<th class="text-left" colspan="1">發文人:  ${member.memberName}</th>

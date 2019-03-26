@@ -22,6 +22,48 @@
 	position: relative;
 	top: 120px;
 }
+.social-card-header{
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 96px;
+}
+.social-card-header i {
+    font-size: 32px;
+    color:#FFF;
+}
+.bg-facebook {
+    background-color:#3b5998;
+}
+.text-facebook {
+    color:#3b5998;
+}
+.bg-google-plus{
+    background-color:#dd4b39;
+}
+.text-google-plus {
+    color:#dd4b39;
+}
+.bg-twitter {
+    background-color:#1da1f2;
+}
+.text-twitter {
+    color:#1da1f2;
+}
+.bg-pinterest {
+    background-color:#bd081c;
+}
+.text-pinterest {
+    color:#bd081c;
+}
+.share:hover {
+        text-decoration: none;
+    opacity: 0.8;
+}	
 </style>
 <!-- 限制字數 -->
 <script>
@@ -55,36 +97,38 @@ $(".textacc").each(function(){
 			<div class="container mt-3">
 				<div class="row">
 <!-- 				<div class="card-columns"> -->
-					<c:forEach var="member" items="${memberInfos}">
-					<div class="col-sm-3">
-						<div class="card mt-3" style="width: 14rem; height: 40rem">
-							<img
+
+<c:forEach var="member" items="${memberInfos}">
+      <div class="col-md-6">
+         <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+            <div class="card-body d-flex flex-column align-items-start">
+               <strong class="d-inline-block mb-2 text-primary"><a href="${pageContext.request.contextPath}/member/other/${member.memberId}">${member.memberName}</a></strong>
+               <h6 class="mb-0">
+               	<a>會員介紹 : </a>
+                  <a class="text-dark textacc">${member.memberIntro }</a>
+               </h6>
+               
+               <p class="card-text mb-auto">發文 :  ${member.postCount } 次</p>
+                <p class="card-text mb-auto">回文 :  ${member.replyCount } 次</p>
+                 <p class="card-text mb-auto">登入 :  ${member.logins } 次</p>
+                 <c:if test="${leaderId == sessionScope.memberId }">
+					<form action="${pageContext.request.contextPath}/group/${groupMain.groupId}/members/delete/${member.memberId}" method="post">
+					<button type="submit" class="float-right btn btn-outline-danger" id="${member.memberId}"><strong>刪除成員</strong></button>
+					</form>
+				</c:if>
+           
+            </div>
+            <img
 								src="<c:url value='/getMemberImage/${member.memberId}.jpg' />"
-								class="img-fluid card-img-top img-thumbnail rounded-circle"
+								 class="card-img-right flex-auto d-none d-lg-block" alt="Thumbnail [200x250]"  style="width: 200px; height: 250px;"
 								src="logo.jpg" alt="Responsive image">
-							<div class="card-body">
-								<h3 class="card-title">
-									<a href="${pageContext.request.contextPath}/member/other/${member.memberId}">${member.memberName}</a>
-								</h3>
-								<p>會員介紹 : </p>
-								<p class="card-text textacc">${member.memberIntro }</p>
-							</div>
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item">發文 :  ${member.postCount } 次</li>
-								<li class="list-group-item">回文 :  ${member.replyCount } 次</li>
-								<li class="list-group-item">登入 :  ${member.logins } 次</li>
-<!-- 								<li class="list-group-item">Vestibulum at eros</li> -->
-							</ul>
-								<div class="card-body">
-								<c:if test="${leaderId == sessionScope.memberId }">
-								<form action="${pageContext.request.contextPath}/group/${groupMain.groupId}/members/delete/${member.memberId}" method="post">
-									<button type="submit" class="float-right btn btn-outline-danger" id="${member.memberId}"><strong>刪除成員</strong></button>
-								</form>
-								</c:if>
-								</div>
-						</div>
-						</div>
-					</c:forEach>
+         </div>
+      </div>
+
+</c:forEach>
+
+
+
 <!-- 					</div> -->
 				</div>
 			</div>
