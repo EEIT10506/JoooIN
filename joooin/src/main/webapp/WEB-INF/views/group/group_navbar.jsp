@@ -60,6 +60,14 @@ body {
   margin-left: 50px;
 }
 
+.openbtn{
+position: fixed;
+  left: 15%;
+  top: 5%;
+  width: 10%;
+  margin-top: 3.5em;
+}
+
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
@@ -102,7 +110,7 @@ function openNav() {
 </div>
 
 
-<span class="openbtn" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; 選單</span>
+<span class="openbtn " style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; 選單</span>
 			
 
 			

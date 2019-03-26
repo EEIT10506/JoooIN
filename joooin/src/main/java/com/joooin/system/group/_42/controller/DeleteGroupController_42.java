@@ -1,5 +1,7 @@
 package com.joooin.system.group._42.controller;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
@@ -14,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupPostBean;
+import com.joooin.model.GroupPostReplyBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.repository.GroupMemberDao;
 import com.joooin.repository.GroupPostDao;
+import com.joooin.system.group._22.pojo.Replyer;
 import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.system.group._42.service.GroupService_42;
 
@@ -37,7 +41,7 @@ public class DeleteGroupController_42 {
 	@Autowired
 	GroupPostDao groupPostDao;
 	
-	//刪除文章功能(進行中)
+	//刪除文章功能
 	@RequestMapping(value = "/DeleteGroupPost", method = RequestMethod.POST)
 	public String DeleteGroupPostartice( @RequestParam Integer memberId, @RequestParam Integer groupPostId,HttpSession session,Integer groupId) {
 		
@@ -53,5 +57,21 @@ public class DeleteGroupController_42 {
 		return "redirect:/group/" + groupId;
 		
 	}
+//	//回文刪除
+//	@RequestMapping(value = "/DeleteGroupReplyPost", method = RequestMethod.POST)
+//	public String DeleteGroupReplyPostartice( @RequestParam Integer memberId, @RequestParam Integer groupPostId,HttpSession session,Integer groupId) {
+//		
+//		
+//		if(memberId!=null) {
+//			List<Replyer> groupPostReplyBean =service2.getReplyerByGroupPostId(groupPostId);
+//		
+//		
+//			
+//			groupPostReplyBean.setIsDeleted(true);
+//			service.updateGroupReplyPostIsDeleted(groupPostReplyBean);
+//		}
+//		return "redirect:/group/" + groupId;
+//		
+//	}
 	
 }

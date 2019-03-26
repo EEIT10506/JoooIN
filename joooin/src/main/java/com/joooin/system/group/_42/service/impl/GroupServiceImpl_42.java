@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupPostBean;
+import com.joooin.model.GroupPostReplyBean;
 import com.joooin.model.ReportBean;
 import com.joooin.repository.GroupMainDao;
 import com.joooin.repository.GroupPostDao;
@@ -40,7 +41,7 @@ public class GroupServiceImpl_42 implements GroupService_42 {
 	ReportDao reportdao;
 	
 	@Autowired
-	GroupPostReplyDao postdao;
+	GroupPostReplyDao groupPostReplyDao;
 	
 	@Autowired
 	GroupPostDao groupPostDao;
@@ -87,6 +88,12 @@ public class GroupServiceImpl_42 implements GroupService_42 {
 	public void updateGroupPostIsDeleted(GroupPostBean groupPostBean) {
 		// TODO Auto-generated method stub
 		groupPostDao.update(groupPostBean);
+	}
+
+	@Override
+	public void updateGroupReplyPostIsDeleted(GroupPostReplyBean groupPostReplyBean) {
+		// TODO Auto-generated method stub
+		groupPostReplyDao.update(groupPostReplyBean);
 	}
 	
 	
