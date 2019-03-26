@@ -20,7 +20,7 @@
 		width: 1050px;
 		margin: auto;
 		position: relative;
-		top: 50px;
+		top: 120px;
 	}
 	.outSide{
 		width:1000px;

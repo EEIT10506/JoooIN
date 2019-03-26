@@ -146,6 +146,8 @@ public class EventController {
 		Integer memberId = (Integer) session.getAttribute("memberId");
 
 		EventMainBean event = eventService.getByEventMainId(eventId);
+		if(event == null)
+		return null;
 		Integer typeid = event.getEventTypeId();
 		Integer inviterid = event.getEventInviterId();
 		String endDate = event.getEventDateEnd();
@@ -179,6 +181,7 @@ public class EventController {
 		MemberMainBean eventmembers = null;
 		List<MemberMainBean> eventmemberlist = new ArrayList<MemberMainBean>();
 		List<MemberMainBean> emfindagreed = new ArrayList<MemberMainBean>();
+		List<EventMemberBean> eventMemberQuantity = new ArrayList<EventMemberBean>();
 		Boolean myAgreed = null;
 		for (EventMemberBean members : eventmember) {
 			Integer memberid = members.getMemberId();
@@ -192,6 +195,7 @@ public class EventController {
 
 			if (isAgreed == true ) {
 				emfindagreed.add(eventmembers);
+				eventMemberQuantity.add(members);
 				if(memberid.equals(memberId)) {
 					myAgreed = true;
 				}
@@ -237,6 +241,7 @@ public class EventController {
 			}
 		}
 		model.addAttribute("myAgreed", myAgreed);
+		model.addAttribute("eventMemberQuantity", eventMemberQuantity);
 		model.addAttribute("findAgreed", findAgreed);
 		model.addAttribute("finish", finish);
 		model.addAttribute("event", event);
@@ -298,15 +303,18 @@ public class EventController {
 	}
 
 	@RequestMapping(value = "/event/checkLike/{eventId}", method = RequestMethod.POST)
-	public @ResponseBody String eventLikeCheck(Integer eventId, HttpSession session) {
+	public @ResponseBody Integer eventLikeCheck(Integer eventId, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
 		List<EventLikeBean> list = eventLikeDao.getAll();
+		Integer likeNum = -3;
 		for (EventLikeBean bean : list) {
 			if (bean.getMemberId().equals(memberId) && bean.getEventId().equals(eventId)) {
-				return "liked";
+				EventMainBean event = eventService.getByEventMainId(eventId);
+				 likeNum = event.getEventLike();
+				return likeNum;
 			} 
 		}
-		return "notLike";
+		return likeNum;
 	}
 
 	// 活動修改
@@ -439,6 +447,7 @@ public class EventController {
 		EventMainBean event = eventService.getByEventMainId(eventId);
 		Integer inviterId = event.getEventInviterId();
 		if (memberId != null && memberId.equals(inviterId)) {
+			
 			List<EventMemberBean> eventMemberList = event.getEventMemberList();
 			List<MemberMainBean> memberList = new ArrayList<MemberMainBean>();
 			List<EventMemberBean> eventMemberId = new ArrayList<EventMemberBean>();

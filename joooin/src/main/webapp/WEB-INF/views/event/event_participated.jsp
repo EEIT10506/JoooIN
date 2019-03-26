@@ -20,7 +20,7 @@
 		width: 1050px;
 		margin: auto;
 		position: relative;
-		top: 50px;
+		top: 120px;
 	}
 			table{
 		    width:100%;
@@ -76,16 +76,7 @@
 			position:relative;
 			bottom:3px;
 		}
-		.report{
-			cursor: pointer;
-			color:	#FFA500;	
-		}
-		.report:hover{
-			cursor: pointer;
-			position:relative;
-			bottom:3px;
-			color:#CD853F;
-		}
+
 		.eventCurrentShow{
 			font-size:25px;
 			font-weight:bold;
@@ -208,7 +199,7 @@ function checkAll(bx) {
 <!-- 				                <th class="tdCenter tdAll">未出席</th> -->
 				                <th class="tdCenter tdAll">報名人數</th>
 				                <th class="tdCenter tdAll">踢除</th>
-				                <th class="tdCenter tdAll">檢舉</th>
+<!-- 				                <th class="tdCenter tdAll">檢舉</th> -->
 				               
 				            </tr>
 				        </thead>
@@ -229,22 +220,22 @@ function checkAll(bx) {
 					       		  <c:if test="${eventFinished == false}">    
 					                <td class="tdCenter tdAll"><i class="far fa-times-circle" style="color:#696969"></i></td>
 					              </c:if>
-					                <c:choose>
-					                 <c:when test="${eventFinished == false and event.eventStatus == 'yes'}"> 
-					                    <td class="tdCenter tdAll">
-					                     <a style="" href="${pageContext.request.contextPath}/event/attendReport/${event.eventId}/${attendList.memberId}">
-					               			 <i class="fas fa-exclamation-triangle report"></i>
-					                	 </a>	
-					                    </td>
-					                 </c:when>
-					                 <c:otherwise> 
-					                    <td class="tdCenter tdAll">
-					                     <a>
-					               			  <i style="color:#696969;" class="fas fa-exclamation-triangle report"></i>
-					                	 </a>	
-					                	</td>
-					                 </c:otherwise>
-					                </c:choose>
+<%-- 					                <c:choose> --%>
+<%-- 					                 <c:when test="${eventFinished == false and event.eventStatus == 'yes'}">  --%>
+<!-- 					                    <td class="tdCenter tdAll"> -->
+<%-- 					                     <a style="" href="${pageContext.request.contextPath}/event/attendReport/${event.eventId}/${attendList.memberId}"> --%>
+<!-- 					               			 <i class="fas fa-exclamation-triangle report"></i> -->
+<!-- 					                	 </a>	 -->
+<!-- 					                    </td> -->
+<%-- 					                 </c:when> --%>
+<%-- 					                 <c:otherwise>  --%>
+<!-- 					                    <td class="tdCenter tdAll"> -->
+<!-- 					                     <a> -->
+<!-- 					               			  <i style="color:#696969;" class="fas fa-exclamation-triangle report"></i> -->
+<!-- 					                	 </a>	 -->
+<!-- 					                	</td> -->
+<%-- 					                 </c:otherwise> --%>
+<%-- 					                </c:choose> --%>
 					                
 <!-- 					                ========= -->
 <!-- 		踢出確認MODAL			                ========= -->

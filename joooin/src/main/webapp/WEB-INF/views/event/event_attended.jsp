@@ -20,7 +20,7 @@
 		width: 1050px;
 		margin: auto;
 		position: relative;
-		top: 50px;
+		top: 120px;
 	}
 			table{
 		    width:100%;
@@ -84,6 +84,17 @@
 			cursor: pointer;
 			position:relative;
 			bottom:3px;
+			color:#B22222;
+		}
+		.report{
+			cursor: pointer;
+			color:	#FFA500;	
+		}
+		.report:hover{
+			cursor: pointer;
+			position:relative;
+			bottom:3px;
+			color:#CD853F;
 		}
 </style>
 <script type="text/javascript">
@@ -158,7 +169,7 @@ $(document).ready(function() {
 				                <th class="tdCenter tdAll">名稱</th>
 				                <th class="tdCenter tdAll">出席</th>
 				                <th class="tdCenter tdAll">未出席</th>
-				                
+				                <th class="tdCenter tdAll">檢舉</th>
 				               
 				            </tr>
 				        </thead>
@@ -173,6 +184,11 @@ $(document).ready(function() {
 					                <td class="tdCenter tdAll"><i class="fas fa-check-circle arrive" id="arrive${eventMemberId[loop.count-1].eventMemberId}"></i></td>
 					       					            
 					                <td class="tdCenter tdAll"><i class="fas fa-times absent" id="absent${eventMemberId[loop.count-1].eventMemberId}"></i></i></td>					              
+					                <td class="tdCenter tdAll">
+					                	<a href="${pageContext.request.contextPath}/event/attendReport/${event.eventId}/${attendList.memberId}">
+ 					               			 <i class="fas fa-exclamation-triangle report"></i> 
+					                	 </a>	
+					                </td>					              
 					       	                
 <!-- 					                ========= -->
 <!-- 		踢出確認MODAL			                ========= -->
