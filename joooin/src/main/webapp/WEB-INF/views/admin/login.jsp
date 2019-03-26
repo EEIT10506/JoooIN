@@ -51,6 +51,7 @@
 	<h4 >${name}</h4>
 	<h4>${welcome}</h4>
 	<h6>${error}</h6>
+	<h6>${reason}</h6>
 	</div>
 	<form:form method="POST" modelAttribute="memberMainBean" name="form1">
   <div class="form-group">

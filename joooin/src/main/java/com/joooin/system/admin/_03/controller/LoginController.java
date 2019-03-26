@@ -81,7 +81,8 @@ public class LoginController {
 			long endTime = endDate.getTime();
 			long nowTime = nowDate.getTime();
 			if(nowTime > startTime && nowTime < endTime) {
-				redirectAttributes.addFlashAttribute("error", "帳號鎖定中"+pb.getPunishDateEnd()+"後解鎖");
+				redirectAttributes.addFlashAttribute("error", "帳號鎖定中:"+pb.getPunishDateEnd()+"後解鎖");
+				redirectAttributes.addFlashAttribute("reason", "原因:"+pb.getPunishType());
 				return "redirect:/login";
 			}else {
 				session.setAttribute("memberName", member.getMemberName());
