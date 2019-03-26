@@ -184,27 +184,24 @@ div {
 					<!-- 					團長按鈕顯示判斷		 -->
 
 				</div>
-<!-- 				網路掛掉 -->
 <!-- 				<ING> -->
-<%-- 					<c:choose> --%>
-<%-- 						<c:when test="isInGroup"> --%>
-<%-- 							<form action="${pageContext.request.contextPath}/group/addgroup/${groupsType.groupId}" method="post"> --%>
-<!-- 								<button type="submit" class="btn btn-sm btn-outline-secondary">進入社團</button> -->
-<%-- 							</form> --%>
-<%-- 						</c:when> --%>
+					<c:choose>
+						<c:when test="${status == 'IN' }">
+							<span><i class="fa fa-user">成員</i></span>
+						</c:when>
 											
-<%-- 						<c:when test="isInGroup"> --%>
-<%-- 							<form action="${pageContext.request.contextPath}/group/addgroup/${groupsType.groupId}" method="post"> --%>
-<!-- 								<button type="submit" class="btn btn-sm btn-outline-secondary">申請中</button> -->
-<%-- 							</form> --%>
-<%-- 						</c:when> --%>
+						<c:when test="${status == 'PROCESS' }">
+							<form action="${pageContext.request.contextPath}/group/addgroup/${groupMain.groupId}" method="post">
+								<button type="submit" class="btn btn-sm btn-outline-secondary">申請中</button>
+							</form>
+						</c:when>
 											
-<%-- 						<c:otherwise> --%>
-<%-- 							<form action="${pageContext.request.contextPath}/group/addgroup/${groupsType.groupId}" method="post"> --%>
-<!-- 								<button type="submit" class="btn btn-sm btn-outline-secondary">加入社團</button> -->
-<%-- 							</form> --%>
-<%-- 						</c:otherwise> --%>
-<%-- 					</c:choose> --%>
+						<c:otherwise>
+							<form action="${pageContext.request.contextPath}/group/addgroup/${groupMain.groupId}" method="post">
+								<button type="submit" class="btn btn-sm btn-outline-secondary">加入社團</button>
+							</form>
+						</c:otherwise>
+					</c:choose>
 <!-- 				<ING> -->
 <!-- 				<button type="button" -->
 <!-- 					class="btn btn-sm btn-outline-secondary dropdown-toggle"> -->
