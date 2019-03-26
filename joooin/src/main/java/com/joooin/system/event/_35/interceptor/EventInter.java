@@ -18,9 +18,7 @@ import com.joooin.model.EventMemberBean;
 import com.joooin.system.event._35.service.EventsService;
 
 public class EventInter implements HandlerInterceptor {
-	
-    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-    
+	  
     @Autowired
     EventsService  eventsService;
 
@@ -32,32 +30,34 @@ public class EventInter implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		System.out.println("-------------------handle----------------");
 		List<EventMainBean> eventList = eventsService.getAll();
-		Iterator<EventMainBean> iterator = eventList.iterator();
 
         Date now = new Date();
         Date eventEndDate = null;
-	     while(iterator.hasNext()) {  			    	
-	    	 EventMainBean event = iterator.next();		
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+
+        
+	     for(EventMainBean event:eventList){  			    	
+	    		
 	    	 eventEndDate = sdf1.parse(event.getEventDateEnd());
 	    	 String status = event.getEventStatus();
 	    	 if(now.after(eventEndDate) && status.equals("unchecked")) { 
 	    		 event.setEventStatus("no");
-	    		 eventsService.update(event);
 	    		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    		 Date nowdate = new Date();
 	    		 String eventupdate = sdf.format(nowdate);
 	    		 String notificationContent = "event_modified_eventId=" + event.getEventId();
 	    		 List<EventMemberBean> eventMemberList = event.getEventMemberList();
-	    		 Iterator<EventMemberBean> eventMemberiterator = eventMemberList.iterator();
-	    		 while(eventMemberiterator.hasNext()) {
-	    			 EventMemberBean eventMember = eventMemberiterator.next();	
+	    		 
+	    		 for(EventMemberBean eventMember:eventMemberList) {	    			
 	    			 Integer myMember_memberId = eventMember.getMemberId();
 	    			 eventsService.addnotification(myMember_memberId, notificationContent, eventupdate, false);
 	    		 }
+	    		 eventsService.update(event);
 	         } 	
+	     
 	     }
-	
 		return true;
 	}
 

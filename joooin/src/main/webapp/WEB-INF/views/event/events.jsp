@@ -80,6 +80,7 @@ border: 1px solid black;
 iframe{
 margin: 0; padding: 0;
 }
+
 .buttonLeft{
 	position:relative;
 	right:100px;
@@ -106,6 +107,16 @@ margin: 0; padding: 0;
  		background-color:#F5F5F5; 
 		font-weight:bold;
 }
+
+.setleft{
+margin-left: 80px;
+margin-bottom: 15px;
+}
+
+.onlyleft{
+margin-left: 150px;
+margin-bottom: 20px;
+}
 </style>
 <title>JoooIN</title>
 
@@ -128,7 +139,7 @@ margin: 0; padding: 0;
 	<div id="main">
 	<div  class="container">
 		<div style="height:50px;margin-bottom: 20px"></div>
-	<div style="text-align:center;">
+	<div style="text-align:center;"> 
 		<button id="new" class="btn btn-secondary btn-lg buttonLeft" >開新活動</button>
 		<button id="get" class="btn btn-primary btn-lg buttonright" >尋找活動</button>
 	</div>
@@ -136,86 +147,94 @@ margin: 0; padding: 0;
 		<div style="margin-bottom: 20px"></div>
 
 		<div id="newdiv" style="display: none">
-
+        <div class="setleft">
 	    <button id="oneclick" class="btn btn-primary btn-sm">一鍵帶入</button>
 	    <button id="nowclick" class="btn btn-primary btn-sm">一鍵帶入(即將到期)</button>
+	    </div>
 <p></p>
 			<form:form modelAttribute="NewEvent" method='POST'
 				onsubmit="return check();" enctype="multipart/form-data">
 				<p>
-
-					活動名稱:
+                    <div class="setleft">
+					活動名稱：
 					<form:input id="ename" path='eventName' required="required" maxlength="10" />
-				<p></p>
-					開始時間:<span class="input-group date" id="datetimepicker1" data-target-input="nearest" style="width:300px">
-					<form:input id="sd" path='eventDateStart' class="form-control datetimepicker-input" data-target="#datetimepicker1" required="required" onkeyup="return Validate(this,value)"/>
-					  <span class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker" >
-                        <span class="input-group-text"><i class="fa fa-calendar" ></i></span>
+				    </div>
+				    <div class="setleft">
+					開始時間：<span class="input-group date" id="datetimepicker1" data-target-input="nearest" style="width:300px;display:inline !important">
+					<form:input id="sd" path='eventDateStart' class="form-control datetimepicker-input" data-target="#datetimepicker1" required="required" onkeyup="return Validate(this,value)" style="width:250px;display:inline !important"/>
+					  <span class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker"  style="display:inline !important">
+                        <span class="input-group-text" style="display:inline !important"><i class="fa fa-calendar" style="display:inline !important"></i></span>
                     </span> 
                 </span>
-				<p></p>
-					結束時間: <span class="input-group date" id="datetimepicker2" data-target-input="nearest" style="width:300px">
-					<form:input id="ed" path='eventDateEnd' class="form-control datetimepicker-input" data-target="#datetimepicker2" required="required" onkeyup="return Validate(this,value)"/>
-					<span class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                        <span class="input-group-text" ><i class="fa fa-calendar"></i></span>
+                  </div>
+				    <div class="setleft">
+					結束時間： <span class="input-group date" id="datetimepicker2" data-target-input="nearest" style="width:300px;display:inline !important">
+					<form:input id="ed" path='eventDateEnd' class="form-control datetimepicker-input" data-target="#datetimepicker2" required="required" onkeyup="return Validate(this,value)" style="width:250px;display:inline !important"/>
+					<span class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker" style="display:inline !important">
+                        <span class="input-group-text" style="display:inline !important"><i class="fa fa-calendar" style="display:inline !important"></i></span>
                     </span>
                 </span>				
-				<p></p>
-           
+				</div>
+            <div class="setleft">
                               進行關鍵字搜尋後請<h3 style="color: red">務必選取地圖上的座標並確認地點是否正確!!</h3><input type="text" size="20" class="controls" placeholder="Search Box"
 					id="address" value="" required="required" style="width:300px; height:50px"/>
+           </div>
 
 
-
-
+                 <div class="setleft">
 				<div id="map" style="width: 800px; height: 450px; display: none"></div>
 				<%--設定顯示 Google Maps 的大小--%>
-
-				<p></p><div>
-					活動地點:
+                </div>
+				<p></p> 
+				    <div class="setleft">
+					活動地點：
 					<form:input path='eventLocation' id="local" required="required" style="width: 400px" readonly="true"/>
-					<p></p>
-					活動地址:
+					</div>
+					 <div class="setleft">
+					活動地址：
 					<form:input path='eventAddress' id="add" required="required" style="width: 400px" readonly="true"/>
-
+                    </div>
 					<form:input path='eventLatitude' id="lat" required="required" readonly="true" style="display:none"/>
 
 					<form:input path='eventLongitude' id="lng" required="required" readonly="true" style="display:none"/>
-					<p></p>
+
 					
 					<form:input id="pid" path='eventPlaceId' required="required"  readonly="true" style="display:none"/>
-					<p></p>
-				</div>
-				<p></p>
-			活動內容(可省略):<p></p>
-				<form:textarea id="evcontent" path='eventContent' style="width:300px;height:100px;" />
-				<p>
 
-					活動類型:
+				<p></p>
+				 <div class="setleft">
+			活動內容（可省略）：<p></p>
+				<form:textarea id="evcontent" path='eventContent' style="width:300px;height:100px;" />
+				</div>
+                     <div class="setleft"> 
+					活動類型：
 					<form:select path='eventTypeId' required="required">
 						<form:option value="1">美食</form:option>
 						<form:option value="2">運動</form:option>
 						<form:option value="3">娛樂</form:option>
 						<form:option value="4">其他</form:option>
 					</form:select>
-				<p>
-					活動圖片(不上傳則依類型提供預設圖片):
+				</div>
+				 <div class="setleft">
+					活動圖片(不上傳則依類型提供預設圖片)：
 					<form:input path='multipartFile' type="file" accept="image/*" />
-				<p>
-					人員上限:
-					<form:input id="plimit" type="number" min="1" path='eventMemberLimit' required="required" onkeyup="return ValidateNumber(this,value)"/>
-				<p>
-					自行攜帶的人數(單獨參加免輸入):<input id="quan" type="number" min="1" name="quantity" onkeyup="return ValidateNumber(this,value)"/>
-				<p>
+				</div>
+				 <div class="setleft">
+					人員上限： <form:input style="width:150px" id="plimit" type="number" min="1" path='eventMemberLimit' required="required" onkeyup="return ValidateNumber(this,value)"/>
+				</div>
+				 <div class="setleft">
+					攜帶人數： <input id="quan" style="width:150px" type="number" min="1" name="quantity" placeholder="單獨參加免輸入" onkeyup="return ValidateNumber(this,value)"/>
+				</div>
 				<div style="display: none">
-					參加費(不輸入設為免費):
+					參加費(不輸入設為免費)：
 					<form:input path='eventFee' onkeyup="return ValidateNumber(this,value)"/>
 				<p></div>
-
+                     <div class="setleft">
 					<br> <input id="submit" type='submit' value='提交'
 						class="btn btn-primary btn-lg active"> <input type='reset'
 						value='還原' class="btn btn-secondary btn-lg active"> <br>
-					<br> <a href='${pageContext.request.contextPath}'>回到首頁</a>
+					<br>
+					</div>
 			</form:form>
 
 
@@ -225,7 +244,7 @@ margin: 0; padding: 0;
 		<div id="getdiv">
 
 			
-						
+						<div class="onlyleft">
 							<select id="ewill">
 								<option value="allevent">所有活動</option>
 								<option value="all">所有未結束</option>
@@ -234,23 +253,24 @@ margin: 0; padding: 0;
 								<option value="lost">已結束的團</option>
 							</select>
 							
-							 類別:<select id="etype">
+							 類別： <select id="etype">
 								<option value="">全部</option>
 								<option value="美食">美食</option>
 								<option value="運動">運動</option>
 								<option value="娛樂">娛樂</option>
 								<option value="其他">其他</option>
 							</select> 
-							地區:<input type="text" id="loc" style="width: 150px" /> 
+							地區： <input type="text" id="loc" style="width: 150px" /> 
 							
 					<div class="input-group date" id="datetimepicker3" data-target-input="nearest" style="width:300px;display:inline !important">   
-					時間:<input id="dcheck" class="form-control datetimepicker-input" data-target="#datetimepicker3"  style="width:250px;display:inline !important" onkeyup="return Validate(this,value)"/>
+					時間： <input id="dcheck" class="form-control datetimepicker-input" data-target="#datetimepicker3"  style="width:250px;display:inline !important" onkeyup="return Validate(this,value)"/>
 					  <span class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker" style="display:inline !important">
                         <span class="input-group-text" style="display:inline !important"><i class="fa fa-calendar" style="display:inline !important"></i></span>
                     </span>
                   </div>
-
-               <button id="search" onclick="search()">篩選</button>
+                  <button id="search" onclick="search()">篩選</button>
+                  </div>
+                                 
 					<table id="showevents" class="display" >	
 				<thead>
 					<tr>
