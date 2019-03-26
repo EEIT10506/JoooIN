@@ -294,7 +294,10 @@ $(document).ready(function () {
 <!--         	        <a class="float-right btn text-danger btn-light" id="like"> 變換按鈕-->
 <!--         	        <a class="float-right btn text-white btn-danger" id="like"> 變換按鈕-->
                    </p>
+                   
+                   <c:if test="${poster.groupPostImage != null}">
                    <img class="img-thumbnail" alt="" width="50%" src="<c:url value='/getPostImage/${poster.groupPostId}.jpg' />">
+        	       </c:if>	
         	    </div>
 	        </div>
 	       

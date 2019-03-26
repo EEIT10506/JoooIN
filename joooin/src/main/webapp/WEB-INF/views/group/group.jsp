@@ -88,7 +88,7 @@ div {
 		
 		//讚數降冪排列
 		$('#table_id').DataTable({"columns":column, "language":language, "lengthChange": false, "aLengthMenu" : 10,
-			 "bScrollCollapse": true, "order" : [ 1, 'desc' ]});
+			 "bScrollCollapse": true, "order" : [ 4, 'desc' ]});
 		
 	});
 	
