@@ -447,6 +447,7 @@ public class EventController {
 		EventMainBean event = eventService.getByEventMainId(eventId);
 		Integer inviterId = event.getEventInviterId();
 		if (memberId != null && memberId.equals(inviterId)) {
+			
 			List<EventMemberBean> eventMemberList = event.getEventMemberList();
 			List<MemberMainBean> memberList = new ArrayList<MemberMainBean>();
 			List<EventMemberBean> eventMemberId = new ArrayList<EventMemberBean>();

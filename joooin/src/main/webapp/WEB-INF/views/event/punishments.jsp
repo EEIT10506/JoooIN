@@ -19,11 +19,11 @@
 		var eventId = ${eventId}
 		$("#btns").click();
 		
-		$("#notEventManager").click(function(){
-			location.href = "${pageContext.request.contextPath}/event/"+eventId;
-		});
+		$("#backToIndex").click(function(){
+			location.href = "${pageContext.request.contextPath}/";
+		}); 
 		setTimeout(function() { 
-			$("#notEventManager").click();
+			$("#backToIndex").click();
 	    }, 3000);
 		 
 	});
@@ -31,20 +31,20 @@
 <title></title>
 </head>
 <body>
-<button id="btns" type="button" class="btn btn-primary" data-toggle="modal" data-target="#notEventM"></button>
+<button id="btns" type="button" class="btn btn-primary" data-toggle="modal" data-target="#punish"></button>
 
 <!-- Modal -->
-<div class="modal fade" id="notEventM" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="punish" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle" style="font-family:微軟正黑體;font-weight:bold;font-size:30px;color:red;">警告</h5>
       </div>
       <div class="modal-body" style="font-family:微軟正黑體;font-weight:bold;font-size:20px;">
-       	非此活動管理者  將在三秒後返回活動頁面
+       	使用者被檢舉懲罰中  將在三秒後返回首頁
       </div>
       <div class="modal-footer">
-      	<button id="notEventManager" type="button" class="btn btn-primary">回到活動</button>
+      	<button id="backToIndex" type="button" class="btn btn-primary">回到首頁</button>
        
       </div>
     </div>
