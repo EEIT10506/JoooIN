@@ -32,9 +32,8 @@
 	    font-weight:bold;
 	}
 	#AdminHasLogin {
-		position: relative;
+		position: absolute;
 		right: 75px;
-
 	}
 	* {
 		font-family:微軟正黑體;
