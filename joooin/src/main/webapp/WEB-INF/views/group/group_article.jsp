@@ -33,13 +33,30 @@
 		position: relative;
 		top: 120px;
 	}
-table{
+	table{
    	
    	width: 770px; 	
 /*    	自動斷行 */
    	word-wrap: break-word;
    	table-layout: fixed;
-   }	
+   }
+   
+   .textarea:focus {
+    outline: none !important;
+    border:1px solid #6495ED;
+    box-shadow: 0 0 10px #719ECE;
+	}
+
+	.mask {
+  	display: inline-block;
+  	width: 100px;
+  	height: 100px;
+  	border-radius: 50%;
+  	overflow: hidden;
+	}
+	
+	.maskimg {max-width: 100%;}
+   	
 </style>
 <!-- reply like ready -->
 <script type="text/javascript">
@@ -113,8 +130,13 @@ $( document ).ready(function() {
 					return;
 				}
 				
+				var con = confirm(" 確定送出? ");
+				
+				if(con == false){
+					return;
+				}
+				
 				var reply_content = ($(this).val() + "<br/>");
-				console.log("回覆內容", reply_content);
 				//submit form via ajax, this is not JS but server side scripting so not showing here
 				
 				var groupId = ${poster.groupId};
@@ -275,12 +297,16 @@ $(document).ready(function () {
 	<c:when test="${Permission}">
 		<div class="row align-items-center">
 		
-	  		<label for="usermsg"><i class="fa fa-pencil"></i>回覆文章:</label>
-	  		<br>
+	  		<div class="mask" style="margin-left: 10%;">
+				<img class="maskimg" src="${pageContext.request.contextPath}/getMemberImage/${sessionScope.memberId}" />
+			</div>​
+	  		
+	  		<label style="margin-left: 2%;" for="usermsg"><i class="fa fa-pencil"></i></label>
+	  		
 	  		<textarea name="usermsg" autocomplete="off" type="text"
-						id="usermsg" rows="5" cols="20" 
+						id="usermsg" rows="5" cols="20" class="textarea"
 						onFocus="if(this.value==this.defaultValue) this.value=''" onBlur="if(this.value=='') this.value=this.defaultValue"
-						style="width: 65%; margin-left: 10%;">留言...... </textarea>
+						style="width: 65%; margin-left: 2%;">留言...... </textarea>
 		</div>
 	</c:when>
 			<c:otherwise>
@@ -376,7 +402,7 @@ $(document).ready(function () {
 <!-- 			</from> -->
 <!-- 		</div> -->
 <!-- For fu -->
-
+			<footer style="height:50px"></footer>
 
 		</section>
 		<!-- 	test --> 
