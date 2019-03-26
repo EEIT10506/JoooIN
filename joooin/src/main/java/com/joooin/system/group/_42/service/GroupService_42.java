@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.joooin.model.EventPostBean;
 import com.joooin.model.GroupMainBean;
+import com.joooin.model.GroupPostBean;
 import com.joooin.model.ReportBean;
 
 public interface GroupService_42 {
@@ -23,7 +25,7 @@ public interface GroupService_42 {
 	
 	public void updateGroupIntro(Integer groupId, String groupintro);
 
-	
+	public void updateGroupPostIsDeleted(GroupPostBean groupPostBean);
 	
 	
 	

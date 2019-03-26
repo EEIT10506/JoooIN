@@ -31,15 +31,32 @@
 		width: 1200px;
 		margin: auto;
 		position: relative;
-		top: 50px;
+		top: 120px;
 	}
-table{
+	table{
    	
    	width: 770px; 	
 /*    	自動斷行 */
    	word-wrap: break-word;
    	table-layout: fixed;
-   }	
+   }
+   
+   .textarea:focus {
+    outline: none !important;
+    border:1px solid #6495ED;
+    box-shadow: 0 0 10px #719ECE;
+	}
+
+	.mask {
+  	display: inline-block;
+  	width: 100px;
+  	height: 100px;
+  	border-radius: 50%;
+  	overflow: hidden;
+	}
+	
+	.maskimg {max-width: 100%;}
+   	
 </style>
 <!-- reply like ready -->
 <script type="text/javascript">
@@ -107,8 +124,19 @@ $( document ).ready(function() {
 	$(function() {
 		$("#usermsg").keypress(function(e) {
 			 if(e.which == 13 && !e.shiftKey) { //按下enter不包含shift+enter
-				 
-				var reply_content = ($(this).val() + "<br/>"); 
+				// 回文不可是空
+				if($(this).val().trim() == ""){
+					e.preventDefault();
+					return;
+				}
+				
+				var con = confirm(" 確定送出? ");
+				
+				if(con == false){
+					return;
+				}
+				
+				var reply_content = ($(this).val() + "<br/>");
 				//submit form via ajax, this is not JS but server side scripting so not showing here
 				
 				var groupId = ${poster.groupId};
@@ -150,7 +178,10 @@ $( document ).ready(function() {
 								
 				$(this).val("");
 				e.preventDefault();
-			}
+			
+			 
+			 
+			 }
 		});
 	});
 	
@@ -235,37 +266,60 @@ $(document).ready(function () {
 	    <div class="card-body">
 	        <div class="row">
         	    <div class="col-md-2">
+        	    
         	        <img src="<c:url value='/getMemberImage/${poster.memberId}.jpg' />" class="img img-rounded img-fluid"/>
         	        <p class="text-secondary text-center">${poster.groupPostDate }</p>
         	    </div>
         	    <div class="col-md-10">
         	        <p>
         	            <a class="float-left" href="${pageContext.request.contextPath}/member/other/${poster.memberId}"><strong>${poster.memberName }</strong></a>
-        	            
-
+        	           <c:if test="${sessionScope.memberId == poster.memberId}"> 
+        	           <form id="DeleteGroupMessage" action="${pageContext.request.contextPath}/DeleteGroupPost" method="post">
+        	           <input type="hidden"  name="groupPostId" value="${poster.groupPostId}">
+        	           <input type="hidden"  name="memberId" value="${poster.memberId}">
+        	           <input type="hidden"  name="groupId" value="${poster.groupId}">    
+						<a class="float-right">
+						<button  type="submit" class="btn btn-dark delete">刪除文章</button>
+						</a>
+						</form>
+						</c:if>
         	       </p>
         	       <div class="clearfix"></div>
         	        <p> ${poster.groupPostText }</p>
-        	        <p> 	
-        	            <a class="float-right btn btn-outline-primary ml-2" href="${pageContext.request.contextPath}/report/${poster.memberId}/${poster.memberName}"> <i class="fa fa-reply" ></i> 檢舉</a>
+        	        <p> 
+        	        	
+        	            <a   class="float-right btn btn-outline-primary ml-2" href="${pageContext.request.contextPath}/report/${poster.memberId}/${poster.memberName}" > <i class="fa fa-reply"  ></i> 檢舉</a>
+        	            
         	            <a class="float-right btn text-danger btn-light" id="like"> <i class="fa fa-heart"></i> Like</a>
 <!--         	        <a class="float-right btn text-danger btn-light" id="like"> 變換按鈕-->
 <!--         	        <a class="float-right btn text-white btn-danger" id="like"> 變換按鈕-->
                    </p>
-                   <img class="img-thumbnail" alt="" src="<c:url value='/getPostImage/${poster.groupPostId}.jpg' />">
+                   <img class="img-thumbnail" alt="" width="50%" src="<c:url value='/getPostImage/${poster.groupPostId}.jpg' />">
         	    </div>
 	        </div>
+	       
 	        <div id="chatbox">
 	        
 	        </div>
 	    </div>
 	</div>
+	<br>
+	<br>
 	<c:choose>
 	<c:when test="${Permission}">
-		<textarea name="usermsg" autocomplete="off" type="text"
-						id="usermsg" rows="4" cols="30" 
+		<div class="row align-items-center">
+		
+	  		<div class="mask" style="margin-left: 10%;">
+				<img class="maskimg" src="${pageContext.request.contextPath}/getMemberImage/${sessionScope.memberId}" />
+			</div>​
+	  		
+	  		<label style="margin-left: 2%;" for="usermsg"><i class="fa fa-pencil"></i></label>
+	  		
+	  		<textarea name="usermsg" autocomplete="off" type="text"
+						id="usermsg" rows="5" cols="20" class="textarea"
 						onFocus="if(this.value==this.defaultValue) this.value=''" onBlur="if(this.value=='') this.value=this.defaultValue"
-						style="width: 450px; margin-left: 25px;">按下Enter送出</textarea>
+						style="width: 65%; margin-left: 2%;">留言...... </textarea>
+		</div>
 	</c:when>
 			<c:otherwise>
 				<span class="d-block p-2 bg-dark text-white">
@@ -273,7 +327,7 @@ $(document).ready(function () {
 				</span>
             </c:otherwise>
 	 </c:choose>
-	 
+
 </div>
 		<!-- 		主文及回文 -->
 		<!-- 		id="chatbox" 回文 -->
@@ -361,7 +415,7 @@ $(document).ready(function () {
 <!-- 			</from> -->
 <!-- 		</div> -->
 <!-- For fu -->
-
+			<footer style="height:50px"></footer>
 
 		</section>
 		<!-- 	test --> 

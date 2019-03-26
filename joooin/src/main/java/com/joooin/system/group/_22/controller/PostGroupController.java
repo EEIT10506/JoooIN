@@ -83,6 +83,9 @@ public class PostGroupController {
 			groupImage = ImageUtils.multipartFileToByteArray(groupPostBean.getMultipartFile());
 			groupPostBean.setGroupPostImage(groupImage);
 		}
+		
+			String text = groupPostBean.getGroupPostText().replace("\n", "<br />");
+			groupPostBean.setGroupPostText(text);
 
 			// 沒有like
 			groupPostBean.setGroupPostLike(0);
@@ -138,6 +141,7 @@ public class PostGroupController {
 		replyBean.setMemberId(memberId);
 		replyBean.setGroupPostReplyDate((sdf.format(new Date()).toString()));
 		replyBean.setIsDeleted(false);
+		reply = reply.replace("\n", "<br />");
 		replyBean.setGroupPostReplyContent(reply);
 		
 		groupService.createReply(replyBean);

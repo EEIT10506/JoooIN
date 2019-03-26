@@ -25,7 +25,7 @@
 	width: 1200px;
 	margin: auto;
 	position: relative;
-	top: 50px;
+	top: 120px;
 }
 </style>
 <script>
@@ -149,7 +149,11 @@
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/navbar" />
-
+	<!-- 	解決include jQuery衝突 -->
+	<script type="text/javascript">
+		var xxx = jQuery.noConflict(true);
+	</script>
+	<!-- 	解決include jQuery衝突 -->
 	<!-- 請把所有內容寫在此div內 -->
 	<div id="main">
 		<jsp:include page="${request.contextPath}/group/group_navbar" />
