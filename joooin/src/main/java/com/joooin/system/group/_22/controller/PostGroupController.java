@@ -138,6 +138,7 @@ public class PostGroupController {
 		replyBean.setMemberId(memberId);
 		replyBean.setGroupPostReplyDate((sdf.format(new Date()).toString()));
 		replyBean.setIsDeleted(false);
+		reply = reply.replace("\n", "<br />");
 		replyBean.setGroupPostReplyContent(reply);
 		
 		groupService.createReply(replyBean);

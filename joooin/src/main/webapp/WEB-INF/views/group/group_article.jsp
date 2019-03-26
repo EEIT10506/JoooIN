@@ -112,8 +112,9 @@ $( document ).ready(function() {
 					e.preventDefault();
 					return;
 				}
-				 
-				var reply_content = ($(this).val() + "<br/>"); 
+				
+				var reply_content = ($(this).val() + "<br/>");
+				console.log("回覆內容", reply_content);
 				//submit form via ajax, this is not JS but server side scripting so not showing here
 				
 				var groupId = ${poster.groupId};
@@ -268,18 +269,18 @@ $(document).ready(function () {
 	        </div>
 	    </div>
 	</div>
-</div>
 	<br>
 	<br>
 	<c:choose>
 	<c:when test="${Permission}">
-		<div class="form-group">
+		<div class="row align-items-center">
+		
 	  		<label for="usermsg"><i class="fa fa-pencil"></i>回覆文章:</label>
 	  		<br>
 	  		<textarea name="usermsg" autocomplete="off" type="text"
-						id="usermsg" rows="5" cols="30" 
+						id="usermsg" rows="5" cols="20" 
 						onFocus="if(this.value==this.defaultValue) this.value=''" onBlur="if(this.value=='') this.value=this.defaultValue"
-						style="width: 450px; margin-left: 25px;">按下Enter送出</textarea>
+						style="width: 65%; margin-left: 10%;">留言...... </textarea>
 		</div>
 	</c:when>
 			<c:otherwise>
@@ -288,6 +289,7 @@ $(document).ready(function () {
 				</span>
             </c:otherwise>
 	 </c:choose>
+</div>
 		<!-- 		主文及回文 -->
 		<!-- 		id="chatbox" 回文 -->
 		
