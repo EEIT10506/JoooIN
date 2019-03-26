@@ -44,7 +44,8 @@ public class EnterGroupController {
 
 	// 依照groupId個別社團主頁連結
 	@RequestMapping(method = RequestMethod.GET, value = "/group/{groupId}")
-	public String groupMainPage(Model model, @PathVariable Integer groupId) {
+	public String groupMainPage(Model model, @PathVariable Integer groupId, HttpSession session) {
+		Integer memberId = (Integer) session.getAttribute("memberId");
 		GroupMainBean groupMain = groupService.getByGroupId(groupId);
 
 		LinkedList<MemberMainBean> applyMember = new LinkedList<>();
@@ -54,6 +55,12 @@ public class EnterGroupController {
 		}
 
 		List<Poster> groupPosters = groupService.getPostersByGroupId(groupId);
+		
+		if(memberId != null) {
+			String status = groupService.statusApplyGroup(groupId, memberId);
+			model.addAttribute("status", status);
+		}
+
 
 		model.addAttribute("groupMain", groupMain);
 		model.addAttribute("applyMemberMain", applyMember);
