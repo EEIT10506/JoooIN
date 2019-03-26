@@ -48,7 +48,7 @@
 		<!-- Contact Form -->
 	<!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
 	<div style="text-align: center;color: red;">
-	<h4 >${name}</h4>
+	<h4>${name}</h4>
 	<h4>${welcome}</h4>
 	<h6>${error}</h6>
 	<h6>${reason}</h6>
