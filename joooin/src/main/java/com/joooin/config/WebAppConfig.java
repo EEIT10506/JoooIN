@@ -19,6 +19,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.ResourceBundleViewResolver;
 
+import com.joooin.system.event._35.interceptor.EventInter;
+
 
 @Configuration
 @EnableWebMvc
@@ -46,12 +48,18 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		pdfView.setOrder(1);
 		return pdfView;
 	}
+	
+	@Bean
+	public EventInter addEventInter() {
+		return new EventInter();
+	}
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		OpenSessionInViewInterceptor sessionInterceptor = new OpenSessionInViewInterceptor();
 	    sessionInterceptor.setSessionFactory(sessionFactory);
 	    registry.addWebRequestInterceptor(sessionInterceptor);
+	    registry.addInterceptor(addEventInter()).excludePathPatterns("/");
 	}
 
 	@Override
