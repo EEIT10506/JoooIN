@@ -19,6 +19,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.ResourceBundleViewResolver;
 
+import com.joooin.system.admin._03.interceptor.LoginInterceptor;
+
 
 @Configuration
 @EnableWebMvc
@@ -46,12 +48,19 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		pdfView.setOrder(1);
 		return pdfView;
 	}
+	
+	@Bean
+	LoginInterceptor loginInterceptor() {
+		return new LoginInterceptor();
+	}
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		OpenSessionInViewInterceptor sessionInterceptor = new OpenSessionInViewInterceptor();
 	    sessionInterceptor.setSessionFactory(sessionFactory);
 	    registry.addWebRequestInterceptor(sessionInterceptor);
+	    
+	    registry.addInterceptor(loginInterceptor()).addPathPatterns(""); // 字串可用,隔開 指定controller路徑將會攔截返回登入頁面
 	}
 
 	@Override
@@ -69,4 +78,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	    multipartResolver.setDefaultEncoding("UTF-8");
 	    return multipartResolver;
 	}
+	
+	
 }
