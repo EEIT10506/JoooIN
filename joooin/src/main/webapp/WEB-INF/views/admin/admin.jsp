@@ -34,7 +34,7 @@
 	width: 1200px;
 	margin: auto;
 	position: relative;
-	top: 50px;
+	top: 120px;
 }
 </style>
 
@@ -43,7 +43,7 @@
 
 <title>後台管理系統</title>
 </head>
-<body>
+<body style="background-color:#f5f5f5;">
 	<jsp:include page="${request.contextPath}/navbar" />
 	<!-- 請把所有內容寫在此div內 -->
 	<div id="main" class="container">

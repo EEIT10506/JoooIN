@@ -23,22 +23,27 @@ $(document).ready(function () {
                 timeout: 600000,
                 
                 success: function (data){
-                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">No.</th><th>Name</th><th>Email</th><th>Password</th><th>Gender</th><th>Phone</th><th>Logins</th><th>SignUp</th><th>Status</th></tr></thead><tbody></tbody>');
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">編號</th><th>名稱</th><th>Email</th><th>性別</th><th>上站次數</th><th>加入日期</th><th>認證狀態</th></tr></thead><tbody></tbody>');
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
                 		console.log(data);
                 		$.each(data, function (index, Member){
+                			var gender = null;
+                			if(Member.gender=='male'){
+                				gender = '男'
+                			}
+                			if(Member.gender=='female'){
+                				gender = '女'
+                			}
                 			var cell1 = $('<td></td>').text(Member.memberId).addClass('pointer text-primary text-center memberId');
                 			var cell2 = $('<td></td>').text(Member.memberName)
                 			var cell3 = $('<td></td>').text(Member.email)
-                			var cell4 = $('<td></td>').text(Member.password)
-                			var cell5 = $('<td></td>').text(Member.gender)
-                			var cell6 = $('<td></td>').text(Member.phone)
-                			var cell7 = $('<td></td>').text(Member.logins)
-                			var cell8 = $('<td></td>').text(Member.memberCreateDate)
-                			var cell9 = $('<td></td>').text(Member.certificationStatus)
+                			var cell4 = $('<td></td>').text(gender)
+                			var cell5 = $('<td></td>').text(Member.logins)
+                			var cell6 = $('<td></td>').text(Member.memberCreateDate)
+                			var cell7 = $('<td></td>').text(Member.certificationStatus)
                 			
-                			var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9]);
+                			var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7]);
                 			
                 			docFrag.append(row);
                 		})
@@ -135,13 +140,26 @@ $(document).ready(function () {
                 timeout: 600000,
                 
                 success: function (data){
-                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">No.</th><th>Type</th><th>Name</th><th>LeaderId</th><th>SignUp</th><th>Total</th></tr></thead><tbody></tbody>');
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">編號</th><th>類型</th><th>名稱</th><th>管理員Id</th><th>建立日期</th><th>總人數</th></tr></thead><tbody></tbody>');
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
                 		console.log(data);
                 		$.each(data, function (index, Group){
+                			var type = null;
+                			if(Group.groupType=='sport'){
+                				type='運動'
+                			}
+                			if(Group.groupType=='food'){
+                				type='美食'
+                			}
+                			if(Group.groupType=='entertainment'){
+                				type='娛樂'
+                			}
+                			if(Group.groupType=='other'){
+                				type='其它'
+                			}
                 			var cell1 = $('<td></td>').text(Group.groupId).addClass('pointer text-primary text-center groupId');
-                			var cell2 = $('<td></td>').text(Group.groupType)
+                			var cell2 = $('<td></td>').text(type)
                 			var cell3 = $('<td></td>').text(Group.groupName)
                 			var cell4 = $('<td></td>').text(Group.groupLeaderId)
                 			var cell5 = $('<td></td>').text(Group.groupCreateDate)
@@ -219,22 +237,22 @@ $(document).ready(function () {
                 timeout: 600000,
                 
                 success: function (data){
-                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">No.</th><th>Name</th><th>Location</th><th>Type</th><th>Total</th></tr></thead><tbody></tbody>');
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">編號</th><th>Name</th><th>地點</th><th>類型</th><th>人數</th></tr></thead><tbody></tbody>');
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
                 		$.each(data, function (index, Event){
                 			console.log("test="+Event.eventTypeId);
                 			if(Event.eventTypeId==1){
-                				Event.eventTypeId="food"
+                				Event.eventTypeId="美食"
                 			}
                 			if(Event.eventTypeId==2){
-                				Event.eventTypeId="sport"
+                				Event.eventTypeId="運動"
                 			}
                 			if(Event.eventTypeId==3){
-                				Event.eventTypeId="entertainment"
+                				Event.eventTypeId="娛樂"
                 			}
                 			if(Event.eventTypeId==4){
-                				Event.eventTypeId="other"
+                				Event.eventTypeId="其它"
                 			}
                 			var cell1 = $('<td></td>').text(Event.eventId).addClass('pointer text-primary text-center eventId');
                 			var cell2 = $('<td></td>').text(Event.eventName)
@@ -315,7 +333,7 @@ $(document).ready(function () {
                 timeout: 600000,
                 
                 success: function (data){
-                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">No.</th><th>Time</th><th>ReportId</th><th>ViolatorId</th><th>Type</th><th>Content</th><th>Status</th></tr></thead><tbody></tbody>');
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">編號</th><th>檢舉時間</th><th>檢舉人</th><th>被檢舉人</th><th>檢舉類型</th><th>檢舉內容</th><th>處理狀況</th></tr></thead><tbody></tbody>');
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
                 		console.log(data);

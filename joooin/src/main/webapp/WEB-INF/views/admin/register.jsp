@@ -15,20 +15,20 @@
 		width: 1200px;
 		margin: auto;
 		position: relative;
-		top: 50px;
+		top: 120px;
 	}
 </style>
 <script type="text/javascript">
 // oneSet
 </script>
 <title>會員註冊</title></head>
-<body>
+<body style="background-color:#f5f5f5;">
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
 <div id="main">
 
 
-<div class="container" style="margin-left:50px">
+<div class="container" style="width: 600px;">
 	
 	<!-- Page Heading/Breadcrumbs -->
 		<h1 class="mt-4 mb-3">會員註冊</h1>
@@ -101,7 +101,7 @@
     <label>
       <form:radiobutton name="birthdayDisplay" value="false" path="birthdayDisplay" checked="true"/> 否
     </label></span><br>
-  	<form:input type="date" id="birthday" name="birthday" path="birthday"/>
+  	<form:input class="form-control" type="date" id="birthday" name="birthday" path="birthday"/>
   </div>
   
   <div class="form-group">
@@ -111,7 +111,7 @@
     <label>
       <form:radiobutton name="cityDisplay" value="false" path="cityDisplay" checked="true"/> 否
     </label></span><br>
-  	<form:select name="city" id="city" path="city">
+  	<form:select class="form-control" name="city" id="city" path="city">
 		<form:option value="臺北市">臺北市</form:option>  	
 		<form:option value="新北市">新北市</form:option>  	
 		<form:option value="桃園市">桃園市</form:option>  	

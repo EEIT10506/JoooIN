@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.joooin.model.AdminBean;
 import com.joooin.model.MemberMainBean;
+import com.joooin.model.PunishmentBean;
 import com.joooin.repository.AdminDao;
 import com.joooin.repository.MemberMainDao;
+import com.joooin.repository.PunishmentDao;
 import com.joooin.system.admin._03.service.LoginService;
 
 @Service
@@ -21,6 +23,9 @@ public class LoginServiceImpl implements LoginService {
 
 	@Autowired
 	AdminDao adminDao;
+	
+	@Autowired
+	PunishmentDao punishmentDao;
 
 	@Override
 	public MemberMainBean checkEmailPassword(String email, String password) {
@@ -53,4 +58,16 @@ public class LoginServiceImpl implements LoginService {
 		}
 		return ab;
 	}
+
+	@Override
+	public PunishmentBean checkPunishment(Integer memberId) {
+		List<PunishmentBean> list = punishmentDao.getAll();
+		for(PunishmentBean pb : list) {
+			if(pb.getPunishMemberId().equals(memberId)) {
+				return pb;
+			}
+		}
+		return null;
+	}
+
 }

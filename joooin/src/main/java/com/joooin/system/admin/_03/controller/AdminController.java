@@ -200,8 +200,19 @@ public class AdminController {
         StringBuffer type=new StringBuffer();  
         
         for (AllEventQuantityBean aqb : list) {  
-        	id.append(aqb.getEventId());  
-        	type.append(aqb.getEventTypeId());   
+        	id.append(aqb.getEventId());
+        	if(aqb.getEventTypeId().equals("1")) {
+        		type.append("美食"); 
+        	}
+        	if(aqb.getEventTypeId().equals("2")) {
+        		type.append("運動"); 
+        	}
+        	if(aqb.getEventTypeId().equals("3")) {
+        		type.append("娛樂"); 
+        	}
+        	if(aqb.getEventTypeId().equals("4")) {
+        		type.append("其他"); 
+        	}
             //
         	i++;
             if(i<list.size()){  

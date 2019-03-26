@@ -25,21 +25,21 @@
 		width: 1200px;
 		margin: auto;
 		position: relative;
-		top: 50px;
+		top: 120px;
 	}
 </style>
 <title>登入頁面</title></head>
-<body>
+<body style="background-color:#f5f5f5;">
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
-	<div id="main">
+	<div id="main" style="margin: 0px auto;">
 	
-	<div class="container" style="margin-left:50px">
+	<div class="container" style="width: 400px;">
 	
 	<!-- Page Heading/Breadcrumbs -->
 		<h1 class="mt-4 mb-3">登入頁面</h1>
 
-		<ol class="breadcrumb">
+		<ol class="breadcrumb" style="max-width:400px;margin: 0px auto;">
 			<li class="breadcrumb-item"><a
 				href="${pageContext.request.contextPath}">首頁</a></li>
 			<li class="breadcrumb-item active">登入頁面</li>
@@ -50,16 +50,17 @@
 	<div style="text-align: center;color: red;">
 	<h4 >${name}</h4>
 	<h4>${welcome}</h4>
-	<h4>${error}</h4>
+	<h6>${error}</h6>
+	<h6>${reason}</h6>
 	</div>
 	<form:form method="POST" modelAttribute="memberMainBean" name="form1">
   <div class="form-group">
-    <label for="email">帳號</label>
-    <form:input type="email" class="form-control" id="email" placeholder="Email" path="email" style="max-width:400px;"/>
+<!--     <label for="email">帳號</label> -->
+    <form:input type="email" class="form-control" id="email" placeholder="Email" path="email" style="max-width:400px;margin: 0px auto;"/>
   </div>
   <div class="form-group">
-    <label for="password">密碼</label>
-    <form:input type="password" class="form-control" id="password" placeholder="Password" path="password" style="max-width:400px;"/>
+<!--     <label for="password">密碼</label> -->
+    <form:input type="password" class="form-control" id="password" placeholder="Password" path="password" style="max-width:400px;margin: 0px auto;"/>
   </div>
 <!--   <div class="checkbox"> -->
 <!--     <label> -->
@@ -87,7 +88,9 @@
   <button type="submit" class="btn btn-primary" onclick="ali()">驗證碼重發</button>
 </form:form>
 
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
+<br>
+<div class="g-signin2" data-onsuccess="onSignIn" style="margin: 0px auto"></div>
+<br>
 <button type="button" id="oneSetuser" class="btn btn-success">一鍵填入(user)</button><br>
 <button type="button" id="oneSetadmin" class="btn btn-success">一鍵填入(admin)</button>
  <!-- /.row -->
