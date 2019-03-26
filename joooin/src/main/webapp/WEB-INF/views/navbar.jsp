@@ -110,10 +110,10 @@
     <li class="nav-item">
       <c:choose>
       	<c:when test="${memberId != null}">
-       		<a id="notiNotRead" class="nav-link" target="_blank" href="${pageContext.request.contextPath}/member/notification">通知（未讀通知：${notiNotReadQuantity}）</a>
+       		<a id="notiNotRead" class="nav-link"  href="${pageContext.request.contextPath}/member/notification">通知（未讀通知：${notiNotReadQuantity}）</a>
         </c:when>
         <c:otherwise>
-            <a class="nav-link" target="_blank" href="${pageContext.request.contextPath}/member/notification">通知</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/member/notification">通知</a>
         </c:otherwise>
       </c:choose>
     </li>

@@ -8,6 +8,7 @@ public class NotificationPojo {
 	private String content;
 	private Integer linkId;
 	private String notificationDate;
+	private Boolean isRead;
 		
 	public NotificationPojo() {
 		super();
@@ -50,6 +51,11 @@ public class NotificationPojo {
 	public void setNotificationDate(String notificationDate) {
 		this.notificationDate = notificationDate;
 	}
-	
+	public Boolean getIsRead() {
+		return isRead;
+	}
+	public void setIsRead(Boolean isRead) {
+		this.isRead = isRead;
+	}
 	
 }

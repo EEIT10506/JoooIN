@@ -45,7 +45,7 @@
 		});
 		
 		$(document).on("click", ".friendChatBtn", function(){
-			window.open("${pageContext.request.contextPath}/member/self/message/" + $(this).val());
+			window.open("${pageContext.request.contextPath}/member/message/" + $(this).val());
 		});
 		
 		$(document).on("click", ".friendDeleteBtn", function(){

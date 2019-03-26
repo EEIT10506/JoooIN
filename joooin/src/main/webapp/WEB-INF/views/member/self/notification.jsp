@@ -21,15 +21,11 @@
 		width: 90px;
 		text-align: center;
 	}
-	.linkBtn {
+	.linkBtnImg {
 		-webkit-filter:invert(1);
 	}
 	thead {
 		text-align: center;
-	}
-	button {
-		position: relative;
-		top: 7px;
 	}
 	.type, .time, .link {
 		text-align: center;
@@ -42,30 +38,60 @@
 </style>
 <script>
 	$(document).ready(function(){	
-		$(document).on("click", ".friendPageBtn", function(){
-			window.open("${pageContext.request.contextPath}/member/other/" + $(this).val());
+		
+		$(document).on("click", ".linkBtn", function(){
+			var content = $(this).parent().prev().prev().text();
+			var type = $(this).parent().prev().prev().prev().text();
+			var id = $(this).val();
+			
+			if (type == "好友"){
+				window.open("${pageContext.request.contextPath}/member/other/" + id);
+			}
+			if (type == "活動"){
+				if (content.indexOf("申請報名") != -1){
+					window.open("${pageContext.request.contextPath}/event/signUp/" + id);
+				} else {
+					window.open("${pageContext.request.contextPath}/event/" + id);
+				}
+			}
+			if (type == "社團"){
+				window.open("${pageContext.request.contextPath}/group/" + id);
+			}
 		});
 		
-		$(document).on("click", ".friendChatBtn", function(){
-			window.open("${pageContext.request.contextPath}/member/self/message/" + $(this).val());
-		});
 		
-		$(document).on("click", ".friendDeleteBtn", function(){
-			var otherMemberId = $(this).val();
+		$(document).on("click", ".readBtn", function(){
+			var parent = $(this).parent();
+			var notificationId = $(this).val();
 			
 			$.ajax({
 			    type: "POST",                           
-			    url: "${pageContext.request.contextPath}/member/friendProcess",
-			    data: {"otherMemberId": otherMemberId, "process": "delete"},
-			    success: function (notLogin) {
-			    	if (notLogin)
-			    		location.href = "${pageContext.request.contextPath}/notLogin";
-			    	else 
-			    		location.href = "${pageContext.request.contextPath}/member/self/friend/my_friend";
+			    url: "${pageContext.request.contextPath}/member/setOneNotificationRead",
+			    data: {"notificationId": notificationId},
+			    success: function () {
+			    	parent.html('<img src="<c:url value='/resources/img/icon_ok.png' />"/>');
+			    	var str = $("#notiNotRead").text();
+			    	var notRead = parseInt(str.substr(8, str.length)) - 1;
+			    	$("#notiNotRead").text("通知（未讀通知：" + notRead + "）");
+			    	
+			    	if (notRead == 0) {
+			    		$("#notiNotRead").css("color", "");
+			    	}
 			    }
 			});
 		});
 		
+    	$(document).on("click", "#allRead", function(event){
+    		
+			$.ajax({
+			    type: "POST",                                 
+			    url: "${pageContext.request.contextPath}/member/setAllNotificationsRead",
+			    data: {"memberId": ${memberId}},
+			    success: function () {
+			    	location.href = "${pageContext.request.contextPath}/member/notification";
+			    }
+			});
+		});
 		
 		//DataTable
 		var language = {
@@ -82,13 +108,16 @@
 		        }
 		    };
 		var column=[
-            {"data": "type", name:"類型" , "orderable":true },
-            {"data": "content", name:"內容" , "orderable":true },
+			{"data": "read", name:"設為已讀" , "orderable":true },
+            {"data": "type", name:"類型" , "orderable":false },
+            {"data": "content", name:"內容" , "orderable":false },
             {"data": "time", name:"時間" , "orderable":true },
             {"data": "link", name:"查看" , "orderable":false }
            ];
 
-		$('#datatable').DataTable({"columns":column, "language":language, "lengthChange": false, "aLengthMenu" : 10, "bScrollCollapse": true});
+		$('#datatable').DataTable({"order": [[ 3, "desc" ]], "columns":column, "language":language, "lengthChange": false, "aLengthMenu" : 10, "bScrollCollapse": true});
+		
+		
 	});
 	
 </script>
@@ -101,9 +130,25 @@
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main" class="container">
 		<div id="main-view"><br /><br />
+			<button id="checkPwdBtn" type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#setAllRead">全部已讀</button>
+				<div class="modal fade" id="setAllRead" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLongTitle">確認全部設為已讀</h5>
+				      </div>
+				      <div class="modal-body">是否確認將所有通知設為已讀？</div>
+				      <div class="modal-footer">
+				      	<button id="allRead" type="submit" class="btn btn-primary">確認</button>
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
 			<table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
    				<thead>
 					<tr>
+						<th>設為已讀</th>
 						<th>類型</th>
                         <th>內容</th>
                         <th>時間</th>
@@ -114,10 +159,20 @@
 					<c:forEach var="pojo" items="${list}">
 						<c:if test="${pojo != null}">
 							<tr style="height: 20px;">
+								<td class="read" style="width:90px;vertical-align:middle;text-align:center;">
+									<c:choose>
+										<c:when test="${pojo.isRead == true}">
+											<img data-title="已讀" data-toggle="modal" src="<c:url value='/resources/img/icon_ok.png' />"/>
+										</c:when>
+										<c:otherwise>
+											<button value="${pojo.notificationId}" class="readBtn btn btn-warning btn-xs" data-title="已讀" data-toggle="modal">已讀</button>
+										</c:otherwise>
+									</c:choose>
+								</td>
 								<td class="type" style="width:60px;vertical-align:middle">${pojo.type}</td>
 	                            <td class="content" style="vertical-align:middle">${pojo.content }</td>
 	                            <td class="time" style="width:150px;vertical-align:middle">${pojo.notificationDate }</td>
-	                            <td class="link" style="padding: 0px;"><p class="linkP" data-placement="top" data-toggle="tooltip" title="查看"><button value="${pojo.linkId}" class="btn btn-primary btn-xs" data-title="查看" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
+	                            <td class="link" style="padding: 0px;vertical-align:middle"><button style="position:relative;top:7px" value="${pojo.linkId}" class="linkBtn btn btn-primary btn-xs" data-title="查看" data-toggle="modal"><img class="linkBtnImg" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
 	    					</tr>
 						</c:if>
 					</c:forEach>
@@ -126,5 +181,6 @@
 		</div>
 	</div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 <!-- 請把所有內容寫在此div內 -->
+
 </body>
 </html>

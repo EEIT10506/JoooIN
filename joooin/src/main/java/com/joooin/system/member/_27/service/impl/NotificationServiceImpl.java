@@ -33,7 +33,18 @@ public class NotificationServiceImpl implements NotificationService {
 		}
 		return quantity;
 	}
-	
+		
+	@Override
+	public void setOneNotificationRead(Integer notificationId) {
+		notificationDao.getByNotificationId(notificationId).setIsRead(true);
+	}	
+
+	@Override
+	public void setAllNotificationsRead(Integer memberId) {
+		System.out.println("進入service");
+		notificationDao.setAllIsReadTrueByMemberId(memberId);
+	}
+
 	@Override
 	public List<NotificationPojo> getNotifications(Integer memberId) {
 		List<NotificationBean> origList = notificationDao.getAll();
@@ -48,6 +59,7 @@ public class NotificationServiceImpl implements NotificationService {
 				pojo.setNotificationId(bean.getNotificationId());
 				pojo.setMemberId(bean.getMemberId());
 				pojo.setNotificationDate(bean.getNotificationDate());
+				pojo.setIsRead(bean.getIsRead());
 				
 				if (str.indexOf("friend") == 0) {
 					pojo.setType("好友");
@@ -73,20 +85,20 @@ public class NotificationServiceImpl implements NotificationService {
 					else if (str.contains("reject")) pojo.setContent("您已被退出社團「" + name + "」");
 					else if (str.contains("request")) pojo.setContent("您的社團「" + name + "」有新會員申請加入");
 				}				
-				else if (str.indexOf("punish") == 0) {
-					pojo.setType("處罰");
-					String eventName = memberService.getEventMainBean(pojo.getLinkId()).getEventName();
-					String groupName = memberService.getGroupMainBean(pojo.getLinkId()).getGroupName();
-					
-					if (str.contains("event_attend")) 
-						pojo.setContent("您因無故未出席活動「" + eventName + "」，將暫時停用您的活動功能，詳細內容請至您的 EMAIL 查閱");
-					else if (str.contains("event_post")) 
-						pojo.setContent("您因在活動「" + eventName + "」留下不雅言詞，將暫時停用您的活動留言功能，詳細內容請至您的 EMAIL 查閱");
-					else if (str.contains("group_post")) 
-						pojo.setContent("您因在社團「" + groupName + "」發文中留下不雅言詞，將暫時停用您的社團發文功能，詳細內容請至您的 EMAIL 查閱");
-					else if (str.contains("group_reply")) 
-						pojo.setContent("您因在社團「" + groupName + "」留言中留下不雅言詞，將暫時停用您的社團留言功能，詳細內容請至您的 EMAIL 查閱");
-				}
+//				else if (str.indexOf("punish") == 0) {
+//					pojo.setType("處罰");
+//					String eventName = memberService.getEventMainBean(pojo.getLinkId()).getEventName();
+//					String groupName = memberService.getGroupMainBean(pojo.getLinkId()).getGroupName();
+//					
+//					if (str.contains("event_attend")) 
+//						pojo.setContent("您因無故未出席活動「" + eventName + "」，將暫時停用您的活動功能，詳細內容請至您的 EMAIL 查閱");
+//					else if (str.contains("event_post")) 
+//						pojo.setContent("您因在活動「" + eventName + "」留下不雅言詞，將暫時停用您的活動留言功能，詳細內容請至您的 EMAIL 查閱");
+//					else if (str.contains("group_post")) 
+//						pojo.setContent("您因在社團「" + groupName + "」發文中留下不雅言詞，將暫時停用您的社團發文功能，詳細內容請至您的 EMAIL 查閱");
+//					else if (str.contains("group_reply")) 
+//						pojo.setContent("您因在社團「" + groupName + "」留言中留下不雅言詞，將暫時停用您的社團留言功能，詳細內容請至您的 EMAIL 查閱");
+//				}
 				newList.add(pojo);
 			}
 				

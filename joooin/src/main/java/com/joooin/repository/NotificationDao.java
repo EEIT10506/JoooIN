@@ -9,6 +9,7 @@ public interface NotificationDao {
 	public Integer save(NotificationBean notificationBean);
 	public void update(NotificationBean notificationBean);
 	public void deleteByNotificationId(Integer notificationId);
+	public void setAllIsReadTrueByMemberId(Integer memberId);
 }
 
 

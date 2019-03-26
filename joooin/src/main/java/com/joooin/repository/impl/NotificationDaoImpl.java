@@ -45,6 +45,15 @@ public class NotificationDaoImpl implements NotificationDao{
 		Session session = factory.getCurrentSession();
 		session.delete(session.get(NotificationBean.class, notificationId));
 	}
+
+	@Override
+	public void setAllIsReadTrueByMemberId(Integer memberId) {
+		System.out.println("進入dao");
+		Session session = factory.getCurrentSession();
+		String hql = "UPDATE NotificationBean n SET n.isRead = 1 WHERE n.memberId = :memberId";
+		session.createQuery(hql).setParameter("memberId", memberId).executeUpdate();
+		
+	}
 	
 	
 }

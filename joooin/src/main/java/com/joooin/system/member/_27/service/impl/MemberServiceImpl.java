@@ -152,7 +152,7 @@ public class MemberServiceImpl implements MemberService{
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				String newDate = sdf.format(date);
 				
-				NotificationBean bean = new NotificationBean(receiveMemberId, "friend_request_memberId=" + inviteMemberId.toString(), newDate, false);
+				NotificationBean bean = new NotificationBean(receiveMemberId, "friend_request_memberId=" + inviteMemberId, newDate, false);
 				notificationDao.save(bean);
 			}
 		}
@@ -183,7 +183,7 @@ public class MemberServiceImpl implements MemberService{
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 						String newDate = sdf.format(date);
 						
-						NotificationBean notiBean = new NotificationBean(receiveMemberId, "friend_accepted_memberId=" + inviteMemberId.toString(), newDate, false);
+						NotificationBean notiBean = new NotificationBean(receiveMemberId, "friend_accepted_memberId=" + inviteMemberId, newDate, false);
 						notificationDao.save(notiBean);	
 					}
 					if (breakPoint == 2) break;

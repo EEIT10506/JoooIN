@@ -55,7 +55,7 @@
 			window.open("${pageContext.request.contextPath}/event/" + $(this).val());
 		});
 		$(document).on("click", ".eventSettingBtn", function(){
-// 			window.open("${pageContext.request.contextPath}/event/" + $(this).val());
+			window.open("${pageContext.request.contextPath}/event/setting/" + $(this).val());
 		});
 		
 		$(".eventDateEnd").each(function(){

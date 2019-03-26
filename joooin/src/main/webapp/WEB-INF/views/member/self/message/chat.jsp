@@ -146,8 +146,7 @@
 		</div>
 		<div class="message-input">
 			<div class="wrap">
-			<textarea rows="2" cols="57" id="text" type="text" placeholder="輸入訊息..." wrap="hard"/></textarea>
-			<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+			<textarea rows="2" cols="70" id="text" type="text" placeholder="輸入訊息..." wrap="hard"/></textarea>
 			<button id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</div>
 		</div>
