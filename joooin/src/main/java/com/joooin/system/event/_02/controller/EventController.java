@@ -303,15 +303,18 @@ public class EventController {
 	}
 
 	@RequestMapping(value = "/event/checkLike/{eventId}", method = RequestMethod.POST)
-	public @ResponseBody String eventLikeCheck(Integer eventId, HttpSession session) {
+	public @ResponseBody Integer eventLikeCheck(Integer eventId, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
 		List<EventLikeBean> list = eventLikeDao.getAll();
+		Integer likeNum = -3;
 		for (EventLikeBean bean : list) {
 			if (bean.getMemberId().equals(memberId) && bean.getEventId().equals(eventId)) {
-				return "liked";
+				EventMainBean event = eventService.getByEventMainId(eventId);
+				 likeNum = event.getEventLike();
+				return likeNum;
 			} 
 		}
-		return "notLike";
+		return likeNum;
 	}
 
 	// 活動修改

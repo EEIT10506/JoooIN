@@ -347,7 +347,7 @@
  	}
  	.Joinmembers:hover{
  	    font-size:30px;
- 	    color:red;
+ 	    color:#4D47C1;
  	}
  	#goodGood{
  	    color:#436EEE;
@@ -401,8 +401,10 @@ function ValidateNumber(e, pnumber)
 	    	    url: "${pageContext.request.contextPath}/event/checkLike/"+eventId,
 	    	    data: {"eventId": eventId},
 	    	    success: function (check){
-	    	    	if(check=="liked"){
+	    	    	if(check != -3){
+	    	    		var a = check;
 	    	    		$("#e${event.eventId }").attr("class", "btn btn-default eventLike");
+	    	    		$(".eventLikeNum").html(a);
 	    	    	}else{
 	    	    		$("#e${event.eventId }").attr("class", "btn btn-default eventNotLike");
 	    	    	}
@@ -826,8 +828,8 @@ function ValidateNumber(e, pnumber)
       			<label class="cancelTitle">確定要退出本團 !? </label>
       				<input type="text" class="hid" name="eventId" value="${event.eventId}"/>  
 
-      				<button type="submit" id="ConfirmCancel" class="btn btn-primary">Confirm</button>
-      				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      				<button type="submit" id="ConfirmCancel" class="btn btn-primary">確認</button>
+      				<button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
       </div>
       </form>
       <div class="modal-footer">
