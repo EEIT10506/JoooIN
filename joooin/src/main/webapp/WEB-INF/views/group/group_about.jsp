@@ -15,9 +15,7 @@
 	crossorigin="anonymous">
 <link
 	href="https://code.jquery.com/jquery-1.12.4.min.css">	
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"
-	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-	crossorigin="anonymous"></script>	
+
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <style>
@@ -29,7 +27,7 @@
 }
 </style>
 <script>
-	$('.collapse').collapse()
+	$('.collapse').collapse();
 
 	//修改按鈕
 	$(document).ready(function(){
@@ -157,6 +155,13 @@
 	<!-- 請把所有內容寫在此div內 -->
 	<div id="main">
 		<jsp:include page="${request.contextPath}/group/group_navbar" />
+		<script type="text/javascript">
+		var xxx = jQuery.noConflict(true);
+	</script>
+	
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+	crossorigin="anonymous"></script>	
 		<!-- 	測試資料正確性 -->
 		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"> 
 
