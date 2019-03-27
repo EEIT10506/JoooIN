@@ -18,11 +18,11 @@
 	}
 </style>
 <title>忘記密碼</title></head>
-<body>
+<body style="background-color:#f5f5f5;">
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
 	<div id="main">
-	<div class="container" style="margin-left:50px">
+	<div class="container" style="width: 600px;">
 
 		<!-- Page Heading/Breadcrumbs -->
 		<h1 class="mt-4 mb-3">忘記密碼</h1>
@@ -48,16 +48,21 @@
 					</div>
 
 					<input type="submit" class="btn btn-primary" id="sendMessageButton"
-						value="重設密碼" />
+						value="發送" />
 				</form>
+				<button type="button" id="oneSet" class="btn btn-success">一鍵填入</button>
 			</div>
 		</div>
 		<!-- /.row -->
-
+		
 	</div>
 	<!-- /.container -->
 	<!-- Footer -->
-
+	<script>
+		$('#oneSet').click(function(){
+			$("#forgotemail").val("eeit105joooin2@gmail.com")
+		});
+	</script>
 
 
 	</div>
