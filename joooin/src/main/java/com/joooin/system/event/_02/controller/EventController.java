@@ -61,6 +61,9 @@ public class EventController {
 			EventPostBean eventPostBean = new EventPostBean();
 			eventPostBean.setEventId(eventId);
 			eventPostBean.setMemberId(memberId);
+		
+			eventPostContent = eventPostContent.replace("<", "&lt;");
+			eventPostContent = eventPostContent.replace(">", "&gt;");
 			eventPostContent = eventPostContent.replace("\n", "<br />");
 			eventPostBean.setEventPostContent(eventPostContent);
 
@@ -127,7 +130,7 @@ public class EventController {
 			return "redirect:/event/" + eventId;
 		} else {
 			return "not_login";
-		}
+		} 
 	}
 //	退出活動
 	@RequestMapping(value = "/DeleteByEventMemberId", method = RequestMethod.POST)

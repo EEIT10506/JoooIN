@@ -59,7 +59,7 @@
 		  
  	} 
 	.buttonE{
-		 font-size:30px;
+		 font-size:22px;
 		 text-align:center;
 	     border-right:solid 1px #9C9C9C; 
 	  	 width:600px;
@@ -70,14 +70,14 @@
 	.buttonE:hover{
 	     background-color:#CCCCCC;
 	       cursor:pointer;
-	       font-size:40px;
+	       font-size:25px;
 	}
 	.spanE{ 
 		 position:relative;
-		 top:22px;		
+		 top:34px;		
 	}
 	.buttonG{
-		 font-size:30px;
+		 font-size:22px;
 		 text-align:center;
 		 float:right;
 	  	 width:600px; 
@@ -87,53 +87,57 @@
 	.buttonG:hover{
 	     background-color:#CCCCCC;
 	     cursor:pointer;
-	     font-size:40px;
+	     font-size:25px;
 	}
 	.actives{
 		 background-color:#94CFD1 !important;
 	}
 	.spanG{
 	    position:relative;
-		top:22px;	
+		top:34px;	
 	}
 	.iconsG{
 		position:relative;
-		top:8px;
-		font-size:50px;
+		top:3px;
+		font-size:27px;
 		color:	#00008B;	
 	}
 	.iconsE{
 		position:relative;
-		top:8px;
-		font-size:50px; 
+		top:3px;
+		font-size:27px; 
 		 color:Red;	
 	}
 	.firstCarousel{
 		width:1200px;margin:auto;margin-top: 30px;
 	}
 	.radiusCarousel{
-		background-color:#3F5867;height:500px;border-radius:40px;
+/*  		opacity:0.8;   */
+/* 		background-color:#005B61; */
+		background-color:#5F999B;
+		height:500px;
+		border-radius:40px;
 	}
 	.insideCarousel{
 		width:1200px;height:380px;margin-top:80px;
 	}
 	.eventFname{
-		font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;
+		font-size:24px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;
 	}
 	.eventSname{
-		font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;
+		font-size:24px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;
 	}
 	.eventTname{
-		font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;
+		font-size:24px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;
 	}
 	.noEventFNow{
-		font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;bottom:20px;text-align:center;display:inline;width:300px;color:white;
+		font-size:24px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;bottom:20px;text-align:center;display:inline;width:300px;color:white;
 	}
 	.noEventSNow{
-		font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;bottom:20px;text-align:center;display:inline;width:300px;color:white;
+		font-size:24px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;bottom:20px;text-align:center;display:inline;width:300px;color:white;
 	}
 	.noEventTNow{
-		font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;bottom:20px;text-align:center;display:inline;width:300px;color:white;
+		font-size:24px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;bottom:20px;text-align:center;display:inline;width:300px;color:white;
 	}
 	.imgFirst{
 		margin-left:90px;width:320px;height:230px;
@@ -145,34 +149,34 @@
 		margin-left:20px;width:320px;height:230px;
 	}
 	.eventTime{
-		font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;text-align:left;display:inline;width:300px;color:	black;
+		font-size:15px;font-weight:1200px;font-family:微軟正黑體;position:absolute;top:285px;text-align:left;display:inline;width:300px;color:	black;
 	}
 	.eventInviter{
-		font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;text-align:left;display:inline;width:300px;color:white;
+		font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;text-align:left;display:inline;width:300px;color:white;
 	}
 	.eventStatusUncheck{
-		font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;
+		font-size:18px; font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;
 	}
 	.eventStatusYes{
-		font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:85px;border-radius:10px;color:white;background-color:red;
+		font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:center;display:inline;width:85px;border-radius:10px;color:white;background-color:red;
 	}
 	.eventStatusUncheckSe{
-		font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;
+		font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;
 	}
 	.eventStatusYesSe{
-		font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:85px;border-radius:10px;color:white;background-color:red;
+		font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:85px;border-radius:10px;color:white;background-color:red;
 	}
 	.eventStatusUncheckTh{
-		font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:white;
+		font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:white;
 	}
 	.eventStatusYesTh{
-		font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:85px;border-radius:10px;color:white;background-color:red;
+		font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:85px;border-radius:10px;color:white;background-color:red;
 	}
 	.eventLikeNum{
-		position:absolute;top:288px;font-size:20px;font-family:微軟正黑體;color:black;
+		position:absolute;top:281px;font-size:20px;font-family:微軟正黑體;color:black;
 	}
 	.eventCurrentNum{
-		position:absolute;top:288px;font-size:20px;font-family:微軟正黑體;color:black;
+		position:absolute;top:280px;font-size:20px;font-family:微軟正黑體;color:black;
 	}
 	.TopEvent{
 		font-size:30px !important;color:white;font-famliy:微軟正黑體 !important;font-weight:bold!important;
@@ -180,12 +184,22 @@
 	.SecondPage{
 		width:1200px;height:380px;margin-top:80px;
 	}
+	.groupType{
+		font-size:18px; font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;
+	}
+	.white{
+		color:white;
+	}
+	.groupMembers{
+	    font-size:18px;font-weight:1200px;font-family:微軟正黑體;position:absolute;text-align:left;display:inline;width:300px;color:white;
+	}
+	
 </style>
 <script>
 	$(document).ready(function(){
 		$(".buttonE").click();
 		$(".buttonE").addClass("actives");
-		$(".spanE").css("font-size","40px");
+		$(".spanE").css("font-size","25px");
 		$("#groupDiv").hide();
 		
 		$(".buttonE").click(function(){
@@ -193,20 +207,19 @@
 			$("#groupDiv").fadeOut(500);
 			$(".buttonE").addClass("actives");
 			$(".buttonG").removeClass("actives");
-			$(".spanE").css("font-size","40px");
-			$(".spanG").css("font-size","30px");
+			$(".spanE").css("font-size","25px");
+			$(".spanG").css("font-size","22px");
 		});
 		$(".buttonG").click(function(){
 			$("#groupDiv").fadeIn(500);
 			$("#eventDiv").fadeOut(500);
 			$(".buttonG").addClass("actives");
 			$(".buttonE").removeClass("actives");
-			$(".spanG").css("font-size","40px");
-			$(".spanE").css("font-size","30px");
+			$(".spanG").css("font-size","25px");
+			$(".spanE").css("font-size","22px");
 		});
 
 	});
-
 </script>
 <title>JoooIN</title></head>
 <body class="everyPage">
@@ -217,7 +230,7 @@
 		<img class="indexTitle" src="<c:url value='/resources/img/logo_JoooIn.png'/>"/>
 <!-- 		</div> -->
 		<div class="title">
-			<p class="font titleContent">~~~~ 大家一起揪團趣  ~~~~</p>
+			<div class="font titleContent" style="width:1200px;height:100px;"> </div >
 		</div>	
  		<div class="titles">
 			<p class="buttonE">
@@ -231,7 +244,7 @@
 			
 <!-- 	event		===================== -->
 <!-- ================================= -->
-	<div  id="eventDiv" class="bd-example firstCarousel" style="">
+	<div  id="eventDiv" class="bd-example firstCarousel">
 		<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 					  <ol class="carousel-indicators">
 					     <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -286,13 +299,13 @@
 <!-- 						時間  -->
 						 <div style="margin-top:10px;">
 						 <c:if test="${!empty top8Events[0]}">
-						   <p class="eventTime" style="left:90px;"><i class="fas fa-clock"></i> ${top8Events[0].eventDateEnd}</p>
+						   <p class="eventTime" style="left:90px;"><i class="fas fa-clock"></i> ${top8Events[0].eventDateEnd} End</p>
 						 </c:if>
 						 <c:if test="${!empty top8Events[1]}">  
-						   <p class="eventTime" style="left:435px;"><i class="fas fa-clock"></i> ${top8Events[1].eventDateEnd}</p>
+						   <p class="eventTime" style="left:435px;"><i class="fas fa-clock"></i> ${top8Events[1].eventDateEnd} End</p>
 						 </c:if>
 						 <c:if test="${!empty top8Events[2]}">  
-						   <p class="eventTime" style="left:780px;"><i class="fas fa-clock"></i> ${top8Events[2].eventDateEnd}</p>
+						   <p class="eventTime" style="left:780px;"><i class="fas fa-clock"></i> ${top8Events[2].eventDateEnd} End</p>
 					     </c:if>
 					     </div>
 <!-- 					   開團者  ============ -->
@@ -414,13 +427,13 @@
 <!-- 						時間  -->
 						 <div style="margin-top:10px;">
 						   <c:if test="${!empty top8Events[3]}">
-						   <p class="eventTime" style="left:90px;"><i class="fas fa-clock"></i> ${top8Events[3].eventDateEnd}</p>
+						   <p class="eventTime" style="left:90px;"><i class="fas fa-clock"></i> ${top8Events[3].eventDateEnd} End</p>
 						   </c:if>
 						   <c:if test="${!empty top8Events[4]}">
-						   <p class="eventTime" style="left:435px;"><i class="fas fa-clock"></i> ${top8Events[4].eventDateEnd}</p>
+						   <p class="eventTime" style="left:435px;"><i class="fas fa-clock"></i> ${top8Events[4].eventDateEnd} End</p>
 						   </c:if>
 						   <c:if test="${!empty top8Events[5]}">
-						   <p class="eventTime" style="left:780px;"><i class="fas fa-clock"></i> ${top8Events[5].eventDateEnd}</p>
+						   <p class="eventTime" style="left:780px;"><i class="fas fa-clock"></i> ${top8Events[5].eventDateEnd} End</p>
 					       </c:if>
 					     </div>
 					     <!-- 					   開團者  ============ -->
@@ -542,13 +555,13 @@
 <!-- 						時間  -->
 						 <div style="margin-top:10px;">
 						  <c:if test="${!empty top8Events[6]}">
-						   <p class="eventTime" style="left:90px;"><i class="fas fa-clock"></i> ${top8Events[6].eventDateEnd}</p>
+						   <p class="eventTime" style="left:90px;"><i class="fas fa-clock"></i> ${top8Events[6].eventDateEnd} End</p>
 						  </c:if>
 						  <c:if test="${!empty top8Events[7]}">
-						   <p class="eventTime" style="left:435px;"><i class="fas fa-clock"></i> ${top8Events[7].eventDateEnd}</p>
+						   <p class="eventTime" style="left:435px;"><i class="fas fa-clock"></i> ${top8Events[7].eventDateEnd} End</p>
 						  </c:if>
 						  <c:if test="${!empty top8Events[8]}">
-						   <p class="eventTime" style="left:780px;"><i class="fas fa-clock"></i> ${top8Events[8].eventDateEnd}</p>
+						   <p class="eventTime" style="left:780px;"><i class="fas fa-clock"></i> ${top8Events[8].eventDateEnd} End</p>
 					      </c:if>
 					     </div>
 					     <!-- 					   開團者  ============ -->
@@ -638,110 +651,110 @@
 <!-- 		event	===================== -->
 <div style="width:1200px;height:0px;"></div>
 <!-- =======group==================================== -->
-	<div id="groupDiv" class="bd-example" style="width:1200px; margin:auto;margin-top:30px;">
+	<div id="groupDiv" class="bd-example firstCarousel">
 		<div id="groups" class="carousel slide" data-ride="carousel">
 					  <ol class="carousel-indicators">
 					     <li data-target="#groups" data-slide-to="0" class="active"></li>
 					     <li data-target="#groups" data-slide-to="1"></li>
 					     <li data-target="#groups" data-slide-to="2"></li>
 					  </ol>
-			<div class="carousel-inner" style="background-color:#3F5867;height:500px;border-radius:40px;">
+			<div class="carousel-inner radiusCarousel">
 <!-- 	第一頁			======	       -->
-				<div class="carousel-item active" style="width:1200px;height:380px;margin-top:80px;">
+				<div class="carousel-item active insideCarousel">
 <!-- 					   名稱 -->
 					 	 <div style="margin-bottom:50px;">
 					 	  <c:if test="${!empty top8Groups[0]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;">1. ${top8Groups[0].groupName}</p>
+						   <p class="eventFname">1. ${top8Groups[0].groupName}</p>
 						  </c:if>
 						  <c:if test="${!empty top8Groups[1]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;">2. ${top8Groups[1].groupName}</p>
+						   <p class="eventSname">2. ${top8Groups[1].groupName}</p>
 						  </c:if>
 						  <c:if test="${!empty top8Groups[2]}"> 
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;">3. ${top8Groups[2].groupName}</p>
+						   <p class="eventTname">3. ${top8Groups[2].groupName}</p>
 					      </c:if>
 					     </div>
 					     
 					     <div style="margin-bottom:50px;">
 					      <c:if test="${empty top8Groups[0]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;bottom:20px;text-align:center;display:inline;width:300px;color:white;">尚無創立社團</p>
+						   <p class="noEventFNow">尚無創立社團</p>
 						  </c:if>
 						  <c:if test="${empty top8Groups[1]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;bottom:20px;text-align:center;display:inline;width:300px;color:white;">尚無創立社團</p>
+						   <p class="noEventSNow">尚無創立社團</p>
 						  </c:if>
 						  <c:if test="${empty top8Groups[2]}"> 
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;bottom:20px;text-align:center;display:inline;width:300px;color:white;">尚無創立社團</p>
+						   <p class="noEventTNow">尚無創立社團</p>
 					      </c:if>
 					     </div>
 					 <c:if test="${!empty top8Groups[0]}">
-					  <a href="<c:url value='/group/${top8Groups[0].groupId}' />"><img src="<c:url value='/getGroupImage/${top8Groups[0].groupId}.jpg' />" alt="其他"  style="margin-left:90px;width:320px;height:230px;" class="hover"></a>
+					  <a href="<c:url value='/group/${top8Groups[0].groupId}' />"><img src="<c:url value='/getGroupImage/${top8Groups[0].groupId}.jpg' />" alt="其他"  class="hover imgFirst"></a>
 					 </c:if>
 					 <c:if test="${empty top8Groups[0]}">
-					  <a href="<c:url value='/groups' />"><img src="<c:url value='/getGroupImage/${top8Groups[0].groupId}.jpg' />" alt="其他"  style="margin-left:90px;width:320px;height:230px;" class="hover"></a>
+					  <a href="<c:url value='/groups' />"><img src="<c:url value='/getGroupImage/${top8Groups[0].groupId}.jpg' />" alt="其他"  class="hover imgFirst"></a>
 					 </c:if>
 					 <c:if test="${!empty top8Groups[1]}">
-				      <a href="<c:url value='/group/${top8Groups[1].groupId}' />"><img src="<c:url value='/getGroupImage/${top8Groups[1].groupId}.jpg' />"  alt="運動"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/group/${top8Groups[1].groupId}' />"><img src="<c:url value='/getGroupImage/${top8Groups[1].groupId}.jpg' />"  alt="運動"  class="hover imgSecond"></a>
 					 </c:if>
 					 <c:if test="${empty top8Groups[1]}">
-				      <a href="<c:url value='/groups' />"><img src="<c:url value='/getGroupImage/${top8Groups[1].groupId}.jpg' />"  alt="運動"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/groups' />"><img src="<c:url value='/getGroupImage/${top8Groups[1].groupId}.jpg' />"  alt="運動"  class="hover imgSecond"></a>
 					 </c:if>
 					 <c:if test="${!empty top8Groups[2]}">
-				      <a href="<c:url value='/group/${top8Groups[2].groupId}' />"><img src="<c:url value='/getGroupImage/${top8Groups[2].groupId}.jpg' />" alt="食物"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/group/${top8Groups[2].groupId}' />"><img src="<c:url value='/getGroupImage/${top8Groups[2].groupId}.jpg' />" alt="食物"  class="hover imgThird"></a>
 					 </c:if>
 					 <c:if test="${empty top8Groups[2]}">
-				      <a href="<c:url value='/groups' />"><img src="<c:url value='/getGroupImage/${top8Groups[2].groupId}.jpg' />" alt="食物"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/groups' />"><img style="color:black;" src="<c:url value='/getGroupImage/${top8Groups[2].groupId}.jpg' />" alt="食物"  class="hover imgThird"></a>
 					 </c:if>
 <!-- =====================開團者 -->
 						 <div style="margin-top:10px;">
 						  <c:if test="${!empty top8Groups[0]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">創立者 : <span style="color:white">${top8GroupLeaderNames[0]}</span></p>
+						   <p class="eventInviter" style="left:90px;">創立者 : <span class="white">${top8GroupLeaderNames[0]}</span></p>
 						  </c:if>
 						  <c:if test="${!empty top8Groups[1]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:	white;">創立者 : <span style="color:white">${top8GroupLeaderNames[1]}</span></p>
+						   <p class="eventInviter" style="left:435px;">創立者 : <span class="white">${top8GroupLeaderNames[1]}</span></p>
 						  </c:if>
 						  <c:if test="${!empty top8Groups[2]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	white;">創立者 : <span style="color:white">${top8GroupLeaderNames[2]}</span></p>
+						   <p class="eventInviter" style="left:780px;">創立者 : <span class="white">${top8GroupLeaderNames[2]}</span></p>
 					      </c:if>
 					     </div>
 <!-- 						社團種類  -->
 						 <div style="margin-top:40px;">
 <!-- 						 1 -->
 						 <c:if test="${top8Groups[0].groupType == 'sport' and !empty top8Groups[0]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">運動類</span></p>
+						   <p class="groupType" style="left:90px;">社團類型 : <span class="white">運動類</span></p>
 						 </c:if>
 						 <c:if test="${top8Groups[0].groupType == 'entertainment' and !empty top8Groups[0]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">娛樂類</span></p>
+						   <p class="groupType" style="left:90px;">社團類型 : <span class="white">娛樂類</span></p>
 						 </c:if> 
 						 <c:if test="${top8Groups[0].groupType == 'food' and !empty top8Groups[0]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">美食類</span></p>
+						   <p class="groupType" style="left:90px;">社團類型 : <span class="white">美食類</span></p>
 						 </c:if> 
 						 <c:if test="${top8Groups[0].groupType == 'other' and !empty top8Groups[0]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">其他類</span></p>
+						   <p class="groupType" style="left:90px;">社團類型 : <span class="white">其他類</span></p>
 						 </c:if>
 <!-- 						 2 -->
 						 <c:if test="${top8Groups[1].groupType == 'sport' and !empty top8Groups[1]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">運動類</span></p>
+						   <p class="groupType" style="left:435px;">社團類型 : <span class="white">運動類</span></p>
 						 </c:if>  
 						 <c:if test="${top8Groups[1].groupType == 'entertainment' and !empty top8Groups[1]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">娛樂類</span></p>
+						   <p class="groupType" style="left:435px;">社團類型 : <span class="white">娛樂類</span></p>
 						 </c:if>  
 						 <c:if test="${top8Groups[1].groupType == 'food' and !empty top8Groups[1]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">美食類</span></p>
+						   <p class="groupType" style="left:435px;">社團類型 : <span class="white">美食類</span></p>
 						 </c:if>  
 						 <c:if test="${top8Groups[1].groupType == 'other' and !empty top8Groups[1]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">其他類</span></p>
+						   <p class="groupType" style="left:435px;">社團類型 : <span class="white">其他類</span></p>
 						 </c:if>    
 <!-- 						 3 -->
 						  <c:if test="${top8Groups[2].groupType == 'sport' and !empty top8Groups[2]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	white;">社團類型 : <span style="color:white">運動類</span></p>
+						   <p class="groupType" style="left:780px;">社團類型 : <span class="white">運動類</span></p>
 					   	  </c:if>
 					   	   <c:if test="${top8Groups[2].groupType == 'entertainment' and !empty top8Groups[2]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	white;">社團類型 : <span style="color:white">娛樂類</span></p>
+						   <p class="groupType" style="left:780px;">社團類型 : <span class="white">娛樂類</span></p>
 					   	  </c:if> 
 					   	   <c:if test="${top8Groups[2].groupType == 'food' and !empty top8Groups[2]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	white;">社團類型 : <span style="color:white">美食類</span></p>
+						   <p class="groupType" style="left:780px;">社團類型 : <span class="white">美食類</span></p>
 					   	  </c:if> 
 					   	   <c:if test="${top8Groups[2].groupType == 'other' and !empty top8Groups[2]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	white;">社團類型 : <span style="color:white">其他類</span></p>
+						   <p class="groupType" style="left:780px;">社團類型 : <span class="white">其他類</span></p>
 					   	  </c:if>   
 					   
 					    </div>
@@ -749,254 +762,258 @@
 					      <div style="margin-top:70px;">
 <!-- 					     第一頁第一張 ======= --> 
 						  <c:if test="${!empty top8Groups[0]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;"> 目前團員  :  <span style="color:white;">${top8Groups[0].groupCurrentMembers}</span> <i class="fas fa-users" style="color:black;"></i></p>  
+						   <p class="groupMembers" style="left:90px;"> 目前團員  :  <span class="white">${top8Groups[0].groupCurrentMembers}</span> <i class="fas fa-users" style="color:black;"></i></p>  
 						  </c:if>
 <!-- 					     第一頁第二張======= -->
 						  <c:if test="${!empty top8Groups[1]}">						  
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;"> 目前團員  :  <span style="color:white;">${top8Groups[1].groupCurrentMembers}</span> <i class="fas fa-users" style="color:black;"></i></p>
+						   <p class="groupMembers" style="left:435px;"> 目前團員  :  <span class="white">${top8Groups[1].groupCurrentMembers}</span> <i class="fas fa-users" style="color:black;"></i></p>
 						  </c:if>
 <!-- 					     第一頁第3張======= -->	
 						  <c:if test="${!empty top8Groups[2]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:white;"> 目前團員  :  <span style="color:white;">${top8Groups[2].groupCurrentMembers}</span> <i class="fas fa-users" style="color:black;"></i></p>
+						   <p class="groupMembers" style="left:780px;"> 目前團員  :  <span class="white">${top8Groups[2].groupCurrentMembers}</span> <i class="fas fa-users" style="color:black;"></i></p>
 						  </c:if>
 					     </div>
 
 					   <div class="carousel-caption d-none d-block" style="bottom:370px;">
-						   	<h1 style="font-size:30px !important;color:	white;font-famliy:微軟正黑體 !important;font-weight:bold!important;">TOP 9 人氣社團</h1>
+						   	<h1 class="TopEvent">TOP 9 人氣社團</h1>
 				   	   </div>
 				</div>
 					   <!-- 	第二頁			======	       -->  
-				 <div class="carousel-item" style="width:1200px;height:380px;margin-top:80px;">
+	<div class="carousel-item insideCarousel">
 <!-- 					   名稱 -->
 					 	 <div style="margin-bottom:50px;">
 					 	  <c:if test="${!empty top8Groups[3]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;">4. ${top8Groups[3].groupName}</p>
+						   <p class="eventFname">1. ${top8Groups[3].groupName}</p>
 						  </c:if>
-						  <c:if test="${!empty top8Groups[4]}"> 
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;">5. ${top8Groups[4].groupName}</p>
+						  <c:if test="${!empty top8Groups[4]}">
+						   <p class="eventSname">2. ${top8Groups[4].groupName}</p>
 						  </c:if>
-						  <c:if test="${!empty top8Groups[5]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;">6. ${top8Groups[5].groupName}</p>
+						  <c:if test="${!empty top8Groups[5]}"> 
+						   <p class="eventTname">3. ${top8Groups[5].groupName}</p>
 					      </c:if>
 					     </div>
 					     
 					     <div style="margin-bottom:50px;">
 					      <c:if test="${empty top8Groups[3]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;bottom:20px;text-align:center;display:inline;width:300px;color:white;">尚無創立社團</p>
+						   <p class="noEventFNow">尚無創立社團</p>
 						  </c:if>
-						  <c:if test="${empty top8Groups[4]}"> 
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;bottom:20px;text-align:center;display:inline;width:300px;color:white;">尚無創立社團</p>
+						  <c:if test="${empty top8Groups[4]}">
+						   <p class="noEventSNow">尚無創立社團</p>
 						  </c:if>
 						  <c:if test="${empty top8Groups[5]}"> 
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;bottom:20px;text-align:center;display:inline;width:300px;color:white;">尚無創立社團</p>
+						   <p class="noEventTNow">尚無創立社團</p>
 					      </c:if>
 					     </div>
 					 <c:if test="${!empty top8Groups[3]}">
-					  <a href="<c:url value='/group/${top8Groups[3].groupId}' />"><img src="<c:url value='/getGroupImage/${top8Groups[3].groupId}.jpg' />" alt="其他"  style="margin-left:90px;width:320px;height:230px;" class="hover"></a>
+					  <a href="<c:url value='/group/${top8Groups[3].groupId}' />"><img src="<c:url value='/getGroupImage/${top8Groups[3].groupId}.jpg' />" alt="其他"  class="hover imgFirst"></a>
 					 </c:if>
 					 <c:if test="${empty top8Groups[3]}">
-					  <a href="<c:url value='/groups' />"><img src="<c:url value='/getGroupImage/${top8Groups[3].groupId}.jpg' />" alt="其他"  style="margin-left:90px;width:320px;height:230px;" class="hover"></a>
+					  <a href="<c:url value='/groups' />"><img src="<c:url value='/getGroupImage/${top8Groups[3].groupId}.jpg' />" alt="其他"  class="hover imgFirst"></a>
 					 </c:if>
 					 <c:if test="${!empty top8Groups[4]}">
-				      <a href="<c:url value='/group/${top8Groups[4].groupId}' />"><img src="<c:url value='/getGroupImage/${top8Groups[4].groupId}.jpg' />"  alt="運動"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/group/${top8Groups[4].groupId}' />"><img src="<c:url value='/getGroupImage/${top8Groups[4].groupId}.jpg' />"  alt="運動"  class="hover imgSecond"></a>
 					 </c:if>
 					 <c:if test="${empty top8Groups[4]}">
-				      <a href="<c:url value='/groups' />"><img src="<c:url value='/getGroupImage/${top8Groups[4].groupId}.jpg' />"  alt="運動"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/groups' />"><img src="<c:url value='/getGroupImage/${top8Groups[4].groupId}.jpg' />"  alt="運動"  class="hover imgSecond"></a>
 					 </c:if>
 					 <c:if test="${!empty top8Groups[5]}">
-				      <a href="<c:url value='/group/${top8Groups[5].groupId}' />"><img src="<c:url value='/getGroupImage/${top8Groups[5].groupId}.jpg' />" alt="食物"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/group/${top8Groups[5].groupId}' />"><img src="<c:url value='/getGroupImage/${top8Groups[5].groupId}.jpg' />" alt="食物"  class="hover imgThird"></a>
 					 </c:if>
 					 <c:if test="${empty top8Groups[5]}">
-				      <a href="<c:url value='/groups' />"><img src="<c:url value='/getGroupImage/${top8Groups[5].groupId}.jpg' />" alt="食物"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/groups' />"><img style="color:black;" src="<c:url value='/getGroupImage/${top8Groups[5].groupId}.jpg' />" alt="食物"  class="hover imgThird"></a>
 					 </c:if>
 <!-- =====================開團者 -->
 						 <div style="margin-top:10px;">
 						  <c:if test="${!empty top8Groups[3]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">創立者 : <span style="color:white">${top8GroupLeaderNames[3]}</span></p>
+						   <p class="eventInviter" style="left:90px;">創立者 : <span class="white">${top8GroupLeaderNames[3]}</span></p>
 						  </c:if>
-						  <c:if test="${!empty top8Groups[4]}"> 
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:	white;">創立者 : <span style="color:white">${top8GroupLeaderNames[4]}</span></p>
+						  <c:if test="${!empty top8Groups[4]}">
+						   <p class="eventInviter" style="left:435px;">創立者 : <span class="white">${top8GroupLeaderNames[4]}</span></p>
 						  </c:if>
 						  <c:if test="${!empty top8Groups[5]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	white;">創立者 : <span style="color:white">${top8GroupLeaderNames[5]}</span></p>
+						   <p class="eventInviter" style="left:780px;">創立者 : <span class="white">${top8GroupLeaderNames[5]}</span></p>
 					      </c:if>
 					     </div>
 <!-- 						社團種類  -->
 						 <div style="margin-top:40px;">
-						   <c:if test="${top8Groups[3].groupType == 'sport' and !empty top8Groups[3]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">運動類</span></p>
+<!-- 						 1 -->
+						 <c:if test="${top8Groups[3].groupType == 'sport' and !empty top8Groups[3]}">
+						   <p class="groupType" style="left:90px;">社團類型 : <span class="white">運動類</span></p>
 						 </c:if>
 						 <c:if test="${top8Groups[3].groupType == 'entertainment' and !empty top8Groups[3]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">娛樂類</span></p>
+						   <p class="groupType" style="left:90px;">社團類型 : <span class="white">娛樂類</span></p>
 						 </c:if> 
 						 <c:if test="${top8Groups[3].groupType == 'food' and !empty top8Groups[3]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">美食類</span></p>
+						   <p class="groupType" style="left:90px;">社團類型 : <span class="white">美食類</span></p>
 						 </c:if> 
 						 <c:if test="${top8Groups[3].groupType == 'other' and !empty top8Groups[3]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">其他類</span></p>
+						   <p class="groupType" style="left:90px;">社團類型 : <span class="white">其他類</span></p>
 						 </c:if>
 <!-- 						 2 -->
 						 <c:if test="${top8Groups[4].groupType == 'sport' and !empty top8Groups[4]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">運動類</span></p>
+						   <p class="groupType" style="left:435px;">社團類型 : <span class="white">運動類</span></p>
 						 </c:if>  
 						 <c:if test="${top8Groups[4].groupType == 'entertainment' and !empty top8Groups[4]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">娛樂類</span></p>
+						   <p class="groupType" style="left:435px;">社團類型 : <span class="white">娛樂類</span></p>
 						 </c:if>  
 						 <c:if test="${top8Groups[4].groupType == 'food' and !empty top8Groups[4]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">美食類</span></p>
+						   <p class="groupType" style="left:435px;">社團類型 : <span class="white">美食類</span></p>
 						 </c:if>  
 						 <c:if test="${top8Groups[4].groupType == 'other' and !empty top8Groups[4]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">其他類</span></p>
+						   <p class="groupType" style="left:435px;">社團類型 : <span class="white">其他類</span></p>
 						 </c:if>    
 <!-- 						 3 -->
 						  <c:if test="${top8Groups[5].groupType == 'sport' and !empty top8Groups[5]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	white;">社團類型 : <span style="color:white">運動類</span></p>
+						   <p class="groupType" style="left:780px;">社團類型 : <span class="white">運動類</span></p>
 					   	  </c:if>
 					   	   <c:if test="${top8Groups[5].groupType == 'entertainment' and !empty top8Groups[5]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	white;">社團類型 : <span style="color:white">娛樂類</span></p>
+						   <p class="groupType" style="left:780px;">社團類型 : <span class="white">娛樂類</span></p>
 					   	  </c:if> 
 					   	   <c:if test="${top8Groups[5].groupType == 'food' and !empty top8Groups[5]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	white;">社團類型 : <span style="color:white">美食類</span></p>
+						   <p class="groupType" style="left:780px;">社團類型 : <span class="white">美食類</span></p>
 					   	  </c:if> 
 					   	   <c:if test="${top8Groups[5].groupType == 'other' and !empty top8Groups[5]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	white;">社團類型 : <span style="color:white">其他類</span></p>
-					   	  </c:if> 
-					     </div>
+						   <p class="groupType" style="left:780px;">社團類型 : <span class="white">其他類</span></p>
+					   	  </c:if>   
+					   
+					    </div>
 <!-- 					     社團目前人數 -->
 					      <div style="margin-top:70px;">
 <!-- 					     第一頁第一張 ======= --> 
-						   <c:if test="${!empty top8Groups[3]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;"> 目前團員  :  <span style="color:white;">${top8Groups[3].groupCurrentMembers}</span> <i class="fas fa-users" style="color:black;"></i></p>  
-						   </c:if>
-<!-- 					     第一頁第二張======= -->						  
-						   <c:if test="${!empty top8Groups[4]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;"> 目前團員  :  <span style="color:white;">${top8Groups[4].groupCurrentMembers}</span> <i class="fas fa-users" style="color:black;"></i></p>
-						   </c:if>						
+						  <c:if test="${!empty top8Groups[3]}">
+						   <p class="groupMembers" style="left:90px;"> 目前團員  :  <span class="white">${top8Groups[3].groupCurrentMembers}</span> <i class="fas fa-users" style="color:black;"></i></p>  
+						  </c:if>
+<!-- 					     第一頁第二張======= -->
+						  <c:if test="${!empty top8Groups[4]}">						  
+						   <p class="groupMembers" style="left:435px;"> 目前團員  :  <span class="white">${top8Groups[4].groupCurrentMembers}</span> <i class="fas fa-users" style="color:black;"></i></p>
+						  </c:if>
 <!-- 					     第一頁第3張======= -->	
-						   <c:if test="${!empty top8Groups[5]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:white;"> 目前團員  :  <span style="color:white;">${top8Groups[5].groupCurrentMembers}</span> <i class="fas fa-users" style="color:black;"></i></p>
-						   </c:if>
+						  <c:if test="${!empty top8Groups[5]}">
+						   <p class="groupMembers" style="left:780px;"> 目前團員  :  <span class="white">${top8Groups[5].groupCurrentMembers}</span> <i class="fas fa-users" style="color:black;"></i></p>
+						  </c:if>
 					     </div>
 
 					   <div class="carousel-caption d-none d-block" style="bottom:370px;">
-						   	<h5 style="font-size:30px !important;color:white;font-famliy:微軟正黑體 !important;font-weight:bold!important;">TOP 9 人氣社團</h5>
+						   	<h1 class="TopEvent">TOP 9 人氣社團</h1>
 				   	   </div>
 				</div>
 					     <!-- 	第三頁			======	       -->
-				 <div class="carousel-item" style="width:1200px;height:380px;margin-top:80px;">
+	<div class="carousel-item insideCarousel">
 <!-- 					   名稱 -->
 					 	 <div style="margin-bottom:50px;">
 					 	  <c:if test="${!empty top8Groups[6]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;text-align:center;display:inline;width:300px;color:white;">7. ${top8Groups[6].groupName}</p>
+						   <p class="eventFname">1. ${top8Groups[6].groupName}</p>
 						  </c:if>
 						  <c:if test="${!empty top8Groups[7]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;text-align:center;display:inline;width:300px;color:white;">8. ${top8Groups[7].groupName}</p>
+						   <p class="eventSname">2. ${top8Groups[7].groupName}</p>
 						  </c:if>
 						  <c:if test="${!empty top8Groups[8]}"> 
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;text-align:center;display:inline;width:300px;color:white;">9. ${top8Groups[8].groupName}</p>
-						  </c:if>					     
+						   <p class="eventTname">3. ${top8Groups[8].groupName}</p>
+					      </c:if>
 					     </div>
 					     
 					     <div style="margin-bottom:50px;">
-					      <c:if test="${empty top8Groups[6]}"> 
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:100px;bottom:20px;text-align:center;display:inline;width:300px;color:white;">尚無創立社團</p>
+					      <c:if test="${empty top8Groups[6]}">
+						   <p class="noEventFNow">尚無創立社團</p>
 						  </c:if>
 						  <c:if test="${empty top8Groups[7]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:445px;bottom:20px;text-align:center;display:inline;width:300px;color:white;">尚無創立社團</p>
+						   <p class="noEventSNow">尚無創立社團</p>
 						  </c:if>
-						  <c:if test="${empty top8Groups[8]}">
-						   <p style="font-size:30px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:790px;bottom:20px;text-align:center;display:inline;width:300px;color:white;">尚無創立社團</p>
+						  <c:if test="${empty top8Groups[8]}"> 
+						   <p class="noEventTNow">尚無創立社團</p>
 					      </c:if>
 					     </div>
 					 <c:if test="${!empty top8Groups[6]}">
-					  <a href="<c:url value='/group/${top8Groups[6].groupId}' />"><img src="<c:url value='/getGroupImage/${top8Groups[6].groupId}.jpg' />" alt="其他"  style="margin-left:90px;width:320px;height:230px;" class="hover"></a>
+					  <a href="<c:url value='/group/${top8Groups[6].groupId}' />"><img src="<c:url value='/getGroupImage/${top8Groups[6].groupId}.jpg' />" alt="其他"  class="hover imgFirst"></a>
 					 </c:if>
 					 <c:if test="${empty top8Groups[6]}">
-					  <a href="<c:url value='/groups' />"><img src="<c:url value='/getGroupImage/${top8Groups[6].groupId}.jpg' />" alt="其他"  style="margin-left:90px;width:320px;height:230px;" class="hover"></a>
+					  <a href="<c:url value='/groups' />"><img src="<c:url value='/getGroupImage/${top8Groups[6].groupId}.jpg' />" alt="其他"  class="hover imgFirst"></a>
 					 </c:if>
 					 <c:if test="${!empty top8Groups[7]}">
-				      <a href="<c:url value='/group/${top8Groups[7].groupId}' />"><img src="<c:url value='/getGroupImage/${top8Groups[7].groupId}.jpg' />"  alt="運動"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/group/${top8Groups[7].groupId}' />"><img src="<c:url value='/getGroupImage/${top8Groups[7].groupId}.jpg' />"  alt="運動"  class="hover imgSecond"></a>
 					 </c:if>
 					 <c:if test="${empty top8Groups[7]}">
-				      <a href="<c:url value='/groups' />"><img src="<c:url value='/getGroupImage/${top8Groups[7].groupId}.jpg' />"  alt="運動"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/groups' />"><img src="<c:url value='/getGroupImage/${top8Groups[7].groupId}.jpg' />"  alt="運動"  class="hover imgSecond"></a>
 					 </c:if>
 					 <c:if test="${!empty top8Groups[8]}">
-				      <a href="<c:url value='/group/${top8Groups[8].groupId}' />"><img src="<c:url value='/getGroupImage/${top8Groups[8].groupId}.jpg' />" alt="食物"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/group/${top8Groups[8].groupId}' />"><img src="<c:url value='/getGroupImage/${top8Groups[8].groupId}.jpg' />" alt="食物"  class="hover imgThird"></a>
 					 </c:if>
 					 <c:if test="${empty top8Groups[8]}">
-				      <a href="<c:url value='/groups' />"><img src="<c:url value='/getGroupImage/${top8Groups[8].groupId}.jpg' />" alt="食物"  style="margin-left:20px;width:320px;height:230px;" class="hover"></a>
+				      <a href="<c:url value='/groups' />"><img style="color:black;" src="<c:url value='/getGroupImage/${top8Groups[8].groupId}.jpg' />" alt="食物"  class="hover imgThird"></a>
 					 </c:if>
 <!-- =====================開團者 -->
-						  <div style="margin-top:10px;">
-						   <c:if test="${!empty top8Groups[6]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">創立者 : <span style="color:white">${top8GroupLeaderNames[6]}</span></p>
-						   </c:if>
-						   <c:if test="${!empty top8Groups[7]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:	white;">創立者 : <span style="color:white">${top8GroupLeaderNames[7]}</span></p>
-						   </c:if>
-						   <c:if test="${!empty top8Groups[8]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	white;">創立者 : <span style="color:white">${top8GroupLeaderNames[8]}</span></p>
-					       </c:if>
+						 <div style="margin-top:10px;">
+						  <c:if test="${!empty top8Groups[6]}">
+						   <p class="eventInviter" style="left:90px;">創立者 : <span class="white">${top8GroupLeaderNames[6]}</span></p>
+						  </c:if>
+						  <c:if test="${!empty top8Groups[7]}">
+						   <p class="eventInviter" style="left:435px;">創立者 : <span class="white">${top8GroupLeaderNames[7]}</span></p>
+						  </c:if>
+						  <c:if test="${!empty top8Groups[8]}">
+						   <p class="eventInviter" style="left:780px;">創立者 : <span class="white">${top8GroupLeaderNames[8]}</span></p>
+					      </c:if>
 					     </div>
 <!-- 						社團種類  -->
 						 <div style="margin-top:40px;">
-						   <c:if test="${top8Groups[6].groupType == 'sport' and !empty top8Groups[6]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">運動類</span></p>
+<!-- 						 1 -->
+						 <c:if test="${top8Groups[6].groupType == 'sport' and !empty top8Groups[6]}">
+						   <p class="groupType" style="left:90px;">社團類型 : <span class="white">運動類</span></p>
 						 </c:if>
 						 <c:if test="${top8Groups[6].groupType == 'entertainment' and !empty top8Groups[6]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">娛樂類</span></p>
+						   <p class="groupType" style="left:90px;">社團類型 : <span class="white">娛樂類</span></p>
 						 </c:if> 
 						 <c:if test="${top8Groups[6].groupType == 'food' and !empty top8Groups[6]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">美食類</span></p>
+						   <p class="groupType" style="left:90px;">社團類型 : <span class="white">美食類</span></p>
 						 </c:if> 
 						 <c:if test="${top8Groups[6].groupType == 'other' and !empty top8Groups[6]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">其他類</span></p>
+						   <p class="groupType" style="left:90px;">社團類型 : <span class="white">其他類</span></p>
 						 </c:if>
 <!-- 						 2 -->
 						 <c:if test="${top8Groups[7].groupType == 'sport' and !empty top8Groups[7]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">運動類</span></p>
+						   <p class="groupType" style="left:435px;">社團類型 : <span class="white">運動類</span></p>
 						 </c:if>  
 						 <c:if test="${top8Groups[7].groupType == 'entertainment' and !empty top8Groups[7]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">娛樂類</span></p>
+						   <p class="groupType" style="left:435px;">社團類型 : <span class="white">娛樂類</span></p>
 						 </c:if>  
 						 <c:if test="${top8Groups[7].groupType == 'food' and !empty top8Groups[7]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">美食類</span></p>
+						   <p class="groupType" style="left:435px;">社團類型 : <span class="white">美食類</span></p>
 						 </c:if>  
 						 <c:if test="${top8Groups[7].groupType == 'other' and !empty top8Groups[7]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;">社團類型 : <span style="color:white">其他類</span></p>
+						   <p class="groupType" style="left:435px;">社團類型 : <span class="white">其他類</span></p>
 						 </c:if>    
 <!-- 						 3 -->
 						  <c:if test="${top8Groups[8].groupType == 'sport' and !empty top8Groups[8]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	white;">社團類型 : <span style="color:white">運動類</span></p>
+						   <p class="groupType" style="left:780px;">社團類型 : <span class="white">運動類</span></p>
 					   	  </c:if>
 					   	   <c:if test="${top8Groups[8].groupType == 'entertainment' and !empty top8Groups[8]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	white;">社團類型 : <span style="color:white">娛樂類</span></p>
+						   <p class="groupType" style="left:780px;">社團類型 : <span class="white">娛樂類</span></p>
 					   	  </c:if> 
 					   	   <c:if test="${top8Groups[8].groupType == 'food' and !empty top8Groups[8]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	white;">社團類型 : <span style="color:white">美食類</span></p>
+						   <p class="groupType" style="left:780px;">社團類型 : <span class="white">美食類</span></p>
 					   	  </c:if> 
 					   	   <c:if test="${top8Groups[8].groupType == 'other' and !empty top8Groups[8]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:	white;">社團類型 : <span style="color:white">其他類</span></p>
-					   	  </c:if> 
-					     </div>
+						   <p class="groupType" style="left:780px;">社團類型 : <span class="white">其他類</span></p>
+					   	  </c:if>   
+					   
+					    </div>
 <!-- 					     社團目前人數 -->
 					      <div style="margin-top:70px;">
 <!-- 					     第一頁第一張 ======= --> 
-						   <c:if test="${!empty top8Groups[6]}">
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:90px;text-align:left;display:inline;width:300px;color:white;"> 目前團員  :  <span style="color:white;">${top8Groups[6].groupCurrentMembers}</span> <i class="fas fa-users" style="color:black;"></i></p>  
-						   </c:if>
-<!-- 					     第一頁第二張======= -->	
-						   <c:if test="${!empty top8Groups[7]}">					  
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:435px;text-align:left;display:inline;width:300px;color:white;"> 目前團員  :  <span style="color:white;">${top8Groups[7].groupCurrentMembers}</span> <i class="fas fa-users" style="color:black;"></i></p>
-						   </c:if>
-<!-- 					     第一頁第3張======= -->
-						   <c:if test="${!empty top8Groups[8]}">	
-						   <p style="font-size:20px;font-weight:1200px;font-family:微軟正黑體;position:absolute;left:780px;text-align:left;display:inline;width:300px;color:white;"> 目前團員  :  <span style="color:white;">${top8Groups[8].groupCurrentMembers}</span> <i class="fas fa-users" style="color:black;"></i></p>
-						   </c:if>
+						  <c:if test="${!empty top8Groups[6]}">
+						   <p class="groupMembers" style="left:90px;"> 目前團員  :  <span class="white">${top8Groups[6].groupCurrentMembers}</span> <i class="fas fa-users" style="color:black;"></i></p>  
+						  </c:if>
+<!-- 					     第一頁第二張======= -->
+						  <c:if test="${!empty top8Groups[7]}">						  
+						   <p class="groupMembers" style="left:435px;"> 目前團員  :  <span class="white">${top8Groups[7].groupCurrentMembers}</span> <i class="fas fa-users" style="color:black;"></i></p>
+						  </c:if>
+<!-- 					     第一頁第3張======= -->	
+						  <c:if test="${!empty top8Groups[8]}">
+						   <p class="groupMembers" style="left:780px;"> 目前團員  :  <span class="white">${top8Groups[8].groupCurrentMembers}</span> <i class="fas fa-users" style="color:black;"></i></p>
+						  </c:if>
 					     </div>
 
 					   <div class="carousel-caption d-none d-block" style="bottom:370px;">
-						   	<h5 style="font-size:30px !important;color:white;font-famliy:微軟正黑體 !important;font-weight:bold!important;">TOP 9 人氣社團</h5>
+						   	<h1 class="TopEvent">TOP 9 人氣社團</h1>
 				   	   </div>
 				</div>
 <!-- 			====================NEXT PREV 		    -->

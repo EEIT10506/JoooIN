@@ -437,7 +437,7 @@ function ValidateNumber(e, pnumber)
 	    });
 	});
 </script>
-<title>Event </title></head>
+<title>活動詳細頁面 </title></head>
 <body class="body">
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->

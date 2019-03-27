@@ -215,7 +215,7 @@ function checkAll(bx) {
   }
 }
 </script>
-<title>Event Setting</title></head>
+<title>報名審查</title></head>
 <body class="settingBody">
 <jsp:include page="${request.contextPath}/navbar"/>
 

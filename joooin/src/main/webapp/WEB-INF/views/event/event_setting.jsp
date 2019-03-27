@@ -286,7 +286,7 @@
 	});
 	
 </script>
-<title>Event Setting</title></head>
+<title>活動內容修改</title></head>
 <body class="settingBody">
 <jsp:include page="${request.contextPath}/navbar"/>
 
