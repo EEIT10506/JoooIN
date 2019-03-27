@@ -479,7 +479,7 @@ $(document).ready(function () {
 																		    }, 
 																		    
 																			title : {
-																				text : 'ratio'
+																				text : 'Member Ratio'
 																			},yAxis: {
 																		        min: 0,
 																		        title: {
@@ -553,7 +553,7 @@ $(document).ready(function () {
 																		    }, 
 																		    
 																			title : {
-																				text : '社團種類比例'
+																				text : 'Group Ratio'
 																			},yAxis: {
 																		        min: 0,
 																		        title: {
@@ -562,10 +562,10 @@ $(document).ready(function () {
 																		        }
 																		        },
 																			tooltip : {
-																				valueSuffix: '個'
+																				valueSuffix: ''
 																			},
 																			 series: [{
-																			        name: '社團數',
+																			        name: 'total',
 																			        data: arrayGroupCurrentMember
 																			    }]
 																		})
@@ -612,7 +612,7 @@ $(document).ready(function () {
 																		    }, 
 																		    
 																			title : {
-																				text : '活動種類比例'
+																				text : 'Event Ratio'
 																			},yAxis: {
 																		        min: 0,
 																		        title: {
@@ -621,10 +621,10 @@ $(document).ready(function () {
 																		        }
 																		        },
 																			tooltip : {
-																				valueSuffix: '人'
+																				valueSuffix: ''
 																			},
 																			 series: [{
-																			        name: '總人數',
+																			        name: 'total',
 																			        data: arrayEventId
 																			    }]
 																		})

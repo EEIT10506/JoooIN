@@ -202,16 +202,16 @@ public class AdminController {
         for (AllEventQuantityBean aqb : list) {  
         	id.append(aqb.getEventId());
         	if(aqb.getEventTypeId().equals("1")) {
-        		type.append("美食"); 
+        		type.append("food"); 
         	}
         	if(aqb.getEventTypeId().equals("2")) {
-        		type.append("運動"); 
+        		type.append("sport"); 
         	}
         	if(aqb.getEventTypeId().equals("3")) {
-        		type.append("娛樂"); 
+        		type.append("entertainment"); 
         	}
         	if(aqb.getEventTypeId().equals("4")) {
-        		type.append("其他"); 
+        		type.append("other"); 
         	}
             //
         	i++;
