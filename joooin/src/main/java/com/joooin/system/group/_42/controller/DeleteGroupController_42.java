@@ -57,21 +57,26 @@ public class DeleteGroupController_42 {
 		return "redirect:/group/" + groupId;
 		
 	}
-//	//回文刪除
+	//回文刪除
 //	@RequestMapping(value = "/DeleteGroupReplyPost", method = RequestMethod.POST)
-//	public String DeleteGroupReplyPostartice( @RequestParam Integer memberId, @RequestParam Integer groupPostId,HttpSession session,Integer groupId) {
+//	public String DeleteGroupReplyPostartice( @RequestParam Integer memberId, @RequestParam Integer groupPostReplyId,HttpSession session,Integer groupId) {
 //		
 //		
 //		if(memberId!=null) {
-//			List<Replyer> groupPostReplyBean =service2.getReplyerByGroupPostId(groupPostId);
-//		
-//		
+//			List<Replyer> replyers=service2.getReplyerByGroupPostId(groupPostReplyId);
+//			for(Replyer replyer : replyers) {
+//				replyer.setGroupPostReplyId(groupPostReplyId);
+//				replyer.setIsDeleted(true);
+//				
+//			}
+//			service.updateGroupReplyPostIsDeleted(replyers);
 //			
-//			groupPostReplyBean.setIsDeleted(true);
-//			service.updateGroupReplyPostIsDeleted(groupPostReplyBean);
+//			
+//			
+//			
 //		}
 //		return "redirect:/group/" + groupId;
 //		
 //	}
-	
+//	
 }

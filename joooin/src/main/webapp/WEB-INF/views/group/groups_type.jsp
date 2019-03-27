@@ -39,14 +39,26 @@
 		font-size: 3.5rem;
 	}
 }
-.groupimg{
--webkit-clip-path: circle(42.9% at 50% 50%);
-clip-path: circle(42.9% at 50% 50%);
-}
+/* .groupimg{ */
+/* -webkit-clip-path: circle(42.9% at 50% 50%); */
+/* clip-path: circle(42.9% at 50% 50%); */
+/* } */
 .groupbg{
 clip-path: polygon(3% 0, 100% 0%, 97% 100%, 0% 100%);
 }
 </style>
+<script>
+// $( document ).ready(function() {
+// 	var $len = 10; // 超過15個字以"..."取代
+// 	$(".textacc").each(function(){
+// 		console.log($(this).text());
+// 	    if($(this).text().length > $len){
+// 	        var $text=$(this).text().substring(0,$len-1)+"...";
+// 	        $(this).text($text);
+// 	    }
+// 	});
+// 	});
+</script>
 <title>社團分類結果</title>
 </head>
 <body>
@@ -67,13 +79,13 @@ clip-path: polygon(3% 0, 100% 0%, 97% 100%, 0% 100%);
 
 								<a href="${pageContext.request.contextPath}/group/${groupsType.groupId}"><img
 
-									class="groupimg" src="<c:url value='/getGroupImage/${groupsType.groupId} '/>" width="100%"  height="225" /></a>
+									 src="<c:url value='/getGroupImage/${groupsType.groupId} '/>" width="100%"  height="225" /></a>
 
 								<div class="card-body text-left">
-									<p class="card-text" style="color:#000000; font-weight:bold;font-size:20px;">團名:                ${groupsType.groupName}</p>
-									<p class="card-text" style="color:#0000FF;" >類型:                ${groupsType.groupType}</p>
-									<p class="card-text " style="color:#A9A9A9;font-size:13px;" >會員數量:                ${groupsType.groupCurrentMembers}</p>
-									<p class="card-text " style="color:#A9A9A9;font-size:13px;" >社團介紹:                ${groupsType.groupIntro}</p>
+									<p class="card-text" style="color:#000000; text-align:left;font-weight:bold;font-size:20px;">團名:                ${groupsType.groupName}</p>
+									<p class="card-text" style="color:#0000FF; text-align:left;font-weight:bold;" >類型:                ${groupsType.groupType}</p>
+									<p class="card-text " style="color:#A9A9A9;font-size:13px;margin:5px;text-align:left;" >會員數量:                ${groupsType.groupCurrentMembers}</p>
+									<p class="card-text textacc " style="color:#A9A9A9;font-size:13px;margin:5px;text-align:left;" >社團介紹:                ${groupsType.groupIntro}</p>
 									<div class="d-flex justify-content-between align-items-center">
 										<div class="btn-group">
 										
@@ -115,6 +127,9 @@ clip-path: polygon(3% 0, 100% 0%, 97% 100%, 0% 100%);
 
 
 					</c:forEach>
+					
+					
+					
 				</div>
 			</div>
 		</div>

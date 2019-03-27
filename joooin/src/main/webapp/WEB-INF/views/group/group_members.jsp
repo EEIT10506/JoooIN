@@ -99,20 +99,21 @@ $(".textacc").each(function(){
 <!-- 				<div class="card-columns"> -->
 
 <c:forEach var="member" items="${memberInfos}">
-      <div class="col-md-6">
+      <div class="col-md-6" style="line-height: 24px;letter-spacing: 3px;">
          <div class="card flex-md-row mb-4 shadow-sm h-md-250">
             <div class="card-body d-flex flex-column align-items-start">
-               <strong class="d-inline-block mb-2 text-primary"><a href="${pageContext.request.contextPath}/member/other/${member.memberId}">${member.memberName}</a></strong>
+               <strong class="d-inline-block mb-2 text-primary" style="font-size:20px;line-height: 24px;letter-spacing: 3px;"><a href="${pageContext.request.contextPath}/member/other/${member.memberId}">${member.memberName}</a></strong>
                <h6 class="mb-0">
                	<a>會員介紹 : </a>
-                  <a class="text-dark textacc">${member.memberIntro }</a>
+                  <a class="text-dark textacc" style="margin:5px;">${member.memberIntro }</a>
                </h6>
                
-               <p class="card-text mb-auto">發文 :  ${member.postCount } 次</p>
-                <p class="card-text mb-auto">回文 :  ${member.replyCount } 次</p>
-                 <p class="card-text mb-auto">登入 :  ${member.logins } 次</p>
+               <p class="card-text mb-auto">發文 :  <span style="color:Red;">${member.postCount }</span> 次</p>
+                <p class="card-text mb-auto">回文 : <span style="color:Red;"> ${member.replyCount } </span>次</p>
+                 <p class="card-text mb-auto">登入 : <span style="color:Red;"> ${member.logins } </span>次</p>
                  <c:if test="${leaderId == sessionScope.memberId }">
 					<form action="${pageContext.request.contextPath}/group/${groupMain.groupId}/members/delete/${member.memberId}" method="post">
+					<p></p>
 					<button type="submit" class="float-right btn btn-outline-danger" id="${member.memberId}"><strong>刪除成員</strong></button>
 					</form>
 				</c:if>
@@ -120,7 +121,7 @@ $(".textacc").each(function(){
             </div>
             <img
 								src="<c:url value='/getMemberImage/${member.memberId}.jpg' />"
-								 class="card-img-right flex-auto d-none d-lg-block" alt="Thumbnail [200x250]"  style="width: 200px; height: 250px;"
+								 class="card-img-right flex-auto d-none d-lg-block img-thumbnail" alt="Thumbnail [150x150]"  style="width: 150px; height: 150px;"
 								src="logo.jpg" alt="Responsive image">
          </div>
       </div>

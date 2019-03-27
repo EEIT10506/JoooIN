@@ -57,10 +57,10 @@ div {
 	width: 50px; solid #999;
 	height: 60px;
 }
-.new-fu{
--webkit-clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
-clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
-}
+/* .new-fu{ */
+/* -webkit-clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%); */
+/* clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%); */
+/* } */
 </style>
 
 <script>
@@ -170,7 +170,7 @@ clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80
 
 		<div
 			class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-			<div class="display-4 " style="color:#0000FF;padding:10px;">${groupMain.groupName}</div>
+			<div class="display-4 " style="color:#000000;padding:10px;font-weight:bold;">${groupMain.groupName}</div>
 			<div class="btn-toolbar mb-2 mb-md-0">
 				<div class="btn-group mr-2">
 <!-- 				fb 分享 -->
@@ -236,7 +236,7 @@ clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80
 									
 									<div class="col-8 div-a apply" id="${memberApply.memberId}_div1">
 										<span >${memberApply.memberName}</span>
-										<span style="display:none; background-color:Blue">${memberApply.memberId}</span>
+										<span style="display:none; background-color:Blue;">${memberApply.memberId}</span>
 									</div>
 									<div class="col div-a apply" id="${memberApply.memberId}_div2">
 										<button id="${memberApply.memberId}"

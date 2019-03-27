@@ -46,14 +46,14 @@
             <div class="col-lg-4">
                 <div class="our-team-main">
                     <div class="team-front">
-                        <img src="<c:url value='/resources/img/icon_sport_01.png'/>"  class="img-fluid" />
+                        <img href="${pageContext.request.contextPath}/groups/sport"  src="<c:url value='/resources/img/icon_sport_01.png'/>"  class="img-fluid" />
                         <h3>運動</h3>
                         
                     </div>
 
                     <div class="team-back text-center">
                         <span>
-                            <a href="${pageContext.request.contextPath}/groups/sport" ><p><strong>目前 :${sport} 個</strong></p></a>
+                            <a href="${pageContext.request.contextPath}/groups/sport" ><p><strong>${sport} 個社團</strong></p></a>
                         </span>
                     </div>
 
@@ -73,7 +73,7 @@
 
                     <div class="team-back text-center">
                         <span>
-                            <a href="${pageContext.request.contextPath}/groups/food" ><p><strong>目前 :  ${food}個</strong></p></a>
+                            <a href="${pageContext.request.contextPath}/groups/food" ><p><strong> ${food} 個社團</strong></p></a>
                         </span>
                     </div>
 
@@ -92,7 +92,7 @@
 
                     <div class="team-back text-center">
                         <span>
-                             <a href="${pageContext.request.contextPath}/groups/entertainment" ><p><strong>目前 : ${entertainment}個</strong></p></a>
+                             <a href="${pageContext.request.contextPath}/groups/entertainment" ><p><strong> ${entertainment} 個社團</strong></p></a>
                         </span>
                     </div>
 
@@ -110,8 +110,8 @@
                     </div>
 
                     <div class="team-back text-center">
-                        <span>
-                             <a href="${pageContext.request.contextPath}/groups/other" ><p><strong>目前 : ${other} 個</strong></p></a>
+                        <span >
+                             <a href="${pageContext.request.contextPath}/groups/other" ><p><strong> ${other} 個社團</strong></p></a>
                         </span>
                     </div>
 
@@ -130,7 +130,7 @@
 
                     <div class="team-back text-center">
                         <span>
-                             <a href="${pageContext.request.contextPath}/groups/groups_type" ><p><strong>全部 :  ${all}個</strong></p></a>
+                             <a href="${pageContext.request.contextPath}/groups/groups_type" ><p><strong>  ${all} 個社團</strong></p></a>
                         </span>
                     </div>
 
