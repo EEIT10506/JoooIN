@@ -18,16 +18,16 @@ public class LoginInterceptor implements HandlerInterceptor {
 		
 		HttpSession session = request.getSession();
 		Integer mmb = (Integer) session.getAttribute("memberId");
-		Integer ab = (Integer) session.getAttribute("admin");
-		System.out.println("session.getAttribute(\"memberId\")="+session.getAttribute("memberId"));
+		Integer ab = (Integer) session.getAttribute("adminId");
 		if (mmb != null || ab !=null) {
-			return true;
-		} else {
-			response.sendRedirect(request.getContextPath() + "/login");
-			System.out.println("session.getAttribute(\"memberId\")="+session.getAttribute("memberId"));
-			return false;
+			if(mmb != null) {
+				response.sendRedirect(request.getContextPath());
+			}
+			if(ab != null) {
+				response.sendRedirect(request.getContextPath() + "/admin");
+			}
 		}
-		
+		return true;
 	}
 
 	@Override

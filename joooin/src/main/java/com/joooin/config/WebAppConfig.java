@@ -65,8 +65,8 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		OpenSessionInViewInterceptor sessionInterceptor = new OpenSessionInViewInterceptor();
 	    sessionInterceptor.setSessionFactory(sessionFactory);
 	    registry.addWebRequestInterceptor(sessionInterceptor);	 
-	    registry.addInterceptor(loginInterceptor()).addPathPatterns(""); // 字串可用,隔開 指定controller路徑將會攔截返回登入頁面
-	    registry.addInterceptor(addEventInter()).excludePathPatterns("/");
+	    registry.addInterceptor(loginInterceptor()).addPathPatterns("/login"); // 字串可用,隔開 指定controller路徑將會攔截返回登入頁面
+	    registry.addInterceptor(addEventInter());
 
 	}
 
