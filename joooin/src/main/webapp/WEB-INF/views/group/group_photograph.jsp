@@ -67,23 +67,40 @@
 
 </style>
 
-<style>
+<title>Insert title here</title>
+</head>
+<body>
 
+	<jsp:include page="${request.contextPath}/navbar" />
 	
 	
-</style>
+<!-- 請把所有內容寫在此div內 -->
+
+<div id="main">
+	
+<jsp:include page="${request.contextPath}/group/group_navbar" />	
+	
+	<!-- 請把所有內容寫在此div內 -->
+	<div id="main">
+
 
 <script>
 $(document).ready(function(){	
 	
 	
-	$('img.zoomable').css({cursor: 'pointer'}).live('click', function () {
+	$('img.zoomable').css({cursor: 'pointer'}).on('click', function () {
 	  var img = $(this);
+	  
+	  var member = $(this).next().val() + " 張貼";
+	  var postdate = $(this).next().next().val();
+	  var txt_member = $("<p></p>").text(member).css("color", "white");
+	  var txt_date = $("<p></p>").text(postdate).css("color", "white");
+	  
 	  var bigImg = $('<img />').css({
 	    'max-width': '100%',
 	    'max-height': '100%',
 	    'display': 'inline',
-	    'margin-top': '10%'
+	    'margin-top': '5%'
 	  });
 	  bigImg.attr({
 	    src: img.attr('src'),
@@ -101,7 +118,7 @@ $(document).ready(function(){
 	    'cursor': 'pointer',
 	    'z-index': 9999,
 	    'text-align': 'center'
-	  }).append(bigImg).bind('click', function () {
+	  }).append(bigImg).append(txt_member).append(txt_date).bind('click', function () {
 	    $(this).fadeOut(300, function () {
 	      $(this).remove();
 	    });
@@ -114,13 +131,6 @@ $(document).ready(function(){
 });
 </script>	
 
-<title>Insert title here</title>
-</head>
-<body>
-<jsp:include page="${request.contextPath}/navbar"/>
-
-<!-- 請把所有內容寫在此div內 -->
-<div id="main">
 
 <div class="container">
   <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0"> <strong>社團相簿</strong></h1>
@@ -133,6 +143,8 @@ $(document).ready(function(){
 	 <div class="col-lg-3 col-md-4 col-6">
 		 <div class="d-block mb-4 h-100 " style='padding: 5px;'>
 		    <img class="zoomable centered rounded mx-auto d-block img-thumbnail" style='width:80%;' src="${pageContext.request.contextPath}/getPostImage/${photo.groupPostId}" />
+			<input type=hidden value="${photo.memberName}">		    
+			<input type=hidden value="${photo.groupPostDate}">		    
 		  </div>
 	  </div>
 	  </c:if>
@@ -141,6 +153,7 @@ $(document).ready(function(){
   </div>
   </div>
 </div>	
+</div>
 <!-- 請把所有內容寫在此div內 -->
 
 </body>

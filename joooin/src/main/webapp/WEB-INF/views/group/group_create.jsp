@@ -71,7 +71,7 @@
 				</form:select>
 
 				<label for="groupName">團名</label>
-				<form:input path="groupName" type='text' id="groupName" />
+				<form:input path="groupName" type='text' id="groupName" required="required"/>
 
 				<label for="groupIntro">社團介紹</label>
 				<form:input path="groupIntro" type='text' id="groupIntro" />

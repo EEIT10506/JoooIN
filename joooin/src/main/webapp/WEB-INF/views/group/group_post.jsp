@@ -55,6 +55,24 @@
 		}
 		return true;
 	}
+	
+</script>
+<script>
+
+$(document).ready(function(){
+	
+	$('#area, #groupPostTitle').keyup(function() {
+		var area = $("#area").val().trim();
+		var title = $("#groupPostTitle").val().trim();
+	    if( (area != "") && (title != "")){
+	        $('.btn').prop('disabled', false);
+	    }
+	    else {
+	        $('.btn').prop('disabled', true);
+	    }
+	});
+	
+});
 </script>
 <title>Insert title here</title>
 </head>
@@ -101,8 +119,7 @@
 				<!-- 				放文章內容 -->
 				
 				<tr>
-				
-					<td colspan="2" ><form:textarea wrap="hard" rows="10" cols="80" path="groupPostText"/></td>
+					<td colspan="2" ><form:textarea wrap="hard" id="area" rows="10" cols="80" path="groupPostText"/></td>
 				</tr>
 				<!-- 				放文章內容 -->
 				
@@ -110,7 +127,7 @@
 					<td colspan="2" class="text-right"><label for="multipartFile">上傳文章照片</label>
 						<form:input type="file" accept="image/*" path="multipartFile"
 							id="multipartFile" onchange="checkImage(this)"></form:input> 
-							<input type="submit" value="送出">
+							<input type="submit" value="送出" class="btn" disabled>
 					</td>
 				</tr>
 			</table>
