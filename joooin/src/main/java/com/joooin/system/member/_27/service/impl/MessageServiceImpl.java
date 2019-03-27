@@ -63,7 +63,7 @@ public class MessageServiceImpl implements MessageService {
 		
 		bean.setSendMemberId(sendMemberId);
 		bean.setReceiveMemberId(receiveMemberId);
-		bean.setMessageText(text);
+		bean.setMessageText(text.replace("<", "&lt;").replace(">", "&gt;").replace("\n", "<br />").trim());
 		bean.setMessageDate(sd);
 		bean.setMessageHash(messageHash);
 		bean.setMessageType("text");

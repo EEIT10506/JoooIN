@@ -19,40 +19,18 @@ public class MemberNotificationController {
 	@RequestMapping(value = "/member/notification", method = RequestMethod.GET)
 	public String getNotifications(HttpSession session, Model model) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		
-		if (memberId != null) {
-			model.addAttribute("list", notificationService.getNotifications(memberId));
-			return "member/self/notification";
-		} else {
-			return "not_login";
-		}
+		model.addAttribute("list", notificationService.getNotifications(memberId));
+		return "member/self/notification";
 	}
 	
 	@RequestMapping(value = "/member/setOneNotificationRead", method = RequestMethod.POST)
-	public @ResponseBody String setOneNotificationRead(Integer notificationId, HttpSession session) {
-		Integer memberId = (Integer)session.getAttribute("memberId");
-		
-		if (memberId != null) {
-			notificationService.setOneNotificationRead(notificationId);
-			return null;
-		} else {
-			return "not_login";
-		}
+	public @ResponseBody void setOneNotificationRead(Integer notificationId, HttpSession session) {
+		notificationService.setOneNotificationRead(notificationId);
 	}
 	
 	@RequestMapping(value = "/member/setAllNotificationsRead", method = RequestMethod.POST)
-	public @ResponseBody String setAllNotificationsRead(String memberId, HttpSession session) {
-		System.out.println("memberId = " + memberId);
-		
-		if (memberId != null) {
-			System.out.println("進入controller");
-			notificationService.setAllNotificationsRead(Integer.valueOf(memberId));
-			System.out.println("離開controller");
-			return null;
-		} else {
-			return "not_login";
-		}
+	public @ResponseBody void setAllNotificationsRead(String memberId, HttpSession session) {
+		notificationService.setAllNotificationsRead(Integer.valueOf(memberId));
 	}
-	
 	
 }

@@ -393,7 +393,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void modifyIntro(Integer memberId, String memberIntro) {
 		MemberMainBean bean = memberMainDao.getByMemberId(memberId);
-		bean.setMemberIntro(memberIntro.replace("\n", "<br />"));
+		bean.setMemberIntro(memberIntro.replace("<", "&lt;").replace(">", "&gt;").replace("\n", "<br />").trim());
 		memberMainDao.update(bean);
 	}
 	
