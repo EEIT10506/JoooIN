@@ -181,20 +181,21 @@
     <td>${groupMain.groupType}</td>
     <c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
     <td><form action="${pageContext.request.contextPath}/group/abouts/updateGroupType/${groupMain.groupId}" method="POST">
-		<p class="text-center">
+		
 		<span id="inputType">
+		<span class="text-center">
 		<select  id="" class="option1" name="type" style="display:none;">
 　								<option class="option1"  value="sport" style="display:none;">運動</option>
 　								<option class="option1"  value="food" style="display:none;">美食</option>
 　								<option class="option1"  value="entertainment" style="display:none;">娛樂</option>
 　								<option class="option1"  value="other" style="display:none;">其他</option>
-		</select>
-		</span>
-		<p>
-		<button id="confirmType" class="btn btn-default btn-lg btn-danger" style="display:none;margin:5px;" type="submit" >確認修改</button>
+		</select>	
+		</span>	
+		<button id="confirmType" class="btn btn-default btn-lg btn-info" style="display:none;margin:5px;" type="submit" >確認修改</button>
+<!-- 		<button id="cancelType" class="btn btn-default btn-lg btn-danger" style="display:none;margin:5px;">取消</button> -->
 		
-		<button id="cancelType" class="btn btn-default btn-lg btn-danger" style="display:none;margin:5px;">取消</button>
-		</p>
+		
+		</span>
 		<p class="text-right">
 <!-- 		<button id="cancelType" class="btn btn-default btn-lg btn-danger" style="display:none;margin:5px;">取消</button> -->
 		<button id="updateType" class="btn btn-default btn-lg btn-danger" style="margin:5px;">修改</button>
@@ -208,15 +209,15 @@
     <td>${groupMain.groupName}</td>
     <c:if test="${sessionScope.memberId == groupMain.groupLeaderId}">
     <td>
-    <form 
-								action="${pageContext.request.contextPath}/group/abouts/updateGroupName/${groupMain.groupId}" method="POST">
+    <form action="${pageContext.request.contextPath}/group/abouts/updateGroupName/${groupMain.groupId}" method="POST" >
 								<p class="text-center">
-								<input id="inputName" class="btn btn-default btn-lg btn-info" type="text" style="display:none;" placeholder="修改內容" name="groupname" />
-								<button id="confirmName" class="btn btn-default btn-lg btn-info" style="display:none;" type="submit" >確認修改</button><label class="btn-danger" id="nameAlert" style="display:none;" >不可為空白</label>
+								<input id="inputName" class="btn btn-default btn-lg btn-info" type="text" style="display:none;margin:5px;" placeholder="修改內容" name="groupname" />
+								<button id="confirmName" class="btn btn-default btn-lg btn-info" style="display:none;margin:5px;" type="submit" >確認修改</button><a class="btn-danger" id="nameAlert" style="display:none;" >不可為空白</a>
+<!-- 								<button id="cancelName" class="btn btn-default btn-lg btn-danger" style="display:none;margin:5px;">取消</button> -->
 								</p>
 								</form>
 								<p class="text-right">
-								<button id="cancelName" class="btn btn-default btn-lg btn-danger" style="display:none;">取消</button>
+								
 								<button id="updateName" class="btn btn-default btn-lg btn-danger">修改</button>
 								</p>
     </td>
@@ -242,10 +243,10 @@
 								<p class="text-center">
 								<input id="inputIntro" class="btn btn-default btn-lg btn-info" type="text" style="display:none;margin:5px;" placeholder="修改內容" name="groupintro" />
 								<button id="confirmIntro" class="btn btn-default btn-lg  btn-info" style="display:none;margin:5px;" type="submit" >確認修改</button><label class="btn-danger" id="introAlert" style="display:none;" >不可為空白</label>
+<!-- 								<button id="cancelIntro" class="btn btn-default btn-lg btn-danger" style="display:none;margin:5px;">取消</button> -->
 								</p>
 								</form>
 								<p class="text-right">
-								<button id="cancelIntro" class="btn btn-default btn-lg btn-danger" style="display:none;margin:5px;">取消</button>
 								<button id="updateIntro" class="btn btn-default btn-lg btn-danger">修改</button>
 								</p>
     </td>

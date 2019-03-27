@@ -92,12 +92,12 @@ public class GroupServiceImpl_42 implements GroupService_42 {
 	}
 
 //	@Override
-//	public List<Replyer>  updateGroupReplyPostIsDeleted(List<Replyer> replyers) {
-//		groupPostReplyDao.update(replyers);
+//	public void  updateGroupReplyPostIsDeleted(GroupPostReplyBean groupPostReplyBean) {
+//		groupPostReplyDao.update(groupPostReplyBean);
 //		
-//		// TODO Auto-generated method stub
-//		
-//		
+		// TODO Auto-generated method stub
+		
+		
 //	}
 	
 	

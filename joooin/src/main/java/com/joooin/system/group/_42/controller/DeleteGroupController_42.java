@@ -20,6 +20,7 @@ import com.joooin.model.GroupPostReplyBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.repository.GroupMemberDao;
 import com.joooin.repository.GroupPostDao;
+import com.joooin.repository.GroupPostReplyDao;
 import com.joooin.system.group._22.pojo.Replyer;
 import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.system.group._42.service.GroupService_42;
@@ -40,6 +41,9 @@ public class DeleteGroupController_42 {
 
 	@Autowired
 	GroupPostDao groupPostDao;
+	
+	@Autowired
+	GroupPostReplyDao groupPostReplyDao;
 	
 	//刪除文章功能
 	@RequestMapping(value = "/DeleteGroupPost", method = RequestMethod.POST)
@@ -68,15 +72,16 @@ public class DeleteGroupController_42 {
 //				replyer.setGroupPostReplyId(groupPostReplyId);
 //				replyer.setIsDeleted(true);
 //				
+//				
 //			}
-//			service.updateGroupReplyPostIsDeleted(replyers);
-//			
-//			
-//			
-//			
+//			service.updateGroupReplyPostIsDeleted();
+			
+			
+			
+			
 //		}
 //		return "redirect:/group/" + groupId;
 //		
 //	}
-//	
+	
 }
