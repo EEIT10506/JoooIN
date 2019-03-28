@@ -61,4 +61,6 @@ public interface GroupService_22 {
 	public Integer getPostAccount(Integer groupId, Integer memberId); // 找出該會員在該社團的發文
 
 	public Integer getReplyAccount(Integer groupId, Integer memberId); // 找出該會員在該社團的回文
+	
+	public Integer getPhotoCount(Integer groupId);
 }

@@ -79,9 +79,8 @@
 <div id="main">
 	
 <jsp:include page="${request.contextPath}/group/group_navbar" />	
-	
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">	
 	<!-- 請把所有內容寫在此div內 -->
-	<div id="main">
 
 
 <script>
@@ -136,7 +135,11 @@ $(document).ready(function(){
   <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0"> <strong>社團相簿</strong></h1>
   <hr class="mt-2 mb-5">
   <div class="row text-center text-lg-left">
-
+<c:choose>
+	<c:when test="${photoCount == 0}">
+		<h3>暫無相片</h3>
+	</c:when>
+	<c:otherwise>
 <!--  	for each -->
 	<c:forEach items="${groupPhotoes}" var="photo">
 	<c:if test="${photo.groupPostImage != null }">
@@ -150,10 +153,12 @@ $(document).ready(function(){
 	  </c:if>
 	 </c:forEach>
 <!--  	for each -->
+	</c:otherwise>
+</c:choose>
   </div>
   </div>
+  </main>
 </div>	
-</div>
 <!-- 請把所有內容寫在此div內 -->
 
 </body>

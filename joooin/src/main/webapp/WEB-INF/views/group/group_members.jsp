@@ -78,15 +78,17 @@ $(".textacc").each(function(){
 });
 });
 </script>
+<script>
+$( document ).ready(function() {
+	var leader = ${leaderId};
+	$("#${leaderId}").replaceWith("<div class='float-right d-inline p-2 bg-dark text-white' id='${leaderId}'><strong>團長</strong></div>");
+});
+</script>
 <!-- 限制字數 -->
 <title>Insert title here</title>
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/navbar" />
-	
-	
-	
-	
 	<!-- 請把所有內容寫在此div內 -->
 	<div id="main">
 	
