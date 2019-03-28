@@ -71,7 +71,7 @@ public class DeleteGroupController_42 {
 
 //		}
 
-		return "redirect:/group/post/" + groupPostId;
+		return "redirect:/group/post/"; // + groupPostId
 		
 	}
 
