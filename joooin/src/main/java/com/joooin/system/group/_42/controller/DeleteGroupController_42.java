@@ -20,6 +20,7 @@ import com.joooin.model.GroupPostReplyBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.repository.GroupMemberDao;
 import com.joooin.repository.GroupPostDao;
+import com.joooin.repository.GroupPostReplyDao;
 import com.joooin.system.group._22.pojo.Replyer;
 import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.system.group._42.service.GroupService_42;
@@ -41,6 +42,9 @@ public class DeleteGroupController_42 {
 	@Autowired
 	GroupPostDao groupPostDao;
 	
+	@Autowired
+	GroupPostReplyDao groupPostReplyDao;
+	
 	//刪除文章功能
 	@RequestMapping(value = "/DeleteGroupPost", method = RequestMethod.POST)
 	public String DeleteGroupPostartice( @RequestParam Integer memberId, @RequestParam Integer groupPostId,HttpSession session,Integer groupId) {
@@ -57,21 +61,19 @@ public class DeleteGroupController_42 {
 		return "redirect:/group/" + groupId;
 		
 	}
-//	//回文刪除
-//	@RequestMapping(value = "/DeleteGroupReplyPost", method = RequestMethod.POST)
-//	public String DeleteGroupReplyPostartice( @RequestParam Integer memberId, @RequestParam Integer groupPostId,HttpSession session,Integer groupId) {
-//		
-//		
-//		if(memberId!=null) {
-//			List<Replyer> groupPostReplyBean =service2.getReplyerByGroupPostId(groupPostId);
-//		
-//		
-//			
-//			groupPostReplyBean.setIsDeleted(true);
-//			service.updateGroupReplyPostIsDeleted(groupPostReplyBean);
+	//回文刪除
+	@RequestMapping(value = "/DeleteGroupReplyPost", method = RequestMethod.POST)
+	public String DeleteGroupReplyPostartice( @RequestParam Integer memberId, @RequestParam Integer groupPostReplyId,HttpSession session,Integer groupId) {
+		
+		
+		service.updateGroupReplyPostIsDeleted(groupPostReplyId);
+		
+
 //		}
-//		return "redirect:/group/" + groupId;
-//		
-//	}
+
+		return "redirect:/group/post/"; // + groupPostId
+		
+	}
+
 	
 }

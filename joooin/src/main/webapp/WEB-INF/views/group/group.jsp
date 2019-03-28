@@ -57,6 +57,10 @@ div {
 	width: 50px; solid #999;
 	height: 60px;
 }
+/* .new-fu{ */
+/* -webkit-clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%); */
+/* clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%); */
+/* } */
 </style>
 
 <script>
@@ -166,7 +170,7 @@ div {
 
 		<div
 			class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-			<div class="display-4">${groupMain.groupName}</div>
+			<div class="display-4 " style="color:#000000;padding:10px;font-weight:bold;">${groupMain.groupName}</div>
 			<div class="btn-toolbar mb-2 mb-md-0">
 				<div class="btn-group mr-2">
 <!-- 				fb 分享 -->
@@ -232,7 +236,7 @@ div {
 									
 									<div class="col-8 div-a apply" id="${memberApply.memberId}_div1">
 										<span >${memberApply.memberName}</span>
-										<span style="display:none; background-color:Blue">${memberApply.memberId}</span>
+										<span style="display:none; background-color:Blue;">${memberApply.memberId}</span>
 									</div>
 									<div class="col div-a apply" id="${memberApply.memberId}_div2">
 										<button id="${memberApply.memberId}"
@@ -259,17 +263,17 @@ div {
 			</div>
 		</div>
 
-		<img class="container"
+		<img class="container new-fu"
 			src="<c:url value='/getGroupImage/${groupMain.groupId}'/>"
-			height="350" />
+			style="max-height:450px;"  />
 		<p></p>
-		<h4>文章列表</h4>
+		<h4 style="font-size:25px;color:#000000;padding:10px;font-weight:bold;">文章列表</h4>
 
 		<div class="table-responsive">
 			<!-- 					<table class="table table-striped table-sm"> -->
-			<table id="table_id" class="display table table-striped table-sm">
+			<table id="table_id" class="display table table-striped table-sm text-center" >
 				<thead>
-					<tr>
+					<tr style="color:#000000">
 						<th>讚數</th>
 						<th>標題</th>
 						<th>發文人</th>
@@ -282,7 +286,7 @@ div {
 					<tr>
 <!-- 					文章及連結 -->
 						<td>${poster.groupPostLike}</td>
-						<td><a href="${pageContext.request.contextPath}/group/post/${poster.groupPostId}">${poster.groupPostTitle}</a></td>
+						<td ><a style="color:#1E90FF;" href="${pageContext.request.contextPath}/group/post/${poster.groupPostId}">${poster.groupPostTitle}</a></td>
 						<td>${poster.memberName }</td>
 						<td>${poster.groupPostDate}</td>
 						<td>${poster.lastReplyDate}</td>

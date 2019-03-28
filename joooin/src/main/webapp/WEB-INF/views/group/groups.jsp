@@ -46,12 +46,13 @@
             <div class="col-lg-4">
                 <div class="our-team-main">
                     <div class="team-front">
-                        <img src="<c:url value='/resources/img/icon_sport_01.png'/>"  class="img-fluid" />
+                        <img href="${pageContext.request.contextPath}/groups/sport"  src="<c:url value='/resources/img/icon_sport_01.png'/>"  class="img-fluid" />
                         <h3>運動</h3>
                         
                     </div>
 
                     <div class="team-back text-center">
+
 	                    <c:choose>
 				            <c:when test="${sport == 0}">
 				              	<span>
@@ -64,6 +65,7 @@
 	                        	</span>
 				            </c:otherwise>
 	        			</c:choose>
+
                     </div>
 
                 </div>
@@ -81,6 +83,7 @@
                     </div>
 
                     <div class="team-back text-center">
+
                          <c:choose>
 				            <c:when test="${food == 0}">
 				              	<span>
@@ -93,6 +96,7 @@
 	                        	</span>
 				            </c:otherwise>
 	        			</c:choose>
+
                     </div>
 
                 </div>
@@ -109,6 +113,7 @@
                     </div>
 
                     <div class="team-back text-center">
+
                          <c:choose>
 				            <c:when test="${entertainment == 0}">
 				              	<span>
@@ -121,6 +126,7 @@
 	                        	</span>
 				            </c:otherwise>
 	        			</c:choose>
+
                     </div>
 
                 </div>
@@ -137,6 +143,7 @@
                     </div>
 
                     <div class="team-back text-center">
+
                         <c:choose>
 				            <c:when test="${other == 0}">
 				              	<span>
@@ -149,6 +156,7 @@
 	                        	</span>
 				            </c:otherwise>
 	        			</c:choose>
+
                     </div>
 
                 </div>
@@ -165,6 +173,7 @@
                     </div>
 
                     <div class="team-back text-center">
+
 	                    	<c:choose>
 					            <c:when test="${all == 0}">
 					              	<span>
@@ -177,6 +186,7 @@
 		                        	</span>
 					            </c:otherwise>
 		        			</c:choose>
+
                     </div>
 
                 </div>
