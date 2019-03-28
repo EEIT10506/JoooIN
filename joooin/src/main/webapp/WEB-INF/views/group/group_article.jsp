@@ -87,7 +87,7 @@ $( document ).ready(function() {
 	                    	        "<span class='float-right'>"+(i+1)+"樓"+"</i>"+"</span>"+"</p>"+
 	                    	        "<p>"+result[i].groupPostReplyContent+"</p>"+
 	                    	       
-	                    	        "<p id= "+ result[i].memberId +" style='display:none;'>"+
+	                    	        "<p id= reply_"+ result[i].memberId +" style='display:none;'  >"+
                     	            "<a href='${pageContext.request.contextPath}/DeleteGroupReplyPost/"+result[i].groupPostReplyId +"/"+result[i].memberId +"/"+result[i].groupId+"/"+result[i].groupPostId+"' class='float-right btn btn btn-dark delete ml-2' style=''>"+"<i class='fa fa-reply'>"+"</i>"+"刪除"+"</a>"+
                     	       		"</p>"+ 
                     	       		
@@ -126,14 +126,11 @@ $( document ).ready(function() {
 <!-- reply ready按鈕判定 -->
 <script>
 $( document ).ready(function() {
-	var currentId = ${sessionScope.memberId};
+	var currentId = replyer;
+	var currentId_button ="#reply_"+replyer;
+	$('#currentId _button').show(); 
 	
 	
-		var replymember=$("p reply.memberId");	
-	if(replymember==currentId){
-		$('#result[i].memberId').show(); 
-	
-	}
 });
 </script>
 <!-- reply update -->
@@ -182,7 +179,7 @@ $( document ).ready(function() {
 				                    	        "<span class='float-right'>"+(i+1)+"樓"+"</i>"+"</span>"+"</p>"+
 				                    	        "<p>"+result[i].groupPostReplyContent+"</p>"+
 				                    	        
-				                    	        "<p id="+ result[i].memberId+" style='display:none;'>"+
+				                    	        "<p id= reply_"+ result[i].memberId +" style='display:none;'  >"+
 			                    	            "<a href='${pageContext.request.contextPath}/DeleteGroupReplyPost/"+result[i].groupPostReplyId +"/"+result[i].memberId +"/"+result[i].groupId +"/"+result[i].groupPostId+"' class='float-right btn btn btn-dark delete ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"刪除"+"</a>"+
 			                    	       		"</p>"+ 
 			                    	       		
