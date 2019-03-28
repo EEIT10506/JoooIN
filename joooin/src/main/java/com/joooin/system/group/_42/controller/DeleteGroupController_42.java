@@ -20,6 +20,7 @@ import com.joooin.model.GroupPostReplyBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.repository.GroupMemberDao;
 import com.joooin.repository.GroupPostDao;
+import com.joooin.repository.GroupPostReplyDao;
 import com.joooin.system.group._22.pojo.Replyer;
 import com.joooin.system.group._22.service.GroupService_22;
 import com.joooin.system.group._42.service.GroupService_42;
@@ -58,10 +59,12 @@ public class DeleteGroupController_42 {
 		
 	}
 	//回文刪除
-//	@RequestMapping(value = "/DeleteGroupReplyPost", method = RequestMethod.POST)
-//	public String DeleteGroupReplyPostartice( @RequestParam Integer memberId, @RequestParam Integer groupPostReplyId,HttpSession session,Integer groupId) {
-//		
-//		
+	@RequestMapping(value = "/DeleteGroupReplyPost", method = RequestMethod.POST)
+	public String DeleteGroupReplyPostartice( @RequestParam Integer memberId, @RequestParam Integer groupPostReplyId,HttpSession session,Integer groupId) {
+		
+		
+		service.updateGroupReplyPostIsDeleted(groupPostReplyId);
+		
 //		if(memberId!=null) {
 //			List<Replyer> replyers=service2.getReplyerByGroupPostId(groupPostReplyId);
 //			for(Replyer replyer : replyers) {
@@ -70,13 +73,9 @@ public class DeleteGroupController_42 {
 //				
 //			}
 //			service.updateGroupReplyPostIsDeleted(replyers);
-//			
-//			
-//			
-//			
 //		}
-//		return "redirect:/group/" + groupId;
-//		
-//	}
-//	
+		return "redirect:/group/post/" + groupPostId;
+		
+	}
+	
 }

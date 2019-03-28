@@ -30,7 +30,7 @@ public interface GroupService_42 {
 
 	public void updateGroupPostIsDeleted(GroupPostBean groupPostBean);
 	
-//	public void  updateGroupReplyPostIsDeleted(List<Replyer> replyers);
+	public void  updateGroupReplyPostIsDeleted(Integer replyId);
 	
 //	public String reportGroupProcess(ReportBean rb, RedirectAttributes redirectAttributes,Integer groupId,Integer groupPostId);
 
