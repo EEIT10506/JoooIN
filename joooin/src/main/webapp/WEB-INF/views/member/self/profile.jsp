@@ -145,17 +145,17 @@
 				<div id="main-view">
 					<br /><br />
 					<div id="show-data" class="profile-view">
-						<div class="param-label">名稱：</div>　${memberMainBean.memberName } <br />
+						<div class="param-label">名稱：</div>　<c:out value="${memberMainBean.memberName }"/> <br />
 						<div class="param-label">性別：</div><c:if test="${memberMainBean.gender == 'male'}">　男</c:if><c:if test="${memberMainBean.gender == 'female'}">　女</c:if><br />
 						<div class="param-label">生日：</div>　${memberMainBean.birthday }<br />
 						<div class="param-label">城市：</div>　${memberMainBean.city }<br />
-						<div class="param-label">信箱：</div>　${memberMainBean.email }<br />
-						<div class="param-label">電話：</div>　${memberMainBean.phone }<br />
+						<div class="param-label">信箱：</div>　<c:out value="${memberMainBean.email }"/><br />
+						<div class="param-label">電話：</div>　<c:out value="${memberMainBean.phone }"/><br />
 					</div>
 					<div id="edit-data" class="profile-view">
 						<form:form modelAttribute="memberMainBean" action="${pageContext.request.contextPath}/member/updateProfile" method="POST" enctype="multipart/form-data">
 							<div class="param-label"><form:label class="edit-data-text" for="memberName" path="memberName">名稱：</form:label></div>　
-							<form:input id="inputName" path="memberName"></form:input><br />
+							<form:input maxlength="20" id="inputName" path="memberName"></form:input><br />
 							
 							<div class="param-label"><form:label class="edit-data-text" for="gender" path="gender">性別：</form:label></div>　
 							<form:radiobutton path="gender" value="male"></form:radiobutton>　男　　　　

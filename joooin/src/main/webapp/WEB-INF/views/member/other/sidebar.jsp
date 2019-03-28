@@ -51,7 +51,7 @@
 <body>
 	<div id="memberImage" >
 		<img id="userImage" src="<c:url value='/getMemberImage/${memberMainBean.memberId}.jpg' />" width="160px" />
-		<p id="memberName">${memberMainBean.memberName}</p>
+		<p id="memberName"><c:out value="${memberMainBean.memberName}"/></p>
 	</div>
 	<br />
 	<div class="list-group">

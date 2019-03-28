@@ -62,7 +62,7 @@
 				<div id="main-view">
 					<br /><br />
 					<div id="show-data" class="profile-view">
-						<div class="param-label">名稱：</div>　${memberMainBean.memberName } <br />
+						<div class="param-label">名稱：</div>　<c:out value="${memberMainBean.memberName } "/><br />
 						<div class="param-label">性別：</div>
 							<c:choose>
 								<c:when test="${memberMainBean.genderDisplay == true}">
@@ -88,14 +88,14 @@
 						<div class="param-label">信箱：</div>
 							<c:choose>
 								<c:when test="${memberMainBean.emailDisplay == true}">
-								　${memberMainBean.email }
+								　<c:out value="${memberMainBean.email }"/>
 								</c:when>
 								<c:otherwise>　不透漏</c:otherwise>
 							</c:choose><br />
 						<div class="param-label">電話：</div>
 							<c:choose>
 								<c:when test="${memberMainBean.phoneDisplay == true}">
-								　${memberMainBean.phone }
+								　<c:out value="${memberMainBean.phone }"/>
 								</c:when>
 								<c:otherwise>　不透漏</c:otherwise>
 							</c:choose><br />

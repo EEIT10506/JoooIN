@@ -98,7 +98,7 @@
 						<tbody>                           
 							<c:forEach var="group" items="${groupList}">
 								<tr>
-									<td style="vertical-align: middle"><img id="groupImage" src='<c:url value='/getGroupImage/${group.groupId}.jpg' />' />　${group.groupName} </td>
+									<td style="vertical-align: middle"><img id="groupImage" src='<c:url value='/getGroupImage/${group.groupId}.jpg' />' />　<c:out value="${group.groupName} "/></td>
 		                            <td class="groupBtn"><p data-placement="top" data-toggle="tooltip" title="社團頁面"><button value="${group.groupId}" class="groupPageBtn btn btn-primary btn-xs" data-title="社團頁面" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
 								</tr>
 							</c:forEach>

@@ -99,7 +99,7 @@
 							<c:forEach var="friend" items="${friendList}">
 								<c:if test="${friend.isFriend == true}">
 									<tr>
-										<td><img id="friendImage" src='<c:url value='/getMemberImage/${friend.memberId}.jpg' />' />　${friend.memberName} </td>
+										<td><img id="friendImage" src='<c:url value='/getMemberImage/${friend.memberId}.jpg' />' />　<c:out value="${friend.memberName} "/></td>
 			                            <td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="個人頁面"><button value="${friend.memberId}" class="friendPageBtn btn btn-primary btn-xs" data-title="個人頁面" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
 									</tr>
 								</c:if>
