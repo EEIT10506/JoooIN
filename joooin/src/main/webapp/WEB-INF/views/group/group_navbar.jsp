@@ -101,7 +101,7 @@ function openNav() {
 			<div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="${pageContext.request.contextPath}/group/${groupMain.groupId}">${groupMain.groupName}</a>
-  <a href="${pageContext.request.contextPath}/group/about/${groupMain.groupId}">關於我們</a>
+  <a href="${pageContext.request.contextPath}/group/about/${groupMain.groupId}"><i class="fal fa-users-cog"></i>關於我們</a>
   <a href="${pageContext.request.contextPath}/group/members/${groupMain.groupId}">社團成員</a>
   <a href="${pageContext.request.contextPath}/group/addpost/${groupMain.groupId}">發文</a>
   

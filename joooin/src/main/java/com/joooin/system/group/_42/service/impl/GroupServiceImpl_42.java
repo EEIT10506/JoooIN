@@ -91,12 +91,14 @@ public class GroupServiceImpl_42 implements GroupService_42 {
 		groupPostDao.update(groupPostBean);
 	}
 
+
 	@Override
 	public void  updateGroupReplyPostIsDeleted(Integer replyId) {
 		GroupPostReplyBean replyBean = groupPostReplyDao.getByGroupPostReplyId(replyId);
 		replyBean.setIsDeleted(true);
 		groupPostReplyDao.update(replyBean);
 	}
+
 	
 	
 	

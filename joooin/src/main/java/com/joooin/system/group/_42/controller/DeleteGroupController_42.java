@@ -42,6 +42,9 @@ public class DeleteGroupController_42 {
 	@Autowired
 	GroupPostDao groupPostDao;
 	
+	@Autowired
+	GroupPostReplyDao groupPostReplyDao;
+	
 	//刪除文章功能
 	@RequestMapping(value = "/DeleteGroupPost", method = RequestMethod.POST)
 	public String DeleteGroupPostartice( @RequestParam Integer memberId, @RequestParam Integer groupPostId,HttpSession session,Integer groupId) {
@@ -65,17 +68,12 @@ public class DeleteGroupController_42 {
 		
 		service.updateGroupReplyPostIsDeleted(groupPostReplyId);
 		
-//		if(memberId!=null) {
-//			List<Replyer> replyers=service2.getReplyerByGroupPostId(groupPostReplyId);
-//			for(Replyer replyer : replyers) {
-//				replyer.setGroupPostReplyId(groupPostReplyId);
-//				replyer.setIsDeleted(true);
-//				
-//			}
-//			service.updateGroupReplyPostIsDeleted(replyers);
+
 //		}
+
 		return "redirect:/group/post/" + groupPostId;
 		
 	}
+
 	
 }

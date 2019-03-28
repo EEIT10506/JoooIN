@@ -158,7 +158,7 @@ border:1px solid #ccc !important;
 <body>
 	<jsp:include page="${request.contextPath}/navbar" />
 	<div id="main">
-		<h1>創建社團初版</h1>
+		
 		<hr>
 		<!-- 		使用表格物件 -->
 			<dvi class="container h-100">
@@ -173,15 +173,17 @@ border:1px solid #ccc !important;
 					<div id="dynamic_container">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text br-15"><i class="far fa-address-book"></i></i></span>
-							</div>
-							<div for="groupType">社團型態:</div>
+<!-- 								<span class="input-group-text br-15"><i class="far fa-address-book"></i></span> -->
+								<div for="groupType" style="margin:5px;font-weight:bold;" >社團型態:</div>
+								
 				<form:select path='groupType' required="required" id="groupType">
 					<form:option value="sport">運動</form:option>
 					<form:option value="food">美食</form:option>
 					<form:option value="entertainment">娛樂</form:option>
 					<form:option value="other">其他</form:option>
 				</form:select>
+							</div>
+							
 						</div>
 						<div class="input-group mt-3">
 							<div class="input-group-prepend">
@@ -191,7 +193,7 @@ border:1px solid #ccc !important;
 						</div>
 						<div class="input-group mt-3">
 							<div class="input-group-prepend">
-								<span class="input-group-text br-15"><i class="fas fa-at"></i></span>
+								<span class="input-group-text br-15"><i class="far fa-address-card"></i></span>
 							</div>
 							<form:input path="groupIntro" type='text' placeholder="輸入社團介紹"  id="groupIntro" />
 						</div>
@@ -206,7 +208,7 @@ border:1px solid #ccc !important;
 						
 					</div>
 					<div class="card-footer">
-				<a class="btn btn-secondary btn-sm" onclick="history.back()"id="add_more"><i class="fas fa-plus-circle"></i> 返回上一頁</a>
+				<a class="btn btn-secondary btn-sm" onclick="history.back()"id="add_more">返回上一頁</a>
 <!-- 				<a class="btn btn-secondary btn-sm" id="remove_more"><i class="fas fa-trash-alt"></i> Remove</a> -->
 				<input class="btn btn-success btn-sm float-right submit_btn " type="submit" value="送出">
 			</div>
