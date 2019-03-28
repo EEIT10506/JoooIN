@@ -126,7 +126,7 @@ $( document ).ready(function() {
 <!-- reply ready按鈕判定 -->
 <script>
 $( document ).ready(function() {
-	var result[i].memberId = replyer;
+	var currentId = replyer;
 	var currentId_button ="#reply_"+replyer;
 	$('#currentId _button').show(); 
 	
