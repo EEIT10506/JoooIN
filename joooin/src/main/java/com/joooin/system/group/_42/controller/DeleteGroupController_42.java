@@ -62,16 +62,16 @@ public class DeleteGroupController_42 {
 		
 	}
 	//回文刪除
-	@RequestMapping(value = "/DeleteGroupReplyPost", method = RequestMethod.POST)
-	public String DeleteGroupReplyPostartice( @RequestParam Integer memberId, @RequestParam Integer groupPostReplyId,HttpSession session,Integer groupId) {
+	@RequestMapping(value = "/DeleteGroupReplyPost/{groupPostReplyId}/{memberId}/{groupId}/{groupPostId}", method = RequestMethod.GET)
+	public String DeleteGroupReplyPostartice( @PathVariable("memberId") Integer memberId, @PathVariable("groupPostReplyId") Integer groupPostReplyId,HttpSession session,@PathVariable("groupId") Integer groupId, @PathVariable("groupPostId") Integer groupPostId) {
 		
 		
 		service.updateGroupReplyPostIsDeleted(groupPostReplyId);
 		
-
+		
 //		}
 
-		return "redirect:/group/post/"; // + groupPostId
+		return "redirect:/group/post/"+groupPostId; // + groupPostId
 		
 	}
 

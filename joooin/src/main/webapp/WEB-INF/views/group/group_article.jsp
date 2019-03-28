@@ -86,9 +86,11 @@ $( document ).ready(function() {
 	                    	        "<p>"+"<a href='${pageContext.request.contextPath}/member/other/"+result[i].memberId +"'>"+"<strong>"+result[i].memberName+"</strong>"+"</a>"+
 	                    	        "<span class='float-right'>"+(i+1)+"樓"+"</i>"+"</span>"+"</p>"+
 	                    	        "<p>"+result[i].groupPostReplyContent+"</p>"+
-	                    	        "<p>"+
-                    	            "<a href='${pageContext.request.contextPath}/report/"+result[i].memberId +"/"+result[i].memberName +"' class='float-right btn btn-outline-primary ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉"+"</a>"+
+	                    	       
+	                    	        "<p id= "+ result[i].memberId +" style='display:none;'>"+
+                    	            "<a href='${pageContext.request.contextPath}/DeleteGroupReplyPost/"+result[i].groupPostReplyId +"/"+result[i].memberId +"/"+result[i].groupId+"/"+result[i].groupPostId+"' class='float-right btn btn btn-dark delete ml-2' style=''>"+"<i class='fa fa-reply'>"+"</i>"+"刪除"+"</a>"+
                     	       		"</p>"+ 
+                    	       		
 	                    	        "<p>"+
 	                    	            "<a href='${pageContext.request.contextPath}/report/"+result[i].memberId +"/"+result[i].memberName +"' class='float-right btn btn-outline-primary ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉"+"</a>"+
 	                    	       "</p>"+
@@ -121,7 +123,19 @@ $( document ).ready(function() {
 	});
 });
 </script>
-<!-- reply ready -->
+<!-- reply ready按鈕判定 -->
+<script>
+$( document ).ready(function() {
+	var currentId = ${sessionScope.memberId};
+	
+	
+		var replymember=$("p reply.memberId");	
+	if(replymember==currentId){
+		$('#result[i].memberId').show(); 
+	
+	}
+});
+</script>
 <!-- reply update -->
 <script>
 	// 送出回文
@@ -167,6 +181,11 @@ $( document ).ready(function() {
 				                    	        "<p>"+"<a href='${pageContext.request.contextPath}/member/other/"+result[i].memberId +"'>"+"<strong>"+result[i].memberName+"</strong>"+"</a>"+
 				                    	        "<span class='float-right'>"+(i+1)+"樓"+"</i>"+"</span>"+"</p>"+
 				                    	        "<p>"+result[i].groupPostReplyContent+"</p>"+
+				                    	        
+				                    	        "<p id="+ result[i].memberId+" style='display:none;'>"+
+			                    	            "<a href='${pageContext.request.contextPath}/DeleteGroupReplyPost/"+result[i].groupPostReplyId +"/"+result[i].memberId +"/"+result[i].groupId +"/"+result[i].groupPostId+"' class='float-right btn btn btn-dark delete ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"刪除"+"</a>"+
+			                    	       		"</p>"+ 
+			                    	       		
 				                    	        "<p>"+
 				                    	            "<a href='${pageContext.request.contextPath}/report/"+result[i].memberId +"/"+result[i].memberName +"' class='float-right btn btn-outline-primary ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉"+"</a>"+
 				                    	       "</p>"+
