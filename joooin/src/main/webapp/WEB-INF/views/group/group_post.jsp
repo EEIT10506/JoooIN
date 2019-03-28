@@ -59,6 +59,24 @@ clip-path: circle(42.5% at 50% 50%);
 		}
 		return true;
 	}
+	
+</script>
+<script>
+
+$(document).ready(function(){
+	
+	$('#area, #groupPostTitle').keyup(function() {
+		var area = $("#area").val().trim();
+		var title = $("#groupPostTitle").val().trim();
+	    if( (area != "") && (title != "")){
+	        $('.btn').prop('disabled', false);
+	    }
+	    else {
+	        $('.btn').prop('disabled', true);
+	    }
+	});
+	
+});
 </script>
 <title>Insert title here</title>
 </head>
@@ -106,8 +124,7 @@ clip-path: circle(42.5% at 50% 50%);
 				<!-- 				放文章內容 -->
 				
 				<tr>
-				
-					<td colspan="2" ><form:textarea wrap="hard" rows="10" cols="100" path="groupPostText"/></td>
+					<td colspan="2" ><form:textarea wrap="hard"  id="area" rows="10" cols="100" path="groupPostText"/></td>
 				</tr>
 				<!-- 				放文章內容 -->
 				
@@ -115,7 +132,9 @@ clip-path: circle(42.5% at 50% 50%);
 					<td colspan="2" class="text-right "><label for="multipartFile">上傳文章照片</label>
 						<form:input type="file" accept="image/*" path="multipartFile" style="color:Red;"
 							id="multipartFile" onchange="checkImage(this)"></form:input> 
-							<input class="btn-primary" type="submit" value="送出">
+
+							<input class="btn-primary btn" type="submit" value="送出" disabled>
+
 					</td>
 				</tr>
 			</table>

@@ -46,7 +46,8 @@
     border:1px solid #6495ED;
     box-shadow: 0 0 10px #719ECE;
 	}
-
+    
+/* 	讓照片大小一致 */
 	.mask {
   	display: inline-block;
   	width: 100px;
@@ -56,7 +57,7 @@
 	}
 	
 	.maskimg {max-width: 100%;}
-   	
+/* 	讓照片大小一致 */  	
 </style>
 <!-- reply like ready -->
 <script type="text/javascript">

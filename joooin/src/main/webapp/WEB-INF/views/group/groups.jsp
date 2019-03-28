@@ -52,9 +52,20 @@
                     </div>
 
                     <div class="team-back text-center">
-                        <span>
-                            <a href="${pageContext.request.contextPath}/groups/sport" ><p><strong>${sport} 個社團</strong></p></a>
-                        </span>
+
+	                    <c:choose>
+				            <c:when test="${sport == 0}">
+				              	<span>
+	                            	<p><strong>暫無社團</strong></p>
+	                        	</span>
+				            </c:when>
+				            <c:otherwise>
+				                 <span>
+	                            	<a href="${pageContext.request.contextPath}/groups/sport" ><p><strong>${sport} 個社團</strong></p></a>
+	                        	</span>
+				            </c:otherwise>
+	        			</c:choose>
+
                     </div>
 
                 </div>
@@ -72,9 +83,20 @@
                     </div>
 
                     <div class="team-back text-center">
-                        <span>
-                            <a href="${pageContext.request.contextPath}/groups/food" ><p><strong> ${food} 個社團</strong></p></a>
-                        </span>
+
+                         <c:choose>
+				            <c:when test="${food == 0}">
+				              	<span>
+	                            	<p><strong>暫無社團</strong></p>
+	                        	</span>
+				            </c:when>
+				            <c:otherwise>
+				                 <span>
+	                            	<a href="${pageContext.request.contextPath}/groups/food" ><p><strong>${food} 個社團</strong></p></a>
+	                        	</span>
+				            </c:otherwise>
+	        			</c:choose>
+
                     </div>
 
                 </div>
@@ -91,9 +113,20 @@
                     </div>
 
                     <div class="team-back text-center">
-                        <span>
-                             <a href="${pageContext.request.contextPath}/groups/entertainment" ><p><strong> ${entertainment} 個社團</strong></p></a>
-                        </span>
+
+                         <c:choose>
+				            <c:when test="${entertainment == 0}">
+				              	<span>
+	                            	<p><strong>暫無社團</strong></p>
+	                        	</span>
+				            </c:when>
+				            <c:otherwise>
+				                 <span>
+	                            	<a href="${pageContext.request.contextPath}/groups/entertainment" ><p><strong>${entertainment} 個社團</strong></p></a>
+	                        	</span>
+				            </c:otherwise>
+	        			</c:choose>
+
                     </div>
 
                 </div>
@@ -110,9 +143,20 @@
                     </div>
 
                     <div class="team-back text-center">
-                        <span >
-                             <a href="${pageContext.request.contextPath}/groups/other" ><p><strong> ${other} 個社團</strong></p></a>
-                        </span>
+
+                        <c:choose>
+				            <c:when test="${other == 0}">
+				              	<span>
+	                            	<p><strong>暫無社團</strong></p>
+	                        	</span>
+				            </c:when>
+				            <c:otherwise>
+				                 <span>
+	                            	<a href="${pageContext.request.contextPath}/groups/other" ><p><strong>${other} 個社團</strong></p></a>
+	                        	</span>
+				            </c:otherwise>
+	        			</c:choose>
+
                     </div>
 
                 </div>
@@ -129,9 +173,20 @@
                     </div>
 
                     <div class="team-back text-center">
-                        <span>
-                             <a href="${pageContext.request.contextPath}/groups/groups_type" ><p><strong>  ${all} 個社團</strong></p></a>
-                        </span>
+
+	                    	<c:choose>
+					            <c:when test="${all == 0}">
+					              	<span>
+		                            	<p><strong>暫無社團</strong></p>
+		                        	</span>
+					            </c:when>
+					            <c:otherwise>
+					                 <span>
+		                            	<a href="${pageContext.request.contextPath}/groups/groups_type" ><p><strong>${all} 個社團</strong></p></a>
+		                        	</span>
+					            </c:otherwise>
+		        			</c:choose>
+
                     </div>
 
                 </div>

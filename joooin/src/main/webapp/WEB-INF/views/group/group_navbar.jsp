@@ -104,7 +104,8 @@ function openNav() {
   <a href="${pageContext.request.contextPath}/group/about/${groupMain.groupId}"><i class="fal fa-users-cog"></i>關於我們</a>
   <a href="${pageContext.request.contextPath}/group/members/${groupMain.groupId}">社團成員</a>
   <a href="${pageContext.request.contextPath}/group/addpost/${groupMain.groupId}">發文</a>
-  
+  <a href="${pageContext.request.contextPath}/group/photograph/${groupMain.groupId}">相簿</a>
+
 </div>
 
 

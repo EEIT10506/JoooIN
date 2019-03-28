@@ -182,6 +182,7 @@ border:1px solid #ccc !important;
 					<form:option value="entertainment">娛樂</form:option>
 					<form:option value="other">其他</form:option>
 				</form:select>
+
 							</div>
 							
 						</div>
@@ -219,6 +220,7 @@ border:1px solid #ccc !important;
 		</div>
 	</div>
 	</dvi>
+
 
 	</div>
 </body>
