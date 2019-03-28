@@ -105,7 +105,7 @@ div {
 		$(target_div2).hide();
 		var target_div3 = "#" + target + "_div3";
 
-		$(target_div3).hide();
+		$(target_div3).remove();
 
 		
 		var groupId = ${groupMain.groupId};
@@ -131,7 +131,7 @@ div {
 		var target_div2 = "#" + target + "_div2";
 		$(target_div2).hide();
 		var target_div3 = "#" + target + "_div3";
-		$(target_div3).hide();
+		$(target_div3).remove();
 		
 		var groupId = ${groupMain.groupId};
 		var memberId = target;
@@ -221,7 +221,7 @@ div {
 					<div class="modal-header">
 						<h4 class="modal-title">成員申請表</h4>
 						<button type="button" class="close" data-dismiss="modal"
-							onClick="window.location.reload()">&times;</button>
+							>&times;</button>
 					</div>
 					<div class="modal-body">
 						<div class="container">
@@ -257,7 +257,7 @@ div {
 					</div>
 					<div class="modal-footer">
 						<button class="btn" class="close" data-dismiss="modal"
-							onClick="window.location.reload()">Cancel</button>
+							>Cancel</button>
 					</div>
 				</div>
 			</div>
