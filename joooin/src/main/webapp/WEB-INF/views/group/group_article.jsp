@@ -187,7 +187,7 @@ $( document ).ready(function() {
 				                    	        "<p class= "+ result[i].memberId +" style='display:none;'>"+
 			                    	            "<a href='${pageContext.request.contextPath}/DeleteGroupReplyPost/"+result[i].groupPostReplyId +"/"+result[i].memberId +"/"+result[i].groupId +"/"+result[i].groupPostId+"' class='float-right btn btn btn-dark delete ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"刪除"+"</a>"+
 			                    	       		"</p>"+ 
-			                    	       		
+			                    	       	
 				                    	        "<p>"+
 				                    	            "<a href='${pageContext.request.contextPath}/report/"+result[i].memberId +"/"+result[i].memberName +"' class='float-right btn btn-outline-primary ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉"+"</a>"+
 				                    	       "</p>"+
