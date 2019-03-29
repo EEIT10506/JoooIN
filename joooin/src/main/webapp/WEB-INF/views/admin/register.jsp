@@ -158,7 +158,7 @@
 	<script>
 $('#oneSet').click(function(){ 
 		
-		$('#email').val('eeit105joooin@gmail.com'); 
+		$('#email').val('eeit105joooin2@gmail.com'); 
 		$('#memberName').val('jojo');
 		$('#phone').val('0987654321');
 		$('#password').val('passw0rd');
