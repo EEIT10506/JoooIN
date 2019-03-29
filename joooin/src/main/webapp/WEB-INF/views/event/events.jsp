@@ -117,6 +117,10 @@ margin-bottom: 15px;
 margin-left: 150px;
 margin-bottom: 20px;
 }
+
+th{
+white-space: nowrap;
+}
 </style>
 <title>JoooIN</title>
 
@@ -314,7 +318,7 @@ margin-bottom: 20px;
               未滿
      </c:if></td>
                             <td><button id="e${event.eventId}" value="${event.eventId}" class="likeBtn btn btn-primary btn-sm">讚:${event.eventLike}</button></td>
-							<td><button type="button" id="m${event.eventId}" class="btn btn-success eventJoin" data-toggle="modal" data-target="#map${event.eventId}">地圖</button>
+							<td><button type="button" id="m${event.eventId}" class="btn btn-success eventJoin" data-toggle="modal" data-target="#map${event.eventId}" style="display:block;white-space:nowrap" >地圖</button>
 							<input style="display: none;" value="https://www.google.com/maps/embed/v1/place?key=AIzaSyC9cpXz2HFE2Dw_vITbm-T6Z-6v-TJujBQ&q=place_id:${event.eventPlaceId}" /></td>
 						</tr>
 							
