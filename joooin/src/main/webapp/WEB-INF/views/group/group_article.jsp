@@ -41,7 +41,7 @@
    	table-layout: fixed;
    }
    
-   .textarea:focus {
+   .textarea:focus { 
     outline: none !important;
     border:1px solid #6495ED;
     box-shadow: 0 0 10px #719ECE;
