@@ -34,9 +34,9 @@ public class ReportGroupController_42 {
 
 	@Autowired
 	ReportService reportService;
-	
-	@RequestMapping(value = "/report/{reportId}/{reportName}", method = RequestMethod.GET)
-	public String reportGroupPage(Model model,@PathVariable("reportId") Integer memberId, HttpSession session,@PathVariable("reportName") String memberName) {
+	//文章檢舉
+	@RequestMapping(value = "/group_postreport/{reportId}/{reportName}", method = RequestMethod.GET)
+	public String reportPostGroupPage(Model model,@PathVariable("reportId") Integer memberId, HttpSession session,@PathVariable("reportName") String memberName) {
 		
 		Integer memberIdNow = (Integer) session.getAttribute("memberId");
 		if (memberIdNow == null) {
@@ -45,10 +45,10 @@ public class ReportGroupController_42 {
 		
 		ReportBean rb = new ReportBean();
 		model.addAttribute("reportBean", rb);
-		return "admin/report" ;
+		return "group/group_postreport" ;
 	}
-	
-	@RequestMapping(value ="/report/{reportId}/{reportName}", method = RequestMethod.POST)
+	//舉報進行(文章)
+	@RequestMapping(value ="/group_postreport/{reportId}/{reportName}", method = RequestMethod.POST)
 	public String reportGroupProcess(@ModelAttribute("reportBean")ReportBean rb, RedirectAttributes redirectAttributes,@PathVariable("reportId") Integer memberId, Integer groupId,@PathVariable("reportName")String memberName,
 			HttpSession session) {
 		
@@ -57,7 +57,32 @@ public class ReportGroupController_42 {
 		reportService.ReportBeanSave(rb);
 		redirectAttributes.addFlashAttribute("success", "檢舉成功");
 		
-		return "redirect:/report/"+ memberId+"/"+memberName;
+		return "redirect:/group_postreport/"+ memberId+"/"+memberName;
+	}
+	//回文檢舉
+	@RequestMapping(value = "/group_replyreport/{reportId}/{reportName}", method = RequestMethod.GET)
+	public String reportReplyGroupPage(Model model,@PathVariable("reportId") Integer memberId, HttpSession session,@PathVariable("reportName") String memberName) {
+		
+		Integer memberIdNow = (Integer) session.getAttribute("memberId");
+		if (memberIdNow == null) {
+			return "not_login";
+		}
+		
+		ReportBean rb = new ReportBean();
+		model.addAttribute("reportBean", rb);
+		return "group/group_replyreport" ;
 	}
 	
+	//舉報進行(回文)
+		@RequestMapping(value ="/group_replyreport/{reportId}/{reportName}", method = RequestMethod.POST)
+		public String reportReplyGroupProcess(@ModelAttribute("reportBean")ReportBean rb, RedirectAttributes redirectAttributes,@PathVariable("reportId") Integer memberId, Integer groupId,@PathVariable("reportName")String memberName,
+				HttpSession session) {
+			
+			
+			rb.setReportViolatorId(memberId);
+			reportService.ReportBeanSave(rb);
+			redirectAttributes.addFlashAttribute("success", "檢舉成功");
+			
+			return "redirect:/group_replyreport/"+ memberId+"/"+memberName;
+		}
 }
