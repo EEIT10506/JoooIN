@@ -42,7 +42,7 @@ public class EnterGroupController {
 	@Autowired
 	ServletContext context;
 
-	// 依照groupId個別社團主頁連結
+	// 依照groupId個別社團主頁連結 ok
 	@RequestMapping(method = RequestMethod.GET, value = "/group/{groupId}")
 	public String groupMainPage(Model model, @PathVariable Integer groupId, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
