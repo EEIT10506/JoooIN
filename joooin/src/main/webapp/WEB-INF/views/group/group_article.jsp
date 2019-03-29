@@ -64,6 +64,7 @@
 $( document ).ready(function() {
 	var groupId = ${poster.groupId};
 	var groupPostId = ${poster.groupPostId};
+	var currentId = "${sessionScope.memberId}";
 	$.ajax({
 		type: "GET",                           
 		url: "${pageContext.request.contextPath}/group/return/reply/"+groupPostId+"/group/"+groupId,
@@ -87,7 +88,7 @@ $( document ).ready(function() {
 	                    	        "<span class='float-right'>"+(i+1)+"樓"+"</i>"+"</span>"+"</p>"+
 	                    	        "<p>"+result[i].groupPostReplyContent+"</p>"+
 	                    	       
-	                    	        "<p id= reply_"+ result[i].memberId +" style='display:none;'  >"+
+	                    	        "<p class='"+ result[i].memberId +"' style='display:none'>"+
                     	            "<a href='${pageContext.request.contextPath}/DeleteGroupReplyPost/"+result[i].groupPostReplyId +"/"+result[i].memberId +"/"+result[i].groupId+"/"+result[i].groupPostId+"' class='float-right btn btn btn-dark delete ml-2' style=''>"+"<i class='fa fa-reply'>"+"</i>"+"刪除"+"</a>"+
                     	       		"</p>"+ 
                     	       		
@@ -100,8 +101,13 @@ $( document ).ready(function() {
 	                "</div>");
 						//結束擴增
 			}
+			
+			$("."+currentId).show();
+			
 		}, 
 	});
+	
+	
 	
 	$.ajax({
 		type: "GET", 
@@ -125,14 +131,9 @@ $( document ).ready(function() {
 </script>
 <!-- reply ready按鈕判定 -->
 <script>
-$( document ).ready(function() {
-	var currentId = replyer;
-	var currentId_button ="#reply_"+replyer;
-	$('#currentId _button').show(); 
-	
-	
-});
+
 </script>
+<!-- reply ready按鈕判定 -->
 <!-- reply update -->
 <script>
 	// 送出回文
@@ -153,7 +154,7 @@ $( document ).ready(function() {
 				
 				var reply_content = ($(this).val() + "<br/>");
 				//submit form via ajax, this is not JS but server side scripting so not showing here
-				
+				var currentId = "${sessionScope.memberId}";
 				var groupId = ${poster.groupId};
 				var groupPostId = ${poster.groupPostId};
 				$.ajax({
@@ -179,7 +180,7 @@ $( document ).ready(function() {
 				                    	        "<span class='float-right'>"+(i+1)+"樓"+"</i>"+"</span>"+"</p>"+
 				                    	        "<p>"+result[i].groupPostReplyContent+"</p>"+
 				                    	        
-				                    	        "<p id= reply_"+ result[i].memberId +" style='display:none;'  >"+
+				                    	        "<p class='"+ result[i].memberId +"' style='display:none'>"+
 			                    	            "<a href='${pageContext.request.contextPath}/DeleteGroupReplyPost/"+result[i].groupPostReplyId +"/"+result[i].memberId +"/"+result[i].groupId +"/"+result[i].groupPostId+"' class='float-right btn btn btn-dark delete ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"刪除"+"</a>"+
 			                    	       		"</p>"+ 
 			                    	       		
@@ -192,6 +193,7 @@ $( document ).ready(function() {
 				                "</div>");
 								//結束擴增
 						}
+						$("."+currentId).show();
             		}, 
 				});
 				
