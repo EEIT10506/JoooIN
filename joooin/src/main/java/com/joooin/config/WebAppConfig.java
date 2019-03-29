@@ -71,7 +71,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	    registry.addInterceptor(memberInterceptor).addPathPatterns("/member").addPathPatterns("/member/**").excludePathPatterns("/member/other/**");
 	    registry.addInterceptor(loginInterceptor()).addPathPatterns("/login"); // 字串可用,隔開 指定controller路徑將會攔截返回登入頁面
 	    registry.addInterceptor(addEventInter());
-
 	}
 
 	@Override

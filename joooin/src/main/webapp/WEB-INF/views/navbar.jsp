@@ -22,6 +22,7 @@
 	#hasLogin {
 		position: absolute;
 		right: 75px;
+		top:20px; 
 	}
 	#logout{
 		position: absolute;
@@ -44,21 +45,24 @@
 		z-index: 100;
 		top: 0px;
 	}
-	#myInput {
-		width: 400px;
-		position: relative;
-		left: 40px;
+
+	.navbarMemberImg{
+		width:35px;
+		height:35px;
+		display:inline;
+		border-radius:100px;
+
 	}
 </style>
 <script>
 	$(document).ready(function(){
 		$("#AdminHasLogin").hide();
-		$("#hasLogin").hide();
+// 		$("#hasLogin").hide();
 		
-		if ($(".hasLogin").text() != ""){
-			$("#loginNregister").hide();
-			$("#hasLogin").show();
-		} 
+// 		if ($(".hasLogin").text() != ""){
+// 			$("#loginNregister").hide();
+// 			$("#hasLogin").show();
+// 		} 
 		
 		if ($(".AdminHasLogin").text() != ""){
 			$("#loginNregister").hide();
@@ -123,12 +127,18 @@
         </c:otherwise>
       </c:choose>
     </li>
+    <c:if test="${memberId == null}">
     <li id="loginNregister" class="nav-item">
       <a class="nav-link" href="${pageContext.request.contextPath}/login">登入／註冊</a>
     </li>
+    </c:if>
+    <c:if test="${memberId != null}">
     <li id="hasLogin" class="nav-item">
-      <a class="nav-link hasLogin" href="${pageContext.request.contextPath}/member">${memberName}</a>
+      <a class="nav-link hasLogin" style="display:inline;" href="${pageContext.request.contextPath}/member">
+        <img class="navbarMemberImg" src="<c:url value='/getMemberImage/${memberId}.jpg' />"/>  ${memberName}
+      </a>
     </li>
+    </c:if>
     <li id="AdminHasLogin" class="nav-item">
       <a class="nav-link AdminHasLogin" href="${pageContext.request.contextPath}/admin">${admin}</a>
     </li>
