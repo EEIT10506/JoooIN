@@ -106,12 +106,17 @@ public class EnterGroupController {
 		return "group/group_members";
 	}
 	
+	//進入社團相簿
 	@RequestMapping(method = RequestMethod.GET, value = "/group/photograph/{groupId}")
 	public String groupPhotograph(Model model, HttpSession session, @PathVariable Integer groupId) {
 		
 		// for group_navbar
 		GroupMainBean groupMain = groupService.getByGroupId(groupId);
 		model.addAttribute("groupMain", groupMain);
+		
+		
+		Integer count = groupService.getPhotoCount(groupId);
+		model.addAttribute("photoCount", count);
 		
 		List<Poster> groupPosters = groupService.getPostersByGroupId(groupId);
 		model.addAttribute("groupPhotoes", groupPosters);

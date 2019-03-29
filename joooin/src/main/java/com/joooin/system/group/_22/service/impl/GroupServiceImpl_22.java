@@ -484,4 +484,15 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 		return replyAccount;
 	}
 
+	@Override
+	public Integer getPhotoCount(Integer groupId) {
+		int count = 0;
+		List<Poster> posters = getPostersByGroupId(groupId);
+		for(Poster post : posters) {
+			if(post.getGroupPostImage() != null) {
+				count++;
+			}
+		}
+		return count;
+	}
 }

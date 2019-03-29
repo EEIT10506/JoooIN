@@ -78,15 +78,17 @@ $(".textacc").each(function(){
 });
 });
 </script>
+<script>
+$( document ).ready(function() {
+	var leader = ${leaderId};
+	$("#${leaderId}").replaceWith("<div class='float-right d-inline p-2 bg-dark text-white' id='${leaderId}'><strong>團長</strong></div>");
+});
+</script>
 <!-- 限制字數 -->
 <title>Insert title here</title>
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/navbar" />
-	
-	
-	
-	
 	<!-- 請把所有內容寫在此div內 -->
 	<div id="main">
 	
@@ -97,39 +99,33 @@ $(".textacc").each(function(){
 			<div class="container mt-3">
 				<div class="row">
 <!-- 				<div class="card-columns"> -->
-
-<c:forEach var="member" items="${memberInfos}">
-      <div class="col-md-6" style="line-height: 24px;letter-spacing: 3px;">
-         <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-               <strong class="d-inline-block mb-2 text-primary" style="font-size:20px;line-height: 24px;letter-spacing: 3px;"><a href="${pageContext.request.contextPath}/member/other/${member.memberId}">${member.memberName}</a></strong>
-               <h6 class="mb-0">
-               	<a>會員介紹 : </a>
-                  <a class="text-dark textacc" style="margin:5px;">${member.memberIntro }</a>
-               </h6>
-               
-               <p class="card-text mb-auto">發文 :  <span style="color:Red;">${member.postCount }</span> 次</p>
-                <p class="card-text mb-auto">回文 : <span style="color:Red;"> ${member.replyCount } </span>次</p>
-                 <p class="card-text mb-auto">登入 : <span style="color:Red;"> ${member.logins } </span>次</p>
-                 <c:if test="${leaderId == sessionScope.memberId }">
-					<form action="${pageContext.request.contextPath}/group/${groupMain.groupId}/members/delete/${member.memberId}" method="post">
-					<p></p>
-					<button type="submit" class="float-right btn btn-outline-danger" id="${member.memberId}"><strong>刪除成員</strong></button>
-					</form>
-				</c:if>
-           
-            </div>
-            <img
-								src="<c:url value='/getMemberImage/${member.memberId}.jpg' />"
-								 class="card-img-right flex-auto d-none d-lg-block img-thumbnail" alt="Thumbnail [150x150]"  style="width: 150px; height: 150px;"
-								src="logo.jpg" alt="Responsive image">
-         </div>
-      </div>
-
-</c:forEach>
-
-
-
+			<c:forEach var="member" items="${memberInfos}">
+		      <div class="col-md-6" style="line-height: 24px;letter-spacing: 3px;">
+		         <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+		            <div class="card-body d-flex flex-column align-items-start">
+		               <strong class="d-inline-block mb-2 text-primary" style="font-size:20px;line-height: 24px;letter-spacing: 3px;"><a href="${pageContext.request.contextPath}/member/other/${member.memberId}">${member.memberName}</a></strong>
+		               <h6 class="mb-0">
+		               	<a>會員介紹 : </a>
+		                  <a class="text-dark textacc" style="margin:5px;">${member.memberIntro }</a>
+		               </h6>
+		               
+		               <p class="card-text mb-auto">發文 :  <span style="color:Red;">${member.postCount }</span> 次</p>
+		                <p class="card-text mb-auto">回文 : <span style="color:Red;"> ${member.replyCount } </span>次</p>
+		                 <p class="card-text mb-auto">登入 : <span style="color:Red;"> ${member.logins } </span>次</p>
+		                 <c:if test="${leaderId == sessionScope.memberId }">
+							<form action="${pageContext.request.contextPath}/group/${groupMain.groupId}/members/delete/${member.memberId}" method="post">
+							<p></p>
+							<button type="submit" class="float-right btn btn-outline-danger" id="${member.memberId}"><strong>刪除成員</strong></button>
+							</form>
+						</c:if>
+		            </div>
+		            <img
+										src="<c:url value='/getMemberImage/${member.memberId}.jpg' />"
+										 class="card-img-right flex-auto d-none d-lg-block img-thumbnail" alt="Thumbnail [150x150]"  style="width: 150px; height: 150px;"
+										src="logo.jpg" alt="Responsive image">
+		         </div>
+		      </div>
+			</c:forEach>
 <!-- 					</div> -->
 				</div>
 			</div>

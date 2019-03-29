@@ -190,13 +190,13 @@ border:1px solid #ccc !important;
 							<div class="input-group-prepend">
 								<span class="input-group-text br-15"><i class="fas fa-child"></i></span>
 							</div>
-							<form:input path="groupName"  placeholder="輸入社團名稱"  type='text' id="groupName" />
+							<form:input style="width : 400px" path="groupName"  placeholder="輸入社團名稱"  type='text' id="groupName"  required="required" />
 						</div>
 						<div class="input-group mt-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text br-15"><i class="far fa-address-card"></i></span>
 							</div>
-							<form:input path="groupIntro" type='text' placeholder="輸入社團介紹"  id="groupIntro" />
+							<form:textarea style="width : 400px" path="groupIntro" type='text' placeholder="輸入社團介紹"  id="groupIntro" />
 						</div>
 						<div class="input-group mt-3">
 							<div class="input-group-prepend">
