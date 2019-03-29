@@ -14,6 +14,8 @@ import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupPostBean;
 import com.joooin.model.GroupPostReplyBean;
 import com.joooin.model.ReportBean;
+import com.joooin.repository.GroupPostReplyDao;
+import com.joooin.system.group._22.pojo.Replyer;
 
 public interface GroupService_42 {
 	List<GroupMainBean> getAll();
@@ -27,8 +29,8 @@ public interface GroupService_42 {
 	public void updateGroupIntro(Integer groupId, String groupintro);
 
 	public void updateGroupPostIsDeleted(GroupPostBean groupPostBean);
-	
-	public void updateGroupReplyPostIsDeleted(GroupPostReplyBean groupPostReplyBean);
+
+	public void  updateGroupReplyPostIsDeleted(Integer replyId);
 	
 //	public String reportGroupProcess(ReportBean rb, RedirectAttributes redirectAttributes,Integer groupId,Integer groupPostId);
 

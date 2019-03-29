@@ -27,6 +27,7 @@ import com.joooin.repository.MemberMainDao;
 import com.joooin.repository.ReportDao;
 import com.joooin.system.admin._03.service.ReportService;
 import com.joooin.system.group._22.pojo.Poster;
+import com.joooin.system.group._22.pojo.Replyer;
 import com.joooin.system.group._42.service.GroupService_42;
 @Service
 @Transactional
@@ -90,11 +91,16 @@ public class GroupServiceImpl_42 implements GroupService_42 {
 		groupPostDao.update(groupPostBean);
 	}
 
+
 	@Override
-	public void updateGroupReplyPostIsDeleted(GroupPostReplyBean groupPostReplyBean) {
-		// TODO Auto-generated method stub
-		groupPostReplyDao.update(groupPostReplyBean);
+	public void  updateGroupReplyPostIsDeleted(Integer replyId) {
+		GroupPostReplyBean replyBean = groupPostReplyDao.getByGroupPostReplyId(replyId);
+		replyBean.setIsDeleted(true);
+		groupPostReplyDao.update(replyBean);
 	}
+
+	
+	
 	
 	
 //	@Override
