@@ -116,11 +116,14 @@
 	}
 	.radiusCarousel{
 /*  		opacity:0.8;   */
-/* 舊綠		background-color:#005B61; */
- 		background-color:#E6F4F1; 
+/*  		background-color:#005B61;  */
+/*   		background-color:#FFF5EE;   */
 /*跟活動依樣 		background-color:#FFEDCB; */
+/* 		background-color:#00BFFF ; */
+		background-color:#5F999B;
 		height:500px;
 		border-radius:40px;
+		border:3px solid black;
 	}
 	.insideCarousel{
 		width:1200px;
@@ -135,7 +138,7 @@
 		text-align:center;
 		display:inline;
 		width:300px;
-		color:black;
+		color:white;
 	}
 	.nameF{
 		left:100px;
@@ -155,7 +158,7 @@
 		text-align:center;
 		display:inline;
 		width:300px;
-		color:black;
+		color:white;
 	}
 	.imgg{
 		width:320px;
@@ -189,7 +192,7 @@
 		text-align:left;
 		display:inline;
 		width:300px;
-		color:black;
+		color:white;
 	}
 	.eventStatusAll{
 		font-size:18px; 
@@ -197,7 +200,7 @@
 		font-family:微軟正黑體;
 		position:absolute;
 		display:inline;
-		color:black;
+		color:white;
 	}
 	.eventStatusUncheck{
 		left:90px;
@@ -209,7 +212,7 @@
 		text-align:center;
 		width:85px;
 		border-radius:10px;
-		color:black;
+		color:white;
 		background-color:red;
 	}
 	.eventStatusUncheckSe{
@@ -245,7 +248,7 @@
 	}
 	.TopEvent{
 		font-size:30px !important;
-		color:black;
+		color:white;
 		font-famliy:微軟正黑體 !important;
 		font-weight:bold!important;
 	}
@@ -257,10 +260,10 @@
 		text-align:left;
 		display:inline;
 		width:300px;
-		color:black;
+		color:white;
 	}
 	.white{
-		color:black;
+		color:white;
 	}
 	.leftAndRight{
 		background-color:#363636;
@@ -689,20 +692,20 @@
 					     <span class="eventLikeNum" style="left:300px;">${top8Events[6].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
 					    </c:if>
 					    <c:if test="${!empty top8Events[7]}"> 
-					     <span style="left:645px;">${top8Events[7].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
+					     <span class="eventLikeNum" style="left:645px;">${top8Events[7].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
 					    </c:if>
 					    <c:if test="${!empty top8Events[8]}">
-					     <span style="left:990px;">${top8Events[8].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
+					     <span class="eventLikeNum" style="left:990px;">${top8Events[8].eventCurrentMembers} <i class="fas fa-user-check"></i> </span>
 					    </c:if>
 					    
 					    <c:if test="${!empty top8Events[6]}">
 					     <span class="eventCurrentNum" style="left:360px;">${top8Events[6].eventLike} <i class="far fa-thumbs-up"></i></span>
 					    </c:if>
 					    <c:if test="${!empty top8Events[7]}">
-					     <span style="left:705px;">${top8Events[7].eventLike} <i class="far fa-thumbs-up"></i></span>
+					     <span class="eventCurrentNum" style="left:705px;">${top8Events[7].eventLike} <i class="far fa-thumbs-up"></i></span>
 					    </c:if>
 					    <c:if test="${!empty top8Events[8]}">
-					     <span style="left:1050px;">${top8Events[8].eventLike} <i class="far fa-thumbs-up"></i></span>
+					     <span class="eventCurrentNum" style="left:1050px;">${top8Events[8].eventLike} <i class="far fa-thumbs-up"></i></span>
 					    </c:if>
 					     
 					   <div class="carousel-caption d-none d-block" style="bottom:370px;">
