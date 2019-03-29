@@ -172,7 +172,7 @@ $( document ).ready(function() {
 						for (var i = 0; i < result.length; i++) {
 							$("#chatbox").append(
 								//開始擴增
-									"<div class='card card-inner'>"+
+								"<div class='card card-inner'>"+
 				            	    "<div class='card-body'>"+
 				            	        "<div class='row'>"+
 				                    	    "<div class='col-md-2'>"+
