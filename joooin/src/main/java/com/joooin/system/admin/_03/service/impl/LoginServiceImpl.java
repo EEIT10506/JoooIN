@@ -1,5 +1,6 @@
 package com.joooin.system.admin._03.service.impl;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,14 +61,16 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public PunishmentBean checkPunishment(Integer memberId) {
+	public List<PunishmentBean> checkPunishment(Integer memberId) {
 		List<PunishmentBean> list = punishmentDao.getAll();
+		List<PunishmentBean> newList = new LinkedList<>();
 		for(PunishmentBean pb : list) {
 			if(pb.getPunishMemberId().equals(memberId)) {
-				return pb;
+				newList.add(pb);
+				
 			}
 		}
-		return null;
+		return newList;
 	}
 
 }

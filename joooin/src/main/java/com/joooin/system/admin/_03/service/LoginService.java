@@ -1,9 +1,10 @@
 package com.joooin.system.admin._03.service;
 
+import java.util.List;
+
 import com.joooin.model.AdminBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.model.PunishmentBean;
-import com.joooin.model.ReportBean;
 
 public interface LoginService {
 
@@ -13,5 +14,5 @@ public interface LoginService {
 
 	public AdminBean checkAdmin(String email, String password);
 	
-	public PunishmentBean checkPunishment(Integer memberId);
+	public List<PunishmentBean> checkPunishment(Integer memberId);
 }
