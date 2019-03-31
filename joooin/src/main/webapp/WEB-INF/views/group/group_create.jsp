@@ -212,6 +212,15 @@ border:1px solid #ccc !important;
 				<a class="btn btn-secondary btn-sm" onclick="history.back()"id="add_more">返回上一頁</a>
 <!-- 				<a class="btn btn-secondary btn-sm" id="remove_more"><i class="fas fa-trash-alt"></i> Remove</a> -->
 				<input class="btn btn-success btn-sm float-right submit_btn " type="submit" value="送出">
+				<button type="button" id="oneSetcreate" class="btn btn-success">一鍵填入</button><br>
+<script>
+// oneSet
+$('#oneSetcreate').click(function(){ 
+		$('#groupName').val('eeit105joooin'); 
+		$('#groupIntro').val('歡迎加入');
+ 	});
+// oneSet
+</script>				
 			</div>
 				</form:form>
 			</div>
