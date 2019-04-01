@@ -20,6 +20,8 @@ public class GroupNotificationImpl implements GroupNotification {
 
 	@Autowired
 	NotificationDao notifDao;
+	@Autowired
+	GroupMainDao groupMainDao;
 	
 	@Autowired
 	GroupMainDao groupMainDao;
