@@ -330,8 +330,12 @@ public class EventController {
 			@PathVariable("eventId") Integer eventId, Model model, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
 		EventMainBean event = eventService.getByEventMainId(eventId);
+		if(event == null) {
+			 return "event/not_eventManager";	
+		}else if(memberId != null && !memberId.equals(event.getEventInviterId())) {
 
-		if (memberId != null && memberId.equals(event.getEventInviterId())) {
+		    return "event/not_eventManager";	
+		}else if (memberId != null && memberId.equals(event.getEventInviterId())) {
 
 			
 			Integer typeid = event.getEventTypeId();
@@ -356,14 +360,8 @@ public class EventController {
 //			=============
 			model.addAttribute("event", event);
 			model.addAttribute("eventtype", eventtype);
-
 			return "event/event_setting";
-
-		} else if(memberId != null && !memberId.equals(event.getEventInviterId())) {
-
-		    return "event/not_eventManager";	
-		}
-		
+		} 
 		else {
 			return "not_login";
 		}

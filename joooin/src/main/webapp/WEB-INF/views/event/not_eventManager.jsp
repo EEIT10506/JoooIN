@@ -20,7 +20,7 @@
 		$("#btns").click();
 		
 		$("#notEventManager").click(function(){
-			location.href = "${pageContext.request.contextPath}/event/"+eventId;
+			location.href = "${pageContext.request.contextPath}/events";
 		});
 		setTimeout(function() { 
 			$("#notEventManager").click();
