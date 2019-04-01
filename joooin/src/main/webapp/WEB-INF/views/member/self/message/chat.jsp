@@ -34,10 +34,10 @@
 
 	var websocket = null;
 	if ('WebSocket' in window) {
-		websocket = new WebSocket("ws://localhost:8080/joooin/member/message/${hash}");
+		websocket = new WebSocket("ws://eeitjoooin.southeastasia.cloudapp.azure.com:8080/joooin/member/message/${hash}");
 	}
 	else if ('MozWebSocket' in window) {
-		websocket = new MozWebSocket("ws://localhost:8080/joooin/member/message/${hash}");
+		websocket = new MozWebSocket("ws://eeitjoooin.southeastasia.cloudapp.azure.com:8080/joooin/member/message/${hash}");
 	}
 	
 	function onMessage(message) {

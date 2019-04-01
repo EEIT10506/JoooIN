@@ -418,7 +418,7 @@ function ValidateNumber(e, pnumber)
 	    });
 	});
 </script>
-<title>活動詳細頁面 </title></head>
+<title>${event.eventName} </title></head>
 <body class="body">
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
@@ -488,7 +488,7 @@ function ValidateNumber(e, pnumber)
     				
     				<p class="eventliketotal"><i id="goodGood" class="far fa-thumbs-up">&nbsp;</i><span class="eventLikeNum">${event.eventLike}</span> 個人覺得讚 
     						<span style="position: relative;top:5px;left:20px;">
-    						 <iframe src="https://www.facebook.com/plugins/share_button.php?href=https:/${pageContext.request.contextPath}/<c:url value='event/${event.eventId}' />&layout=button_count&size=small&width=92&height=20&margin=0&padding=0&appId" width="20%"  height="20" style="border:none;overflow:hidden;margin: 0;padding: 0" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    						 <iframe src="https://www.facebook.com/plugins/share_button.php?href=http://eeitjoooin.southeastasia.cloudapp.azure.com:8080${pageContext.request.contextPath}/<c:url value='event/${event.eventId}' />&layout=button_count&size=small&width=92&height=20&margin=0&padding=0&appId" width="20%"  height="20" style="border:none;overflow:hidden;margin: 0;padding: 0" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
 							 <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html" style="width:80px ; height:20px;margin: 0;padding: 0"></iframe>
 							 <a title="Share to Plurk" href="javascript:void(window.open('http://www.plurk.com/?qualifier=shares&status='.concat(encodeURIComponent(window.location.href)).concat(' ').concat('(').concat(encodeURIComponent(document.title)).concat(')')));" style="margin:  0;padding: 0"><img title="share" src="http://statics.plurk.com/bda225d234426cccca300c551f60438e.png" width="92" height="20" border="0" style="margin-bottom:10px;margin-left: 0;padding-left: 0"/></a>
 						    </span>	

@@ -336,7 +336,7 @@ white-space: nowrap;
       <div class="modal-body">
 <iframe id="if${event.eventId}"
   width="600"
-  height="450"
+  height="430"
   frameborder="0" style="border:0"
   allowfullscreen>
 </iframe>

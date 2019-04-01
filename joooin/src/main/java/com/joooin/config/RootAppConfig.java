@@ -3,6 +3,8 @@ package com.joooin.config;
 import java.beans.PropertyVetoException;
 import java.util.Properties;
 import javax.sql.DataSource;
+
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,17 +21,12 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 public class RootAppConfig {
 	@Bean
 	public DataSource dataSource() {
-		ComboPooledDataSource ds = new ComboPooledDataSource();
-		ds.setUser("sa");
+		BasicDataSource ds = new BasicDataSource();
+		ds.setUsername("sa");
 		ds.setPassword("passw0rd");
-		try {
-			ds.setDriverClass("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		} catch (PropertyVetoException e) {
-			e.printStackTrace();
-		}
-		ds.setJdbcUrl("jdbc:sqlserver://localhost:1433;databaseName=JOOOIN");
-		ds.setInitialPoolSize(4);
-		ds.setMaxPoolSize(8);
+		ds.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		ds.setUrl("jdbc:sqlserver://localhost:1433;databaseName=JOOOIN");
+		ds.setInitialSize(5);
 		return ds;
 	}
 	

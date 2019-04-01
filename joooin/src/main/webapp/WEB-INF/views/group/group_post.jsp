@@ -78,7 +78,7 @@ $(document).ready(function(){
 	
 });
 </script>
-<title>Insert title here</title>
+<title>發文</title>
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/navbar" />
@@ -134,7 +134,16 @@ $(document).ready(function(){
 							id="multipartFile" onchange="checkImage(this)"></form:input> 
 
 							<input class="btn-primary btn" type="submit" value="送出" disabled>
-
+							<button type="button" id="oneSetpost" class="btn btn-success">一鍵填入</button><br>
+							
+<script>
+// oneSet
+$('#oneSetpost').click(function(){ 
+		$('#groupPostTitle').val('大家好'); 
+		$('#area').val('如果喜歡我的文章，請幫我按喜歡');
+ 	});
+// oneSet
+</script>		
 					</td>
 				</tr>
 			</table>

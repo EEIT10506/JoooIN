@@ -85,7 +85,7 @@ $( document ).ready(function() {
 });
 </script>
 <!-- 限制字數 -->
-<title>Insert title here</title>
+<title>社團成員</title>
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/navbar" />
