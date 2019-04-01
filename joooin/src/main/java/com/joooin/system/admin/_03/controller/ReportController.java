@@ -66,13 +66,7 @@ public class ReportController {
 		ReportBean rb = reportService.getReportBean(reportId);
 		rb.setIsDone(true);
 		reportService.PunishmentBeanSave(reportId, punishMemberId, punishDateEnd, punishType);
-		NotificationBean nb = new NotificationBean();
-		nb.setMemberId(rb.getReportViolatorId());
-		nb.setIsRead(false);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		nb.setNotificationDate(sdf.format(new Date()).toString());
-		nb.setNotificationContent(rb.getReportType());
-		reportService.saveNotification(nb);
+		
 		reportService.ReportBeanSave(rb);
 		return "";
 	}

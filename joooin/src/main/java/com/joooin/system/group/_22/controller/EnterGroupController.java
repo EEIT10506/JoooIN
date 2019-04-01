@@ -139,7 +139,7 @@ public class EnterGroupController {
 			groupService.memberAddToGroupApply(groupId, memId);
 			
 			// 申請入團，通知leader，是哪個member
-			notifGroup.groupNotifRequest(memId, groupId);
+			notifGroup.groupNotifRequest(groupId);
 			
 			model.addAttribute("status", "申請成功，待批准");
 			return "redirect:/group/" + groupId;
