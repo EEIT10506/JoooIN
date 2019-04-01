@@ -111,7 +111,7 @@
 							<c:forEach var="friend" items="${friendList}">
 								<c:if test="${friend.isFriend == false && friend.isInviter == true}">
 									<tr>
-										<td><img id="friendImage" src='<c:url value='/getMemberImage/${friend.memberId}.jpg' />' />　${friend.memberName} </td>
+										<td><img id="friendImage" src='<c:url value='/getMemberImage/${friend.memberId}.jpg' />' />　<c:out value="${friend.memberName} "/></td>
 			                            <td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="個人頁面"><button value="${friend.memberId}" class="friendPageBtn btn btn-primary btn-xs" data-title="個人頁面" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
 			    						<td class="friendBtn"><p data-placement="top" data-toggle="tooltip" title="解除好友"><button value="${friend.memberId}" class="friendCancelBtn btn btn-secondary btn-xs" data-title="取消申請" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_delete.png' />"/></button></p></td>
 									</tr>

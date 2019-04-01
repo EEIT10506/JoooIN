@@ -19,35 +19,20 @@ public class MemberGroupController {
 	@RequestMapping(value = "/member/self/group/{link}", method = RequestMethod.GET)
 	public String getGroups(@PathVariable String link, HttpSession session, Model model) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		
-		if (memberId != null) {
-			model.addAttribute("groupList", memberService.getGroups(memberId, link));
-			return "member/self/group/" + link;
-		} else {
-			return "not_login";
-		}	
+		model.addAttribute("groupList", memberService.getGroups(memberId, link));			
+		return "member/self/group/" + link;
 	}
+	
 	@RequestMapping(value = "/member/deleteGroup", method = RequestMethod.POST)
-	public @ResponseBody String deleteGroup(Integer groupId, HttpSession session) {
+	public @ResponseBody void deleteGroup(Integer groupId, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		
-		if (memberId != null) {
-			memberService.deleteGroup(memberId, groupId);
-			return null;
-		} else {
-			return "not_login";
-		}	
+		memberService.deleteGroup(memberId, groupId);	
 	}
+	
 	@RequestMapping(value = "/member/cancelGroup", method = RequestMethod.POST)
-	public @ResponseBody String cancelGroup(Integer groupId, HttpSession session) {
+	public @ResponseBody void cancelGroup(Integer groupId, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		
-		if (memberId != null) {
-			memberService.cancelGroup(memberId, groupId);
-			return null;
-		} else {
-			return "not_login";
-		}	
+		memberService.cancelGroup(memberId, groupId);
 	}
 	
 	@RequestMapping(value = "/member/other/group/{otherMemberId}", method = RequestMethod.GET)

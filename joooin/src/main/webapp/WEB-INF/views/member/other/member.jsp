@@ -15,7 +15,7 @@
 		width: 1200px;
 		margin: auto;
 		position: relative;
-		top: 50px;
+		top: 120px;
 	}
 	
 </style>
@@ -89,17 +89,15 @@
 						<c:otherwise>${memberMainBean.memberIntro}</c:otherwise>
 					</c:choose>
 					</p>
+					<c:if test="${memberId != null }">
 					<hr class="my-4">
-					<h1 class="display-6">好友關係：<label id="friendText"></label></h1>
-	<!-- 				  <p>Itf</p> -->
-	<!-- 				  <p class="lead"> -->
-	<!-- 				      <a class="btn btn-primary btn-md" href="#" role="button">Learn more</a> -->
-	<!-- 				  </p> -->
-					<button id="request" type="button" class="friendBtn btn btn-primary">申請好友</button>
-					<button id="cancel" type="button" class="friendBtn btn btn-secondary">取消申請</button>
-					<button id="agree" type="button" class="friendBtn btn btn-success">同意</button>
-					<button id="reject" type="button" class="friendBtn btn btn-danger">拒絕</button>
-					<button id="delete" type="button" class="friendBtn btn btn-danger">解除好友</button>
+						<h1 class="display-6">好友關係：<label id="friendText"></label></h1>
+						<button id="request" type="button" class="friendBtn btn btn-primary">申請好友</button>
+						<button id="cancel" type="button" class="friendBtn btn btn-secondary">取消申請</button>
+						<button id="agree" type="button" class="friendBtn btn btn-success">同意</button>
+						<button id="reject" type="button" class="friendBtn btn btn-danger">拒絕</button>
+						<button id="delete" type="button" class="friendBtn btn btn-danger">解除好友</button>
+					</c:if>
 				</div>
 				
 			</div>

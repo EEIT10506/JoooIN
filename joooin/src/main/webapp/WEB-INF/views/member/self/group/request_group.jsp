@@ -71,9 +71,6 @@
 			});
 		});
 		
-
-
-
 		//DataTable
 		var language = {
 		        "zeroRecords": "沒有結果",
@@ -121,7 +118,7 @@
 						<tbody>
 							<c:forEach var="group" items="${groupList}">
 								<tr>
-									<td><img id="groupImage" src="<c:url value='/getGroupImage/${group.groupId}.jpg' />" />　${group.groupName}</td>
+									<td><img id="groupImage" src="<c:url value='/getGroupImage/${group.groupId}.jpg' />" />　<c:out value="${group.groupName}"/></td>
 		                            <td class="groupBtn"><p data-placement="top" data-toggle="tooltip" title="社團連結"><button value="${group.groupId}" class="groupPageBtn btn btn-primary btn-xs" data-title="社團連結" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
 		    						<td class="groupBtn"><p data-placement="top" data-toggle="tooltip" title="取消申請"><button value="${group.groupId}" class="groupCancelBtn btn btn-secondary btn-xs" data-title="取消申請" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_delete.png' />"/></button></p></td>
 								</tr>

@@ -18,6 +18,8 @@ import org.springframework.web.servlet.resource.VersionResourceResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.ResourceBundleViewResolver;
+
+import com.joooin.interceptor.MemberInterceptor;
 import com.joooin.system.admin._03.interceptor.LoginInterceptor;
 import com.joooin.system.event._35.interceptor.EventInter;
 
@@ -32,6 +34,8 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	ServletContext context;
 	@Autowired
 	SessionFactory sessionFactory;
+	@Autowired
+	MemberInterceptor memberInterceptor;
 
 	@Bean
 	public ViewResolver jspViewResolver() {
@@ -57,7 +61,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public EventInter addEventInter() {
 		return new EventInter();
-
 	}
 
 	@Override
@@ -65,9 +68,9 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		OpenSessionInViewInterceptor sessionInterceptor = new OpenSessionInViewInterceptor();
 	    sessionInterceptor.setSessionFactory(sessionFactory);
 	    registry.addWebRequestInterceptor(sessionInterceptor);	 
-	    registry.addInterceptor(loginInterceptor()).addPathPatterns(""); // 字串可用,隔開 指定controller路徑將會攔截返回登入頁面
-	    registry.addInterceptor(addEventInter()).excludePathPatterns("/");
-
+	    registry.addInterceptor(memberInterceptor).addPathPatterns("/member").addPathPatterns("/member/**").excludePathPatterns("/member/other/**");
+	    registry.addInterceptor(loginInterceptor()).addPathPatterns("/login"); // 字串可用,隔開 指定controller路徑將會攔截返回登入頁面
+	    registry.addInterceptor(addEventInter());
 	}
 
 	@Override

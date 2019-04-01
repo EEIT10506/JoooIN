@@ -19,49 +19,26 @@ public class MemberEventController {
 	@RequestMapping(value = "/member/self/event/{link}", method = RequestMethod.GET)
 	public String getEvents(@PathVariable String link, HttpSession session, Model model) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		
-		if (memberId != null) {
-			model.addAttribute("eventList", memberService.getEvents(memberId, link));
-			return "member/self/event/" + link;
-		} else {
-			return "not_login";
-		}	
+		model.addAttribute("eventList", memberService.getEvents(memberId, link));
+		return "member/self/event/" + link;
 	}
 
 	@RequestMapping(value = "/member/deleteEvent", method = RequestMethod.POST)
-	public @ResponseBody String deleteEvent(Integer eventId, HttpSession session) {
+	public @ResponseBody void deleteEvent(Integer eventId, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		
-		if (memberId != null) {
-			memberService.deleteEvent(memberId, eventId);
-			return null;
-		} else {
-			return "not_login";
-		}	
+		memberService.deleteEvent(memberId, eventId);
 	}
 	
 	@RequestMapping(value = "/member/cancelEvent", method = RequestMethod.POST)
-	public @ResponseBody String cancelEvent(Integer eventId, HttpSession session) {
+	public @ResponseBody void cancelEvent(Integer eventId, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		
-		if (memberId != null) {
-			memberService.cancelEvent(memberId, eventId);
-			return null;
-		} else {
-			return "not_login";
-		}	
+		memberService.cancelEvent(memberId, eventId);
 	}
 	
 	@RequestMapping(value = "/member/noLikeEvent", method = RequestMethod.POST)
-	public @ResponseBody String noLikeEvent(Integer eventId, HttpSession session) {
+	public @ResponseBody void noLikeEvent(Integer eventId, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		
-		if (memberId != null) {
-			memberService.noLikeEvent(memberId, eventId);
-			return null;
-		} else {
-			return "not_login";
-		}	
+		memberService.noLikeEvent(memberId, eventId);
 	}
 	
 	@RequestMapping(value = "/member/other/event/{otherMemberId}", method = RequestMethod.GET)

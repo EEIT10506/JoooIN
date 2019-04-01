@@ -62,6 +62,7 @@
 <!-- reply like ready -->
 <script type="text/javascript">
 $( document ).ready(function() {
+	var currentId="${sessionScope.memberId}";
 	var groupId = ${poster.groupId};
 	var groupPostId = ${poster.groupPostId};
 	var currentId = "${sessionScope.memberId}";
@@ -88,12 +89,14 @@ $( document ).ready(function() {
 	                    	        "<span class='float-right'>"+(i+1)+"樓"+"</i>"+"</span>"+"</p>"+
 	                    	        "<p>"+result[i].groupPostReplyContent+"</p>"+
 	                    	       
+
 	                    	        "<p class='"+ result[i].memberId +"' style='display:none'>"+
+
                     	            "<a href='${pageContext.request.contextPath}/DeleteGroupReplyPost/"+result[i].groupPostReplyId +"/"+result[i].memberId +"/"+result[i].groupId+"/"+result[i].groupPostId+"' class='float-right btn btn btn-dark delete ml-2' style=''>"+"<i class='fa fa-reply'>"+"</i>"+"刪除"+"</a>"+
                     	       		"</p>"+ 
                     	       		
 	                    	        "<p>"+
-	                    	            "<a href='${pageContext.request.contextPath}/report/"+result[i].memberId +"/"+result[i].memberName +"' class='float-right btn btn-outline-primary ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉"+"</a>"+
+	                    	            "<a href='${pageContext.request.contextPath}/group_replyreport/"+result[i].memberId +"/"+result[i].memberName +"' class='float-right btn btn-outline-primary ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉"+"</a>"+
 	                    	       "</p>"+
 	                    	    "</div>"+
 	            	        "</div>"+
@@ -101,9 +104,10 @@ $( document ).ready(function() {
 	                "</div>");
 						//結束擴增
 			}
-			
+		
 			$("."+currentId).show();
 			
+
 		}, 
 	});
 	
@@ -154,7 +158,9 @@ $( document ).ready(function() {
 				
 				var reply_content = ($(this).val() + "<br/>");
 				//submit form via ajax, this is not JS but server side scripting so not showing here
+
 				var currentId = "${sessionScope.memberId}";
+
 				var groupId = ${poster.groupId};
 				var groupPostId = ${poster.groupPostId};
 				$.ajax({
@@ -168,7 +174,7 @@ $( document ).ready(function() {
 						for (var i = 0; i < result.length; i++) {
 							$("#chatbox").append(
 								//開始擴增
-									"<div class='card card-inner'>"+
+								"<div class='card card-inner'>"+
 				            	    "<div class='card-body'>"+
 				            	        "<div class='row'>"+
 				                    	    "<div class='col-md-2'>"+
@@ -180,12 +186,14 @@ $( document ).ready(function() {
 				                    	        "<span class='float-right'>"+(i+1)+"樓"+"</i>"+"</span>"+"</p>"+
 				                    	        "<p>"+result[i].groupPostReplyContent+"</p>"+
 				                    	        
+
 				                    	        "<p class='"+ result[i].memberId +"' style='display:none'>"+
+
 			                    	            "<a href='${pageContext.request.contextPath}/DeleteGroupReplyPost/"+result[i].groupPostReplyId +"/"+result[i].memberId +"/"+result[i].groupId +"/"+result[i].groupPostId+"' class='float-right btn btn btn-dark delete ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"刪除"+"</a>"+
 			                    	       		"</p>"+ 
-			                    	       		
+			                    	       
 				                    	        "<p>"+
-				                    	            "<a href='${pageContext.request.contextPath}/report/"+result[i].memberId +"/"+result[i].memberName +"' class='float-right btn btn-outline-primary ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉"+"</a>"+
+				                    	            "<a href='${pageContext.request.contextPath}/group_replyreport/"+result[i].memberId +"/"+result[i].memberName +"' class='float-right btn btn-outline-primary ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉"+"</a>"+
 				                    	       "</p>"+
 				                    	    "</div>"+
 				            	        "</div>"+
@@ -310,7 +318,7 @@ $(document).ready(function () {
         	        <p> ${poster.groupPostText }</p>
         	        <p> 
         	        	
-        	            <a   class="float-right btn btn-outline-primary ml-2" href="${pageContext.request.contextPath}/report/${poster.memberId}/${poster.memberName}" > <i class="fa fa-reply"  ></i> 檢舉</a>
+        	            <a   class="float-right btn btn-outline-primary ml-2" href="${pageContext.request.contextPath}/group_postreport/${poster.memberId}/${poster.memberName}" > <i class="fa fa-reply"  ></i> 檢舉</a>
         	            
         	            <a class="float-right btn text-danger btn-light" id="like"> <i class="fa fa-heart"></i> Like</a>
 <!--         	        <a class="float-right btn text-danger btn-light" id="like"> 變換按鈕-->

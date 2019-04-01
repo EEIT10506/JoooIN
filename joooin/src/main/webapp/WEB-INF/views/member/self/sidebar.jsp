@@ -23,7 +23,7 @@
 </style>
 <div id="memberImage" >
 	<img id="userImage" src="<c:url value='/getMemberImage/${memberId}.jpg' />" width="160px" />
-	<p id="memberName">${memberName}</p>
+	<p id="memberName"><c:out value="${memberName}"/></p>
 </div>
 <br />
 <div class="list-group">

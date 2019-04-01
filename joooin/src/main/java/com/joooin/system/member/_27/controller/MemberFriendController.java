@@ -28,27 +28,16 @@ public class MemberFriendController {
 	}
 	 
 	@RequestMapping(value = "/member/friendProcess", method = RequestMethod.POST)
-	public @ResponseBody String friendProcess(Integer otherMemberId, String process, HttpSession session) {
+	public @ResponseBody void friendProcess(Integer otherMemberId, String process, HttpSession session) {
 		Integer selfMemberId = (Integer)session.getAttribute("memberId");
-		
-		if (selfMemberId != null) {
-			memberService.friendProcess(selfMemberId, otherMemberId, process);
-			return null;
-		} else {
-			return "not_login";
-		}
+		memberService.friendProcess(selfMemberId, otherMemberId, process);
 	}
 	                         
 	@RequestMapping(value = "/member/self/friend/{link}", method = RequestMethod.GET)
 	public String getFriends(@PathVariable String link, HttpSession session, Model model) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		
-		if (memberId != null) {
-			model.addAttribute("friendList", memberService.getFriendsOnFriendPage(memberId));
-			return "member/self/friend/" + link;
-		} else {
-			return "not_login";
-		}	
+		model.addAttribute("friendList", memberService.getFriendsOnFriendPage(memberId));
+		return "member/self/friend/" + link;
 	}
 	
 	@RequestMapping(value = "/member/other/friend/{otherMemberId}", method = RequestMethod.GET)

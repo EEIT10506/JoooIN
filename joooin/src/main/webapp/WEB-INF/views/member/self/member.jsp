@@ -22,6 +22,8 @@
 	}
 	#modify-intro, #modify-finish{
 		float: right;
+		position: relative;
+		top: -60px;
 	}
 	#input-intro, #modify-finish{
 		display: none;
@@ -37,27 +39,15 @@
 			var intro = $("#intro").html().trim();
 			while(intro.indexOf("<br>") != -1){
 				intro = intro.replace("<br>", "\n");
+				intro = intro.replace("\n\n", "\n");
 			}
-			
+
 			$("#intro").hide();
 			$("#modify-intro").hide();
 			$("#modify-finish").show();
 			$("#input-intro").show();
 			$("#input-intro").val(intro);
-		});
-		
-		$("#modify-finish").click(function(){
-			var intro = $("#input-intro").val().trim();
-			
-			$.ajax({
-			    type: "POST",                  
-			    url: "${pageContext.request.contextPath}/member/modifyIntro",
-			    data: {"memberIntro": intro},
-			    success: function(){
-			    	location.href = "${pageContext.request.contextPath}/member";
-			    }
-			});
-			
+			return false;
 		});
 		
 	});
@@ -74,21 +64,18 @@
 			<div id="x" class="col-9">
 				<div class="jumbotron">
 				  <h1 id="about" class="display-4">關於我</h1>
-				  <a id="modify-intro" class="btn btn-primary btn-md" href="#" role="button">修改</a>
-				  <a id="modify-finish" class="btn btn-danger btn-md" href="#" role="button">完成</a>
-
-				  <p id="intro" class="lead">
-				  	<c:choose>
-				  		<c:when test="${memberMainBean.memberIntro == null}">您尚未新增自我介紹，請點「修改」按鈕來新增。</c:when>
-				  		<c:otherwise>${memberMainBean.memberIntro}</c:otherwise>
-				  	</c:choose>
-				  </p>
-				  <textarea id="input-intro" rows="5" cols="70" wrap="hard"></textarea>
-<!-- 				  <hr class="my-4"> -->
-<!-- 				  <p>Itf</p> -->
-<!-- 				  <p class="lead"> -->
-<!-- 				      <a class="btn btn-primary btn-md" href="#" role="button">Learn more</a> -->
-<!-- 				  </p> -->
+				  <form action="${pageContext.request.contextPath}/member/modifyIntro" method="POST">
+					  <button id="modify-intro" class="btn btn-primary btn-md">修改</button>
+					  <button id="modify-finish" class="btn btn-danger btn-md" type="submit">完成</button>
+	
+					  <p id="intro" class="lead" style="word-wrap: break-word;">
+					  	<c:choose>
+					  		<c:when test="${memberMainBean.memberIntro == null}">您尚未新增自我介紹，請點「修改」按鈕來新增。</c:when>
+					  		<c:otherwise>${memberMainBean.memberIntro}</c:otherwise>
+					  	</c:choose>
+					  </p>
+					  <textarea id="input-intro" rows="5" cols="70" wrap="hard" name="memberIntro"></textarea>
+				  </form>
 				</div>
 			</div>
 		</div>
