@@ -400,7 +400,7 @@
 <!-- 					     備用 -->
 					      <div style="margin-top:70px;">
 <!-- 					     第一頁第一張 三種狀態======= --> 
-					      <c:if test="${(top8Events[0].eventMemberLimit-top8Events[0].eventCurrentMembers) < 5 and top8Events[0].eventMemberLimit != top8Events[0].eventCurrentMembers and !empty top8Events[0]}">
+					      <c:if test="${(top8Events[0].eventMemberLimit-top8Events[0].eventCurrentMembers) <= 5 and top8Events[0].eventMemberLimit != top8Events[0].eventCurrentMembers and !empty top8Events[0]}">
 						   <p class="eventStatusUncheck eventStatusAll">即將成團 尚餘 ${top8Events[0].eventMemberLimit-top8Events[0].eventCurrentMembers} 個名額</p>  
 						  </c:if>
 						   <c:if test="${(top8Events[0].eventMemberLimit-top8Events[0].eventCurrentMembers) > 5 and !empty top8Events[0]}">
@@ -410,7 +410,7 @@
 						   <p class="eventStatusYes eventStatusAll">人數已滿</p>  
 						  </c:if>
 <!-- 					     第一頁第二張 三種狀態======= -->						  
-						  <c:if test="${(top8Events[1].eventMemberLimit-top8Events[1].eventCurrentMembers) < 5 and top8Events[1].eventMemberLimit != top8Events[1].eventCurrentMembers and !empty top8Events[1]}">
+						  <c:if test="${(top8Events[1].eventMemberLimit-top8Events[1].eventCurrentMembers) <= 5 and top8Events[1].eventMemberLimit != top8Events[1].eventCurrentMembers and !empty top8Events[1]}">
 						   <p class="eventStatusUncheckSe eventStatusAll">即將成團 尚餘 ${top8Events[1].eventMemberLimit-top8Events[1].eventCurrentMembers} 個名額</p>
 						  </c:if> 
 						  <c:if test="${(top8Events[1].eventMemberLimit-top8Events[1].eventCurrentMembers) > 5 and !empty top8Events[1]}">
@@ -421,7 +421,7 @@
 						  </c:if> 
 						   
 <!-- 					     第一頁第3張 三種狀態======= -->	
-						   <c:if test="${(top8Events[2].eventMemberLimit-top8Events[2].eventCurrentMembers) < 5 and top8Events[2].eventMemberLimit != top8Events[2].eventCurrentMembers and !empty top8Events[2]}">
+						   <c:if test="${(top8Events[2].eventMemberLimit-top8Events[2].eventCurrentMembers) <= 5 and top8Events[2].eventMemberLimit != top8Events[2].eventCurrentMembers and !empty top8Events[2]}">
 						   <p class="eventStatusUncheckTh eventStatusAll">即將成團 尚餘 ${top8Events[2].eventMemberLimit-top8Events[2].eventCurrentMembers} 個名額</p>
 						  </c:if> 
 						  <c:if test="${(top8Events[2].eventMemberLimit-top8Events[2].eventCurrentMembers) > 5 and !empty top8Events[2]}">
@@ -528,7 +528,7 @@
 <!-- 					     備用 -->
 					      <div style="margin-top:70px;">
 <!-- 					     第一頁第一張 三種狀態======= --> 
-					      <c:if test="${(top8Events[3].eventMemberLimit-top8Events[3].eventCurrentMembers) < 5 and top8Events[3].eventMemberLimit != top8Events[3].eventCurrentMembers and !empty top8Events[3]}">
+					      <c:if test="${(top8Events[3].eventMemberLimit-top8Events[3].eventCurrentMembers) <= 5 and top8Events[3].eventMemberLimit != top8Events[3].eventCurrentMembers and !empty top8Events[3]}">
 						   <p class="eventStatusUncheck eventStatusAll" style="left:90px;">即將成團 尚餘 ${top8Events[3].eventMemberLimit-top8Events[3].eventCurrentMembers} 個名額</p>  
 						  </c:if>
 						   <c:if test="${(top8Events[3].eventMemberLimit-top8Events[3].eventCurrentMembers) > 5 and !empty top8Events[3]}">
@@ -538,7 +538,7 @@
 						   <p class="eventStatusYes eventStatusAll">人數已滿</p>  
 						  </c:if>
 <!-- 					     第一頁第二張 三種狀態======= -->						  
-						  <c:if test="${(top8Events[4].eventMemberLimit-top8Events[4].eventCurrentMembers) < 5 and top8Events[4].eventMemberLimit != top8Events[4].eventCurrentMembers and !empty top8Events[4]}">
+						  <c:if test="${(top8Events[4].eventMemberLimit-top8Events[4].eventCurrentMembers) <= 5 and top8Events[4].eventMemberLimit != top8Events[4].eventCurrentMembers and !empty top8Events[4]}">
 						   <p class="eventStatusUncheckSe eventStatusAll" >即將成團 尚餘 ${top8Events[4].eventMemberLimit-top8Events[4].eventCurrentMembers} 個名額</p>
 						  </c:if> 
 						  <c:if test="${(top8Events[4].eventMemberLimit-top8Events[4].eventCurrentMembers) > 5 and !empty top8Events[4]}">
@@ -549,7 +549,7 @@
 						  </c:if> 
 						   
 <!-- 					     第一頁第3張 三種狀態======= -->	
-						   <c:if test="${(top8Events[5].eventMemberLimit-top8Events[5].eventCurrentMembers) < 5 and top8Events[5].eventMemberLimit != top8Events[5].eventCurrentMembers and !empty top8Events[5]}">
+						   <c:if test="${(top8Events[5].eventMemberLimit-top8Events[5].eventCurrentMembers) <= 5 and top8Events[5].eventMemberLimit != top8Events[5].eventCurrentMembers and !empty top8Events[5]}">
 						   <p class="eventStatusUncheckTh eventStatusAll">即將成團 尚餘 ${top8Events[5].eventMemberLimit-top8Events[5].eventCurrentMembers} 個名額</p>
 						  </c:if> 
 						  <c:if test="${(top8Events[5].eventMemberLimit-top8Events[5].eventCurrentMembers) > 5 and !empty top8Events[5]}">
@@ -656,7 +656,7 @@
 <!-- 					     備用 -->
 					      <div style="margin-top:70px;">
 <!-- 					     第一頁第一張 三種狀態======= --> 
-					      <c:if test="${(top8Events[6].eventMemberLimit-top8Events[6].eventCurrentMembers) < 5 and top8Events[6].eventMemberLimit != top8Events[6].eventCurrentMembers and !empty top8Events[6]}">
+					      <c:if test="${(top8Events[6].eventMemberLimit-top8Events[6].eventCurrentMembers) <= 5 and top8Events[6].eventMemberLimit != top8Events[6].eventCurrentMembers and !empty top8Events[6]}">
 						   <p class="eventStatusUncheck eventStatusAll" style="left:90px;">即將成團 尚餘 ${top8Events[6].eventMemberLimit-top8Events[6].eventCurrentMembers} 個名額</p>  
 						  </c:if>
 						   <c:if test="${(top8Events[6].eventMemberLimit-top8Events[6].eventCurrentMembers) > 5 and !empty top8Events[6]}">
@@ -666,7 +666,7 @@
 						   <p class="eventStatusYes eventStatusAll">人數已滿</p>  
 						  </c:if>
 <!-- 					     第一頁第二張 三種狀態======= -->						  
-						  <c:if test="${(top8Events[7].eventMemberLimit-top8Events[7].eventCurrentMembers) < 5 and top8Events[7].eventMemberLimit != top8Events[7].eventCurrentMembers and !empty top8Events[7]}">
+						  <c:if test="${(top8Events[7].eventMemberLimit-top8Events[7].eventCurrentMembers) <= 5 and top8Events[7].eventMemberLimit != top8Events[7].eventCurrentMembers and !empty top8Events[7]}">
 						   <p class="eventStatusUncheckSe eventStatusAll" style="left:435px;">即將成團 尚餘 ${top8Events[7].eventMemberLimit-top8Events[7].eventCurrentMembers} 個名額</p>
 						  </c:if> 
 						  <c:if test="${(top8Events[7].eventMemberLimit-top8Events[7].eventCurrentMembers) > 5 and !empty top8Events[7]}">
@@ -677,7 +677,7 @@
 						  </c:if> 
 						   
 <!-- 					     第一頁第3張 三種狀態======= -->	
-						   <c:if test="${(top8Events[8].eventMemberLimit-top8Events[8].eventCurrentMembers) < 5 and top8Events[8].eventMemberLimit != top8Events[8].eventCurrentMembers and !empty top8Events[8]}">
+						   <c:if test="${(top8Events[8].eventMemberLimit-top8Events[8].eventCurrentMembers) <= 5 and top8Events[8].eventMemberLimit != top8Events[8].eventCurrentMembers and !empty top8Events[8]}">
 						   <p class="eventStatusUncheckTh eventStatusAll" style="left:780px;">即將成團 尚餘 ${top8Events[8].eventMemberLimit-top8Events[8].eventCurrentMembers} 個名額</p>
 						  </c:if> 
 						  <c:if test="${(top8Events[8].eventMemberLimit-top8Events[8].eventCurrentMembers) > 5 and !empty top8Events[8]}">
