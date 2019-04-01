@@ -221,7 +221,7 @@ white-space: nowrap;
 				</div>
 				 <div class="setleft">
 					活動圖片(不上傳則依類型提供預設圖片)：
-					<form:input path='multipartFile' type="file" accept="image/*" />
+					<form:input path='multipartFile' type="file" accept="image/*" onchange="checkImage(this)"/>
 				</div>
 				 <div class="setleft">
 					人員上限： <form:input style="width:150px" id="plimit" type="number" min="1" path='eventMemberLimit' required="required" onkeyup="return ValidateNumber(this,value)"/>
@@ -768,6 +768,32 @@ $("#nowclick").click(function (){
 
 });             
 
+//限制活動圖片大小  
+function checkImage(image){
+	var validExts = new Array(".jpg", ".png", ".gif");
+	var fileExt = image.value;
+	
+	fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
+	if (validExts.indexOf(fileExt) == -1) {
+		alert("檔案類型錯誤，僅接受以下檔案類型： jpg、png、gif");
+		image.value = null;
+		return false;
+	}
+	
+	var fileSize = 0;
+	var fileMaxSize = 1024;
+    var filePath = image.value;
+    if(filePath){
+        fileSize = image.files[0].size;
+        var size = fileSize / 1024;
+        if (size > fileMaxSize) {
+            alert("圖片容量不可超過 1 MB");
+            image.value = null;
+            return false;
+        } 
+    }
+    return true;
+}
     
   </script>
             </div>
