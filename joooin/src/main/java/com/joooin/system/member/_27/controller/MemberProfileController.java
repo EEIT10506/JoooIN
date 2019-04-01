@@ -61,8 +61,13 @@ public class MemberProfileController {
 		Integer selfMemberId = (Integer)session.getAttribute("memberId");
 
 		if (selfMemberId == null || !selfMemberId.equals(otherMemberId)) {
-			model.addAttribute("memberMainBean", memberService.getMemberMainBean(otherMemberId));
-			return "member/other/profile";
+			MemberMainBean bean = memberService.getMemberMainBean(otherMemberId);
+			if (bean != null) {
+				model.addAttribute("memberMainBean", bean);
+				return "member/other/profile";
+			} else {
+				return "member/other/no_member";
+			}
 		} else {
 			return "redirect:/member/self/profile";
 		}
