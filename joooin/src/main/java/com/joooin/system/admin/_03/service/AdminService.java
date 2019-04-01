@@ -5,6 +5,7 @@ import java.util.List;
 import com.joooin.model.EventMainBean;
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.MemberMainBean;
+import com.joooin.system.admin._03.model.MemberMainPojo;
 
 public interface AdminService {
 	public List<MemberMainBean> getAllMember();
@@ -22,5 +23,6 @@ public interface AdminService {
 	public void deleteEventLike(Integer eventId);
 	public void deleteEventPost(Integer eventId);
 	public void putMember(MemberMainBean mmb);
+	public List<MemberMainPojo> getAllMembers();
 
 }

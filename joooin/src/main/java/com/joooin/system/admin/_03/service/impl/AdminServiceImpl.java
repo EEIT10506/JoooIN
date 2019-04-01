@@ -1,5 +1,6 @@
 package com.joooin.system.admin._03.service.impl;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,6 @@ import com.joooin.model.EventPostBean;
 import com.joooin.model.GroupChatBean;
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.GroupMemberBean;
-import com.joooin.model.GroupPostLikeBean;
-import com.joooin.model.GroupPostReplyBean;
 import com.joooin.model.MemberMainBean;
 import com.joooin.repository.EventLikeDao;
 import com.joooin.repository.EventMainDao;
@@ -27,6 +26,7 @@ import com.joooin.repository.GroupPostDao;
 import com.joooin.repository.GroupPostLikeDao;
 import com.joooin.repository.GroupPostReplyDao;
 import com.joooin.repository.MemberMainDao;
+import com.joooin.system.admin._03.model.MemberMainPojo;
 import com.joooin.system.admin._03.service.AdminService;
 
 @Service
@@ -159,6 +159,28 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void putMember(MemberMainBean mmb) {
 		mmd.update(mmb);
+	}
+
+	@Override
+	public List<MemberMainPojo> getAllMembers() {
+		
+		List<MemberMainPojo> pojoList = new LinkedList<MemberMainPojo>();
+		
+		for(MemberMainBean list : mmd.getAll()) {
+			MemberMainPojo memberPojo = new MemberMainPojo();
+			memberPojo.setMemberId(list.getMemberId());
+			memberPojo.setMemberName(list.getMemberName());
+			memberPojo.setEmail(list.getEmail());
+			memberPojo.setGender(list.getGender());
+			memberPojo.setLogins(list.getLogins());
+			memberPojo.setMemberCreateDate(list.getMemberCreateDate());
+			memberPojo.setCertificationStatus(list.getCertificationStatus());
+			pojoList.add(memberPojo);
+		}
+		
+		
+		
+		return pojoList;
 	}
 
 
