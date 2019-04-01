@@ -860,13 +860,13 @@
 <!-- 					   名稱 -->
 					 	 <div style="margin-bottom:50px;">
 					 	  <c:if test="${!empty top8Groups[3]}">
-						   <p class="eventFname nameF">1. ${top8Groups[3].groupName}</p>
+						   <p class="eventFname nameF">4. ${top8Groups[3].groupName}</p>
 						  </c:if>
 						  <c:if test="${!empty top8Groups[4]}">
-						   <p class="eventFname nameS">2. ${top8Groups[4].groupName}</p>
+						   <p class="eventFname nameS">5. ${top8Groups[4].groupName}</p>
 						  </c:if>
 						  <c:if test="${!empty top8Groups[5]}"> 
-						   <p class="eventFname nameT">3. ${top8Groups[5].groupName}</p>
+						   <p class="eventFname nameT">6. ${top8Groups[5].groupName}</p>
 					      </c:if>
 					     </div>
 					     
@@ -979,13 +979,13 @@
 <!-- 					   名稱 -->
 					 	 <div style="margin-bottom:50px;">
 					 	  <c:if test="${!empty top8Groups[6]}">
-						   <p class="eventFname nameF">1. ${top8Groups[6].groupName}</p>
+						   <p class="eventFname nameF">7. ${top8Groups[6].groupName}</p>
 						  </c:if>
 						  <c:if test="${!empty top8Groups[7]}">
-						   <p class="eventFname nameS">2. ${top8Groups[7].groupName}</p>
+						   <p class="eventFname nameS">8. ${top8Groups[7].groupName}</p>
 						  </c:if>
 						  <c:if test="${!empty top8Groups[8]}"> 
-						   <p class="eventFname nameT">3. ${top8Groups[8].groupName}</p>
+						   <p class="eventFname nameT">9. ${top8Groups[8].groupName}</p>
 					      </c:if>
 					     </div>
 					     
