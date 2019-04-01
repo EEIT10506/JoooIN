@@ -7,14 +7,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"
-	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-	crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
 	function checkImage(image) {
@@ -42,6 +39,58 @@
 		}
 		return true;
 	}
+	
+// 	var i=0;
+// 	$(document).ready(function(){
+//      $('#add_more').on('click', function(){
+//       var colorR = Math.floor((Math.random() * 256));
+//       var colorG = Math.floor((Math.random() * 256));
+//       var colorB = Math.floor((Math.random() * 256));
+//       i++;
+//       var html ='<div id="append_no_'+i+'" class="animated bounceInLeft">'+
+//           '<div class="input-group mt-3">'+
+// 		  '<div class="input-group-prepend">'+
+// 		  '<span class="input-group-text br-15" style="color:rgb('+colorR+','+colorG+','+colorB+'">'+
+// 		  '<i class="fas fa-user-graduate"></i></span>'+
+// 		  '</div>'+
+// 		  '<input type="text" placeholder="Student Name"  class="form-control"/>'+
+// 		  '</div>'+
+// 		  '<div class="input-group mt-3">'+
+// 		  '<div class="input-group-prepend">'+
+// 		  '<span class="input-group-text br-15" style="color:rgb('+colorR+','+colorG+','+colorB+'">'+
+// 		  '<i class="fas fa-phone-square"></i></span>'+
+// 		  '</div>'+
+// 		  '<input type="text" placeholder="Student Phone" class="form-control"/>'+
+// 		  '</div>'+
+// 		  '<div class="input-group mt-3">'+
+// 		  '<div class="input-group-prepend">'+
+// 		  '<span class="input-group-text br-15" style="color:rgb('+colorR+','+colorG+','+colorB+'">'+
+// 		  '<i class="fas fa-at"></i></span>'+
+// 		  '</div>'+
+// 		  '<input type="email" placeholder="Student Email" class="form-control"/>'+
+// 		  '</div></div>';
+
+// 	  $('#dynamic_container').append(html);
+// 	  $('#remove_more').fadeIn(function(){
+// 	  	 $(this).show();
+// 	  });
+//      });
+
+//      $('#remove_more').on('click', function(){
+         
+//          $('#append_no_'+i).removeClass('bounceInLeft').addClass('bounceOutRight')
+//             .fadeOut(function(){
+//             	$(this).remove();
+//             });
+//             i--;
+//             if(i==0){
+//             	$('#remove_more').fadeOut(function(){
+//             		$(this).hide()
+//             	});;
+//             }
+   
+//      });
+// 	});
 </script>
 <style>
 #main {
@@ -50,19 +99,83 @@
 	position: relative;
 	top: 120px;
 }
+
+	html,body{
+			height: 100%;
+			margin: 0;
+/* 			background: rgb(2,0,36); */
+/*             background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(149,199,20,1) 0%, rgba(0,212,255,1) 96%); */
+		
+		}
+   
+   .myForm{
+   	background-color: rgba(0,0,0,0.5) !important;
+   	padding: 15px !important;
+   border-radius: 15px !important;
+   color: white;
+   
+   }
+
+   input{
+   	border-radius:0 15px 15px 0 !important;
+
+   }
+   input:focus{
+       outline: none;
+box-shadow:none !important;
+border:1px solid #ccc !important;
+
+   }
+
+   .br-15{
+   	border-radius: 15px 0 0 15px !important;
+   }
+
+   #add_more{
+   	color: white !important;
+   	background-color: #fa8231 !important;
+   	border-radius: 15px !important;
+   	border: 0 !important;
+
+   }
+   #remove_more{
+   	color: white !important;
+   	background-color: #fc5c65 !important;
+   	border-radius: 15px !important;
+   	border: 0 !important;
+   	display: none;
+
+   }
+   	
+   .submit_btn{
+   	border-radius: 15px !important;
+    background-color: #95c714 !important;
+    border: 0 !important;
+   }
 </style>
-<title>Insert title here</title>
+<title>創建社團</title>
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/navbar" />
 	<div id="main">
-		<h1>創建社團初版</h1>
+		
 		<hr>
 		<!-- 		使用表格物件 -->
-		<form:form method="POST" modelAttribute="groupMainBean"
+			<dvi class="container h-100">
+	<div class="d-flex justify-content-center">
+		<div class="card animated bounceInDown myForm">
+			<div class="card-header">
+				<h4>創建社團</h4>
+			</div>
+			<div class="card-body">
+				<form:form method="POST" modelAttribute="groupMainBean"
 			enctype="multipart/form-data">
-			<fieldset>
-				<label for="groupType">社團型態</label>
+					<div id="dynamic_container">
+						<div class="input-group">
+							<div class="input-group-prepend">
+<!-- 								<span class="input-group-text br-15"><i class="far fa-address-book"></i></span> -->
+								<div for="groupType" style="margin:5px;font-weight:bold;" >社團型態:</div>
+								
 				<form:select path='groupType' required="required" id="groupType">
 					<form:option value="sport">運動</form:option>
 					<form:option value="food">美食</form:option>
@@ -70,19 +183,53 @@
 					<form:option value="other">其他</form:option>
 				</form:select>
 
-				<label for="groupName">團名</label>
-				<form:input path="groupName" type='text' id="groupName" />
+							</div>
+							
+						</div>
+						<div class="input-group mt-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text br-15"><i class="fas fa-child"></i></span>
+							</div>
+							<form:input style="width : 400px" path="groupName"  placeholder="輸入社團名稱"  type='text' id="groupName"  required="required" />
+						</div>
+						<div class="input-group mt-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text br-15"><i class="far fa-address-card"></i></span>
+							</div>
+							<form:textarea style="width : 400px" path="groupIntro" type='text' placeholder="輸入社團介紹"  id="groupIntro" />
+						</div>
+						<div class="input-group mt-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text br-15"><i class="fas fa-chalkboard-teacher">   上傳社團照片(無圖使用預設)</i></span>
+							</div>
+							<form:input type="file" accept="image/*" path="multipartFile"
+							id="multipartFile" onchange="checkImage(this)"></form:input>
+							
+						</div>
+						
+					</div>
+					<div class="card-footer">
+				<a class="btn btn-secondary btn-sm" onclick="history.back()"id="add_more">返回上一頁</a>
+<!-- 				<a class="btn btn-secondary btn-sm" id="remove_more"><i class="fas fa-trash-alt"></i> Remove</a> -->
+				<input class="btn btn-success btn-sm float-right submit_btn " type="submit" value="送出">
+				<button type="button" id="oneSetcreate" class="btn btn-success">一鍵填入</button><br>
+<script>
+// oneSet
+$('#oneSetcreate').click(function(){ 
+		$('#groupName').val('eeit105joooin'); 
+		$('#groupIntro').val('歡迎加入');
+ 	});
+// oneSet
+</script>				
+			</div>
+				</form:form>
+			</div>
+			
+			
+		</div>
+	</div>
+	</dvi>
 
-				<label for="groupIntro">社團介紹</label>
-				<form:input path="groupIntro" type='text' id="groupIntro" />
-
-				<label for="multipartFile">上傳社團照片(不傳使用預設)</label>
-				<form:input type="file" accept="image/*" path="multipartFile"
-					id="multipartFile" onchange="checkImage(this)"></form:input>
-
-				<input type="submit" value="送出">
-			</fieldset>
-		</form:form>
 
 	</div>
 </body>

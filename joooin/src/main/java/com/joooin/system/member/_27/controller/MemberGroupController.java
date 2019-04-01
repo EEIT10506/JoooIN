@@ -1,6 +1,7 @@
 package com.joooin.system.member._27.controller;
 
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.joooin.model.MemberMainBean;
 import com.joooin.system.member._27.service.MemberService;
 
 @Controller
@@ -19,35 +21,20 @@ public class MemberGroupController {
 	@RequestMapping(value = "/member/self/group/{link}", method = RequestMethod.GET)
 	public String getGroups(@PathVariable String link, HttpSession session, Model model) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		
-		if (memberId != null) {
-			model.addAttribute("groupList", memberService.getGroups(memberId, link));
-			return "member/self/group/" + link;
-		} else {
-			return "not_login";
-		}	
+		model.addAttribute("groupList", memberService.getGroups(memberId, link));			
+		return "member/self/group/" + link;
 	}
+	
 	@RequestMapping(value = "/member/deleteGroup", method = RequestMethod.POST)
-	public @ResponseBody String deleteGroup(Integer groupId, HttpSession session) {
+	public @ResponseBody void deleteGroup(Integer groupId, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		
-		if (memberId != null) {
-			memberService.deleteGroup(memberId, groupId);
-			return null;
-		} else {
-			return "not_login";
-		}	
+		memberService.deleteGroup(memberId, groupId);	
 	}
+	
 	@RequestMapping(value = "/member/cancelGroup", method = RequestMethod.POST)
-	public @ResponseBody String cancelGroup(Integer groupId, HttpSession session) {
+	public @ResponseBody void cancelGroup(Integer groupId, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		
-		if (memberId != null) {
-			memberService.cancelGroup(memberId, groupId);
-			return null;
-		} else {
-			return "not_login";
-		}	
+		memberService.cancelGroup(memberId, groupId);
 	}
 	
 	@RequestMapping(value = "/member/other/group/{otherMemberId}", method = RequestMethod.GET)
@@ -55,9 +42,14 @@ public class MemberGroupController {
 		Integer selfMemberId = (Integer)session.getAttribute("memberId");
 
 		if (selfMemberId == null || !selfMemberId.equals(otherMemberId)) {
-			model.addAttribute("memberMainBean", memberService.getMemberMainBean(otherMemberId));
-			model.addAttribute("groupList", memberService.getOtherGroups(otherMemberId));
-			return "member/other/group";
+			MemberMainBean bean = memberService.getMemberMainBean(otherMemberId);
+			if (bean != null) {
+				model.addAttribute("memberMainBean", bean);
+				model.addAttribute("groupList", memberService.getOtherGroups(otherMemberId));
+				return "member/other/group";
+			} else {
+				return "member/other/no_member";
+			}
 		} else {
 			return "redirect:/member/self/group/my_group";
 		}

@@ -173,7 +173,7 @@ function checkAll(bx) {
   }
 }
 </script>
-<title>Insert title here</title></head>
+<title>Event_participated</title></head>
 <body class="settingBody">
 <jsp:include page="${request.contextPath}/navbar"/>
 

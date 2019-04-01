@@ -61,7 +61,9 @@ public class EventController {
 			EventPostBean eventPostBean = new EventPostBean();
 			eventPostBean.setEventId(eventId);
 			eventPostBean.setMemberId(memberId);
-			eventPostContent = eventPostContent.replace("\n", "<br />");
+		
+			eventPostContent = eventPostContent.replace("<", "&lt;").replace(">", "&gt;").replace("\n", "<br />").trim();
+			
 			eventPostBean.setEventPostContent(eventPostContent);
 
 			Date date = new Date();
@@ -127,7 +129,7 @@ public class EventController {
 			return "redirect:/event/" + eventId;
 		} else {
 			return "not_login";
-		}
+		} 
 	}
 //	退出活動
 	@RequestMapping(value = "/DeleteByEventMemberId", method = RequestMethod.POST)
@@ -328,8 +330,12 @@ public class EventController {
 			@PathVariable("eventId") Integer eventId, Model model, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
 		EventMainBean event = eventService.getByEventMainId(eventId);
+		if(event == null) {
+			 return "event/not_eventManager";	
+		}else if(memberId != null && !memberId.equals(event.getEventInviterId())) {
 
-		if (memberId != null && memberId.equals(event.getEventInviterId())) {
+		    return "event/not_eventManager";	
+		}else if (memberId != null && memberId.equals(event.getEventInviterId())) {
 
 			
 			Integer typeid = event.getEventTypeId();
@@ -354,14 +360,8 @@ public class EventController {
 //			=============
 			model.addAttribute("event", event);
 			model.addAttribute("eventtype", eventtype);
-
 			return "event/event_setting";
-
-		} else if(memberId != null && !memberId.equals(event.getEventInviterId())) {
-
-		    return "event/not_eventManager";	
-		}
-		
+		} 
 		else {
 			return "not_login";
 		}

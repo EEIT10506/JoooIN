@@ -42,7 +42,7 @@ public class EnterGroupController {
 	@Autowired
 	ServletContext context;
 
-	// 依照groupId個別社團主頁連結
+	// 依照groupId個別社團主頁連結 ok
 	@RequestMapping(method = RequestMethod.GET, value = "/group/{groupId}")
 	public String groupMainPage(Model model, @PathVariable Integer groupId, HttpSession session) {
 		Integer memberId = (Integer) session.getAttribute("memberId");
@@ -105,6 +105,24 @@ public class EnterGroupController {
 
 		return "group/group_members";
 	}
+	
+	//進入社團相簿
+	@RequestMapping(method = RequestMethod.GET, value = "/group/photograph/{groupId}")
+	public String groupPhotograph(Model model, HttpSession session, @PathVariable Integer groupId) {
+		
+		// for group_navbar
+		GroupMainBean groupMain = groupService.getByGroupId(groupId);
+		model.addAttribute("groupMain", groupMain);
+		
+		
+		Integer count = groupService.getPhotoCount(groupId);
+		model.addAttribute("photoCount", count);
+		
+		List<Poster> groupPosters = groupService.getPostersByGroupId(groupId);
+		model.addAttribute("groupPhotoes", groupPosters);
+		
+		return "group/group_photograph";
+	}
 
 	// 處理加入或進入{groupId}社團
 	@RequestMapping(method = RequestMethod.POST, value = "/group/addgroup/{groupId}")
@@ -121,7 +139,7 @@ public class EnterGroupController {
 			groupService.memberAddToGroupApply(groupId, memId);
 			
 			// 申請入團，通知leader，是哪個member
-			notifGroup.groupNotifRequest(memId, groupId);
+			notifGroup.groupNotifRequest(groupId);
 			
 			model.addAttribute("status", "申請成功，待批准");
 			return "redirect:/group/" + groupId;

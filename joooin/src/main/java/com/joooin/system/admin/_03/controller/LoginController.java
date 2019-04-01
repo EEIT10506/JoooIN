@@ -1,9 +1,9 @@
 package com.joooin.system.admin._03.controller;
 
 import java.text.ParseException;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -48,13 +48,16 @@ public class LoginController {
 			RedirectAttributes redirectAttributes) throws ParseException {
 		HttpSession session = request.getSession();
 		MemberMainBean member = null;
-		PunishmentBean pb = null;
+		List<PunishmentBean> pb = null;
 		AdminBean admin = null;
 		member = service.checkEmailPassword(mmb.getEmail(), mmb.getPassword());
 		admin = service.checkAdmin(mmb.getEmail(), mmb.getPassword());
 		
 		if(member!=null) {
 			pb = service.checkPunishment(member.getMemberId());
+			for(PunishmentBean ddd : pb) {
+				System.out.println("------------------------PB:"+ddd);
+			}
 		}
 
 		if (member != null && member.getCertificationStatus() == true && pb == null) {
@@ -74,17 +77,26 @@ public class LoginController {
 		
 		if (member!=null && pb!=null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ahh:mm:ss");
-			Date startDate = sdf.parse(pb.getPunishDateStart());
-			Date endDate = sdf.parse(pb.getPunishDateEnd());
+			
+			Date startDate = new Date();
+			Date endDate = new Date();
+			
+			for(PunishmentBean npb : pb) {
+			startDate = sdf.parse(npb.getPunishDateStart());
+			endDate = sdf.parse(npb.getPunishDateEnd());
 			Date nowDate = new Date();
 			long startTime = startDate.getTime();
 			long endTime = endDate.getTime();
 			long nowTime = nowDate.getTime();
+			
 			if(nowTime > startTime && nowTime < endTime) {
-				redirectAttributes.addFlashAttribute("error", "帳號鎖定中:"+pb.getPunishDateEnd()+"後解鎖");
-				redirectAttributes.addFlashAttribute("reason", "原因:"+pb.getPunishType());
+				redirectAttributes.addFlashAttribute("error", "帳號鎖定中:"+npb.getPunishDateEnd()+"後解鎖");
+				redirectAttributes.addFlashAttribute("reason", "原因:"+npb.getPunishType());
 				return "redirect:/login";
-			}else {
+			}
+			
+			}
+			
 				session.setAttribute("memberName", member.getMemberName());
 				session.setAttribute("memberId", member.getMemberId());
 				Integer logins = member.getLogins() + 1;
@@ -92,7 +104,6 @@ public class LoginController {
 				service.update(member);
 				session.setAttribute("logout", "登出");
 				return "redirect:/";
-			}
 		}
 
 		if (admin != null) {

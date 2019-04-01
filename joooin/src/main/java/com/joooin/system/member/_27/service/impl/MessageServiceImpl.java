@@ -63,7 +63,7 @@ public class MessageServiceImpl implements MessageService {
 		
 		bean.setSendMemberId(sendMemberId);
 		bean.setReceiveMemberId(receiveMemberId);
-		bean.setMessageText(text);
+		bean.setMessageText(text.replace("<", "&lt;").replace(">", "&gt;").replace("\n", "<br />").trim());
 		bean.setMessageDate(sd);
 		bean.setMessageHash(messageHash);
 		bean.setMessageType("text");
@@ -136,7 +136,7 @@ public class MessageServiceImpl implements MessageService {
 		List<FriendPojo> friendPojoList = new ArrayList<FriendPojo>();
 		
 		for (MemberFriendBean bean : memberFriendList) {
-			if (bean.getInviteMemberId().equals(memberId)) {
+			if (bean.getInviteMemberId().equals(memberId) && bean.getIsFriend().equals(true)) {
 				FriendPojo pojo = new FriendPojo();
 				pojo.setMemberId(bean.getReceiveMemberId());
 				pojo.setMemberName(memberMainDao.getByMemberId(bean.getReceiveMemberId()).getMemberName());

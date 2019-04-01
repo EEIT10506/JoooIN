@@ -110,7 +110,7 @@
 								<c:if test="${friend.notRead != 0}">
 									<p class="not-read" style="bottom: 8px;position: relative;text-align: right;">未讀：${friend.notRead}</p>
 								</c:if>
-								<p class="preview" style="position:relative;top:5px;font-size:15px;color:gray;">${friend.messageText }</p>
+								<p class="preview" style="position:relative;top:5px;font-size:15px;color:gray;"><c:out value="${friend.messageText }"/></p>
 							</div>
 						</div>
 					</li>

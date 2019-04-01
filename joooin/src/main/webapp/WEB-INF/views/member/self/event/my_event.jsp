@@ -121,7 +121,7 @@
 						<tbody>
 							<c:forEach var="event" items="${eventList}">
 								<tr>
-									<td><img id="eventImage" src="<c:url value='/getEventImage/${event.eventId}.jpg' />" />　${event.eventName}</td>
+									<td><img id="eventImage" src="<c:url value='/getEventImage/${event.eventId}.jpg' />" />　<c:out value="${event.eventName}"/></td>
 		                            <td class="textTd"><p data-placement="top" data-toggle="tooltip" title="開始時間">${event.eventDateStart}</p></td>
 		                            <td class="textTd"><p id="d${event.eventId}" class="eventDateEnd" data-placement="top" data-toggle="tooltip" title="結束時間">${event.eventDateEnd}</p></td>
 		    						<td class="textTd"><p id="s${event.eventId}" class="eventStatus" data-placement="top" data-toggle="tooltip" title="活動狀態">

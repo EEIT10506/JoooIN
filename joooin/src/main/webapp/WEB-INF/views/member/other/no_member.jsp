@@ -11,41 +11,31 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <style>
-	#btns {visibility: hidden;}
-	
+	#btn, #str{visibility: hidden;}
 </style>
 <script>
 	$(document).ready(function(){
-		var eventId = ${eventId}
-		$("#btns").click();
-		
-		$("#notEventManager").click(function(){
-			location.href = "${pageContext.request.contextPath}/events";
-		});
-		setTimeout(function() { 
-			$("#notEventManager").click();
-	    }, 3000);
-		 
+		$("#btn").click();
+		$("#back").click(function(){history.go(-1);});
 	});
 </script>
 <title></title>
 </head>
 <body>
-<button id="btns" type="button" class="btn btn-primary" data-toggle="modal" data-target="#notEventM"></button>
+<button id="btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"></button>
 
 <!-- Modal -->
-<div class="modal fade" id="notEventM" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle" style="font-family:微軟正黑體;font-weight:bold;font-size:30px;color:red;">警告</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">查無此人</h5>
       </div>
-      <div class="modal-body" style="font-family:微軟正黑體;font-weight:bold;font-size:20px;">
-       	非此活動管理者  將在三秒後返回活動頁面
+      <div class="modal-body">
+       	找不到該會員
       </div>
       <div class="modal-footer">
-      	<button id="notEventManager" type="button" class="btn btn-primary">回到活動</button>
-       
+        <button id="back" type="button" class="btn btn-primary">回上一頁</button>
       </div>
     </div>
   </div>

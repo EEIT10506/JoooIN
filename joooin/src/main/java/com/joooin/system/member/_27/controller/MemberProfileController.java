@@ -1,7 +1,5 @@
 package com.joooin.system.member._27.controller;
 
-
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,60 +16,39 @@ import com.joooin.system.member._27.service.MemberService;
 public class MemberProfileController {
 	@Autowired
 	MemberService memberService;
-	@Autowired
-	ServletContext context;
 	
 	@RequestMapping(value = "/member/updateProfile", method = RequestMethod.POST)
 	public String updateProfile(@ModelAttribute("memberMainBean") MemberMainBean updateBean, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		
-		if (memberId != null) {
-			String memberName = memberService.updateProfile(memberId, updateBean, context);
-			session.setAttribute("memberName", memberName);
-			return "redirect:/member/self/profile";
-		} else {
-			return "not_login";
-		}	
+		String memberName = memberService.updateProfile(memberId, updateBean);
+		session.setAttribute("memberName", memberName);
+		return "redirect:/member/self/profile";	
 	}						  
 	
 	@RequestMapping(value = "/member/updatePassword", method = RequestMethod.POST)
 	public String updatePassword(@RequestParam String password1, @RequestParam String password2, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		
-		if (memberId != null) {
-			if (password1 != null && password2 != null) {
-				memberService.updatePassword(password1, password2, memberId);
-				return "redirect:/member/self/profile";
-			} else {
-				return null;
-			}
+		if (password1 != null && password2 != null) {
+			memberService.updatePassword(password1, password2, memberId);
+			return "redirect:/member/self/profile";
 		} else {
-			return "not_login";
+			return null;
 		}
 	}
 	
 	@RequestMapping(value = "/member/updatePrivacy", method = RequestMethod.POST)
 	public String updatePrivacy(@ModelAttribute("memberMainBean") MemberMainBean updateBean, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		
-		if (memberId != null) {
-			memberService.updatePrivacy(memberId, updateBean);
-			return "redirect:/member/self/profile";
-		} else {
-			return "not_login";
-		}	
+		memberService.updatePrivacy(memberId, updateBean);		
+		return "redirect:/member/self/profile";
 	}
 	
 	@RequestMapping(value = "/member/self/profile", method = RequestMethod.GET)
 	public String selfProfile(Model model, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-
-		if (memberId != null) {
-			model.addAttribute("memberMainBean", memberService.getMemberMainBean(memberId));
-			return "member/self/profile";
-		} else {
-			return "not_login";
-		}
+		model.addAttribute("memberMainBean", memberService.getMemberMainBean(memberId));
+		return "member/self/profile";
 	}
 	
 	@RequestMapping(value = "/member/other/profile/{otherMemberId}", method = RequestMethod.GET)
@@ -79,8 +56,13 @@ public class MemberProfileController {
 		Integer selfMemberId = (Integer)session.getAttribute("memberId");
 
 		if (selfMemberId == null || !selfMemberId.equals(otherMemberId)) {
-			model.addAttribute("memberMainBean", memberService.getMemberMainBean(otherMemberId));
-			return "member/other/profile";
+			MemberMainBean bean = memberService.getMemberMainBean(otherMemberId);
+			if (bean != null) {
+				model.addAttribute("memberMainBean", bean);
+				return "member/other/profile";
+			} else {
+				return "member/other/no_member";
+			}
 		} else {
 			return "redirect:/member/self/profile";
 		}

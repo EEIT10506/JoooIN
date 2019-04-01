@@ -34,10 +34,10 @@
 
 	var websocket = null;
 	if ('WebSocket' in window) {
-		websocket = new WebSocket("ws://localhost:8080/joooin/member/message/${hash}");
+		websocket = new WebSocket("ws://eeitjoooin.southeastasia.cloudapp.azure.com:8080/joooin/member/message/${hash}");
 	}
 	else if ('MozWebSocket' in window) {
-		websocket = new MozWebSocket("ws://localhost:8080/joooin/member/message/${hash}");
+		websocket = new MozWebSocket("ws://eeitjoooin.southeastasia.cloudapp.azure.com:8080/joooin/member/message/${hash}");
 	}
 	
 	function onMessage(message) {
@@ -48,10 +48,10 @@
 		var date = d.getFullYear() + "-" + month + "-" + d.getDate() + " " + d.getHours() + ":" + minute;
 		
 		if (myMD5 == messageMD5){
-			$('<li class="replies"><p>' + message.data.substr(32) + '</p></li>').appendTo($('.messages ul'));
+			$('<li class="replies"><p style="word-wrap: break-word;">' + message.data.substr(32) + '</p></li>').appendTo($('.messages ul'));
 			$('<div class="repliesText" style="text-align:right;position:relative;right:10px;margin-bottom: 15px;">' + date + '</div>').appendTo($('.messages ul'));
 		} else {
-			$('<li class="sent"><p>' + message.data.substr(32) + '</p></li>').appendTo($('.messages ul'));
+			$('<li class="sent"><p style="word-wrap: break-word;">' + message.data.substr(32) + '</p></li>').appendTo($('.messages ul'));
 			$('<div class="sentText" style="text-align:left;position:relative;left:15px;margin-bottom: 15px;">' + date + '</div>').appendTo($('.messages ul'));
 			
 			$.ajax({
@@ -130,13 +130,13 @@
 					<c:choose>
 						<c:when test="${message.sendMemberId != memberId}">
 							<li class="sent">				
-								<p>${message.messageText}</p>
+								<p style="word-wrap: break-word;">${message.messageText}</p>
 							</li>
 							<div class="sentText" style="text-align:left;position:relative;left:15px;">${message.messageDate}</div>
 						</c:when>
 						<c:otherwise>
 							<li class="replies">
-								<p>${message.messageText}</p>						
+								<p style="word-wrap: break-word;">${message.messageText}</p>						
 							</li>
 							<div class="repliesText" style="text-align:right;position:relative;right:10px;">${message.messageDate}</div>
 						</c:otherwise>

@@ -16,7 +16,7 @@
 		width: 1200px;
 		margin: auto;
 		position: relative;
-		top: 50px;
+		top: 120px;
 	}
 	.eventBtn {
 		width: 90px;
@@ -98,7 +98,7 @@
 						<tbody>
 							<c:forEach var="event" items="${eventList}">
 								<tr>
-									<td style="vertical-align: middle"><img id="eventImage" src='<c:url value='/getEventImage/${event.eventId}.jpg' />' />　${event.eventName} </td>
+									<td style="vertical-align: middle"><img id="eventImage" src='<c:url value='/getEventImage/${event.eventId}.jpg' />' />　<c:out value="${event.eventName} "/></td>
 		                            <td class="eventBtn"><p data-placement="top" data-toggle="tooltip" title="活動頁面"><button value="${event.eventId}" class="eventPageBtn btn btn-primary btn-xs" data-title="活動頁面" data-toggle="modal"><img class="linkBtn" src="<c:url value='/resources/img/icon_link.png' />"/></button></p></td>
 								</tr>
 							</c:forEach>

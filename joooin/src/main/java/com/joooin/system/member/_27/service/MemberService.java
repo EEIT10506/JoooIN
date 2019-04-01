@@ -2,7 +2,6 @@ package com.joooin.system.member._27.service;
 
 
 import java.util.List;
-import javax.servlet.ServletContext;
 import com.joooin.model.EventMainBean;
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.MemberMainBean;
@@ -12,7 +11,7 @@ public interface MemberService {
 	public MemberMainBean getMemberMainBean(Integer memberId);
 	public EventMainBean getEventMainBean(Integer eventId);
 	public GroupMainBean getGroupMainBean(Integer groupId);
-	public String updateProfile(Integer memberId, MemberMainBean updateBean, ServletContext context);
+	public String updateProfile(Integer memberId, MemberMainBean updateBean);
 	public void updatePassword(String password1, String password2, Integer memberId);
 	public void updatePrivacy(Integer memberId, MemberMainBean updateBean);
 	public String checkFriendStatus(Integer inviteMemberId, Integer receiveMemberId);

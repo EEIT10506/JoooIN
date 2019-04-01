@@ -1,18 +1,13 @@
 package com.joooin.system.member._27.service.impl;
 
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
-import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.joooin.model.EventLikeBean;
 import com.joooin.model.EventMainBean;
 import com.joooin.model.EventMemberBean;
@@ -72,7 +67,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public String updateProfile(Integer memberId, MemberMainBean updateBean, ServletContext context) {
+	public String updateProfile(Integer memberId, MemberMainBean updateBean) {
 		MemberMainBean oldBean = memberMainDao.getByMemberId(memberId);
 		oldBean.setMemberName(updateBean.getMemberName());
 		oldBean.setBirthday(updateBean.getBirthday());
@@ -393,7 +388,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void modifyIntro(Integer memberId, String memberIntro) {
 		MemberMainBean bean = memberMainDao.getByMemberId(memberId);
-		bean.setMemberIntro(memberIntro.replace("\n", "<br />"));
+		bean.setMemberIntro(memberIntro.replace("<", "&lt;").replace(">", "&gt;").replace("\n", "<br />").trim());
 		memberMainDao.update(bean);
 	}
 	

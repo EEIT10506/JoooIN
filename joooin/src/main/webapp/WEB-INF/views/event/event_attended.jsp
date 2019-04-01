@@ -151,7 +151,7 @@ $(document).ready(function() {
 	$('#example').DataTable({"language":language, "lengthChange": false, "aLengthMenu" : 10, "bScrollCollapse": true});
 } );
 </script>
-<title>Event Setting</title></head>
+<title>已參加人員</title></head>
 <body class="settingBody">
 <jsp:include page="${request.contextPath}/navbar"/>
 

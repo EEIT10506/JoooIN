@@ -71,8 +71,8 @@
 			    success: function () {
 			    	parent.html('<img src="<c:url value='/resources/img/icon_ok.png' />"/>');
 			    	var str = $("#notiNotRead").text();
-			    	var notRead = parseInt(str.substr(8, str.length)) - 1;
-			    	$("#notiNotRead").text("通知（未讀通知：" + notRead + "）");
+			    	var notRead = parseInt(str.substr(3, str.length)) - 1;
+			    	$("#notiNotRead").text("通知（" + notRead + "）");
 			    	
 			    	if (notRead == 0) {
 			    		$("#notiNotRead").css("color", "");

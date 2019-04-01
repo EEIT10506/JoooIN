@@ -46,7 +46,8 @@
     border:1px solid #6495ED;
     box-shadow: 0 0 10px #719ECE;
 	}
-
+    
+/* 	讓照片大小一致 */
 	.mask {
   	display: inline-block;
   	width: 100px;
@@ -56,13 +57,15 @@
 	}
 	
 	.maskimg {max-width: 100%;}
-   	
+/* 	讓照片大小一致 */  	
 </style>
 <!-- reply like ready -->
 <script type="text/javascript">
 $( document ).ready(function() {
+	var currentId="${sessionScope.memberId}";
 	var groupId = ${poster.groupId};
 	var groupPostId = ${poster.groupPostId};
+	var currentId = "${sessionScope.memberId}";
 	$.ajax({
 		type: "GET",                           
 		url: "${pageContext.request.contextPath}/group/return/reply/"+groupPostId+"/group/"+groupId,
@@ -85,8 +88,15 @@ $( document ).ready(function() {
 	                    	        "<p>"+"<a href='${pageContext.request.contextPath}/member/other/"+result[i].memberId +"'>"+"<strong>"+result[i].memberName+"</strong>"+"</a>"+
 	                    	        "<span class='float-right'>"+(i+1)+"樓"+"</i>"+"</span>"+"</p>"+
 	                    	        "<p>"+result[i].groupPostReplyContent+"</p>"+
+	                    	       
+
+	                    	        "<p class='"+ result[i].memberId +"' style='display:none'>"+
+
+                    	            "<a href='${pageContext.request.contextPath}/DeleteGroupReplyPost/"+result[i].groupPostReplyId +"/"+result[i].memberId +"/"+result[i].groupId+"/"+result[i].groupPostId+"' class='float-right btn btn btn-dark delete ml-2' style=''>"+"<i class='fa fa-reply'>"+"</i>"+"刪除"+"</a>"+
+                    	       		"</p>"+ 
+                    	       		
 	                    	        "<p>"+
-	                    	            "<a href='${pageContext.request.contextPath}/report/"+result[i].memberId +"/"+result[i].memberName +"' class='float-right btn btn-outline-primary ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉"+"</a>"+
+	                    	            "<a href='${pageContext.request.contextPath}/group_replyreport/"+result[i].memberId +"/"+result[i].memberName +"' class='float-right btn btn-outline-primary ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉"+"</a>"+
 	                    	       "</p>"+
 	                    	    "</div>"+
 	            	        "</div>"+
@@ -94,8 +104,14 @@ $( document ).ready(function() {
 	                "</div>");
 						//結束擴增
 			}
+		
+			$("."+currentId).show();
+			
+
 		}, 
 	});
+	
+	
 	
 	$.ajax({
 		type: "GET", 
@@ -117,7 +133,11 @@ $( document ).ready(function() {
 	});
 });
 </script>
-<!-- reply ready -->
+<!-- reply ready按鈕判定 -->
+<script>
+
+</script>
+<!-- reply ready按鈕判定 -->
 <!-- reply update -->
 <script>
 	// 送出回文
@@ -138,7 +158,9 @@ $( document ).ready(function() {
 				
 				var reply_content = ($(this).val() + "<br/>");
 				//submit form via ajax, this is not JS but server side scripting so not showing here
-				
+
+				var currentId = "${sessionScope.memberId}";
+
 				var groupId = ${poster.groupId};
 				var groupPostId = ${poster.groupPostId};
 				$.ajax({
@@ -152,7 +174,7 @@ $( document ).ready(function() {
 						for (var i = 0; i < result.length; i++) {
 							$("#chatbox").append(
 								//開始擴增
-									"<div class='card card-inner'>"+
+								"<div class='card card-inner'>"+
 				            	    "<div class='card-body'>"+
 				            	        "<div class='row'>"+
 				                    	    "<div class='col-md-2'>"+
@@ -163,8 +185,15 @@ $( document ).ready(function() {
 				                    	        "<p>"+"<a href='${pageContext.request.contextPath}/member/other/"+result[i].memberId +"'>"+"<strong>"+result[i].memberName+"</strong>"+"</a>"+
 				                    	        "<span class='float-right'>"+(i+1)+"樓"+"</i>"+"</span>"+"</p>"+
 				                    	        "<p>"+result[i].groupPostReplyContent+"</p>"+
+				                    	        
+
+				                    	        "<p class='"+ result[i].memberId +"' style='display:none'>"+
+
+			                    	            "<a href='${pageContext.request.contextPath}/DeleteGroupReplyPost/"+result[i].groupPostReplyId +"/"+result[i].memberId +"/"+result[i].groupId +"/"+result[i].groupPostId+"' class='float-right btn btn btn-dark delete ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"刪除"+"</a>"+
+			                    	       		"</p>"+ 
+			                    	       
 				                    	        "<p>"+
-				                    	            "<a href='${pageContext.request.contextPath}/report/"+result[i].memberId +"/"+result[i].memberName +"' class='float-right btn btn-outline-primary ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉"+"</a>"+
+				                    	            "<a href='${pageContext.request.contextPath}/group_replyreport/"+result[i].memberId +"/"+result[i].memberName +"' class='float-right btn btn-outline-primary ml-2'>"+"<i class='fa fa-reply'>"+"</i>"+"檢舉"+"</a>"+
 				                    	       "</p>"+
 				                    	    "</div>"+
 				            	        "</div>"+
@@ -172,6 +201,7 @@ $( document ).ready(function() {
 				                "</div>");
 								//結束擴增
 						}
+						$("."+currentId).show();
             		}, 
 				});
 				
@@ -288,13 +318,16 @@ $(document).ready(function () {
         	        <p> ${poster.groupPostText }</p>
         	        <p> 
         	        	
-        	            <a   class="float-right btn btn-outline-primary ml-2" href="${pageContext.request.contextPath}/report/${poster.memberId}/${poster.memberName}" > <i class="fa fa-reply"  ></i> 檢舉</a>
+        	            <a   class="float-right btn btn-outline-primary ml-2" href="${pageContext.request.contextPath}/group_postreport/${poster.memberId}/${poster.memberName}" > <i class="fa fa-reply"  ></i> 檢舉</a>
         	            
         	            <a class="float-right btn text-danger btn-light" id="like"> <i class="fa fa-heart"></i> Like</a>
 <!--         	        <a class="float-right btn text-danger btn-light" id="like"> 變換按鈕-->
 <!--         	        <a class="float-right btn text-white btn-danger" id="like"> 變換按鈕-->
                    </p>
+                   
+                   <c:if test="${poster.groupPostImage != null}">
                    <img class="img-thumbnail" alt="" width="50%" src="<c:url value='/getPostImage/${poster.groupPostId}.jpg' />">
+        	       </c:if>	
         	    </div>
 	        </div>
 	       

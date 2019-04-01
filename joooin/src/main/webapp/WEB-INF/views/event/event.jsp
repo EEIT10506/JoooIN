@@ -109,11 +109,8 @@
 		float:right;	
 	}
 	.manager{
-		 positive:relative; 
+		positive:relative; 
 		right:30px;
-	}
-	.eventAdminButton{
-		
 	}
 	.eventtype{
 		position:relative;
@@ -125,13 +122,13 @@
 		
 	}
 	.eventliketotal{
-	margin-left:10px;
+		margin-left:10px;
 		margin-top:5px;
 		margin-right:5px;
 /* 		float:right; */
-	  font-size:16px;
+	 	font-size:16px;
 /*  	 color:	#B22222;  */
-	 color:#436EEE;
+		color:#436EEE;
 /* 	 color:	blue; */
 	}
 	.eventtypeimg{
@@ -209,7 +206,6 @@
 	.writeMessage{
 		width:70% !important;
 /* 		margin:auto; */
-		
 		position:relative;
 		left:100px;
 /* 		margin-right:300px; */
@@ -364,37 +360,23 @@ function ValidateNumber(e, pnumber)
     return false;
 }
  	$(document).ready(function(){
- 		 
-
  		<c:if test="${!empty success}">  
  		   $("#clickMessageReport").click();
- 		
  		</c:if>
- 	
- 		var message = $("#allMessage").val();
- 		if(message != null){
- 			$("#allMessage").attr("height", "400px");
- 		}else{
- 			$("#allMessage").attr("height", "0px");
- 		}
- 		
  		//報名完成顯示
  		<c:if test="${!empty signUpSuccess}"> 
  		   $("#ccccc").click();
- 		
  		</c:if>
-
 // 		先隱藏 點地址顯示
 		$("#eventAddressImage").hide();
-		$(".eventaddress").click(function(){
-			$("#eventAddressImage").toggle(500);
-		});
+			$(".eventaddress").click(function(){
+				$("#eventAddressImage").toggle(500);
+			});
 		
 		$("#backbutton").click(function(){
 			history.go(-1);
 		});
 // 		按讚 
- 	   	
  	   	var eventId = ${event.eventId};
 			$.ajax({
 				type: "POST",                           
@@ -410,7 +392,6 @@ function ValidateNumber(e, pnumber)
 	    	    	}
 	    	    } 
 			});
-		
 		
 	    $("#e${event.eventId}").click(function(){
 	    	$("#e${event.eventId}").toggleClass("eventNotLike eventLike");
@@ -437,7 +418,7 @@ function ValidateNumber(e, pnumber)
 	    });
 	});
 </script>
-<title>Event </title></head>
+<title>${event.eventName} </title></head>
 <body class="body">
 <jsp:include page="${request.contextPath}/navbar"/>
 <!-- 請把所有內容寫在此div內 -->
@@ -507,7 +488,7 @@ function ValidateNumber(e, pnumber)
     				
     				<p class="eventliketotal"><i id="goodGood" class="far fa-thumbs-up">&nbsp;</i><span class="eventLikeNum">${event.eventLike}</span> 個人覺得讚 
     						<span style="position: relative;top:5px;left:20px;">
-    						 <iframe src="https://www.facebook.com/plugins/share_button.php?href=https://zh.wikipedia.org/zh-tw/%E8%B3%87%E8%A8%8A%E5%B7%A5%E6%A5%AD%E7%AD%96%E9%80%B2%E6%9C%83&layout=button_count&size=small&width=92&height=20&margin=0&padding=0&appId" width="20%"  height="20" style="border:none;overflow:hidden;margin: 0;padding: 0" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    						 <iframe src="https://www.facebook.com/plugins/share_button.php?href=http://eeitjoooin.southeastasia.cloudapp.azure.com:8080${pageContext.request.contextPath}/<c:url value='event/${event.eventId}' />&layout=button_count&size=small&width=92&height=20&margin=0&padding=0&appId" width="20%"  height="20" style="border:none;overflow:hidden;margin: 0;padding: 0" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
 							 <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html" style="width:80px ; height:20px;margin: 0;padding: 0"></iframe>
 							 <a title="Share to Plurk" href="javascript:void(window.open('http://www.plurk.com/?qualifier=shares&status='.concat(encodeURIComponent(window.location.href)).concat(' ').concat('(').concat(encodeURIComponent(document.title)).concat(')')));" style="margin:  0;padding: 0"><img title="share" src="http://statics.plurk.com/bda225d234426cccca300c551f60438e.png" width="92" height="20" border="0" style="margin-bottom:10px;margin-left: 0;padding-left: 0"/></a>
 						    </span>	
@@ -524,15 +505,15 @@ function ValidateNumber(e, pnumber)
 		<c:if test="${memberId != inviterid and memberCheck == false and event.eventStatus == 'unchecked' and event.isFull == false and finish != false}">
 				<button type="button" id="signUp" class="btn btn-success eventJoin" data-toggle="modal" data-target="#exampleModalCenter">報名活動</button>
 		</c:if>
-		<c:if test="${memberId != inviterid and memberCheck != false and event.eventStatus == 'unchecked' and finish != false and myAgreed == false}">
+		<c:if test="${memberId != inviterid and memberCheck != false and event.eventStatus != 'no' and finish != false and myAgreed == false}">
 				<button type="button" readonly id="joinWaitCheck" class="btn btn-success eventJoin joinWaitCheck">報名申請中</button>
  		</c:if>	
- 		<c:if test="${memberId != inviterid and memberCheck != false and event.eventStatus == 'unchecked' and finish != false and myAgreed == true}">
+ 		<c:if test="${memberId != inviterid and memberCheck != false and event.eventStatus != 'no' and finish != false and myAgreed == true}">
 				<button type="button" readonly id="joinWaitCheck" class="btn btn-success eventJoin joinWaitCheck">報名已成功</button>
  		</c:if>
  </span> 	
     		<span>
-    		 <c:if test="${memberId != inviterid and memberCheck != false and event.eventStatus == 'unchecked' and finish != false}">
+    		 <c:if test="${memberId != inviterid and memberCheck != false and event.eventStatus != 'no' and finish != false}">
     			<button type="button" id="dropOut" class="btn btn-danger eventCancels" data-toggle="modal" data-target="#CancelJoinEvent">取消報名</button>    				
     		 </c:if>
     		</span> 

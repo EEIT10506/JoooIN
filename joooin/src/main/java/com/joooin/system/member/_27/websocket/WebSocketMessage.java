@@ -70,7 +70,10 @@ public class WebSocketMessage {
     @OnMessage
     public void onMessage(String message, Session session) {    
         //测试向客户端发送消息发送
-        sendMessageToUser(this.userId, message.replace("\n", "<br />"));
+    	message = message.replace("<", "&lt;")
+    					 .replace(">", "&gt;")
+    					 .replace("\n", "<br />");
+        sendMessageToUser(this.userId, message);
     }
    
     /**
