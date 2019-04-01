@@ -237,7 +237,7 @@ $(document).ready(function () {
                 timeout: 600000,
                 
                 success: function (data){
-                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">編號</th><th>Name</th><th>地點</th><th>類型</th><th>人數</th></tr></thead><tbody></tbody>');
+                	var tab = $('<table></table>').addClass('table table-striped').html('<thead><tr><th class="text-center">編號</th><th>名稱</th><th>地點</th><th>類型</th><th>人數</th></tr></thead><tbody></tbody>');
                 	$('#content>h2').after(tab);
                 		var docFrag = $(document.createDocumentFragment());
                 		$.each(data, function (index, Event){
@@ -340,8 +340,8 @@ $(document).ready(function () {
                 		$.each(data, function (index, Report){
                 			var cell1 = $('<td></td>').text(Report.reportId).addClass('pointer text-primary text-center reportId');
                 			var cell2 = $('<td></td>').text(Report.reportDate)
-                			var cell3 = $('<td></td>').text(Report.reportMemberId)
-                			var cell4 = $('<td></td>').text(Report.reportViolatorId)
+                			var cell3 = $('<td></td>').text(Report.reportMember)
+                			var cell4 = $('<td></td>').text(Report.reportViolator)
                 			var cell5 = $('<td></td>').text(Report.reportType)
                 			var cell6 = $('<td></td>').text(Report.reportContent)
                 			var cell7 = $('<td></td>').text(Report.isDone)
