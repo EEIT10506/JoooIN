@@ -4,7 +4,7 @@ public class GroupMainPojo {
 	private Integer groupId;
 	private String groupType;
 	private String groupName;
-	private Integer groupLeaderId;
+	private String groupLeaderId;
 	private Integer groupCurrentMembers;
 	private String groupCreateDate;
 	public Integer getGroupId() {
@@ -25,10 +25,10 @@ public class GroupMainPojo {
 	public void setGroupName(String groupName) {
 		this.groupName = groupName;
 	}
-	public Integer getGroupLeaderId() {
+	public String getGroupLeaderId() {
 		return groupLeaderId;
 	}
-	public void setGroupLeaderId(Integer groupLeaderId) {
+	public void setGroupLeaderId(String groupLeaderId) {
 		this.groupLeaderId = groupLeaderId;
 	}
 	public Integer getGroupCurrentMembers() {

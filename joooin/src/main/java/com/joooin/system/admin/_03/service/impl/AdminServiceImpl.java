@@ -195,9 +195,13 @@ public class AdminServiceImpl implements AdminService {
 			groupPojo.setGroupId(list.getGroupId());
 			groupPojo.setGroupType(list.getGroupType());
 			groupPojo.setGroupName(list.getGroupName());
-			groupPojo.setGroupLeaderId(list.getGroupLeaderId());
+			if(list.getGroupLeaderId()!=null) {
+				MemberMainBean mmb = mmd.getByMemberId(list.getGroupLeaderId());
+				groupPojo.setGroupLeaderId(mmb.getMemberName());
+			}
 			groupPojo.setGroupCreateDate(list.getGroupCreateDate());
 			groupPojo.setGroupCurrentMembers(list.getGroupCurrentMembers());
+			
 			
 			pojoList.add(groupPojo);
 		}
