@@ -23,9 +23,6 @@ public class GroupNotificationImpl implements GroupNotification {
 	@Autowired
 	GroupMainDao groupMainDao;
 	
-	@Autowired
-	GroupMainDao groupMainDao;
-	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");	
 	
 	@Override
