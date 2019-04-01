@@ -78,7 +78,7 @@ $(document).ready(function(){
 	
 });
 </script>
-<title>Insert title here</title>
+<title>發文</title>
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/navbar" />
@@ -144,7 +144,6 @@ $('#oneSetpost').click(function(){
  	});
 // oneSet
 </script>		
-							
 					</td>
 				</tr>
 			</table>

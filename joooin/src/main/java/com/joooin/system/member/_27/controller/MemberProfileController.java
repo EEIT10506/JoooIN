@@ -51,7 +51,8 @@ public class MemberProfileController {
 	@RequestMapping(value = "/member/self/profile", method = RequestMethod.GET)
 	public String selfProfile(Model model, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		model.addAttribute("memberMainBean", memberService.getMemberMainBean(memberId));	
+		model.addAttribute("memberMainBean", memberService.getMemberMainBean(memberId));
+		System.out.println("city: " + memberService.getMemberMainBean(memberId).getCity());
 		return "member/self/profile";
 	}
 	

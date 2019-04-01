@@ -67,7 +67,7 @@
 
 </style>
 
-<title>Insert title here</title>
+<title>社團相簿</title>
 </head>
 <body>
 

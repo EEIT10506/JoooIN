@@ -150,7 +150,7 @@ div {
 // 	隱藏申請人按鈕功能
 </script>
 
-<title>各社團主頁</title>
+<title>社團主頁</title>
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/navbar"/>
@@ -175,7 +175,7 @@ div {
 				<div class="btn-group mr-2">
 <!-- 				fb 分享 -->
 					
-					<iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&size=large&width=65&height=28&appId" width="65" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+					<iframe src="https://www.facebook.com/plugins/share_button.php?href=http://eeitjoooin.southeastasia.cloudapp.azure.com:8080${pageContext.request.contextPath}/<c:url value='group/${groupMain.groupId}' />&layout=button&size=large&width=65&height=28&appId" width="65" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
 					
 <!-- 				fb 分享 -->
 
