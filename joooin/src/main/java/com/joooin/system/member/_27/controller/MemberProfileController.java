@@ -1,7 +1,5 @@
 package com.joooin.system.member._27.controller;
 
-
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,13 +16,11 @@ import com.joooin.system.member._27.service.MemberService;
 public class MemberProfileController {
 	@Autowired
 	MemberService memberService;
-	@Autowired
-	ServletContext context;
 	
 	@RequestMapping(value = "/member/updateProfile", method = RequestMethod.POST)
 	public String updateProfile(@ModelAttribute("memberMainBean") MemberMainBean updateBean, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
-		String memberName = memberService.updateProfile(memberId, updateBean, context);
+		String memberName = memberService.updateProfile(memberId, updateBean);
 		session.setAttribute("memberName", memberName);
 		return "redirect:/member/self/profile";	
 	}						  
@@ -52,7 +48,6 @@ public class MemberProfileController {
 	public String selfProfile(Model model, HttpSession session) {
 		Integer memberId = (Integer)session.getAttribute("memberId");
 		model.addAttribute("memberMainBean", memberService.getMemberMainBean(memberId));
-		System.out.println("city: " + memberService.getMemberMainBean(memberId).getCity());
 		return "member/self/profile";
 	}
 	
