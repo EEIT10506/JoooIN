@@ -26,6 +26,7 @@ import com.joooin.repository.GroupPostDao;
 import com.joooin.repository.GroupPostLikeDao;
 import com.joooin.repository.GroupPostReplyDao;
 import com.joooin.repository.MemberMainDao;
+import com.joooin.system.admin._03.model.EventMainPojo;
 import com.joooin.system.admin._03.model.GroupMainPojo;
 import com.joooin.system.admin._03.model.MemberMainPojo;
 import com.joooin.system.admin._03.service.AdminService;
@@ -201,6 +202,23 @@ public class AdminServiceImpl implements AdminService {
 			pojoList.add(groupPojo);
 		}
 		
+		return pojoList;
+	}
+
+	@Override
+	public List<EventMainPojo> getAllEvents() {
+		
+		List<EventMainPojo> pojoList = new LinkedList<EventMainPojo>();
+		for(EventMainBean list : emd.getAll()) {
+			EventMainPojo eventPojo = new EventMainPojo();
+			eventPojo.setEventId(list.getEventId());
+			eventPojo.setEventName(list.getEventName());
+			eventPojo.setEventAddress(list.getEventAddress());
+			eventPojo.setEventTypeId(list.getEventTypeId());
+			eventPojo.setEventCurrentMembers(list.getEventCurrentMembers());
+			
+			pojoList.add(eventPojo);
+		}
 		return pojoList;
 	}
 

@@ -5,6 +5,7 @@ import java.util.List;
 import com.joooin.model.EventMainBean;
 import com.joooin.model.GroupMainBean;
 import com.joooin.model.MemberMainBean;
+import com.joooin.system.admin._03.model.EventMainPojo;
 import com.joooin.system.admin._03.model.GroupMainPojo;
 import com.joooin.system.admin._03.model.MemberMainPojo;
 
@@ -26,5 +27,6 @@ public interface AdminService {
 	public void putMember(MemberMainBean mmb);
 	public List<MemberMainPojo> getAllMembers();
 	public List<GroupMainPojo> getAllGroups();
+	public List<EventMainPojo> getAllEvents();
 
 }
