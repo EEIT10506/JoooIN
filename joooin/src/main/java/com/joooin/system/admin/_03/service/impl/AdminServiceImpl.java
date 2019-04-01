@@ -26,6 +26,7 @@ import com.joooin.repository.GroupPostDao;
 import com.joooin.repository.GroupPostLikeDao;
 import com.joooin.repository.GroupPostReplyDao;
 import com.joooin.repository.MemberMainDao;
+import com.joooin.system.admin._03.model.GroupMainPojo;
 import com.joooin.system.admin._03.model.MemberMainPojo;
 import com.joooin.system.admin._03.service.AdminService;
 
@@ -179,6 +180,26 @@ public class AdminServiceImpl implements AdminService {
 		}
 		
 		
+		
+		return pojoList;
+	}
+
+	@Override
+	public List<GroupMainPojo> getAllGroups() {
+		
+		List<GroupMainPojo> pojoList = new LinkedList<GroupMainPojo>();
+		
+		for(GroupMainBean list : gmd.getAll()) {
+			GroupMainPojo groupPojo = new GroupMainPojo();
+			groupPojo.setGroupId(list.getGroupId());
+			groupPojo.setGroupType(list.getGroupType());
+			groupPojo.setGroupName(list.getGroupName());
+			groupPojo.setGroupLeaderId(list.getGroupLeaderId());
+			groupPojo.setGroupCreateDate(list.getGroupCreateDate());
+			groupPojo.setGroupCurrentMembers(list.getGroupCurrentMembers());
+			
+			pojoList.add(groupPojo);
+		}
 		
 		return pojoList;
 	}

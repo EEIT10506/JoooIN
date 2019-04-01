@@ -22,6 +22,7 @@ import com.joooin.repository.MemberMainDao;
 import com.joooin.system.admin._03.model.AllEventQuantityBean;
 import com.joooin.system.admin._03.model.AllGroupQuantityBean;
 import com.joooin.system.admin._03.model.AllMemberQuantityBean;
+import com.joooin.system.admin._03.model.GroupMainPojo;
 import com.joooin.system.admin._03.model.MemberMainPojo;
 import com.joooin.system.admin._03.service.AdminService;
 
@@ -52,8 +53,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/admin/getAllGroup", method = RequestMethod.GET)
-	public @ResponseBody List<GroupMainBean> getAllGroup(){
-		List<GroupMainBean> list = service.getAllGroup();
+	public @ResponseBody List<GroupMainPojo> getAllGroup(){
+		List<GroupMainPojo> list = service.getAllGroups();
 		return list;
 	}
 	
