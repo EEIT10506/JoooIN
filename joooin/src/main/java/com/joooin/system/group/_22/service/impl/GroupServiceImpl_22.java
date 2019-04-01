@@ -320,6 +320,9 @@ public class GroupServiceImpl_22 implements GroupService_22 {
 		for (GroupMemberBean gmBean : allGM) {
 			if (gmBean.getGroupId().equals(groupId) && gmBean.getMemberId().equals(memberId)) {
 				groupMemberDao.deleteByGroupMemberId(gmBean.getGroupMemberId());
+				GroupMainBean group = groupMainDao.getByGroupId(groupId);
+				group.setGroupCurrentMembers(groupMainDao.getByGroupId(groupId).getGroupCurrentMembers() - 1);
+				groupMainDao.update(group);
 				break;
 			}
 		}
