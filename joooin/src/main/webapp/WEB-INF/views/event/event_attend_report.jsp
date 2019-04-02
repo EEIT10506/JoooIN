@@ -54,7 +54,7 @@
       <form:form method="POST" modelAttribute="eventReportBean" action="${pageContext.request.contextPath}/event/report/${event.eventId}">
 		<div class="form-group">
 			<label for="reportMemberId">檢舉人：${memberName}</label>
-			<form:input type="hidden" value='${memberId}' path="reportMemberId" id="reportMemberId"/>
+			<form:input type="hidden" value='${sessionScope.memberId}' path="reportMemberId" id="reportMemberId"/>
 		</div>
 		
 		<div class="form-group">
