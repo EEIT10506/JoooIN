@@ -67,7 +67,11 @@ public class AdminController {
 	
 	@RequestMapping(value = "/admin/getMemberBean/{memberId}", method = RequestMethod.GET)
 	public @ResponseBody MemberMainBean getMemberBean(@PathVariable("memberId") Integer memberId) {
-		return service.getMemberBean(memberId);
+		MemberMainBean mmb = service.getMemberBean(memberId);
+		MemberMainBean newMmb = new MemberMainBean();
+		newMmb.setMemberName(mmb.getMemberName());
+		newMmb.setEmail(mmb.getEmail());
+		return newMmb;
 	}
 	
 	@RequestMapping(value = "/admin/putMember", method = RequestMethod.POST)
@@ -90,7 +94,10 @@ public class AdminController {
 	
 	@RequestMapping(value = "/admin/getGroupBean/{groupId}", method = RequestMethod.GET)
 	public @ResponseBody GroupMainBean getGroupBean(@PathVariable("groupId")Integer groupId) {
-		return service.getGroupBean(groupId);
+		GroupMainBean gmb = service.getGroupBean(groupId);
+		GroupMainBean newGmb = new GroupMainBean();
+		newGmb.setGroupName(gmb.getGroupName());
+		return newGmb;
 	}
 	
 	@RequestMapping(value = "/admin/deleteGroup", method = RequestMethod.POST)
@@ -104,7 +111,10 @@ public class AdminController {
 	
 	@RequestMapping(value = "/admin/getEventBean/{eventId}", method = RequestMethod.GET)
 	public @ResponseBody EventMainBean getEventBean(@PathVariable("eventId")Integer eventId) {
-		return service.getEventBean(eventId);
+		EventMainBean emb = service.getEventBean(eventId);
+		EventMainBean newEmb = new EventMainBean();
+		newEmb.setEventName(emb.getEventName());
+		return newEmb;
 	}
 	
 	@RequestMapping(value = "/admin/deleteEvent", method = RequestMethod.POST)
